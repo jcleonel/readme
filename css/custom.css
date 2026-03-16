@@ -1,0 +1,143 @@
+body {
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    margin-top: 1.4rem;
+    margin-bottom: .8rem;
+    font-weight: 600;
+}
+
+p, ul, ol {
+    margin-bottom: 1rem;
+}
+
+.wy-nav-content {
+    max-width: 1100px;
+    margin: auto;
+}
+
+.wy-nav-content-wrap {
+    background-color: var(--background-color, #fcfcfc);
+}
+
+/* === Sidebar unificada === */
+
+/* Cor padrão desejada */
+:root {
+    --sidebar-bg: #2f2f2f; /* cinza escuro */
+    --sidebar-text: #ffffff;
+    --sidebar-text-dim: #cccccc;
+}
+
+/* Fundo da sidebar inteira */
+.wy-side-nav-search,
+.wy-nav-side,
+.wy-menu-vertical {
+    background-color: var(--sidebar-bg) !important;
+}
+
+/* Itens selecionados / hover */
+.wy-menu-vertical li.on a,
+.wy-menu-vertical li.current > a,
+.wy-menu-vertical li a:hover {
+    background-color: #3a3a3a !important; /* um tom mais claro */
+    color: var(--sidebar-text) !important;
+}
+
+/* Links e títulos */
+.wy-menu-vertical a,
+.wy-side-nav-search a,
+.wy-menu-vertical span.toctree-expand,
+.wy-menu-vertical header {
+    color: var(--sidebar-text-dim) !important;
+}
+
+/* Títulos principais do menu */
+.wy-menu-vertical header {
+    color: var(--sidebar-text) !important;
+}
+
+/* Botão expand/collapse */
+.wy-menu-vertical .toctree-expand {
+    color: var(--sidebar-text) !important;
+}
+
+/* Evitar faixa cinza clara nos níveis superiores */
+.wy-menu-vertical li.current > a {
+    background: var(--sidebar-bg) !important;
+}
+
+/* Remover o fundo cinza claro da categoria ativa */
+.wy-menu-vertical li.current li.current > a {
+    background: #3a3a3a !important;
+}
+
+/* === Remover fundo claro dos itens selecionados === */
+
+/* Item de menu atual (qualquer nível) */
+.wy-menu-vertical li.current > a,
+.wy-menu-vertical li.current > a:hover,
+.wy-menu-vertical li.on > a,
+.wy-menu-vertical li.current li.current > a,
+.wy-menu-vertical li.current li > a,
+.wy-menu-vertical li.toctree-l1.current > a {
+    background: #2f2f2f !important; /* mesma cor da sidebar */
+    color: #ffffff !important;
+}
+
+/* Subitens ativos */
+.wy-menu-vertical li.current ul li a,
+.wy-menu-vertical li.current ul li.current > a,
+.wy-menu-vertical li.current ul li.on > a {
+    background: #2f2f2f !important;
+    color: #ffffff !important;
+}
+
+/* Remover fundo CINZA CLARO do nivel 2 */
+.wy-menu-vertical li.current li.current > a {
+    background-color: #2f2f2f !important;
+}
+
+/* Hover escuro uniforme */
+.wy-menu-vertical a:hover {
+    background-color: #3a3a3a !important;
+    color: #ffffff !important;
+}
+
+/* Hover consistente e suave para todos os níveis do menu lateral */
+.wy-nav-side .wy-menu-vertical li a:hover,
+.wy-nav-side .wy-menu-vertical li a:focus,
+.wy-menu-vertical li.current > a:hover,
+.wy-menu-vertical li.on > a:hover,
+.wy-menu-vertical li.current li a:hover,
+.wy-menu-vertical li.current li.current > a:hover {
+    background-color: #3a3a3a !important; /* cinza claro sobre o fundo escuro */
+    color: #ffffff !important;             /* texto fica branco */
+}
+
+/* Hover para itens colapsáveis (ícone + título) */
+.wy-menu-vertical .toctree-l1 > a:hover,
+.wy-menu-vertical .toctree-l2 > a:hover {
+    background-color: #3a3a3a !important;
+    color: #ffffff !important;
+}
+
+/* Pequena animação para ficar suave */
+.wy-nav-side .wy-menu-vertical li a {
+    transition: background-color 150ms ease, color 150ms ease;
+}
+
+/* Garante contraste do texto dos itens "ativos" após hover */
+.wy-menu-vertical li.current > a,
+.wy-menu-vertical li.current li.current > a {
+    color: #ffffff !important;
+    background-color: #2f2f2f !important; /* mantém o background do item ativo */
+}
+
+/* Caso o seletor do tema aplique um pseudo-elemento, forçamos a cor */
+.wy-menu-vertical li.current > a::before,
+.wy-menu-vertical li.on > a::before {
+    background: transparent !important;
+}
