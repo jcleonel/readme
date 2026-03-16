@@ -29,17 +29,3 @@ Aqui você encontrará anotações organizadas sobre:
 * **Design Patterns:** Aplicados ao mundo real.
 * **Docker & Containers:** De containers simples a orquestração.
 * **System Design:** Decisões arquiteturais.
-
----
-
-## 🚧 Status Atual (WIP)
-
-📅 **Dezembro 2025**
-Atualmente focado no curso **Especialista Spring REST (AlgaWorks)**.
-
-* [ ] Fundamentos REST
-* [ ] Modelagem de recursos
-* [ ] Implementação com Spring
-
----
-*Documentado por **Jean** | Buildado com MkDocs*
