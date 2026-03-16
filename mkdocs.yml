@@ -1,0 +1,15 @@
+site_name: README
+nav:
+  - Arquitetura de Software:
+    - Estilos Arquiteturais:
+      - O que é REST?: arquitetura/rest/conceitos.md
+      - Richardson Maturity Model: arquitetura/rest/richardson.md
+    - Protocolos:
+      - HTTP: arquitetura/protocolos/http.md
+  - Java & Spring:
+    - Spring Boot: java/spring-boot.md
+
+theme: readthedocs
+
+extra_css:
+  - css/custom.css
