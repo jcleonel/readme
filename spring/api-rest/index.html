@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>O que é API REST? - README</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../css/custom.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "O que \u00e9 API REST?";
+        var mkdocs_page_input_path = "spring\\api-rest.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> README
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Início</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Spring</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">O que é API REST?</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#muito-alem-da-internet-o-que-e-uma-api-afinal">Muito Além da Internet: O Que é uma API, Afinal?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#web-services-vs-web-apis-qual-a-diferenca">Web Services vs. Web APIs: Qual a Diferença?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#um-servidor-multiplos-clientes">Um Servidor, Múltiplos Clientes</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#o-padrao-rest-a-arquitetura-da-web-moderna">O Padrão REST: A Arquitetura da Web Moderna</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#por-que-desenvolver-rest-apis">Por Que Desenvolver REST APIs?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#colocando-a-mao-na-massa-rest-na-pratica">Colocando a Mão na Massa: REST na Prática</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#conclusao">Conclusão</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../http/">HTTP</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">README</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Spring</li>
+      <li class="breadcrumb-item active">O que é API REST?</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="a-engrenagem-da-web-entendendo-apis-web-services-e-rest">A Engrenagem da Web: Entendendo APIs, Web Services e REST</h1>
+<p>Imagine que você está em um pub de rock e decide pedir uma cerveja e uma porção de batatas fritas. Você não entra na cozinha, não mexe nos barris de chope e nem liga os fogões. Em vez disso, você chama o garçom, faz o seu pedido, e ele se encarrega de ir até a cozinha, comunicar o que você quer e, minutos depois, trazer o seu pedido pronto. </p>
+<p>No mundo do desenvolvimento de software, o garçom é a nossa <strong>API</strong>. </p>
+<p>Ela atua como um mensageiro intermediário que permite que dois sistemas (você e a cozinha) conversem entre si de forma segura e padronizada, escondendo toda a complexidade de como a comida (ou o dado) é preparada.</p>
+<h2 id="muito-alem-da-internet-o-que-e-uma-api-afinal">Muito Além da Internet: O Que é uma API, Afinal?</h2>
+<p>API significa <em>Application Programming Interface</em> (Interface de Programação de Aplicações). Basicamente, é um conjunto de funções e procedimentos que expõe as funcionalidades de um software para que outro software possa consumi-las. Neste cenário, sempre temos duas figuras: o <strong>provedor</strong> (quem cria e disponibiliza a API) e o <strong>consumidor</strong> (quem a utiliza).</p>
+<p>Um erro comum é achar que toda API vive na internet. Na verdade, muitas APIs funcionam inteiramente offline, dentro do próprio sistema operacional ou da linguagem de programação. A API do Windows, por exemplo, permite que os programas interajam com o hardware do seu computador.</p>
+<p>No universo do Java, nós consumimos APIs o tempo todo sem usar a rede. Quer um exemplo prático? A API de <em>Collections</em> do Java. Quando você precisa agrupar as bandas que vão tocar no seu festival, você simplesmente chama métodos públicos de uma classe que o Java já providenciou:</p>
+<pre><code class="language-java">import java.util.ArrayList;
+import java.util.List;
+
+public class FestivalMetal {
+    public static void main(String[] args) {
+        // Consumindo a API de Collections do Java
+        List&lt;String&gt; lineUp = new ArrayList&lt;&gt;();
+        lineUp.add(&quot;Metallica&quot;);
+        lineUp.add(&quot;Iron Maiden&quot;);
+        lineUp.add(&quot;Angra&quot;);
+
+        System.out.println(&quot;Bandas confirmadas: &quot; + lineUp.size());
+    }
+}
+</code></pre>
+<p>Neste caso, você é o consumidor chamando os métodos <code>.add()</code> e <code>.size()</code>, e o Java é o provedor da API. Nenhuma requisição web foi feita.</p>
+<h2 id="web-services-vs-web-apis-qual-a-diferenca">Web Services vs. Web APIs: Qual a Diferença?</h2>
+<p>Se uma API pode ser apenas uma classe Java, como chamamos as APIs que se comunicam pela internet? É aqui que entram os <strong>Web Services</strong> e as <strong>Web APIs</strong>.</p>
+<p>Pense na diferença entre usar o interfone do seu prédio para falar com o síndico (API local) e usar o seu celular para ligar para uma pizzaria do outro lado da cidade (Web API). Ambos são meios de comunicação, mas o segundo depende de uma rede externa.</p>
+<p>Um <strong>Web Service</strong> é, essencialmente, uma API que fornece sua interface de comunicação através de uma rede (como a web). O termo <strong>Web API</strong> é usado praticamente como um sinônimo no mercado moderno. Empresas gigantes como Spotify e iFood, ou até mesmo os portais governamentais, expõem Web APIs para que outros desenvolvedores possam integrar seus serviços. </p>
+<p>Por exemplo, no nosso projeto <code>meucatalogomusical.com</code>, nós podemos ter uma funcionalidade que busca automaticamente a biografia da banda Lamb of God. Para isso, nosso sistema faz o papel de consumidor, consultando uma Web API externa (como a do Spotify ou do Last.fm) pela internet. Da mesma forma, nosso catálogo pode ser uma Web API interna e privada, servindo dados apenas para os sistemas da nossa própria empresa.</p>
+<h3 id="um-servidor-multiplos-clientes">Um Servidor, Múltiplos Clientes</h3>
+<p>Uma das maiores belezas de construir uma Web API é a centralização das regras de negócio. Imagine que a arquitetura do <code>meucatalogomusical.com</code> precisa atender diferentes interfaces.</p>
+<p>Em vez de escrever a lógica de busca de álbuns separadamente para o site e para o celular, nós criamos uma única Web API. Assim, o App Mobile (iOS/Android), o site principal da aplicação (em Angular, por exemplo) e até mesmo sistemas de terceiros (como uma rádio parceira) consomem exatamente a mesma API. Isso garante consistência e facilidade de manutenção.</p>
+<h2 id="o-padrao-rest-a-arquitetura-da-web-moderna">O Padrão REST: A Arquitetura da Web Moderna</h2>
+<p>Quando falamos de Web APIs hoje em dia, um termo reina absoluto: <strong>REST</strong>.</p>
+<blockquote>
+<p>Em sua dissertação de doutorado publicada no ano 2000 sob o título <em>"Architectural Styles and the Design of Network-based Software Architectures"</em> (procure no Google para ler depois), Roy Thomas Fielding, um dos principais autores da especificação do protocolo HTTP, definiu formalmente o <strong>REST</strong> (<em>Representational State Transfer</em> - Transferência de Estado Representacional). O REST não é uma tecnologia, framework ou biblioteca, mas sim um <strong>estilo arquitetural</strong> para sistemas hipermídia distribuídos. Ele estabelece um conjunto de restrições e princípios que, quando seguidos, resultam em aplicações web altamente escaláveis, independentes e confiáveis, aproveitando ao máximo a semântica dos protocolos de rede já existentes, predominantemente o HTTP.</p>
+</blockquote>
+<p>Em outras palavras, o REST pegou o protocolo HTTP, que já operava a web, e disse: <em>"Vamos usar os métodos que já existem (GET, POST, PUT, DELETE) para manipular recursos, em vez de criar regras novas do zero"</em>.</p>
+<p>Mas afinal, respondendo a uma dúvida crucial: <strong>nem todo Web Service é uma REST API?</strong></p>
+<p>Exatamente! Nem todo Web Service é REST. Como o REST é um <em>estilo arquitetural</em> (um conjunto de regras e boas práticas), você pode construir Web Services usando outras abordagens. Historicamente, tínhamos o SOAP (baseado em XML complexo e envelopado), e hoje também temos alternativas modernas como gRPC e GraphQL. No entanto, se o seu Web Service segue as regras e restrições propostas por Fielding, aí sim ele ganha o título de <strong>REST API</strong> (ou RESTful API).</p>
+<h2 id="por-que-desenvolver-rest-apis">Por Que Desenvolver REST APIs?</h2>
+<p>Escolher a arquitetura REST traz vantagens imensas para o desenvolvimento de software:</p>
+<ol>
+<li><strong>Desacoplamento entre Cliente e Servidor:</strong> Quem consome a API (o front-end) não precisa saber como o banco de dados funciona ou qual linguagem o back-end (Spring Boot) utiliza. Eles evoluem de forma independente.</li>
+<li><strong>Uso de Padrões da Web:</strong> O REST abraça o HTTP em sua essência. Ele usa os métodos verbais que já existem na web (GET para buscar, POST para criar, etc.) e os códigos de status nativos (200 OK, 404 Not Found).</li>
+<li><strong>Escalabilidade e <em>Stateless</em>:</strong> Uma verdadeira API REST não guarda o estado do cliente no servidor entre as requisições (stateless). Cada chamada é independente e contém tudo o que o servidor precisa para entendê-la, o que facilita escalar a aplicação para milhares de acessos simultâneos.</li>
+<li><strong>Respostas Leves:</strong> Geralmente trafegamos os dados no formato JSON (JavaScript Object Notation), que é infinitamente mais leve e legível por humanos do que os antigos padrões de Web Services.</li>
+</ol>
+<h2 id="colocando-a-mao-na-massa-rest-na-pratica">Colocando a Mão na Massa: REST na Prática</h2>
+<p>Para materializar tudo isso, veja como um pedaço do nosso <code>meucatalogomusical.com</code> exporia uma REST API simples usando Java e Spring Boot para retornar dados de uma banda de metal.</p>
+<pre><code class="language-java">import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+
+@RestController
+@RequestMapping(&quot;/api/v1/bandas&quot;)
+public class BandaCatalogController {
+
+    // O método HTTP GET é usado para buscar uma representação do recurso
+    @GetMapping(&quot;/{nomeBanda}&quot;)
+    public ResponseEntity&lt;BandaResponse&gt; buscarBandaDeMetal(@PathVariable String nomeBanda) {
+
+        // Simulando uma busca no banco de dados da nossa aplicação
+        if (nomeBanda.equalsIgnoreCase(&quot;iron-maiden&quot;)) {
+            BandaResponse maiden = new BandaResponse(
+                &quot;Iron Maiden&quot;, 
+                &quot;Heavy Metal&quot;, 
+                1975, 
+                &quot;Reino Unido&quot;
+            );
+            return ResponseEntity.ok(maiden); // Retorna 200 OK e os dados
+        }
+
+        // Utilizando os padrões do protocolo HTTP para respostas não encontradas
+        return ResponseEntity.notFound().build(); // Retorna 404 Not Found
+    }
+}
+</code></pre>
+<p>Quando um cliente (como o nosso front-end) faz uma requisição para esse provedor, a resposta chega no formato JSON, de forma estruturada e simples:</p>
+<pre><code class="language-json">{
+  &quot;nome&quot;: &quot;Iron Maiden&quot;,
+  &quot;genero&quot;: &quot;Heavy Metal&quot;,
+  &quot;anoFormacao&quot;: 1975,
+  &quot;paisOrigem&quot;: &quot;Reino Unido&quot;
+}
+</code></pre>
+<h2 id="conclusao">Conclusão</h2>
+<p>Compreender a diferença entre uma simples interface de programação e uma API distribuída via rede é o primeiro passo para projetar sistemas modernos. Os Web Services conectaram o mundo corporativo, e a genialidade da arquitetura REST tornou essa conexão fluida, leve e padronizada. Ao dominar a criação e o consumo de REST APIs, você não está apenas escrevendo código; você está construindo as engrenagens que movem praticamente toda a internet contemporânea.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../.." class="btn btn-neutral float-left" title="Início"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../http/" class="btn btn-neutral float-right" title="HTTP">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../.." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../http/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

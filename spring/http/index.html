@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>HTTP - README</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../css/custom.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "HTTP";
+        var mkdocs_page_input_path = "spring\\http.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> README
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Início</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Spring</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../api-rest/">O que é API REST?</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">HTTP</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#o-mensageiro-universal-o-que-e-o-http">O Mensageiro Universal: O Que é o HTTP?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#o-http-e-as-apis-rest-uma-parceria-perfeita">O HTTP e as APIs REST: Uma Parceria Perfeita</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#na-pratica-requisitando-muito-metal">Na Prática: Requisitando Muito Metal</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#os-carimbos-dos-correios-http-status-codes">Os Carimbos dos Correios: HTTP Status Codes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#conclusao">Conclusão</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">README</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Spring</li>
+      <li class="breadcrumb-item active">HTTP</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="o-idioma-da-web-desmistificando-o-protocolo-http">O Idioma da Web: Desmistificando o Protocolo HTTP</h1>
+<p>Imagine que você precisa enviar um pacote com vinis raros do Pink Floyd para um amigo em outra cidade. Você não pode simplesmente jogar os discos na rua e esperar que cheguem lá. É preciso colocá-los em uma caixa (o formato), escrever o endereço de destino (para onde vai), colar selos que indicam a prioridade (cabeçalhos) e entregar aos Correios (o meio de transporte). Se o endereço estiver errado, os Correios te devolvem o pacote com um carimbo de "Destinatário não encontrado".</p>
+<p>No desenvolvimento de software, a internet é a nossa agência de correios, e o <strong>HTTP</strong> é o conjunto de regras rigorosas que dita como esses pacotes de dados devem ser enviados, recebidos e carimbados.</p>
+<h2 id="o-mensageiro-universal-o-que-e-o-http">O Mensageiro Universal: O Que é o HTTP?</h2>
+<p>HTTP é a sigla para <em>Hypertext Transfer Protocol</em> (Protocolo de Transferência de Hipertexto). De forma simples, é a linguagem base que permite a comunicação entre um cliente (como o seu navegador, o Postman ou um aplicativo de celular) e um servidor (onde a sua aplicação e banco de dados moram).</p>
+<p>Ele funciona em um modelo clássico de <strong>Requisição e Resposta (Request/Response)</strong>. O cliente pede algo, e o servidor responde. Essa conversa é totalmente dependente do HTTP para acontecer de forma padronizada, independentemente se o cliente foi escrito em JavaScript e o servidor em Java.</p>
+<blockquote>
+<p>Do ponto de vista técnico e formal, conforme definido pela <em>Internet Engineering Task Force</em> (IETF) na <strong>RFC 9110</strong> (que atualizou as especificações semânticas clássicas do protocolo), o HTTP é um protocolo de camada de aplicação genérico, <em>stateless</em> (sem estado) e orientado a objetos. Ele foi projetado para sistemas de informação distribuídos e colaborativos. Sua característica <em>stateless</em> significa que o servidor não guarda memória das requisições passadas do cliente; cada requisição HTTP deve conter absolutamente todas as informações necessárias para que o servidor possa compreendê-la e processá-la de forma isolada.</p>
+</blockquote>
+<h2 id="o-http-e-as-apis-rest-uma-parceria-perfeita">O HTTP e as APIs REST: Uma Parceria Perfeita</h2>
+<p>Nas APIs REST, o HTTP não é apenas um "tubo" por onde os dados passam; a própria semântica do HTTP é usada para definir o que queremos fazer com os recursos do nosso sistema.</p>
+<p>Para isso, o protocolo disponibiliza os chamados <strong>Métodos HTTP</strong> (ou Verbos HTTP). Os quatro mais utilizados no dia a dia de uma API REST são:</p>
+<ul>
+<li><strong>GET:</strong> Para buscar ou ler dados. (Ex: "Me traga a discografia do Iron Maiden").</li>
+<li><strong>POST:</strong> Para criar um novo recurso. (Ex: "Cadastre essa nova banda no catálogo").</li>
+<li><strong>PUT:</strong> Para atualizar um recurso existente por completo. (Ex: "Atualize todos os dados do álbum <em>Ashes of the Wake</em>").</li>
+<li><strong>DELETE:</strong> Para remover um recurso. (Ex: "Apague essa música duplicada do sistema").</li>
+</ul>
+<h3 id="na-pratica-requisitando-muito-metal">Na Prática: Requisitando Muito Metal</h3>
+<p>Vamos imaginar a nossa aplicação, <code>meucatalogomusical.com</code>. O cliente quer cadastrar um novo álbum da banda Gunmen. Ele enviará uma requisição HTTP <strong>POST</strong> contendo um corpo (Body) em formato JSON.</p>
+<p>A requisição crua viajando pela rede se parece com isso:</p>
+<pre><code class="language-http">POST /api/v1/albuns HTTP/1.1
+Host: meucatalogomusical.com
+Content-Type: application/json
+
+{
+  &quot;banda&quot;: &quot;Gunmen&quot;,
+  &quot;titulo&quot;: &quot;The Order of Fear&quot;,
+  &quot;anoLancamento&quot;: 2024
+}
+</code></pre>
+<p>Do lado do servidor, usando Java e Spring Boot, nós interceptamos essa requisição de forma muito simples e mapeamos o verbo HTTP para um método no nosso código usando anotações:</p>
+<pre><code class="language-java">import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
+
+@RestController
+@RequestMapping(&quot;/api/v1/albuns&quot;)
+public class AlbumController {
+
+    // O @PostMapping diz ao Spring: &quot;Só aceite requisições HTTP do tipo POST aqui&quot;
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED) 
+    public AlbumResponse cadastrarAlbum(@RequestBody AlbumRequest request) {
+
+        // Lógica para salvar o álbum &quot;Omens&quot; no banco de dados
+        Album novoAlbum = albumService.salvar(request);
+
+        return new AlbumResponse(novoAlbum.getId(), novoAlbum.getTitulo());
+    }
+}
+</code></pre>
+<h2 id="os-carimbos-dos-correios-http-status-codes">Os Carimbos dos Correios: HTTP Status Codes</h2>
+<p>Lembra do carimbo de "Destinatário não encontrado"? No HTTP, toda resposta do servidor vem acompanhada de um <strong>Status Code</strong> (Código de Status). É um número de 3 dígitos que resume rapidamente o que aconteceu com a sua requisição.</p>
+<p>Eles são divididos em famílias. Aqui estão os mais comuns e cruciais para quem desenvolve APIs:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Código</th>
+<th style="text-align: left;">Nome (Status)</th>
+<th style="text-align: left;">O que significa na prática?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>200</strong></td>
+<td style="text-align: left;"><code>OK</code></td>
+<td style="text-align: left;">A requisição deu certo. Muito comum em retornos de requisições <code>GET</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>201</strong></td>
+<td style="text-align: left;"><code>Created</code></td>
+<td style="text-align: left;">Sucesso! O recurso (como o álbum do Gunmen) foi criado no servidor. Padrão para <code>POST</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>204</strong></td>
+<td style="text-align: left;"><code>No Content</code></td>
+<td style="text-align: left;">Sucesso, mas não há dados para retornar no corpo da resposta. Comum após um <code>DELETE</code> bem-sucedido.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>400</strong></td>
+<td style="text-align: left;"><code>Bad Request</code></td>
+<td style="text-align: left;">A culpa é do cliente. Faltou um campo obrigatório no JSON ou a sintaxe da requisição está errada.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>401</strong></td>
+<td style="text-align: left;"><code>Unauthorized</code></td>
+<td style="text-align: left;">Você não enviou um token de autenticação válido. O servidor não sabe quem você é.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>403</strong></td>
+<td style="text-align: left;"><code>Forbidden</code></td>
+<td style="text-align: left;">O servidor sabe quem você é, mas você não tem permissão para fazer isso (ex: tentar apagar o Metallica do catálogo sem ser administrador).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>404</strong></td>
+<td style="text-align: left;"><code>Not Found</code></td>
+<td style="text-align: left;">O recurso solicitado não existe. A URL está errada ou a banda não está no banco de dados.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>500</strong></td>
+<td style="text-align: left;"><code>Internal Server Error</code></td>
+<td style="text-align: left;">O famoso "Deu ruim no Back-end". Ocorreu uma exceção não tratada (como um <em>NullPointerException</em>) no seu código Java.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="conclusao">Conclusão</h2>
+<p>Entender o HTTP não é um mero detalhe acadêmico; é o conhecimento fundamental para qualquer desenvolvedor que constrói ou consome APIs. Ao respeitar a semântica dos verbos HTTP e retornar os <em>Status Codes</em> adequados, sua API se torna previsível, madura e extremamente fácil de ser consumida por outros desenvolvedores. Você para de "brigar" com a web e passa a surfar na arquitetura para a qual ela foi desenhada.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../api-rest/" class="btn btn-neutral float-left" title="O que é API REST?"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../api-rest/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
