@@ -1,13 +1,17 @@
 site_name: README
 nav:
-  - Arquitetura de Software:
-    - Estilos Arquiteturais:
-      - O que é REST?: arquitetura/rest/conceitos.md
-      - Richardson Maturity Model: arquitetura/rest/richardson.md
-    - Protocolos:
-      - HTTP: arquitetura/protocolos/http.md
-  - Java & Spring:
-    - Spring Boot: java/spring-boot.md
+  - Início: index.md  
+  ##- Java:
+    ##- Assunto 1 de Java: java1.md         
+  - Spring:
+      - O que é API REST?: spring/api-rest.md
+      - HTTP: spring/http.md      
+  ##- Persistência de Dados:
+    ##- persistencia: persistencia.md
+  ##- Arquitetura e Microsserviços: 
+    ##- Arquiteruta1: arquit.md     
+  ##- Histórias de Guerra (Casos Reais):
+    ##-caso1: caso1.md
 
 theme: readthedocs
 
