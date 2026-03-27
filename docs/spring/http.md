@@ -25,7 +25,7 @@ Para isso, o protocolo disponibiliza os chamados **Métodos HTTP** (ou Verbos HT
 
 ### Na Prática: Requisitando Muito Metal
 
-Vamos imaginar a nossa aplicação, `meucatalogomusical.com`. O cliente quer cadastrar um novo álbum da banda Gunmen. Ele enviará uma requisição HTTP **POST** contendo um corpo (Body) em formato JSON.
+Vamos imaginar a nossa aplicação, `meucatalogomusical.com`. O cliente quer cadastrar um novo álbum da banda Orden Ogan. Ele enviará uma requisição HTTP **POST** contendo um corpo (Body) em formato JSON.
 
 A requisição crua viajando pela rede se parece com isso:
 
@@ -35,7 +35,7 @@ Host: meucatalogomusical.com
 Content-Type: application/json
 
 {
-  "banda": "Gunmen",
+  "banda": "Orden Ogan",
   "titulo": "The Order of Fear",
   "anoLancamento": 2024
 }
@@ -73,7 +73,7 @@ Eles são divididos em famílias. Aqui estão os mais comuns e cruciais para que
 | Código | Nome (Status) | O que significa na prática? |
 | :--- | :--- | :--- |
 | **200** | `OK` | A requisição deu certo. Muito comum em retornos de requisições `GET`. |
-| **201** | `Created` | Sucesso! O recurso (como o álbum do Gunmen) foi criado no servidor. Padrão para `POST`. |
+| **201** | `Created` | Sucesso! O recurso (como o álbum do Orden Ogan) foi criado no servidor. Padrão para `POST`. |
 | **204** | `No Content` | Sucesso, mas não há dados para retornar no corpo da resposta. Comum após um `DELETE` bem-sucedido. |
 | **400** | `Bad Request` | A culpa é do cliente. Faltou um campo obrigatório no JSON ou a sintaxe da requisição está errada. |
 | **401** | `Unauthorized` | Você não enviou um token de autenticação válido. O servidor não sabe quem você é. |

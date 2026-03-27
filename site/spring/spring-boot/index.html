@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Spring Boot - README</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../css/custom.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Spring Boot";
+        var mkdocs_page_input_path = "spring\\spring-boot.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> README
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Início</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Spring</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../api-rest/">O que é API REST?</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../http/">HTTP</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../por-que-spring/">Por que escolher Spring?</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Spring Boot</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#a-evolucao-do-caos-do-xml-a-autoconfiguracao">A Evolução: Do Caos do XML à Autoconfiguração</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#a-bussola-do-spring-boot-visao-opinativa-e-convencoes">A Bússola do Spring Boot: Visão Opinativa e Convenções</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#o-fim-do-inferno-das-dependencias-com-os-starters">O Fim do "Inferno das Dependências" com os Starters</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#o-servidor-embutido-e-o-poder-do-fat-jar">O Servidor Embutido e o Poder do Fat JAR</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#spring-boot-ou-spring-mvc-desfazendo-a-confusao">Spring Boot ou Spring MVC? Desfazendo a Confusão</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#colocando-a-mao-na-massa">Colocando a Mão na Massa</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#conclusao">Conclusão</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">README</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Spring</li>
+      <li class="breadcrumb-item active">Spring Boot</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="a-magica-sem-truques-do-spring-boot">A Mágica Sem Truques do Spring Boot</h1>
+<p>Quem tem base em Engenharia Elétrica, ou já brincou com eletrônica básica, conhece bem a famosa "protoboard" (aquela matriz de contatos cheia de furinhos). Para acender um simples LED e fazer um motor girar, você precisa plugar dezenas de fios, medir resistores e criar pontes de forma estritamente manual. Um fio no buraco errado e nada funciona. No desenvolvimento de software corporativo clássico, configurar uma aplicação era exatamente assim. </p>
+<p>Hoje, nós usamos placas de circuito impresso prontas, onde os componentes já vêm soldados de fábrica nos lugares certos e testados para máxima eficiência. No ecossistema Java, essa placa de circuito pronta atende pelo nome de <strong>Spring Boot</strong>.</p>
+<h2 id="a-evolucao-do-caos-do-xml-a-autoconfiguracao">A Evolução: Do Caos do XML à Autoconfiguração</h2>
+<p>Antigamente, orquestrar um projeto Spring exigia arquivos XML quilométricos e extremamente burocráticos. O maior problema dessa abordagem era o <em>feedback</em> tardio: um simples erro de digitação no nome de uma classe dentro do XML era silencioso e só seria descoberto quando a aplicação tentasse rodar e quebrasse.</p>
+<p>Com o amadurecimento do framework, passamos a usar configurações programáticas. Trocamos o XML por anotações e código Java (como <code>@Configuration</code> e <code>@Bean</code>). Foi um avanço tremendo, pois o compilador passou a nos avisar de erros antecipadamente. Contudo, o desenvolvedor ainda perdia horas preciosas escrevendo "código de infraestrutura" e perdia o foco do que realmente importava: desenvolver a regra de negócio.</p>
+<h2 id="a-bussola-do-spring-boot-visao-opinativa-e-convencoes">A Bússola do Spring Boot: Visão Opinativa e Convenções</h2>
+<p>É exatamente para curar essa dor que o Spring Boot nasceu. E aqui vai uma regra de ouro: <strong>o Spring Boot não é um gerador de código</strong>. Ele é um orquestrador mestre que adota o conceito de <em>Convention over Configuration</em> (Convenção sobre Configuração - CoC).</p>
+<p>O Spring Boot possui o que chamamos de <strong>Visão Opinativa</strong>. Ele olha para o mercado, avalia como a maioria dos desenvolvedores experientes configura segurança, transações web ou persistência de dados, e já entrega tudo pré-configurado seguindo essas melhores práticas. </p>
+<p>Por exemplo, ao lidar com persistência de dados, existe um padrão conhecido como <em>Open Session in View</em>, que dita que toda transação com o banco de dados deve ser aberta e fechada no ciclo de vida de uma requisição HTTP. O Spring Boot já deixa isso configurado para você por debaixo dos panos. É claro que você tem liberdade total para sobrescrever essa configuração caso sua arquitetura exija algo diferente, mas na esmagadora maioria das vezes, a opinião do Spring Boot está correta.</p>
+<h2 id="o-fim-do-inferno-das-dependencias-com-os-starters">O Fim do "Inferno das Dependências" com os Starters</h2>
+<p>Se você já trabalha com Maven ou Gradle, sabe que o arquivo <code>pom.xml</code> pode facilmente passar de milhares de linhas, transformando o gerenciamento de versões em um pesadelo.</p>
+<p>O Spring Boot ataca esse problema através dos <strong>Starters</strong>. Pense neles como os "combos" de uma lanchonete. Em vez de pedir o pão, a carne, o queijo e o molho separadamente (e torcer para que os ingredientes combinem e não estraguem), você simplesmente pede o "Combo 1". </p>
+<p>Ao adicionar o <code>spring-boot-starter-data-jpa</code>, por exemplo, o Spring Boot não adiciona apenas uma biblioteca. Ele traz o Hibernate, as interfaces do Spring Data, o gerenciador de conexões e garante que <strong>todas as versões dessas ferramentas sejam 100% compatíveis entre si</strong>, eliminando conflitos no seu <em>classpath</em>.</p>
+<h2 id="o-servidor-embutido-e-o-poder-do-fat-jar">O Servidor Embutido e o Poder do Fat JAR</h2>
+<p>No modelo clássico, você precisava compilar sua aplicação, empacotá-la em um arquivo <code>.war</code> e instalá-la manualmente dentro de um servidor de aplicação externo, como o Tomcat.</p>
+<p>O Spring Boot inverteu essa arquitetura de forma brilhante. Ele incorpora o <em>Servlet Container</em> (o Tomcat vem por padrão, mas você pode trocar por outros) <strong>dentro</strong> da sua aplicação. </p>
+<p>O resultado da sua compilação é um <strong>Fat JAR</strong> (um JAR "gordinho"). Ele contém as suas regras de negócio, as dependências do ecossistema e o próprio servidor web. O <em>deploy</em> passa a ser tão simples quanto executar um único comando no terminal: <code>java -jar minha-aplicacao.jar</code>. A aplicação já nasce pronta para rodar em qualquer máquina ou contêiner de nuvem.</p>
+<h2 id="spring-boot-ou-spring-mvc-desfazendo-a-confusao">Spring Boot ou Spring MVC? Desfazendo a Confusão</h2>
+<p>É muito comum, especialmente entre iniciantes, ouvir a frase: <em>"Estou trabalhando com desenvolvimento Web usando Spring Boot"</em>. Embora não seja uma mentira, é uma informação incompleta que gera uma dúvida clássica: <em>"Qual é melhor: Spring Boot ou Spring MVC?"</em>.</p>
+<p>Eles não são concorrentes. O Spring Boot é uma <strong>camada de abstração</strong> em cima de todo o ecossistema Spring. O Spring MVC é o framework específico para desenvolvimento Web (lidar com requisições HTTP, rotas, etc). O Spring Boot é apenas o facilitador que configura o Spring MVC automaticamente para você. Inclusive, você pode usar o Spring Boot para desenvolver sistemas que sequer tocam na web, como rotinas de processamento em lote (<em>Batch</em>) ou ferramentas de linha de comando.</p>
+<blockquote>
+<p>Segundo a documentação oficial fornecida pela VMware, mantenedora do projeto, o Spring Boot torna fácil criar aplicações baseadas em Spring, <em>stand-alone</em> e prontas para produção, que você pode "apenas rodar" (<em>just run</em>). Ele adota uma visão opinativa sobre a plataforma Spring e bibliotecas de terceiros para que o desenvolvedor possa começar com o mínimo de confusão. A tecnologia fornece um conjunto de características não-funcionais comuns a grandes classes de projetos (como servidores embutidos, segurança, métricas, verificações de integridade e configuração externalizada), sem absolutamente nenhuma necessidade de geração de código.</p>
+</blockquote>
+<h2 id="colocando-a-mao-na-massa">Colocando a Mão na Massa</h2>
+<p>Vamos materializar isso no nosso domínio, o <code>meucatalogomusical.com</code>. Queremos expor uma API que liste algumas das maiores bandas.</p>
+<p>No nosso <code>pom.xml</code>, o combo é simples:</p>
+<pre><code class="language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>A classe principal do projeto não tem complexidade alguma. A anotação <code>@SpringBootApplication</code> liga os radares do framework para encontrar nossos componentes e aplicar as configurações opinativas:</p>
+<pre><code class="language-java">import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class CatalogoMusicalApplication {
+    public static void main(String[] args) {
+        // Inicializa o Spring Boot e sobe o Tomcat embutido na porta 8080
+        SpringApplication.run(CatalogoMusicalApplication.class, args);
+    }
+}
+</code></pre>
+<p>E finalmente, focamos estritamente na regra de negócio através de um <em>Controller</em>:</p>
+<pre><code class="language-java">import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import java.util.Arrays;
+import java.util.List;
+
+@RestController
+@RequestMapping(&quot;/api/v1/bandas&quot;)
+public class BandaController {
+
+    @GetMapping
+    public List&lt;String&gt; listarBandas() {
+        // Graças à visão opinativa, não precisamos configurar um conversor de JSON.
+        // O Spring Boot já embute o Jackson e traduz essa lista Java automaticamente.
+        return Arrays.asList(&quot;Metallica&quot;, &quot;Iron Maiden&quot;, &quot;Angra&quot;, &quot;Lamb of God&quot;, &quot;Pink Floyd&quot;, &quot;Sepultura&quot;);
+    }
+}
+</code></pre>
+<p>Ao rodar a aplicação e disparar um <code>GET</code> para <code>/api/v1/bandas</code>, recebemos imediatamente a resposta formatada:</p>
+<pre><code class="language-json">[
+  &quot;Metallica&quot;,
+  &quot;Iron Maiden&quot;,
+  &quot;Angra&quot;,
+  &quot;Lamb of God&quot;,
+  &quot;Pink Floyd&quot;
+]
+</code></pre>
+<h2 id="conclusao">Conclusão</h2>
+<p>O Spring Boot não trouxe novas tecnologias reinventadas do zero; ele trouxe inteligência de arquitetura e ergonomia para o desenvolvedor. Ao abraçar a Visão Opinativa e centralizar o peso das configurações através dos <em>Starters</em> e do servidor embutido, ele remove a burocracia do seu caminho. Entender o Spring Boot não é sobre decorar anotações, mas sim compreender que o seu tempo como desenvolvedor de software é valioso demais para ser gasto conectando fios em uma protoboard virtual.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../por-que-spring/" class="btn btn-neutral float-left" title="Por que escolher Spring?"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../por-que-spring/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

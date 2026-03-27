@@ -5,7 +5,9 @@ nav:
     ##- Assunto 1 de Java: java1.md         
   - Spring:
       - O que é API REST?: spring/api-rest.md
-      - HTTP: spring/http.md      
+      - HTTP: spring/http.md
+      - Por que escolher Spring?: spring/por-que-spring.md
+      - Spring Boot: spring/spring-boot.md
   ##- Persistência de Dados:
     ##- persistencia: persistencia.md
   ##- Arquitetura e Microsserviços: 
