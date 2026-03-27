@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+body {
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    margin-top: 1.4rem;
+    margin-bottom: .8rem;
+    font-weight: 600;
+}
+
+p, ul, ol {
+    margin-bottom: 1rem;
+}
+
+.wy-nav-content {
+    max-width: 1100px;
+    margin: auto;
+}
+
+/* =========================
+   🎯 BASE (Dracula)
+========================= */
+
+:root {
+  --dracula-bg: #282a36;
+  --dracula-current: #44475a;
+  --dracula-fg: #f8f8f2;
+  --dracula-comment: #6272a4;
+  --dracula-cyan: #8be9fd;
+  --dracula-green: #50fa7b;
+  --dracula-orange: #ffb86c;
+  --dracula-pink: #ff79c6;
+  --dracula-purple: #bd93f9;
+  --dracula-red: #ff5555;
+  --dracula-yellow: #f1fa8c;
+}
+
+/* =========================
+   📦 BLOCO DE CÓDIGO
+========================= */
+
+.md-typeset pre {
+  background-color: var(--dracula-bg);
+  border: 1px solid var(--dracula-current);
+  border-radius: 10px;
+  padding: 16px;
+  overflow-x: auto;
+  max-height: 500px;
+}
+
+/* Código interno */
+.md-typeset pre code {
+  background: none;
+  color: var(--dracula-fg);
+  font-size: 0.65rem;
+  line-height: 1.4;
+}
+
+/* Inline code */
+.md-typeset code {
+  font-size: 0.65rem;
+  background-color: var(--dracula-current);
+  color: var(--dracula-yellow);
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+/* =========================
+   💻 SYNTAX HIGHLIGHT
+========================= */
+
+/* Comentários */
+.md-typeset .c,
+.md-typeset .c1 {
+  color: var(--dracula-comment);
+  font-style: italic;
+}
+
+/* Keywords */
+.md-typeset .k {
+  color: var(--dracula-pink);
+}
+
+/* Strings */
+.md-typeset .s {
+  color: var(--dracula-yellow);
+}
+
+/* Números */
+.md-typeset .m {
+  color: var(--dracula-purple);
+}
+
+/* Classes (Java classes) */
+.md-typeset .nc {
+  color: var(--dracula-green);
+  font-weight: 500;
+}
+
+/* Métodos */
+.md-typeset .nf {
+  color: var(--dracula-cyan);
+}
+
+/* Annotations (@SpringBootApplication) */
+.md-typeset .nd {
+  color: var(--dracula-orange);
+}
+
+/* Tipos (String, Integer, etc) */
+.md-typeset .kt {
+  color: var(--dracula-cyan);
+}
+
+/* Variáveis */
+.md-typeset .n {
+  color: var(--dracula-fg);
+}
+
+/* Operadores */
+.md-typeset .o {
+  color: var(--dracula-pink);
+}
+
+/* =========================
+   🧱 MELHORIAS VISUAIS
+========================= */
+
+/* Scroll bonito */
+.md-typeset pre::-webkit-scrollbar {
+  height: 8px;
+}
+
+.md-typeset pre::-webkit-scrollbar-thumb {
+  background: var(--dracula-current);
+  border-radius: 4px;
+}
+
+/* Destaque de seleção */
+::selection {
+  background: var(--dracula-purple);
+  color: #fff;
+}
+
+/* =========================
+   ☕ FOCO EM JAVA
+========================= */
+
+/* Destaque extra pra palavras comuns do Java */
+.md-typeset .kd {
+  color: var(--dracula-pink);
+}
+
+.md-typeset .nb {
+  color: var(--dracula-cyan);
+}
