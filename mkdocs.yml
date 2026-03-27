@@ -8,6 +8,7 @@ nav:
         - Um pouco de HTTP: backend/spring/http.md
         - Por que escolher Spring?: backend/spring/por-que-spring.md
         - Spring Boot: backend/spring/spring-boot.md
+        - Spring Initializr: backend/spring/spring-initializr.md
     
     ##- Java:
       ##- Assunto 1 de Java: backend/spring/api-rest.md
@@ -22,11 +23,21 @@ theme:
   name: material
   include_page_toc: false
   language: pt-BR
+  palette:
+    scheme: slate
+    primary: indigo
+    accent: cyan
+
+  font:
+    text: Roboto
+    code: JetBrains Mono
 
 markdown_extensions:
-  - pymdownx.highlight
+  - pymdownx.highlight:
+      pygments_style: dracula
+      noclasses: false
   - pymdownx.superfences
   - pymdownx.inlinehilite
 
 extra_css:
-  - css/custom.css
+  - assets/css/custom.css
