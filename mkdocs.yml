@@ -1,13 +1,16 @@
 site_name: README
 nav:
-  - Início: index.md  
-  ##- Java:
-    ##- Assunto 1 de Java: java1.md         
-  - Spring:
-      - O que é API REST?: spring/api-rest.md
-      - HTTP: spring/http.md
-      - Por que escolher Spring?: spring/por-que-spring.md
-      - Spring Boot: spring/spring-boot.md
+  - Início: index.md
+
+  - Backend:         
+    - Spring:
+        - O que é API REST?: backend/spring/api-rest.md
+        - Um pouco de HTTP: backend/spring/http.md
+        - Por que escolher Spring?: backend/spring/por-que-spring.md
+        - Spring Boot: backend/spring/spring-boot.md
+    
+    ##- Java:
+      ##- Assunto 1 de Java: backend/spring/api-rest.md
   ##- Persistência de Dados:
     ##- persistencia: persistencia.md
   ##- Arquitetura e Microsserviços: 
@@ -15,7 +18,15 @@ nav:
   ##- Histórias de Guerra (Casos Reais):
     ##-caso1: caso1.md
 
-theme: readthedocs
+theme:
+  name: material
+  include_page_toc: false
+  language: pt-BR
+
+markdown_extensions:
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
 
 extra_css:
   - css/custom.css
