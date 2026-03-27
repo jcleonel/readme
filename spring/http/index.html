@@ -64,6 +64,10 @@
     </li>
     </ul>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../por-que-spring/">Por que escolher Spring?</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../spring-boot/">Spring Boot</a>
+                  </li>
               </ul>
       </div>
     </div>
@@ -108,14 +112,14 @@
 <li><strong>DELETE:</strong> Para remover um recurso. (Ex: "Apague essa música duplicada do sistema").</li>
 </ul>
 <h3 id="na-pratica-requisitando-muito-metal">Na Prática: Requisitando Muito Metal</h3>
-<p>Vamos imaginar a nossa aplicação, <code>meucatalogomusical.com</code>. O cliente quer cadastrar um novo álbum da banda Gunmen. Ele enviará uma requisição HTTP <strong>POST</strong> contendo um corpo (Body) em formato JSON.</p>
+<p>Vamos imaginar a nossa aplicação, <code>meucatalogomusical.com</code>. O cliente quer cadastrar um novo álbum da banda Orden Ogan. Ele enviará uma requisição HTTP <strong>POST</strong> contendo um corpo (Body) em formato JSON.</p>
 <p>A requisição crua viajando pela rede se parece com isso:</p>
 <pre><code class="language-http">POST /api/v1/albuns HTTP/1.1
 Host: meucatalogomusical.com
 Content-Type: application/json
 
 {
-  &quot;banda&quot;: &quot;Gunmen&quot;,
+  &quot;banda&quot;: &quot;Orden Ogan&quot;,
   &quot;titulo&quot;: &quot;The Order of Fear&quot;,
   &quot;anoLancamento&quot;: 2024
 }
@@ -160,7 +164,7 @@ public class AlbumController {
 <tr>
 <td style="text-align: left;"><strong>201</strong></td>
 <td style="text-align: left;"><code>Created</code></td>
-<td style="text-align: left;">Sucesso! O recurso (como o álbum do Gunmen) foi criado no servidor. Padrão para <code>POST</code>.</td>
+<td style="text-align: left;">Sucesso! O recurso (como o álbum do Orden Ogan) foi criado no servidor. Padrão para <code>POST</code>.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>204</strong></td>
@@ -201,6 +205,7 @@ public class AlbumController {
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../api-rest/" class="btn btn-neutral float-left" title="O que é API REST?"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../por-que-spring/" class="btn btn-neutral float-right" title="Por que escolher Spring?">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -225,6 +230,8 @@ public class AlbumController {
     
       <span><a href="../api-rest/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
+    
+      <span><a href="../por-que-spring/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
