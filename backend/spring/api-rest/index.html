@@ -1,0 +1,845 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../..">
+      
+      
+        <link rel="next" href="../http/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>O que é API REST? - README</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#a-engrenagem-da-web-entendendo-apis-web-services-e-rest" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../../.." title="README" class="md-header__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            README
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              O que é API REST?
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="README" class="md-nav__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    README
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Backend
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Spring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    O que é API REST?
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    O que é API REST?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#muito-alem-da-internet-o-que-e-uma-api-afinal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Muito Além da Internet: O Que é uma API, Afinal?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#web-services-vs-web-apis-qual-a-diferenca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Web Services vs. Web APIs: Qual a Diferença?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Web Services vs. Web APIs: Qual a Diferença?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#um-servidor-multiplos-clientes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Um Servidor, Múltiplos Clientes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-padrao-rest-a-arquitetura-da-web-moderna" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O Padrão REST: A Arquitetura da Web Moderna
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-desenvolver-rest-apis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por Que Desenvolver REST APIs?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#colocando-a-mao-na-massa-rest-na-pratica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Colocando a Mão na Massa: REST na Prática
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusão
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../http/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Um pouco de HTTP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../por-que-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Por que escolher Spring?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../spring-boot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Boot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#muito-alem-da-internet-o-que-e-uma-api-afinal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Muito Além da Internet: O Que é uma API, Afinal?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#web-services-vs-web-apis-qual-a-diferenca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Web Services vs. Web APIs: Qual a Diferença?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Web Services vs. Web APIs: Qual a Diferença?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#um-servidor-multiplos-clientes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Um Servidor, Múltiplos Clientes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-padrao-rest-a-arquitetura-da-web-moderna" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O Padrão REST: A Arquitetura da Web Moderna
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-desenvolver-rest-apis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por Que Desenvolver REST APIs?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#colocando-a-mao-na-massa-rest-na-pratica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Colocando a Mão na Massa: REST na Prática
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusão
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="a-engrenagem-da-web-entendendo-apis-web-services-e-rest">A Engrenagem da Web: Entendendo APIs, Web Services e REST</h1>
+<p>Imagine que você está em um pub de rock e decide pedir uma cerveja e uma porção de batatas fritas. Você não entra na cozinha, não mexe nos barris de chope e nem liga os fogões. Em vez disso, você chama o garçom, faz o seu pedido, e ele se encarrega de ir até a cozinha, comunicar o que você quer e, minutos depois, trazer o seu pedido pronto. </p>
+<p>No mundo do desenvolvimento de software, o garçom é a nossa <strong>API</strong>. </p>
+<p>Ela atua como um mensageiro intermediário que permite que dois sistemas (você e a cozinha) conversem entre si de forma segura e padronizada, escondendo toda a complexidade de como a comida (ou o dado) é preparada.</p>
+<h2 id="muito-alem-da-internet-o-que-e-uma-api-afinal">Muito Além da Internet: O Que é uma API, Afinal?</h2>
+<p>API significa <em>Application Programming Interface</em> (Interface de Programação de Aplicações). Basicamente, é um conjunto de funções e procedimentos que expõe as funcionalidades de um software para que outro software possa consumi-las. Neste cenário, sempre temos duas figuras: o <strong>provedor</strong> (quem cria e disponibiliza a API) e o <strong>consumidor</strong> (quem a utiliza).</p>
+<p>Um erro comum é achar que toda API vive na internet. Na verdade, muitas APIs funcionam inteiramente offline, dentro do próprio sistema operacional ou da linguagem de programação. A API do Windows, por exemplo, permite que os programas interajam com o hardware do seu computador.</p>
+<p>No universo do Java, nós consumimos APIs o tempo todo sem usar a rede. Quer um exemplo prático? A API de <em>Collections</em> do Java. Quando você precisa agrupar as bandas que vão tocar no seu festival, você simplesmente chama métodos públicos de uma classe que o Java já providenciou:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.ArrayList</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">FestivalMetal</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Consumindo a API de Collections do Java</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">lineUp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="n">lineUp</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Metallica&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">lineUp</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Iron Maiden&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">lineUp</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;Angra&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Bandas confirmadas: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">lineUp</span><span class="p">.</span><span class="na">size</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Neste caso, você é o consumidor chamando os métodos <code>.add()</code> e <code>.size()</code>, e o Java é o provedor da API. Nenhuma requisição web foi feita.</p>
+<h2 id="web-services-vs-web-apis-qual-a-diferenca">Web Services vs. Web APIs: Qual a Diferença?</h2>
+<p>Se uma API pode ser apenas uma classe Java, como chamamos as APIs que se comunicam pela internet? É aqui que entram os <strong>Web Services</strong> e as <strong>Web APIs</strong>.</p>
+<p>Pense na diferença entre usar o interfone do seu prédio para falar com o síndico (API local) e usar o seu celular para ligar para uma pizzaria do outro lado da cidade (Web API). Ambos são meios de comunicação, mas o segundo depende de uma rede externa.</p>
+<p>Um <strong>Web Service</strong> é, essencialmente, uma API que fornece sua interface de comunicação através de uma rede (como a web). O termo <strong>Web API</strong> é usado praticamente como um sinônimo no mercado moderno. Empresas gigantes como Spotify e iFood, ou até mesmo os portais governamentais, expõem Web APIs para que outros desenvolvedores possam integrar seus serviços. </p>
+<p>Por exemplo, no nosso projeto <code>meucatalogomusical.com</code>, nós podemos ter uma funcionalidade que busca automaticamente a biografia da banda Lamb of God. Para isso, nosso sistema faz o papel de consumidor, consultando uma Web API externa (como a do Spotify ou do Last.fm) pela internet. Da mesma forma, nosso catálogo pode ser uma Web API interna e privada, servindo dados apenas para os sistemas da nossa própria empresa.</p>
+<h3 id="um-servidor-multiplos-clientes">Um Servidor, Múltiplos Clientes</h3>
+<p>Uma das maiores belezas de construir uma Web API é a centralização das regras de negócio. Imagine que a arquitetura do <code>meucatalogomusical.com</code> precisa atender diferentes interfaces.</p>
+<p>Em vez de escrever a lógica de busca de álbuns separadamente para o site e para o celular, nós criamos uma única Web API. Assim, o App Mobile (iOS/Android), o site principal da aplicação (em Angular, por exemplo) e até mesmo sistemas de terceiros (como uma rádio parceira) consomem exatamente a mesma API. Isso garante consistência e facilidade de manutenção.</p>
+<h2 id="o-padrao-rest-a-arquitetura-da-web-moderna">O Padrão REST: A Arquitetura da Web Moderna</h2>
+<p>Quando falamos de Web APIs hoje em dia, um termo reina absoluto: <strong>REST</strong>.</p>
+<blockquote>
+<p>Em sua dissertação de doutorado publicada no ano 2000 sob o título <em>"Architectural Styles and the Design of Network-based Software Architectures"</em> (procure no Google para ler depois), Roy Thomas Fielding, um dos principais autores da especificação do protocolo HTTP, definiu formalmente o <strong>REST</strong> (<em>Representational State Transfer</em> - Transferência de Estado Representacional). O REST não é uma tecnologia, framework ou biblioteca, mas sim um <strong>estilo arquitetural</strong> para sistemas hipermídia distribuídos. Ele estabelece um conjunto de restrições e princípios que, quando seguidos, resultam em aplicações web altamente escaláveis, independentes e confiáveis, aproveitando ao máximo a semântica dos protocolos de rede já existentes, predominantemente o HTTP.</p>
+</blockquote>
+<p>Em outras palavras, o REST pegou o protocolo HTTP, que já operava a web, e disse: <em>"Vamos usar os métodos que já existem (GET, POST, PUT, DELETE) para manipular recursos, em vez de criar regras novas do zero"</em>.</p>
+<p>Mas afinal, respondendo a uma dúvida crucial: <strong>nem todo Web Service é uma REST API?</strong></p>
+<p>Exatamente! Nem todo Web Service é REST. Como o REST é um <em>estilo arquitetural</em> (um conjunto de regras e boas práticas), você pode construir Web Services usando outras abordagens. Historicamente, tínhamos o SOAP (baseado em XML complexo e envelopado), e hoje também temos alternativas modernas como gRPC e GraphQL. No entanto, se o seu Web Service segue as regras e restrições propostas por Fielding, aí sim ele ganha o título de <strong>REST API</strong> (ou RESTful API).</p>
+<h2 id="por-que-desenvolver-rest-apis">Por Que Desenvolver REST APIs?</h2>
+<p>Escolher a arquitetura REST traz vantagens imensas para o desenvolvimento de software:</p>
+<ol>
+<li><strong>Desacoplamento entre Cliente e Servidor:</strong> Quem consome a API (o front-end) não precisa saber como o banco de dados funciona ou qual linguagem o back-end (Spring Boot) utiliza. Eles evoluem de forma independente.</li>
+<li><strong>Uso de Padrões da Web:</strong> O REST abraça o HTTP em sua essência. Ele usa os métodos verbais que já existem na web (GET para buscar, POST para criar, etc.) e os códigos de status nativos (200 OK, 404 Not Found).</li>
+<li><strong>Escalabilidade e <em>Stateless</em>:</strong> Uma verdadeira API REST não guarda o estado do cliente no servidor entre as requisições (stateless). Cada chamada é independente e contém tudo o que o servidor precisa para entendê-la, o que facilita escalar a aplicação para milhares de acessos simultâneos.</li>
+<li><strong>Respostas Leves:</strong> Geralmente trafegamos os dados no formato JSON (JavaScript Object Notation), que é infinitamente mais leve e legível por humanos do que os antigos padrões de Web Services.</li>
+</ol>
+<h2 id="colocando-a-mao-na-massa-rest-na-pratica">Colocando a Mão na Massa: REST na Prática</h2>
+<p>Para materializar tudo isso, veja como um pedaço do nosso <code>meucatalogomusical.com</code> exporia uma REST API simples usando Java e Spring Boot para retornar dados de uma banda de metal.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.*</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.ResponseEntity</span><span class="p">;</span>
+
+<span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/api/v1/bandas&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BandaCatalogController</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// O método HTTP GET é usado para buscar uma representação do recurso</span>
+<span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/{nomeBanda}&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">BandaResponse</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">buscarBandaDeMetal</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nomeBanda</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="c1">// Simulando uma busca no banco de dados da nossa aplicação</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nomeBanda</span><span class="p">.</span><span class="na">equalsIgnoreCase</span><span class="p">(</span><span class="s">&quot;iron-maiden&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">BandaResponse</span><span class="w"> </span><span class="n">maiden</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BandaResponse</span><span class="p">(</span>
+<span class="w">                </span><span class="s">&quot;Iron Maiden&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                </span><span class="s">&quot;Heavy Metal&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                </span><span class="mi">1975</span><span class="p">,</span><span class="w"> </span>
+<span class="w">                </span><span class="s">&quot;Reino Unido&quot;</span>
+<span class="w">            </span><span class="p">);</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">ok</span><span class="p">(</span><span class="n">maiden</span><span class="p">);</span><span class="w"> </span><span class="c1">// Retorna 200 OK e os dados</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">// Utilizando os padrões do protocolo HTTP para respostas não encontradas</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">notFound</span><span class="p">().</span><span class="na">build</span><span class="p">();</span><span class="w"> </span><span class="c1">// Retorna 404 Not Found</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Quando um cliente (como o nosso front-end) faz uma requisição para esse provedor, a resposta chega no formato JSON, de forma estruturada e simples:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;nome&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Iron Maiden&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;genero&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Heavy Metal&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;anoFormacao&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1975</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;paisOrigem&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Reino Unido&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="conclusao">Conclusão</h2>
+<p>Compreender a diferença entre uma simples interface de programação e uma API distribuída via rede é o primeiro passo para projetar sistemas modernos. Os Web Services conectaram o mundo corporativo, e a genialidade da arquitetura REST tornou essa conexão fluida, leve e padronizada. Ao dominar a criação e o consumo de REST APIs, você não está apenas escrevendo código; você está construindo as engrenagens que movem praticamente toda a internet contemporânea.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

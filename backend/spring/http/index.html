@@ -1,0 +1,821 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../api-rest/">
+      
+      
+        <link rel="next" href="../por-que-spring/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Um pouco de HTTP - README</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#o-idioma-da-web-desmistificando-o-protocolo-http" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../../.." title="README" class="md-header__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            README
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Um pouco de HTTP
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="README" class="md-nav__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    README
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Backend
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Spring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-rest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    O que é API REST?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Um pouco de HTTP
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Um pouco de HTTP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-mensageiro-universal-o-que-e-o-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O Mensageiro Universal: O Que é o HTTP?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-http-e-as-apis-rest-uma-parceria-perfeita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O HTTP e as APIs REST: Uma Parceria Perfeita
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="O HTTP e as APIs REST: Uma Parceria Perfeita">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#na-pratica-requisitando-muito-metal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Na Prática: Requisitando Muito Metal
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#os-carimbos-dos-correios-http-status-codes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Os Carimbos dos Correios: HTTP Status Codes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusão
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../por-que-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Por que escolher Spring?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../spring-boot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Boot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-mensageiro-universal-o-que-e-o-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O Mensageiro Universal: O Que é o HTTP?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-http-e-as-apis-rest-uma-parceria-perfeita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O HTTP e as APIs REST: Uma Parceria Perfeita
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="O HTTP e as APIs REST: Uma Parceria Perfeita">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#na-pratica-requisitando-muito-metal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Na Prática: Requisitando Muito Metal
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#os-carimbos-dos-correios-http-status-codes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Os Carimbos dos Correios: HTTP Status Codes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusão
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="o-idioma-da-web-desmistificando-o-protocolo-http">O Idioma da Web: Desmistificando o Protocolo HTTP</h1>
+<p>Imagine que você precisa enviar um pacote com vinis raros do Pink Floyd para um amigo em outra cidade. Você não pode simplesmente jogar os discos na rua e esperar que cheguem lá. É preciso colocá-los em uma caixa (o formato), escrever o endereço de destino (para onde vai), colar selos que indicam a prioridade (cabeçalhos) e entregar aos Correios (o meio de transporte). Se o endereço estiver errado, os Correios te devolvem o pacote com um carimbo de "Destinatário não encontrado".</p>
+<p>No desenvolvimento de software, a internet é a nossa agência de correios, e o <strong>HTTP</strong> é o conjunto de regras rigorosas que dita como esses pacotes de dados devem ser enviados, recebidos e carimbados.</p>
+<h2 id="o-mensageiro-universal-o-que-e-o-http">O Mensageiro Universal: O Que é o HTTP?</h2>
+<p>HTTP é a sigla para <em>Hypertext Transfer Protocol</em> (Protocolo de Transferência de Hipertexto). De forma simples, é a linguagem base que permite a comunicação entre um cliente (como o seu navegador, o Postman ou um aplicativo de celular) e um servidor (onde a sua aplicação e banco de dados moram).</p>
+<p>Ele funciona em um modelo clássico de <strong>Requisição e Resposta (Request/Response)</strong>. O cliente pede algo, e o servidor responde. Essa conversa é totalmente dependente do HTTP para acontecer de forma padronizada, independentemente se o cliente foi escrito em JavaScript e o servidor em Java.</p>
+<blockquote>
+<p>Do ponto de vista técnico e formal, conforme definido pela <em>Internet Engineering Task Force</em> (IETF) na <strong>RFC 9110</strong> (que atualizou as especificações semânticas clássicas do protocolo), o HTTP é um protocolo de camada de aplicação genérico, <em>stateless</em> (sem estado) e orientado a objetos. Ele foi projetado para sistemas de informação distribuídos e colaborativos. Sua característica <em>stateless</em> significa que o servidor não guarda memória das requisições passadas do cliente; cada requisição HTTP deve conter absolutamente todas as informações necessárias para que o servidor possa compreendê-la e processá-la de forma isolada.</p>
+</blockquote>
+<h2 id="o-http-e-as-apis-rest-uma-parceria-perfeita">O HTTP e as APIs REST: Uma Parceria Perfeita</h2>
+<p>Nas APIs REST, o HTTP não é apenas um "tubo" por onde os dados passam; a própria semântica do HTTP é usada para definir o que queremos fazer com os recursos do nosso sistema.</p>
+<p>Para isso, o protocolo disponibiliza os chamados <strong>Métodos HTTP</strong> (ou Verbos HTTP). Os quatro mais utilizados no dia a dia de uma API REST são:</p>
+<ul>
+<li><strong>GET:</strong> Para buscar ou ler dados. (Ex: "Me traga a discografia do Iron Maiden").</li>
+<li><strong>POST:</strong> Para criar um novo recurso. (Ex: "Cadastre essa nova banda no catálogo").</li>
+<li><strong>PUT:</strong> Para atualizar um recurso existente por completo. (Ex: "Atualize todos os dados do álbum <em>Ashes of the Wake</em>").</li>
+<li><strong>DELETE:</strong> Para remover um recurso. (Ex: "Apague essa música duplicada do sistema").</li>
+</ul>
+<h3 id="na-pratica-requisitando-muito-metal">Na Prática: Requisitando Muito Metal</h3>
+<p>Vamos imaginar a nossa aplicação, <code>meucatalogomusical.com</code>. O cliente quer cadastrar um novo álbum da banda Orden Ogan. Ele enviará uma requisição HTTP <strong>POST</strong> contendo um corpo (Body) em formato JSON.</p>
+<p>A requisição crua viajando pela rede se parece com isso:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">POST</span> <span class="nn">/api/v1/albuns</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">meucatalogomusical.com</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;banda&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Orden Ogan&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;titulo&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;The Order of Fear&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;anoLancamento&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2024</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Do lado do servidor, usando Java e Spring Boot, nós interceptamos essa requisição de forma muito simples e mapeamos o verbo HTTP para um método no nosso código usando anotações:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.*</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.HttpStatus</span><span class="p">;</span>
+
+<span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/api/v1/albuns&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AlbumController</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// O @PostMapping diz ao Spring: &quot;Só aceite requisições HTTP do tipo POST aqui&quot;</span>
+<span class="w">    </span><span class="nd">@PostMapping</span>
+<span class="w">    </span><span class="nd">@ResponseStatus</span><span class="p">(</span><span class="n">HttpStatus</span><span class="p">.</span><span class="na">CREATED</span><span class="p">)</span><span class="w"> </span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">AlbumResponse</span><span class="w"> </span><span class="nf">cadastrarAlbum</span><span class="p">(</span><span class="nd">@RequestBody</span><span class="w"> </span><span class="n">AlbumRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="c1">// Lógica para salvar o álbum &quot;Omens&quot; no banco de dados</span>
+<span class="w">        </span><span class="n">Album</span><span class="w"> </span><span class="n">novoAlbum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">albumService</span><span class="p">.</span><span class="na">salvar</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AlbumResponse</span><span class="p">(</span><span class="n">novoAlbum</span><span class="p">.</span><span class="na">getId</span><span class="p">(),</span><span class="w"> </span><span class="n">novoAlbum</span><span class="p">.</span><span class="na">getTitulo</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="os-carimbos-dos-correios-http-status-codes">Os Carimbos dos Correios: HTTP Status Codes</h2>
+<p>Lembra do carimbo de "Destinatário não encontrado"? No HTTP, toda resposta do servidor vem acompanhada de um <strong>Status Code</strong> (Código de Status). É um número de 3 dígitos que resume rapidamente o que aconteceu com a sua requisição.</p>
+<p>Eles são divididos em famílias. Aqui estão os mais comuns e cruciais para quem desenvolve APIs:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Código</th>
+<th style="text-align: left;">Nome (Status)</th>
+<th style="text-align: left;">O que significa na prática?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>200</strong></td>
+<td style="text-align: left;"><code>OK</code></td>
+<td style="text-align: left;">A requisição deu certo. Muito comum em retornos de requisições <code>GET</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>201</strong></td>
+<td style="text-align: left;"><code>Created</code></td>
+<td style="text-align: left;">Sucesso! O recurso (como o álbum do Orden Ogan) foi criado no servidor. Padrão para <code>POST</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>204</strong></td>
+<td style="text-align: left;"><code>No Content</code></td>
+<td style="text-align: left;">Sucesso, mas não há dados para retornar no corpo da resposta. Comum após um <code>DELETE</code> bem-sucedido.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>400</strong></td>
+<td style="text-align: left;"><code>Bad Request</code></td>
+<td style="text-align: left;">A culpa é do cliente. Faltou um campo obrigatório no JSON ou a sintaxe da requisição está errada.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>401</strong></td>
+<td style="text-align: left;"><code>Unauthorized</code></td>
+<td style="text-align: left;">Você não enviou um token de autenticação válido. O servidor não sabe quem você é.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>403</strong></td>
+<td style="text-align: left;"><code>Forbidden</code></td>
+<td style="text-align: left;">O servidor sabe quem você é, mas você não tem permissão para fazer isso (ex: tentar apagar o Metallica do catálogo sem ser administrador).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>404</strong></td>
+<td style="text-align: left;"><code>Not Found</code></td>
+<td style="text-align: left;">O recurso solicitado não existe. A URL está errada ou a banda não está no banco de dados.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>500</strong></td>
+<td style="text-align: left;"><code>Internal Server Error</code></td>
+<td style="text-align: left;">O famoso "Deu ruim no Back-end". Ocorreu uma exceção não tratada (como um <em>NullPointerException</em>) no seu código Java.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="conclusao">Conclusão</h2>
+<p>Entender o HTTP não é um mero detalhe acadêmico; é o conhecimento fundamental para qualquer desenvolvedor que constrói ou consome APIs. Ao respeitar a semântica dos verbos HTTP e retornar os <em>Status Codes</em> adequados, sua API se torna previsível, madura e extremamente fácil de ser consumida por outros desenvolvedores. Você para de "brigar" com a web e passa a surfar na arquitetura para a qual ela foi desenhada.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
