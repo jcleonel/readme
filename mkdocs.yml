@@ -2,22 +2,20 @@ site_name: README
 nav:
   - Início: index.md
 
-  - Backend:         
+  - Backend:  
+    - Java:
+        - Fundamentos de Java: backend/java/fundamentos-da-linguagem-java.md
+        - Convenções de código em Java: backend/java/convencoes-de-codigo-java.md
+        - Variáveis, tipos primitivos, operadores e conversões: backend/java/variaveis-tipos-primitivos-operadores-conversoes.md
+        - Fundamentos de String: backend/java/fundamentos-de-string.md
+    
     - Spring:
         - O que é API REST?: backend/spring/api-rest.md
         - Um pouco de HTTP: backend/spring/http.md
         - Por que escolher Spring?: backend/spring/por-que-spring.md
         - Spring Boot: backend/spring/spring-boot.md
         - Spring Initializr: backend/spring/spring-initializr.md
-    
-    ##- Java:
-      ##- Assunto 1 de Java: backend/spring/api-rest.md
-  ##- Persistência de Dados:
-    ##- persistencia: persistencia.md
-  ##- Arquitetura e Microsserviços: 
-    ##- Arquiteruta1: arquit.md     
-  ##- Histórias de Guerra (Casos Reais):
-    ##-caso1: caso1.md
+        - Maven e pom.xml: backend/spring/maven-pom.md
 
 theme:
   name: material

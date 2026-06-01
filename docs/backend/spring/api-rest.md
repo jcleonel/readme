@@ -122,7 +122,7 @@ Pense em um gigantesco festival de rock europeu, como o *Wacken Open Air*. Você
 
 Na arquitetura de software, essa "entrada principal" é o **API Gateway**. Em vez do aplicativo mobile do nosso catálogo conhecer o endereço de cada microsserviço (o serviço de Usuários, o serviço de Bandas, o serviço de Playlists), ele faz uma única chamada REST para o API Gateway. O Gateway, de forma inteligente, roteia a requisição para o microsserviço correto no back-end. É assim que garantimos segurança, controle de tráfego (*rate limiting*) e escalabilidade em sistemas robustos.
 
-## Quando Usar e Quando NÃO Usar REST
+## Quando Usar e Quando não Usar REST
 
 Um bom desenvolvedor sabe que não existe "bala de prata". O REST é o padrão ouro da indústria, mas tomar a decisão arquitetural correta exige entender os *trade-offs*.
 
@@ -173,7 +173,3 @@ Compreender a diferença entre uma simples interface de programação e uma API 
   * **Fielding, Roy Thomas.** (2000). *Architectural Styles and the Design of Network-based Software Architectures*. Tese de Doutorado, University of California, Irvine. [Link para a tese](https://roy.gbiv.com/pubs/dissertation/fielding_dissertation.pdf).
   * **Fowler, Martin.** *Richardson Maturity Model*. Um guia excelente sobre os níveis de maturidade de uma API REST. [Artigo de referência](https://martinfowler.com/articles/richardsonMaturityModel.html).
   * **Documentação Oficial do Spring Framework.** *Building a RESTful Web Service*. [Spring Guides](https://spring.io/guides/gs/rest-service/).
-
-## Leia Mais
-
-  * [Um pouco de HTTP](https://jcleonel.github.io/readme/backend/spring/http/)

@@ -87,7 +87,7 @@ Quando saímos de pequenas aplicações e olhamos para a arquitetura de gigantes
 
 Em uma arquitetura de microsserviços real, você tem dezenas de pequenas APIs rodando simultaneamente. Como um serviço sabe o IP do outro? Como balancear a carga? O projeto **Spring Cloud** resolve isso. Ele fornece ferramentas para *Service Discovery* (Eureka), roteamento inteligente (Spring Cloud Gateway) e resiliência (Circuit Breakers). O Spring permite que você orquestre um verdadeiro "festival" de serviços de forma padronizada.
 
-## Quando Usar e Quando NÃO Usar
+## Quando Usar e Quando Não Usar
 
 O ecossistema Spring é a resposta padrão para o mundo Java, mas um bom desenvolvedor precisa conhecer as alternativas.
 

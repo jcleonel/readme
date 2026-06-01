@@ -1,0 +1,3248 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../variaveis-tipos-primitivos-operadores-conversoes/">
+      
+      
+        <link rel="next" href="../../spring/api-rest/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Fundamentos de String - README</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/css/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#fundamentos-de-string-em-java" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../../.." title="README" class="md-header__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            README
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Fundamentos de String
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="README" class="md-nav__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    README
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Backend
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fundamentos-da-linguagem-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../convencoes-de-codigo-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convenções de código em Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../variaveis-tipos-primitivos-operadores-conversoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variáveis, tipos primitivos, operadores e conversões
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de String
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de String
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-no-codigo-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar no código: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-funciona-em-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como funciona em Java
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Como funciona em Java">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#criando-strings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Criando strings
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concatenando-strings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concatenando strings
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sequencias-de-escape" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sequências de escape
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#text-blocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Text blocks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#print-println-printf-e-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        print, println, printf e format
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conversoes-do-printf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conversões do printf
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scanner-e-entrada-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scanner e entrada de dados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo prático
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analisando-o-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analisando o código
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-acontece-por-baixo-dos-panos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que acontece por baixo dos panos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="O que acontece por baixo dos panos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#string-e-imutavel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        String é imutável
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#literais-e-pool-de-strings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Literais e pool de strings
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#representacao-interna-e-compact-strings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Representação interna e Compact Strings
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concatenacao-e-invokedynamic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concatenação e invokedynamic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#length-conta-unidades-utf-16-nao-necessariamente-caracteres-visuais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        length() conta unidades UTF-16, não necessariamente “caracteres visuais”
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#printf-usa-formatter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        printf usa Formatter
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparacao-com-versoes-anteriores-do-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparação com versões anteriores do Java
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comparação com versões anteriores do Java">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#java-10-string-ja-existia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Java 1.0: String já existia
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#java-15-formatter-printf-e-stringformat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Java 1.5: Formatter, printf e String.format
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#java-9-compact-strings-e-nova-concatenacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Java 9: Compact Strings e nova concatenação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#java-15-text-blocks-e-stringformatted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Java 15: Text blocks e String.formatted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#java-21-e-22-string-templates-em-preview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Java 21 e 22: String Templates em preview
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boas práticas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prefira-clareza-em-concatenacoes-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prefira clareza em concatenações simples
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-formatted-ou-stringformat-para-mensagens-com-muitos-valores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use formatted ou String.format para mensagens com muitos valores
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-stringbuilder-em-concatenacoes-repetidas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use StringBuilder em concatenações repetidas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-n-em-vez-de-n-em-formatacoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use %n em vez de \n em formatações
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#defina-locale-quando-formatar-numeros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Defina Locale quando formatar números
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-equals-para-comparar-conteudo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use equals para comparar conteúdo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#valide-entradas-antes-de-converter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Valide entradas antes de converter
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#achar-que-string-e-tipo-primitivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Achar que String é tipo primitivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usar-para-comparar-textos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usar == para comparar textos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#esquecer-a-ordem-da-concatenacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esquecer a ordem da concatenação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usar-especificador-incompativel-no-printf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usar especificador incompatível no printf
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#esquecer-que-printf-nao-quebra-linha-sozinho" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esquecer que printf não quebra linha sozinho
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#misturar-nextint-e-nextline-sem-consumir-a-linha" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Misturar nextInt() e nextLine() sem consumir a linha
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#escapar-barras-em-excesso-ou-de-menos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escapar barras em excesso ou de menos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usar-scanner-como-se-fosse-parser-robusto-de-producao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usar Scanner como se fosse parser robusto de produção
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decisões de engenharia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-concatenacao-com" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar concatenação com +
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-stringformatted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar String.formatted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-printf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar printf
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-stringbuilder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar StringBuilder
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-text-blocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar text blocks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-evitar-scanner" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando evitar Scanner
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-evitar-printf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando evitar printf
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Onde isso aparece em sistemas reais">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#apis-rest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        APIs REST
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JSON
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mensagens-para-usuarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mensagens para usuários
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ferramentas-internas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ferramentas internas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Spring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/api-rest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    O que é API REST?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/http/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Um pouco de HTTP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/por-que-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Por que escolher Spring?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/spring-boot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Boot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/spring-initializr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Initializr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/maven-pom/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maven e pom.xml
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-no-codigo-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar no código: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-funciona-em-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como funciona em Java
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Como funciona em Java">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#criando-strings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Criando strings
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concatenando-strings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concatenando strings
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sequencias-de-escape" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sequências de escape
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#text-blocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Text blocks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#print-println-printf-e-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        print, println, printf e format
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conversoes-do-printf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conversões do printf
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scanner-e-entrada-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scanner e entrada de dados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo prático
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analisando-o-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analisando o código
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-acontece-por-baixo-dos-panos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que acontece por baixo dos panos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="O que acontece por baixo dos panos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#string-e-imutavel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        String é imutável
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#literais-e-pool-de-strings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Literais e pool de strings
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#representacao-interna-e-compact-strings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Representação interna e Compact Strings
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concatenacao-e-invokedynamic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concatenação e invokedynamic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#length-conta-unidades-utf-16-nao-necessariamente-caracteres-visuais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        length() conta unidades UTF-16, não necessariamente “caracteres visuais”
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#printf-usa-formatter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        printf usa Formatter
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparacao-com-versoes-anteriores-do-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparação com versões anteriores do Java
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comparação com versões anteriores do Java">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#java-10-string-ja-existia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Java 1.0: String já existia
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#java-15-formatter-printf-e-stringformat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Java 1.5: Formatter, printf e String.format
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#java-9-compact-strings-e-nova-concatenacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Java 9: Compact Strings e nova concatenação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#java-15-text-blocks-e-stringformatted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Java 15: Text blocks e String.formatted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#java-21-e-22-string-templates-em-preview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Java 21 e 22: String Templates em preview
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boas práticas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prefira-clareza-em-concatenacoes-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prefira clareza em concatenações simples
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-formatted-ou-stringformat-para-mensagens-com-muitos-valores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use formatted ou String.format para mensagens com muitos valores
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-stringbuilder-em-concatenacoes-repetidas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use StringBuilder em concatenações repetidas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-n-em-vez-de-n-em-formatacoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use %n em vez de \n em formatações
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#defina-locale-quando-formatar-numeros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Defina Locale quando formatar números
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-equals-para-comparar-conteudo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use equals para comparar conteúdo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#valide-entradas-antes-de-converter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Valide entradas antes de converter
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#achar-que-string-e-tipo-primitivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Achar que String é tipo primitivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usar-para-comparar-textos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usar == para comparar textos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#esquecer-a-ordem-da-concatenacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esquecer a ordem da concatenação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usar-especificador-incompativel-no-printf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usar especificador incompatível no printf
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#esquecer-que-printf-nao-quebra-linha-sozinho" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esquecer que printf não quebra linha sozinho
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#misturar-nextint-e-nextline-sem-consumir-a-linha" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Misturar nextInt() e nextLine() sem consumir a linha
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#escapar-barras-em-excesso-ou-de-menos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escapar barras em excesso ou de menos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usar-scanner-como-se-fosse-parser-robusto-de-producao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usar Scanner como se fosse parser robusto de produção
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decisões de engenharia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-concatenacao-com" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar concatenação com +
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-stringformatted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar String.formatted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-printf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar printf
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-stringbuilder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar StringBuilder
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-text-blocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar text blocks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-evitar-scanner" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando evitar Scanner
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-evitar-printf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando evitar printf
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Onde isso aparece em sistemas reais">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#apis-rest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        APIs REST
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JSON
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mensagens-para-usuarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mensagens para usuários
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ferramentas-internas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ferramentas internas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="fundamentos-de-string-em-java">Fundamentos de String em Java</h1>
+<p>Praticamente todo sistema backend manipula texto o tempo inteiro: nomes de usuários, e-mails, mensagens de erro, logs, respostas HTTP, payloads JSON, comandos SQL, templates de notificação, parâmetros de busca, valores vindos de formulários e dados recebidos de outros sistemas.</p>
+<p>Em uma aplicação fictícia como <strong>meucatalogomusical.com</strong>, por exemplo, textos aparecem em vários pontos:</p>
+<ul>
+<li>nome de uma banda;</li>
+<li>título de uma música;</li>
+<li>descrição de um álbum;</li>
+<li>mensagem exibida em uma API;</li>
+<li>log de uma operação;</li>
+<li>JSON retornado para um frontend;</li>
+<li>entrada digitada em um terminal durante um teste simples.</li>
+</ul>
+<p>Por isso, entender <code>String</code> em Java não é apenas saber “colocar texto entre aspas”. É entender como o Java representa texto, como concatena valores, como interpreta caracteres especiais, como formata saídas e quais armadilhas podem aparecer em código real.</p>
+<p>A documentação oficial define <code>String</code> como a classe que representa sequências de caracteres, e todos os literais de string escritos no código, como <code>"abc"</code>, são instâncias dessa classe. Também é importante saber que objetos <code>String</code> são imutáveis: depois de criados, seus valores não mudam. :contentReference[oaicite:0]{index=0}</p>
+<h2 id="antes-de-entrar-no-codigo-uma-ideia-simples">Antes de entrar no código: uma ideia simples</h2>
+<p>Uma <code>String</code> é um texto tratado como valor dentro do programa.</p>
+<p>Quando escrevemos:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Dream Theater&quot;</span><span class="p">;</span>
+</code></pre></div>
+<p>estamos dizendo:</p>
+<blockquote>
+<p>A variável <code>banda</code> referencia um objeto do tipo <code>String</code> que representa o texto <code>Dream Theater</code>.</p>
+</blockquote>
+<p>Isso é diferente de tipos primitivos como <code>int</code>, <code>double</code>, <code>boolean</code> e <code>char</code>. <code>String</code> começa com letra maiúscula porque é uma classe, não um tipo primitivo.</p>
+<p>De forma simples:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">ano</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1986</span><span class="p">;</span>
+<span class="n">String</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Europe&quot;</span><span class="p">;</span>
+</code></pre></div>
+<p><code>ano</code> guarda um valor numérico primitivo.
+<code>banda</code> guarda uma referência para um objeto que representa texto.</p>
+<h2 id="definicao-tecnica">Definição técnica</h2>
+<p>Em Java, <code>String</code> é uma classe final do pacote <code>java.lang</code>, usada para representar sequências de caracteres. Por estar em <code>java.lang</code>, ela não precisa ser importada manualmente.</p>
+<p>Um literal de string é qualquer sequência de caracteres entre aspas duplas:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">genero</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Rock Progressivo&quot;</span><span class="p">;</span>
+</code></pre></div>
+<p>Pela especificação da linguagem, um literal de string consiste em zero ou mais caracteres entre aspas duplas e é sempre do tipo <code>String</code>. A JLS também define que quebras de linha diretas não podem aparecer dentro de um literal comum de string; quando uma quebra de linha é necessária, usamos uma sequência de escape, como <code>\n</code>, ou um text block. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-3.html" title="Chapter 3. Lexical Structure">Oracle Docs</a>)</p>
+<p>Tecnicamente, isso significa que:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">texto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Metal&quot;</span><span class="p">;</span>
+</code></pre></div>
+<p>não cria um valor primitivo. Cria, ou reutiliza, um objeto <code>String</code>.</p>
+<p>Além disso, literais de string são internados. Isso significa que strings literais iguais podem compartilhar a mesma instância no pool de strings mantido pela JVM. A especificação define que literais de string e expressões constantes de string são internados, funcionando como se <code>String.intern()</code> tivesse sido usado. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-3.html" title="Chapter 3. Lexical Structure">Oracle Docs</a>)</p>
+<h2 id="como-funciona-em-java">Como funciona em Java</h2>
+<h3 id="criando-strings">Criando strings</h3>
+<p>A forma mais comum de criar uma <code>String</code> é usando aspas duplas:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Black Sabbath&quot;</span><span class="p">;</span>
+<span class="n">String</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Paranoid&quot;</span><span class="p">;</span>
+</code></pre></div>
+<p>Também é possível criar uma <code>String</code> com <code>new</code>, mas normalmente isso deve ser evitado:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="s">&quot;Black Sabbath&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>Esse segundo formato força a criação de um novo objeto desnecessário na maioria dos casos. Em código real, prefira literais ou valores vindos de entrada, banco, APIs e serviços.</p>
+<h3 id="concatenando-strings">Concatenando strings</h3>
+<p>O operador <code>+</code> pode somar números ou concatenar textos.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">musicasCadastradas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">musicasImportadas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Total: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">musicasCadastradas</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">musicasImportadas</span><span class="p">);</span>
+</code></pre></div>
+<p>A saída será:</p>
+<div class="highlight"><pre><span></span><code>Total: 105
+</code></pre></div>
+<p>Isso acontece porque a expressão é avaliada da esquerda para a direita. Quando o Java encontra uma <code>String</code> primeiro, o operador <code>+</code> passa a trabalhar como concatenação. A JLS define que o operador <code>+</code> é associativo à esquerda; por isso, <code>a + b + c</code> é interpretado como <code>(a + b) + c</code>. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-15.html" title="Chapter 15. Expressions">Oracle Docs</a>)</p>
+<p>Para obter a soma antes da concatenação, use parênteses:</p>
+<div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Total: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">musicasCadastradas</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">musicasImportadas</span><span class="p">));</span>
+</code></pre></div>
+<p>Saída:</p>
+<div class="highlight"><pre><span></span><code>Total: 15
+</code></pre></div>
+<p>Também funcionaria assim:</p>
+<div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">musicasCadastradas</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">musicasImportadas</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; músicas no total&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>Saída:</p>
+<div class="highlight"><pre><span></span><code>15 músicas no total
+</code></pre></div>
+<p>Nesse caso, os dois primeiros operandos são numéricos, então o Java soma antes de encontrar a <code>String</code>.</p>
+<h3 id="sequencias-de-escape">Sequências de escape</h3>
+<p>Sequências de escape são formas de representar caracteres especiais dentro de literais de texto.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">mensagem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Banda \&quot;Rush\&quot; cadastrada com sucesso.&quot;</span><span class="p">;</span>
+</code></pre></div>
+<p>A saída será:</p>
+<div class="highlight"><pre><span></span><code>Banda &quot;Rush&quot; cadastrada com sucesso.
+</code></pre></div>
+<p>Sem a barra invertida antes das aspas internas, o compilador entenderia que a string terminou antes da hora.</p>
+<p>A JLS define as sequências de escape para literais de caractere, literais de string e text blocks. Elas incluem <code>\b</code>, <code>\s</code>, <code>\t</code>, <code>\n</code>, <code>\f</code>, <code>\r</code>, <code>\"</code>, <code>\'</code>, <code>\\</code>, escapes octais e continuação de linha com <code>\</code> seguido de terminador de linha. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-3.html" title="Chapter 3. Lexical Structure">Oracle Docs</a>)</p>
+<p>Tabela prática:</p>
+<table>
+<thead>
+<tr>
+<th>Escape</th>
+<th>Significado</th>
+<th>Uso comum</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>\"</code></td>
+<td>aspas duplas</td>
+<td>escrever aspas dentro de uma string</td>
+</tr>
+<tr>
+<td><code>\'</code></td>
+<td>aspas simples</td>
+<td>mais comum em <code>char</code>, mas válido em string</td>
+</tr>
+<tr>
+<td><code>\\</code></td>
+<td>barra invertida</td>
+<td>caminhos, regex, textos com <code>\</code></td>
+</tr>
+<tr>
+<td><code>\n</code></td>
+<td>nova linha, line feed</td>
+<td>quebra de linha lógica</td>
+</tr>
+<tr>
+<td><code>\r</code></td>
+<td>carriage return</td>
+<td>compatibilidade com formatos antigos/Windows</td>
+</tr>
+<tr>
+<td><code>\t</code></td>
+<td>tabulação horizontal</td>
+<td>alinhamento simples</td>
+</tr>
+<tr>
+<td><code>\b</code></td>
+<td>backspace</td>
+<td>raro em aplicações backend</td>
+</tr>
+<tr>
+<td><code>\f</code></td>
+<td>form feed</td>
+<td>raro, usado historicamente em impressão</td>
+</tr>
+<tr>
+<td><code>\s</code></td>
+<td>espaço</td>
+<td>útil especialmente em text blocks, introduzido junto aos ajustes de text blocks</td>
+</tr>
+<tr>
+<td><code>\</code> + quebra de linha</td>
+<td>continuação de linha</td>
+<td>evita inserir a quebra no valor final</td>
+</tr>
+<tr>
+<td><code>\0</code> até <code>\377</code></td>
+<td>escape octal</td>
+<td>raro em código moderno</td>
+</tr>
+</tbody>
+</table>
+<p>O <code>\\</code> não “vira uma barra” por mágica. Ele representa um único caractere de barra invertida no valor final da string. O primeiro <code>\</code> informa ao compilador que o próximo caractere faz parte de uma sequência especial; o segundo <code>\</code> é o caractere desejado.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">caminho</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;C:\\catalogo\\bandas\\sabbath.json&quot;</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">caminho</span><span class="p">);</span>
+</code></pre></div>
+<p>Saída:</p>
+<div class="highlight"><pre><span></span><code>C:\catalogo\bandas\sabbath.json
+</code></pre></div>
+<h3 id="text-blocks">Text blocks</h3>
+<p>A partir do Java 15, text blocks se tornaram um recurso padrão da linguagem por meio da JEP 378. Eles permitem escrever strings multilinha com <code>"""</code>, evitando muitas concatenações e escapes desnecessários. (<a href="https://openjdk.org/jeps/378" title="JEP 378: Text Blocks">OpenJDK</a>)</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        {</span>
+<span class="s">          &quot;banda&quot;: &quot;Iron Maiden&quot;,</span>
+<span class="s">          &quot;genero&quot;: &quot;Heavy Metal&quot;,</span>
+<span class="s">          &quot;ativa&quot;: true</span>
+<span class="s">        }</span>
+<span class="s">        &quot;&quot;&quot;</span><span class="p">;</span>
+</code></pre></div>
+<p>Isso é muito útil para exemplos de JSON, SQL, HTML, mensagens longas e fixtures de teste.</p>
+<p>Text blocks também são do tipo <code>String</code>. A JLS define que um text block pode ser usado onde uma expressão <code>String</code> é aceita, e que seu conteúdo passa por processamento de normalização de quebras de linha, remoção de indentação incidental e interpretação de escapes. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-3.html" title="Chapter 3. Lexical Structure">Oracle Docs</a>)</p>
+<h3 id="print-println-printf-e-format"><code>print</code>, <code>println</code>, <code>printf</code> e <code>format</code></h3>
+<p><code>System.out</code> é um <code>PrintStream</code>. Essa classe possui métodos para imprimir valores de forma conveniente, incluindo <code>print</code>, <code>println</code>, <code>printf</code> e <code>format</code>. A documentação oficial mostra sobrecargas para tipos como <code>boolean</code>, <code>char</code>, <code>int</code>, <code>long</code>, <code>float</code>, <code>double</code>, <code>String</code> e <code>Object</code>. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api//java.base/java/io/PrintStream.html" title="PrintStream (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</p>
+<p>Principais diferenças:</p>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th style="text-align: right;">Quebra linha automaticamente?</th>
+<th style="text-align: right;">Formata com <code>%s</code>, <code>%d</code>, <code>%f</code>?</th>
+<th>Uso comum</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>print</code></td>
+<td style="text-align: right;">Não</td>
+<td style="text-align: right;">Não</td>
+<td>imprimir partes de uma linha</td>
+</tr>
+<tr>
+<td><code>println</code></td>
+<td style="text-align: right;">Sim</td>
+<td style="text-align: right;">Não</td>
+<td>imprimir uma linha simples</td>
+</tr>
+<tr>
+<td><code>printf</code></td>
+<td style="text-align: right;">Não</td>
+<td style="text-align: right;">Sim</td>
+<td>imprimir saída formatada</td>
+</tr>
+<tr>
+<td><code>format</code></td>
+<td style="text-align: right;">Não</td>
+<td style="text-align: right;">Sim</td>
+<td>equivalente prático ao <code>printf</code></td>
+</tr>
+<tr>
+<td><code>String.format</code></td>
+<td style="text-align: right;">Não imprime</td>
+<td style="text-align: right;">Sim</td>
+<td>criar uma string formatada</td>
+</tr>
+<tr>
+<td><code>"texto".formatted(...)</code></td>
+<td style="text-align: right;">Não imprime</td>
+<td style="text-align: right;">Sim</td>
+<td>forma fluente de criar string formatada</td>
+</tr>
+</tbody>
+</table>
+<p><code>println</code> imprime o valor e termina a linha. A documentação informa que <code>println()</code> escreve o separador de linha definido pelo sistema, que não necessariamente é apenas <code>\n</code>. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api//java.base/java/io/PrintStream.html" title="PrintStream (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</p>
+<p><code>printf</code> é um método de conveniência para escrever uma string formatada e funciona como <code>format</code>. A documentação mostra que <code>out.printf(format, args)</code> se comporta como <code>out.format(format, args)</code>. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api//java.base/java/io/PrintStream.html" title="PrintStream (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</p>
+<h3 id="conversoes-do-printf">Conversões do <code>printf</code></h3>
+<p>O <code>printf</code> usa a infraestrutura de <code>java.util.Formatter</code>, que interpreta strings de formatação no estilo <code>printf</code>. O <code>Formatter</code> suporta alinhamento, largura, formatos numéricos, strings, datas, horas e saída dependente de <code>Locale</code>. (<a href="https://docs.oracle.com/en/java/javase/25/docs//api/java.base/java/util/Formatter.html" title="Formatter (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</p>
+<p>Sintaxe geral:</p>
+<div class="highlight"><pre><span></span><code>%[índice_do_argumento$][flags][largura][.precisão]conversão
+</code></pre></div>
+<p>A documentação oficial descreve essa estrutura com partes opcionais como índice do argumento, flags, largura, precisão e conversão. (<a href="https://docs.oracle.com/en/java/javase/25/docs//api/java.base/java/util/Formatter.html" title="Formatter (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</p>
+<p>Conversões mais úteis:</p>
+<table>
+<thead>
+<tr>
+<th>Conversão</th>
+<th>Significado</th>
+<th>Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>%s</code></td>
+<td>string</td>
+<td>nome, descrição, status</td>
+</tr>
+<tr>
+<td><code>%S</code></td>
+<td>string em maiúsculas</td>
+<td>saída textual destacada</td>
+</tr>
+<tr>
+<td><code>%d</code></td>
+<td>inteiro decimal</td>
+<td>quantidade, código, ano</td>
+</tr>
+<tr>
+<td><code>%f</code></td>
+<td>ponto flutuante decimal</td>
+<td>peso, média, percentual</td>
+</tr>
+<tr>
+<td><code>%.2f</code></td>
+<td>ponto flutuante com 2 casas</td>
+<td>valores monetários simples, medidas</td>
+</tr>
+<tr>
+<td><code>%10.2f</code></td>
+<td>largura mínima 10, 2 casas</td>
+<td>alinhamento em relatórios simples</td>
+</tr>
+<tr>
+<td><code>%b</code></td>
+<td>booleano</td>
+<td><code>true</code> ou <code>false</code></td>
+</tr>
+<tr>
+<td><code>%c</code></td>
+<td>caractere</td>
+<td>um caractere Unicode</td>
+</tr>
+<tr>
+<td><code>%x</code> / <code>%X</code></td>
+<td>inteiro em hexadecimal</td>
+<td>debug técnico</td>
+</tr>
+<tr>
+<td><code>%o</code></td>
+<td>inteiro em octal</td>
+<td>raro</td>
+</tr>
+<tr>
+<td><code>%e</code> / <code>%E</code></td>
+<td>notação científica</td>
+<td>números muito grandes/pequenos</td>
+</tr>
+<tr>
+<td><code>%g</code> / <code>%G</code></td>
+<td>formato geral para ponto flutuante</td>
+<td>saída compacta</td>
+</tr>
+<tr>
+<td><code>%t...</code> / <code>%T...</code></td>
+<td>data/hora</td>
+<td>exige sufixo, como <code>%tF</code></td>
+</tr>
+<tr>
+<td><code>%%</code></td>
+<td>caractere <code>%</code> literal</td>
+<td>imprimir porcentagem</td>
+</tr>
+<tr>
+<td><code>%n</code></td>
+<td>separador de linha da plataforma</td>
+<td>quebra de linha portável</td>
+</tr>
+</tbody>
+</table>
+<p>A documentação divide as conversões em categorias: gerais, caractere, numéricas, data/hora, percentual e separador de linha. Também define <code>%n</code> como o separador de linha específico da plataforma. (<a href="https://docs.oracle.com/en/java/javase/25/docs//api/java.base/java/util/Formatter.html" title="Formatter (Java SE 25 &amp; JDK 25)">Oracle Docs</a>) (<a href="https://docs.oracle.com/en/java/javase/25/docs//api/java.base/java/util/Formatter.html" title="Formatter (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Locale</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">RelatorioCatalogoMusical</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Locale</span><span class="w"> </span><span class="n">locale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Locale</span><span class="p">.</span><span class="na">US</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Metallica&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">album</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Master of Puppets&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">anoLancamento</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1986</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">faixas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">avaliacaoMedia</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">9.75</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">boolean</span><span class="w"> </span><span class="n">classico</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="n">locale</span><span class="p">,</span>
+<span class="w">                </span><span class="s">&quot;Banda: %s%nÁlbum: %s%nAno: %d%nFaixas: %d%nAvaliação: %.2f%nClássico: %b%n&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="n">banda</span><span class="p">,</span><span class="w"> </span><span class="n">album</span><span class="p">,</span><span class="w"> </span><span class="n">anoLancamento</span><span class="p">,</span><span class="w"> </span><span class="n">faixas</span><span class="p">,</span><span class="w"> </span><span class="n">avaliacaoMedia</span><span class="p">,</span><span class="w"> </span><span class="n">classico</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Saída:</p>
+<div class="highlight"><pre><span></span><code>Banda: Metallica
+Álbum: Master of Puppets
+Ano: 1986
+Faixas: 8
+Avaliação: 9.75
+Clássico: true
+</code></pre></div>
+<p>O uso de <code>Locale.US</code> evita surpresas na representação decimal. Em alguns ambientes, a localidade padrão pode trocar ponto por vírgula em números formatados.</p>
+<h3 id="scanner-e-entrada-de-dados"><code>Scanner</code> e entrada de dados</h3>
+<p><code>Scanner</code> é uma classe simples para ler e converter texto em tokens. A documentação define <code>Scanner</code> como um leitor capaz de analisar tipos primitivos e strings usando expressões regulares. Por padrão, ele separa tokens usando espaços em branco. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Scanner.html" title="Scanner (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</p>
+<p>Principais métodos:</p>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>O que lê</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>next()</code></td>
+<td>próximo token como <code>String</code></td>
+</tr>
+<tr>
+<td><code>nextLine()</code></td>
+<td>restante da linha atual</td>
+</tr>
+<tr>
+<td><code>nextInt()</code></td>
+<td>próximo token como <code>int</code></td>
+</tr>
+<tr>
+<td><code>nextLong()</code></td>
+<td>próximo token como <code>long</code></td>
+</tr>
+<tr>
+<td><code>nextDouble()</code></td>
+<td>próximo token como <code>double</code></td>
+</tr>
+<tr>
+<td><code>nextFloat()</code></td>
+<td>próximo token como <code>float</code></td>
+</tr>
+<tr>
+<td><code>nextBoolean()</code></td>
+<td>próximo token como <code>boolean</code></td>
+</tr>
+<tr>
+<td><code>nextByte()</code></td>
+<td>próximo token como <code>byte</code></td>
+</tr>
+<tr>
+<td><code>nextShort()</code></td>
+<td>próximo token como <code>short</code></td>
+</tr>
+<tr>
+<td><code>nextBigInteger()</code></td>
+<td>próximo token como <code>BigInteger</code></td>
+</tr>
+<tr>
+<td><code>nextBigDecimal()</code></td>
+<td>próximo token como <code>BigDecimal</code></td>
+</tr>
+<tr>
+<td><code>hasNext...()</code></td>
+<td>verifica se o próximo token pode ser lido no tipo desejado</td>
+</tr>
+<tr>
+<td><code>useDelimiter(...)</code></td>
+<td>altera o delimitador</td>
+</tr>
+<tr>
+<td><code>findInLine(...)</code></td>
+<td>procura padrão na linha atual</td>
+</tr>
+<tr>
+<td><code>skip(...)</code></td>
+<td>avança ignorando um padrão</td>
+</tr>
+</tbody>
+</table>
+<p>A documentação lista métodos como <code>nextInt</code>, <code>nextLong</code>, <code>nextFloat</code>, <code>nextDouble</code>, <code>nextBigInteger</code>, <code>nextBigDecimal</code> e suas versões <code>hasNext...</code>. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Scanner.html" title="Scanner (Java SE 25 &amp; JDK 25)">Oracle Docs</a>) (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Scanner.html" title="Scanner (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</p>
+<p>Um detalhe importante: <code>nextLine()</code> lê o restante da linha atual, enquanto métodos como <code>nextInt()</code> e <code>nextDouble()</code> trabalham por token. A documentação descreve que <code>nextLine()</code> avança o scanner até o fim da linha e retorna o conteúdo ignorado, excluindo o separador de linha. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Scanner.html" title="Scanner (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</p>
+<p>Por isso, misturar <code>nextInt()</code> com <code>nextLine()</code> pode causar surpresa:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Scanner</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CadastroTerminal</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Scanner</span><span class="w"> </span><span class="n">scanner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Scanner</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">in</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">&quot;Ano de lançamento: &quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">ano</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scanner</span><span class="p">.</span><span class="na">nextInt</span><span class="p">();</span>
+
+<span class="w">        </span><span class="n">scanner</span><span class="p">.</span><span class="na">nextLine</span><span class="p">();</span>
+
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">&quot;Nome da banda: &quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scanner</span><span class="p">.</span><span class="na">nextLine</span><span class="p">();</span>
+
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;Banda cadastrada: %s (%d)%n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">banda</span><span class="p">,</span><span class="w"> </span><span class="n">ano</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>A chamada extra a <code>scanner.nextLine()</code> consome o restante da linha deixado após a leitura do número.</p>
+<p>Em aplicações backend reais, <code>Scanner</code> é mais comum em programas de terminal, scripts, exercícios, ferramentas internas simples e exemplos didáticos. Em APIs web, os dados normalmente chegam via HTTP, JSON, parâmetros de rota, query parameters, headers, filas ou eventos.</p>
+<h2 id="exemplo-pratico">Exemplo prático</h2>
+<p>O exemplo abaixo usa <code>String</code>, concatenação, sequências de escape, text block, <code>String.formatted</code>, <code>printf</code> e <code>Scanner</code> em um cenário simples do <strong>meucatalogomusical.com</strong>.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.math.BigDecimal</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Locale</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Scanner</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CadastroMusicaTerminal</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Locale</span><span class="w"> </span><span class="n">locale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Locale</span><span class="p">.</span><span class="na">US</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Scanner</span><span class="w"> </span><span class="n">scanner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Scanner</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">in</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">&quot;Banda: &quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scanner</span><span class="p">.</span><span class="na">nextLine</span><span class="p">();</span>
+
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">&quot;Música: &quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scanner</span><span class="p">.</span><span class="na">nextLine</span><span class="p">();</span>
+
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">&quot;Ano de lançamento: &quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">anoLancamento</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scanner</span><span class="p">.</span><span class="na">nextInt</span><span class="p">();</span>
+
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">&quot;Duração em minutos: &quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">duracaoMinutos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scanner</span><span class="p">.</span><span class="na">nextDouble</span><span class="p">();</span>
+
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">&quot;Preço digital: &quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">BigDecimal</span><span class="w"> </span><span class="n">precoDigital</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scanner</span><span class="p">.</span><span class="na">nextBigDecimal</span><span class="p">();</span>
+
+<span class="w">        </span><span class="n">scanner</span><span class="p">.</span><span class="na">nextLine</span><span class="p">();</span>
+
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">resumo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Cadastro recebido: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; - \&quot;&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;\&quot;&quot;</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">mensagemFormatada</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">                Música cadastrada no meucatalogomusical.com</span>
+<span class="s">                Banda: %s</span>
+<span class="s">                Música: &quot;%s&quot;</span>
+<span class="s">                Ano: %d</span>
+<span class="s">                Duração: %.2f minutos</span>
+<span class="s">                Preço digital: R$ %s</span>
+<span class="s">                &quot;&quot;&quot;</span><span class="p">.</span><span class="na">formatted</span><span class="p">(</span><span class="n">banda</span><span class="p">,</span><span class="w"> </span><span class="n">musica</span><span class="p">,</span><span class="w"> </span><span class="n">anoLancamento</span><span class="p">,</span><span class="w"> </span><span class="n">duracaoMinutos</span><span class="p">,</span><span class="w"> </span><span class="n">precoDigital</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">();</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">resumo</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">();</span>
+
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="n">locale</span><span class="p">,</span>
+<span class="w">                </span><span class="s">&quot;Resumo técnico: banda=%s | musica=%s | ano=%d | duracao=%.2f%n&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="n">banda</span><span class="p">,</span><span class="w"> </span><span class="n">musica</span><span class="p">,</span><span class="w"> </span><span class="n">anoLancamento</span><span class="p">,</span><span class="w"> </span><span class="n">duracaoMinutos</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">();</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">mensagemFormatada</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="analisando-o-codigo">Analisando o código</h2>
+<p>O programa começa importando três classes:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.math.BigDecimal</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Locale</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Scanner</span><span class="p">;</span>
+</code></pre></div>
+<p><code>BigDecimal</code> representa valores decimais com maior controle, especialmente útil quando o assunto envolve dinheiro. <code>Locale</code> controla regras de formatação regional. <code>Scanner</code> lê dados do terminal.</p>
+<p>Depois, o programa cria o <code>Scanner</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Scanner</span><span class="w"> </span><span class="n">scanner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Scanner</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">in</span><span class="p">);</span>
+</code></pre></div>
+<p><code>System.in</code> representa a entrada padrão do processo. Em um terminal, normalmente é o teclado.</p>
+<p>As leituras de texto usam <code>nextLine()</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scanner</span><span class="p">.</span><span class="na">nextLine</span><span class="p">();</span>
+<span class="n">String</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scanner</span><span class="p">.</span><span class="na">nextLine</span><span class="p">();</span>
+</code></pre></div>
+<p>Isso permite ler valores com espaços, como <code>Dream Theater</code> ou <code>Smoke on the Water</code>.</p>
+<p>As leituras numéricas usam métodos específicos:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">anoLancamento</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scanner</span><span class="p">.</span><span class="na">nextInt</span><span class="p">();</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">duracaoMinutos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scanner</span><span class="p">.</span><span class="na">nextDouble</span><span class="p">();</span>
+<span class="n">BigDecimal</span><span class="w"> </span><span class="n">precoDigital</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scanner</span><span class="p">.</span><span class="na">nextBigDecimal</span><span class="p">();</span>
+</code></pre></div>
+<p>Aqui, cada método tenta converter o próximo token para o tipo esperado. Se a entrada não for compatível, o <code>Scanner</code> pode lançar <code>InputMismatchException</code>.</p>
+<p>Depois da última leitura por token, aparece:</p>
+<div class="highlight"><pre><span></span><code><span class="n">scanner</span><span class="p">.</span><span class="na">nextLine</span><span class="p">();</span>
+</code></pre></div>
+<p>Essa linha consome o restante da linha atual, evitando problemas caso outra leitura com <code>nextLine()</code> seja adicionada depois.</p>
+<p>A variável <code>resumo</code> mostra concatenação:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">resumo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Cadastro recebido: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; - \&quot;&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;\&quot;&quot;</span><span class="p">;</span>
+</code></pre></div>
+<p>As aspas ao redor do nome da música usam <code>\"</code>, porque aspas duplas têm significado especial dentro de literais de string.</p>
+<p>Depois, o programa usa text block com <code>formatted</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">mensagemFormatada</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        Música cadastrada no meucatalogomusical.com</span>
+<span class="s">        Banda: %s</span>
+<span class="s">        Música: &quot;%s&quot;</span>
+<span class="s">        Ano: %d</span>
+<span class="s">        Duração: %.2f minutos</span>
+<span class="s">        Preço digital: R$ %s</span>
+<span class="s">        &quot;&quot;&quot;</span><span class="p">.</span><span class="na">formatted</span><span class="p">(</span><span class="n">banda</span><span class="p">,</span><span class="w"> </span><span class="n">musica</span><span class="p">,</span><span class="w"> </span><span class="n">anoLancamento</span><span class="p">,</span><span class="w"> </span><span class="n">duracaoMinutos</span><span class="p">,</span><span class="w"> </span><span class="n">precoDigital</span><span class="p">);</span>
+</code></pre></div>
+<p>O método <code>String.formatted</code>, disponível desde Java 15, formata a própria string usando os argumentos informados. A documentação informa que ele é equivalente a <code>String.format(this, args)</code>. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="String (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</p>
+<p>Por fim, o código usa <code>printf</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="n">locale</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;Resumo técnico: banda=%s | musica=%s | ano=%d | duracao=%.2f%n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">banda</span><span class="p">,</span><span class="w"> </span><span class="n">musica</span><span class="p">,</span><span class="w"> </span><span class="n">anoLancamento</span><span class="p">,</span><span class="w"> </span><span class="n">duracaoMinutos</span><span class="p">);</span>
+</code></pre></div>
+<p>O <code>Locale.US</code> ajuda a manter o ponto como separador decimal na saída. O <code>%n</code> quebra a linha de forma portável.</p>
+<h2 id="o-que-acontece-por-baixo-dos-panos">O que acontece por baixo dos panos</h2>
+<h3 id="string-e-imutavel"><code>String</code> é imutável</h3>
+<p>Quando você escreve:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Rush&quot;</span><span class="p">;</span>
+<span class="n">nome</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nome</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; - Progressivo&quot;</span><span class="p">;</span>
+</code></pre></div>
+<p>o texto <code>"Rush"</code> não é alterado. O que acontece é que uma nova <code>String</code> é produzida com o conteúdo <code>"Rush - Progressivo"</code>, e a variável <code>nome</code> passa a referenciar essa nova string.</p>
+<p>A imutabilidade é uma das características mais importantes de <code>String</code>. Ela facilita compartilhamento, segurança, uso em mapas, uso em caches e previsibilidade em código concorrente.</p>
+<h3 id="literais-e-pool-de-strings">Literais e pool de strings</h3>
+<p>Strings literais iguais podem ser compartilhadas no pool de strings:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Queen&quot;</span><span class="p">;</span>
+<span class="n">String</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Queen&quot;</span><span class="p">;</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w">      </span><span class="c1">// true, em geral por interning de literal</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">b</span><span class="p">));</span><span class="w"> </span><span class="c1">// true</span>
+</code></pre></div>
+<p>Mas strings criadas em tempo de execução podem ser objetos diferentes, mesmo com o mesmo conteúdo:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Queen&quot;</span><span class="p">;</span>
+<span class="n">String</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Que&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;en&quot;</span><span class="p">;</span>
+<span class="n">String</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Que&quot;</span><span class="p">;</span>
+<span class="n">String</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;en&quot;</span><span class="p">;</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w">      </span><span class="c1">// true, expressão constante</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">d</span><span class="p">);</span><span class="w">      </span><span class="c1">// false, calculada em runtime</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">d</span><span class="p">));</span><span class="w"> </span><span class="c1">// true</span>
+</code></pre></div>
+<p>A JLS explica que expressões constantes de string podem ser computadas em tempo de compilação e tratadas como literais, enquanto strings calculadas em tempo de execução são recém-criadas e podem ser distintas. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-3.html" title="Chapter 3. Lexical Structure">Oracle Docs</a>)</p>
+<p>Regra prática:</p>
+<ul>
+<li>use <code>equals</code> para comparar conteúdo;</li>
+<li>não use <code>==</code> para comparar texto, exceto quando você realmente quer comparar identidade de objeto.</li>
+</ul>
+<h3 id="representacao-interna-e-compact-strings">Representação interna e Compact Strings</h3>
+<p>Desde o Java 9, a JEP 254 mudou a representação interna de <code>String</code> de um array de <code>char</code> para um array de <code>byte</code> mais uma marca de codificação. A ideia é armazenar caracteres em Latin-1 com um byte quando possível, ou UTF-16 quando necessário, sem alterar a API pública. (<a href="https://openjdk.org/jeps/254" title="JEP 254: Compact Strings">OpenJDK</a>)</p>
+<p>Isso importa porque strings costumam ocupar uma parte relevante da heap em aplicações reais. Logs, nomes, mensagens, payloads, chaves de cache e dados textuais em geral podem gerar muitas instâncias de <code>String</code>.</p>
+<h3 id="concatenacao-e-invokedynamic">Concatenação e <code>invokedynamic</code></h3>
+<p>Antes do Java 9, era comum explicar concatenação dizendo que o compilador transformava <code>+</code> em operações com <code>StringBuilder</code>. Essa explicação ainda ajuda como modelo mental, mas ficou incompleta para versões modernas.</p>
+<p>A partir do Java 9, a JEP 280 alterou a forma como o <code>javac</code> gera bytecode para concatenação de strings, passando a usar <code>invokedynamic</code> e funções de biblioteca do JDK. O objetivo foi permitir otimizações futuras sem exigir mudanças frequentes no compilador. (<a href="https://openjdk.org/jeps/280" title="JEP 280: Indify String Concatenation">OpenJDK</a>)</p>
+<p>Na prática:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">mensagem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Banda: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;, música: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">musica</span><span class="p">;</span>
+</code></pre></div>
+<p>continua sendo simples e aceitável para concatenações pequenas e legíveis. Para concatenações repetidas dentro de loops grandes, <code>StringBuilder</code> ainda pode ser melhor.</p>
+<h3 id="length-conta-unidades-utf-16-nao-necessariamente-caracteres-visuais"><code>length()</code> conta unidades UTF-16, não necessariamente “caracteres visuais”</h3>
+<p>A documentação de <code>String.length()</code> informa que o tamanho retornado é o número de unidades de código Unicode na string. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="String (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</p>
+<p>Isso é importante porque nem todo símbolo visual cabe em uma única unidade UTF-16.</p>
+<p>Em sistemas reais, isso afeta validações de tamanho, campos com emojis, normalização Unicode e integrações que limitam bytes ou caracteres de forma diferente.</p>
+<h3 id="printf-usa-formatter"><code>printf</code> usa <code>Formatter</code></h3>
+<p>Quando usamos:</p>
+<div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;Banda: %s%n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">banda</span><span class="p">);</span>
+</code></pre></div>
+<p>o Java usa a infraestrutura de <code>Formatter</code>. O formato pode lançar exceções se a string de formatação estiver inválida, se faltar argumento ou se uma conversão for incompatível com o tipo passado. A documentação de <code>Formatter</code> informa que métodos de formatação podem lançar <code>IllegalFormatException</code> nessas situações. (<a href="https://docs.oracle.com/en/java/javase/25/docs//api/java.base/java/util/Formatter.html" title="Formatter (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</p>
+<p>Exemplo de erro:</p>
+<div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;Ano: %d%n&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;1986&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p><code>%d</code> espera um tipo numérico inteiro compatível, não uma <code>String</code>.</p>
+<h2 id="comparacao-com-versoes-anteriores-do-java">Comparação com versões anteriores do Java</h2>
+<h3 id="java-10-string-ja-existia">Java 1.0: <code>String</code> já existia</h3>
+<p><code>String</code> é uma classe fundamental desde o início da plataforma Java. Literais de string, concatenação com <code>+</code>, <code>print</code> e <code>println</code> fazem parte da base histórica da linguagem.</p>
+<h3 id="java-15-formatter-printf-e-stringformat">Java 1.5: <code>Formatter</code>, <code>printf</code> e <code>String.format</code></h3>
+<p>A API de formatação no estilo <code>printf</code>, incluindo <code>Formatter</code>, <code>PrintStream.printf</code> e <code>String.format</code>, existe desde Java 5. A documentação marca <code>Formatter</code> e métodos relacionados como disponíveis desde 1.5. (<a href="https://docs.oracle.com/en/java/javase/25/docs//api/java.base/java/util/Formatter.html" title="Formatter (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</p>
+<p>Antes disso, era mais comum ver concatenações manuais ou uso de classes como <code>NumberFormat</code> e <code>MessageFormat</code>.</p>
+<h3 id="java-9-compact-strings-e-nova-concatenacao">Java 9: Compact Strings e nova concatenação</h3>
+<p>No Java 9, duas mudanças relevantes aconteceram:</p>
+<ul>
+<li>JEP 254: Compact Strings, mudando a representação interna para economizar memória em muitos cenários;</li>
+<li>JEP 280: Indify String Concatenation, mudando a estratégia de bytecode para concatenação com <code>+</code>. (<a href="https://openjdk.org/jeps/254" title="JEP 254: Compact Strings">OpenJDK</a>) (<a href="https://openjdk.org/jeps/280" title="JEP 280: Indify String Concatenation">OpenJDK</a>)</li>
+</ul>
+<p>Essas mudanças não alteraram como você escreve código no dia a dia, mas mudaram detalhes importantes de performance e implementação.</p>
+<h3 id="java-15-text-blocks-e-stringformatted">Java 15: Text blocks e <code>String.formatted</code></h3>
+<p>Text blocks viraram recurso padrão no Java 15 pela JEP 378, ajudando a escrever strings multilinha com menos ruído. (<a href="https://openjdk.org/jeps/378" title="JEP 378: Text Blocks">OpenJDK</a>)</p>
+<p>Também desde Java 15, <code>String.formatted</code> permite formatar a própria string de maneira fluente:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">mensagem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Banda %s cadastrada&quot;</span><span class="p">.</span><span class="na">formatted</span><span class="p">(</span><span class="s">&quot;Rush&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>A documentação oficial informa que <code>formatted</code> existe desde Java 15. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="String (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</p>
+<h3 id="java-21-e-22-string-templates-em-preview">Java 21 e 22: String Templates em preview</h3>
+<p>String Templates apareceram como preview no Java 21 pela JEP 430 e foram reavaliados no Java 22 pela JEP 459. Porém, a documentação de mudanças da linguagem informa que o recurso foi retirado antes do Java 23, por falta de consenso sobre o desenho adequado. Portanto, em Java 25, não trate String Templates como recurso padrão da linguagem. (<a href="https://docs.oracle.com/en/java/javase/25/language/java-language-changes-release.html" title="Java Language Changes by Release">Oracle Docs</a>)</p>
+<p>Na prática, para Java 25, continue usando:</p>
+<ul>
+<li>concatenação simples com <code>+</code>;</li>
+<li><code>StringBuilder</code> para montagem repetitiva;</li>
+<li><code>String.format</code>;</li>
+<li><code>String.formatted</code>;</li>
+<li><code>MessageFormat</code> quando precisar de mensagens internacionalizadas;</li>
+<li>template engines em camadas de apresentação, quando fizer sentido.</li>
+</ul>
+<h2 id="boas-praticas">Boas práticas</h2>
+<h3 id="prefira-clareza-em-concatenacoes-simples">Prefira clareza em concatenações simples</h3>
+<p>Para mensagens pequenas, concatenação é aceitável:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">mensagem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Banda &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; cadastrada com sucesso&quot;</span><span class="p">;</span>
+</code></pre></div>
+<p>Evite transformar tudo em <code>printf</code> ou <code>formatted</code> quando a concatenação for mais clara.</p>
+<h3 id="use-formatted-ou-stringformat-para-mensagens-com-muitos-valores">Use <code>formatted</code> ou <code>String.format</code> para mensagens com muitos valores</h3>
+<p>Quando a string tem vários valores interpolados, formatação pode melhorar a leitura:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">mensagem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Banda %s cadastrada com %d músicas&quot;</span><span class="p">.</span><span class="na">formatted</span><span class="p">(</span><span class="n">banda</span><span class="p">,</span><span class="w"> </span><span class="n">totalMusicas</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="use-stringbuilder-em-concatenacoes-repetidas">Use <code>StringBuilder</code> em concatenações repetidas</h3>
+<p>Evite isto em loops grandes:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">bandas</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">resultado</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;\n&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Prefira:</p>
+<div class="highlight"><pre><span></span><code><span class="n">StringBuilder</span><span class="w"> </span><span class="n">builder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StringBuilder</span><span class="p">();</span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">bandas</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">builder</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">banda</span><span class="p">).</span><span class="na">append</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">lineSeparator</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="n">String</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="p">.</span><span class="na">toString</span><span class="p">();</span>
+</code></pre></div>
+<h3 id="use-n-em-vez-de-n-em-formatacoes">Use <code>%n</code> em vez de <code>\n</code> em formatações</h3>
+<p>Em strings de formatação, prefira:</p>
+<div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;Banda: %s%n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">banda</span><span class="p">);</span>
+</code></pre></div>
+<p>em vez de:</p>
+<div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;Banda: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">banda</span><span class="p">);</span>
+</code></pre></div>
+<p><code>%n</code> usa o separador de linha da plataforma, enquanto <code>\n</code> representa line feed.</p>
+<h3 id="defina-locale-quando-formatar-numeros">Defina <code>Locale</code> quando formatar números</h3>
+<p>Para logs técnicos, testes e formatos estáveis, use um <code>Locale</code> explícito:</p>
+<div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="n">Locale</span><span class="p">.</span><span class="na">US</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Duração: %.2f%n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">duracao</span><span class="p">);</span>
+</code></pre></div>
+<p>Sem isso, a saída pode variar conforme a configuração regional do ambiente.</p>
+<h3 id="use-equals-para-comparar-conteudo">Use <code>equals</code> para comparar conteúdo</h3>
+<p>Correto:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;Metal&quot;</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">genero</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Gênero encontrado&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Evite:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">genero</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;Metal&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Gênero encontrado&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>O operador <code>==</code> compara referências. <code>equals</code> compara conteúdo.</p>
+<h3 id="valide-entradas-antes-de-converter">Valide entradas antes de converter</h3>
+<p>Com <code>Scanner</code>, prefira verificar antes:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">scanner</span><span class="p">.</span><span class="na">hasNextInt</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">ano</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scanner</span><span class="p">.</span><span class="na">nextInt</span><span class="p">();</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Ano inválido&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Os métodos <code>hasNext...</code> permitem verificar se o próximo token pode ser interpretado no tipo desejado sem avançar a entrada. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Scanner.html" title="Scanner (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</p>
+<h2 id="erros-comuns">Erros comuns</h2>
+<h3 id="achar-que-string-e-tipo-primitivo">Achar que <code>String</code> é tipo primitivo</h3>
+<p><code>String</code> é uma classe. Isso explica por que ela tem métodos:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Rush&quot;</span><span class="p">;</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">banda</span><span class="p">.</span><span class="na">length</span><span class="p">());</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">banda</span><span class="p">.</span><span class="na">toUpperCase</span><span class="p">());</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">banda</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="s">&quot;sh&quot;</span><span class="p">));</span>
+</code></pre></div>
+<h3 id="usar-para-comparar-textos">Usar <code>==</code> para comparar textos</h3>
+<p>Errado:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">banda</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;Rush&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Encontrada&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Correto:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;Rush&quot;</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">banda</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Encontrada&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="esquecer-a-ordem-da-concatenacao">Esquecer a ordem da concatenação</h3>
+<p>Possível erro:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">aprovadas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">pendentes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Total: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aprovadas</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">pendentes</span><span class="p">);</span>
+</code></pre></div>
+<p>Saída:</p>
+<div class="highlight"><pre><span></span><code>Total: 105
+</code></pre></div>
+<p>Correto:</p>
+<div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Total: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">aprovadas</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">pendentes</span><span class="p">));</span>
+</code></pre></div>
+<h3 id="usar-especificador-incompativel-no-printf">Usar especificador incompatível no <code>printf</code></h3>
+<p>Errado:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">ano</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;1986&quot;</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;Ano: %d%n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ano</span><span class="p">);</span>
+</code></pre></div>
+<p>Correto:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">ano</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1986</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;Ano: %d%n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ano</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="esquecer-que-printf-nao-quebra-linha-sozinho">Esquecer que <code>printf</code> não quebra linha sozinho</h3>
+<div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;Banda: %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Rush&quot;</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;Gênero: %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Rock Progressivo&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>Saída colada:</p>
+<div class="highlight"><pre><span></span><code>Banda: RushGênero: Rock Progressivo
+</code></pre></div>
+<p>Melhor:</p>
+<div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;Banda: %s%n&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Rush&quot;</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;Gênero: %s%n&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Rock Progressivo&quot;</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="misturar-nextint-e-nextline-sem-consumir-a-linha">Misturar <code>nextInt()</code> e <code>nextLine()</code> sem consumir a linha</h3>
+<p>Problema comum:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">ano</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scanner</span><span class="p">.</span><span class="na">nextInt</span><span class="p">();</span>
+<span class="n">String</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scanner</span><span class="p">.</span><span class="na">nextLine</span><span class="p">();</span>
+</code></pre></div>
+<p><code>banda</code> pode receber apenas o restante vazio da linha atual.</p>
+<p>Solução simples:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">ano</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scanner</span><span class="p">.</span><span class="na">nextInt</span><span class="p">();</span>
+<span class="n">scanner</span><span class="p">.</span><span class="na">nextLine</span><span class="p">();</span>
+<span class="n">String</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scanner</span><span class="p">.</span><span class="na">nextLine</span><span class="p">();</span>
+</code></pre></div>
+<h3 id="escapar-barras-em-excesso-ou-de-menos">Escapar barras em excesso ou de menos</h3>
+<p>Para representar:</p>
+<div class="highlight"><pre><span></span><code>C:\catalogo\bandas
+</code></pre></div>
+<p>a string Java precisa ser:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">caminho</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;C:\\catalogo\\bandas&quot;</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="usar-scanner-como-se-fosse-parser-robusto-de-producao">Usar <code>Scanner</code> como se fosse parser robusto de produção</h3>
+<p><code>Scanner</code> é simples e útil, mas não é a melhor escolha para parsing de alto desempenho, protocolos de rede, JSON, CSV complexo ou payloads HTTP. Nesses casos, use bibliotecas e APIs específicas.</p>
+<h2 id="decisoes-de-engenharia">Decisões de engenharia</h2>
+<h3 id="quando-usar-concatenacao-com">Quando usar concatenação com <code>+</code></h3>
+<p>Use quando:</p>
+<ul>
+<li>a mensagem é curta;</li>
+<li>há poucos valores;</li>
+<li>a legibilidade fica melhor que com formato;</li>
+<li>não há loop grande montando texto repetidamente.</li>
+</ul>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">mensagem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Banda &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; cadastrada&quot;</span><span class="p">;</span>
+</code></pre></div>
+<p>Impacto:</p>
+<ul>
+<li>boa legibilidade em casos simples;</li>
+<li>performance adequada na maioria dos trechos pequenos;</li>
+<li>pode ficar confuso com muitos valores.</li>
+</ul>
+<h3 id="quando-usar-stringformatted">Quando usar <code>String.formatted</code></h3>
+<p>Use quando:</p>
+<ul>
+<li>a mensagem tem vários valores;</li>
+<li>você quer separar template de valores;</li>
+<li>a string final precisa ser guardada em variável;</li>
+<li>a leitura fica melhor que concatenação.</li>
+</ul>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">mensagem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Banda %s cadastrada com %d músicas&quot;</span>
+<span class="w">        </span><span class="p">.</span><span class="na">formatted</span><span class="p">(</span><span class="n">banda</span><span class="p">,</span><span class="w"> </span><span class="n">totalMusicas</span><span class="p">);</span>
+</code></pre></div>
+<p>Impacto:</p>
+<ul>
+<li>melhora a organização;</li>
+<li>exige atenção aos especificadores;</li>
+<li>pode lançar exceções se o formato estiver incorreto.</li>
+</ul>
+<h3 id="quando-usar-printf">Quando usar <code>printf</code></h3>
+<p>Use quando:</p>
+<ul>
+<li>a intenção é imprimir diretamente no console;</li>
+<li>você precisa formatar números, largura, precisão ou datas;</li>
+<li>está escrevendo uma ferramenta de terminal.</li>
+</ul>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="n">Locale</span><span class="p">.</span><span class="na">US</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Avaliação média: %.2f%n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">avaliacao</span><span class="p">);</span>
+</code></pre></div>
+<p>Impacto:</p>
+<ul>
+<li>bom para saída textual formatada;</li>
+<li>não adiciona quebra de linha sozinho;</li>
+<li>não deve substituir logs profissionais em aplicações backend.</li>
+</ul>
+<h3 id="quando-usar-stringbuilder">Quando usar <code>StringBuilder</code></h3>
+<p>Use quando:</p>
+<ul>
+<li>há concatenação dentro de loops;</li>
+<li>você monta textos grandes progressivamente;</li>
+<li>há muitas partes opcionais;</li>
+<li>a construção do texto é incremental.</li>
+</ul>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="n">StringBuilder</span><span class="w"> </span><span class="n">builder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StringBuilder</span><span class="p">();</span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">bandas</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">builder</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="s">&quot;- &quot;</span><span class="p">).</span><span class="na">append</span><span class="p">(</span><span class="n">banda</span><span class="p">).</span><span class="na">append</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">lineSeparator</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="n">String</span><span class="w"> </span><span class="n">relatorio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">builder</span><span class="p">.</span><span class="na">toString</span><span class="p">();</span>
+</code></pre></div>
+<p>Impacto:</p>
+<ul>
+<li>evita criação excessiva de strings intermediárias;</li>
+<li>pode melhorar performance em loops;</li>
+<li>exige código um pouco mais verboso.</li>
+</ul>
+<h3 id="quando-usar-text-blocks">Quando usar text blocks</h3>
+<p>Use quando:</p>
+<ul>
+<li>o texto é multilinha;</li>
+<li>você precisa representar JSON, SQL, HTML, XML ou mensagens longas;</li>
+<li>concatenação com <code>\n</code> deixaria o código ilegível.</li>
+</ul>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">sql</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        select b.id, b.nome</span>
+<span class="s">        from bandas b</span>
+<span class="s">        where b.genero = ?</span>
+<span class="s">        order by b.nome</span>
+<span class="s">        &quot;&quot;&quot;</span><span class="p">;</span>
+</code></pre></div>
+<p>Impacto:</p>
+<ul>
+<li>melhora muito a legibilidade;</li>
+<li>exige atenção à indentação;</li>
+<li>está disponível como recurso padrão desde Java 15.</li>
+</ul>
+<h3 id="quando-evitar-scanner">Quando evitar <code>Scanner</code></h3>
+<p>Evite em:</p>
+<ul>
+<li>APIs web;</li>
+<li>parsing de arquivos grandes;</li>
+<li>leitura de JSON;</li>
+<li>leitura de CSV real com aspas, delimitadores e escapes;</li>
+<li>aplicações de alta performance.</li>
+</ul>
+<p>Alternativas:</p>
+<ul>
+<li><code>BufferedReader</code> para leitura linha a linha;</li>
+<li>bibliotecas JSON, como Jackson;</li>
+<li>bibliotecas CSV, como Apache Commons CSV;</li>
+<li>parâmetros HTTP em controllers Spring;</li>
+<li>DTOs de request em APIs REST.</li>
+</ul>
+<h3 id="quando-evitar-printf">Quando evitar <code>printf</code></h3>
+<p>Evite para logs de aplicação:</p>
+<div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;Erro ao cadastrar banda: %s%n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">erro</span><span class="p">);</span>
+</code></pre></div>
+<p>Em aplicações backend, prefira logging estruturado:</p>
+<div class="highlight"><pre><span></span><code><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Banda cadastrada com sucesso: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">banda</span><span class="p">);</span>
+</code></pre></div>
+<p>Motivo: frameworks de logging integram níveis de log, timestamps, correlação, appenders, observabilidade e coleta por ferramentas externas.</p>
+<h2 id="onde-isso-aparece-em-sistemas-reais">Onde isso aparece em sistemas reais</h2>
+<h3 id="apis-rest">APIs REST</h3>
+<p>Ao retornar mensagens:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">mensagem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Banda %s cadastrada com sucesso&quot;</span><span class="p">.</span><span class="na">formatted</span><span class="p">(</span><span class="n">nomeBanda</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="logs">Logs</h3>
+<p>Ao registrar eventos:</p>
+<div class="highlight"><pre><span></span><code><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Música cadastrada: banda={}, musica={}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">banda</span><span class="p">,</span><span class="w"> </span><span class="n">musica</span><span class="p">);</span>
+</code></pre></div>
+<p>Mesmo quando você não usa <code>String</code> diretamente, os valores textuais continuam sendo parte central do log.</p>
+<h3 id="json">JSON</h3>
+<p>Text blocks são úteis em testes:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">payload</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        {</span>
+<span class="s">          &quot;banda&quot;: &quot;Led Zeppelin&quot;,</span>
+<span class="s">          &quot;musica&quot;: &quot;Kashmir&quot;,</span>
+<span class="s">          &quot;genero&quot;: &quot;Hard Rock&quot;</span>
+<span class="s">        }</span>
+<span class="s">        &quot;&quot;&quot;</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="sql">SQL</h3>
+<p>Text blocks melhoram consultas longas:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">consulta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        select m.id, m.titulo, b.nome</span>
+<span class="s">        from musicas m</span>
+<span class="s">        join bandas b on b.id = m.banda_id</span>
+<span class="s">        where b.nome = ?</span>
+<span class="s">        order by m.titulo</span>
+<span class="s">        &quot;&quot;&quot;</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="mensagens-para-usuarios">Mensagens para usuários</h3>
+<p>Formatação ajuda a montar respostas consistentes:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">resposta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;A banda %s possui %d músicas cadastradas&quot;</span>
+<span class="w">        </span><span class="p">.</span><span class="na">formatted</span><span class="p">(</span><span class="n">banda</span><span class="p">,</span><span class="w"> </span><span class="n">quantidade</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="ferramentas-internas">Ferramentas internas</h3>
+<p><code>Scanner</code>, <code>printf</code> e <code>println</code> são úteis em CLIs simples:</p>
+<div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="s">&quot;Digite o nome da banda: &quot;</span><span class="p">);</span>
+<span class="n">String</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scanner</span><span class="p">.</span><span class="na">nextLine</span><span class="p">();</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;Buscando discografia de %s...%n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">banda</span><span class="p">);</span>
+</code></pre></div>
+<h2 id="perguntas-de-revisao">Perguntas de revisão</h2>
+<p>1 - O que é uma <code>String</code> em Java?
+Resposta: É uma classe usada para representar sequências de caracteres. Todo literal textual escrito entre aspas duplas, como <code>"Metallica"</code>, é uma instância de <code>String</code>.</p>
+<p>2 - <code>String</code> é tipo primitivo?
+Resposta: Não. <code>String</code> é uma classe do pacote <code>java.lang</code>. Ela é muito usada e tem suporte especial da linguagem, mas não é um tipo primitivo.</p>
+<p>3 - Por que <code>String</code> começa com letra maiúscula?
+Resposta: Porque é o nome de uma classe. Em Java, classes normalmente usam <code>UpperCamelCase</code>, enquanto tipos primitivos usam palavras reservadas minúsculas, como <code>int</code>, <code>double</code> e <code>boolean</code>.</p>
+<p>4 - O que significa dizer que <code>String</code> é imutável?
+Resposta: Significa que o conteúdo de uma <code>String</code> não muda depois que o objeto é criado. Operações como concatenação, <code>toUpperCase</code> ou <code>replace</code> retornam novas strings em vez de alterar a original.</p>
+<p>5 - Qual é a diferença entre <code>==</code> e <code>equals</code> ao comparar strings?
+Resposta: <code>==</code> compara se duas referências apontam para o mesmo objeto. <code>equals</code> compara o conteúdo textual. Para comparar textos, normalmente use <code>equals</code>.</p>
+<p>6 - Por que <code>"Total: " + 10 + 5</code> resulta em <code>"Total: 105"</code>?
+Resposta: Porque o operador <code>+</code> é avaliado da esquerda para a direita. Depois que a primeira parte vira string, os próximos valores são concatenados como texto.</p>
+<p>7 - Como forçar a soma antes da concatenação?
+Resposta: Use parênteses: <code>"Total: " + (10 + 5)</code>. Assim, o Java calcula <code>10 + 5</code> antes de concatenar com o texto.</p>
+<p>8 - Para que servem sequências de escape?
+Resposta: Servem para representar caracteres especiais dentro de literais, como aspas, barra invertida, quebra de linha, tabulação e caracteres de controle.</p>
+<p>9 - O que <code>\"</code> representa?
+Resposta: Representa uma aspas dupla dentro de uma string, sem encerrar o literal textual.</p>
+<p>10 - O que <code>\\</code> representa?
+Resposta: Representa uma única barra invertida no valor final da string.</p>
+<p>11 - O que <code>\n</code> representa?
+Resposta: Representa uma quebra de linha do tipo line feed. Em strings de formatação, <code>%n</code> costuma ser preferível por usar o separador de linha da plataforma.</p>
+<p>12 - O que é um text block?
+Resposta: É uma forma de escrever strings multilinha usando <code>"""</code>, disponível como recurso padrão desde Java 15. É útil para JSON, SQL, HTML e textos longos.</p>
+<p>13 - Qual é a diferença entre <code>print</code> e <code>println</code>?
+Resposta: <code>print</code> escreve o valor sem encerrar a linha. <code>println</code> escreve o valor e depois encerra a linha.</p>
+<p>14 - Qual é a diferença entre <code>println</code> e <code>printf</code>?
+Resposta: <code>println</code> imprime valores simples e quebra linha. <code>printf</code> usa uma string de formatação com especificadores como <code>%s</code>, <code>%d</code>, <code>%f</code> e não quebra linha automaticamente.</p>
+<p>15 - O que <code>%s</code> faz no <code>printf</code>?
+Resposta: Formata um argumento como string, normalmente usando <code>toString()</code> quando o argumento não é uma <code>String</code>.</p>
+<p>16 - O que <code>%d</code> faz?
+Resposta: Formata um número inteiro decimal, como <code>int</code>, <code>long</code>, <code>short</code>, <code>byte</code> ou <code>BigInteger</code>.</p>
+<p>17 - O que <code>%f</code> faz?
+Resposta: Formata número de ponto flutuante, como <code>float</code>, <code>double</code> ou <code>BigDecimal</code>.</p>
+<p>18 - O que significa <code>%.2f</code>?
+Resposta: Significa formatar um número de ponto flutuante com duas casas decimais.</p>
+<p>19 - O que significa <code>%10.2f</code>?
+Resposta: Significa formatar um número com largura mínima de 10 caracteres e duas casas decimais. Se o valor ocupar menos espaço, o Java preenche com espaços à esquerda.</p>
+<p>20 - O que <code>%n</code> faz?
+Resposta: Insere o separador de linha da plataforma. É mais portável que usar <code>\n</code> dentro de strings de formatação.</p>
+<p>21 - Como imprimir o caractere <code>%</code> usando <code>printf</code>?
+Resposta: Use <code>%%</code>. Exemplo: <code>System.out.printf("Progresso: 80%%%n");</code>.</p>
+<p>22 - O que é <code>String.formatted</code>?
+Resposta: É um método disponível desde Java 15 que formata a própria string usando os argumentos informados, funcionando de forma semelhante a <code>String.format</code>.</p>
+<p>23 - O que é <code>Scanner</code>?
+Resposta: É uma classe usada para ler entrada textual e converter tokens em tipos como <code>String</code>, <code>int</code>, <code>double</code>, <code>boolean</code>, <code>BigDecimal</code> e outros.</p>
+<p>24 - Qual é a diferença entre <code>next()</code> e <code>nextLine()</code>?
+Resposta: <code>next()</code> lê o próximo token, normalmente até um espaço em branco. <code>nextLine()</code> lê o restante da linha atual.</p>
+<p>25 - Por que misturar <code>nextInt()</code> e <code>nextLine()</code> pode causar problema?
+Resposta: Porque <code>nextInt()</code> consome apenas o número, mas pode deixar a quebra de linha pendente. O próximo <code>nextLine()</code> pode ler essa sobra em vez de esperar uma nova entrada.</p>
+<p>26 - Como resolver o problema entre <code>nextInt()</code> e <code>nextLine()</code>?
+Resposta: Depois de <code>nextInt()</code>, chame um <code>nextLine()</code> extra para consumir o restante da linha antes de ler o próximo texto completo.</p>
+<p>27 - Quais outros métodos de leitura existem no <code>Scanner</code>?
+Resposta: Existem métodos como <code>nextLong</code>, <code>nextFloat</code>, <code>nextDouble</code>, <code>nextBoolean</code>, <code>nextByte</code>, <code>nextShort</code>, <code>nextBigInteger</code>, <code>nextBigDecimal</code> e suas versões <code>hasNext...</code>.</p>
+<p>28 - Quando usar <code>StringBuilder</code>?
+Resposta: Use quando precisar montar strings progressivamente, especialmente dentro de loops ou com muitas partes opcionais.</p>
+<p>29 - O que mudou em <code>String</code> no Java 9?
+Resposta: O Java 9 trouxe Compact Strings pela JEP 254, mudando a representação interna para economizar memória em muitos casos, e a JEP 280, que mudou a estratégia de concatenação para usar <code>invokedynamic</code>.</p>
+<p>30 - String Templates existem como recurso padrão no Java 25?
+Resposta: Não. String Templates foram preview no Java 21 e Java 22, mas foram retirados antes do Java 23. Em Java 25, use concatenação, <code>StringBuilder</code>, <code>String.format</code>, <code>String.formatted</code>, <code>MessageFormat</code> ou templates externos conforme o caso.</p>
+<h2 id="resumo-final">Resumo final</h2>
+<p><code>String</code> é uma das classes mais importantes de Java. Ela representa texto, é imutável, tem tratamento especial pela linguagem e aparece em praticamente qualquer aplicação backend.</p>
+<p>Para usar bem <code>String</code>, é importante entender:</p>
+<ul>
+<li>literais de string são objetos <code>String</code>;</li>
+<li><code>String</code> não é tipo primitivo;</li>
+<li>concatenação com <code>+</code> depende da ordem de avaliação;</li>
+<li>use parênteses quando quiser calcular antes de concatenar;</li>
+<li>sequências de escape representam caracteres especiais;</li>
+<li><code>\\</code> representa uma barra invertida real;</li>
+<li><code>\n</code> representa quebra de linha, mas <code>%n</code> é melhor em <code>printf</code>;</li>
+<li><code>print</code>, <code>println</code>, <code>printf</code> e <code>format</code> têm propósitos diferentes;</li>
+<li><code>printf</code> usa especificadores como <code>%s</code>, <code>%d</code>, <code>%f</code>, <code>%%</code> e <code>%n</code>;</li>
+<li><code>Scanner</code> lê tokens e linhas, mas exige cuidado ao misturar métodos;</li>
+<li><code>StringBuilder</code> é melhor para montagem repetitiva de texto;</li>
+<li>text blocks, desde Java 15, melhoram strings multilinha;</li>
+<li>Java 9 trouxe mudanças internas importantes com Compact Strings e concatenação via <code>invokedynamic</code>.</li>
+</ul>
+<p>Em sistemas reais, strings aparecem em logs, APIs, JSON, SQL, mensagens, validações, integrações e ferramentas internas. Dominar <code>String</code> é dominar uma parte essencial da comunicação entre o programa, o usuário, outros sistemas e a própria JVM.</p>
+<h2 id="referencias">Referências</h2>
+<ul>
+<li>Java Language Specification, Java SE 25 Edition — literais, text blocks, escapes, ordem de avaliação e concatenação. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/index.html" title="The Java® Language Specification">Oracle Docs</a>)</li>
+<li>Java SE 25 API Documentation — <code>java.lang.String</code>. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="String (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</li>
+<li>Java SE 25 API Documentation — <code>java.io.PrintStream</code>. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api//java.base/java/io/PrintStream.html" title="PrintStream (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</li>
+<li>Java SE 25 API Documentation — <code>java.util.Formatter</code>. (<a href="https://docs.oracle.com/en/java/javase/25/docs//api/java.base/java/util/Formatter.html" title="Formatter (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</li>
+<li>Java SE 25 API Documentation — <code>java.util.Scanner</code>. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Scanner.html" title="Scanner (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</li>
+<li>OpenJDK JEP 254 — Compact Strings. (<a href="https://openjdk.org/jeps/254" title="JEP 254: Compact Strings">OpenJDK</a>)</li>
+<li>OpenJDK JEP 280 — Indify String Concatenation. (<a href="https://openjdk.org/jeps/280" title="JEP 280: Indify String Concatenation">OpenJDK</a>)</li>
+<li>OpenJDK JEP 378 — Text Blocks. (<a href="https://openjdk.org/jeps/378" title="JEP 378: Text Blocks">OpenJDK</a>)</li>
+<li>Oracle Java Language Changes by Release — histórico de String Templates e mudanças da linguagem. (<a href="https://docs.oracle.com/en/java/javase/25/language/java-language-changes-release.html" title="Java Language Changes by Release">Oracle Docs</a>)</li>
+<li>Effective Java, Joshua Bloch — boas práticas gerais de uso de objetos, imutabilidade, legibilidade e APIs.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
