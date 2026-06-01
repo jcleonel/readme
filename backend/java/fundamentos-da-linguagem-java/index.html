@@ -1,0 +1,3139 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../..">
+      
+      
+        <link rel="next" href="../convencoes-de-codigo-java/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Fundamentos de Java - README</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/css/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#fundamentos-da-linguagem-java" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../../.." title="README" class="md-header__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            README
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Fundamentos de Java
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="README" class="md-nav__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    README
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Backend
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de Java
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-no-codigo-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar no código: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Definição técnica">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jvm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JVM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#javac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        javac
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        java
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-funciona-em-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como funciona em Java
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo prático
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analisando-o-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analisando o código
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Analisando o código">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#package" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        package
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#public-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        public class
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nome-do-arquivo-e-nome-da-classe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nome do arquivo e nome da classe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        main
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variaveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variáveis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#systemoutprintln" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        System.out.println
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-acontece-por-baixo-dos-panos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que acontece por baixo dos panos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="O que acontece por baixo dos panos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#por-que-existe-bytecode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que existe bytecode?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#por-que-o-comando-e-java-e-nao-o-nome-do-programa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que o comando é java e não o nome do programa?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#java-25-e-a-forma-moderna-de-escrever-pequenos-programas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Java 25 e a forma moderna de escrever pequenos programas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Java 25 e a forma moderna de escrever pequenos programas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#forma-tradicional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Forma tradicional
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#forma-com-instance-main-no-java-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Forma com instance main no Java 25
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#forma-compacta-no-java-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Forma compacta no Java 25
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparacao-com-versoes-anteriores-do-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparação com versões anteriores do Java
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comparação com versões anteriores do Java">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#antes-do-java-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes do Java 11
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#java-11-jep-330" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Java 11 — JEP 330
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#java-22-jep-458" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Java 22 — JEP 458
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#java-25-jep-512" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Java 25 — JEP 512
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boas práticas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#use-nomes-claros-para-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use nomes claros para classes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mantenha-o-nome-do-arquivo-consistente-com-a-classe-publica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mantenha o nome do arquivo consistente com a classe pública
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-pacotes-em-projetos-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use pacotes em projetos reais
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compile-para-uma-pasta-separada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compile para uma pasta separada
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#entenda-o-basico-antes-de-depender-apenas-da-ide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entenda o básico antes de depender apenas da IDE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-java-arquivojava-para-experimentos-nao-como-padrao-produtivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use java Arquivo.java para experimentos, não como padrão produtivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#erro-1-nome-do-arquivo-diferente-da-classe-publica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erro 1: nome do arquivo diferente da classe pública
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#erro-2-tentar-executar-usando-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erro 2: tentar executar usando .class
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#erro-3-esquecer-o-classpath" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erro 3: esquecer o classpath
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#erro-4-executar-classe-com-pacote-como-se-ela-nao-tivesse-pacote" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erro 4: executar classe com pacote como se ela não tivesse pacote
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#erro-5-alterar-a-assinatura-tradicional-do-main-em-versoes-anteriores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erro 5: alterar a assinatura tradicional do main em versões anteriores
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#erro-6-confundir-jdk-com-jre" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erro 6: confundir JDK com JRE
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decisões de engenharia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-a-forma-tradicional-com-public-static-void-main" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar a forma tradicional com public static void main
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-java-arquivojava" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar java Arquivo.java
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-compact-source-files-do-java-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar compact source files do Java 25
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternativas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternativas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Onde isso aparece em sistemas reais">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#em-aplicacoes-spring-boot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Em aplicações Spring Boot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#em-builds-maven-e-gradle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Em builds Maven e Gradle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#em-containers-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Em containers Docker
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#em-observabilidade-e-troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Em observabilidade e troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Perguntas de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-qual-e-a-diferenca-entre-arquivo-java-e-arquivo-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Qual é a diferença entre arquivo .java e arquivo .class?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-qual-e-a-responsabilidade-do-javac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Qual é a responsabilidade do javac?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-qual-e-a-responsabilidade-do-comando-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Qual é a responsabilidade do comando java?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-o-que-e-a-jvm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. O que é a JVM?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-por-que-ao-executar-uma-classe-usamos-java-nomedaclasse-e-nao-java-nomedaclasseclass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Por que, ao executar uma classe, usamos java NomeDaClasse e não java NomeDaClasse.class?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-o-que-significa-public-static-void-mainstring-args" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. O que significa public static void main(String[] args)?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-por-que-o-nome-do-arquivo-deve-acompanhar-o-nome-da-classe-publica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Por que o nome do arquivo deve acompanhar o nome da classe pública?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-o-que-acontece-quando-uma-classe-esta-dentro-de-um-pacote" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. O que acontece quando uma classe está dentro de um pacote?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-qual-e-a-diferenca-entre-executar-java-programajava-e-executar-javac-programajava-seguido-de-java-programa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Qual é a diferença entre executar java Programa.java e executar javac Programa.java seguido de java Programa?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-em-quais-cenarios-compact-source-files-do-java-25-sao-uteis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Em quais cenários compact source files do Java 25 são úteis?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-por-que-aplicacoes-backend-reais-normalmente-usam-maven-ou-gradle-em-vez-de-compilar-manualmente-com-javac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Por que aplicações backend reais normalmente usam Maven ou Gradle em vez de compilar manualmente com javac?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-como-o-conhecimento-de-jvm-ajuda-a-resolver-problemas-em-producao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Como o conhecimento de JVM ajuda a resolver problemas em produção?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../convencoes-de-codigo-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convenções de código em Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../variaveis-tipos-primitivos-operadores-conversoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variáveis, tipos primitivos, operadores e conversões
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fundamentos-de-string/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de String
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Spring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/api-rest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    O que é API REST?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/http/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Um pouco de HTTP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/por-que-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Por que escolher Spring?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/spring-boot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Boot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/spring-initializr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Initializr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/maven-pom/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maven e pom.xml
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-no-codigo-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar no código: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Definição técnica">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jvm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JVM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#javac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        javac
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        java
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-funciona-em-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como funciona em Java
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo prático
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analisando-o-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analisando o código
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Analisando o código">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#package" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        package
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#public-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        public class
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nome-do-arquivo-e-nome-da-classe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nome do arquivo e nome da classe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        main
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variaveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variáveis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#systemoutprintln" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        System.out.println
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-acontece-por-baixo-dos-panos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que acontece por baixo dos panos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="O que acontece por baixo dos panos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#por-que-existe-bytecode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que existe bytecode?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#por-que-o-comando-e-java-e-nao-o-nome-do-programa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que o comando é java e não o nome do programa?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#java-25-e-a-forma-moderna-de-escrever-pequenos-programas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Java 25 e a forma moderna de escrever pequenos programas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Java 25 e a forma moderna de escrever pequenos programas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#forma-tradicional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Forma tradicional
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#forma-com-instance-main-no-java-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Forma com instance main no Java 25
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#forma-compacta-no-java-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Forma compacta no Java 25
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparacao-com-versoes-anteriores-do-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparação com versões anteriores do Java
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comparação com versões anteriores do Java">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#antes-do-java-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes do Java 11
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#java-11-jep-330" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Java 11 — JEP 330
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#java-22-jep-458" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Java 22 — JEP 458
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#java-25-jep-512" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Java 25 — JEP 512
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boas práticas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#use-nomes-claros-para-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use nomes claros para classes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mantenha-o-nome-do-arquivo-consistente-com-a-classe-publica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mantenha o nome do arquivo consistente com a classe pública
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-pacotes-em-projetos-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use pacotes em projetos reais
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compile-para-uma-pasta-separada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compile para uma pasta separada
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#entenda-o-basico-antes-de-depender-apenas-da-ide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entenda o básico antes de depender apenas da IDE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-java-arquivojava-para-experimentos-nao-como-padrao-produtivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use java Arquivo.java para experimentos, não como padrão produtivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#erro-1-nome-do-arquivo-diferente-da-classe-publica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erro 1: nome do arquivo diferente da classe pública
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#erro-2-tentar-executar-usando-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erro 2: tentar executar usando .class
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#erro-3-esquecer-o-classpath" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erro 3: esquecer o classpath
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#erro-4-executar-classe-com-pacote-como-se-ela-nao-tivesse-pacote" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erro 4: executar classe com pacote como se ela não tivesse pacote
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#erro-5-alterar-a-assinatura-tradicional-do-main-em-versoes-anteriores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erro 5: alterar a assinatura tradicional do main em versões anteriores
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#erro-6-confundir-jdk-com-jre" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erro 6: confundir JDK com JRE
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decisões de engenharia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-a-forma-tradicional-com-public-static-void-main" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar a forma tradicional com public static void main
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-java-arquivojava" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar java Arquivo.java
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-compact-source-files-do-java-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar compact source files do Java 25
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternativas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternativas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Onde isso aparece em sistemas reais">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#em-aplicacoes-spring-boot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Em aplicações Spring Boot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#em-builds-maven-e-gradle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Em builds Maven e Gradle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#em-containers-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Em containers Docker
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#em-observabilidade-e-troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Em observabilidade e troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Perguntas de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-qual-e-a-diferenca-entre-arquivo-java-e-arquivo-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Qual é a diferença entre arquivo .java e arquivo .class?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-qual-e-a-responsabilidade-do-javac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Qual é a responsabilidade do javac?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-qual-e-a-responsabilidade-do-comando-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Qual é a responsabilidade do comando java?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-o-que-e-a-jvm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. O que é a JVM?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-por-que-ao-executar-uma-classe-usamos-java-nomedaclasse-e-nao-java-nomedaclasseclass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Por que, ao executar uma classe, usamos java NomeDaClasse e não java NomeDaClasse.class?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-o-que-significa-public-static-void-mainstring-args" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. O que significa public static void main(String[] args)?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-por-que-o-nome-do-arquivo-deve-acompanhar-o-nome-da-classe-publica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Por que o nome do arquivo deve acompanhar o nome da classe pública?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-o-que-acontece-quando-uma-classe-esta-dentro-de-um-pacote" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. O que acontece quando uma classe está dentro de um pacote?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-qual-e-a-diferenca-entre-executar-java-programajava-e-executar-javac-programajava-seguido-de-java-programa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Qual é a diferença entre executar java Programa.java e executar javac Programa.java seguido de java Programa?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-em-quais-cenarios-compact-source-files-do-java-25-sao-uteis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Em quais cenários compact source files do Java 25 são úteis?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-por-que-aplicacoes-backend-reais-normalmente-usam-maven-ou-gradle-em-vez-de-compilar-manualmente-com-javac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Por que aplicações backend reais normalmente usam Maven ou Gradle em vez de compilar manualmente com javac?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-como-o-conhecimento-de-jvm-ajuda-a-resolver-problemas-em-producao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Como o conhecimento de JVM ajuda a resolver problemas em produção?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="fundamentos-da-linguagem-java">Fundamentos da linguagem Java</h1>
+<p>Todo sistema Java, seja um pequeno programa de terminal, uma API REST com Spring Boot ou um serviço em microsserviços, começa com a mesma ideia central: escrever código-fonte, transformá-lo em uma forma executável pela plataforma Java e iniciar a execução por um ponto de entrada.</p>
+<p>Em aplicações backend, esse fluxo aparece em vários lugares:</p>
+<ul>
+<li>ao rodar uma classe com <code>main</code>;</li>
+<li>ao iniciar uma aplicação Spring Boot;</li>
+<li>ao compilar um projeto com Maven ou Gradle;</li>
+<li>ao gerar um artefato <code>.jar</code>;</li>
+<li>ao executar esse artefato dentro de um container Docker;</li>
+<li>ao investigar erros como <code>ClassNotFoundException</code>, <code>NoClassDefFoundError</code> ou incompatibilidade de versão de bytecode.</li>
+</ul>
+<p>Por isso, entender o primeiro programa Java não é apenas uma etapa inicial de aprendizado. É a base para compreender como a linguagem, o compilador, a JVM e o comando <code>java</code> trabalham juntos.</p>
+<p>Neste artigo, os exemplos usam Java 25, versão LTS no ecossistema Oracle/JDK 25.</p>
+<h2 id="antes-de-entrar-no-codigo-uma-ideia-simples">Antes de entrar no código: uma ideia simples</h2>
+<p>Um programa Java passa por três momentos principais:</p>
+<ol>
+<li>você escreve um arquivo <code>.java</code>;</li>
+<li>o compilador Java transforma esse arquivo em bytecode, normalmente em arquivos <code>.class</code>;</li>
+<li>a JVM carrega esse bytecode e executa o programa.</li>
+</ol>
+<p>De forma simplificada:</p>
+<div class="highlight"><pre><span></span><code>Código-fonte Java (.java)
+        |
+        | javac
+        v
+Bytecode Java (.class)
+        |
+        | java
+        v
+Execução na JVM
+</code></pre></div>
+<p>O arquivo <code>.java</code> é feito para humanos escreverem e lerem.</p>
+<p>O arquivo <code>.class</code> é feito para a JVM interpretar, validar, carregar e executar.</p>
+<p>Essa separação é uma das razões pelas quais Java ficou conhecido pela ideia de portabilidade: o código é compilado para bytecode, e o bytecode é executado por uma JVM compatível com a plataforma onde o programa está rodando.</p>
+<h2 id="definicao-tecnica">Definição técnica</h2>
+<p>Em Java, o código-fonte é organizado em unidades de compilação. Uma unidade de compilação geralmente corresponde a um arquivo <code>.java</code>, que pode declarar classes, interfaces, enums, records e outros tipos.</p>
+<p>O compilador <code>javac</code> lê arquivos-fonte escritos na linguagem Java e os compila em arquivos de classe que rodam na Java Virtual Machine. A própria documentação oficial do <code>javac</code> define o comando como responsável por ler declarações Java e compilá-las em arquivos <code>.class</code>. (<a href="https://docs.oracle.com/en/java/javase/25/docs/specs/man/javac.html" title="The javac Command">Oracle Docs</a>)</p>
+<p>A JVM, por sua vez, é a máquina virtual responsável por executar esse bytecode. Quando usamos o comando <code>java</code>, ele inicia uma aplicação Java criando uma JVM, carregando a classe especificada e chamando o método <code>main</code>. (<a href="https://docs.oracle.com/en/java/javase/25/docs/specs/man/java.html" title="The java Command">Oracle Docs</a>)</p>
+<p>Portanto, três conceitos são fundamentais:</p>
+<h3 id="jvm">JVM</h3>
+<p>A JVM, Java Virtual Machine, é o ambiente de execução do bytecode Java.</p>
+<p>Ela é responsável por tarefas como:</p>
+<ul>
+<li>carregar classes;</li>
+<li>verificar a validade estrutural do bytecode;</li>
+<li>preparar classes para execução;</li>
+<li>resolver referências simbólicas;</li>
+<li>inicializar classes;</li>
+<li>executar instruções;</li>
+<li>gerenciar memória;</li>
+<li>lidar com pilha, heap, método, constantes e outros elementos internos.</li>
+</ul>
+<p>A especificação da JVM descreve áreas de execução como heap, pilhas da JVM, method area, constant pool e o processo de loading, linking e initialization. (<a href="https://docs.oracle.com/javase/specs/jvms/se25/html/index.html" title="The Java® Virtual Machine Specification">Oracle Docs</a>)</p>
+<h3 id="javac">javac</h3>
+<p><code>javac</code> é o compilador Java.</p>
+<p>Ele recebe arquivos <code>.java</code> e gera arquivos <code>.class</code>.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>javac<span class="w"> </span>ResumoCatalogoMusical.java
+</code></pre></div>
+<p>Esse comando tenta compilar <code>ResumoCatalogoMusical.java</code>. Se o código estiver válido, será gerado um arquivo como:</p>
+<div class="highlight"><pre><span></span><code>ResumoCatalogoMusical.class
+</code></pre></div>
+<p>A documentação oficial também reforça que arquivos-fonte Java usam extensão <code>.java</code>, enquanto arquivos de classe usam extensão <code>.class</code>. (<a href="https://docs.oracle.com/en/java/javase/25/docs/specs/man/javac.html" title="The javac Command">Oracle Docs</a>)</p>
+<h3 id="java">java</h3>
+<p><code>java</code> é o launcher, ou seja, o comando usado para iniciar uma aplicação Java.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>java<span class="w"> </span>ResumoCatalogoMusical
+</code></pre></div>
+<p>Nesse caso, não usamos <code>.class</code> no comando. Informamos o nome da classe que deve ser carregada e executada. O launcher localiza a classe, inicia a JVM e chama o método <code>main</code>.</p>
+<h2 id="como-funciona-em-java">Como funciona em Java</h2>
+<p>Vamos começar com uma estrutura tradicional, ainda muito importante para aplicações backend.</p>
+<p>Crie um arquivo chamado:</p>
+<div class="highlight"><pre><span></span><code>ResumoCatalogoMusical.java
+</code></pre></div>
+<p>Com o seguinte conteúdo:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ResumoCatalogoMusical</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Mammoth&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">genero</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hard rock&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">totalMusicas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Resumo do catálogo musical&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Banda: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">banda</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Gênero: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">genero</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Total de músicas cadastradas: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">totalMusicas</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse programa representa uma saída simples para uma aplicação fictícia chamada <code>meucatalogomusical.com</code>, um catálogo musical com bandas e músicas de Metal, Hard Rock e Rock Progressivo.</p>
+<p>Para compilar:</p>
+<div class="highlight"><pre><span></span><code>javac<span class="w"> </span>ResumoCatalogoMusical.java
+</code></pre></div>
+<p>Para executar:</p>
+<div class="highlight"><pre><span></span><code>java<span class="w"> </span>ResumoCatalogoMusical
+</code></pre></div>
+<p>Saída esperada:</p>
+<div class="highlight"><pre><span></span><code>Resumo do catálogo musical
+Banda: Mammoth
+Gênero: Hard rock
+Total de músicas cadastradas: 12
+</code></pre></div>
+<h2 id="exemplo-pratico">Exemplo prático</h2>
+<p>Em um projeto mais próximo de um sistema real, é comum organizar o código em pacotes.</p>
+<p>Estrutura sugerida:</p>
+<div class="highlight"><pre><span></span><code>src/
+└── com/
+    └── meucatalogomusical/
+        └── console/
+            └── ResumoCatalogoMusical.java
+</code></pre></div>
+<p>Arquivo:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.console</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ResumoCatalogoMusical</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Metallica&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">album</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Master of Puppets&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">musicasPublicadas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">boolean</span><span class="w"> </span><span class="n">catalogoAtivo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;meucatalogomusical.com&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Banda: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">banda</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Álbum: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">album</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Músicas publicadas: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">musicasPublicadas</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Catálogo ativo: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">catalogoAtivo</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Compilando para uma pasta de saída:</p>
+<div class="highlight"><pre><span></span><code>javac<span class="w"> </span>-d<span class="w"> </span>out<span class="w"> </span>src/com/meucatalogomusical/console/ResumoCatalogoMusical.java
+</code></pre></div>
+<p>Executando:</p>
+<div class="highlight"><pre><span></span><code>java<span class="w"> </span>-cp<span class="w"> </span>out<span class="w"> </span>com.meucatalogomusical.console.ResumoCatalogoMusical
+</code></pre></div>
+<p>Aqui aparecem dois pontos importantes.</p>
+<p>Primeiro, <code>-d out</code> diz ao <code>javac</code> para colocar os arquivos <code>.class</code> na pasta <code>out</code>. A própria documentação do <code>javac</code> recomenda especificar um diretório separado de destino com <code>-d</code> em vez de gravar os <code>.class</code> ao lado dos arquivos-fonte. (<a href="https://docs.oracle.com/en/java/javase/25/docs/specs/man/javac.html" title="The javac Command">Oracle Docs</a>)</p>
+<p>Segundo, <code>-cp out</code> informa ao comando <code>java</code> onde procurar as classes compiladas. Como a classe está dentro de um pacote, a execução precisa usar o nome totalmente qualificado:</p>
+<div class="highlight"><pre><span></span><code>com.meucatalogomusical.console.ResumoCatalogoMusical
+</code></pre></div>
+<h2 id="analisando-o-codigo">Analisando o código</h2>
+<h3 id="package">package</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.console</span><span class="p">;</span>
+</code></pre></div>
+<p>A declaração <code>package</code> organiza a classe em um namespace.</p>
+<p>Em sistemas reais, pacotes evitam conflito de nomes e ajudam a expressar a arquitetura do projeto.</p>
+<p>Por exemplo:</p>
+<div class="highlight"><pre><span></span><code>com.meucatalogomusical.domain
+com.meucatalogomusical.application
+com.meucatalogomusical.infrastructure
+</code></pre></div>
+<p>Em uma aplicação backend maior, essa organização facilita separar domínio, casos de uso, infraestrutura, controllers, persistência e integrações externas.</p>
+<h3 id="public-class">public class</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ResumoCatalogoMusical</span><span class="w"> </span><span class="p">{</span>
+</code></pre></div>
+<p>Essa linha declara uma classe pública chamada <code>ResumoCatalogoMusical</code>.</p>
+<p>O modificador <code>public</code> permite que a classe seja acessada a partir de outros pacotes, respeitando as regras de módulos quando existirem. A JLS explica que uma classe pode ser declarada <code>public</code> para ser referenciada por código de outros pacotes. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-8.html" title="Chapter 8. Classes">Oracle Docs</a>)</p>
+<p>O nome da classe usa <code>PascalCase</code>, uma variação do CamelCase usada normalmente para nomes de classes em Java.</p>
+<p>Java diferencia letras maiúsculas e minúsculas. Portanto:</p>
+<div class="highlight"><pre><span></span><code><span class="n">ResumoCatalogoMusical</span>
+<span class="n">resumoCatalogoMusical</span>
+<span class="n">RESUMOCATALOGOMUSICAL</span>
+</code></pre></div>
+<p>são nomes diferentes.</p>
+<h3 id="nome-do-arquivo-e-nome-da-classe">Nome do arquivo e nome da classe</h3>
+<p>Quando uma classe pública é declarada em um arquivo-fonte, a prática e a regra usual é que o nome do arquivo corresponda ao nome da classe pública.</p>
+<p>Por isso:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ResumoCatalogoMusical</span>
+</code></pre></div>
+<p>deve estar em:</p>
+<div class="highlight"><pre><span></span><code>ResumoCatalogoMusical.java
+</code></pre></div>
+<p>A JLS explica que, em ambientes baseados em sistema de arquivos, uma implementação pode exigir que uma classe ou interface pública seja encontrada em um arquivo com o nome do tipo mais a extensão, como <code>.java</code>; a própria especificação exemplifica uma classe pública <code>Toad</code> no arquivo <code>Toad.java</code>. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-7.html" title="Chapter 7. Packages and Modules">Oracle Docs</a>)</p>
+<h3 id="main">main</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</code></pre></div>
+<p>Esse é o ponto de entrada tradicional de uma aplicação Java.</p>
+<p>Na forma clássica, o método precisa ser:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span>
+</code></pre></div>
+<p>O comando <code>java</code> inicia a JVM, carrega a classe indicada e chama esse método <code>main</code>. A documentação oficial do comando <code>java</code> descreve exatamente esse fluxo. (<a href="https://docs.oracle.com/en/java/javase/25/docs/specs/man/java.html" title="The java Command">Oracle Docs</a>)</p>
+<p>Cada parte tem um papel:</p>
+<div class="highlight"><pre><span></span><code>public
+</code></pre></div>
+<p>Permite que o launcher acesse o método.</p>
+<div class="highlight"><pre><span></span><code>static
+</code></pre></div>
+<p>Permite chamar o método sem criar manualmente uma instância da classe.</p>
+<div class="highlight"><pre><span></span><code>void
+</code></pre></div>
+<p>Indica que o método não retorna valor.</p>
+<div class="highlight"><pre><span></span><code>main
+</code></pre></div>
+<p>É o nome reconhecido como ponto de entrada.</p>
+<div class="highlight"><pre><span></span><code>String[] args
+</code></pre></div>
+<p>Representa os argumentos recebidos pela linha de comando.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>java<span class="w"> </span>ResumoCatalogoMusical<span class="w"> </span>Metallica
+</code></pre></div>
+<p>O valor <code>Metallica</code> poderia ser lido dentro do array <code>args</code>.</p>
+<h3 id="variaveis">Variáveis</h3>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Metallica&quot;</span><span class="p">;</span>
+<span class="n">String</span><span class="w"> </span><span class="n">album</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Master of Puppets&quot;</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">musicasPublicadas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">catalogoAtivo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+</code></pre></div>
+<p>Essas linhas criam variáveis locais dentro do método <code>main</code>.</p>
+<ul>
+<li><code>String</code> representa texto;</li>
+<li><code>int</code> representa número inteiro;</li>
+<li><code>boolean</code> representa verdadeiro ou falso.</li>
+</ul>
+<p>Essas variáveis existem apenas durante a execução do método.</p>
+<h3 id="systemoutprintln">System.out.println</h3>
+<div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;meucatalogomusical.com&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p><code>System</code> é uma classe da API padrão Java.</p>
+<p>A documentação oficial descreve <code>System</code> como uma classe com campos e métodos úteis, incluindo acesso à entrada padrão, saída padrão e saída de erro. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/System.html" title="System (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</p>
+<p><code>out</code> é a saída padrão.</p>
+<p><code>println</code> escreve uma linha de texto nessa saída.</p>
+<p>Em programas de terminal, essa saída aparece no console. Em servidores, a saída padrão frequentemente é capturada por ferramentas de log, runtime de containers ou plataformas de observabilidade.</p>
+<h2 id="o-que-acontece-por-baixo-dos-panos">O que acontece por baixo dos panos</h2>
+<p>Ao executar:</p>
+<div class="highlight"><pre><span></span><code>javac<span class="w"> </span>-d<span class="w"> </span>out<span class="w"> </span>src/com/meucatalogomusical/console/ResumoCatalogoMusical.java
+</code></pre></div>
+<p>o compilador realiza várias tarefas:</p>
+<ol>
+<li>lê o arquivo <code>.java</code>;</li>
+<li>analisa a sintaxe;</li>
+<li>verifica tipos;</li>
+<li>valida regras da linguagem;</li>
+<li>resolve referências;</li>
+<li>gera bytecode;</li>
+<li>grava um arquivo <code>.class</code>.</li>
+</ol>
+<p>Depois, ao executar:</p>
+<div class="highlight"><pre><span></span><code>java<span class="w"> </span>-cp<span class="w"> </span>out<span class="w"> </span>com.meucatalogomusical.console.ResumoCatalogoMusical
+</code></pre></div>
+<p>o launcher Java:</p>
+<ol>
+<li>inicia a JVM;</li>
+<li>procura a classe no classpath;</li>
+<li>carrega a classe;</li>
+<li>realiza linking;</li>
+<li>verifica o bytecode;</li>
+<li>inicializa a classe quando necessário;</li>
+<li>chama o método <code>main</code>.</li>
+</ol>
+<p>A JLS descreve linking como o processo de combinar a representação binária de uma classe ou interface ao estado de execução da JVM, e também explica que a verificação garante que a representação binária seja estruturalmente correta. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-12.html" title="Chapter 12. Execution">Oracle Docs</a>)</p>
+<h3 id="por-que-existe-bytecode">Por que existe bytecode?</h3>
+<p>O bytecode é uma representação intermediária.</p>
+<p>Em vez de compilar diretamente para uma arquitetura específica, como x86 ou ARM, o Java compila para um formato entendido pela JVM.</p>
+<p>Isso permite que o mesmo <code>.class</code> ou <code>.jar</code> seja executado em ambientes diferentes, desde que exista uma JVM compatível.</p>
+<p>Na prática, a JVM moderna não apenas interpreta bytecode. Implementações como HotSpot também usam compilação JIT, Just-In-Time, para transformar partes quentes do código em código nativo durante a execução.</p>
+<h3 id="por-que-o-comando-e-java-e-nao-o-nome-do-programa">Por que o comando é <code>java</code> e não o nome do programa?</h3>
+<p>Porque o sistema operacional não executa bytecode diretamente.</p>
+<p>Quem sabe carregar, verificar e executar bytecode Java é a JVM.</p>
+<p>Então, quando você escreve:</p>
+<div class="highlight"><pre><span></span><code>java<span class="w"> </span>com.meucatalogomusical.console.ResumoCatalogoMusical
+</code></pre></div>
+<p>você está dizendo:</p>
+<div class="highlight"><pre><span></span><code>Inicie a plataforma Java e execute esta classe.
+</code></pre></div>
+<p>O comando <code>java</code> é o ponto de contato entre o terminal e a JVM.</p>
+<h2 id="java-25-e-a-forma-moderna-de-escrever-pequenos-programas">Java 25 e a forma moderna de escrever pequenos programas</h2>
+<p>Até aqui usamos a forma tradicional, importante para entender projetos reais e aplicações backend.</p>
+<p>Mas o Java 25 trouxe uma evolução relevante com a JEP 512: Compact Source Files and Instance Main Methods.</p>
+<p>Essa feature foi entregue no JDK 25 e permite escrever programas pequenos com menos cerimônia, sem abandonar a linguagem Java nem criar um dialeto separado. (<a href="https://openjdk.org/jeps/512" title="JEP 512: Compact Source Files and Instance Main Methods">OpenJDK</a>)</p>
+<h3 id="forma-tradicional">Forma tradicional</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">VerificarCatalogo</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Catálogo musical verificado.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="forma-com-instance-main-no-java-25">Forma com instance main no Java 25</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">VerificarCatalogo</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">IO</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Catálogo musical verificado.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Nesse exemplo:</p>
+<ul>
+<li>o método <code>main</code> não é <code>static</code>;</li>
+<li>o método <code>main</code> não recebe <code>String[] args</code>;</li>
+<li><code>IO.println</code> é usado no lugar de <code>System.out.println</code>.</li>
+</ul>
+<p>A classe <code>java.lang.IO</code> foi adicionada no Java 25 e fornece métodos estáticos simples para entrada e saída orientadas a linha, como <code>print</code>, <code>println</code> e <code>readln</code>. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/IO.html" title="IO (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</p>
+<h3 id="forma-compacta-no-java-25">Forma compacta no Java 25</h3>
+<p>Em um arquivo compacto, também é possível escrever:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">IO</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Catálogo musical verificado.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse formato é útil para pequenos programas, experimentos, scripts simples e aprendizado progressivo.</p>
+<p>Mas em aplicações backend profissionais, a forma tradicional com classes explícitas, pacotes, build tool, testes e empacotamento continua sendo a mais comum.</p>
+<h2 id="comparacao-com-versoes-anteriores-do-java">Comparação com versões anteriores do Java</h2>
+<h3 id="antes-do-java-11">Antes do Java 11</h3>
+<p>Antes do Java 11, normalmente era necessário compilar explicitamente antes de executar:</p>
+<div class="highlight"><pre><span></span><code>javac<span class="w"> </span>VerificarCatalogo.java
+java<span class="w"> </span>VerificarCatalogo
+</code></pre></div>
+<h3 id="java-11-jep-330">Java 11 — JEP 330</h3>
+<p>O Java 11 introduziu a JEP 330, que permite executar diretamente um arquivo-fonte único com o comando <code>java</code>. (<a href="https://openjdk.org/jeps/330" title="JEP 330: Launch Single-File Source-Code Programs">OpenJDK</a>)</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>java<span class="w"> </span>VerificarCatalogo.java
+</code></pre></div>
+<p>Nesse modo, o arquivo é compilado e executado em uma única etapa. A JEP 330 descreve esse comportamento como equivalente, de forma informal, a compilar em memória e executar a classe resultante. (<a href="https://openjdk.org/jeps/330" title="JEP 330: Launch Single-File Source-Code Programs">OpenJDK</a>)</p>
+<p>Uso recomendado:</p>
+<div class="highlight"><pre><span></span><code>Bom para: estudos, scripts pequenos, experimentos e protótipos.
+Evitar como padrão em: builds produtivos, pipelines, distribuição de aplicações e serviços backend.
+</code></pre></div>
+<h3 id="java-22-jep-458">Java 22 — JEP 458</h3>
+<p>O Java 22 expandiu essa ideia com a JEP 458, permitindo lançar programas compostos por múltiplos arquivos-fonte sem uma etapa explícita de compilação. (<a href="https://openjdk.org/jeps/458" title="JEP 458: Launch Multi-File Source-Code Programs">OpenJDK</a>)</p>
+<p>A JEP 458 permite que o launcher encontre e compile outros arquivos <code>.java</code> referenciados pelo programa, tornando a transição de programas pequenos para programas com múltiplos arquivos mais gradual. (<a href="https://openjdk.org/jeps/458" title="JEP 458: Launch Multi-File Source-Code Programs">OpenJDK</a>)</p>
+<h3 id="java-25-jep-512">Java 25 — JEP 512</h3>
+<p>O Java 25 finalizou a JEP 512, trazendo compact source files e instance main methods. (<a href="https://openjdk.org/jeps/512" title="JEP 512: Compact Source Files and Instance Main Methods">OpenJDK</a>)</p>
+<p>Isso reduz a cerimônia inicial para pequenos programas, mas não substitui a estrutura robusta usada em aplicações reais.</p>
+<p>Uma comparação simples:</p>
+<table>
+<thead>
+<tr>
+<th>Versão</th>
+<th>Recurso</th>
+<th style="text-align: right;">JEP</th>
+<th>Exemplo de uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Java 8 ou anterior</td>
+<td>Compilar e executar separadamente</td>
+<td style="text-align: right;">—</td>
+<td><code>javac Programa.java</code> + <code>java Programa</code></td>
+</tr>
+<tr>
+<td>Java 11</td>
+<td>Executar arquivo-fonte único</td>
+<td style="text-align: right;">JEP 330</td>
+<td><code>java Programa.java</code></td>
+</tr>
+<tr>
+<td>Java 22</td>
+<td>Executar programas com múltiplos arquivos-fonte</td>
+<td style="text-align: right;">JEP 458</td>
+<td><code>java Programa.java</code> encontrando dependências locais</td>
+</tr>
+<tr>
+<td>Java 25</td>
+<td><code>main</code> de instância e arquivos-fonte compactos</td>
+<td style="text-align: right;">JEP 512</td>
+<td><code>void main() { IO.println("..."); }</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="boas-praticas">Boas práticas</h2>
+<h3 id="use-nomes-claros-para-classes">Use nomes claros para classes</h3>
+<p>Prefira:</p>
+<div class="highlight"><pre><span></span><code><span class="n">ResumoCatalogoMusical</span>
+<span class="n">ImportadorDeBandas</span>
+<span class="n">GeradorRelatorioBandas</span>
+</code></pre></div>
+<p>Evite:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Teste</span>
+<span class="n">Programa</span>
+<span class="n">Classe1</span>
+<span class="n">Main2</span>
+</code></pre></div>
+<p>Nomes claros ajudam na leitura, manutenção e busca dentro do projeto.</p>
+<h3 id="mantenha-o-nome-do-arquivo-consistente-com-a-classe-publica">Mantenha o nome do arquivo consistente com a classe pública</h3>
+<p>Se a classe é:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ImportadorDeBandas</span>
+</code></pre></div>
+<p>o arquivo deve ser:</p>
+<div class="highlight"><pre><span></span><code>ImportadorDeBandas.java
+</code></pre></div>
+<p>Essa consistência evita erros de compilação e melhora a organização do projeto.</p>
+<h3 id="use-pacotes-em-projetos-reais">Use pacotes em projetos reais</h3>
+<p>Para estudos muito pequenos, uma classe sem pacote pode ser suficiente.</p>
+<p>Para aplicações reais, use pacotes:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.application</span><span class="p">;</span>
+</code></pre></div>
+<p>Isso reduz conflitos de nome e melhora a arquitetura.</p>
+<h3 id="compile-para-uma-pasta-separada">Compile para uma pasta separada</h3>
+<p>Prefira:</p>
+<div class="highlight"><pre><span></span><code>javac<span class="w"> </span>-d<span class="w"> </span>out<span class="w"> </span>src/com/meucatalogomusical/console/ResumoCatalogoMusical.java
+</code></pre></div>
+<p>em vez de espalhar <code>.class</code> junto dos arquivos <code>.java</code>.</p>
+<p>Em projetos reais, Maven e Gradle automatizam isso.</p>
+<h3 id="entenda-o-basico-antes-de-depender-apenas-da-ide">Entenda o básico antes de depender apenas da IDE</h3>
+<p>IDEs como IntelliJ IDEA facilitam a execução, mas é importante saber o que acontece por baixo:</p>
+<div class="highlight"><pre><span></span><code>javac
+java
+classpath
+bytecode
+main
+JVM
+</code></pre></div>
+<p>Esse conhecimento ajuda muito na investigação de problemas em CI/CD, Docker, servidores e ambientes produtivos.</p>
+<h3 id="use-java-arquivojava-para-experimentos-nao-como-padrao-produtivo">Use <code>java Arquivo.java</code> para experimentos, não como padrão produtivo</h3>
+<p>Executar direto o arquivo-fonte é excelente para aprendizado e scripts pequenos.</p>
+<p>Para aplicações backend, prefira build estruturado com Maven ou Gradle, testes automatizados, empacotamento e versionamento adequado.</p>
+<h2 id="erros-comuns">Erros comuns</h2>
+<h3 id="erro-1-nome-do-arquivo-diferente-da-classe-publica">Erro 1: nome do arquivo diferente da classe pública</h3>
+<p>Arquivo:</p>
+<div class="highlight"><pre><span></span><code>Catalogo.java
+</code></pre></div>
+<p>Código:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ResumoCatalogoMusical</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Resultado provável:</p>
+<div class="highlight"><pre><span></span><code>class ResumoCatalogoMusical is public, should be declared in a file named ResumoCatalogoMusical.java
+</code></pre></div>
+<p>Correção:</p>
+<div class="highlight"><pre><span></span><code>ResumoCatalogoMusical.java
+</code></pre></div>
+<h3 id="erro-2-tentar-executar-usando-class">Erro 2: tentar executar usando <code>.class</code></h3>
+<p>Incorreto:</p>
+<div class="highlight"><pre><span></span><code>java<span class="w"> </span>ResumoCatalogoMusical.class
+</code></pre></div>
+<p>Correto:</p>
+<div class="highlight"><pre><span></span><code>java<span class="w"> </span>ResumoCatalogoMusical
+</code></pre></div>
+<p>O comando <code>java</code> espera o nome da classe, não o nome do arquivo <code>.class</code>.</p>
+<h3 id="erro-3-esquecer-o-classpath">Erro 3: esquecer o classpath</h3>
+<p>Se a classe foi compilada para a pasta <code>out</code>, isto pode falhar:</p>
+<div class="highlight"><pre><span></span><code>java<span class="w"> </span>com.meucatalogomusical.console.ResumoCatalogoMusical
+</code></pre></div>
+<p>Correção:</p>
+<div class="highlight"><pre><span></span><code>java<span class="w"> </span>-cp<span class="w"> </span>out<span class="w"> </span>com.meucatalogomusical.console.ResumoCatalogoMusical
+</code></pre></div>
+<h3 id="erro-4-executar-classe-com-pacote-como-se-ela-nao-tivesse-pacote">Erro 4: executar classe com pacote como se ela não tivesse pacote</h3>
+<p>Se a classe possui:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.console</span><span class="p">;</span>
+</code></pre></div>
+<p>não execute assim:</p>
+<div class="highlight"><pre><span></span><code>java<span class="w"> </span>ResumoCatalogoMusical
+</code></pre></div>
+<p>Execute com o nome totalmente qualificado:</p>
+<div class="highlight"><pre><span></span><code>java<span class="w"> </span>-cp<span class="w"> </span>out<span class="w"> </span>com.meucatalogomusical.console.ResumoCatalogoMusical
+</code></pre></div>
+<h3 id="erro-5-alterar-a-assinatura-tradicional-do-main-em-versoes-anteriores">Erro 5: alterar a assinatura tradicional do main em versões anteriores</h3>
+<p>Em código tradicional, isto está correto:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span>
+</code></pre></div>
+<p>Mas isto pode não funcionar em versões antigas:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span>
+</code></pre></div>
+<p><code>void main()</code> é suportado como parte da evolução finalizada no Java 25 pela JEP 512. Em projetos que precisam rodar em Java 17 ou Java 21, prefira a assinatura tradicional.</p>
+<h3 id="erro-6-confundir-jdk-com-jre">Erro 6: confundir JDK com JRE</h3>
+<p>Para compilar, você precisa do JDK, pois ele inclui ferramentas como <code>javac</code>.</p>
+<p>Para apenas executar aplicações Java já compiladas, um runtime compatível pode ser suficiente.</p>
+<p>Em ambientes de desenvolvimento backend, normalmente usamos JDK.</p>
+<h2 id="decisoes-de-engenharia">Decisões de engenharia</h2>
+<h3 id="quando-usar-a-forma-tradicional-com-public-static-void-main">Quando usar a forma tradicional com <code>public static void main</code></h3>
+<p>Use quando:</p>
+<ul>
+<li>estiver criando uma aplicação backend real;</li>
+<li>estiver criando um projeto com Maven ou Gradle;</li>
+<li>precisar gerar <code>.jar</code>;</li>
+<li>estiver trabalhando com Spring Boot;</li>
+<li>precisar compatibilidade com versões anteriores;</li>
+<li>quiser clareza explícita sobre classe, pacote e ponto de entrada.</li>
+</ul>
+<p>Impactos:</p>
+<div class="highlight"><pre><span></span><code>Legibilidade: alta para projetos profissionais.
+Manutenção: alta, pois segue convenções amplamente conhecidas.
+Performance: não há prejuízo relevante por usar a forma tradicional.
+Compatibilidade: excelente com versões antigas e atuais.
+</code></pre></div>
+<h3 id="quando-usar-java-arquivojava">Quando usar <code>java Arquivo.java</code></h3>
+<p>Use quando:</p>
+<ul>
+<li>quiser testar rapidamente uma ideia;</li>
+<li>estiver escrevendo um script simples;</li>
+<li>estiver estudando a linguagem;</li>
+<li>quiser evitar uma configuração inicial de build.</li>
+</ul>
+<p>Evite quando:</p>
+<ul>
+<li>o projeto precisa de dependências externas;</li>
+<li>há muitos arquivos;</li>
+<li>existe pipeline de CI/CD;</li>
+<li>o código será empacotado e distribuído;</li>
+<li>a aplicação é um serviço backend real.</li>
+</ul>
+<p>Impactos:</p>
+<div class="highlight"><pre><span></span><code>Legibilidade: boa para código pequeno.
+Manutenção: limitada em projetos maiores.
+Performance: o custo de compilação pode aparecer a cada execução.
+Distribuição: fraca para aplicações produtivas.
+</code></pre></div>
+<h3 id="quando-usar-compact-source-files-do-java-25">Quando usar compact source files do Java 25</h3>
+<p>Use quando:</p>
+<ul>
+<li>estiver escrevendo programas pequenos;</li>
+<li>estiver aprendendo ou ensinando conceitos básicos;</li>
+<li>estiver criando utilitários simples;</li>
+<li>quiser reduzir cerimônia inicial.</li>
+</ul>
+<p>Evite quando:</p>
+<ul>
+<li>o código representa um componente de aplicação grande;</li>
+<li>você precisa de arquitetura explícita;</li>
+<li>o projeto precisa suportar Java anterior ao 25;</li>
+<li>a equipe ainda padroniza <code>public static void main</code>.</li>
+</ul>
+<p>Impactos:</p>
+<div class="highlight"><pre><span></span><code>Legibilidade: ótima para exemplos pequenos.
+Manutenção: boa apenas enquanto o programa permanecer pequeno.
+Compatibilidade: exige Java 25.
+Arquitetura: limitada para aplicações complexas.
+</code></pre></div>
+<h3 id="alternativas">Alternativas</h3>
+<p>Em vez de executar manualmente com <code>javac</code> e <code>java</code>, aplicações reais costumam usar:</p>
+<div class="highlight"><pre><span></span><code>mvn<span class="w"> </span><span class="nb">test</span>
+mvn<span class="w"> </span>package
+java<span class="w"> </span>-jar<span class="w"> </span>target/app.jar
+</code></pre></div>
+<p>ou:</p>
+<div class="highlight"><pre><span></span><code>./gradlew<span class="w"> </span><span class="nb">test</span>
+./gradlew<span class="w"> </span>build
+java<span class="w"> </span>-jar<span class="w"> </span>build/libs/app.jar
+</code></pre></div>
+<p>A diferença é que Maven e Gradle organizam compilação, testes, dependências, empacotamento e plugins.</p>
+<h2 id="onde-isso-aparece-em-sistemas-reais">Onde isso aparece em sistemas reais</h2>
+<h3 id="em-aplicacoes-spring-boot">Em aplicações Spring Boot</h3>
+<p>Mesmo quando você usa Spring Boot, existe um ponto de entrada.</p>
+<p>Normalmente ele se parece com:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MeuCatalogoMusicalApplication</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Inicialização da aplicação</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>A diferença é que, em vez de imprimir algo no console, o método inicia o contexto da aplicação, registra beans, configura servidor web, carrega propriedades e prepara a aplicação para receber requisições.</p>
+<h3 id="em-builds-maven-e-gradle">Em builds Maven e Gradle</h3>
+<p>Quando você executa:</p>
+<div class="highlight"><pre><span></span><code>mvn<span class="w"> </span>package
+</code></pre></div>
+<p>ou:</p>
+<div class="highlight"><pre><span></span><code>./gradlew<span class="w"> </span>build
+</code></pre></div>
+<p>por baixo dos panos ocorre compilação Java.</p>
+<p>O compilador transforma <code>.java</code> em <code>.class</code>, e o build tool organiza esses arquivos em diretórios como:</p>
+<div class="highlight"><pre><span></span><code>target/classes
+build/classes
+</code></pre></div>
+<p>Depois, esses arquivos podem ser empacotados em um <code>.jar</code>.</p>
+<h3 id="em-containers-docker">Em containers Docker</h3>
+<p>Em um container, a aplicação Java geralmente é iniciada com algo como:</p>
+<div class="highlight"><pre><span></span><code>java<span class="w"> </span>-jar<span class="w"> </span>app.jar
+</code></pre></div>
+<p>Nesse cenário, o comando <code>java</code> continua sendo responsável por iniciar a JVM.</p>
+<p>A diferença é que o ponto de entrada pode estar declarado no manifesto do JAR, e não diretamente na linha de comando.</p>
+<h3 id="em-observabilidade-e-troubleshooting">Em observabilidade e troubleshooting</h3>
+<p>Entender JVM e bytecode ajuda a interpretar problemas como:</p>
+<div class="highlight"><pre><span></span><code>UnsupportedClassVersionError
+ClassNotFoundException
+NoClassDefFoundError
+NoSuchMethodError
+OutOfMemoryError
+</code></pre></div>
+<p>Esses erros são muito comuns em ambientes reais e geralmente envolvem versão do Java, classpath, empacotamento, dependências ou incompatibilidade entre compilação e execução.</p>
+<h2 id="perguntas-de-revisao">Perguntas de revisão</h2>
+<h3 id="1-qual-e-a-diferenca-entre-arquivo-java-e-arquivo-class">1. Qual é a diferença entre arquivo <code>.java</code> e arquivo <code>.class</code>?</h3>
+<p><strong>Resposta:</strong>
+O arquivo <code>.java</code> contém o código-fonte escrito pelo desenvolvedor. É o arquivo legível por humanos.</p>
+<p>O arquivo <code>.class</code> contém o bytecode gerado pelo compilador <code>javac</code>. Esse bytecode é a forma que a JVM consegue carregar, verificar e executar. A documentação do <code>javac</code> define que arquivos-fonte Java usam extensão <code>.java</code> e arquivos de classe usam extensão <code>.class</code>.</p>
+<hr />
+<h3 id="2-qual-e-a-responsabilidade-do-javac">2. Qual é a responsabilidade do <code>javac</code>?</h3>
+<p><strong>Resposta:</strong>
+O <code>javac</code> é o compilador Java. Ele lê arquivos-fonte escritos na linguagem Java e os transforma em arquivos <code>.class</code>, que podem ser executados pela JVM.</p>
+<p>Em outras palavras:</p>
+<div class="highlight"><pre><span></span><code>ResumoCatalogoMusical.java  --javac--&gt;  ResumoCatalogoMusical.class
+</code></pre></div>
+<p>O <code>javac</code> também verifica erros de sintaxe, tipos, acesso a classes, uso de APIs e outras regras da linguagem antes de gerar o bytecode.</p>
+<hr />
+<h3 id="3-qual-e-a-responsabilidade-do-comando-java">3. Qual é a responsabilidade do comando <code>java</code>?</h3>
+<p><strong>Resposta:</strong>
+O comando <code>java</code> é o launcher da aplicação Java. Ele inicia a JVM, carrega a classe indicada e chama o método <code>main</code>.</p>
+<p>Por exemplo:</p>
+<div class="highlight"><pre><span></span><code>java<span class="w"> </span>ResumoCatalogoMusical
+</code></pre></div>
+<p>Nesse comando, <code>ResumoCatalogoMusical</code> é o nome da classe que será carregada e executada pela JVM. A documentação oficial descreve que o comando <code>java</code> inicia a JVM, carrega a classe especificada e chama o método <code>main</code>.</p>
+<hr />
+<h3 id="4-o-que-e-a-jvm">4. O que é a JVM?</h3>
+<p><strong>Resposta:</strong>
+A JVM, Java Virtual Machine, é a máquina virtual responsável por executar programas Java compilados em bytecode.</p>
+<p>Ela não executa diretamente o arquivo <code>.java</code>. Ela executa o conteúdo do arquivo <code>.class</code>.</p>
+<p>A JVM cuida de tarefas como:</p>
+<ul>
+<li>carregar classes;</li>
+<li>verificar bytecode;</li>
+<li>gerenciar memória;</li>
+<li>executar instruções;</li>
+<li>controlar pilha de chamadas;</li>
+<li>lidar com erros em tempo de execução;</li>
+<li>aplicar otimizações durante a execução.</li>
+</ul>
+<p>A especificação oficial define a JVM como uma máquina abstrata que possui um conjunto de instruções e manipula áreas de memória em tempo de execução.</p>
+<hr />
+<h3 id="5-por-que-ao-executar-uma-classe-usamos-java-nomedaclasse-e-nao-java-nomedaclasseclass">5. Por que, ao executar uma classe, usamos <code>java NomeDaClasse</code> e não <code>java NomeDaClasse.class</code>?</h3>
+<p><strong>Resposta:</strong>
+Porque o comando <code>java</code> espera o nome da classe, não o nome do arquivo físico.</p>
+<p>Quando executamos:</p>
+<div class="highlight"><pre><span></span><code>java<span class="w"> </span>ResumoCatalogoMusical
+</code></pre></div>
+<p>estamos dizendo ao launcher:</p>
+<div class="highlight"><pre><span></span><code>Procure, carregue e execute a classe ResumoCatalogoMusical.
+</code></pre></div>
+<p>O arquivo <code>ResumoCatalogoMusical.class</code> existe no sistema de arquivos, mas o comando <code>java</code> trabalha com o nome da classe que será carregada pela JVM. A documentação oficial explica que, por padrão, o primeiro argumento que não é uma opção é o nome totalmente qualificado da classe a ser chamada.</p>
+<hr />
+<h3 id="6-o-que-significa-public-static-void-mainstring-args">6. O que significa <code>public static void main(String[] args)</code>?</h3>
+<p><strong>Resposta:</strong>
+Esse é o ponto de entrada tradicional de uma aplicação Java.</p>
+<p>Cada parte tem uma função:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span>
+</code></pre></div>
+<ul>
+<li><code>public</code>: permite que o método seja acessado pelo launcher Java;</li>
+<li><code>static</code>: permite chamar o método sem criar um objeto manualmente;</li>
+<li><code>void</code>: indica que o método não retorna valor;</li>
+<li><code>main</code>: é o nome reconhecido como ponto de entrada;</li>
+<li><code>String[] args</code>: representa os argumentos recebidos pela linha de comando.</li>
+</ul>
+<p>Em uma aplicação tradicional, quando o comando <code>java</code> executa uma classe, ele procura e chama esse método <code>main</code>.</p>
+<hr />
+<h3 id="7-por-que-o-nome-do-arquivo-deve-acompanhar-o-nome-da-classe-publica">7. Por que o nome do arquivo deve acompanhar o nome da classe pública?</h3>
+<p><strong>Resposta:</strong>
+Porque, em Java, quando uma classe pública está em um arquivo-fonte, o nome do arquivo deve corresponder ao nome dessa classe.</p>
+<p>Exemplo correto:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ResumoCatalogoMusical</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Arquivo:</p>
+<div class="highlight"><pre><span></span><code>ResumoCatalogoMusical.java
+</code></pre></div>
+<p>Exemplo incorreto:</p>
+<div class="highlight"><pre><span></span><code>Catalogo.java
+</code></pre></div>
+<p>com uma classe pública chamada:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ResumoCatalogoMusical</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Isso gera erro de compilação, porque a organização do arquivo não corresponde à declaração pública da classe. A JLS permite que implementações baseadas em sistema de arquivos exijam essa correspondência entre nome do tipo e nome do arquivo.</p>
+<hr />
+<h3 id="8-o-que-acontece-quando-uma-classe-esta-dentro-de-um-pacote">8. O que acontece quando uma classe está dentro de um pacote?</h3>
+<p><strong>Resposta:</strong>
+Quando uma classe declara um pacote, ela passa a pertencer a um namespace específico.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.console</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ResumoCatalogoMusical</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Nesse caso, o nome completo da classe não é apenas:</p>
+<div class="highlight"><pre><span></span><code>ResumoCatalogoMusical
+</code></pre></div>
+<p>É:</p>
+<div class="highlight"><pre><span></span><code>com.meucatalogomusical.console.ResumoCatalogoMusical
+</code></pre></div>
+<p>Por isso, para executar a classe compilada, usamos o nome totalmente qualificado:</p>
+<div class="highlight"><pre><span></span><code>java<span class="w"> </span>-cp<span class="w"> </span>out<span class="w"> </span>com.meucatalogomusical.console.ResumoCatalogoMusical
+</code></pre></div>
+<p>A JLS define que a declaração <code>package</code> indica a qual pacote uma unidade de compilação pertence. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-8.html" title="Chapter 8. Classes">Oracle Docs</a>)</p>
+<hr />
+<h3 id="9-qual-e-a-diferenca-entre-executar-java-programajava-e-executar-javac-programajava-seguido-de-java-programa">9. Qual é a diferença entre executar <code>java Programa.java</code> e executar <code>javac Programa.java</code> seguido de <code>java Programa</code>?</h3>
+<p><strong>Resposta:</strong>
+Ao executar:</p>
+<div class="highlight"><pre><span></span><code>javac<span class="w"> </span>Programa.java
+java<span class="w"> </span>Programa
+</code></pre></div>
+<p>você faz o processo em duas etapas explícitas:</p>
+<ol>
+<li>compila o arquivo <code>.java</code> e gera o <code>.class</code>;</li>
+<li>executa a classe compilada.</li>
+</ol>
+<p>Ao executar:</p>
+<div class="highlight"><pre><span></span><code>java<span class="w"> </span>Programa.java
+</code></pre></div>
+<p>você usa o modo de execução direta de arquivo-fonte. Nesse caso, o Java compila e executa o programa em uma única etapa.</p>
+<p>Esse recurso é útil para estudos, testes rápidos e pequenos scripts, mas em aplicações reais o mais comum é compilar, testar, empacotar e distribuir a aplicação com ferramentas como Maven ou Gradle. A documentação do comando <code>java</code> explica que, quando o argumento identifica um arquivo <code>.java</code>, o modo source-file é selecionado e o arquivo é compilado e executado.</p>
+<hr />
+<h3 id="10-em-quais-cenarios-compact-source-files-do-java-25-sao-uteis">10. Em quais cenários compact source files do Java 25 são úteis?</h3>
+<p><strong>Resposta:</strong>
+Compact source files, recurso finalizado no Java 25 pela JEP 512, são úteis para programas pequenos, estudos, exemplos didáticos, scripts simples e utilitários de linha de comando.</p>
+<p>Com Java 25, é possível escrever algo como:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">IO</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Catálogo musical verificado.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse formato reduz a cerimônia inicial da linguagem, porque não obriga o iniciante ou o autor de um script simples a escrever imediatamente <code>public class</code>, <code>public static void main</code> e outros elementos mais ligados a programas maiores.</p>
+<p>Mesmo assim, para aplicações backend profissionais, a forma tradicional com classes, pacotes, build tool, testes e empacotamento continua sendo mais adequada. A JEP 512 deixa claro que o objetivo é ajudar na escrita de programas pequenos e permitir evolução gradual, sem criar um dialeto separado da linguagem Java.</p>
+<hr />
+<h3 id="11-por-que-aplicacoes-backend-reais-normalmente-usam-maven-ou-gradle-em-vez-de-compilar-manualmente-com-javac">11. Por que aplicações backend reais normalmente usam Maven ou Gradle em vez de compilar manualmente com <code>javac</code>?</h3>
+<p><strong>Resposta:</strong>
+Porque aplicações backend reais geralmente têm muitas classes, pacotes, dependências externas, testes, profiles, plugins, empacotamento, versionamento e integração com pipelines de CI/CD.</p>
+<p>Compilar manualmente com <code>javac</code> funciona para exemplos pequenos, mas fica difícil de manter em sistemas maiores.</p>
+<p>Maven e Gradle ajudam a automatizar tarefas como:</p>
+<ul>
+<li>baixar dependências;</li>
+<li>compilar o projeto;</li>
+<li>executar testes;</li>
+<li>gerar <code>.jar</code>;</li>
+<li>separar código principal e código de teste;</li>
+<li>configurar plugins;</li>
+<li>padronizar o build entre máquinas e ambientes;</li>
+<li>integrar com Docker, CI/CD e deploy.</li>
+</ul>
+<p>Ou seja, <code>javac</code> continua existindo por baixo, mas Maven e Gradle coordenam o processo completo de build.</p>
+<hr />
+<h3 id="12-como-o-conhecimento-de-jvm-ajuda-a-resolver-problemas-em-producao">12. Como o conhecimento de JVM ajuda a resolver problemas em produção?</h3>
+<p><strong>Resposta:</strong>
+Conhecer JVM ajuda porque muitos problemas de produção em Java não estão apenas no código-fonte, mas também no modo como a aplicação foi compilada, empacotada, carregada e executada.</p>
+<p>Esse conhecimento ajuda a investigar problemas como:</p>
+<div class="highlight"><pre><span></span><code>ClassNotFoundException
+NoClassDefFoundError
+UnsupportedClassVersionError
+OutOfMemoryError
+StackOverflowError
+NoSuchMethodError
+</code></pre></div>
+<p>Por exemplo:</p>
+<ul>
+<li><code>UnsupportedClassVersionError</code> pode indicar que o código foi compilado em uma versão mais nova do Java do que a versão usada para executar;</li>
+<li><code>ClassNotFoundException</code> pode indicar problema de classpath ou dependência ausente;</li>
+<li><code>OutOfMemoryError</code> pode indicar consumo excessivo de heap;</li>
+<li><code>NoSuchMethodError</code> pode indicar incompatibilidade entre versões de bibliotecas.</li>
+</ul>
+<p>A especificação da JVM mostra que arquivos <code>.class</code> possuem versão própria, e no Java SE 25 a versão principal mais recente suportada é a 69. Isso explica por que bytecodes gerados por versões diferentes do Java podem causar problemas quando executados em uma JVM incompatível.</p>
+<h2 id="resumo-final">Resumo final</h2>
+<p>Um programa Java começa no código-fonte, geralmente em um arquivo <code>.java</code>.</p>
+<p>O compilador <code>javac</code> transforma esse código em bytecode, normalmente em arquivos <code>.class</code>.</p>
+<p>A JVM executa esse bytecode.</p>
+<p>O comando <code>java</code> é o launcher usado para iniciar a JVM, carregar uma classe e chamar o método <code>main</code>.</p>
+<p>A forma tradicional:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span>
+</code></pre></div>
+<p>continua sendo essencial para entender aplicações Java reais.</p>
+<p>O Java 11 introduziu a execução direta de arquivos-fonte únicos com a JEP 330.</p>
+<p>O Java 22 expandiu esse modelo para múltiplos arquivos com a JEP 458.</p>
+<p>O Java 25 finalizou compact source files e instance main methods com a JEP 512, reduzindo a cerimônia para programas pequenos.</p>
+<p>Para estudos, scripts e experimentos, os recursos modernos do Java 25 são muito úteis.</p>
+<p>Para aplicações backend profissionais, é importante dominar também a estrutura tradicional com classes, pacotes, compilação, classpath, JARs, build tools e JVM.</p>
+<h2 id="referencias">Referências</h2>
+<ul>
+<li>Java SE 25 &amp; JDK 25 — <code>javac</code> Command. (<a href="https://docs.oracle.com/en/java/javase/25/docs/specs/man/javac.html" title="The javac Command">Oracle Docs</a>)</li>
+<li>Java SE 25 &amp; JDK 25 — <code>java</code> Command. (<a href="https://docs.oracle.com/en/java/javase/25/docs/specs/man/java.html" title="The java Command">Oracle Docs</a>)</li>
+<li>Java Language Specification, Java SE 25 Edition. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/index.html" title="The Java® Language Specification">Oracle Docs</a>)</li>
+<li>Java Virtual Machine Specification, Java SE 25 Edition. (<a href="https://docs.oracle.com/javase/specs/jvms/se25/html/index.html" title="The Java® Virtual Machine Specification">Oracle Docs</a>)</li>
+<li>Java SE 25 API — <code>java.lang.System</code>. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/System.html" title="System (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</li>
+<li>Java SE 25 API — <code>java.lang.IO</code>. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/IO.html" title="IO (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</li>
+<li>OpenJDK JEP 330 — Launch Single-File Source-Code Programs. (<a href="https://openjdk.org/jeps/330" title="JEP 330: Launch Single-File Source-Code Programs">OpenJDK</a>)</li>
+<li>OpenJDK JEP 458 — Launch Multi-File Source-Code Programs. (<a href="https://openjdk.org/jeps/458" title="JEP 458: Launch Multi-File Source-Code Programs">OpenJDK</a>)</li>
+<li>OpenJDK JEP 512 — Compact Source Files and Instance Main Methods. (<a href="https://openjdk.org/jeps/512" title="JEP 512: Compact Source Files and Instance Main Methods">OpenJDK</a>)</li>
+<li>Effective Java, Joshua Bloch.</li>
+<li>Java Concurrency in Practice, Brian Goetz.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

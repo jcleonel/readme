@@ -1,0 +1,3052 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../fundamentos-da-linguagem-java/">
+      
+      
+        <link rel="next" href="../variaveis-tipos-primitivos-operadores-conversoes/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Convenções de código em Java - README</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/css/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#convencoes-de-codigo-em-java" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../../.." title="README" class="md-header__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            README
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Convenções de código em Java
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="README" class="md-nav__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    README
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Backend
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fundamentos-da-linguagem-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convenções de código em Java
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convenções de código em Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-no-codigo-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar no código: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-funciona-em-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como funciona em Java
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Como funciona em Java">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nomes-de-pacotes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nomes de pacotes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nomes-de-classes-records-e-enums" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nomes de classes, records e enums
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nomes-de-metodos-e-variaveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nomes de métodos e variáveis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nomes-de-constantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nomes de constantes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chaves-e-blocos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chaves e blocos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#espacos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Espaços
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chaves-mesmo-em-blocos-de-uma-linha" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chaves mesmo em blocos de uma linha
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linhas-em-branco" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Linhas em branco
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo prático
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analisando-o-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analisando o código
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Analisando o código">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comparacao-com-versoes-anteriores-do-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparação com versões anteriores do Java
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-acontece-por-baixo-dos-panos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que acontece por baixo dos panos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boas práticas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#escolha-um-guia-base-e-adapte-pouco" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escolha um guia base e adapte pouco
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#automatize-formatacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automatize formatação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#padronize-nomes-por-intencao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Padronize nomes por intenção
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-var-com-moderacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use var com moderação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-chaves-mesmo-em-blocos-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use chaves mesmo em blocos simples
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evite-abreviacoes-desnecessarias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evite abreviações desnecessárias
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#organize-a-classe-de-forma-previsivel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Organize a classe de forma previsível
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#colocar-espaco-entre-nome-do-metodo-e-parenteses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Colocar espaço entre nome do método e parênteses
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usar-nome-de-metodo-comecando-com-maiuscula" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usar nome de método começando com maiúscula
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nomear-variavel-local-como-se-fosse-classe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nomear variável local como se fosse classe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#omitir-chaves-em-if-for-e-while" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Omitir chaves em if, for e while
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usar-var-quando-o-tipo-nao-esta-claro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usar var quando o tipo não está claro
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#misturar-estilos-no-mesmo-projeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Misturar estilos no mesmo projeto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transformar-convencao-em-gosto-pessoal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Transformar convenção em gosto pessoal
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decisões de engenharia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-evitar-excesso-de-regras" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando evitar excesso de regras
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternativas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternativas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impacto-em-legibilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impacto em legibilidade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impacto-em-manutencao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impacto em manutenção
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impacto-em-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impacto em performance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impacto-em-arquitetura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impacto em arquitetura
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Onde isso aparece em sistemas reais">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pull-requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pull requests
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cicd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CI/CD
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#onboarding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onboarding
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        APIs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Perguntas de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-qual-problema-real-as-convencoes-de-codigo-resolvem-em-um-time-de-desenvolvimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 - Qual problema real as convenções de código resolvem em um time de desenvolvimento?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-qual-e-a-diferenca-entre-regra-da-linguagem-java-e-convencao-de-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 - Qual é a diferença entre regra da linguagem Java e convenção de código?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-por-que-metodos-em-java-normalmente-usam-lowercamelcase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 - Por que métodos em Java normalmente usam lowerCamelCase?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-por-que-classes-normalmente-usam-uppercamelcase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 - Por que classes normalmente usam UpperCamelCase?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-por-que-constantes-usam-upper_snake_case" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 - Por que constantes usam UPPER_SNAKE_CASE?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-por-que-nao-e-recomendado-colocar-espaco-entre-o-nome-do-metodo-e-o-parentese-de-abertura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6 - Por que não é recomendado colocar espaço entre o nome do método e o parêntese de abertura?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-por-que-e-recomendado-usar-chaves-mesmo-em-blocos-if-de-uma-linha" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7 - Por que é recomendado usar chaves mesmo em blocos if de uma linha?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-o-uso-de-var-melhora-ou-piora-a-legibilidade-de-que-depende" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8 - O uso de var melhora ou piora a legibilidade? De que depende?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-convencoes-de-codigo-afetam-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9 - Convenções de código afetam performance?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-em-quais-situacoes-espacos-e-quebras-de-linha-podem-alterar-o-comportamento-real-do-programa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 - Em quais situações espaços e quebras de linha podem alterar o comportamento real do programa?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-como-um-formatter-ajuda-em-pull-requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11 - Como um formatter ajuda em pull requests?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-qual-e-o-risco-de-uma-convencao-interna-grande-demais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12 - Qual é o risco de uma convenção interna grande demais?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-como-convencoes-podem-reforcar-uma-arquitetura-em-camadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13 - Como convenções podem reforçar uma arquitetura em camadas?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-por-que-o-documento-classico-de-convencoes-da-oracle-deve-ser-lido-como-referencia-historica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14 - Por que o documento clássico de convenções da Oracle deve ser lido como referência histórica?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-como-voce-configuraria-um-projeto-java-para-evitar-discussoes-manuais-sobre-formatacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15 - Como você configuraria um projeto Java para evitar discussões manuais sobre formatação?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../variaveis-tipos-primitivos-operadores-conversoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variáveis, tipos primitivos, operadores e conversões
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fundamentos-de-string/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de String
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Spring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/api-rest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    O que é API REST?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/http/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Um pouco de HTTP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/por-que-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Por que escolher Spring?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/spring-boot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Boot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/spring-initializr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Initializr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/maven-pom/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maven e pom.xml
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-no-codigo-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar no código: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-funciona-em-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como funciona em Java
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Como funciona em Java">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nomes-de-pacotes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nomes de pacotes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nomes-de-classes-records-e-enums" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nomes de classes, records e enums
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nomes-de-metodos-e-variaveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nomes de métodos e variáveis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nomes-de-constantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nomes de constantes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chaves-e-blocos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chaves e blocos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#espacos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Espaços
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chaves-mesmo-em-blocos-de-uma-linha" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chaves mesmo em blocos de uma linha
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linhas-em-branco" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Linhas em branco
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo prático
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analisando-o-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analisando o código
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Analisando o código">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comparacao-com-versoes-anteriores-do-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparação com versões anteriores do Java
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-acontece-por-baixo-dos-panos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que acontece por baixo dos panos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boas práticas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#escolha-um-guia-base-e-adapte-pouco" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escolha um guia base e adapte pouco
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#automatize-formatacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automatize formatação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#padronize-nomes-por-intencao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Padronize nomes por intenção
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-var-com-moderacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use var com moderação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-chaves-mesmo-em-blocos-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use chaves mesmo em blocos simples
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evite-abreviacoes-desnecessarias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evite abreviações desnecessárias
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#organize-a-classe-de-forma-previsivel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Organize a classe de forma previsível
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#colocar-espaco-entre-nome-do-metodo-e-parenteses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Colocar espaço entre nome do método e parênteses
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usar-nome-de-metodo-comecando-com-maiuscula" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usar nome de método começando com maiúscula
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nomear-variavel-local-como-se-fosse-classe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nomear variável local como se fosse classe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#omitir-chaves-em-if-for-e-while" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Omitir chaves em if, for e while
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usar-var-quando-o-tipo-nao-esta-claro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usar var quando o tipo não está claro
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#misturar-estilos-no-mesmo-projeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Misturar estilos no mesmo projeto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transformar-convencao-em-gosto-pessoal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Transformar convenção em gosto pessoal
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decisões de engenharia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-evitar-excesso-de-regras" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando evitar excesso de regras
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternativas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternativas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impacto-em-legibilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impacto em legibilidade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impacto-em-manutencao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impacto em manutenção
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impacto-em-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impacto em performance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impacto-em-arquitetura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impacto em arquitetura
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Onde isso aparece em sistemas reais">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pull-requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pull requests
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cicd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CI/CD
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#onboarding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onboarding
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        APIs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Perguntas de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-qual-problema-real-as-convencoes-de-codigo-resolvem-em-um-time-de-desenvolvimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 - Qual problema real as convenções de código resolvem em um time de desenvolvimento?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-qual-e-a-diferenca-entre-regra-da-linguagem-java-e-convencao-de-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 - Qual é a diferença entre regra da linguagem Java e convenção de código?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-por-que-metodos-em-java-normalmente-usam-lowercamelcase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 - Por que métodos em Java normalmente usam lowerCamelCase?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-por-que-classes-normalmente-usam-uppercamelcase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 - Por que classes normalmente usam UpperCamelCase?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-por-que-constantes-usam-upper_snake_case" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 - Por que constantes usam UPPER_SNAKE_CASE?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-por-que-nao-e-recomendado-colocar-espaco-entre-o-nome-do-metodo-e-o-parentese-de-abertura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6 - Por que não é recomendado colocar espaço entre o nome do método e o parêntese de abertura?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-por-que-e-recomendado-usar-chaves-mesmo-em-blocos-if-de-uma-linha" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7 - Por que é recomendado usar chaves mesmo em blocos if de uma linha?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-o-uso-de-var-melhora-ou-piora-a-legibilidade-de-que-depende" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8 - O uso de var melhora ou piora a legibilidade? De que depende?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-convencoes-de-codigo-afetam-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9 - Convenções de código afetam performance?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-em-quais-situacoes-espacos-e-quebras-de-linha-podem-alterar-o-comportamento-real-do-programa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 - Em quais situações espaços e quebras de linha podem alterar o comportamento real do programa?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-como-um-formatter-ajuda-em-pull-requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11 - Como um formatter ajuda em pull requests?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-qual-e-o-risco-de-uma-convencao-interna-grande-demais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12 - Qual é o risco de uma convenção interna grande demais?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-como-convencoes-podem-reforcar-uma-arquitetura-em-camadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13 - Como convenções podem reforçar uma arquitetura em camadas?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-por-que-o-documento-classico-de-convencoes-da-oracle-deve-ser-lido-como-referencia-historica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14 - Por que o documento clássico de convenções da Oracle deve ser lido como referência histórica?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-como-voce-configuraria-um-projeto-java-para-evitar-discussoes-manuais-sobre-formatacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15 - Como você configuraria um projeto Java para evitar discussões manuais sobre formatação?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="convencoes-de-codigo-em-java">Convenções de código em Java</h1>
+<p>Em um projeto Java real, o maior custo raramente está em fazer o código compilar pela primeira vez. O custo maior aparece depois: quando outra pessoa precisa entender, revisar, alterar, corrigir, testar ou evoluir aquele código meses depois.</p>
+<p>Convenções de código resolvem um problema de comunicação entre desenvolvedores. Elas reduzem o esforço mental necessário para ler o código porque criam um padrão previsível para nomes, organização, espaçamento, quebras de linha, chaves, comentários e estrutura dos arquivos.</p>
+<p>Em uma aplicação como <code>meucatalogomusical.com</code>, por exemplo, imagine que existam classes para cadastrar bandas, músicas, gêneros musicais, álbuns, playlists e recomendações. Se cada pessoa do time escrever de um jeito, o código vira uma mistura de estilos:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">bandaService</span><span class="p">{</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">CadastrarBanda</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">Nome</span><span class="p">){...}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BandaService</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">cadastrarBanda</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">...</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Os dois exemplos podem representar uma ideia parecida, mas apenas o segundo segue uma forma mais idiomática para Java: nome de classe em <code>UpperCamelCase</code>, nome de método em <code>lowerCamelCase</code>, espaço antes da abertura do bloco e estrutura visual consistente.</p>
+<p>A Oracle mantém um documento clássico de convenções de código para Java, hoje arquivado e não mais mantido ativamente, mas que ainda registra princípios importantes: convenções ajudam na legibilidade e facilitam que engenheiros entendam código novo com mais rapidez. O próprio documento informa que sua última revisão foi em 20 de abril de 1999, então ele deve ser tratado como referência histórica, não como a única fonte moderna de estilo. (<a href="https://www.oracle.com/java/technologies/cc-java-programming-language.html" title="Code Conventions for the Java Programming Language">Oracle</a>)</p>
+<p>Os exemplos deste artigo usam Java 25 como referência, porque o JDK 25 é a versão LTS atual da plataforma Java SE, embora o JDK 26 já exista como release mais recente não-LTS. (<a href="https://www.oracle.com/java/technologies/downloads/" title="Java Downloads | Oracle">Oracle</a>)</p>
+<h2 id="antes-de-entrar-no-codigo-uma-ideia-simples">Antes de entrar no código: uma ideia simples</h2>
+<p>Convenção de código é como combinar um idioma dentro do time.</p>
+<p>Não muda a lógica do sistema, mas muda a facilidade de leitura. Da mesma forma que um texto sem pontuação fica cansativo, um código sem padrão visual obriga o leitor a gastar energia entendendo forma antes de entender comportamento.</p>
+<p>Uma boa convenção responde perguntas como:</p>
+<ul>
+<li>Classes devem usar <code>BandaService</code> ou <code>banda_service</code>?</li>
+<li>Métodos devem usar <code>cadastrarMusica</code> ou <code>CadastrarMusica</code>?</li>
+<li>Deve existir espaço entre o nome do método e os parênteses?</li>
+<li>A chave <code>{</code> deve ficar na mesma linha ou na linha seguinte?</li>
+<li>Deve-se usar <code>var</code> em todo lugar ou apenas quando o tipo for óbvio?</li>
+<li>Um <code>if</code> de uma linha pode ficar sem chaves?</li>
+<li>Qual é o tamanho máximo aceitável de uma linha?</li>
+<li>O time vai usar formatter automático ou revisar isso manualmente?</li>
+</ul>
+<p>Essas decisões parecem pequenas, mas em um projeto com centenas de classes elas afetam diretamente legibilidade, revisões de pull request, conflitos de merge e manutenção.</p>
+<h2 id="definicao-tecnica">Definição técnica</h2>
+<p>Convenções de código são regras adotadas por um projeto, time ou organização para padronizar a forma como o código-fonte é escrito.</p>
+<p>Elas podem envolver:</p>
+<ul>
+<li>nomenclatura de pacotes, classes, interfaces, métodos, variáveis e constantes;</li>
+<li>formatação de blocos, chaves, indentação e quebras de linha;</li>
+<li>organização de arquivos, imports e membros da classe;</li>
+<li>uso de comentários e documentação;</li>
+<li>escolhas de estilo para recursos modernos da linguagem, como <code>record</code>, <code>var</code>, <code>switch expression</code> e <code>text blocks</code>;</li>
+<li>automação com formatadores, linters e validações no pipeline.</li>
+</ul>
+<p>É importante separar duas coisas:</p>
+<p><strong>A especificação da linguagem Java</strong> define o que é sintaticamente válido e como o compilador deve interpretar o programa. A documentação Java SE 25 inclui, entre outras coisas, a Java Language Specification, a Java Virtual Machine Specification e a API Specification. (<a href="https://docs.oracle.com/en/java/javase/25/docs/specs/index.html" title="Java® Platform, Standard Edition &amp; Java Development Kit Specifications Version 25">Oracle Docs</a>)</p>
+<p><strong>A convenção de código</strong> define como o time prefere escrever código válido de uma maneira consistente, legível e sustentável.</p>
+<p>Por exemplo, isto pode ser válido para o compilador:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Banda</span><span class="p">{</span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">nome</span><span class="p">(){</span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Rush&quot;</span><span class="p">;}}</span>
+</code></pre></div>
+<p>Mas não é desejável em um projeto profissional porque prejudica leitura, revisão e manutenção.</p>
+<p>Uma versão mais convencional seria:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Banda</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">nome</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Rush&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>A diferença não está na capacidade do compilador entender o código. Está na capacidade de pessoas entenderem e manterem o código com segurança.</p>
+<h2 id="como-funciona-em-java">Como funciona em Java</h2>
+<p>Java tem algumas convenções amplamente adotadas pela comunidade. Elas não são todas obrigatórias pela linguagem, mas aparecem com frequência em bibliotecas, frameworks, documentação oficial, IDEs e projetos profissionais.</p>
+<h3 id="nomes-de-pacotes">Nomes de pacotes</h3>
+<p>Pacotes normalmente usam letras minúsculas, com componentes separados por ponto:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.catalogo</span><span class="p">;</span>
+</code></pre></div>
+<p>Evite:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.MeuCatalogoMusical.Catalogo</span><span class="p">;</span>
+</code></pre></div>
+<p>A convenção clássica da Oracle recomenda prefixos de pacotes em letras minúsculas e nomes únicos baseados em domínio, como <code>com</code>, <code>org</code>, <code>net</code> e equivalentes. (<a href="https://www.oracle.com/java/technologies/javase/codeconventions-namingconventions.html" title="Code Conventions for the Java Programming Language: 9. Naming Conventions">Oracle</a>)</p>
+<p>Em backend Java, isso ajuda a organizar responsabilidades:</p>
+<div class="highlight"><pre><span></span><code>com.meucatalogomusical.catalogo.domain
+com.meucatalogomusical.catalogo.application
+com.meucatalogomusical.catalogo.infrastructure
+</code></pre></div>
+<h3 id="nomes-de-classes-records-e-enums">Nomes de classes, records e enums</h3>
+<p>Classes, records e enums normalmente usam <code>UpperCamelCase</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CatalogoMusicalService</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">MusicaResumo</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">titulo</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">banda</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">GeneroMusical</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">METAL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">HARD_ROCK</span><span class="p">,</span>
+<span class="w">    </span><span class="n">ROCK_PROGRESSIVO</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>A convenção clássica da Oracle recomenda nomes de classes como substantivos, em mixed case, com a primeira letra de cada palavra interna em maiúscula, evitando abreviações desnecessárias. (<a href="https://www.oracle.com/java/technologies/javase/codeconventions-namingconventions.html" title="Code Conventions for the Java Programming Language: 9. Naming Conventions">Oracle</a>)</p>
+<h3 id="nomes-de-metodos-e-variaveis">Nomes de métodos e variáveis</h3>
+<p>Métodos e variáveis normalmente usam <code>lowerCamelCase</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">cadastrarBanda</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="n">quantidadeDeMusicas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span>
+</code></pre></div>
+<p>Evite nomes vagos:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span>
+<span class="kd">var</span><span class="w"> </span><span class="n">dados</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">buscar</span><span class="p">();</span>
+</code></pre></div>
+<p>Prefira nomes que expressem intenção:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="n">quantidadeDeMusicas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span>
+<span class="kd">var</span><span class="w"> </span><span class="n">bandasAtivas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">buscarBandasAtivas</span><span class="p">();</span>
+</code></pre></div>
+<p>O uso de <code>var</code> existe desde Java 10 pela JEP 286 e permite inferência de tipo para variáveis locais com inicializador. A própria JEP restringe o recurso a variáveis locais, índices de <code>for</code> e variáveis locais em loops, não permitindo seu uso em campos, parâmetros ou retornos de métodos. (<a href="https://openjdk.org/jeps/286" title="JEP 286: Local-Variable Type Inference">OpenJDK</a>)</p>
+<h3 id="nomes-de-constantes">Nomes de constantes</h3>
+<p>Constantes normalmente usam <code>UPPER_SNAKE_CASE</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">LIMITE_PADRAO_DE_RESULTADOS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
+</code></pre></div>
+<p>Esse padrão ajuda o leitor a reconhecer rapidamente que o valor é estático, final e tratado como constante.</p>
+<h3 id="chaves-e-blocos">Chaves e blocos</h3>
+<p>Em Java, o estilo mais comum é abrir a chave <code>{</code> na mesma linha da declaração do método, classe, construtor, <code>if</code>, <code>for</code>, <code>while</code>, <code>switch</code> ou bloco equivalente:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">cadastrarMusica</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">titulo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">validarTitulo</span><span class="p">(</span><span class="n">titulo</span><span class="p">);</span>
+<span class="w">    </span><span class="n">salvarMusica</span><span class="p">(</span><span class="n">titulo</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>O Google Java Style Guide adota o estilo em que não há quebra de linha antes da chave de abertura, há quebra depois da chave de abertura e há quebra antes da chave de fechamento. (<a href="https://google.github.io/styleguide/javaguide.html?hl=zh-CN" title="Google Java Style Guide">Google GitHub</a>)</p>
+<p>Evite:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">cadastrarMusica</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">titulo</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">validarTitulo</span><span class="p">(</span><span class="n">titulo</span><span class="p">);</span>
+<span class="w">    </span><span class="n">salvarMusica</span><span class="p">(</span><span class="n">titulo</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse segundo estilo pode existir em outras linguagens ou bases antigas, mas em Java moderno é menos comum.</p>
+<h3 id="espacos">Espaços</h3>
+<p>Uma regra importante: não se coloca espaço entre o nome do método e o parêntese de abertura.</p>
+<p>Correto:</p>
+<div class="highlight"><pre><span></span><code><span class="n">cadastrarMusica</span><span class="p">(</span><span class="s">&quot;Rebirth&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>Evite:</p>
+<div class="highlight"><pre><span></span><code><span class="n">cadastrarMusica</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;Rebirth&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>A convenção clássica da Oracle recomenda não usar espaço entre o nome do método e o parêntese de abertura, justamente para diferenciar visualmente chamadas de método de palavras-chave como <code>if</code>, <code>while</code> e <code>for</code>. (<a href="https://www.oracle.com/java/technologies/javase/codeconventions-whitespace.html" title="Code Conventions for the Java Programming Language: 8. White Space">Oracle</a>)</p>
+<p>Por outro lado, estruturas de controle costumam ter espaço entre a palavra-chave e o parêntese:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">bandaAtiva</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">publicarNoCatalogo</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Também é comum usar espaços ao redor de operadores binários:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">quantidadeDeAlbuns</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">quantidadeDeSingles</span><span class="p">;</span>
+</code></pre></div>
+<p>A convenção da Oracle também recomenda espaços ao redor de operadores binários, exceto o operador de acesso <code>.</code>. (<a href="https://www.oracle.com/java/technologies/javase/codeconventions-whitespace.html" title="Code Conventions for the Java Programming Language: 8. White Space">Oracle</a>)</p>
+<h3 id="chaves-mesmo-em-blocos-de-uma-linha">Chaves mesmo em blocos de uma linha</h3>
+<p>Prefira sempre usar chaves em estruturas de controle, mesmo quando houver apenas uma instrução:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">bandaAtiva</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">publicarNoCatalogo</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Evite:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">bandaAtiva</span><span class="p">)</span>
+<span class="w">    </span><span class="n">publicarNoCatalogo</span><span class="p">();</span>
+</code></pre></div>
+<p>O problema do segundo estilo aparece quando alguém adiciona uma segunda linha depois:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">bandaAtiva</span><span class="p">)</span>
+<span class="w">    </span><span class="n">publicarNoCatalogo</span><span class="p">();</span>
+<span class="w">    </span><span class="n">enviarNotificacao</span><span class="p">();</span>
+</code></pre></div>
+<p>Visualmente pode parecer que as duas chamadas estão dentro do <code>if</code>, mas apenas a primeira está. A convenção clássica da Oracle recomenda chaves mesmo para instruções únicas em estruturas de controle, reduzindo o risco de bugs ao adicionar novas instruções depois. (<a href="https://www.oracle.com/java/technologies/javase/codeconventions-statements.html" title="Code Conventions for the Java Programming Language: 7. Statements">Oracle</a>)</p>
+<h3 id="linhas-em-branco">Linhas em branco</h3>
+<p>Linhas em branco devem separar ideias, não decorar o código aleatoriamente.</p>
+<p>Bom uso:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">cadastrarBanda</span><span class="p">(</span><span class="n">NovaBanda</span><span class="w"> </span><span class="n">novaBanda</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">validarNome</span><span class="p">(</span><span class="n">novaBanda</span><span class="p">.</span><span class="na">nome</span><span class="p">());</span>
+<span class="w">    </span><span class="n">validarGenero</span><span class="p">(</span><span class="n">novaBanda</span><span class="p">.</span><span class="na">genero</span><span class="p">());</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Banda</span><span class="p">(</span><span class="n">novaBanda</span><span class="p">.</span><span class="na">nome</span><span class="p">(),</span><span class="w"> </span><span class="n">novaBanda</span><span class="p">.</span><span class="na">genero</span><span class="p">());</span>
+
+<span class="w">    </span><span class="n">bandaRepository</span><span class="p">.</span><span class="na">salvar</span><span class="p">(</span><span class="n">banda</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Aqui existem três blocos lógicos:</p>
+<ol>
+<li>validação;</li>
+<li>criação do objeto;</li>
+<li>persistência.</li>
+</ol>
+<p>A convenção clássica da Oracle recomenda linhas em branco para separar seções logicamente relacionadas do código, inclusive entre métodos e entre seções lógicas dentro de um método. (<a href="https://www.oracle.com/java/technologies/javase/codeconventions-whitespace.html" title="Code Conventions for the Java Programming Language: 8. White Space">Oracle</a>)</p>
+<h2 id="exemplo-pratico">Exemplo prático</h2>
+<p>A seguir, um exemplo simples usando Java 25 para uma parte da aplicação fictícia <code>meucatalogomusical.com</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.catalogo.application</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Objects</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CatalogoMusicalService</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">LIMITE_PADRAO_DE_RESULTADOS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">BandaRepository</span><span class="w"> </span><span class="n">bandaRepository</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">CatalogoMusicalService</span><span class="p">(</span><span class="n">BandaRepository</span><span class="w"> </span><span class="n">bandaRepository</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">bandaRepository</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">bandaRepository</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">BandaResumo</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">listarBandasPorGenero</span><span class="p">(</span><span class="n">GeneroMusical</span><span class="w"> </span><span class="n">genero</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">genero</span><span class="p">);</span>
+
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="n">limite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LIMITE_PADRAO_DE_RESULTADOS</span><span class="p">;</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="n">descricaoGenero</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">descreverGenero</span><span class="p">(</span><span class="n">genero</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">bandaRepository</span><span class="p">.</span><span class="na">buscarPorGenero</span><span class="p">(</span><span class="n">descricaoGenero</span><span class="p">,</span><span class="w"> </span><span class="n">limite</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">descreverGenero</span><span class="p">(</span><span class="n">GeneroMusical</span><span class="w"> </span><span class="n">genero</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">genero</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">METAL</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Metal&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">HARD_ROCK</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Hard Rock&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">ROCK_PROGRESSIVO</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Rock Progressivo&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.catalogo.application</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">GeneroMusical</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">METAL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">HARD_ROCK</span><span class="p">,</span>
+<span class="w">    </span><span class="n">ROCK_PROGRESSIVO</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.catalogo.application</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">BandaResumo</span><span class="p">(</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">,</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">genero</span><span class="p">,</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">quantidadeDeMusicas</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.catalogo.application</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">BandaRepository</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">BandaResumo</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">buscarPorGenero</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">genero</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">limite</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="analisando-o-codigo">Analisando o código</h2>
+<p>O pacote segue uma estrutura em letras minúsculas:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.catalogo.application</span><span class="p">;</span>
+</code></pre></div>
+<p>Isso comunica que a classe pertence à camada de aplicação do contexto de catálogo musical.</p>
+<p>A classe usa <code>UpperCamelCase</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CatalogoMusicalService</span><span class="w"> </span><span class="p">{</span>
+</code></pre></div>
+<p>O nome sugere responsabilidade de serviço de aplicação para operações do catálogo musical. Não é um nome genérico como <code>Service</code>, <code>Manager</code> ou <code>Processor</code>.</p>
+<p>A constante usa <code>UPPER_SNAKE_CASE</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">LIMITE_PADRAO_DE_RESULTADOS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
+</code></pre></div>
+<p>Isso deixa claro que o valor representa uma constante interna da classe.</p>
+<p>O campo usa <code>lowerCamelCase</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">BandaRepository</span><span class="w"> </span><span class="n">bandaRepository</span><span class="p">;</span>
+</code></pre></div>
+<p>O nome indica claramente a dependência usada para buscar bandas.</p>
+<p>O construtor segue a mesma linha da abertura de chave:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="nf">CatalogoMusicalService</span><span class="p">(</span><span class="n">BandaRepository</span><span class="w"> </span><span class="n">bandaRepository</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</code></pre></div>
+<p>Não há espaço entre o nome do construtor e <code>(</code>, mas existe um espaço entre <code>)</code> e <code>{</code>.</p>
+<p>O método público também usa <code>lowerCamelCase</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">BandaResumo</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">listarBandasPorGenero</span><span class="p">(</span><span class="n">GeneroMusical</span><span class="w"> </span><span class="n">genero</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</code></pre></div>
+<p>O nome começa com verbo e comunica a ação executada.</p>
+<p>O uso de <code>Objects.requireNonNull</code> torna explícita uma pré-condição:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">genero</span><span class="p">);</span>
+</code></pre></div>
+<p>Em um sistema real, talvez essa validação fosse substituída por uma exceção de domínio mais descritiva, dependendo da arquitetura.</p>
+<p>O uso de <code>var</code> aparece onde o tipo é fácil de inferir pelo lado direito:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="n">limite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LIMITE_PADRAO_DE_RESULTADOS</span><span class="p">;</span>
+<span class="kd">var</span><span class="w"> </span><span class="n">descricaoGenero</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">descreverGenero</span><span class="p">(</span><span class="n">genero</span><span class="p">);</span>
+</code></pre></div>
+<p>Apesar de <code>var</code> reduzir repetição, ele deve ser usado com cuidado. Se o lado direito não deixar claro o tipo ou a intenção, o código fica menos legível.</p>
+<p>O <code>switch</code> expression é um recurso moderno estabilizado no Java 14 pela JEP 361. Ele permite usar <code>switch</code> como expressão, com <code>case -&gt;</code>, evitando o comportamento tradicional de <code>fall through</code> quando se usa esse formato. (<a href="https://openjdk.org/jeps/361" title="JEP 361: Switch Expressions">OpenJDK</a>)</p>
+<div class="highlight"><pre><span></span><code><span class="k">return</span><span class="w"> </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">genero</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">METAL</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Metal&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">HARD_ROCK</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Hard Rock&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">ROCK_PROGRESSIVO</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Rock Progressivo&quot;</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div>
+<p>O <code>record</code> <code>BandaResumo</code> é adequado para transportar dados imutáveis de resumo:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">BandaResumo</span><span class="p">(</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">,</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">genero</span><span class="p">,</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">quantidadeDeMusicas</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Records foram finalizados no Java 16 pela JEP 395. (<a href="https://openjdk.org/jeps/395" title="JEP 395: Records">OpenJDK</a>)</p>
+<h3 id="comparacao-com-versoes-anteriores-do-java">Comparação com versões anteriores do Java</h3>
+<p>As convenções principais de nomes, chaves, espaços e organização existem há muito tempo e não dependem do Java 25. O que mudou com as versões mais recentes foi o conjunto de construções que também precisam de estilo consistente.</p>
+<p>Antes do Java 10, não existia <code>var</code> para variáveis locais. O código geralmente ficaria assim:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">limite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LIMITE_PADRAO_DE_RESULTADOS</span><span class="p">;</span>
+<span class="n">String</span><span class="w"> </span><span class="n">descricaoGenero</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">descreverGenero</span><span class="p">(</span><span class="n">genero</span><span class="p">);</span>
+</code></pre></div>
+<p>A partir do Java 10, com a JEP 286, isso pode ser escrito assim:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="n">limite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LIMITE_PADRAO_DE_RESULTADOS</span><span class="p">;</span>
+<span class="kd">var</span><span class="w"> </span><span class="n">descricaoGenero</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">descreverGenero</span><span class="p">(</span><span class="n">genero</span><span class="p">);</span>
+</code></pre></div>
+<p>Antes do Java 14, o <code>switch</code> era usado principalmente como statement:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">descreverGenero</span><span class="p">(</span><span class="n">GeneroMusical</span><span class="w"> </span><span class="n">genero</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">genero</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">METAL</span><span class="p">:</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Metal&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">HARD_ROCK</span><span class="p">:</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Hard Rock&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">ROCK_PROGRESSIVO</span><span class="p">:</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Rock Progressivo&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">default</span><span class="p">:</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Gênero inválido: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">genero</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>A partir do Java 14, com a JEP 361, o <code>switch</code> expression permite uma escrita mais direta:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">descreverGenero</span><span class="p">(</span><span class="n">GeneroMusical</span><span class="w"> </span><span class="n">genero</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">genero</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">METAL</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Metal&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">HARD_ROCK</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Hard Rock&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">ROCK_PROGRESSIVO</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Rock Progressivo&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Antes do Java 16, um DTO simples normalmente exigia classe com campos, construtor, getters, <code>equals</code>, <code>hashCode</code> e <code>toString</code>. A partir do Java 16, com records, esse tipo de estrutura pode ser representado de forma mais compacta quando a intenção for modelar dados transparentes e imutáveis. (<a href="https://openjdk.org/jeps/395" title="JEP 395: Records">OpenJDK</a>)</p>
+<p>Antes do Java 15, strings multilinha eram mais verbosas. A JEP 378 adicionou text blocks como literais multilinha, reduzindo escapes e concatenações em casos como JSON, SQL e HTML. (<a href="https://openjdk.org/jeps/378" title="JEP 378: Text Blocks">OpenJDK</a>)</p>
+<p>Exemplo com text block:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="n">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        {</span>
+<span class="s">          &quot;banda&quot;: &quot;Iron Maiden&quot;,</span>
+<span class="s">          &quot;genero&quot;: &quot;Heavy metal&quot;,</span>
+<span class="s">          &quot;musicasCadastradas&quot;: 42</span>
+<span class="s">        }</span>
+<span class="s">        &quot;&quot;&quot;</span><span class="p">;</span>
+</code></pre></div>
+<p>Nesse caso, a convenção precisa definir como alinhar o conteúdo do text block para não prejudicar leitura nem gerar surpresas em testes que comparam strings.</p>
+<h2 id="o-que-acontece-por-baixo-dos-panos">O que acontece por baixo dos panos</h2>
+<p>O compilador Java não se importa com a maior parte da formatação visual usada por humanos.</p>
+<p>A Java Language Specification define que o código-fonte passa por etapas léxicas até ser reduzido a elementos como espaços em branco, comentários e tokens. Depois, espaços em branco e comentários são descartados, ficando os tokens que compõem a gramática sintática da linguagem. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-3.html" title="Chapter 3. Lexical Structure">Oracle Docs</a>)</p>
+<p>Por isso, para o compilador, estas duas versões podem ser equivalentes:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Banda</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">nome</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Rush&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Banda</span><span class="p">{</span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">nome</span><span class="p">(){</span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Rush&quot;</span><span class="p">;}}</span>
+</code></pre></div>
+<p>Mas para humanos elas não são equivalentes. A primeira comunica estrutura. A segunda exige esforço desnecessário.</p>
+<p>Também é importante entender que espaços podem ser necessários para separar tokens. A JLS mostra que <code>staticvoid</code> seria lido como um único identificador, enquanto <code>static void</code> é lido como duas palavras-chave separadas por espaço. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-3.html" title="Chapter 3. Lexical Structure">Oracle Docs</a>)</p>
+<p>Identificadores em Java também têm regras próprias. A JLS define identificador como uma sequência de letras e dígitos Java, em que o primeiro caractere precisa ser uma letra Java, e informa que palavras reservadas não podem ser usadas como identificadores comuns. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-3.html" title="Chapter 3. Lexical Structure">Oracle Docs</a>)</p>
+<p>Isso significa que convenção não substitui a regra da linguagem. Por exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="n">class</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Metallica&quot;</span><span class="p">;</span>
+</code></pre></div>
+<p>Esse código não compila porque <code>class</code> é palavra reservada.</p>
+<p>Já isto pode compilar, mas viola convenções:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="n">NomeDaBanda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Metallica&quot;</span><span class="p">;</span>
+</code></pre></div>
+<p>O problema aqui não é sintático. O problema é de estilo: variáveis locais em Java devem usar <code>lowerCamelCase</code>.</p>
+<p>Text blocks merecem atenção especial. Ao contrário de espaços comuns fora de strings, a formatação dentro de um text block participa de um processamento específico de compilação. A JEP 378 descreve que o compilador normaliza terminadores de linha, remove espaços incidentais e interpreta escapes; depois, o conteúdo é registrado no class file como uma string constante, sem diferenciar se veio de text block ou string literal tradicional. (<a href="https://openjdk.org/jeps/378" title="JEP 378: Text Blocks">OpenJDK</a>)</p>
+<p>Portanto, a maior parte da convenção não muda performance nem bytecode. Ela muda legibilidade. Mas em strings, text blocks e literais, espaços e quebras de linha podem alterar o valor real produzido.</p>
+<h2 id="boas-praticas">Boas práticas</h2>
+<h3 id="escolha-um-guia-base-e-adapte-pouco">Escolha um guia base e adapte pouco</h3>
+<p>O time pode usar o Google Java Style Guide, as convenções clássicas da Oracle, ou uma convenção interna baseada nelas. O mais importante é não transformar cada pull request em uma discussão subjetiva sobre estilo.</p>
+<p>O Google Java Style Guide define regras modernas para formatação, incluindo estilo de chaves, indentação de <code>switch</code> e tratamento de construções novas da linguagem. (<a href="https://google.github.io/styleguide/javaguide.html?hl=zh-CN" title="Google Java Style Guide">Google GitHub</a>)</p>
+<h3 id="automatize-formatacao">Automatize formatação</h3>
+<p>Não dependa apenas de revisão humana para corrigir espaço, chave, import e indentação.</p>
+<p>Use ferramentas como:</p>
+<div class="highlight"><pre><span></span><code>.editorconfig
+google-java-format
+Checkstyle
+Spotless
+configurações compartilhadas da IDE
+validação no pipeline
+</code></pre></div>
+<p>EditorConfig ajuda a manter estilos consistentes entre diferentes editores e IDEs por meio de um arquivo versionado no projeto. (<a href="https://editorconfig.org/index" title="EditorConfig">editorconfig.org</a>)</p>
+<p>O <code>google-java-format</code> reformata código Java para seguir o Google Java Style e informa que sua falta de configurabilidade é uma decisão deliberada para unificar o formato. (<a href="https://github.com/google/google-java-format" title="GitHub - google/google-java-format: Reformats Java source code to comply with Google Java Style. · GitHub">GitHub</a>)</p>
+<h3 id="padronize-nomes-por-intencao">Padronize nomes por intenção</h3>
+<p>Prefira nomes que revelem o papel do elemento no domínio:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="n">bandasAtivas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">buscarBandasAtivas</span><span class="p">();</span>
+<span class="kd">var</span><span class="w"> </span><span class="n">musicaMaisTocada</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ranking</span><span class="p">.</span><span class="na">primeiraColocada</span><span class="p">();</span>
+<span class="kd">var</span><span class="w"> </span><span class="n">generoPrincipal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">banda</span><span class="p">.</span><span class="na">generoPrincipal</span><span class="p">();</span>
+</code></pre></div>
+<p>Evite nomes que dependem de contexto mental:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="n">lista</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">buscar</span><span class="p">();</span>
+<span class="kd">var</span><span class="w"> </span><span class="n">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ranking</span><span class="p">.</span><span class="na">primeiraColocada</span><span class="p">();</span>
+<span class="kd">var</span><span class="w"> </span><span class="n">tipo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">banda</span><span class="p">.</span><span class="na">generoPrincipal</span><span class="p">();</span>
+</code></pre></div>
+<h3 id="use-var-com-moderacao">Use <code>var</code> com moderação</h3>
+<p>Bom uso:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="n">bandas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bandaRepository</span><span class="p">.</span><span class="na">buscarPorGenero</span><span class="p">(</span><span class="s">&quot;Metal&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">);</span>
+</code></pre></div>
+<p>Uso ruim:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">processar</span><span class="p">(</span><span class="n">dados</span><span class="p">);</span>
+</code></pre></div>
+<p>No segundo caso, o tipo e a intenção são vagos. O problema não é o <code>var</code> em si, mas a combinação de nome genérico com chamada genérica.</p>
+<h3 id="use-chaves-mesmo-em-blocos-simples">Use chaves mesmo em blocos simples</h3>
+<p>Prefira:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">catalogoEstaPublicado</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">atualizarIndiceDeBusca</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Evite:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">catalogoEstaPublicado</span><span class="p">)</span>
+<span class="w">    </span><span class="n">atualizarIndiceDeBusca</span><span class="p">();</span>
+</code></pre></div>
+<p>Essa prática reduz bugs em alterações futuras.</p>
+<h3 id="evite-abreviacoes-desnecessarias">Evite abreviações desnecessárias</h3>
+<p>Prefira:</p>
+<div class="highlight"><pre><span></span><code><span class="n">quantidadeDeMusicas</span>
+</code></pre></div>
+<p>Em vez de:</p>
+<div class="highlight"><pre><span></span><code><span class="n">qtdMsc</span>
+</code></pre></div>
+<p>Abreviações economizam poucos caracteres e aumentam o custo de leitura.</p>
+<h3 id="organize-a-classe-de-forma-previsivel">Organize a classe de forma previsível</h3>
+<p>Uma ordem comum é:</p>
+<div class="highlight"><pre><span></span><code>constantes
+campos
+construtores
+métodos públicos
+métodos privados auxiliares
+</code></pre></div>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">PlaylistService</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">TAMANHO_MINIMO_DA_PLAYLIST</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">MusicaRepository</span><span class="w"> </span><span class="n">musicaRepository</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">PlaylistService</span><span class="p">(</span><span class="n">MusicaRepository</span><span class="w"> </span><span class="n">musicaRepository</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">musicaRepository</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">musicaRepository</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Playlist</span><span class="w"> </span><span class="nf">criarPlaylist</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="n">musicasIds</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">validarQuantidadeDeMusicas</span><span class="p">(</span><span class="n">musicasIds</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">montarPlaylist</span><span class="p">(</span><span class="n">nome</span><span class="p">,</span><span class="w"> </span><span class="n">musicasIds</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">validarQuantidadeDeMusicas</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="n">musicasIds</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">musicasIds</span><span class="p">.</span><span class="na">size</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">TAMANHO_MINIMO_DA_PLAYLIST</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;A playlist precisa ter pelo menos 3 músicas.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Playlist</span><span class="w"> </span><span class="nf">montarPlaylist</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="n">musicasIds</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="n">musicas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">musicaRepository</span><span class="p">.</span><span class="na">buscarPorIds</span><span class="p">(</span><span class="n">musicasIds</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Playlist</span><span class="p">(</span><span class="n">nome</span><span class="p">,</span><span class="w"> </span><span class="n">musicas</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="erros-comuns">Erros comuns</h2>
+<h3 id="colocar-espaco-entre-nome-do-metodo-e-parenteses">Colocar espaço entre nome do método e parênteses</h3>
+<p>Evite:</p>
+<div class="highlight"><pre><span></span><code><span class="n">cadastrarBanda</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;Rush&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>Prefira:</p>
+<div class="highlight"><pre><span></span><code><span class="n">cadastrarBanda</span><span class="p">(</span><span class="s">&quot;Rush&quot;</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="usar-nome-de-metodo-comecando-com-maiuscula">Usar nome de método começando com maiúscula</h3>
+<p>Evite:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">CadastrarBanda</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Prefira:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">cadastrarBanda</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="nomear-variavel-local-como-se-fosse-classe">Nomear variável local como se fosse classe</h3>
+<p>Evite:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="n">Banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">buscarBanda</span><span class="p">();</span>
+</code></pre></div>
+<p>Prefira:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">buscarBanda</span><span class="p">();</span>
+</code></pre></div>
+<h3 id="omitir-chaves-em-if-for-e-while">Omitir chaves em <code>if</code>, <code>for</code> e <code>while</code></h3>
+<p>Evite:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">bandaAtiva</span><span class="p">)</span>
+<span class="w">    </span><span class="n">publicarBanda</span><span class="p">();</span>
+</code></pre></div>
+<p>Prefira:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">bandaAtiva</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">publicarBanda</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="usar-var-quando-o-tipo-nao-esta-claro">Usar <code>var</code> quando o tipo não está claro</h3>
+<p>Evite:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="n">resposta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cliente</span><span class="p">.</span><span class="na">executar</span><span class="p">(</span><span class="n">requisicao</span><span class="p">);</span>
+</code></pre></div>
+<p>Prefira uma das opções abaixo, dependendo do contexto:</p>
+<div class="highlight"><pre><span></span><code><span class="n">RespostaCatalogo</span><span class="w"> </span><span class="n">resposta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cliente</span><span class="p">.</span><span class="na">executar</span><span class="p">(</span><span class="n">requisicao</span><span class="p">);</span>
+</code></pre></div>
+<p>Ou melhore o nome:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="n">respostaDoCatalogo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cliente</span><span class="p">.</span><span class="na">executar</span><span class="p">(</span><span class="n">requisicao</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="misturar-estilos-no-mesmo-projeto">Misturar estilos no mesmo projeto</h3>
+<p>Evite uma classe assim:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BandaService</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">cadastrar_banda</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">Nome</span><span class="p">){</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">Nome</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span>
+<span class="w">            </span><span class="n">salvar</span><span class="p">(</span><span class="n">Nome</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Prefira consistência:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BandaService</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">cadastrarBanda</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nome</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">salvar</span><span class="p">(</span><span class="n">nome</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="transformar-convencao-em-gosto-pessoal">Transformar convenção em gosto pessoal</h3>
+<p>Um erro comum em times é discutir estilo como preferência individual.</p>
+<p>A pergunta correta não é:</p>
+<blockquote>
+<p>Eu gosto mais desse jeito?</p>
+</blockquote>
+<p>A pergunta correta é:</p>
+<blockquote>
+<p>Qual padrão reduz custo de manutenção para o time?</p>
+</blockquote>
+<h2 id="decisoes-de-engenharia">Decisões de engenharia</h2>
+<h3 id="quando-usar">Quando usar</h3>
+<p>Use convenções de código sempre que houver código mantido por mais de uma pessoa, revisado em pull requests, versionado em Git ou executado em produção.</p>
+<p>Em sistemas backend, convenções são especialmente importantes porque o código atravessa várias camadas:</p>
+<div class="highlight"><pre><span></span><code>Controller
+Use Case
+Service
+Domain Model
+Repository
+Client HTTP
+Mensageria
+Testes
+Configuração
+</code></pre></div>
+<p>Sem padrão, cada camada pode parecer escrita por um time diferente.</p>
+<h3 id="quando-evitar-excesso-de-regras">Quando evitar excesso de regras</h3>
+<p>Evite criar uma convenção interna grande demais, cheia de exceções subjetivas.</p>
+<p>Regras demais geram custo de adoção e discussões desnecessárias. O ideal é combinar um guia base, automatizar o que for mecânico e documentar apenas decisões específicas do projeto.</p>
+<p>Evite, por exemplo, discutir manualmente em pull request:</p>
+<div class="highlight"><pre><span></span><code>faltou espaço
+quebrou linha errado
+import fora de ordem
+chave deveria subir
+</code></pre></div>
+<p>Esses pontos devem ser resolvidos por formatter ou linter.</p>
+<h3 id="alternativas">Alternativas</h3>
+<p>As principais alternativas são:</p>
+<table>
+<thead>
+<tr>
+<th>Abordagem</th>
+<th>Vantagem</th>
+<th>Risco</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sem convenção formal</td>
+<td>Menos configuração inicial</td>
+<td>Código inconsistente e revisões subjetivas</td>
+</tr>
+<tr>
+<td>Convenção interna manual</td>
+<td>Personalização total</td>
+<td>Alto custo de manutenção</td>
+</tr>
+<tr>
+<td>Guia conhecido, como Google Java Style</td>
+<td>Fácil adoção e boa documentação</td>
+<td>Pode não refletir todas as preferências do time</td>
+</tr>
+<tr>
+<td>Formatter opinativo</td>
+<td>Reduz discussão humana</td>
+<td>Menos flexibilidade</td>
+</tr>
+<tr>
+<td>Linter no pipeline</td>
+<td>Impede inconsistência antes do merge</td>
+<td>Pode incomodar se mal configurado</td>
+</tr>
+</tbody>
+</table>
+<h3 id="impacto-em-legibilidade">Impacto em legibilidade</h3>
+<p>Convenções aumentam previsibilidade. O leitor reconhece rapidamente o que é classe, método, constante, variável local, pacote e bloco lógico.</p>
+<h3 id="impacto-em-manutencao">Impacto em manutenção</h3>
+<p>Código padronizado reduz tempo de onboarding, facilita reviews, diminui ruído em diffs e ajuda a encontrar problemas reais em vez de discutir formatação.</p>
+<h3 id="impacto-em-performance">Impacto em performance</h3>
+<p>Na maior parte dos casos, convenções de formatação não afetam performance. Chaves, indentação, quebras de linha e espaços fora de literais são relevantes para leitura humana, não para execução.</p>
+<p>A exceção está em conteúdo textual: strings, text blocks, SQL, JSON e templates. Nesses casos, espaços e quebras podem fazer parte do valor final.</p>
+<h3 id="impacto-em-arquitetura">Impacto em arquitetura</h3>
+<p>Convenções também reforçam arquitetura.</p>
+<p>Em um projeto com Clean Architecture, por exemplo, nomes consistentes ajudam a deixar claro o papel de cada classe:</p>
+<div class="highlight"><pre><span></span><code>CadastrarBandaUseCase
+BandaRepository
+BandaGateway
+BandaController
+BandaResponse
+NovaBandaRequest
+</code></pre></div>
+<p>A convenção não cria a arquitetura, mas torna a arquitetura mais visível.</p>
+<h2 id="onde-isso-aparece-em-sistemas-reais">Onde isso aparece em sistemas reais</h2>
+<h3 id="pull-requests">Pull requests</h3>
+<p>Em PRs, convenções reduzem comentários superficiais.</p>
+<p>Sem padrão, a revisão vira:</p>
+<div class="highlight"><pre><span></span><code>Ajustar indentação.
+Renomear variável.
+Subir chave.
+Remover espaço.
+Organizar imports.
+</code></pre></div>
+<p>Com padrão automatizado, a revisão foca em:</p>
+<div class="highlight"><pre><span></span><code>Essa regra de negócio está correta?
+Esse método pertence a essa classe?
+Essa exceção faz sentido?
+Esse teste cobre o cenário crítico?
+Essa query escala?
+</code></pre></div>
+<h3 id="cicd">CI/CD</h3>
+<p>Pipelines podem bloquear merge quando o código viola estilo mínimo.</p>
+<p>Exemplo de etapas:</p>
+<div class="highlight"><pre><span></span><code>compile
+test
+formatCheck
+checkstyle
+spotbugs
+jacocoTestReport
+build
+</code></pre></div>
+<h3 id="onboarding">Onboarding</h3>
+<p>Um novo desenvolvedor entende mais rápido o projeto quando nomes e estrutura são previsíveis.</p>
+<p>Ao ver:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CadastrarMusicaUseCase</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Ele entende uma intenção.</p>
+<p>Ao ver:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ProcMus</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Ele precisa investigar.</p>
+<h3 id="testes">Testes</h3>
+<p>Convenções também aparecem em testes:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nc">CatalogoMusicalServiceTest</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">deveListarBandasPorGenero</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">...</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Nomes de teste claros reduzem a necessidade de comentários.</p>
+<h3 id="apis">APIs</h3>
+<p>Convenções internas de Java também influenciam contratos externos.</p>
+<p>Uma classe Java pode usar:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nomeDaBanda</span><span class="p">;</span>
+</code></pre></div>
+<p>Mas a API JSON pode expor:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;nomeDaBanda&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Black Sabbath&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Ou, dependendo da convenção da API:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;nome_da_banda&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Black Sabbath&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>O importante é separar convenção interna da linguagem Java e convenção externa do contrato HTTP/JSON.</p>
+<p>Segue uma versão pronta para substituir a seção <strong>Perguntas de revisão</strong> no artigo:</p>
+<h2 id="perguntas-de-revisao">Perguntas de revisão</h2>
+<h3 id="1-qual-problema-real-as-convencoes-de-codigo-resolvem-em-um-time-de-desenvolvimento">1 - Qual problema real as convenções de código resolvem em um time de desenvolvimento?</h3>
+<p>Resposta:
+Elas reduzem o custo de leitura, revisão e manutenção do código. Em um time, o código raramente é lido apenas por quem escreveu. Convenções criam um padrão visual e estrutural que ajuda qualquer pessoa a entender classes, métodos, variáveis, constantes e blocos de código com menos esforço. A própria documentação clássica da Oracle destaca que convenções melhoram a legibilidade e ajudam engenheiros a entender código novo com mais rapidez.</p>
+<h3 id="2-qual-e-a-diferenca-entre-regra-da-linguagem-java-e-convencao-de-codigo">2 - Qual é a diferença entre regra da linguagem Java e convenção de código?</h3>
+<p>Resposta:
+Regra da linguagem é aquilo que o compilador exige para o programa ser válido. Convenção de código é aquilo que o time adota para o código ficar legível e consistente. Por exemplo, <code>public class Banda{}</code> pode compilar, mas não é uma boa forma de escrever em um projeto profissional. A Java Language Specification define a estrutura lexical e sintática da linguagem, enquanto guias de estilo tratam de legibilidade, organização e padronização.</p>
+<h3 id="3-por-que-metodos-em-java-normalmente-usam-lowercamelcase">3 - Por que métodos em Java normalmente usam <code>lowerCamelCase</code>?</h3>
+<p>Resposta:
+Porque esse padrão diferencia métodos de classes e constantes, além de tornar o código mais previsível para quem lê. Em Java, métodos normalmente representam ações, então nomes como <code>cadastrarBanda</code>, <code>buscarMusicasPorGenero</code> e <code>atualizarCatalogo</code> comunicam comportamento. O Google Java Style Guide define que nomes de métodos devem ser escritos em <code>lowerCamelCase</code> e normalmente são verbos ou frases verbais.</p>
+<h3 id="4-por-que-classes-normalmente-usam-uppercamelcase">4 - Por que classes normalmente usam <code>UpperCamelCase</code>?</h3>
+<p>Resposta:
+Porque classes representam tipos, conceitos ou entidades do sistema. Usar <code>UpperCamelCase</code>, como <code>BandaService</code>, <code>MusicaRepository</code> ou <code>CatalogoMusicalController</code>, ajuda o leitor a reconhecer rapidamente que aquele identificador representa um tipo. A convenção clássica da Oracle recomenda nomes de classes como substantivos em mixed case, com a primeira letra de cada palavra em maiúscula.</p>
+<h3 id="5-por-que-constantes-usam-upper_snake_case">5 - Por que constantes usam <code>UPPER_SNAKE_CASE</code>?</h3>
+<p>Resposta:
+Porque esse padrão deixa claro que o valor é uma constante, ou seja, algo que não deve mudar durante a execução normal do programa. Ao ver <code>LIMITE_PADRAO_DE_RESULTADOS</code>, o leitor entende rapidamente que aquele valor tem papel fixo e especial no código. Isso evita confusão com variáveis locais, parâmetros ou campos comuns.</p>
+<h3 id="6-por-que-nao-e-recomendado-colocar-espaco-entre-o-nome-do-metodo-e-o-parentese-de-abertura">6 - Por que não é recomendado colocar espaço entre o nome do método e o parêntese de abertura?</h3>
+<p>Resposta:
+Porque em Java a chamada de método deve ser visualmente diferente de estruturas de controle como <code>if</code>, <code>while</code> e <code>for</code>. O recomendado é escrever <code>cadastrarBanda("Rush")</code>, e não <code>cadastrarBanda ("Rush")</code>. A convenção clássica da Oracle orienta não usar espaço entre o nome do método e o parêntese de abertura, justamente para diferenciar chamadas de método de palavras-chave.</p>
+<h3 id="7-por-que-e-recomendado-usar-chaves-mesmo-em-blocos-if-de-uma-linha">7 - Por que é recomendado usar chaves mesmo em blocos <code>if</code> de uma linha?</h3>
+<p>Resposta:
+Porque isso evita bugs quando alguém adiciona novas instruções depois. Sem chaves, apenas a primeira linha pertence ao <code>if</code>, mesmo que visualmente pareça que mais linhas fazem parte do bloco. Por isso, prefira sempre:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">bandaAtiva</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">publicarNoCatalogo</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Em vez de:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">bandaAtiva</span><span class="p">)</span>
+<span class="w">    </span><span class="n">publicarNoCatalogo</span><span class="p">();</span>
+</code></pre></div>
+<p>A convenção da Oracle recomenda usar chaves em estruturas de controle mesmo quando há apenas uma instrução, para facilitar alterações futuras sem introduzir erros acidentais.</p>
+<h3 id="8-o-uso-de-var-melhora-ou-piora-a-legibilidade-de-que-depende">8 - O uso de <code>var</code> melhora ou piora a legibilidade? De que depende?</h3>
+<p>Resposta:
+Depende do contexto. <code>var</code> melhora a legibilidade quando o tipo é óbvio pelo lado direito da atribuição ou quando repetir o tipo deixaria o código mais verboso sem ganho real. Mas pode piorar quando o nome da variável é genérico ou quando o método chamado não deixa claro qual tipo está sendo retornado.</p>
+<p>Bom exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="n">bandas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bandaRepository</span><span class="p">.</span><span class="na">buscarPorGenero</span><span class="p">(</span><span class="s">&quot;Metal&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">);</span>
+</code></pre></div>
+<p>Exemplo ruim:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">processar</span><span class="p">(</span><span class="n">dados</span><span class="p">);</span>
+</code></pre></div>
+<p>O <code>var</code> foi introduzido no Java 10 pela JEP 286 para inferência de tipo em variáveis locais com inicializador. Ele não torna Java uma linguagem dinamicamente tipada; o tipo continua sendo definido em tempo de compilação.</p>
+<h3 id="9-convencoes-de-codigo-afetam-performance">9 - Convenções de código afetam performance?</h3>
+<p>Resposta:
+Na maior parte dos casos, não. Indentação, espaços fora de strings, posição das chaves e nomes de variáveis não tornam o programa mais rápido ou mais lento. O impacto principal é em legibilidade, manutenção e revisão. Porém, convenções podem afetar indiretamente a qualidade do software, porque código mais claro tende a gerar menos bugs e ser mais fácil de otimizar quando necessário.</p>
+<h3 id="10-em-quais-situacoes-espacos-e-quebras-de-linha-podem-alterar-o-comportamento-real-do-programa">10 - Em quais situações espaços e quebras de linha podem alterar o comportamento real do programa?</h3>
+<p>Resposta:
+Espaços e quebras de linha podem alterar o comportamento quando fazem parte de valores textuais, como <code>String</code>, text blocks, JSON, SQL, HTML ou mensagens comparadas em testes. Fora desses casos, muitos espaços e comentários são tratados como elementos lexicais e não afetam diretamente a execução. A JLS explica que o código-fonte é processado em elementos de entrada, incluindo espaços, comentários e tokens, e que a estrutura lexical é parte formal da linguagem.</p>
+<h3 id="11-como-um-formatter-ajuda-em-pull-requests">11 - Como um formatter ajuda em pull requests?</h3>
+<p>Resposta:
+Um formatter reduz discussões manuais sobre estilo. Em vez de gastar tempo comentando “faltou espaço”, “quebrou linha errado” ou “organize os imports”, o time deixa a ferramenta aplicar o padrão automaticamente. Isso permite que o pull request foque no que realmente importa: regra de negócio, arquitetura, testes, segurança, performance e clareza da solução. Ferramentas como <code>google-java-format</code> automatizam a formatação de código Java conforme um estilo definido.</p>
+<h3 id="12-qual-e-o-risco-de-uma-convencao-interna-grande-demais">12 - Qual é o risco de uma convenção interna grande demais?</h3>
+<p>Resposta:
+O risco é transformar estilo de código em burocracia. Quando a convenção tem regras demais, exceções demais ou preferências muito subjetivas, o time passa a discutir detalhes pouco relevantes em vez de discutir qualidade técnica. Uma boa convenção deve ser simples, automatizável e fácil de seguir. O ideal é documentar o essencial e deixar ferramentas cuidarem do que for mecânico.</p>
+<h3 id="13-como-convencoes-podem-reforcar-uma-arquitetura-em-camadas">13 - Como convenções podem reforçar uma arquitetura em camadas?</h3>
+<p>Resposta:
+Convenções tornam a arquitetura mais visível no código. Em uma aplicação backend, nomes como <code>CadastrarBandaUseCase</code>, <code>BandaRepository</code>, <code>BandaController</code>, <code>BandaResponse</code> e <code>NovaBandaRequest</code> ajudam o leitor a entender rapidamente o papel de cada classe. A convenção não cria a arquitetura sozinha, mas ajuda a comunicar limites, responsabilidades e intenção.</p>
+<h3 id="14-por-que-o-documento-classico-de-convencoes-da-oracle-deve-ser-lido-como-referencia-historica">14 - Por que o documento clássico de convenções da Oracle deve ser lido como referência histórica?</h3>
+<p>Resposta:
+Porque ele não está sendo mantido ativamente e sua última revisão foi feita em 20 de abril de 1999. Ainda assim, vários princípios continuam úteis, como legibilidade, nomes claros, uso consistente de espaços e chaves. O ideal é usá-lo como base histórica, complementando com guias mais atuais, ferramentas modernas e práticas adotadas pelo time.</p>
+<h3 id="15-como-voce-configuraria-um-projeto-java-para-evitar-discussoes-manuais-sobre-formatacao">15 - Como você configuraria um projeto Java para evitar discussões manuais sobre formatação?</h3>
+<p>Resposta:
+Eu configuraria um padrão automatizado no projeto, versionado junto com o código. Uma boa configuração incluiria <code>.editorconfig</code> para padronizar indentação, charset e quebras de linha; um formatter como <code>google-java-format</code>; uma ferramenta de análise como Checkstyle ou Spotless; e uma etapa no pipeline para bloquear código fora do padrão. O EditorConfig ajuda a manter estilos consistentes entre diferentes editores e IDEs, especialmente em times com várias pessoas.</p>
+<h2 id="resumo-final">Resumo final</h2>
+<p>Convenções de código em Java não existem para agradar preferências individuais. Elas existem para reduzir custo de leitura, revisão, manutenção e evolução do software.</p>
+<p>A linguagem Java define o que é válido. A convenção define o que é legível, previsível e sustentável dentro de um time.</p>
+<p>Em Java moderno, boas convenções envolvem nomes claros, pacotes em minúsculas, classes em <code>UpperCamelCase</code>, métodos e variáveis em <code>lowerCamelCase</code>, constantes em <code>UPPER_SNAKE_CASE</code>, chaves consistentes, uso cuidadoso de <code>var</code>, blocos sempre com chaves e automação com formatter, linter e pipeline.</p>
+<p>Para um desenvolvedor pleno ou sênior, o ponto principal não é decorar regras isoladas. É entender que padrão de código é uma decisão de engenharia. Ele afeta colaboração, qualidade, revisão, arquitetura, onboarding e manutenção de longo prazo.</p>
+<h2 id="referencias">Referências</h2>
+<ul>
+<li>Oracle — Java Downloads: JDK 25 como LTS atual da plataforma Java SE. (<a href="https://www.oracle.com/java/technologies/downloads/" title="Java Downloads | Oracle">Oracle</a>)</li>
+<li>Oracle — Java SE 25 Specifications: JLS, JVM Specification e API Specification. (<a href="https://docs.oracle.com/en/java/javase/25/docs/specs/index.html" title="Java® Platform, Standard Edition &amp; Java Development Kit Specifications Version 25">Oracle Docs</a>)</li>
+<li>Oracle — The Java Language Specification, Java SE 25 Edition. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/index.html" title="The Java® Language Specification">Oracle Docs</a>)</li>
+<li>Oracle — JLS, Chapter 3: Lexical Structure. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-3.html" title="Chapter 3. Lexical Structure">Oracle Docs</a>)</li>
+<li>Oracle — Code Conventions for the Java Programming Language. (<a href="https://www.oracle.com/java/technologies/cc-java-programming-language.html" title="Code Conventions for the Java Programming Language">Oracle</a>)</li>
+<li>Oracle — Code Conventions: Statements. (<a href="https://www.oracle.com/java/technologies/javase/codeconventions-statements.html" title="Code Conventions for the Java Programming Language: 7. Statements">Oracle</a>)</li>
+<li>Oracle — Code Conventions: White Space. (<a href="https://www.oracle.com/java/technologies/javase/codeconventions-whitespace.html" title="Code Conventions for the Java Programming Language: 8. White Space">Oracle</a>)</li>
+<li>Oracle — Code Conventions: Naming Conventions. (<a href="https://www.oracle.com/java/technologies/javase/codeconventions-namingconventions.html" title="Code Conventions for the Java Programming Language: 9. Naming Conventions">Oracle</a>)</li>
+<li>Google — Google Java Style Guide. (<a href="https://google.github.io/styleguide/javaguide.html?hl=zh-CN" title="Google Java Style Guide">Google GitHub</a>)</li>
+<li>OpenJDK — JEP 286: Local-Variable Type Inference, Java 10. (<a href="https://openjdk.org/jeps/286" title="JEP 286: Local-Variable Type Inference">OpenJDK</a>)</li>
+<li>OpenJDK — JEP 361: Switch Expressions, Java 14. (<a href="https://openjdk.org/jeps/361" title="JEP 361: Switch Expressions">OpenJDK</a>)</li>
+<li>OpenJDK — JEP 378: Text Blocks, Java 15. (<a href="https://openjdk.org/jeps/378" title="JEP 378: Text Blocks">OpenJDK</a>)</li>
+<li>OpenJDK — JEP 395: Records, Java 16. (<a href="https://openjdk.org/jeps/395" title="JEP 395: Records">OpenJDK</a>)</li>
+<li>EditorConfig — configuração compartilhada de estilo entre editores e IDEs. (<a href="https://editorconfig.org/index" title="EditorConfig">editorconfig.org</a>)</li>
+<li>Google — google-java-format. (<a href="https://github.com/google/google-java-format" title="GitHub - google/google-java-format: Reformats Java source code to comply with Google Java Style. · GitHub">GitHub</a>)</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

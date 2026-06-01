@@ -1,0 +1,2814 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../convencoes-de-codigo-java/">
+      
+      
+        <link rel="next" href="../fundamentos-de-string/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Variáveis, tipos primitivos, operadores e conversões - README</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/css/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#fundamentos-de-java-variaveis-tipos-primitivos-operadores-e-conversoes" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../../.." title="README" class="md-header__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            README
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Variáveis, tipos primitivos, operadores e conversões
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="README" class="md-nav__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    README
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Backend
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fundamentos-da-linguagem-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../convencoes-de-codigo-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convenções de código em Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variáveis, tipos primitivos, operadores e conversões
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variáveis, tipos primitivos, operadores e conversões
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-no-codigo-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar no código: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-funciona-em-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como funciona em Java
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Como funciona em Java">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#declaracao-e-atribuicao-de-variaveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Declaração e atribuição de variáveis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nomes-de-variaveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nomes de variáveis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#literais-numericos-com-underscore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Literais numéricos com underscore
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sufixos-l-f-e-d" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sufixos L, f e d
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo prático
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analisando-o-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analisando o código
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-acontece-por-baixo-dos-panos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que acontece por baixo dos panos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="O que acontece por baixo dos panos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipagem-em-tempo-de-compilacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipagem em tempo de compilação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conversoes-de-ampliacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conversões de ampliação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conversoes-de-estreitamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conversões de estreitamento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conversoes-com-byte-short-e-char" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conversões com byte, short e char
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#promocao-aritmetica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Promoção aritmética
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operadores-aritmeticos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operadores aritméticos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#introducao-a-bigdecimal-para-valores-monetarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introdução a BigDecimal para valores monetários
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparacao-com-versoes-anteriores-do-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparação com versões anteriores do Java
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#achar-que-divisao-inteira-arredonda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Achar que divisão inteira arredonda
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usar-double-para-dinheiro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usar double para dinheiro
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#esquecer-o-l-em-literais-long" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esquecer o L em literais long
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#achar-que-byte-byte-resulta-em-byte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Achar que byte + byte resulta em byte
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fazer-cast-para-calar-o-compilador" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fazer cast para “calar o compilador”
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#confundir-char-com-texto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Confundir char com texto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#abusar-de-incremento-dentro-de-expressoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Abusar de incremento dentro de expressões
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decisões de engenharia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-tipos-primitivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar tipos primitivos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-evitar-tipos-primitivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando evitar tipos primitivos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar int
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-long" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar long
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-float-e-double" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar float e double
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-bigdecimal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar BigDecimal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-evitar-casts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando evitar casts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternativas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternativas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Perguntas de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-qual-e-a-diferenca-entre-declarar-uma-variavel-e-atribuir-um-valor-a-ela" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Qual é a diferença entre declarar uma variável e atribuir um valor a ela?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-por-que-java-nao-permite-trocar-o-tipo-de-uma-variavel-depois-que-ela-foi-declarada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Por que Java não permite trocar o tipo de uma variável depois que ela foi declarada?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-qual-e-a-diferenca-entre-int-e-long" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Qual é a diferença entre int e long?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-por-que-2_147_483_648-precisa-do-sufixo-l-para-ser-tratado-como-long" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Por que 2_147_483_648 precisa do sufixo L para ser tratado como long?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-por-que-3-2-resulta-em-1-mas-3-20-resulta-em-15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Por que 3 / 2 resulta em 1, mas 3 / 2.0 resulta em 1.5?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-por-que-byte-byte-resulta-em-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Por que byte + byte resulta em int?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-o-que-acontece-quando-um-double-e-convertido-para-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. O que acontece quando um double é convertido para int?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-por-que-char-nao-deve-ser-tratado-como-texto-completo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Por que char não deve ser tratado como texto completo?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-qual-e-o-risco-de-usar-cast-explicito-sem-validar-a-faixa-do-valor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Qual é o risco de usar cast explícito sem validar a faixa do valor?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-por-que-bigdecimal-e-preferivel-a-double-para-valores-monetarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Por que BigDecimal é preferível a double para valores monetários?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-qual-e-a-diferenca-entre-total-e-total" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Qual é a diferença entre total++ e ++total?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-em-quais-situacoes-byte-e-short-fazem-sentido-em-aplicacoes-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Em quais situações byte e short fazem sentido em aplicações backend?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-quando-var-introduzido-no-java-10-pela-jep-286-melhora-a-legibilidade-e-quando-pode-piora-la" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Quando var, introduzido no Java 10 pela JEP 286, melhora a legibilidade e quando pode piorá-la?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-o-que-significa-promocao-aritmetica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. O que significa promoção aritmética?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-por-que-operadores-compostos-como-podem-esconder-uma-conversao-implicita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Por que operadores compostos como += podem esconder uma conversão implícita?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fundamentos-de-string/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de String
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Spring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/api-rest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    O que é API REST?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/http/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Um pouco de HTTP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/por-que-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Por que escolher Spring?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/spring-boot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Boot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/spring-initializr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Initializr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/maven-pom/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maven e pom.xml
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-no-codigo-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar no código: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-funciona-em-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como funciona em Java
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Como funciona em Java">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#declaracao-e-atribuicao-de-variaveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Declaração e atribuição de variáveis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nomes-de-variaveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nomes de variáveis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#literais-numericos-com-underscore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Literais numéricos com underscore
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sufixos-l-f-e-d" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sufixos L, f e d
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo prático
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analisando-o-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analisando o código
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-acontece-por-baixo-dos-panos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que acontece por baixo dos panos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="O que acontece por baixo dos panos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipagem-em-tempo-de-compilacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipagem em tempo de compilação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conversoes-de-ampliacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conversões de ampliação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conversoes-de-estreitamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conversões de estreitamento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conversoes-com-byte-short-e-char" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conversões com byte, short e char
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#promocao-aritmetica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Promoção aritmética
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operadores-aritmeticos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operadores aritméticos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#introducao-a-bigdecimal-para-valores-monetarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introdução a BigDecimal para valores monetários
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparacao-com-versoes-anteriores-do-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparação com versões anteriores do Java
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#achar-que-divisao-inteira-arredonda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Achar que divisão inteira arredonda
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usar-double-para-dinheiro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usar double para dinheiro
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#esquecer-o-l-em-literais-long" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esquecer o L em literais long
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#achar-que-byte-byte-resulta-em-byte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Achar que byte + byte resulta em byte
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fazer-cast-para-calar-o-compilador" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fazer cast para “calar o compilador”
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#confundir-char-com-texto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Confundir char com texto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#abusar-de-incremento-dentro-de-expressoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Abusar de incremento dentro de expressões
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decisões de engenharia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-tipos-primitivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar tipos primitivos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-evitar-tipos-primitivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando evitar tipos primitivos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar int
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-long" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar long
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-float-e-double" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar float e double
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-bigdecimal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar BigDecimal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-evitar-casts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando evitar casts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternativas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternativas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Perguntas de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-qual-e-a-diferenca-entre-declarar-uma-variavel-e-atribuir-um-valor-a-ela" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Qual é a diferença entre declarar uma variável e atribuir um valor a ela?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-por-que-java-nao-permite-trocar-o-tipo-de-uma-variavel-depois-que-ela-foi-declarada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Por que Java não permite trocar o tipo de uma variável depois que ela foi declarada?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-qual-e-a-diferenca-entre-int-e-long" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Qual é a diferença entre int e long?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-por-que-2_147_483_648-precisa-do-sufixo-l-para-ser-tratado-como-long" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Por que 2_147_483_648 precisa do sufixo L para ser tratado como long?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-por-que-3-2-resulta-em-1-mas-3-20-resulta-em-15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Por que 3 / 2 resulta em 1, mas 3 / 2.0 resulta em 1.5?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-por-que-byte-byte-resulta-em-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Por que byte + byte resulta em int?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-o-que-acontece-quando-um-double-e-convertido-para-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. O que acontece quando um double é convertido para int?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-por-que-char-nao-deve-ser-tratado-como-texto-completo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Por que char não deve ser tratado como texto completo?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-qual-e-o-risco-de-usar-cast-explicito-sem-validar-a-faixa-do-valor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Qual é o risco de usar cast explícito sem validar a faixa do valor?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-por-que-bigdecimal-e-preferivel-a-double-para-valores-monetarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Por que BigDecimal é preferível a double para valores monetários?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-qual-e-a-diferenca-entre-total-e-total" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Qual é a diferença entre total++ e ++total?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-em-quais-situacoes-byte-e-short-fazem-sentido-em-aplicacoes-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Em quais situações byte e short fazem sentido em aplicações backend?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-quando-var-introduzido-no-java-10-pela-jep-286-melhora-a-legibilidade-e-quando-pode-piora-la" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Quando var, introduzido no Java 10 pela JEP 286, melhora a legibilidade e quando pode piorá-la?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-o-que-significa-promocao-aritmetica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. O que significa promoção aritmética?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-por-que-operadores-compostos-como-podem-esconder-uma-conversao-implicita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Por que operadores compostos como += podem esconder uma conversão implícita?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="fundamentos-de-java-variaveis-tipos-primitivos-operadores-e-conversoes">Fundamentos de Java: variáveis, tipos primitivos, operadores e conversões</h1>
+<p>Todo sistema backend manipula dados: identificadores, quantidades, preços, datas, flags, códigos, médias, limites e resultados de cálculos. Em uma aplicação como o <strong>meucatalogomusical.com</strong>, por exemplo, o código precisa representar a duração de uma música, a quantidade de reproduções de uma banda, o preço de um álbum digital, a posição de uma faixa no catálogo e se um item está ativo ou não.</p>
+<p>O problema é que cada uma dessas informações tem uma natureza diferente. Uma duração em segundos não é a mesma coisa que um preço. Uma flag de ativação não é a mesma coisa que uma nota média. Um código de caractere não é a mesma coisa que um texto completo.</p>
+<p>Os fundamentos de Java existem para dar precisão a essas decisões. Variáveis, tipos primitivos, operadores aritméticos, conversões e promoção aritmética formam a base para escrever código que calcula corretamente, evita perda de informação e deixa claro o que cada dado representa.</p>
+<p>Em sistemas reais, erros nesses fundamentos aparecem como bugs silenciosos: divisão inteira retornando <code>1</code> em vez de <code>1.5</code>, valores monetários com arredondamento indevido, <code>int</code> estourando em contadores grandes, <code>byte</code> e <code>short</code> sendo promovidos para <code>int</code> sem o desenvolvedor perceber, ou conversões explícitas descartando dados importantes.</p>
+<p>Os exemplos deste artigo usam <strong>Java 25</strong>, versão que alcançou disponibilidade geral em 16 de setembro de 2025 e é tratada como LTS por grande parte dos fornecedores. (<a href="https://openjdk.org/projects/jdk/25/" title="JDK 25">OpenJDK</a>)</p>
+<h2 id="antes-de-entrar-no-codigo-uma-ideia-simples">Antes de entrar no código: uma ideia simples</h2>
+<p>Uma variável pode ser vista como um nome dado a uma informação que o programa precisa usar.</p>
+<p>Por exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">duracaoEmSegundos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">515</span><span class="p">;</span>
+</code></pre></div>
+<p>Nesse caso:</p>
+<ul>
+<li><code>int</code> define o tipo da informação;</li>
+<li><code>duracaoEmSegundos</code> é o nome da variável;</li>
+<li><code>515</code> é o valor armazenado;</li>
+<li><code>=</code> atribui o valor à variável.</li>
+</ul>
+<p>A ideia mais importante é: <strong>em Java, o tipo faz parte do contrato da variável</strong>.</p>
+<p>Depois que uma variável local é declarada como <code>int</code>, ela continua sendo <code>int</code>. O valor pode mudar, mas o tipo não muda:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">totalFaixas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+
+<span class="n">totalFaixas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">9</span><span class="p">;</span><span class="w"> </span><span class="c1">// ok: continua sendo int</span>
+<span class="c1">// totalFaixas = 9.5; // não compila: 9.5 não é int</span>
+</code></pre></div>
+<p>Isso ajuda o compilador a encontrar erros antes da aplicação rodar. Em um backend, esse tipo de proteção é essencial porque muitos erros de cálculo só apareceriam em produção se a linguagem não validasse tipos em tempo de compilação.</p>
+<h2 id="definicao-tecnica">Definição técnica</h2>
+<p>A especificação da linguagem Java divide os tipos em duas grandes categorias: <strong>tipos primitivos</strong> e <strong>tipos de referência</strong>. Os tipos primitivos incluem <code>boolean</code> e os tipos numéricos. Os numéricos se dividem em integrais (<code>byte</code>, <code>short</code>, <code>int</code>, <code>long</code> e <code>char</code>) e ponto flutuante (<code>float</code> e <code>double</code>). Já os tipos de referência incluem classes, interfaces e arrays. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-4.html" title="Chapter 4. Types, Values, and Variables">Oracle Docs</a>)</p>
+<p>Os tipos primitivos representam valores diretamente. Eles não possuem identidade de objeto e não compartilham estado com outros valores primitivos. A própria especificação define que valores primitivos não compartilham estado entre si. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-4.html" title="Chapter 4. Types, Values, and Variables">Oracle Docs</a>)</p>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th style="text-align: right;">Categoria</th>
+<th style="text-align: right;">Tamanho / faixa principal</th>
+<th>Uso típico em backend</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>boolean</code></td>
+<td style="text-align: right;">lógico</td>
+<td style="text-align: right;">valores <code>true</code> ou <code>false</code>; a linguagem não fixa tamanho de armazenamento</td>
+<td>flags, validações, estados simples</td>
+</tr>
+<tr>
+<td><code>byte</code></td>
+<td style="text-align: right;">inteiro</td>
+<td style="text-align: right;">8 bits, de <code>-128</code> a <code>127</code></td>
+<td>dados binários, protocolos, buffers</td>
+</tr>
+<tr>
+<td><code>short</code></td>
+<td style="text-align: right;">inteiro</td>
+<td style="text-align: right;">16 bits, de <code>-32768</code> a <code>32767</code></td>
+<td>integração legada, formatos compactos</td>
+</tr>
+<tr>
+<td><code>int</code></td>
+<td style="text-align: right;">inteiro</td>
+<td style="text-align: right;">32 bits, de <code>-2147483648</code> a <code>2147483647</code></td>
+<td>contadores, quantidades, cálculos inteiros comuns</td>
+</tr>
+<tr>
+<td><code>long</code></td>
+<td style="text-align: right;">inteiro</td>
+<td style="text-align: right;">64 bits, de <code>-9223372036854775808</code> a <code>9223372036854775807</code></td>
+<td>IDs, timestamps, contadores grandes</td>
+</tr>
+<tr>
+<td><code>char</code></td>
+<td style="text-align: right;">inteiro sem sinal</td>
+<td style="text-align: right;">16 bits, de <code>0</code> a <code>65535</code>; representa uma unidade de código UTF-16</td>
+<td>caracteres simples e códigos textuais baixos</td>
+</tr>
+<tr>
+<td><code>float</code></td>
+<td style="text-align: right;">ponto flutuante</td>
+<td style="text-align: right;">32 bits, IEEE 754 binary32</td>
+<td>medições aproximadas, uso raro em backend comum</td>
+</tr>
+<tr>
+<td><code>double</code></td>
+<td style="text-align: right;">ponto flutuante</td>
+<td style="text-align: right;">64 bits, IEEE 754 binary64</td>
+<td>cálculos aproximados, médias, métricas, estatísticas</td>
+</tr>
+</tbody>
+</table>
+<p>As faixas numéricas dos tipos integrais e a natureza dos tipos <code>float</code> e <code>double</code> seguem a Java Language Specification. Ela também define que <code>char</code> é um inteiro sem sinal de 16 bits que representa uma unidade de código UTF-16, não necessariamente um “caractere visual completo” como o usuário enxerga na tela. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-4.html" title="Chapter 4. Types, Values, and Variables">Oracle Docs</a>)</p>
+<p>Essa observação sobre <code>char</code> é importante: alguns símbolos modernos, como emojis ou certos caracteres fora do Plano Multilíngue Básico Unicode, podem precisar de mais de uma unidade UTF-16. Para textos reais de usuário, prefira <code>String</code>.</p>
+<h2 id="como-funciona-em-java">Como funciona em Java</h2>
+<h3 id="declaracao-e-atribuicao-de-variaveis">Declaração e atribuição de variáveis</h3>
+<p>Em Java, uma variável local precisa ser declarada antes de ser usada:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">totalAlbuns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">notaMedia</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.7</span><span class="p">;</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">bandaAtiva</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="kt">char</span><span class="w"> </span><span class="n">classificacao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;A&#39;</span><span class="p">;</span>
+</code></pre></div>
+<p>O valor pode ser alterado depois:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">totalAlbuns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span>
+<span class="n">totalAlbuns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">13</span><span class="p">;</span>
+</code></pre></div>
+<p>Mas o tipo permanece o mesmo:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">totalAlbuns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span>
+
+<span class="c1">// totalAlbuns = 13.5; // não compila</span>
+</code></pre></div>
+<p>O compilador usa o tipo declarado para validar as operações possíveis. Isso é parte do motivo pelo qual Java é uma linguagem estaticamente tipada.</p>
+<h3 id="nomes-de-variaveis">Nomes de variáveis</h3>
+<p>Em código Java profissional, nomes de variáveis locais normalmente seguem <code>lowerCamelCase</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">duracaoTotalEmSegundos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">albumDisponivel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="kt">long</span><span class="w"> </span><span class="n">totalReproducoes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2_500_000L</span><span class="p">;</span>
+</code></pre></div>
+<p>Boas variáveis descrevem intenção, não apenas formato. Por exemplo, <code>duracaoTotalEmSegundos</code> comunica mais do que <code>x</code>, e <code>precoAlbum</code> comunica mais do que <code>valor</code>.</p>
+<h3 id="literais-numericos-com-underscore">Literais numéricos com underscore</h3>
+<p>Desde Java 7, é possível usar <code>_</code> entre dígitos em literais numéricos para melhorar a leitura. Esse recurso veio pelo Project Coin / JSR 334, não por uma JEP individual. (<a href="https://cr.openjdk.org/~darcy/ProjectCoin/ProjectCoin-Documentation-v0.83.html" title="Project Coin/JSR 334 Documentation v0.83">OpenJDK CR</a>)</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">populacao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">699_097</span><span class="p">;</span>
+<span class="kt">long</span><span class="w"> </span><span class="n">totalReproducoes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2_147_483_648L</span><span class="p">;</span>
+</code></pre></div>
+<p>O <code>_</code> não muda o valor. Ele só melhora a legibilidade no código-fonte.</p>
+<h3 id="sufixos-l-f-e-d">Sufixos <code>L</code>, <code>f</code> e <code>d</code></h3>
+<p>Por padrão, literais inteiros comuns são tratados como <code>int</code>, e literais de ponto flutuante comuns são tratados como <code>double</code>. A especificação define que literais inteiros sem sufixo especial são <code>int</code>, e literais de ponto flutuante sem <code>F</code>/<code>f</code> são <code>double</code>. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-15.html" title="Chapter 15. Expressions">Oracle Docs</a>)</p>
+<p>Por isso:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">long</span><span class="w"> </span><span class="n">totalReproducoes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2_147_483_648L</span><span class="p">;</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">taxaPopularidade</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">98.5f</span><span class="p">;</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">notaMedia</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.85d</span><span class="p">;</span><span class="w"> </span><span class="c1">// o d é opcional</span>
+</code></pre></div>
+<p>O <code>L</code> indica que o literal é <code>long</code>. O <code>f</code> indica que o literal é <code>float</code>. O <code>d</code> indica <code>double</code>, mas quase sempre é omitido porque <code>double</code> já é o padrão.</p>
+<h2 id="exemplo-pratico">Exemplo prático</h2>
+<p>Imagine uma rotina simples do <strong>meucatalogomusical.com</strong> para calcular informações de um álbum no catálogo.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.math.BigDecimal</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.math.RoundingMode</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CalculoCatalogoMusical</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Rush&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">album</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Moving Pictures&quot;</span><span class="p">;</span>
+
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">duracaoTomSawyer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">276</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">duracaoLimelight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">259</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">duracaoYyz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">266</span><span class="p">;</span>
+
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">totalFaixas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">duracaoTotal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">duracaoTomSawyer</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">duracaoLimelight</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">duracaoYyz</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">duracaoMedia</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">duracaoTotal</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="w"> </span><span class="n">totalFaixas</span><span class="p">;</span>
+
+<span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">totalReproducoes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2_147_483_648L</span><span class="p">;</span>
+<span class="w">        </span><span class="n">totalReproducoes</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">50_000L</span><span class="p">;</span>
+
+<span class="w">        </span><span class="kt">byte</span><span class="w"> </span><span class="n">prioridadeCuradoria</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">        </span><span class="n">prioridadeCuradoria</span><span class="o">++</span><span class="p">;</span>
+
+<span class="w">        </span><span class="kt">byte</span><span class="w"> </span><span class="n">prioridadeAjustada</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">prioridadeCuradoria</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+
+<span class="w">        </span><span class="kt">char</span><span class="w"> </span><span class="n">seloCuradoria</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;A&#39;</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">codigoSeloCuradoria</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seloCuradoria</span><span class="p">;</span>
+
+<span class="w">        </span><span class="kt">boolean</span><span class="w"> </span><span class="n">albumClassico</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">duracaoTotal</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">700</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">BigDecimal</span><span class="w"> </span><span class="n">precoAlbum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BigDecimal</span><span class="p">(</span><span class="s">&quot;39.90&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">BigDecimal</span><span class="w"> </span><span class="n">desconto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BigDecimal</span><span class="p">(</span><span class="s">&quot;5.00&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">BigDecimal</span><span class="w"> </span><span class="n">precoPromocional</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">precoAlbum</span><span class="p">.</span><span class="na">subtract</span><span class="p">(</span><span class="n">desconto</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">BigDecimal</span><span class="w"> </span><span class="n">precoPorFaixa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">precoPromocional</span><span class="p">.</span><span class="na">divide</span><span class="p">(</span>
+<span class="w">                </span><span class="n">BigDecimal</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">totalFaixas</span><span class="p">),</span>
+<span class="w">                </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">                </span><span class="n">RoundingMode</span><span class="p">.</span><span class="na">HALF_UP</span>
+<span class="w">        </span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Banda: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">banda</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Álbum: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">album</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Duração total: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">duracaoTotal</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; segundos&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Duração média: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">duracaoMedia</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; segundos&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Total de reproduções: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">totalReproducoes</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Prioridade ajustada: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">prioridadeAjustada</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Código do selo: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">codigoSeloCuradoria</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Álbum clássico? &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">albumClassico</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Preço promocional: R$ &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">precoPromocional</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Preço por faixa: R$ &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">precoPorFaixa</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="analisando-o-codigo">Analisando o código</h2>
+<p><code>String banda</code> e <code>String album</code> são tipos de referência, não tipos primitivos. Eles aparecem no exemplo porque nomes de bandas e álbuns são textos, e textos em Java são representados pela classe <code>String</code>.</p>
+<p>As variáveis <code>duracaoTomSawyer</code>, <code>duracaoLimelight</code> e <code>duracaoYyz</code> foram declaradas como <code>int</code> porque durações em segundos cabem confortavelmente em um inteiro de 32 bits. Para esse tipo de cálculo, <code>int</code> é legível, eficiente e suficiente.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">duracaoTotal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">duracaoTomSawyer</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">duracaoLimelight</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">duracaoYyz</span><span class="p">;</span>
+</code></pre></div>
+<p>Aqui ocorre uma soma entre inteiros. O resultado também é <code>int</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="n">duracaoMedia</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">duracaoTotal</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="w"> </span><span class="n">totalFaixas</span><span class="p">;</span>
+</code></pre></div>
+<p>Esse trecho é importante. Se fosse escrito assim:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="n">duracaoMedia</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">duracaoTotal</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">totalFaixas</span><span class="p">;</span>
+</code></pre></div>
+<p>a divisão seria feita como divisão inteira, porque os dois operandos são <code>int</code>. Só depois o resultado inteiro seria atribuído ao <code>double</code>. Ao converter um dos operandos para <code>double</code>, a operação passa a ser uma divisão de ponto flutuante.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">long</span><span class="w"> </span><span class="n">totalReproducoes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2_147_483_648L</span><span class="p">;</span>
+</code></pre></div>
+<p>Esse valor ultrapassa o limite máximo de <code>int</code>, por isso precisa ser <code>long</code>. O sufixo <code>L</code> deixa claro que o literal é do tipo <code>long</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">totalReproducoes</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">50_000L</span><span class="p">;</span>
+</code></pre></div>
+<p>Esse é um operador de atribuição composto. Ele equivale, conceitualmente, a:</p>
+<div class="highlight"><pre><span></span><code><span class="n">totalReproducoes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">totalReproducoes</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">50_000L</span><span class="p">;</span>
+</code></pre></div>
+<p>Mas existe um detalhe técnico importante: operadores como <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code> e <code>%=</code> fazem uma conversão implícita para o tipo da variável da esquerda. A JLS define que <code>E1 op= E2</code> equivale a <code>E1 = (T) ((E1) op (E2))</code>, onde <code>T</code> é o tipo de <code>E1</code>, com a diferença de que <code>E1</code> é avaliado apenas uma vez. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-15.html" title="Chapter 15. Expressions">Oracle Docs</a>)</p>
+<p>Isso pode ser útil, mas também perigoso:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">short</span><span class="w"> </span><span class="n">posicao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+
+<span class="n">posicao</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="c1">// compila</span>
+<span class="c1">// posicao = posicao + 1; // não compila, porque posicao + 1 vira int</span>
+</code></pre></div>
+<p>A segunda forma não compila porque operações aritméticas com <code>byte</code>, <code>short</code> e <code>char</code> geralmente são promovidas para <code>int</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">byte</span><span class="w"> </span><span class="n">prioridadeCuradoria</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="n">prioridadeCuradoria</span><span class="o">++</span><span class="p">;</span>
+</code></pre></div>
+<p>O operador <code>++</code> incrementa a variável em uma unidade. Para pós-incremento, o valor da expressão é o valor anterior ao armazenamento do novo valor; para pré-incremento, o valor da expressão é o valor depois do armazenamento. A mesma lógica vale para <code>--</code>. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-15.html" title="Chapter 15. Expressions">Oracle Docs</a>)</p>
+<div class="highlight"><pre><span></span><code><span class="kt">byte</span><span class="w"> </span><span class="n">prioridadeAjustada</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">prioridadeCuradoria</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+</code></pre></div>
+<p>Esse trecho mostra uma pegadinha real: <code>prioridadeCuradoria + 1</code> não resulta em <code>byte</code>, mas em <code>int</code>. Por isso o cast explícito para <code>byte</code> é necessário.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">char</span><span class="w"> </span><span class="n">seloCuradoria</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;A&#39;</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">codigoSeloCuradoria</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seloCuradoria</span><span class="p">;</span>
+</code></pre></div>
+<p><code>char</code> pode ser convertido implicitamente para <code>int</code>, porque é uma conversão de ampliação (<code>widening</code>). O valor de <code>'A'</code> corresponde ao código numérico dessa unidade UTF-16.</p>
+<div class="highlight"><pre><span></span><code><span class="n">BigDecimal</span><span class="w"> </span><span class="n">precoAlbum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BigDecimal</span><span class="p">(</span><span class="s">&quot;39.90&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p><code>BigDecimal</code> não é tipo primitivo. Ele é uma classe da API Java usada quando precisamos de controle decimal e arredondamento explícito, especialmente em valores monetários. A documentação oficial define <code>BigDecimal</code> como uma classe para aritmética decimal, manipulação de escala, arredondamento, comparação e conversão de formato. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api//java.base/java/math/BigDecimal.html" title="BigDecimal (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</p>
+<h2 id="o-que-acontece-por-baixo-dos-panos">O que acontece por baixo dos panos</h2>
+<h3 id="tipagem-em-tempo-de-compilacao">Tipagem em tempo de compilação</h3>
+<p>Quando o compilador encontra:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">totalFaixas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+</code></pre></div>
+<p>ele registra que <code>totalFaixas</code> é uma variável do tipo <code>int</code>. A partir desse ponto, operações envolvendo essa variável passam por validação estática.</p>
+<p>Por isso este código não compila:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">totalFaixas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="c1">// totalFaixas = 3.5;</span>
+</code></pre></div>
+<p>O compilador sabe que <code>3.5</code> é um literal <code>double</code>, e uma conversão de <code>double</code> para <code>int</code> pode perder informação. Java exige cast explícito nesse caso:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="n">valor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.5</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">inteiro</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">valor</span><span class="p">;</span><span class="w"> </span><span class="c1">// resultado: 3</span>
+</code></pre></div>
+<p>A conversão descarta a parte decimal. Isso não é arredondamento; é truncamento em direção a zero.</p>
+<h3 id="conversoes-de-ampliacao">Conversões de ampliação</h3>
+<p>Conversões de ampliação são aquelas em que o destino consegue representar uma faixa maior de valores ou uma categoria mais ampla. Exemplos:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">byte</span><span class="w"> </span><span class="n">codigoPequeno</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="kt">short</span><span class="w"> </span><span class="n">codigoMedio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">codigoPequeno</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">codigoInteiro</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">codigoMedio</span><span class="p">;</span>
+<span class="kt">long</span><span class="w"> </span><span class="n">codigoLongo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">codigoInteiro</span><span class="p">;</span>
+
+<span class="kt">char</span><span class="w"> </span><span class="n">letra</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;A&#39;</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">codigoLetra</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">letra</span><span class="p">;</span>
+
+<span class="kt">float</span><span class="w"> </span><span class="n">notaFloat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.5f</span><span class="p">;</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">notaDouble</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">notaFloat</span><span class="p">;</span>
+</code></pre></div>
+<p>A JLS lista como conversões de ampliação, entre outras, <code>byte</code> para <code>short</code>, <code>int</code>, <code>long</code>, <code>float</code> ou <code>double</code>; <code>short</code> para <code>int</code>, <code>long</code>, <code>float</code> ou <code>double</code>; <code>char</code> para <code>int</code>, <code>long</code>, <code>float</code> ou <code>double</code>; <code>int</code> para <code>long</code>, <code>float</code> ou <code>double</code>; <code>long</code> para <code>float</code> ou <code>double</code>; e <code>float</code> para <code>double</code>. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-5.html" title="Chapter 5. Conversions and Contexts">Oracle Docs</a>)</p>
+<p>Um detalhe de nível pleno/sênior: ampliação nem sempre significa preservação exata de precisão. Por exemplo, <code>long</code> para <code>double</code> ou <code>int</code> para <code>float</code> podem perder precisão, mesmo sendo conversões permitidas implicitamente. A especificação permite isso e afirma que conversões de ampliação nunca geram exceção em tempo de execução. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-5.html" title="Chapter 5. Conversions and Contexts">Oracle Docs</a>)</p>
+<h3 id="conversoes-de-estreitamento">Conversões de estreitamento</h3>
+<p>Conversões de estreitamento exigem cast explícito porque podem perder informação:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">long</span><span class="w"> </span><span class="n">reproducoes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">9_300_000_035L</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">reproducoesComoInt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">reproducoes</span><span class="p">;</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">reproducoesComoInt</span><span class="p">);</span><span class="w"> </span><span class="c1">// valor inesperado</span>
+</code></pre></div>
+<p>Isso acontece porque um <code>long</code> de 64 bits não cabe necessariamente em um <code>int</code> de 32 bits.</p>
+<p>O mesmo vale para <code>double</code> para <code>int</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="n">nota</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.95</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">notaInteira</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">nota</span><span class="p">;</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">notaInteira</span><span class="p">);</span><span class="w"> </span><span class="c1">// 4</span>
+</code></pre></div>
+<p>A JLS define que conversões de estreitamento podem perder magnitude, precisão e faixa. Para inteiros, bits mais significativos podem ser descartados; para ponto flutuante convertido para inteiro, a parte fracionária é removida por arredondamento em direção a zero. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-5.html" title="Chapter 5. Conversions and Contexts">Oracle Docs</a>)</p>
+<h3 id="conversoes-com-byte-short-e-char">Conversões com <code>byte</code>, <code>short</code> e <code>char</code></h3>
+<p>Esses tipos causam muitas dúvidas porque, embora sejam inteiros menores, as operações aritméticas comuns promovem seus valores para <code>int</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">byte</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="kt">byte</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
+
+<span class="c1">// byte resultado = a + b; // não compila</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w">     </span><span class="c1">// correto</span>
+</code></pre></div>
+<p>O mesmo acontece com <code>short</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">short</span><span class="w"> </span><span class="n">faixasLadoA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="kt">short</span><span class="w"> </span><span class="n">faixasLadoB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+
+<span class="c1">// short total = faixasLadoA + faixasLadoB; // não compila</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">faixasLadoA</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">faixasLadoB</span><span class="p">;</span>
+</code></pre></div>
+<p>E com <code>char</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">char</span><span class="w"> </span><span class="n">selo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;A&#39;</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">proximoCodigo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">selo</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="kt">char</span><span class="w"> </span><span class="n">proximoSelo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">selo</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+</code></pre></div>
+<p>A operação <code>selo + 1</code> resulta em <code>int</code>, não em <code>char</code>.</p>
+<p>Também existe uma conversão especial de <code>byte</code> para <code>char</code>, que combina ampliação e estreitamento: primeiro o <code>byte</code> é convertido para <code>int</code>, depois o <code>int</code> é convertido para <code>char</code>. Isso precisa ser tratado com cuidado porque <code>byte</code> é assinado e <code>char</code> é sem sinal. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-5.html" title="Chapter 5. Conversions and Contexts">Oracle Docs</a>)</p>
+<div class="highlight"><pre><span></span><code><span class="kt">byte</span><span class="w"> </span><span class="n">codigo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">65</span><span class="p">;</span>
+
+<span class="kt">char</span><span class="w"> </span><span class="n">caractere</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="p">)</span><span class="w"> </span><span class="n">codigo</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">caractere</span><span class="p">);</span><span class="w"> </span><span class="c1">// A</span>
+</code></pre></div>
+<p>Agora veja um caso perigoso:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">byte</span><span class="w"> </span><span class="n">codigoNegativo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="kt">char</span><span class="w"> </span><span class="n">caractere</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="p">)</span><span class="w"> </span><span class="n">codigoNegativo</span><span class="p">;</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">caractere</span><span class="p">);</span><span class="w"> </span><span class="c1">// 65535</span>
+</code></pre></div>
+<p>Isso acontece porque <code>char</code> não representa números negativos. O cast força a conversão, mas o significado do valor muda.</p>
+<h3 id="promocao-aritmetica">Promoção aritmética</h3>
+<p>Promoção aritmética é a regra que Java usa para definir o tipo final de uma operação numérica.</p>
+<p>Em operações binárias, Java promove os operandos para um tipo comum. A regra geral em contexto aritmético é:</p>
+<ol>
+<li>se houver <code>double</code>, o resultado tende a <code>double</code>;</li>
+<li>senão, se houver <code>float</code>, o resultado tende a <code>float</code>;</li>
+<li>senão, se houver <code>long</code>, o resultado tende a <code>long</code>;</li>
+<li>caso contrário, o resultado tende a <code>int</code>.</li>
+</ol>
+<p>A especificação define essa ordem de promoção numérica: <code>double</code>, depois <code>float</code>, depois <code>long</code>; quando nenhum deles aparece em contexto aritmético, o tipo promovido é <code>int</code>. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-5.html" title="Chapter 5. Conversions and Contexts">Oracle Docs</a>)</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="kt">long</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+
+<span class="kt">long</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+</code></pre></div>
+<p>O <code>int</code> é promovido para <code>long</code>, então o resultado da multiplicação é <code>long</code>.</p>
+<p>Outro exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">long</span><span class="w"> </span><span class="n">reproducoes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10_000L</span><span class="p">;</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">fatorPopularidade</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.5f</span><span class="p">;</span>
+
+<span class="kt">float</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reproducoes</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">fatorPopularidade</span><span class="p">;</span>
+</code></pre></div>
+<p>Mesmo <code>long</code> tendo 64 bits, <code>float</code> é ponto flutuante. A operação é promovida para <code>float</code>.</p>
+<p>A divisão inteira é um dos pontos mais importantes:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">totalSegundos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">totalFaixas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="n">mediaErrada</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">totalSegundos</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">totalFaixas</span><span class="p">;</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">mediaCorreta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">totalSegundos</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="w"> </span><span class="n">totalFaixas</span><span class="p">;</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">mediaErrada</span><span class="p">);</span><span class="w">   </span><span class="c1">// 1.0</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">mediaCorreta</span><span class="p">);</span><span class="w">  </span><span class="c1">// 1.5</span>
+</code></pre></div>
+<p>Na primeira conta, a divisão acontece entre dois <code>int</code>, então o resultado é <code>int</code>. Só depois ele é convertido para <code>double</code>.</p>
+<p>Na segunda conta, um dos operandos foi convertido para <code>double</code>, então a divisão já nasce como operação de ponto flutuante.</p>
+<h3 id="operadores-aritmeticos">Operadores aritméticos</h3>
+<p>Java possui os operadores aritméticos básicos:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">soma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">subtracao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">multiplicacao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">divisaoInteira</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">resto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+</code></pre></div>
+<p>Os operadores <code>*</code>, <code>/</code> e <code>%</code> têm precedência maior que <code>+</code> e <code>-</code>. A JLS define <code>*</code>, <code>/</code> e <code>%</code> como operadores multiplicativos, e <code>+</code> e <code>-</code> como operadores aditivos; dentro de cada grupo, a avaliação é associativa à esquerda. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-15.html" title="Chapter 15. Expressions">Oracle Docs</a>)</p>
+<p>Por isso:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">mediaErrada</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">mediaCorreta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">40</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">30</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+</code></pre></div>
+<p>A primeira expressão calcula primeiro <code>30 / 3</code>. A segunda força a soma antes da divisão.</p>
+<p>O operador <code>+</code> também pode ser usado para concatenação de <code>String</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">totalFaixas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Total de faixas: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">totalFaixas</span><span class="p">);</span>
+</code></pre></div>
+<p>Quando um dos operandos do <code>+</code> é <code>String</code>, a operação vira concatenação, não soma numérica. A JLS define que, se qualquer operando do <code>+</code> for <code>String</code>, a operação é concatenação de strings. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-15.html" title="Chapter 15. Expressions">Oracle Docs</a>)</p>
+<h3 id="introducao-a-bigdecimal-para-valores-monetarios">Introdução a <code>BigDecimal</code> para valores monetários</h3>
+<p><code>float</code> e <code>double</code> são ótimos para cálculos aproximados, mas não são a melhor escolha para dinheiro. Eles seguem representação binária de ponto flutuante, e muitos valores decimais comuns não são representados exatamente em binário.</p>
+<p>Exemplo clássico:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="n">preco</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.10</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.20</span><span class="p">;</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">preco</span><span class="p">);</span><span class="w"> </span><span class="c1">// pode imprimir algo como 0.30000000000000004</span>
+</code></pre></div>
+<p>Para valores monetários, prefira <code>BigDecimal</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">BigDecimal</span><span class="w"> </span><span class="n">preco</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BigDecimal</span><span class="p">(</span><span class="s">&quot;0.10&quot;</span><span class="p">);</span>
+<span class="n">BigDecimal</span><span class="w"> </span><span class="n">taxa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BigDecimal</span><span class="p">(</span><span class="s">&quot;0.20&quot;</span><span class="p">);</span>
+
+<span class="n">BigDecimal</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">preco</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">taxa</span><span class="p">);</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">total</span><span class="p">);</span><span class="w"> </span><span class="c1">// 0.30</span>
+</code></pre></div>
+<p>Evite:</p>
+<div class="highlight"><pre><span></span><code><span class="n">BigDecimal</span><span class="w"> </span><span class="n">valor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BigDecimal</span><span class="p">(</span><span class="mf">0.10</span><span class="p">);</span><span class="w"> </span><span class="c1">// não recomendado</span>
+</code></pre></div>
+<p>Prefira:</p>
+<div class="highlight"><pre><span></span><code><span class="n">BigDecimal</span><span class="w"> </span><span class="n">valor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BigDecimal</span><span class="p">(</span><span class="s">&quot;0.10&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>ou:</p>
+<div class="highlight"><pre><span></span><code><span class="n">BigDecimal</span><span class="w"> </span><span class="n">valor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BigDecimal</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="mf">0.10</span><span class="p">);</span>
+</code></pre></div>
+<p>Em sistemas reais, além de usar <code>BigDecimal</code>, você precisa definir regras de escala e arredondamento:</p>
+<div class="highlight"><pre><span></span><code><span class="n">BigDecimal</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BigDecimal</span><span class="p">(</span><span class="s">&quot;34.90&quot;</span><span class="p">);</span>
+<span class="n">BigDecimal</span><span class="w"> </span><span class="n">quantidade</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BigDecimal</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+
+<span class="n">BigDecimal</span><span class="w"> </span><span class="n">precoUnitario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">total</span><span class="p">.</span><span class="na">divide</span><span class="p">(</span>
+<span class="w">        </span><span class="n">quantidade</span><span class="p">,</span>
+<span class="w">        </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">        </span><span class="n">RoundingMode</span><span class="p">.</span><span class="na">HALF_UP</span>
+<span class="p">);</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">precoUnitario</span><span class="p">);</span><span class="w"> </span><span class="c1">// 11.63</span>
+</code></pre></div>
+<p><code>BigDecimal</code> dá controle explícito sobre arredondamento. A documentação oficial afirma que, se nenhum modo de arredondamento for especificado e o resultado exato não puder ser representado, uma <code>ArithmeticException</code> pode ser lançada. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api//java.base/java/math/BigDecimal.html" title="BigDecimal (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</p>
+<h2 id="comparacao-com-versoes-anteriores-do-java">Comparação com versões anteriores do Java</h2>
+<p>Os fundamentos de variáveis, tipos primitivos, operadores aritméticos, casting e promoção aritmética são muito estáveis em Java. Um <code>int</code>, um <code>long</code>, uma divisão inteira e uma promoção de <code>byte</code> para <code>int</code> continuam seguindo as mesmas ideias centrais em Java 25.</p>
+<p>O que mudou ao longo das versões foi principalmente a ergonomia da linguagem.</p>
+<p>Em Java 7, o Project Coin / JSR 334 adicionou melhorias como literais binários e underscores em literais numéricos. Antes disso, números longos precisavam ser escritos sem separadores visuais:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">long</span><span class="w"> </span><span class="n">valorAntigo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2147483648L</span><span class="p">;</span>
+</code></pre></div>
+<p>Com Java 7 ou superior:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">long</span><span class="w"> </span><span class="n">valorAtual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2_147_483_648L</span><span class="p">;</span>
+</code></pre></div>
+<p>Em Java 10, a JEP 286 introduziu inferência de tipo para variáveis locais com <code>var</code>. Isso permite omitir o tipo explícito em algumas declarações locais com inicializador, mantendo a segurança estática de tipos. (<a href="https://openjdk.org/jeps/286" title="JEP 286: Local-Variable Type Inference">OpenJDK</a>)</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="n">totalFaixas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span><span class="w">      </span><span class="c1">// inferido como int</span>
+<span class="kd">var</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Metallica&quot;</span><span class="p">;</span><span class="w">  </span><span class="c1">// inferido como String</span>
+</code></pre></div>
+<p>Mas <code>var</code> não transforma Java em linguagem dinâmica:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="n">totalFaixas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+
+<span class="c1">// totalFaixas = &quot;oito&quot;; // não compila</span>
+</code></pre></div>
+<p>O tipo continua fixo; ele apenas foi inferido pelo compilador.</p>
+<p>Em Java 25, a JEP 512 finalizou arquivos de origem compactos e métodos <code>main</code> de instância, permitindo escrever pequenos programas com menos cerimônia. Isso ajuda estudos, scripts e exemplos pequenos, mas não altera as regras fundamentais de tipos, operadores ou conversões. (<a href="https://openjdk.org/jeps/512" title="JEP 512: Compact Source Files and Instance Main Methods">OpenJDK</a>)</p>
+<p>Exemplo compacto em Java 25:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">totalFaixas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+<span class="w">    </span><span class="n">IO</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Total de faixas: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">totalFaixas</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Para artigos técnicos e código de backend profissional, ainda é comum usar classes explícitas, pacotes, testes e organização tradicional.</p>
+<h2 id="boas-praticas">Boas práticas</h2>
+<p>Prefira <code>int</code> para contadores e quantidades comuns. Use <code>long</code> quando o valor puder ultrapassar o limite de <code>int</code>, como IDs, timestamps e contadores acumulados de alto volume.</p>
+<p>Evite <code>byte</code> e <code>short</code> para “economizar memória” em variáveis locais comuns. Na prática, eles frequentemente são promovidos para <code>int</code> em operações, e podem deixar o código mais confuso. Use-os quando houver motivo real: protocolo binário, arquivo, buffer, interoperabilidade ou estrutura compacta.</p>
+<p>Use <code>boolean</code> para estados claramente binários:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="n">albumAtivo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">assinaturaExpirada</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+</code></pre></div>
+<p>Evite representar booleanos com <code>0</code> e <code>1</code>. Em Java, isso não é idiomático e nem compila diretamente para <code>boolean</code>.</p>
+<p>Use <code>char</code> apenas para caracteres simples ou códigos controlados. Para nomes, títulos, descrições, slugs, mensagens e conteúdo de usuário, use <code>String</code>.</p>
+<p>Use <code>double</code> para cálculos aproximados, como estatísticas, médias, notas e métricas. Para dinheiro, use <code>BigDecimal</code>.</p>
+<p>Use parênteses quando a expressão puder gerar dúvida:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">media</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">idadeA</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">idadeB</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">idadeC</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+</code></pre></div>
+<p>Mesmo quando a precedência da linguagem resolveria corretamente, parênteses podem melhorar a leitura.</p>
+<p>Evite misturar cálculo e concatenação complexa na mesma linha:</p>
+<div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Média: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">total</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="w"> </span><span class="n">quantidade</span><span class="p">));</span>
+</code></pre></div>
+<p>Prefira nomes que indiquem unidade:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">duracaoEmSegundos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">515</span><span class="p">;</span>
+<span class="kt">long</span><span class="w"> </span><span class="n">tamanhoEmBytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5_242_880L</span><span class="p">;</span>
+<span class="n">BigDecimal</span><span class="w"> </span><span class="n">precoEmReais</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BigDecimal</span><span class="p">(</span><span class="s">&quot;39.90&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>Unidades explícitas evitam bugs muito comuns em sistemas distribuídos.</p>
+<h2 id="erros-comuns">Erros comuns</h2>
+<h3 id="achar-que-divisao-inteira-arredonda">Achar que divisão inteira arredonda</h3>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">resultado</span><span class="p">);</span><span class="w"> </span><span class="c1">// 1.0</span>
+</code></pre></div>
+<p>O resultado não é <code>1.5</code> porque a divisão aconteceu entre inteiros.</p>
+<p>Correção:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="usar-double-para-dinheiro">Usar <code>double</code> para dinheiro</h3>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.10</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.20</span><span class="p">;</span>
+</code></pre></div>
+<p>Para dinheiro:</p>
+<div class="highlight"><pre><span></span><code><span class="n">BigDecimal</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BigDecimal</span><span class="p">(</span><span class="s">&quot;0.10&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BigDecimal</span><span class="p">(</span><span class="s">&quot;0.20&quot;</span><span class="p">));</span>
+</code></pre></div>
+<h3 id="esquecer-o-l-em-literais-long">Esquecer o <code>L</code> em literais <code>long</code></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// long valor = 2_147_483_648; // não compila</span>
+<span class="kt">long</span><span class="w"> </span><span class="n">valor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2_147_483_648L</span><span class="p">;</span>
+</code></pre></div>
+<p>O literal sem <code>L</code> é interpretado como <code>int</code>, e esse valor não cabe em <code>int</code>.</p>
+<h3 id="achar-que-byte-byte-resulta-em-byte">Achar que <code>byte + byte</code> resulta em <code>byte</code></h3>
+<div class="highlight"><pre><span></span><code><span class="kt">byte</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="kt">byte</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
+
+<span class="c1">// byte c = a + b; // não compila</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+</code></pre></div>
+<p>Operações com <code>byte</code>, <code>short</code> e <code>char</code> geralmente são promovidas para <code>int</code>.</p>
+<h3 id="fazer-cast-para-calar-o-compilador">Fazer cast para “calar o compilador”</h3>
+<div class="highlight"><pre><span></span><code><span class="kt">long</span><span class="w"> </span><span class="n">reproducoes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">9_300_000_035L</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">valor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">reproducoes</span><span class="p">;</span>
+</code></pre></div>
+<p>Esse código compila, mas o valor pode ficar incorreto. Cast explícito deve ser uma decisão consciente, não uma forma de ignorar o compilador.</p>
+<h3 id="confundir-char-com-texto">Confundir <code>char</code> com texto</h3>
+<div class="highlight"><pre><span></span><code><span class="kt">char</span><span class="w"> </span><span class="n">inicial</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;R&#39;</span><span class="p">;</span>
+<span class="c1">// char banda = &#39;Rush&#39;; // não compila</span>
+<span class="n">String</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Rush&quot;</span><span class="p">;</span>
+</code></pre></div>
+<p><code>char</code> representa uma unidade UTF-16. Texto deve ser <code>String</code>.</p>
+<h3 id="abusar-de-incremento-dentro-de-expressoes">Abusar de incremento dentro de expressões</h3>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">total</span><span class="o">++</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">++</span><span class="n">total</span><span class="p">;</span>
+</code></pre></div>
+<p>Mesmo sendo válido, esse tipo de expressão reduz legibilidade. Em código profissional, prefira operações separadas.</p>
+<h2 id="decisoes-de-engenharia">Decisões de engenharia</h2>
+<h3 id="quando-usar-tipos-primitivos">Quando usar tipos primitivos</h3>
+<p>Use tipos primitivos quando você precisa representar valores simples, sem identidade de objeto, com baixo custo e sem necessidade de <code>null</code>.</p>
+<p>Exemplos:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">quantidadeFaixas</span><span class="p">;</span>
+<span class="kt">long</span><span class="w"> </span><span class="n">totalReproducoes</span><span class="p">;</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">albumAtivo</span><span class="p">;</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">notaMedia</span><span class="p">;</span>
+</code></pre></div>
+<p>Eles são diretos, eficientes e expressam bem dados básicos.</p>
+<h3 id="quando-evitar-tipos-primitivos">Quando evitar tipos primitivos</h3>
+<p>Evite primitivos quando <code>null</code> tiver significado no modelo ou quando você estiver trabalhando com APIs que exigem objetos, como algumas estruturas genéricas:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Integer</span><span class="w"> </span><span class="n">quantidadeOpcional</span><span class="p">;</span>
+<span class="n">Long</span><span class="w"> </span><span class="n">idExterno</span><span class="p">;</span>
+<span class="n">Boolean</span><span class="w"> </span><span class="n">aceiteTermos</span><span class="p">;</span>
+</code></pre></div>
+<p>Mas cuidado: wrappers (<code>Integer</code>, <code>Long</code>, <code>Boolean</code>) podem ser <code>null</code>, e isso introduz risco de <code>NullPointerException</code> por unboxing automático.</p>
+<h3 id="quando-usar-int">Quando usar <code>int</code></h3>
+<p>Use <code>int</code> para quantidades e cálculos inteiros comuns:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">totalFaixas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">duracaoEmSegundos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">515</span><span class="p">;</span>
+</code></pre></div>
+<p>Evite <code>int</code> quando o valor pode crescer muito, como total global de reproduções, IDs externos ou timestamps.</p>
+<h3 id="quando-usar-long">Quando usar <code>long</code></h3>
+<p>Use <code>long</code> para valores inteiros grandes:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">long</span><span class="w"> </span><span class="n">totalReproducoes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">9_000_000_000L</span><span class="p">;</span>
+<span class="kt">long</span><span class="w"> </span><span class="n">timestampEvento</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">();</span>
+</code></pre></div>
+<p>O impacto de performance costuma ser irrelevante para a maioria dos backends. A decisão deve ser guiada por faixa de valor e clareza.</p>
+<h3 id="quando-usar-float-e-double">Quando usar <code>float</code> e <code>double</code></h3>
+<p>Use <code>double</code> para valores aproximados:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="n">notaMedia</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.75</span><span class="p">;</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">percentualPopularidade</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">98.3</span><span class="p">;</span>
+</code></pre></div>
+<p>Evite <code>float</code> em backend comum, a menos que exista motivo específico, como economia de memória em grande volume de dados numéricos aproximados ou compatibilidade com APIs específicas.</p>
+<h3 id="quando-usar-bigdecimal">Quando usar <code>BigDecimal</code></h3>
+<p>Use <code>BigDecimal</code> para dinheiro, taxas financeiras e cálculos decimais nos quais arredondamento precisa ser controlado:</p>
+<div class="highlight"><pre><span></span><code><span class="n">BigDecimal</span><span class="w"> </span><span class="n">preco</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BigDecimal</span><span class="p">(</span><span class="s">&quot;39.90&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>O custo é maior que <code>double</code>, mas a previsibilidade compensa em domínios financeiros. Em backend, normalmente é melhor pagar esse custo do que introduzir erros monetários.</p>
+<h3 id="quando-evitar-casts">Quando evitar casts</h3>
+<p>Evite casts quando eles estiverem apenas escondendo uma modelagem errada:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">valorLongo</span><span class="p">;</span>
+</code></pre></div>
+<p>Antes de fazer isso, pergunte:</p>
+<ul>
+<li>o valor realmente cabe no tipo menor?</li>
+<li>o truncamento é aceitável?</li>
+<li>existe teste cobrindo o limite?</li>
+<li>o tipo da variável de destino deveria ser maior?</li>
+</ul>
+<h3 id="alternativas">Alternativas</h3>
+<p>Para valores monetários persistidos em banco, uma alternativa comum é armazenar em menor unidade monetária usando inteiro, por exemplo centavos em <code>long</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">long</span><span class="w"> </span><span class="n">precoEmCentavos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3990L</span><span class="p">;</span>
+</code></pre></div>
+<p>Essa estratégia pode ser boa em domínios financeiros controlados, mas exige disciplina: todas as operações precisam respeitar a unidade. Para regras de negócio com escala decimal, impostos, descontos e arredondamento, <code>BigDecimal</code> costuma ser mais expressivo.</p>
+<h2 id="onde-isso-aparece-em-sistemas-reais">Onde isso aparece em sistemas reais</h2>
+<p>Em APIs REST, tipos aparecem em DTOs, validações e contratos JSON. Um campo <code>quantidade</code> pode ser <code>int</code>, mas um campo <code>id</code> frequentemente é <code>long</code> ou <code>UUID</code>.</p>
+<p>Em persistência, escolhas de tipos precisam conversar com o banco. Um <code>BigDecimal</code> em Java normalmente se relaciona melhor com colunas <code>NUMERIC</code>/<code>DECIMAL</code> do que com <code>FLOAT</code>/<code>DOUBLE</code>.</p>
+<p>Em mensageria, tipos pequenos aparecem em protocolos, flags, códigos e serialização. Nesses casos, <code>byte</code> pode fazer sentido.</p>
+<p>Em observabilidade, métricas e percentuais podem usar <code>double</code>, desde que sejam aproximados e não monetários.</p>
+<p>Em regras de negócio, a decisão de tipo comunica intenção. Um método que recebe <code>BigDecimal preco</code> transmite uma ideia diferente de um método que recebe <code>double preco</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="n">BigDecimal</span><span class="w"> </span><span class="nf">calcularPrecoPromocional</span><span class="p">(</span>
+<span class="w">        </span><span class="n">BigDecimal</span><span class="w"> </span><span class="n">precoOriginal</span><span class="p">,</span>
+<span class="w">        </span><span class="n">BigDecimal</span><span class="w"> </span><span class="n">desconto</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">precoOriginal</span><span class="p">.</span><span class="na">subtract</span><span class="p">(</span><span class="n">desconto</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse método deixa claro que a operação envolve valor decimal controlado, não aproximação binária.</p>
+<h2 id="perguntas-de-revisao">Perguntas de revisão</h2>
+<h3 id="1-qual-e-a-diferenca-entre-declarar-uma-variavel-e-atribuir-um-valor-a-ela">1. Qual é a diferença entre declarar uma variável e atribuir um valor a ela?</h3>
+<p><strong>Resposta:</strong> Declarar uma variável é informar ao compilador que aquele nome existe e qual tipo de valor ele pode armazenar. Atribuir um valor é colocar efetivamente uma informação dentro dessa variável.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">totalFaixas</span><span class="p">;</span><span class="w">      </span><span class="c1">// declaração</span>
+<span class="n">totalFaixas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span><span class="w">      </span><span class="c1">// atribuição</span>
+</code></pre></div>
+<p>Também é possível declarar e atribuir na mesma linha:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">totalFaixas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+</code></pre></div>
+<hr />
+<h3 id="2-por-que-java-nao-permite-trocar-o-tipo-de-uma-variavel-depois-que-ela-foi-declarada">2. Por que Java não permite trocar o tipo de uma variável depois que ela foi declarada?</h3>
+<p><strong>Resposta:</strong> Porque Java é uma linguagem estaticamente tipada. O tipo da variável faz parte do contrato validado pelo compilador. Se uma variável foi declarada como <code>int</code>, ela deve continuar recebendo valores compatíveis com <code>int</code>. Isso evita muitos erros antes mesmo da aplicação executar. A Java Language Specification define os tipos primitivos e os contextos de conversão que determinam quando uma atribuição é válida ou não. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/index.html" title="The Java® Language Specification">Oracle Docs</a>)</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">totalFaixas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+
+<span class="c1">// totalFaixas = &quot;oito&quot;; // não compila</span>
+</code></pre></div>
+<hr />
+<h3 id="3-qual-e-a-diferenca-entre-int-e-long">3. Qual é a diferença entre <code>int</code> e <code>long</code>?</h3>
+<p><strong>Resposta:</strong> <code>int</code> é um tipo inteiro de 32 bits, enquanto <code>long</code> é um tipo inteiro de 64 bits. Na prática, <code>int</code> é usado para quantidades comuns, contadores e cálculos inteiros do dia a dia. <code>long</code> é usado quando o valor pode ser muito grande, como IDs, timestamps e contadores globais de alta escala. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/index.html" title="The Java® Language Specification">Oracle Docs</a>)</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">totalFaixas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span>
+<span class="kt">long</span><span class="w"> </span><span class="n">totalReproducoes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">9_500_000_000L</span><span class="p">;</span>
+</code></pre></div>
+<hr />
+<h3 id="4-por-que-2_147_483_648-precisa-do-sufixo-l-para-ser-tratado-como-long">4. Por que <code>2_147_483_648</code> precisa do sufixo <code>L</code> para ser tratado como <code>long</code>?</h3>
+<p><strong>Resposta:</strong> Porque literais inteiros sem sufixo são interpretados inicialmente como <code>int</code>. O valor <code>2_147_483_648</code> ultrapassa o limite máximo de <code>int</code>, que é <code>2_147_483_647</code>. Por isso, é necessário usar <code>L</code> para indicar que o literal deve ser tratado como <code>long</code>. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/index.html" title="The Java® Language Specification">Oracle Docs</a>)</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// long valor = 2_147_483_648; // não compila</span>
+
+<span class="kt">long</span><span class="w"> </span><span class="n">valor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2_147_483_648L</span><span class="p">;</span><span class="w"> </span><span class="c1">// correto</span>
+</code></pre></div>
+<hr />
+<h3 id="5-por-que-3-2-resulta-em-1-mas-3-20-resulta-em-15">5. Por que <code>3 / 2</code> resulta em <code>1</code>, mas <code>3 / 2.0</code> resulta em <code>1.5</code>?</h3>
+<p><strong>Resposta:</strong> Porque <code>3 / 2</code> é uma divisão entre dois valores inteiros. Nesse caso, Java faz divisão inteira e descarta a parte decimal. Já <code>3 / 2.0</code> envolve um valor de ponto flutuante (<code>double</code>), então a operação é promovida para <code>double</code> e o resultado preserva a parte decimal. As regras de promoção numérica são definidas pela JLS. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/index.html" title="The Java® Language Specification">Oracle Docs</a>)</p>
+<div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="mi">3</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w">     </span><span class="c1">// 1</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="mi">3</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2.0</span><span class="p">);</span><span class="w">   </span><span class="c1">// 1.5</span>
+</code></pre></div>
+<hr />
+<h3 id="6-por-que-byte-byte-resulta-em-int">6. Por que <code>byte + byte</code> resulta em <code>int</code>?</h3>
+<p><strong>Resposta:</strong> Porque Java aplica promoção numérica em operações aritméticas. Tipos menores que <code>int</code>, como <code>byte</code>, <code>short</code> e <code>char</code>, normalmente são promovidos para <code>int</code> antes da operação. Por isso, o resultado de <code>byte + byte</code> é <code>int</code>, não <code>byte</code>. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/index.html" title="The Java® Language Specification">Oracle Docs</a>)</p>
+<div class="highlight"><pre><span></span><code><span class="kt">byte</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="kt">byte</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
+
+<span class="c1">// byte resultado = a + b; // não compila</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w"> </span><span class="c1">// correto</span>
+</code></pre></div>
+<hr />
+<h3 id="7-o-que-acontece-quando-um-double-e-convertido-para-int">7. O que acontece quando um <code>double</code> é convertido para <code>int</code>?</h3>
+<p><strong>Resposta:</strong> A parte decimal é descartada. Isso não é arredondamento; é truncamento em direção a zero. Por isso, a conversão de <code>double</code> para <code>int</code> exige cast explícito, porque pode haver perda de informação. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/index.html" title="The Java® Language Specification">Oracle Docs</a>)</p>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="n">nota</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.95</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">notaInteira</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">nota</span><span class="p">;</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">notaInteira</span><span class="p">);</span><span class="w"> </span><span class="c1">// 4</span>
+</code></pre></div>
+<hr />
+<h3 id="8-por-que-char-nao-deve-ser-tratado-como-texto-completo">8. Por que <code>char</code> não deve ser tratado como texto completo?</h3>
+<p><strong>Resposta:</strong> Porque <code>char</code> representa uma unidade de código UTF-16 de 16 bits, não necessariamente um texto completo ou um caractere visual completo. Para textos, nomes, títulos e mensagens, o tipo adequado é <code>String</code>. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/index.html" title="The Java® Language Specification">Oracle Docs</a>)</p>
+<div class="highlight"><pre><span></span><code><span class="kt">char</span><span class="w"> </span><span class="n">inicial</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;R&#39;</span><span class="p">;</span>
+
+<span class="n">String</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Rush&quot;</span><span class="p">;</span>
+<span class="n">String</span><span class="w"> </span><span class="n">album</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Moving Pictures&quot;</span><span class="p">;</span>
+</code></pre></div>
+<hr />
+<h3 id="9-qual-e-o-risco-de-usar-cast-explicito-sem-validar-a-faixa-do-valor">9. Qual é o risco de usar cast explícito sem validar a faixa do valor?</h3>
+<p><strong>Resposta:</strong> O risco é perder informação ou gerar um valor inesperado. Um cast explícito diz ao compilador: “eu sei o que estou fazendo”. Mas, se o valor não couber no tipo de destino, o resultado pode ficar incorreto. A JLS trata essas conversões como conversões de estreitamento, que podem perder magnitude ou precisão. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/index.html" title="The Java® Language Specification">Oracle Docs</a>)</p>
+<div class="highlight"><pre><span></span><code><span class="kt">long</span><span class="w"> </span><span class="n">totalReproducoes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">9_300_000_035L</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">valorConvertido</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">totalReproducoes</span><span class="p">;</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">valorConvertido</span><span class="p">);</span><span class="w"> </span><span class="c1">// valor inesperado</span>
+</code></pre></div>
+<hr />
+<h3 id="10-por-que-bigdecimal-e-preferivel-a-double-para-valores-monetarios">10. Por que <code>BigDecimal</code> é preferível a <code>double</code> para valores monetários?</h3>
+<p><strong>Resposta:</strong> Porque <code>double</code> usa ponto flutuante binário e pode representar alguns valores decimais de forma aproximada. Para dinheiro, isso pode gerar pequenas diferenças indesejadas. <code>BigDecimal</code> permite trabalhar com aritmética decimal, escala e arredondamento controlado. A documentação oficial destaca que <code>BigDecimal</code> dá controle completo sobre o comportamento de arredondamento. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api//java.base/java/math/BigDecimal.html" title="BigDecimal (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</p>
+<div class="highlight"><pre><span></span><code><span class="n">BigDecimal</span><span class="w"> </span><span class="n">preco</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BigDecimal</span><span class="p">(</span><span class="s">&quot;39.90&quot;</span><span class="p">);</span>
+<span class="n">BigDecimal</span><span class="w"> </span><span class="n">desconto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BigDecimal</span><span class="p">(</span><span class="s">&quot;5.00&quot;</span><span class="p">);</span>
+
+<span class="n">BigDecimal</span><span class="w"> </span><span class="n">precoFinal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">preco</span><span class="p">.</span><span class="na">subtract</span><span class="p">(</span><span class="n">desconto</span><span class="p">);</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">precoFinal</span><span class="p">);</span><span class="w"> </span><span class="c1">// 34.90</span>
+</code></pre></div>
+<hr />
+<h3 id="11-qual-e-a-diferenca-entre-total-e-total">11. Qual é a diferença entre <code>total++</code> e <code>++total</code>?</h3>
+<p><strong>Resposta:</strong> Os dois incrementam a variável em 1, mas retornam valores diferentes quando usados dentro de uma expressão. <code>total++</code> é pós-incremento: primeiro usa o valor atual e depois incrementa. <code>++total</code> é pré-incremento: primeiro incrementa e depois usa o novo valor. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/index.html" title="The Java® Language Specification">Oracle Docs</a>)</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">total</span><span class="o">++</span><span class="p">;</span><span class="w"> </span><span class="c1">// a recebe 10, total vira 11</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">++</span><span class="n">total</span><span class="p">;</span><span class="w"> </span><span class="c1">// total vira 12, b recebe 12</span>
+</code></pre></div>
+<p>Em código profissional, é melhor evitar incremento dentro de expressões complexas, porque isso reduz a legibilidade.</p>
+<hr />
+<h3 id="12-em-quais-situacoes-byte-e-short-fazem-sentido-em-aplicacoes-backend">12. Em quais situações <code>byte</code> e <code>short</code> fazem sentido em aplicações backend?</h3>
+<p><strong>Resposta:</strong> Eles fazem sentido quando existe uma necessidade real de representar dados pequenos ou compatíveis com formatos externos, como arquivos binários, protocolos, buffers, integrações legadas ou estruturas compactas. Para variáveis comuns de regra de negócio, <code>int</code> costuma ser mais simples e legível.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">byte</span><span class="w"> </span><span class="n">tipoEvento</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="kt">short</span><span class="w"> </span><span class="n">codigoLegado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32000</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">quantidadeFaixas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span>
+</code></pre></div>
+<p>Na maioria dos cálculos, <code>byte</code> e <code>short</code> acabam sendo promovidos para <code>int</code>, então usá-los apenas para “economizar memória” em variáveis locais geralmente não traz benefício prático.</p>
+<hr />
+<h3 id="13-quando-var-introduzido-no-java-10-pela-jep-286-melhora-a-legibilidade-e-quando-pode-piora-la">13. Quando <code>var</code>, introduzido no Java 10 pela JEP 286, melhora a legibilidade e quando pode piorá-la?</h3>
+<p><strong>Resposta:</strong> <code>var</code> melhora a legibilidade quando o tipo é óbvio pelo lado direito da atribuição e repetir o tipo deixaria o código mais poluído. Ele pode piorar a leitura quando esconde informação importante sobre o domínio ou torna o tipo menos evidente. A JEP 286 introduziu inferência de tipo para variáveis locais com inicializador, mas isso não torna Java uma linguagem dinâmica: o tipo continua sendo definido em tempo de compilação. (<a href="https://openjdk.org/jeps/286" title="JEP 286: Local-Variable Type Inference">OpenJDK</a>)</p>
+<p>Bom uso:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="n">preco</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BigDecimal</span><span class="p">(</span><span class="s">&quot;39.90&quot;</span><span class="p">);</span>
+<span class="kd">var</span><span class="w"> </span><span class="n">bandas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;Rush&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Metallica&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Pink Floyd&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>Uso que pode prejudicar a leitura:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">buscarDados</span><span class="p">();</span>
+</code></pre></div>
+<p>Nesse caso, <code>resultado</code> não comunica claramente se é uma lista, um mapa, um DTO, uma entidade ou outro tipo.</p>
+<hr />
+<h3 id="14-o-que-significa-promocao-aritmetica">14. O que significa promoção aritmética?</h3>
+<p><strong>Resposta:</strong> Promoção aritmética é o processo pelo qual Java ajusta os tipos dos operandos antes de realizar uma operação numérica. Isso define o tipo final da expressão. Em geral, <code>double</code> tem prioridade sobre <code>float</code>, <code>float</code> sobre <code>long</code>, <code>long</code> sobre <code>int</code>, e tipos menores como <code>byte</code>, <code>short</code> e <code>char</code> são promovidos para <code>int</code>. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/index.html" title="The Java® Language Specification">Oracle Docs</a>)</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="kt">long</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+
+<span class="kt">long</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w"> </span><span class="c1">// x é promovido para long</span>
+</code></pre></div>
+<p>Outro exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w"> </span><span class="c1">// resultado 1.5</span>
+</code></pre></div>
+<hr />
+<h3 id="15-por-que-operadores-compostos-como-podem-esconder-uma-conversao-implicita">15. Por que operadores compostos como <code>+=</code> podem esconder uma conversão implícita?</h3>
+<p><strong>Resposta:</strong> Porque operadores compostos fazem uma conversão automática para o tipo da variável à esquerda. Em termos conceituais, <code>x += y</code> se comporta como <code>x = (tipoDeX) (x + y)</code>. Isso pode ser conveniente, mas também pode esconder perda de informação em alguns casos. A JLS define esse comportamento para operadores de atribuição compostos. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/index.html" title="The Java® Language Specification">Oracle Docs</a>)</p>
+<div class="highlight"><pre><span></span><code><span class="kt">short</span><span class="w"> </span><span class="n">quantidade</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+
+<span class="n">quantidade</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="c1">// compila</span>
+
+<span class="c1">// quantidade = quantidade + 1; // não compila</span>
+</code></pre></div>
+<p>O segundo caso não compila porque <code>quantidade + 1</code> resulta em <code>int</code>. O primeiro compila porque o operador <code>+=</code> aplica a conversão implícita de volta para <code>short</code>.</p>
+<h2 id="resumo-final">Resumo final</h2>
+<p>Variáveis são nomes dados a valores que o programa manipula. Em Java, cada variável tem um tipo, e esse tipo define o que pode ser armazenado, quais operações são permitidas e quais conversões são seguras.</p>
+<p>Os tipos primitivos formam a base da linguagem: <code>boolean</code> para valores lógicos, <code>byte</code>, <code>short</code>, <code>int</code>, <code>long</code> e <code>char</code> para valores integrais, e <code>float</code> e <code>double</code> para valores aproximados de ponto flutuante.</p>
+<p>Operadores aritméticos permitem somar, subtrair, multiplicar, dividir e obter resto de divisão. Mas eles seguem regras de precedência, concatenação com <code>String</code>, promoção aritmética e divisão inteira.</p>
+<p>Conversões de ampliação costumam ser automáticas, mas ainda podem perder precisão em alguns casos. Conversões de estreitamento exigem cast e podem perder informação de forma significativa.</p>
+<p><code>byte</code>, <code>short</code> e <code>char</code> merecem atenção especial porque operações aritméticas com eles geralmente resultam em <code>int</code>.</p>
+<p>Para valores monetários, <code>BigDecimal</code> é a escolha mais segura porque oferece aritmética decimal e controle explícito de escala e arredondamento.</p>
+<p>Dominar esses fundamentos é essencial para escrever código Java confiável. Eles parecem simples, mas afetam diretamente legibilidade, segurança, performance, persistência, integrações e regras de negócio em sistemas backend reais.</p>
+<h2 id="referencias">Referências</h2>
+<ul>
+<li><strong>Java Language Specification, Java SE 25 — Chapter 4: Types, Values, and Variables</strong>. Base para tipos primitivos, tipos de referência, faixas dos tipos integrais, <code>char</code>, <code>float</code>, <code>double</code> e <code>boolean</code>. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-4.html" title="Chapter 4. Types, Values, and Variables">Oracle Docs</a>)</li>
+<li><strong>Java Language Specification, Java SE 25 — Chapter 5: Conversions and Contexts</strong>. Base para conversões primitivas, casting, widening, narrowing e promoção numérica. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-5.html" title="Chapter 5. Conversions and Contexts">Oracle Docs</a>)</li>
+<li><strong>Java Language Specification, Java SE 25 — Chapter 15: Expressions</strong>. Base para operadores aritméticos, concatenação com <code>String</code>, incremento/decremento e operadores de atribuição compostos. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-15.html" title="Chapter 15. Expressions">Oracle Docs</a>)</li>
+<li><strong>Java SE 25 API Documentation — <code>java.math.BigDecimal</code></strong>. Referência para aritmética decimal, escala, arredondamento e comportamento de operações exatas. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api//java.base/java/math/BigDecimal.html" title="BigDecimal (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</li>
+<li><strong>OpenJDK — JDK 25 Project Page</strong>. Referência sobre disponibilidade geral do JDK 25 e relação com Java SE 25 / JSR 400. (<a href="https://openjdk.org/projects/jdk/25/" title="JDK 25">OpenJDK</a>)</li>
+<li><strong>OpenJDK — JEP 286: Local-Variable Type Inference</strong>. Referência sobre <code>var</code>, introduzido no Java 10. (<a href="https://openjdk.org/jeps/286" title="JEP 286: Local-Variable Type Inference">OpenJDK</a>)</li>
+<li><strong>OpenJDK — JEP 512: Compact Source Files and Instance Main Methods</strong>. Referência sobre arquivos compactos e métodos <code>main</code> de instância finalizados no JDK 25. (<a href="https://openjdk.org/jeps/512" title="JEP 512: Compact Source Files and Instance Main Methods">OpenJDK</a>)</li>
+<li><strong>Project Coin / JSR 334</strong>. Referência histórica para underscores em literais numéricos e outras pequenas melhorias de linguagem introduzidas no Java 7. (<a href="https://cr.openjdk.org/~darcy/ProjectCoin/ProjectCoin-Documentation-v0.83.html" title="Project Coin/JSR 334 Documentation v0.83">OpenJDK CR</a>)</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
