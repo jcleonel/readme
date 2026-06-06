@@ -1,0 +1,1759 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../estruturas-de-repeticao/">
+      
+      
+        <link rel="next" href="../../spring/api-rest/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Introdução à POO - README</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/css/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introducao-a-programacao-orientada-a-objetos-em-java" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../../.." title="README" class="md-header__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            README
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Introdução à POO
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="README" class="md-nav__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    README
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Backend
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fundamentos-da-linguagem-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../convencoes-de-codigo-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convenções de código em Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../variaveis-tipos-primitivos-operadores-conversoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variáveis, tipos primitivos, operadores e conversões
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fundamentos-de-string/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de String
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../estruturas-controle-operadores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de controle e operadores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../estruturas-condicionais/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas condicionais
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../estruturas-de-repeticao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de repetição
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Orientação a Objetos (POO)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Orientação a Objetos (POO)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução à POO
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução à POO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-no-codigo-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar no código: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-funciona-em-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como funciona em Java
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Como funciona em Java">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comparacao-com-versoes-anteriores-do-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparação com versões anteriores do Java
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo prático
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analisando-o-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analisando o código
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-acontece-por-baixo-dos-panos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que acontece por baixo dos panos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Spring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/api-rest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    O que é API REST?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/http/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Um pouco de HTTP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/por-que-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Por que escolher Spring?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/spring-boot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Boot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/spring-initializr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Initializr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/maven-pom/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maven e pom.xml
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-no-codigo-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar no código: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-funciona-em-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como funciona em Java
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Como funciona em Java">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comparacao-com-versoes-anteriores-do-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparação com versões anteriores do Java
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo prático
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analisando-o-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analisando o código
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-acontece-por-baixo-dos-panos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que acontece por baixo dos panos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="introducao-a-programacao-orientada-a-objetos-em-java">Introdução à Programação Orientada a Objetos em Java</h1>
+<p>À medida que um sistema cresce, ele deixa de ser apenas uma sequência de comandos e passa a representar regras de negócio, estados, validações, fluxos, integrações e responsabilidades diferentes.</p>
+<p>Em uma aplicação como <code>meucatalogomusical.com</code>, não basta ter variáveis soltas como <code>nomeBanda</code>, <code>nomeMusica</code>, <code>duracao</code>, <code>genero</code> e vários procedimentos manipulando tudo livremente. Com o tempo, surgem perguntas importantes:</p>
+<ul>
+<li>Quem garante que uma música sempre terá título?</li>
+<li>Quem decide se uma banda pode ser cadastrada?</li>
+<li>Onde fica a regra que impede uma duração inválida?</li>
+<li>Quem altera os dados do catálogo?</li>
+<li>Como evitar que qualquer parte do sistema mude informações de forma descontrolada?</li>
+</ul>
+<p>A Programação Orientada a Objetos resolve esse problema organizando o sistema em unidades com <strong>estado</strong>, <strong>comportamento</strong> e <strong>responsabilidade</strong>. Em vez de pensar apenas em comandos executados em sequência, passamos a modelar partes do domínio como objetos que colaboram entre si.</p>
+<p>No Java, esse modelo é especialmente importante porque a linguagem é fortemente baseada em classes, objetos, interfaces e hierarquias de tipos. A própria especificação da linguagem define classes, interfaces, arrays e objetos como parte central do sistema de tipos de referência. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/index.html" title="The Java® Language Specification">Oracle Docs</a>)</p>
+<h2 id="antes-de-entrar-no-codigo-uma-ideia-simples">Antes de entrar no código: uma ideia simples</h2>
+<p>Um paradigma de programação é uma forma de pensar, organizar e expressar uma solução em código.</p>
+<p>Alguns paradigmas comuns são:</p>
+<table>
+<thead>
+<tr>
+<th>Paradigma</th>
+<th>Ideia central</th>
+<th>Exemplo de pensamento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Imperativo</td>
+<td>Dizer passo a passo o que o programa deve fazer</td>
+<td>“Faça isso, depois aquilo, depois atualize essa variável.”</td>
+</tr>
+<tr>
+<td>Procedural</td>
+<td>Organizar o programa em procedimentos, funções ou rotinas</td>
+<td>“Crie uma função para cadastrar música e outra para listar bandas.”</td>
+</tr>
+<tr>
+<td>Orientado a Objetos</td>
+<td>Organizar o sistema em objetos com responsabilidades</td>
+<td>“Uma banda conhece suas músicas; um catálogo gerencia bandas.”</td>
+</tr>
+<tr>
+<td>Funcional</td>
+<td>Descrever transformações de dados com funções</td>
+<td>“Filtre as músicas, transforme os dados e colete o resultado.”</td>
+</tr>
+<tr>
+<td>Reativo</td>
+<td>Trabalhar com fluxos assíncronos de dados e eventos</td>
+<td>“Quando uma música for cadastrada, publique um evento para outros componentes.”</td>
+</tr>
+</tbody>
+</table>
+<p>A Programação Orientada a Objetos pertence ao grande grupo da programação imperativa, mas muda o foco. Em vez de pensar somente em uma lista de comandos, o programador pensa em <strong>modelos</strong>, <strong>responsabilidades</strong> e <strong>colaboração entre partes do sistema</strong>.</p>
+<p>Java também permite combinar estilos. Desde o Java 8, por exemplo, a linguagem passou a ter suporte importante para expressões lambda e method references, aproximando alguns usos da programação funcional ao código Java cotidiano. (<a href="https://openjdk.org/jeps/126" title="JEP 126: Lambda Expressions &amp; Virtual Extension Methods">OpenJDK</a>)</p>
+<h2 id="definicao-tecnica">Definição técnica</h2>
+<p>Programação Orientada a Objetos é um paradigma que organiza o software em torno de objetos. Um objeto representa uma unidade do sistema que pode possuir:</p>
+<ul>
+<li><strong>estado</strong>, representado por dados internos;</li>
+<li><strong>comportamento</strong>, representado por operações;</li>
+<li><strong>identidade</strong>, quando faz sentido distinguir uma instância de outra;</li>
+<li><strong>responsabilidade</strong>, ou seja, uma razão clara para existir dentro do modelo.</li>
+</ul>
+<p>Em Java, objetos normalmente são criados a partir de classes. Uma classe descreve a estrutura e o comportamento que seus objetos podem ter. A documentação da plataforma Java também destaca <code>java.lang.Object</code> como a raiz da hierarquia de classes, o que reforça a centralidade desse modelo na linguagem. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="Object (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</p>
+<p>Mas é importante não simplificar demais: Java não é uma linguagem “100% orientada a objetos” no sentido absoluto. A linguagem possui tipos primitivos, membros <code>static</code>, métodos utilitários e recursos que permitem escrever código em estilo procedural. A própria especificação diferencia tipos primitivos de tipos de referência, e os objetos pertencem ao universo dos tipos de referência. (<a href="https://docs.oracle.com/javase/specs/jls/se25/jls25.pdf" title="The Java® Language Specification">Oracle Docs</a>)</p>
+<p>Portanto, uma definição mais madura seria:</p>
+<blockquote>
+<p>Programação Orientada a Objetos, em Java, é uma forma de estruturar sistemas usando tipos que combinam dados e comportamento, criando limites explícitos de responsabilidade e permitindo que diferentes partes do programa colaborem por meio de chamadas de métodos.</p>
+</blockquote>
+<h2 id="como-funciona-em-java">Como funciona em Java</h2>
+<p>Em Java, a orientação a objetos aparece principalmente por meio de:</p>
+<ul>
+<li>classes;</li>
+<li>objetos;</li>
+<li>métodos;</li>
+<li>atributos;</li>
+<li>construtores;</li>
+<li>interfaces;</li>
+<li>herança;</li>
+<li>composição;</li>
+<li>encapsulamento;</li>
+<li>polimorfismo.</li>
+</ul>
+<p>A ideia principal é: uma classe define um tipo; um objeto é uma instância concreta desse tipo; métodos representam comportamentos; atributos representam dados internos; e as partes do sistema interagem chamando métodos umas das outras.</p>
+<p>Em <code>meucatalogomusical.com</code>, poderíamos pensar assim:</p>
+<table>
+<thead>
+<tr>
+<th>Conceito do domínio</th>
+<th>Possível representação em Java</th>
+<th>Responsabilidade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Banda</td>
+<td><code>Banda</code></td>
+<td>Representar uma banda e suas músicas</td>
+</tr>
+<tr>
+<td>Música</td>
+<td><code>Musica</code></td>
+<td>Representar os dados de uma música</td>
+</tr>
+<tr>
+<td>Catálogo</td>
+<td><code>CatalogoMusical</code></td>
+<td>Gerenciar bandas cadastradas</td>
+</tr>
+<tr>
+<td>Busca</td>
+<td><code>ServicoDeBusca</code></td>
+<td>Pesquisar músicas e bandas</td>
+</tr>
+<tr>
+<td>API</td>
+<td><code>CatalogoController</code></td>
+<td>Receber requisições HTTP</td>
+</tr>
+</tbody>
+</table>
+<p>O ponto mais importante não é “criar classes porque Java exige classes”. O ponto é criar modelos que ajudem o sistema a ficar mais claro, seguro e fácil de evoluir.</p>
+<h3 id="comparacao-com-versoes-anteriores-do-java">Comparação com versões anteriores do Java</h3>
+<p>A base da orientação a objetos existe desde as primeiras versões da linguagem. Classes, objetos, métodos, herança e interfaces fazem parte da identidade do Java há muito tempo.</p>
+<p>O que mudou ao longo das versões foi a forma como Java permite combinar POO com outros estilos:</p>
+<table>
+<thead>
+<tr>
+<th>Versão</th>
+<th>Recurso</th>
+<th>Impacto no desenho orientado a objetos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Java 8</td>
+<td>Lambdas e method references, associados à JEP 126</td>
+<td>Permitiu expressar comportamentos de forma mais concisa, especialmente com Collections e Streams. (<a href="https://openjdk.org/jeps/126" title="JEP 126: Lambda Expressions &amp; Virtual Extension Methods">OpenJDK</a>)</td>
+</tr>
+<tr>
+<td>Java 10</td>
+<td><code>var</code>, associado à JEP 286</td>
+<td>Reduziu verbosidade em variáveis locais quando o tipo pode ser inferido com clareza. (<a href="https://openjdk.org/jeps/286" title="JEP 286: Local-Variable Type Inference">OpenJDK</a>)</td>
+</tr>
+<tr>
+<td>Java 16</td>
+<td>Records, associados à JEP 395</td>
+<td>Criou uma forma mais concisa de representar agregados de dados imutáveis ou quase imutáveis por convenção. (<a href="https://openjdk.org/jeps/395" title="JEP 395: Records">OpenJDK</a>)</td>
+</tr>
+<tr>
+<td>Java 17</td>
+<td>Sealed classes, associadas à JEP 409</td>
+<td>Permitiu restringir quais classes podem estender ou implementar um tipo. (<a href="https://openjdk.org/jeps/409" title="JEP 409: Sealed Classes">OpenJDK</a>)</td>
+</tr>
+<tr>
+<td>Java 25</td>
+<td>LTS mais recente da plataforma Java SE</td>
+<td>Base moderna para projetos que querem suporte de longo prazo e recursos atuais da linguagem e da plataforma. (<a href="https://www.oracle.com/java/technologies/java-se-support-roadmap.html" title="Java SE Support Roadmap">Oracle</a>)</td>
+</tr>
+</tbody>
+</table>
+<p>Isso não muda o fundamento da POO, mas muda as ferramentas disponíveis para modelar melhor o domínio.</p>
+<h2 id="exemplo-pratico">Exemplo prático</h2>
+<p>O exemplo abaixo mostra uma modelagem simples para o <code>meucatalogomusical.com</code>.</p>
+<p>A ideia não é se aprofundar ainda em todos os conceitos internos de classe, objeto, encapsulamento ou composição. O objetivo é perceber a mudança de mentalidade: em vez de variáveis soltas e funções manipulando tudo, criamos tipos com responsabilidades claras.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.ArrayList</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CatalogoMusicalDemo</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="n">catalogo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CatalogoMusical</span><span class="p">();</span>
+
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="n">brothersOfMetal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Banda</span><span class="p">(</span><span class="s">&quot;Brothers of Metal&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">brothersOfMetal</span><span class="p">.</span><span class="na">adicionarMusica</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Musica</span><span class="p">(</span><span class="s">&quot;Ride of the Valkyries&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Power Metal Viking&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">276</span><span class="p">));</span>
+<span class="w">        </span><span class="n">brothersOfMetal</span><span class="p">.</span><span class="na">adicionarMusica</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Musica</span><span class="p">(</span><span class="s">&quot;Defenders of Valhalla&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Power Metal Viking&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">265</span><span class="p">));</span>
+
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="n">ironMaiden</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Banda</span><span class="p">(</span><span class="s">&quot;Iron Maiden&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">ironMaiden</span><span class="p">.</span><span class="na">adicionarMusica</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Musica</span><span class="p">(</span><span class="s">&quot;The Trooper&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Heavy Metal&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">251</span><span class="p">));</span>
+
+<span class="w">        </span><span class="n">catalogo</span><span class="p">.</span><span class="na">cadastrar</span><span class="p">(</span><span class="n">brothersOfMetal</span><span class="p">);</span>
+<span class="w">        </span><span class="n">catalogo</span><span class="p">.</span><span class="na">cadastrar</span><span class="p">(</span><span class="n">ironMaiden</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">catalogo</span><span class="p">.</span><span class="na">listarBandas</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="na">forEach</span><span class="p">(</span><span class="n">banda</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span>
+<span class="w">                        </span><span class="s">&quot;%s: %d música(s)%n&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="n">banda</span><span class="p">.</span><span class="na">nome</span><span class="p">(),</span>
+<span class="w">                        </span><span class="n">banda</span><span class="p">.</span><span class="na">quantidadeDeMusicas</span><span class="p">()</span>
+<span class="w">                </span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">record</span> <span class="nc">Musica</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">titulo</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">genero</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">duracaoEmSegundos</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">Musica</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">titulo</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">titulo</span><span class="p">.</span><span class="na">isBlank</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;O título da música é obrigatório.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">genero</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">genero</span><span class="p">.</span><span class="na">isBlank</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;O gênero musical é obrigatório.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">duracaoEmSegundos</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;A duração deve ser maior que zero.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Banda</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Musica</span><span class="o">&gt;</span><span class="w"> </span><span class="n">musicas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">Banda</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nome</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">nome</span><span class="p">.</span><span class="na">isBlank</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;O nome da banda é obrigatório.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">nome</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nome</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="nf">nome</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">nome</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">adicionarMusica</span><span class="p">(</span><span class="n">Musica</span><span class="w"> </span><span class="n">musica</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">musica</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;A música não pode ser nula.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">musicas</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">musica</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">quantidadeDeMusicas</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">musicas</span><span class="p">.</span><span class="na">size</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Musica</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">musicas</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">copyOf</span><span class="p">(</span><span class="n">musicas</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">final</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CatalogoMusical</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Banda</span><span class="o">&gt;</span><span class="w"> </span><span class="n">bandas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">cadastrar</span><span class="p">(</span><span class="n">Banda</span><span class="w"> </span><span class="n">banda</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">banda</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;A banda não pode ser nula.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">bandas</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">banda</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Banda</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">listarBandas</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">copyOf</span><span class="p">(</span><span class="n">bandas</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="analisando-o-codigo">Analisando o código</h2>
+<p>A classe <code>CatalogoMusicalDemo</code> representa apenas o ponto de entrada do exemplo. Ela cria o catálogo, cadastra bandas e imprime um resumo.</p>
+<p>A classe <code>CatalogoMusical</code> tem uma responsabilidade mais clara: guardar e listar bandas. Ela não deveria validar detalhes internos de uma música, calcular duração total de álbuns ou formatar resposta HTTP. Cada responsabilidade deve ficar no lugar mais adequado.</p>
+<p>A classe <code>Banda</code> representa uma banda dentro do domínio. Ela possui um nome e uma coleção de músicas. Em vez de deixar qualquer parte do sistema manipular diretamente a lista interna, ela oferece o método <code>adicionarMusica</code>.</p>
+<p>O <code>record Musica</code> representa uma música como dado de domínio. Records foram finalizados no Java 16 pela JEP 395 e são uma forma concisa de declarar classes voltadas a carregar dados, com membros como construtor, acessores, <code>equals</code>, <code>hashCode</code> e <code>toString</code> gerados de forma padronizada. (<a href="https://openjdk.org/jeps/395" title="JEP 395: Records">OpenJDK</a>)</p>
+<p>O uso de <code>var</code> aparece em variáveis locais dentro do <code>main</code>. Esse recurso foi introduzido no Java 10 pela JEP 286 e permite que o compilador infira o tipo da variável a partir do inicializador. (<a href="https://openjdk.org/jeps/286" title="JEP 286: Local-Variable Type Inference">OpenJDK</a>)</p>
+<p>A expressão lambda usada em <code>.forEach(banda -&gt; ...)</code> representa uma forma mais funcional de passar comportamento para uma operação. Esse estilo se tornou comum no Java moderno a partir do Java 8, com lambdas e method references. (<a href="https://openjdk.org/jeps/126" title="JEP 126: Lambda Expressions &amp; Virtual Extension Methods">OpenJDK</a>)</p>
+<p>Mesmo com esses recursos modernos, o exemplo continua sendo orientado a objetos. O centro do desenho ainda está nos tipos <code>Banda</code>, <code>Musica</code> e <code>CatalogoMusical</code>.</p>
+<h2 id="o-que-acontece-por-baixo-dos-panos">O que acontece por baixo dos panos</h2>
+<p>Quando escrevemos:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="n">brothersOfMetal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Banda</span><span class="p">(</span><span class="s">&quot;Brothers of Metal&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>o código cria um novo objeto do tipo <code>Banda</code> e guarda uma referência para esse objeto na variável <code>brothersOfMetal</code>.</p>
+<p>A variável não “é” o objeto em si. Ela referencia um objeto. Essa diferença é essencial em Java. A especificação da linguagem define que tipos de referência são implementados por objetos criados dinamicamente, e múltiplas referências podem apontar para o mesmo objeto. (<a href="https://docs.oracle.com/javase/specs/jls/se25/jls25.pdf" title="The Java® Language Specification">Oracle Docs</a>)</p>
+<p>Quando chamamos:</p>
+<div class="highlight"><pre><span></span><code><span class="n">brothersOfMetal</span><span class="p">.</span><span class="na">adicionarMusica</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Musica</span><span class="p">(</span><span class="s">&quot;Ride of the Valkyries&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Power Metal Viking&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">276</span><span class="p">));</span>
+</code></pre></div>
+<p>acontecem algumas coisas importantes:</p>
+<ol>
+<li>um objeto <code>Musica</code> é criado;</li>
+<li>o construtor compacto do <code>record</code> valida os dados;</li>
+<li>o método <code>adicionarMusica</code> é chamado no objeto <code>brothersOfMetal</code>;</li>
+<li>a música é adicionada à lista interna daquela banda.</li>
+</ol>
+<p>Essa chamada de método é a forma mais comum de “mensagem” entre objetos em Java. Um objeto não precisa conhecer todos os detalhes internos do outro. Ele precisa conhecer apenas a operação pública ou acessível que pode chamar.</p>
+<p>Outro ponto importante é que <code>Banda</code> e <code>CatalogoMusical</code> retornam cópias não modificáveis das listas usando <code>List.copyOf</code>. A intenção é proteger o estado interno. Sem isso, outro trecho do código poderia receber a lista e modificá-la diretamente, quebrando regras internas do objeto.</p>
+<h2 id="boas-praticas">Boas práticas</h2>
+<p>Modele objetos a partir de responsabilidades reais, não apenas a partir de tabelas do banco de dados. Uma tabela <code>bandas</code> pode virar uma classe <code>Banda</code>, mas isso não significa que toda classe deve ser uma cópia exata da estrutura relacional.</p>
+<p>Evite criar objetos que só carregam dados e não protegem nenhuma regra. Em muitos sistemas, isso leva ao chamado modelo anêmico: os dados ficam nas classes, mas as regras importantes ficam espalhadas em services genéricos.</p>
+<p>Use nomes que expressem o domínio. <code>Banda</code>, <code>Musica</code>, <code>CatalogoMusical</code> e <code>ServicoDeBusca</code> comunicam melhor a intenção do que nomes genéricos como <code>Manager</code>, <code>Processor</code>, <code>Handler</code> ou <code>Util</code>.</p>
+<p>Proteja invariantes. Se uma música não pode existir sem título ou com duração negativa, essa validação deve estar próxima da criação da música. Isso reduz a chance de estados inválidos circularem pelo sistema.</p>
+<p>Prefira composição antes de herança quando estiver modelando relações de negócio. Uma banda “possui músicas”; ela não “é uma música”. Herança deve representar uma relação conceitual forte, não apenas uma forma de reaproveitar código.</p>
+<p>Use recursos modernos do Java com intenção. <code>record</code> é excelente para representar dados simples, mas nem todo objeto de domínio deve ser um record. Quando há identidade, ciclo de vida, mudança controlada de estado e regras comportamentais, uma classe comum pode ser mais adequada.</p>
+<h2 id="erros-comuns">Erros comuns</h2>
+<p>Um erro comum é acreditar que Programação Orientada a Objetos significa apenas “criar muitas classes”. Isso leva a sistemas cheios de arquivos, mas sem clareza de responsabilidade.</p>
+<p>Outro erro é colocar tudo em uma única classe central. Por exemplo, uma classe <code>CatalogoService</code> que cadastra banda, valida música, formata JSON, acessa banco, envia evento e monta resposta HTTP tende a virar um ponto de acoplamento excessivo.</p>
+<p>Também é comum confundir objeto com registro de banco. Um objeto pode até ser persistido, mas seu papel no código é representar comportamento e regras do domínio, não apenas linhas e colunas.</p>
+<p>Outro problema recorrente é usar herança para reaproveitamento de código sem uma relação conceitual verdadeira. Isso cria hierarquias frágeis e difíceis de mudar.</p>
+<p>Também existe o risco de usar POO de forma excessivamente abstrata. Interfaces, classes abstratas e padrões de projeto são ferramentas úteis, mas podem prejudicar a legibilidade quando aparecem antes de uma necessidade real.</p>
+<h2 id="decisoes-de-engenharia">Decisões de engenharia</h2>
+<p>Use Programação Orientada a Objetos quando o problema possui entidades com regras, estados, comportamentos e relações importantes. Sistemas backend normalmente se beneficiam disso porque lidam com regras de negócio, validações, fluxos, integrações e persistência.</p>
+<p>Evite forçar POO quando o problema é apenas uma transformação simples de dados. Por exemplo, filtrar uma lista de músicas por gênero pode ficar mais claro com Streams e funções do que com uma hierarquia complexa de classes.</p>
+<p>A orientação a objetos melhora a manutenção quando as responsabilidades estão bem distribuídas. Porém, ela piora o sistema quando vira excesso de camadas, abstrações prematuras ou classes sem comportamento relevante.</p>
+<p>Em performance, o custo de criar objetos geralmente não é o primeiro problema em aplicações backend comuns. Antes de otimizar a quantidade de objetos, normalmente faz mais sentido observar acesso a banco, chamadas HTTP, serialização, concorrência, uso de memória e algoritmos. Ainda assim, em trechos de alto volume, alocações excessivas podem impactar garbage collection e devem ser analisadas com métricas.</p>
+<p>Alternativas e complementos:</p>
+<table>
+<thead>
+<tr>
+<th>Abordagem</th>
+<th>Quando considerar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Procedural</td>
+<td>Scripts simples, automações pequenas ou fluxos lineares</td>
+</tr>
+<tr>
+<td>Funcional</td>
+<td>Transformações de coleções, pipelines de dados e operações sem estado compartilhado</td>
+</tr>
+<tr>
+<td>Orientação a Objetos</td>
+<td>Domínio com regras, estados, entidades e colaboração entre componentes</td>
+</tr>
+<tr>
+<td>Data-oriented programming</td>
+<td>Modelos em que a estrutura dos dados e os casos possíveis são mais importantes que identidade mutável</td>
+</tr>
+<tr>
+<td>Reativo</td>
+<td>Fluxos assíncronos, não bloqueantes e orientados a eventos</td>
+</tr>
+</tbody>
+</table>
+<p>O ponto de maturidade não é defender um paradigma como se fosse sempre superior. O ponto é escolher o modelo que deixa o sistema mais simples, seguro e evolutivo.</p>
+<h2 id="onde-isso-aparece-em-sistemas-reais">Onde isso aparece em sistemas reais</h2>
+<p>Em aplicações Java backend, POO aparece em praticamente todos os níveis.</p>
+<p>Na camada de domínio, objetos representam conceitos de negócio como <code>Banda</code>, <code>Musica</code>, <code>Album</code>, <code>Usuario</code>, <code>Playlist</code> e <code>Assinatura</code>.</p>
+<p>Na camada de aplicação, objetos representam casos de uso, comandos, resultados e regras de orquestração.</p>
+<p>Na camada de infraestrutura, objetos representam repositórios, clients HTTP, produtores de mensagens, configurações, entidades de persistência e adaptadores externos.</p>
+<p>Em APIs REST, objetos aparecem em requests, responses, controllers, services e validadores.</p>
+<p>Em frameworks como Spring, a própria ideia de componentes, beans, services, repositories e controllers se apoia fortemente na criação, configuração e colaboração entre objetos.</p>
+<p>Em entrevistas técnicas, entender POO ajuda a explicar temas como encapsulamento, coesão, acoplamento, SOLID, design patterns, Clean Architecture, DDD, testes unitários e modelagem de domínio.</p>
+<h2 id="perguntas-de-revisao">Perguntas de revisão</h2>
+<p>1 - O que é um paradigma de programação?
+Resposta: é uma forma de organizar o pensamento e a estrutura do código. Paradigmas diferentes propõem formas diferentes de resolver problemas, como programação procedural, orientada a objetos, funcional e reativa.</p>
+<p>2 - Qual problema a Programação Orientada a Objetos ajuda a resolver?
+Resposta: ela ajuda a organizar sistemas complexos em partes com responsabilidades claras, reduzindo código espalhado, estado global descontrolado e regras de negócio duplicadas.</p>
+<p>3 - Qual é a diferença entre programação procedural e programação orientada a objetos?
+Resposta: na programação procedural, o foco está em procedimentos e passos executados sobre dados. Na orientação a objetos, o foco está em objetos que combinam dados, comportamento e responsabilidade.</p>
+<p>4 - Java é uma linguagem totalmente orientada a objetos?
+Resposta: não em sentido absoluto. Java é fortemente orientada a objetos, mas possui tipos primitivos, membros estáticos e recursos que permitem código procedural. A própria linguagem separa tipos primitivos de tipos de referência.</p>
+<p>5 - O que é um objeto em uma visão inicial?
+Resposta: é uma unidade do sistema que representa alguma coisa relevante e pode possuir estado, comportamento e responsabilidade.</p>
+<p>6 - O que é uma classe em uma visão inicial?
+Resposta: é a definição de um tipo. Ela descreve quais dados e comportamentos os objetos daquele tipo podem ter.</p>
+<p>7 - O que significa dizer que objetos colaboram entre si?
+Resposta: significa que um objeto pode chamar métodos de outro para realizar uma tarefa. Em Java, essa colaboração normalmente acontece por chamadas de métodos.</p>
+<p>8 - Por que variáveis globais podem ser perigosas em sistemas grandes?
+Resposta: porque podem ser lidas e alteradas por várias partes do programa, dificultando rastrear quem mudou o estado e por qual motivo.</p>
+<p>9 - Por que encapsular estado interno é importante?
+Resposta: porque impede que qualquer parte do sistema altere dados internos sem passar pelas regras definidas pelo próprio objeto.</p>
+<p>10 - Quando um <code>record</code> pode ser útil em Java?
+Resposta: quando queremos representar dados simples de forma concisa, especialmente valores que carregam informações e não exigem identidade mutável complexa.</p>
+<p>11 - Quando uma classe comum pode ser melhor que um <code>record</code>?
+Resposta: quando o objeto possui ciclo de vida, identidade, mudanças controladas de estado e comportamentos relevantes.</p>
+<p>12 - O que é modelagem de domínio?
+Resposta: é o processo de representar conceitos e regras importantes do negócio no código, usando nomes, estruturas e responsabilidades próximas da realidade do sistema.</p>
+<p>13 - POO elimina a necessidade de programação funcional?
+Resposta: não. Em Java moderno, os paradigmas podem ser combinados. Um sistema pode ter objetos bem modelados e, ao mesmo tempo, usar lambdas, Streams e funções para transformar dados.</p>
+<p>14 - Qual é o principal risco de exagerar na orientação a objetos?
+Resposta: criar abstrações demais, classes demais e hierarquias difíceis de entender, sem ganho real para o sistema.</p>
+<p>15 - Qual é a principal habilidade ao aplicar POO em backend?
+Resposta: distribuir responsabilidades corretamente, mantendo alta coesão, baixo acoplamento e regras de negócio protegidas em lugares adequados.</p>
+<h2 id="resumo-final">Resumo final</h2>
+<p>Programação Orientada a Objetos é uma forma de organizar software em torno de objetos com responsabilidades claras.</p>
+<p>Em Java, esse paradigma é central porque a linguagem trabalha fortemente com classes, objetos, interfaces e tipos de referência. Porém, Java moderno também permite combinar POO com recursos funcionais, como lambdas, além de recursos mais recentes como records e sealed classes.</p>
+<p>O mais importante não é decorar termos como classe, objeto, atributo ou método. O mais importante é entender a mudança de mentalidade: sair de um código baseado apenas em comandos e variáveis soltas para um modelo em que cada parte do sistema tem uma responsabilidade compreensível.</p>
+<p>Em sistemas backend reais, POO aparece na modelagem de domínio, nos casos de uso, nos services, nos controllers, nos repositories, nas integrações e nos testes. Quando bem aplicada, melhora clareza, manutenção e evolução. Quando mal aplicada, pode gerar excesso de abstração e complexidade desnecessária.</p>
+<h2 id="referencias">Referências</h2>
+<ul>
+<li>Oracle. <strong>Java SE 25 API Documentation</strong>. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/index.html" title="Overview (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</li>
+<li>Oracle. <strong>Java Language Specification — Java SE 25 Edition</strong>. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/index.html" title="The Java® Language Specification">Oracle Docs</a>)</li>
+<li>Oracle. <strong>Java SE Downloads — JDK 25 como LTS mais recente</strong>. (<a href="https://www.oracle.com/java/technologies/downloads/" title="Java Downloads">Oracle</a>)</li>
+<li>Oracle. <strong>Java SE Support Roadmap</strong>. (<a href="https://www.oracle.com/java/technologies/java-se-support-roadmap.html" title="Java SE Support Roadmap">Oracle</a>)</li>
+<li>OpenJDK. <strong>JEP 126: Lambda Expressions &amp; Virtual Extension Methods</strong>. (<a href="https://openjdk.org/jeps/126" title="JEP 126: Lambda Expressions &amp; Virtual Extension Methods">OpenJDK</a>)</li>
+<li>OpenJDK. <strong>JEP 286: Local-Variable Type Inference</strong>. (<a href="https://openjdk.org/jeps/286" title="JEP 286: Local-Variable Type Inference">OpenJDK</a>)</li>
+<li>OpenJDK. <strong>JEP 395: Records</strong>. (<a href="https://openjdk.org/jeps/395" title="JEP 395: Records">OpenJDK</a>)</li>
+<li>OpenJDK. <strong>JEP 409: Sealed Classes</strong>. (<a href="https://openjdk.org/jeps/409" title="JEP 409: Sealed Classes">OpenJDK</a>)</li>
+<li>Oracle. <strong>java.lang.Object — Java SE 25 API</strong>. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="Object (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</li>
+<li>Bloch, Joshua. <strong>Effective Java</strong>. Addison-Wesley.</li>
+<li>Goetz, Brian et al. <strong>Java Concurrency in Practice</strong>. Addison-Wesley.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

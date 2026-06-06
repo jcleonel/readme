@@ -1,0 +1,2699 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../fundamentos-de-string/">
+      
+      
+        <link rel="next" href="../estruturas-condicionais/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Estruturas de controle e operadores - README</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/css/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#estruturas-de-controle-e-operadores-em-java" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../../.." title="README" class="md-header__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            README
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Estruturas de controle e operadores
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="README" class="md-nav__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    README
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Backend
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fundamentos-da-linguagem-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../convencoes-de-codigo-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convenções de código em Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../variaveis-tipos-primitivos-operadores-conversoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variáveis, tipos primitivos, operadores e conversões
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fundamentos-de-string/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de String
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de controle e operadores
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de controle e operadores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-no-codigo-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar no código: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-funciona-em-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como funciona em Java
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Como funciona em Java">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#igualdade-e" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Igualdade: == e !=
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#negacao-logica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Negação lógica: !
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparação: &lt;, &lt;=, &gt;, &gt;=
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operadores-logicos-condicionais-e" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operadores lógicos condicionais: &amp;&amp; e ||
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diferenca-entre-e" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Diferença entre &amp;&amp; e &amp;
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diferenca-entre-e_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Diferença entre || e |
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#o-operador-xor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O operador XOR: ^
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo prático
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analisando-o-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analisando o código
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-acontece-por-baixo-dos-panos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que acontece por baixo dos panos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="O que acontece por baixo dos panos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#expressoes-booleanas-sao-avaliadas-da-esquerda-para-a-direita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expressões booleanas são avaliadas da esquerda para a direita
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#curto-circuito-nao-e-apenas-otimizacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Curto-circuito não é apenas otimização
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#em-objetos-compara-referencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        == em objetos compara referência
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#string-e-objeto-nao-primitivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        String é objeto, não primitivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#java-25-e-versoes-anteriores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Java 25 e versões anteriores
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#confundir-com" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Confundir = com ==
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usar-para-comparar-string" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usar == para comparar String
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#esquecer-o-curto-circuito" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esquecer o curto-circuito
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#misturar-e-sem-parenteses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Misturar &amp;&amp; e || sem parênteses
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criar-expressoes-negativas-demais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Criar expressões negativas demais
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#colocar-operacoes-importantes-em-expressoes-com-curto-circuito" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Colocar operações importantes em expressões com curto-circuito
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decisões de engenharia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-evitar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando evitar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternativas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternativas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impactos-em-legibilidade-manutencao-e-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impactos em legibilidade, manutenção e performance
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Onde isso aparece em sistemas reais">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validacao-de-entrada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validação de entrada
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autorizacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Autorização
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtros-de-busca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Filtros de busca
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#regras-de-negocio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regras de negócio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#protecao-contra-nullpointerexception" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Proteção contra NullPointerException
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chamadas-condicionais-a-recursos-caros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chamadas condicionais a recursos caros
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../estruturas-condicionais/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas condicionais
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../estruturas-de-repeticao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de repetição
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Orientação a Objetos (POO)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Orientação a Objetos (POO)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introducao-orientacao-a-objetos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução à POO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Spring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/api-rest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    O que é API REST?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/http/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Um pouco de HTTP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/por-que-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Por que escolher Spring?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/spring-boot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Boot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/spring-initializr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Initializr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/maven-pom/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maven e pom.xml
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-no-codigo-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar no código: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-funciona-em-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como funciona em Java
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Como funciona em Java">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#igualdade-e" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Igualdade: == e !=
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#negacao-logica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Negação lógica: !
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparação: &lt;, &lt;=, &gt;, &gt;=
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operadores-logicos-condicionais-e" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operadores lógicos condicionais: &amp;&amp; e ||
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diferenca-entre-e" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Diferença entre &amp;&amp; e &amp;
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diferenca-entre-e_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Diferença entre || e |
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#o-operador-xor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O operador XOR: ^
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo prático
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analisando-o-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analisando o código
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-acontece-por-baixo-dos-panos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que acontece por baixo dos panos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="O que acontece por baixo dos panos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#expressoes-booleanas-sao-avaliadas-da-esquerda-para-a-direita" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expressões booleanas são avaliadas da esquerda para a direita
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#curto-circuito-nao-e-apenas-otimizacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Curto-circuito não é apenas otimização
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#em-objetos-compara-referencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        == em objetos compara referência
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#string-e-objeto-nao-primitivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        String é objeto, não primitivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#java-25-e-versoes-anteriores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Java 25 e versões anteriores
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#confundir-com" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Confundir = com ==
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usar-para-comparar-string" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usar == para comparar String
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#esquecer-o-curto-circuito" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esquecer o curto-circuito
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#misturar-e-sem-parenteses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Misturar &amp;&amp; e || sem parênteses
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criar-expressoes-negativas-demais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Criar expressões negativas demais
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#colocar-operacoes-importantes-em-expressoes-com-curto-circuito" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Colocar operações importantes em expressões com curto-circuito
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decisões de engenharia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-evitar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando evitar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternativas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternativas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impactos-em-legibilidade-manutencao-e-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impactos em legibilidade, manutenção e performance
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Onde isso aparece em sistemas reais">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validacao-de-entrada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validação de entrada
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autorizacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Autorização
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtros-de-busca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Filtros de busca
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#regras-de-negocio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regras de negócio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#protecao-contra-nullpointerexception" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Proteção contra NullPointerException
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chamadas-condicionais-a-recursos-caros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chamadas condicionais a recursos caros
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="estruturas-de-controle-e-operadores-em-java">Estruturas de controle e operadores em Java</h1>
+<p>Todo sistema backend precisa tomar decisões. Uma API decide se um usuário pode acessar um recurso. Um serviço de pedidos decide se uma compra pode ser finalizada. Um job decide se um registro deve ser reprocessado. Um validador decide se uma música pode ser publicada no catálogo.</p>
+<p>Essas decisões normalmente nascem de perguntas booleanas:</p>
+<div class="highlight"><pre><span></span><code><span class="n">usuarioEstaAutenticado</span><span class="o">?</span>
+<span class="n">pedidoEstaPago</span><span class="o">?</span>
+<span class="n">musicaPossuiLicenca</span><span class="o">?</span>
+<span class="n">bandaFoiInformada</span><span class="o">?</span>
+<span class="n">generoEhPermitido</span><span class="o">?</span>
+</code></pre></div>
+<p>Em Java, essas perguntas são representadas por expressões que retornam <code>boolean</code>, ou seja, <code>true</code> ou <code>false</code>. Operadores de igualdade, comparação, negação e operadores lógicos são a base dessas expressões. Eles alimentam estruturas de controle como <code>if</code>, <code>while</code>, <code>for</code>, <code>switch</code>, validações, filtros, regras de autorização e regras de negócio.</p>
+<p>No Java 25, que é a versão LTS mais recente da plataforma Java SE, esses operadores continuam sendo parte fundamental da linguagem. A Oracle lista o JDK 25 como a versão LTS mais recente, enquanto o JDK 21 aparece como a LTS anterior. (<a href="https://www.oracle.com/java/technologies/downloads/" title="Java Downloads">Oracle</a>)</p>
+<h2 id="antes-de-entrar-no-codigo-uma-ideia-simples">Antes de entrar no código: uma ideia simples</h2>
+<p>Pense em uma regra de publicação do <code>meucatalogomusical.com</code>.</p>
+<p>Uma música só pode ser publicada se:</p>
+<ul>
+<li>a banda foi informada;</li>
+<li>o gênero é permitido;</li>
+<li>a duração faz sentido;</li>
+<li>a música possui licença;</li>
+<li>o usuário tem permissão para publicar.</li>
+</ul>
+<p>Em linguagem natural:</p>
+<div class="highlight"><pre><span></span><code>Pode publicar se a banda foi informada
+E o gênero é permitido
+E a duração é válida
+E existe licença
+E o usuário está autorizado.
+</code></pre></div>
+<p>Em Java, isso vira uma expressão lógica:</p>
+<div class="highlight"><pre><span></span><code><span class="n">bandaInformada</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">generoPermitido</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">duracaoValida</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">possuiLicenca</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">usuarioAutorizado</span>
+</code></pre></div>
+<p>O operador <code>&amp;&amp;</code> representa “E lógico”. A expressão inteira só será verdadeira se todas as partes forem verdadeiras.</p>
+<p>Agora imagine outra regra:</p>
+<div class="highlight"><pre><span></span><code>O usuário pode publicar se for administrador
+OU se for editor e a música já foi revisada.
+</code></pre></div>
+<p>Em Java:</p>
+<div class="highlight"><pre><span></span><code><span class="n">usuarioAdmin</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">usuarioEditor</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">musicaRevisada</span><span class="p">)</span>
+</code></pre></div>
+<p>O operador <code>||</code> representa “OU lógico”. Basta uma das alternativas ser verdadeira para que a expressão possa ser verdadeira.</p>
+<h2 id="definicao-tecnica">Definição técnica</h2>
+<p>Em Java, operadores são símbolos da linguagem usados para construir expressões. Algumas expressões produzem valores numéricos, outras produzem referências, e outras produzem valores booleanos.</p>
+<p>Neste artigo, o foco está nos operadores usados para tomada de decisão:</p>
+<table>
+<thead>
+<tr>
+<th>Categoria</th>
+<th>Operadores</th>
+<th>Resultado</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Igualdade</td>
+<td><code>==</code>, <code>!=</code></td>
+<td><code>boolean</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Comparação numérica</td>
+<td><code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code></td>
+<td><code>boolean</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Negação lógica</td>
+<td><code>!</code></td>
+<td><code>boolean</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>AND lógico condicional</td>
+<td><code>&amp;&amp;</code></td>
+<td><code>boolean</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>OR lógico condicional</td>
+<td><code>|                                       |</code></td>
+<td><code>boolean</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>AND lógico não condicional</td>
+<td><code>&amp;</code></td>
+<td><code>boolean</code>, quando usado com booleanos</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>OR lógico não condicional</td>
+<td><code>|</code></td>
+<td><code>boolean</code>, quando usado com booleanos</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>XOR lógico</td>
+<td><code>^</code></td>
+<td><code>boolean</code>, quando usado com booleanos</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>A Java Language Specification define <code>==</code> e <code>!=</code> como operadores de igualdade. O resultado de uma expressão de igualdade é sempre <code>boolean</code>, e <code>a != b</code> produz o mesmo resultado de <code>!(a == b)</code>. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-15.html" title="Chapter 15. Expressions">Oracle Docs</a>)</p>
+<p>Os operadores <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code> e <code>&gt;=</code> são operadores relacionais usados principalmente com tipos numéricos. Eles respondem perguntas como “maior que”, “menor que”, “maior ou igual” e “menor ou igual”. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-15.html" title="Chapter 15. Expressions">Oracle Docs</a>)</p>
+<p>Os operadores <code>&amp;</code>, <code>|</code> e <code>^</code> têm dois usos em Java: podem atuar como operadores bitwise em tipos inteiros e também como operadores lógicos em operandos <code>boolean</code>/<code>Boolean</code>. A JLS define <code>&amp;</code> como AND, <code>|</code> como OR inclusivo e <code>^</code> como OR exclusivo. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-15.html" title="Chapter 15. Expressions">Oracle Docs</a>)</p>
+<p>Já <code>&amp;&amp;</code> e <code>||</code> são operadores condicionais. Eles produzem o mesmo resultado lógico de <code>&amp;</code> e <code>|</code> quando usados com booleanos, mas têm uma diferença essencial: podem evitar a avaliação do lado direito da expressão. Essa característica é chamada de curto-circuito. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-15.html" title="Chapter 15. Expressions">Oracle Docs</a>) (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-15.html" title="Chapter 15. Expressions">Oracle Docs</a>)</p>
+<h2 id="como-funciona-em-java">Como funciona em Java</h2>
+<h3 id="igualdade-e">Igualdade: <code>==</code> e <code>!=</code></h3>
+<p>O operador <code>==</code> compara igualdade. O operador <code>!=</code> compara diferença.</p>
+<p>Com tipos primitivos, como <code>int</code>, <code>long</code>, <code>boolean</code>, <code>char</code>, <code>double</code>, a comparação é feita pelo valor:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">quantidadeCadastrada</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">quantidadeMinima</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+
+<span class="kt">boolean</span><span class="w"> </span><span class="n">quantidadeSuficiente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">quantidadeCadastrada</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">quantidadeMinima</span><span class="p">;</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">quantidadeExata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">quantidadeCadastrada</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">quantidadeMinima</span><span class="p">;</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">quantidadeDiferente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">quantidadeCadastrada</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">quantidadeMinima</span><span class="p">;</span>
+</code></pre></div>
+<p>Com referências, como <code>String</code>, objetos de domínio, listas e entidades, <code>==</code> compara se as duas variáveis apontam para o mesmo objeto, não se o conteúdo interno é equivalente. A JLS deixa isso explícito: em referências, <code>==</code> retorna <code>true</code> quando os dois operandos são <code>null</code> ou quando apontam para o mesmo objeto ou array. No caso de <code>String</code>, a própria especificação alerta que <code>==</code> verifica se são o mesmo objeto <code>String</code>; para comparar conteúdo, deve-se usar <code>equals</code>. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-15.html" title="Chapter 15. Expressions">Oracle Docs</a>)</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">banda1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="s">&quot;Dream Theater&quot;</span><span class="p">);</span>
+<span class="n">String</span><span class="w"> </span><span class="n">banda2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="s">&quot;Dream Theater&quot;</span><span class="p">);</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">banda1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">banda2</span><span class="p">);</span><span class="w">      </span><span class="c1">// false</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">banda1</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">banda2</span><span class="p">));</span><span class="w"> </span><span class="c1">// true</span>
+</code></pre></div>
+<p>O primeiro resultado é <code>false</code> porque são dois objetos diferentes. O segundo é <code>true</code> porque o conteúdo textual é o mesmo.</p>
+<p>Quando existe risco de <code>null</code>, uma alternativa segura é usar <code>Objects.equals</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Objects</span><span class="p">;</span>
+
+<span class="n">String</span><span class="w"> </span><span class="n">bandaCadastrada</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="n">String</span><span class="w"> </span><span class="n">bandaInformada</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Rush&quot;</span><span class="p">;</span>
+
+<span class="kt">boolean</span><span class="w"> </span><span class="n">mesmaBanda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">bandaCadastrada</span><span class="p">,</span><span class="w"> </span><span class="n">bandaInformada</span><span class="p">);</span>
+</code></pre></div>
+<p><code>Objects.equals(a, b)</code> retorna <code>true</code> se os dois argumentos forem iguais, incluindo o caso em que ambos são <code>null</code>; se apenas o primeiro não for <code>null</code>, a comparação é feita chamando <code>equals</code> nele. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api//java.base/java/util/Objects.html" title="Objects (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</p>
+<h3 id="negacao-logica">Negação lógica: <code>!</code></h3>
+<p>O operador <code>!</code> inverte um valor booleano:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="n">possuiLicenca</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">bloqueadaParaPublicacao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">!</span><span class="n">possuiLicenca</span><span class="p">;</span>
+</code></pre></div>
+<p>Se <code>possuiLicenca</code> é <code>false</code>, então <code>!possuiLicenca</code> é <code>true</code>.</p>
+<p>Em regras de negócio, a negação deve ser usada com cuidado. Expressões como esta são válidas:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="n">podePublicar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">!</span><span class="n">bloqueada</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">revisada</span><span class="p">;</span>
+</code></pre></div>
+<p>Mas podem ficar difíceis de ler quando acumulam muitas negações:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">!</span><span class="p">(</span><span class="o">!</span><span class="n">bloqueada</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">expirada</span><span class="p">);</span>
+</code></pre></div>
+<p>Nesses casos, geralmente é melhor criar variáveis intermediárias com nomes claros.</p>
+<h3 id="comparacao">Comparação: <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code></h3>
+<p>Operadores de comparação são usados para validar limites:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">duracaoEmSegundos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">421</span><span class="p">;</span>
+
+<span class="kt">boolean</span><span class="w"> </span><span class="n">duracaoMinimaValida</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">duracaoEmSegundos</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">30</span><span class="p">;</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">duracaoMaximaValida</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">duracaoEmSegundos</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">3600</span><span class="p">;</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">duracaoValida</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">duracaoMinimaValida</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">duracaoMaximaValida</span><span class="p">;</span>
+</code></pre></div>
+<p>Esse tipo de regra aparece muito em backend:</p>
+<div class="highlight"><pre><span></span><code><span class="n">preco</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span>
+<span class="n">idade</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">18</span>
+<span class="n">tentativas</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">limiteMaximo</span>
+<span class="n">quantidadeSolicitada</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">quantidadeDisponivel</span>
+<span class="n">dataExpiracao</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">dataAtual</span>
+</code></pre></div>
+<p>Com <code>double</code> e <code>float</code>, há detalhes importantes. A JLS define regras específicas para comparações de ponto flutuante, incluindo o caso de <code>NaN</code>: qualquer comparação <code>==</code> envolvendo <code>NaN</code> retorna <code>false</code>, enquanto <code>!=</code> retorna <code>true</code>. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-15.html" title="Chapter 15. Expressions">Oracle Docs</a>)</p>
+<p>Por isso, para regras monetárias e cálculos financeiros, normalmente não se usa <code>double</code>; usa-se <code>BigDecimal</code>, especialmente em sistemas backend que lidam com dinheiro.</p>
+<h3 id="operadores-logicos-condicionais-e">Operadores lógicos condicionais: <code>&amp;&amp;</code> e <code>||</code></h3>
+<p>O operador <code>&amp;&amp;</code> representa AND lógico:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="n">podePublicar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">possuiLicenca</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">revisada</span><span class="p">;</span>
+</code></pre></div>
+<p>A expressão só será <code>true</code> se <code>possuiLicenca</code> e <code>revisada</code> forem <code>true</code>.</p>
+<p>Tabela verdade do AND:</p>
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+<th><code>A &amp;&amp; B</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>false</code></td>
+<td><code>false</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>false</code></td>
+<td><code>true</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>true</code></td>
+<td><code>false</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>true</code></td>
+<td><code>true</code></td>
+<td><code>true</code></td>
+</tr>
+</tbody>
+</table>
+<p>O operador <code>||</code> representa OR lógico:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="n">podeGerenciar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usuarioAdmin</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">usuarioModerador</span><span class="p">;</span>
+</code></pre></div>
+<p>A expressão será <code>true</code> se pelo menos uma das condições for <code>true</code>.</p>
+<p>Tabela verdade do OR:</p>
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+<th><code>A || B</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>false</code></td>
+<td><code>false</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>false</code></td>
+<td><code>true</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>true</code></td>
+<td><code>false</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>true</code></td>
+<td><code>true</code></td>
+<td><code>true</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="diferenca-entre-e">Diferença entre <code>&amp;&amp;</code> e <code>&amp;</code></h3>
+<p>Com booleanos, <code>&amp;&amp;</code> e <code>&amp;</code> podem produzir o mesmo resultado final, mas não têm o mesmo comportamento de avaliação.</p>
+<p>O <code>&amp;&amp;</code> faz curto-circuito. Se o lado esquerdo for <code>false</code>, o lado direito nem é avaliado:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+
+<span class="kt">boolean</span><span class="w"> </span><span class="n">bandaValida</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">banda</span><span class="p">.</span><span class="na">isBlank</span><span class="p">();</span>
+</code></pre></div>
+<p>Essa expressão não lança <code>NullPointerException</code>, porque <code>!banda.isBlank()</code> só será executado se <code>banda != null</code> for <code>true</code>.</p>
+<p>Se você trocar <code>&amp;&amp;</code> por <code>&amp;</code>, os dois lados serão avaliados:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+
+<span class="kt">boolean</span><span class="w"> </span><span class="n">bandaValida</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">banda</span><span class="p">.</span><span class="na">isBlank</span><span class="p">();</span><span class="w"> </span><span class="c1">// risco de NullPointerException</span>
+</code></pre></div>
+<p>A JLS define que <code>&amp;&amp;</code> avalia o operando da direita apenas se o operando da esquerda for <code>true</code>; já <code>&amp;</code>, quando usado com booleanos, avalia os dois operandos. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-15.html" title="Chapter 15. Expressions">Oracle Docs</a>) (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-15.html" title="Chapter 15. Expressions">Oracle Docs</a>)</p>
+<h3 id="diferenca-entre-e_1">Diferença entre <code>||</code> e <code>|</code></h3>
+<p>Com booleanos, <code>||</code> também faz curto-circuito. Se o lado esquerdo for <code>true</code>, o lado direito não precisa ser avaliado:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="n">usuarioAdmin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">usuarioEditor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+
+<span class="kt">boolean</span><span class="w"> </span><span class="n">podeEditar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usuarioAdmin</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">usuarioEditor</span><span class="p">;</span>
+</code></pre></div>
+<p>Como <code>usuarioAdmin</code> já é <code>true</code>, a expressão inteira já é verdadeira.</p>
+<p>Com <code>|</code>, os dois lados são avaliados:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="n">podeEditar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usuarioAdmin</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">usuarioEditor</span><span class="p">;</span>
+</code></pre></div>
+<p>Em regras condicionais comuns, prefira <code>&amp;&amp;</code> e <code>||</code>. Reserve <code>&amp;</code> e <code>|</code> para casos específicos: operações bitwise, flags, máscaras de bits ou situações raras em que você realmente precisa avaliar os dois lados.</p>
+<h3 id="o-operador-xor">O operador XOR: <code>^</code></h3>
+<p>Além de AND e OR, Java também possui o operador XOR lógico, representado por <code>^</code>.</p>
+<p>XOR significa “ou exclusivo”. Ele retorna <code>true</code> quando os operandos são diferentes:</p>
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+<th><code>A ^ B</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>false</code></td>
+<td><code>false</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>false</code></td>
+<td><code>true</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>true</code></td>
+<td><code>false</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>true</code></td>
+<td><code>true</code></td>
+<td><code>false</code></td>
+</tr>
+</tbody>
+</table>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="n">loginComSenha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">loginComCodigoTemporario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+
+<span class="kt">boolean</span><span class="w"> </span><span class="n">exatamenteUmMetodoDeLogin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">loginComSenha</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="n">loginComCodigoTemporario</span><span class="p">;</span>
+</code></pre></div>
+<p>Essa regra exige que apenas um método de login tenha sido usado. Se os dois forem usados ao mesmo tempo, ou nenhum deles for usado, a expressão será <code>false</code>.</p>
+<p>Use <code>^</code> com moderação. Ele é útil, mas nem sempre é imediatamente claro para todos os leitores. Em regras de negócio críticas, uma alternativa mais explícita pode ser melhor.</p>
+<h2 id="exemplo-pratico">Exemplo prático</h2>
+<p>Imagine que o <code>meucatalogomusical.com</code> tem uma área administrativa para cadastrar músicas de bandas como Iron Maiden, Rush, Dream Theater, Metallica e Led Zeppelin.</p>
+<p>Uma música só pode ser publicada quando:</p>
+<ul>
+<li>a banda foi informada;</li>
+<li>o nome da música foi informado;</li>
+<li>o gênero pertence ao escopo do catálogo;</li>
+<li>a duração está entre 30 segundos e 1 hora;</li>
+<li>a música possui licença de exibição;</li>
+<li>o usuário é administrador ou é editor e a música já foi revisada.</li>
+</ul>
+<p>Código em Java 25:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Objects</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">PoliticaPublicacaoMusica</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Dream Theater&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Pull Me Under&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">genero</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Metal Progressivo&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">duracaoEmSegundos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">496</span><span class="p">;</span>
+
+<span class="w">        </span><span class="kt">boolean</span><span class="w"> </span><span class="n">possuiLicenca</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">boolean</span><span class="w"> </span><span class="n">musicaRevisada</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">boolean</span><span class="w"> </span><span class="n">usuarioAdmin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">boolean</span><span class="w"> </span><span class="n">usuarioEditor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+
+<span class="w">        </span><span class="kt">boolean</span><span class="w"> </span><span class="n">podePublicar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">podePublicarMusica</span><span class="p">(</span>
+<span class="w">                </span><span class="n">banda</span><span class="p">,</span>
+<span class="w">                </span><span class="n">musica</span><span class="p">,</span>
+<span class="w">                </span><span class="n">genero</span><span class="p">,</span>
+<span class="w">                </span><span class="n">duracaoEmSegundos</span><span class="p">,</span>
+<span class="w">                </span><span class="n">possuiLicenca</span><span class="p">,</span>
+<span class="w">                </span><span class="n">musicaRevisada</span><span class="p">,</span>
+<span class="w">                </span><span class="n">usuarioAdmin</span><span class="p">,</span>
+<span class="w">                </span><span class="n">usuarioEditor</span>
+<span class="w">        </span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;Pode publicar: %b%n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">podePublicar</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">bandaJaCadastrada</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Dream Theater&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">boolean</span><span class="w"> </span><span class="n">mesmaBanda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mesmaBanda</span><span class="p">(</span><span class="n">bandaJaCadastrada</span><span class="p">,</span><span class="w"> </span><span class="n">banda</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;Mesma banda: %b%n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">mesmaBanda</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">podePublicarMusica</span><span class="p">(</span>
+<span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">banda</span><span class="p">,</span>
+<span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">musica</span><span class="p">,</span>
+<span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">genero</span><span class="p">,</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">duracaoEmSegundos</span><span class="p">,</span>
+<span class="w">            </span><span class="kt">boolean</span><span class="w"> </span><span class="n">possuiLicenca</span><span class="p">,</span>
+<span class="w">            </span><span class="kt">boolean</span><span class="w"> </span><span class="n">musicaRevisada</span><span class="p">,</span>
+<span class="w">            </span><span class="kt">boolean</span><span class="w"> </span><span class="n">usuarioAdmin</span><span class="p">,</span>
+<span class="w">            </span><span class="kt">boolean</span><span class="w"> </span><span class="n">usuarioEditor</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">boolean</span><span class="w"> </span><span class="n">bandaInformada</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">banda</span><span class="p">.</span><span class="na">isBlank</span><span class="p">();</span>
+<span class="w">        </span><span class="kt">boolean</span><span class="w"> </span><span class="n">musicaInformada</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">musica</span><span class="p">.</span><span class="na">isBlank</span><span class="p">();</span>
+
+<span class="w">        </span><span class="kt">boolean</span><span class="w"> </span><span class="n">generoPermitido</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">genero</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Metal&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="o">||</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">genero</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Heavy Metal&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="o">||</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">genero</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Hard Rock&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="o">||</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">genero</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Rock Progressivo&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="o">||</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">genero</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Metal Progressivo&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="kt">boolean</span><span class="w"> </span><span class="n">duracaoValida</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">duracaoEmSegundos</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">duracaoEmSegundos</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">3600</span><span class="p">;</span>
+
+<span class="w">        </span><span class="kt">boolean</span><span class="w"> </span><span class="n">usuarioAutorizado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usuarioAdmin</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">usuarioEditor</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">musicaRevisada</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">bandaInformada</span>
+<span class="w">                </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">musicaInformada</span>
+<span class="w">                </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">generoPermitido</span>
+<span class="w">                </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">duracaoValida</span>
+<span class="w">                </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">possuiLicenca</span>
+<span class="w">                </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">usuarioAutorizado</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">mesmaBanda</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">bandaJaCadastrada</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">bandaInformada</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">bandaJaCadastrada</span><span class="p">,</span><span class="w"> </span><span class="n">bandaInformada</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="analisando-o-codigo">Analisando o código</h2>
+<p>O método <code>podePublicarMusica</code> concentra uma regra de negócio. Em vez de retornar uma expressão gigante e difícil de entender, ele cria variáveis booleanas intermediárias:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="n">bandaInformada</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">banda</span><span class="p">.</span><span class="na">isBlank</span><span class="p">();</span>
+</code></pre></div>
+<p>Essa linha usa curto-circuito de forma segura. Primeiro verifica se <code>banda</code> não é <code>null</code>. Só depois chama <code>isBlank()</code>. Se <code>banda</code> fosse <code>null</code>, o lado direito não seria executado, evitando <code>NullPointerException</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="n">generoPermitido</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">genero</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Metal&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="o">||</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">genero</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Heavy Metal&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="o">||</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">genero</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Hard Rock&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="o">||</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">genero</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Rock Progressivo&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="o">||</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">genero</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Metal Progressivo&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>Aqui, <code>||</code> representa alternativas. O gênero é permitido se for igual a pelo menos uma das opções aceitas. <code>Objects.equals</code> evita erro caso <code>genero</code> seja <code>null</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="n">duracaoValida</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">duracaoEmSegundos</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">duracaoEmSegundos</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">3600</span><span class="p">;</span>
+</code></pre></div>
+<p>Essa expressão representa uma faixa. A duração precisa ser maior ou igual a 30 segundos e menor ou igual a 3600 segundos.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="n">usuarioAutorizado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usuarioAdmin</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">usuarioEditor</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">musicaRevisada</span><span class="p">);</span>
+</code></pre></div>
+<p>Essa regra merece atenção. O usuário está autorizado se for administrador ou se for editor e a música estiver revisada.</p>
+<p>Os parênteses não são obrigatórios para o compilador nesse caso, porque <code>&amp;&amp;</code> tem precedência maior que <code>||</code>. Mesmo assim, eles melhoram a legibilidade e reduzem a chance de erro humano.</p>
+<div class="highlight"><pre><span></span><code><span class="k">return</span><span class="w"> </span><span class="n">bandaInformada</span>
+<span class="w">        </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">musicaInformada</span>
+<span class="w">        </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">generoPermitido</span>
+<span class="w">        </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">duracaoValida</span>
+<span class="w">        </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">possuiLicenca</span>
+<span class="w">        </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">usuarioAutorizado</span><span class="p">;</span>
+</code></pre></div>
+<p>O retorno final combina todas as regras obrigatórias. Como foi usado <code>&amp;&amp;</code>, basta uma condição ser <code>false</code> para a publicação ser negada.</p>
+<h2 id="o-que-acontece-por-baixo-dos-panos">O que acontece por baixo dos panos</h2>
+<h3 id="expressoes-booleanas-sao-avaliadas-da-esquerda-para-a-direita">Expressões booleanas são avaliadas da esquerda para a direita</h3>
+<p>A JLS define a ordem de avaliação das expressões em Java. O operando da esquerda é avaliado primeiro, e a avaliação respeita parênteses e precedência. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/index.html" title="The Java® Language Specification">Oracle Docs</a>)</p>
+<p>Isso importa muito em expressões como:</p>
+<div class="highlight"><pre><span></span><code><span class="n">banda</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">banda</span><span class="p">.</span><span class="na">isBlank</span><span class="p">()</span>
+</code></pre></div>
+<p>A segurança dessa linha depende da ordem. Primeiro Java avalia <code>banda != null</code>. Se for <code>false</code>, a expressão inteira já é <code>false</code>, e o método <code>isBlank()</code> não é chamado.</p>
+<h3 id="curto-circuito-nao-e-apenas-otimizacao">Curto-circuito não é apenas otimização</h3>
+<p>O curto-circuito pode melhorar performance, mas sua importância principal é semântica e defensiva.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">usuario</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">usuario</span><span class="p">.</span><span class="na">temPermissao</span><span class="p">(</span><span class="s">&quot;PUBLICAR_MUSICA&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// publica música</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Essa expressão evita chamar um método em uma referência <code>null</code>.</p>
+<p>Outro exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cacheDisponivel</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">buscarNoBancoDeDados</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// prossegue</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Se <code>cacheDisponivel</code> for <code>true</code>, talvez nem seja necessário chamar uma operação mais cara.</p>
+<p>O ponto importante: não coloque efeitos colaterais importantes no lado direito de <code>&amp;&amp;</code> ou <code>||</code>, porque esse lado pode não ser executado.</p>
+<p>Evite:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usuarioValido</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">auditoria</span><span class="p">.</span><span class="na">registrarAcesso</span><span class="p">();</span>
+</code></pre></div>
+<p>Se <code>usuarioValido</code> for <code>false</code>, <code>registrarAcesso()</code> não será chamado. Se o registro de auditoria for obrigatório, ele deve ficar em uma instrução separada.</p>
+<h3 id="em-objetos-compara-referencia"><code>==</code> em objetos compara referência</h3>
+<p>Com objetos, <code>==</code> responde à pergunta:</p>
+<div class="highlight"><pre><span></span><code>Essas duas variáveis apontam para o mesmo objeto?
+</code></pre></div>
+<p><code>equals</code> responde a outra pergunta:</p>
+<div class="highlight"><pre><span></span><code>Esses dois objetos devem ser considerados equivalentes segundo a regra da classe?
+</code></pre></div>
+<p>A documentação de <code>Object.equals</code> define o contrato de equivalência: reflexivo, simétrico, transitivo, consistente e falso quando comparado com <code>null</code>. Ela também informa que a implementação padrão de <code>Object.equals</code> compara identidade, isto é, equivale a <code>x == y</code> para referências não nulas. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="Object (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</p>
+<p>Por isso, se uma classe de domínio sobrescreve <code>equals</code>, também deve sobrescrever <code>hashCode</code>. Isso é essencial em coleções como <code>HashSet</code> e <code>HashMap</code>.</p>
+<h3 id="string-e-objeto-nao-primitivo"><code>String</code> é objeto, não primitivo</h3>
+<p><code>String</code> tem tratamento especial na linguagem, mas continua sendo classe. A documentação oficial informa que <code>String</code> representa sequências de caracteres, que literais como <code>"abc"</code> são instâncias dessa classe e que strings são imutáveis. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="String (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</p>
+<p>Por causa do pool de strings, este código pode enganar:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Rush&quot;</span><span class="p">;</span>
+<span class="n">String</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Rush&quot;</span><span class="p">;</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w"> </span><span class="c1">// pode imprimir true</span>
+</code></pre></div>
+<p>Mas isso não significa que <code>==</code> compara conteúdo. Significa apenas que, nesse caso específico, os dois literais podem estar apontando para o mesmo objeto internado.</p>
+<p>Em código de aplicação, compare conteúdo textual com:</p>
+<div class="highlight"><pre><span></span><code><span class="n">a</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="n">Objects</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span>
+<span class="s">&quot;Rush&quot;</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="java-25-e-versoes-anteriores">Java 25 e versões anteriores</h2>
+<p>Para os operadores tratados neste artigo, o comportamento principal não é uma novidade do Java 25. Operadores como <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&amp;&amp;</code>, <code>||</code>, <code>!</code>, <code>&amp;</code>, <code>|</code> e <code>^</code> fazem parte da base da linguagem Java há muito tempo.</p>
+<p>O que muda em versões mais recentes é o contexto em que você escreve o código. Em Java moderno, é comum combinar esses operadores com recursos como records, pattern matching, APIs funcionais e melhores práticas de modelagem. Mas as regras fundamentais de avaliação, igualdade, curto-circuito e precedência continuam definidas pela JLS.</p>
+<p>Um detalhe histórico relevante envolve ponto flutuante. A partir do Java 17, a JEP 306 restaurou a semântica “always-strict” para operações de ponto flutuante, buscando tornar esse aspecto da plataforma mais regular e previsível. Em Java 25, essa regra já faz parte do comportamento vigente. (<a href="https://openjdk.org/jeps/306" title="JEP 306: Restore Always-Strict Floating-Point Semantics">OpenJDK</a>)</p>
+<p>Outro recurso moderno que pode aparecer em exemplos é <code>var</code>, introduzido no Java 10 pela JEP 286. Ele permite inferência de tipo em variáveis locais com inicializador, mas não altera o funcionamento dos operadores. (<a href="https://openjdk.org/jeps/286" title="JEP 286: Local-Variable Type Inference">OpenJDK</a>)</p>
+<p>Exemplo com tipo explícito:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="n">generoPermitido</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">genero</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Hard Rock&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>Exemplo com <code>var</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="n">generoPermitido</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">genero</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Hard Rock&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>Os dois exemplos têm o mesmo tipo final: <code>boolean</code>. Em artigos de estudo e código de domínio, o tipo explícito pode ser melhor quando aumenta a clareza.</p>
+<h2 id="boas-praticas">Boas práticas</h2>
+<p>Prefira <code>&amp;&amp;</code> e <code>||</code> em condições de negócio. Eles expressam melhor a intenção e evitam avaliações desnecessárias.</p>
+<p>Use parênteses para deixar a regra clara, mesmo quando a precedência da linguagem já resolveria:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="n">usuarioAutorizado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usuarioAdmin</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">usuarioEditor</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">musicaRevisada</span><span class="p">);</span>
+</code></pre></div>
+<p>Compare <code>String</code> e objetos por conteúdo com <code>equals</code> ou <code>Objects.equals</code>, não com <code>==</code>.</p>
+<p>Coloque verificações mais baratas e mais seguras primeiro:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">banda</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">banda</span><span class="p">.</span><span class="na">isBlank</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// seguro</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Evite efeitos colaterais dentro de expressões booleanas:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Evite</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">processado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">valido</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">enviarNotificacao</span><span class="p">();</span>
+</code></pre></div>
+<p>Prefira separar:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">valido</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">enviarNotificacao</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Nomeie expressões complexas:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="n">estaDentroDoPeriodoDePublicacao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dataAtual</span><span class="p">.</span><span class="na">isAfter</span><span class="p">(</span><span class="n">inicio</span><span class="p">)</span>
+<span class="w">        </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">dataAtual</span><span class="p">.</span><span class="na">isBefore</span><span class="p">(</span><span class="n">fim</span><span class="p">);</span>
+
+<span class="kt">boolean</span><span class="w"> </span><span class="n">podePublicar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usuarioAutorizado</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">estaDentroDoPeriodoDePublicacao</span><span class="p">;</span>
+</code></pre></div>
+<p>Isso torna a regra mais fácil de revisar, testar e discutir em code review.</p>
+<h2 id="erros-comuns">Erros comuns</h2>
+<h3 id="confundir-com">Confundir <code>=</code> com <code>==</code></h3>
+<p><code>=</code> atribui valor. <code>==</code> compara valor ou referência.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">quantidade</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+
+<span class="kt">boolean</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">quantidade</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="c1">// comparação</span>
+</code></pre></div>
+<p>Em Java, isto não compila dentro de <code>if</code> quando envolve tipos incompatíveis:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">quantidade</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// erro de compilação</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Diferente de algumas linguagens, Java exige uma expressão booleana no <code>if</code>.</p>
+<h3 id="usar-para-comparar-string">Usar <code>==</code> para comparar <code>String</code></h3>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="s">&quot;Metallica&quot;</span><span class="p">);</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">banda</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;Metallica&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// errado para comparação de conteúdo</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Correto:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;Metallica&quot;</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">banda</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// comparação de conteúdo e segura contra null</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="esquecer-o-curto-circuito">Esquecer o curto-circuito</h3>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">banda</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">banda</span><span class="p">.</span><span class="na">isBlank</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// risco de NullPointerException</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Correto:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">banda</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">banda</span><span class="p">.</span><span class="na">isBlank</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// seguro</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="misturar-e-sem-parenteses">Misturar <code>&amp;&amp;</code> e <code>||</code> sem parênteses</h3>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="n">autorizado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">admin</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">editor</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">revisado</span><span class="p">;</span>
+</code></pre></div>
+<p>O compilador entende como:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="n">autorizado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">admin</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">editor</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">revisado</span><span class="p">);</span>
+</code></pre></div>
+<p>Mas o leitor pode ficar em dúvida. Prefira:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="n">autorizado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">admin</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">editor</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">revisado</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="criar-expressoes-negativas-demais">Criar expressões negativas demais</h3>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">!</span><span class="n">usuarioBloqueado</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">musicaExpirada</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">licencaInvalida</span><span class="p">;</span>
+</code></pre></div>
+<p>Pode ser melhor reescrever com nomes positivos:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="n">usuarioAtivo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">!</span><span class="n">usuarioBloqueado</span><span class="p">;</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">musicaDentroDoPrazo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">!</span><span class="n">musicaExpirada</span><span class="p">;</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">licencaValida</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">!</span><span class="n">licencaInvalida</span><span class="p">;</span>
+
+<span class="kt">boolean</span><span class="w"> </span><span class="n">podePublicar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usuarioAtivo</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">musicaDentroDoPrazo</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">licencaValida</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="colocar-operacoes-importantes-em-expressoes-com-curto-circuito">Colocar operações importantes em expressões com curto-circuito</h3>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="n">resultado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">validarMusica</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">registrarAuditoria</span><span class="p">();</span>
+</code></pre></div>
+<p>Se <code>validarMusica()</code> retornar <code>false</code>, <code>registrarAuditoria()</code> não será executado.</p>
+<p>Se auditoria é obrigatória, não use esse padrão.</p>
+<h2 id="decisoes-de-engenharia">Decisões de engenharia</h2>
+<h3 id="quando-usar">Quando usar</h3>
+<p>Use operadores booleanos quando a regra é simples, local e fácil de entender:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="n">podePublicar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">possuiLicenca</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">revisada</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">usuarioAutorizado</span><span class="p">;</span>
+</code></pre></div>
+<p>Use <code>&amp;&amp;</code> para requisitos obrigatórios. Use <code>||</code> para alternativas. Use <code>!</code> para negar uma condição simples. Use <code>Objects.equals</code> quando comparar objetos que podem ser <code>null</code>.</p>
+<h3 id="quando-evitar">Quando evitar</h3>
+<p>Evite expressões booleanas gigantes:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">d</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="n">g</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">h</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// difícil de manter</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse tipo de código é difícil de testar, revisar e alterar com segurança.</p>
+<p>Também evite usar operadores como substitutos de modelagem. Se uma regra é importante para o domínio, talvez ela mereça um método com nome claro:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">podeSerPublicadaPor</span><span class="p">(</span><span class="n">usuario</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// melhor do que espalhar a regra em vários lugares</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="alternativas">Alternativas</h3>
+<p>Para regras simples, variáveis booleanas intermediárias são suficientes.</p>
+<p>Para regras de domínio mais ricas, prefira métodos no domínio:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="n">podePublicar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">politicaPublicacao</span><span class="p">.</span><span class="na">podePublicar</span><span class="p">(</span><span class="n">musica</span><span class="p">,</span><span class="w"> </span><span class="n">usuario</span><span class="p">);</span>
+</code></pre></div>
+<p>Para regras combináveis, pode fazer sentido usar Specification Pattern:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Specification</span><span class="o">&lt;</span><span class="n">Musica</span><span class="o">&gt;</span><span class="w"> </span><span class="n">possuiLicenca</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MusicaPossuiLicenca</span><span class="p">();</span>
+<span class="n">Specification</span><span class="o">&lt;</span><span class="n">Musica</span><span class="o">&gt;</span><span class="w"> </span><span class="n">generoPermitido</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">GeneroPermitido</span><span class="p">();</span>
+
+<span class="kt">boolean</span><span class="w"> </span><span class="n">podePublicar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">possuiLicenca</span><span class="p">.</span><span class="na">and</span><span class="p">(</span><span class="n">generoPermitido</span><span class="p">).</span><span class="na">isSatisfiedBy</span><span class="p">(</span><span class="n">musica</span><span class="p">);</span>
+</code></pre></div>
+<p>Para filtros em coleções, <code>Predicate&lt;T&gt;</code> pode representar regras booleanas reutilizáveis. A API oficial define <code>Predicate&lt;T&gt;</code> como uma função que recebe um argumento e retorna um valor booleano. (<a href="https://ligm.univ-eiffel.fr/~juge/javadoc-25/api/java.base/java/util/function/Predicate.html" title="Predicate (Java SE 25 &amp; JDK 25)">ligm.univ-eiffel.fr</a>)</p>
+<h3 id="impactos-em-legibilidade-manutencao-e-performance">Impactos em legibilidade, manutenção e performance</h3>
+<p>Em legibilidade, a maior decisão é escolher entre “expressão curta” e “expressão nomeada”. Uma expressão muito compacta pode ser elegante, mas difícil de revisar. Uma expressão quebrada em variáveis bem nomeadas costuma ser melhor para código de negócio.</p>
+<p>Em manutenção, duplicar regras booleanas em vários pontos do sistema aumenta risco de inconsistência. Se a regra é de negócio, centralize.</p>
+<p>Em performance, <code>&amp;&amp;</code> e <code>||</code> podem evitar chamadas desnecessárias. Porém, em código de aplicação, o ganho normalmente é menos importante que a clareza. A exceção ocorre quando o lado direito chama banco de dados, API externa, cálculo pesado ou operação com efeito colateral. Nesses casos, a ordem das condições importa muito.</p>
+<h2 id="onde-isso-aparece-em-sistemas-reais">Onde isso aparece em sistemas reais</h2>
+<h3 id="validacao-de-entrada">Validação de entrada</h3>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="n">nomeValido</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nome</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">nome</span><span class="p">.</span><span class="na">isBlank</span><span class="p">();</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="n">duracaoValida</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">duracaoEmSegundos</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">duracaoEmSegundos</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">3600</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="autorizacao">Autorização</h3>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="n">podeExcluir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usuarioAdmin</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">usuarioDonoDoCadastro</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="filtros-de-busca">Filtros de busca</h3>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="n">correspondeAoFiltro</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">generoPermitido</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">bandaCorresponde</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">anoDentroDoIntervalo</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="regras-de-negocio">Regras de negócio</h3>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="n">podePublicar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">possuiLicenca</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">revisada</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">usuarioAutorizado</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="protecao-contra-nullpointerexception">Proteção contra <code>NullPointerException</code></h3>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">musica</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">musica</span><span class="p">.</span><span class="na">banda</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// acesso seguro</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="chamadas-condicionais-a-recursos-caros">Chamadas condicionais a recursos caros</h3>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cacheContemResultado</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">consultarBancoDeDados</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// usa resultado disponível</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="perguntas-de-revisao">Perguntas de revisão</h2>
+<p>1 - Qual problema os operadores lógicos resolvem em Java?
+Resposta: Eles permitem expressar decisões como verdadeiro ou falso. Essas decisões são usadas em <code>if</code>, <code>while</code>, validações, regras de autorização, filtros, regras de negócio e controle de fluxo.</p>
+<p>2 - Qual é a diferença entre <code>=</code> e <code>==</code>?
+Resposta: <code>=</code> é operador de atribuição; ele coloca um valor em uma variável. <code>==</code> é operador de comparação; ele verifica igualdade entre dois operandos e retorna <code>boolean</code>.</p>
+<p>3 - O que o operador <code>!=</code> faz?
+Resposta: Ele verifica diferença. A expressão <code>a != b</code> equivale logicamente a <code>!(a == b)</code>.</p>
+<p>4 - O operador <code>!</code> faz o quê?
+Resposta: Ele inverte um valor booleano. Se a expressão é <code>true</code>, <code>!expressao</code> vira <code>false</code>. Se é <code>false</code>, vira <code>true</code>.</p>
+<p>5 - Qual é a diferença entre <code>&amp;&amp;</code> e <code>&amp;</code> com booleanos?
+Resposta: Ambos podem representar AND lógico, mas <code>&amp;&amp;</code> faz curto-circuito e pode não avaliar o lado direito. O operador <code>&amp;</code> avalia os dois lados sempre.</p>
+<p>6 - Qual é a diferença entre <code>||</code> e <code>|</code> com booleanos?
+Resposta: Ambos podem representar OR lógico, mas <code>||</code> faz curto-circuito e pode não avaliar o lado direito quando o lado esquerdo já é <code>true</code>. O operador <code>|</code> avalia os dois lados sempre.</p>
+<p>7 - Qual operador normalmente deve ser usado em condições de negócio: <code>&amp;&amp;</code> ou <code>&amp;</code>?
+Resposta: Normalmente <code>&amp;&amp;</code>, porque expressa melhor a intenção lógica e evita avaliação desnecessária ou perigosa do lado direito.</p>
+<p>8 - Quando faz sentido usar <code>&amp;</code> e <code>|</code>?
+Resposta: Eles fazem mais sentido em operações bitwise com inteiros, flags e máscaras de bits. Com booleanos, só devem ser usados quando realmente for necessário avaliar os dois lados.</p>
+<p>9 - O que é curto-circuito?
+Resposta: É o comportamento de <code>&amp;&amp;</code> e <code>||</code> em que Java decide não avaliar o lado direito da expressão quando o resultado final já pode ser determinado pelo lado esquerdo.</p>
+<p>10 - Por que esta expressão é segura: <code>banda != null &amp;&amp; !banda.isBlank()</code>?
+Resposta: Porque <code>&amp;&amp;</code> avalia primeiro <code>banda != null</code>. Se <code>banda</code> for <code>null</code>, a segunda parte não será executada, evitando <code>NullPointerException</code>.</p>
+<p>11 - Por que <code>String</code> não deve ser comparada com <code>==</code>?
+Resposta: Porque <code>String</code> é objeto. Com objetos, <code>==</code> compara se as referências apontam para o mesmo objeto, não se o conteúdo textual é igual. Para conteúdo, use <code>equals</code> ou <code>Objects.equals</code>.</p>
+<p>12 - Qual é a vantagem de <code>"Metallica".equals(banda)</code>?
+Resposta: Essa forma evita <code>NullPointerException</code> caso <code>banda</code> seja <code>null</code>, porque o método <code>equals</code> é chamado em uma string literal não nula.</p>
+<p>13 - O que o operador <code>^</code> faz com booleanos?
+Resposta: Ele representa XOR, ou “ou exclusivo”. Retorna <code>true</code> quando os operandos são diferentes e <code>false</code> quando são iguais.</p>
+<p>14 - Por que é recomendado usar parênteses em expressões com <code>&amp;&amp;</code> e <code>||</code>?
+Resposta: Porque parênteses deixam a intenção explícita para quem lê. Mesmo quando a precedência do Java já resolveria a ordem, parênteses reduzem ambiguidade e facilitam manutenção.</p>
+<p>15 - Qual é o risco de colocar efeitos colaterais no lado direito de <code>&amp;&amp;</code> ou <code>||</code>?
+Resposta: O lado direito pode não ser executado por causa do curto-circuito. Se ali houver uma operação importante, como auditoria, incremento, envio de evento ou chamada obrigatória, ela pode não acontecer.</p>
+<p>16 - O que a tabela verdade ajuda a entender?
+Resposta: Ela mostra todos os resultados possíveis de um operador lógico para combinações de entradas booleanas. É útil para validar regras, simplificar expressões e testar cenários.</p>
+<p>17 - Como transformar uma regra complexa em código mais legível?
+Resposta: Criando variáveis intermediárias com nomes claros ou movendo a regra para métodos de domínio, por exemplo <code>musica.podeSerPublicadaPor(usuario)</code>.</p>
+<p>18 - Qual cuidado um desenvolvedor pleno ou sênior deve ter com expressões booleanas?
+Resposta: Deve pensar em legibilidade, duplicação de regra, curto-circuito, efeitos colaterais, comparação correta de objetos, risco de <code>null</code>, testes e manutenção futura.</p>
+<h2 id="resumo-final">Resumo final</h2>
+<p>Operadores de igualdade, comparação, negação e operadores lógicos são a base das decisões em Java.</p>
+<p><code>==</code> e <code>!=</code> comparam igualdade e diferença, mas é fundamental lembrar que, em objetos, <code>==</code> compara referência. Para comparar conteúdo, use <code>equals</code> ou <code>Objects.equals</code>.</p>
+<p><code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code> e <code>&gt;=</code> são usados para comparar valores numéricos e validar limites.</p>
+<p><code>!</code> inverte expressões booleanas.</p>
+<p><code>&amp;&amp;</code> representa AND lógico com curto-circuito. <code>||</code> representa OR lógico com curto-circuito. Na maioria das condições de negócio, eles são preferíveis a <code>&amp;</code> e <code>|</code>.</p>
+<p><code>&amp;</code>, <code>|</code> e <code>^</code> também funcionam com booleanos, mas <code>&amp;</code> e <code>|</code> não fazem curto-circuito. Além disso, esses operadores também são usados em operações bitwise com tipos inteiros.</p>
+<p>A tabela verdade ajuda a entender o comportamento dos operadores. A precedência define como expressões são agrupadas, mas código profissional não deve depender de o leitor decorar precedência. Use parênteses e nomes claros.</p>
+<p>Em sistemas reais, operadores booleanos aparecem em validação, autorização, filtros, regras de negócio, prevenção de <code>NullPointerException</code>, chamadas condicionais e modelagem de políticas. Quanto mais importante for a regra, mais ela merece clareza, testes e centralização.</p>
+<h2 id="referencias">Referências</h2>
+<ul>
+<li>Java Language Specification, Java SE 25, Chapter 15: Expressions. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-15.html" title="Chapter 15. Expressions">Oracle Docs</a>)</li>
+<li>Java Language Specification, Java SE 25, Equality Operators <code>==</code> and <code>!=</code>. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-15.html" title="Chapter 15. Expressions">Oracle Docs</a>)</li>
+<li>Java Language Specification, Java SE 25, Boolean Logical Operators <code>&amp;</code>, <code>^</code> and <code>|</code>. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-15.html" title="Chapter 15. Expressions">Oracle Docs</a>)</li>
+<li>Java Language Specification, Java SE 25, Conditional-And Operator <code>&amp;&amp;</code>. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-15.html" title="Chapter 15. Expressions">Oracle Docs</a>)</li>
+<li>Java Language Specification, Java SE 25, Conditional-Or Operator <code>||</code>. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-15.html" title="Chapter 15. Expressions">Oracle Docs</a>)</li>
+<li>Java SE 25 API Documentation, <code>java.lang.String</code>. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html" title="String (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</li>
+<li>Java SE 25 API Documentation, <code>java.lang.Object.equals</code>. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="Object (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</li>
+<li>Java SE 25 API Documentation, <code>java.util.Objects.equals</code>. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api//java.base/java/util/Objects.html" title="Objects (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</li>
+<li>OpenJDK, JEP 306: Restore Always-Strict Floating-Point Semantics. (<a href="https://openjdk.org/jeps/306" title="JEP 306: Restore Always-Strict Floating-Point Semantics">OpenJDK</a>)</li>
+<li>OpenJDK, JEP 286: Local-Variable Type Inference. (<a href="https://openjdk.org/jeps/286" title="JEP 286: Local-Variable Type Inference">OpenJDK</a>)</li>
+<li>Joshua Bloch, <em>Effective Java</em>, 3rd Edition, Addison-Wesley.</li>
+<li>Brian Goetz et al., <em>Java Concurrency in Practice</em>, Addison-Wesley.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

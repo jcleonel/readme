@@ -1,0 +1,3340 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../estruturas-condicionais/">
+      
+      
+        <link rel="next" href="../introducao-orientacao-a-objetos/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Estruturas de repetição - README</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/css/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#estruturas-de-repeticao-em-java" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../../.." title="README" class="md-header__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            README
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Estruturas de repetição
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="README" class="md-nav__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    README
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Backend
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fundamentos-da-linguagem-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../convencoes-de-codigo-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convenções de código em Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../variaveis-tipos-primitivos-operadores-conversoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variáveis, tipos primitivos, operadores e conversões
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fundamentos-de-string/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de String
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../estruturas-controle-operadores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de controle e operadores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../estruturas-condicionais/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas condicionais
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de repetição
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de repetição
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-no-codigo-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar no código: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-funciona-em-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como funciona em Java
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Como funciona em Java">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        for
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#while" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        while
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dowhile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        do/while
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#break" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        break
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#continue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        continue
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo prático
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analisando-o-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analisando o código
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Analisando o código">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modelagem-inicial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modelagem inicial
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uso-do-for-tradicional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uso do for tradicional
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uso-do-enhanced-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uso do enhanced for
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uso-do-while" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uso do while
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uso-do-dowhile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uso do do/while
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparacao-com-versoes-anteriores-do-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparação com versões anteriores do Java
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comparação com versões anteriores do Java">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enhanced-for-java-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enhanced for — Java 5
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#var-em-variaveis-locais-java-10-jep-286" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var em variáveis locais — Java 10, JEP 286
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-acontece-por-baixo-dos-panos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que acontece por baixo dos panos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boas práticas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#escolha-o-loop-pela-intencao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escolha o loop pela intenção
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evite-loops-infinitos-acidentais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evite loops infinitos acidentais
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cuidado-com-alteracao-da-colecao-durante-iteracao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cuidado com alteração da coleção durante iteração
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evite-logica-complexa-demais-dentro-do-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evite lógica complexa demais dentro do loop
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evite-concatenacao-excessiva-de-string-dentro-de-loops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evite concatenação excessiva de String dentro de loops
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#esquecer-de-atualizar-a-variavel-de-controle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esquecer de atualizar a variável de controle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usar-quando-deveria-usar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usar &lt;= quando deveria usar &lt;
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usar-continue-antes-de-atualizar-estado-necessario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usar continue antes de atualizar estado necessário
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usar-break-quando-deveria-usar-continue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usar break quando deveria usar continue
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usar-dowhile-quando-a-execucao-nao-deveria-acontecer-nenhuma-vez" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usar do/while quando a execução não deveria acontecer nenhuma vez
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decisões de engenharia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar for
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-enhanced-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar enhanced for
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-while" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar while
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-dowhile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar do/while
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-break" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar break
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-continue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar continue
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternativas-aos-loops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternativas aos loops
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Perguntas de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-o-que-sao-estruturas-de-repeticao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 - O que são estruturas de repetição?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-qual-problema-real-os-loops-resolvem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 - Qual problema real os loops resolvem?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-quando-usar-for-tradicional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 - Quando usar for tradicional?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-quando-usar-enhanced-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 - Quando usar enhanced for?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-qual-e-a-diferenca-entre-for-tradicional-e-enhanced-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 - Qual é a diferença entre for tradicional e enhanced for?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-quando-usar-while" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6 - Quando usar while?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-quando-usar-dowhile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7 - Quando usar do/while?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-qual-e-a-diferenca-entre-while-e-dowhile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8 - Qual é a diferença entre while e do/while?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-o-que-o-break-faz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9 - O que o break faz?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-o-que-o-continue-faz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 - O que o continue faz?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-qual-e-a-diferenca-entre-break-e-continue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11 - Qual é a diferença entre break e continue?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-por-que-loops-infinitos-sao-perigosos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12 - Por que loops infinitos são perigosos?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-o-que-acontece-se-eu-esquecer-de-incrementar-uma-variavel-em-um-while" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13 - O que acontece se eu esquecer de incrementar uma variável em um while?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-por-que-indice-listasize-costuma-estar-errado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14 - Por que indice &lt;= lista.size() costuma estar errado?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-var-muda-o-tipo-da-variavel-em-tempo-de-execucao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15 - var muda o tipo da variável em tempo de execução?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16-enhanced-for-substitui-completamente-o-for-tradicional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16 - Enhanced for substitui completamente o for tradicional?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17-streams-substituem-loops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17 - Streams substituem loops?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18-o-break-dentro-de-um-loop-aninhado-interrompe-todos-os-loops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18 - O break dentro de um loop aninhado interrompe todos os loops?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Orientação a Objetos (POO)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Orientação a Objetos (POO)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introducao-orientacao-a-objetos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução à POO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Spring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/api-rest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    O que é API REST?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/http/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Um pouco de HTTP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/por-que-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Por que escolher Spring?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/spring-boot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Boot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/spring-initializr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Initializr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/maven-pom/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maven e pom.xml
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-no-codigo-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar no código: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-funciona-em-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como funciona em Java
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Como funciona em Java">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        for
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#while" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        while
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dowhile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        do/while
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#break" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        break
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#continue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        continue
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo prático
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analisando-o-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analisando o código
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Analisando o código">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modelagem-inicial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modelagem inicial
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uso-do-for-tradicional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uso do for tradicional
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uso-do-enhanced-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uso do enhanced for
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uso-do-while" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uso do while
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uso-do-dowhile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uso do do/while
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparacao-com-versoes-anteriores-do-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparação com versões anteriores do Java
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comparação com versões anteriores do Java">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enhanced-for-java-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enhanced for — Java 5
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#var-em-variaveis-locais-java-10-jep-286" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        var em variáveis locais — Java 10, JEP 286
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-acontece-por-baixo-dos-panos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que acontece por baixo dos panos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boas práticas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#escolha-o-loop-pela-intencao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escolha o loop pela intenção
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evite-loops-infinitos-acidentais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evite loops infinitos acidentais
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cuidado-com-alteracao-da-colecao-durante-iteracao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cuidado com alteração da coleção durante iteração
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evite-logica-complexa-demais-dentro-do-loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evite lógica complexa demais dentro do loop
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evite-concatenacao-excessiva-de-string-dentro-de-loops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evite concatenação excessiva de String dentro de loops
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#esquecer-de-atualizar-a-variavel-de-controle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esquecer de atualizar a variável de controle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usar-quando-deveria-usar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usar &lt;= quando deveria usar &lt;
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usar-continue-antes-de-atualizar-estado-necessario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usar continue antes de atualizar estado necessário
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usar-break-quando-deveria-usar-continue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usar break quando deveria usar continue
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usar-dowhile-quando-a-execucao-nao-deveria-acontecer-nenhuma-vez" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usar do/while quando a execução não deveria acontecer nenhuma vez
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decisões de engenharia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar for
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-enhanced-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar enhanced for
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-while" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar while
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-dowhile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar do/while
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-break" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar break
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-continue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar continue
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternativas-aos-loops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternativas aos loops
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Perguntas de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-o-que-sao-estruturas-de-repeticao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 - O que são estruturas de repetição?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-qual-problema-real-os-loops-resolvem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 - Qual problema real os loops resolvem?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-quando-usar-for-tradicional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 - Quando usar for tradicional?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-quando-usar-enhanced-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 - Quando usar enhanced for?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-qual-e-a-diferenca-entre-for-tradicional-e-enhanced-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 - Qual é a diferença entre for tradicional e enhanced for?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-quando-usar-while" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6 - Quando usar while?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-quando-usar-dowhile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7 - Quando usar do/while?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-qual-e-a-diferenca-entre-while-e-dowhile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8 - Qual é a diferença entre while e do/while?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-o-que-o-break-faz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9 - O que o break faz?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-o-que-o-continue-faz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 - O que o continue faz?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-qual-e-a-diferenca-entre-break-e-continue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11 - Qual é a diferença entre break e continue?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-por-que-loops-infinitos-sao-perigosos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12 - Por que loops infinitos são perigosos?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-o-que-acontece-se-eu-esquecer-de-incrementar-uma-variavel-em-um-while" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13 - O que acontece se eu esquecer de incrementar uma variável em um while?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-por-que-indice-listasize-costuma-estar-errado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14 - Por que indice &lt;= lista.size() costuma estar errado?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-var-muda-o-tipo-da-variavel-em-tempo-de-execucao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15 - var muda o tipo da variável em tempo de execução?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16-enhanced-for-substitui-completamente-o-for-tradicional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16 - Enhanced for substitui completamente o for tradicional?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17-streams-substituem-loops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17 - Streams substituem loops?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18-o-break-dentro-de-um-loop-aninhado-interrompe-todos-os-loops" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18 - O break dentro de um loop aninhado interrompe todos os loops?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="estruturas-de-repeticao-em-java">Estruturas de repetição em Java</h1>
+<p>Em aplicações backend, quase nunca lidamos com apenas um único dado isolado. Um sistema real precisa percorrer listas de músicas, processar lotes de registros, validar itens de uma requisição, consumir páginas de uma API externa, recalcular estatísticas, aplicar regras em coleções, tentar uma operação novamente ou interromper um processamento quando uma condição de negócio é atingida.</p>
+<p>Sem estruturas de repetição, o código ficaria duplicado:</p>
+<div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Processando música 1&quot;</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Processando música 2&quot;</span><span class="p">);</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Processando música 3&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>Isso não escala. Se amanhã forem 10, 100 ou 10.000 músicas, o código precisaria crescer manualmente. Estruturas de repetição resolvem esse problema permitindo executar o mesmo bloco de código várias vezes, de forma controlada.</p>
+<p>No contexto do <code>meucatalogomusical.com</code>, imagine algumas necessidades reais:</p>
+<ul>
+<li>montar uma playlist com músicas bem avaliadas;</li>
+<li>percorrer o catálogo para encontrar músicas de Metal, Hard Rock ou Rock Progressivo;</li>
+<li>processar uma fila de músicas pendentes de revisão;</li>
+<li>consumir páginas de uma API de bandas;</li>
+<li>interromper o processamento quando a duração máxima da playlist for atingida;</li>
+<li>ignorar itens inválidos sem interromper o processamento inteiro.</li>
+</ul>
+<p>Esses cenários são resolvidos com <code>for</code>, <code>while</code>, <code>do/while</code>, <code>break</code> e <code>continue</code>.</p>
+<h2 id="antes-de-entrar-no-codigo-uma-ideia-simples">Antes de entrar no código: uma ideia simples</h2>
+<p>Uma estrutura de repetição responde a perguntas como:</p>
+<blockquote>
+<p>“Enquanto ainda houver músicas pendentes, continue processando.”</p>
+<p>“Para cada música do catálogo, aplique esta regra.”</p>
+<p>“Execute esta validação pelo menos uma vez e repita enquanto o valor estiver inválido.”</p>
+<p>“Pare o processamento quando a playlist atingir o limite de duração.”</p>
+</blockquote>
+<p>A ideia central é simples: repetir um bloco enquanto uma condição permitir.</p>
+<p>Existem três formas principais de repetição em Java:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(...)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// repete com controle mais explícito</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">while</span><span class="w"> </span><span class="p">(...)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// repete enquanto a condição for verdadeira</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">do</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// executa pelo menos uma vez</span>
+<span class="p">}</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(...);</span>
+</code></pre></div>
+<p>Além disso, existem duas instruções importantes para alterar o fluxo normal do loop:</p>
+<div class="highlight"><pre><span></span><code><span class="k">break</span><span class="p">;</span><span class="w">    </span><span class="c1">// interrompe o loop</span>
+<span class="k">continue</span><span class="p">;</span><span class="w"> </span><span class="c1">// pula a iteração atual</span>
+</code></pre></div>
+<h2 id="definicao-tecnica">Definição técnica</h2>
+<p>Em Java, estruturas de repetição são comandos de controle de fluxo que executam um bloco de código repetidamente de acordo com uma condição booleana ou uma sequência de elementos.</p>
+<p>A Java Language Specification do Java SE 25 define formalmente os comandos <code>while</code>, <code>do</code>, <code>for</code>, <code>break</code> e <code>continue</code> nas seções de statements da linguagem. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/index.html" title="The Java® Language Specification">Oracle Docs</a>)</p>
+<p>De forma técnica:</p>
+<ul>
+<li><code>for</code> é usado quando há uma estrutura clara de inicialização, condição e atualização;</li>
+<li><code>while</code> é usado quando a repetição depende de uma condição avaliada antes de cada execução;</li>
+<li><code>do/while</code> é usado quando o bloco precisa executar pelo menos uma vez;</li>
+<li><code>break</code> causa uma saída antecipada do loop;</li>
+<li><code>continue</code> pula o restante da iteração atual e segue para a próxima avaliação do loop.</li>
+</ul>
+<h2 id="como-funciona-em-java">Como funciona em Java</h2>
+<h3 id="for"><code>for</code></h3>
+<p>O <code>for</code> tradicional tem três partes principais:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">inicialização</span><span class="p">;</span><span class="w"> </span><span class="n">condição</span><span class="p">;</span><span class="w"> </span><span class="n">atualização</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// bloco repetido</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">indice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">indice</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">indice</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">indice</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>A ordem de execução é:</p>
+<ol>
+<li>executa a inicialização uma única vez;</li>
+<li>avalia a condição;</li>
+<li>se a condição for <code>true</code>, executa o bloco;</li>
+<li>executa a atualização;</li>
+<li>volta para a condição;</li>
+<li>encerra quando a condição for <code>false</code>.</li>
+</ol>
+<p>O <code>for</code> é muito útil quando existe um contador, índice ou limite bem definido.</p>
+<p>Também existe o enhanced <code>for</code>, muito usado para percorrer arrays e coleções:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">musicas</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">titulo</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse formato é melhor quando você não precisa do índice, apenas do elemento atual.</p>
+<h3 id="while"><code>while</code></h3>
+<p>O <code>while</code> avalia a condição antes de executar o bloco:</p>
+<div class="highlight"><pre><span></span><code><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">condição</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// bloco repetido</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">fila</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fila</span><span class="p">.</span><span class="na">removeFirst</span><span class="p">();</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">titulo</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Ele é comum quando você não sabe exatamente quantas repetições serão necessárias. Em vez de pensar “execute 10 vezes”, você pensa “execute enquanto ainda houver trabalho”.</p>
+<h3 id="dowhile"><code>do/while</code></h3>
+<p>O <code>do/while</code> executa o bloco antes de avaliar a condição:</p>
+<div class="highlight"><pre><span></span><code><span class="k">do</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// bloco executado pelo menos uma vez</span>
+<span class="p">}</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">condição</span><span class="p">);</span>
+</code></pre></div>
+<p>Isso é útil quando a primeira execução sempre precisa acontecer. Um caso comum é buscar a primeira página de uma integração externa e continuar enquanto houver próxima página.</p>
+<h3 id="break"><code>break</code></h3>
+<p>O <code>break</code> interrompe o loop imediatamente:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">musicas</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">duracaoSegundos</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">600</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">titulo</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Depois do <code>break</code>, o programa continua na primeira instrução após o loop.</p>
+<h3 id="continue"><code>continue</code></h3>
+<p>O <code>continue</code> pula o restante da iteração atual:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">musicas</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">notaCuradoria</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">continue</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Música recomendada: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">musica</span><span class="p">.</span><span class="na">titulo</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Nesse exemplo, músicas com nota menor que 8 são ignoradas, mas o loop continua processando as próximas.</p>
+<h2 id="exemplo-pratico">Exemplo prático</h2>
+<p>O exemplo abaixo simula parte do backend do <code>meucatalogomusical.com</code>.</p>
+<p>A aplicação possui um catálogo com bandas de Metal, Hard Rock e Rock Progressivo. O código monta uma playlist com músicas bem avaliadas, processa uma fila de revisão e simula uma sincronização paginada.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.ArrayDeque</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.ArrayList</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CuradoriaCatalogoMusical</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">enum</span><span class="w"> </span><span class="n">Genero</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">METAL</span><span class="p">,</span>
+<span class="w">        </span><span class="n">HARD_ROCK</span><span class="p">,</span>
+<span class="w">        </span><span class="n">ROCK_PROGRESSIVO</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">record</span> <span class="nc">Musica</span><span class="p">(</span>
+<span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">banda</span><span class="p">,</span>
+<span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">titulo</span><span class="p">,</span>
+<span class="w">            </span><span class="n">Genero</span><span class="w"> </span><span class="n">genero</span><span class="p">,</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">duracaoSegundos</span><span class="p">,</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">notaCuradoria</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">record</span> <span class="nc">Pagina</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">itens</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">temProxima</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="n">catalogo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span>
+<span class="w">                </span><span class="k">new</span><span class="w"> </span><span class="n">Musica</span><span class="p">(</span><span class="s">&quot;Iron Maiden&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;The Trooper&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Genero</span><span class="p">.</span><span class="na">METAL</span><span class="p">,</span><span class="w"> </span><span class="mi">252</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">),</span>
+<span class="w">                </span><span class="k">new</span><span class="w"> </span><span class="n">Musica</span><span class="p">(</span><span class="s">&quot;Metallica&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Orion&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Genero</span><span class="p">.</span><span class="na">METAL</span><span class="p">,</span><span class="w"> </span><span class="mi">507</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">),</span>
+<span class="w">                </span><span class="k">new</span><span class="w"> </span><span class="n">Musica</span><span class="p">(</span><span class="s">&quot;Black Sabbath&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Paranoid&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Genero</span><span class="p">.</span><span class="na">METAL</span><span class="p">,</span><span class="w"> </span><span class="mi">168</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">),</span>
+<span class="w">                </span><span class="k">new</span><span class="w"> </span><span class="n">Musica</span><span class="p">(</span><span class="s">&quot;Led Zeppelin&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Black Dog&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Genero</span><span class="p">.</span><span class="na">HARD_ROCK</span><span class="p">,</span><span class="w"> </span><span class="mi">296</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">),</span>
+<span class="w">                </span><span class="k">new</span><span class="w"> </span><span class="n">Musica</span><span class="p">(</span><span class="s">&quot;Deep Purple&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Highway Star&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Genero</span><span class="p">.</span><span class="na">HARD_ROCK</span><span class="p">,</span><span class="w"> </span><span class="mi">368</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">),</span>
+<span class="w">                </span><span class="k">new</span><span class="w"> </span><span class="n">Musica</span><span class="p">(</span><span class="s">&quot;Rush&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Tom Sawyer&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Genero</span><span class="p">.</span><span class="na">ROCK_PROGRESSIVO</span><span class="p">,</span><span class="w"> </span><span class="mi">277</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">),</span>
+<span class="w">                </span><span class="k">new</span><span class="w"> </span><span class="n">Musica</span><span class="p">(</span><span class="s">&quot;Pink Floyd&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Time&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Genero</span><span class="p">.</span><span class="na">ROCK_PROGRESSIVO</span><span class="p">,</span><span class="w"> </span><span class="mi">412</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">),</span>
+<span class="w">                </span><span class="k">new</span><span class="w"> </span><span class="n">Musica</span><span class="p">(</span><span class="s">&quot;Dream Theater&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Pull Me Under&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Genero</span><span class="p">.</span><span class="na">ROCK_PROGRESSIVO</span><span class="p">,</span><span class="w"> </span><span class="mi">493</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">)</span>
+<span class="w">        </span><span class="p">);</span>
+
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="n">playlist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">montarPlaylistDeDestaques</span><span class="p">(</span><span class="n">catalogo</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Playlist de destaques:&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">exibirPlaylist</span><span class="p">(</span><span class="n">playlist</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">();</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Processando fila de revisão:&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">processarFilaDeRevisao</span><span class="p">(</span><span class="n">catalogo</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">();</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Sincronizando catálogo por páginas:&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">sincronizarCatalogoPorPaginas</span><span class="p">(</span><span class="n">catalogo</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Musica</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">montarPlaylistDeDestaques</span><span class="p">(</span>
+<span class="w">            </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Musica</span><span class="o">&gt;</span><span class="w"> </span><span class="n">catalogo</span><span class="p">,</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">limiteDuracaoSegundos</span><span class="p">,</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">notaMinima</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="n">selecionadas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Musica</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="n">duracaoTotal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">indice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">indice</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">catalogo</span><span class="p">.</span><span class="na">size</span><span class="p">();</span><span class="w"> </span><span class="n">indice</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">var</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">catalogo</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">indice</span><span class="p">);</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">notaCuradoria</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">notaMinima</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">continue</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">duracaoTotal</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">musica</span><span class="p">.</span><span class="na">duracaoSegundos</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">limiteDuracaoSegundos</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="n">selecionadas</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">musica</span><span class="p">);</span>
+<span class="w">            </span><span class="n">duracaoTotal</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">musica</span><span class="p">.</span><span class="na">duracaoSegundos</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">List</span><span class="p">.</span><span class="na">copyOf</span><span class="p">(</span><span class="n">selecionadas</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">exibirPlaylist</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Musica</span><span class="o">&gt;</span><span class="w"> </span><span class="n">playlist</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">playlist</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span>
+<span class="w">                    </span><span class="s">&quot;- %s - %s (%s, %d segundos)%n&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="n">musica</span><span class="p">.</span><span class="na">banda</span><span class="p">(),</span>
+<span class="w">                    </span><span class="n">musica</span><span class="p">.</span><span class="na">titulo</span><span class="p">(),</span>
+<span class="w">                    </span><span class="n">musica</span><span class="p">.</span><span class="na">genero</span><span class="p">(),</span>
+<span class="w">                    </span><span class="n">musica</span><span class="p">.</span><span class="na">duracaoSegundos</span><span class="p">()</span>
+<span class="w">            </span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">processarFilaDeRevisao</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Musica</span><span class="o">&gt;</span><span class="w"> </span><span class="n">catalogo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="n">fila</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayDeque</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">catalogo</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">fila</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">var</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fila</span><span class="p">.</span><span class="na">removeFirst</span><span class="p">();</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">genero</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">Genero</span><span class="p">.</span><span class="na">ROCK_PROGRESSIVO</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span>
+<span class="w">                        </span><span class="s">&quot;Revisão detalhada: %s - %s%n&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="n">musica</span><span class="p">.</span><span class="na">banda</span><span class="p">(),</span>
+<span class="w">                        </span><span class="n">musica</span><span class="p">.</span><span class="na">titulo</span><span class="p">()</span>
+<span class="w">                </span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span>
+<span class="w">                        </span><span class="s">&quot;Revisão padrão: %s - %s%n&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="n">musica</span><span class="p">.</span><span class="na">banda</span><span class="p">(),</span>
+<span class="w">                        </span><span class="n">musica</span><span class="p">.</span><span class="na">titulo</span><span class="p">()</span>
+<span class="w">                </span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">sincronizarCatalogoPorPaginas</span><span class="p">(</span>
+<span class="w">            </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Musica</span><span class="o">&gt;</span><span class="w"> </span><span class="n">catalogo</span><span class="p">,</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">tamanhoPagina</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="n">paginaAtual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Pagina</span><span class="o">&lt;</span><span class="n">Musica</span><span class="o">&gt;</span><span class="w"> </span><span class="n">pagina</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">do</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">pagina</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">buscarPagina</span><span class="p">(</span><span class="n">catalogo</span><span class="p">,</span><span class="w"> </span><span class="n">paginaAtual</span><span class="p">,</span><span class="w"> </span><span class="n">tamanhoPagina</span><span class="p">);</span>
+
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span>
+<span class="w">                    </span><span class="s">&quot;Página %d: %d música(s)%n&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="n">paginaAtual</span><span class="p">,</span>
+<span class="w">                    </span><span class="n">pagina</span><span class="p">.</span><span class="na">itens</span><span class="p">().</span><span class="na">size</span><span class="p">()</span>
+<span class="w">            </span><span class="p">);</span>
+
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">pagina</span><span class="p">.</span><span class="na">itens</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span>
+<span class="w">                        </span><span class="s">&quot;Enviando para índice de busca: %s - %s%n&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="n">musica</span><span class="p">.</span><span class="na">banda</span><span class="p">(),</span>
+<span class="w">                        </span><span class="n">musica</span><span class="p">.</span><span class="na">titulo</span><span class="p">()</span>
+<span class="w">                </span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="n">paginaAtual</span><span class="o">++</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">pagina</span><span class="p">.</span><span class="na">temProxima</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Pagina</span><span class="o">&lt;</span><span class="n">Musica</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">buscarPagina</span><span class="p">(</span>
+<span class="w">            </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Musica</span><span class="o">&gt;</span><span class="w"> </span><span class="n">catalogo</span><span class="p">,</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">paginaAtual</span><span class="p">,</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">tamanhoPagina</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="n">inicio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">paginaAtual</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">tamanhoPagina</span><span class="p">;</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="n">fim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="na">min</span><span class="p">(</span><span class="n">inicio</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tamanhoPagina</span><span class="p">,</span><span class="w"> </span><span class="n">catalogo</span><span class="p">.</span><span class="na">size</span><span class="p">());</span>
+
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="n">itens</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">catalogo</span><span class="p">.</span><span class="na">subList</span><span class="p">(</span><span class="n">inicio</span><span class="p">,</span><span class="w"> </span><span class="n">fim</span><span class="p">);</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="n">temProxima</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fim</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">catalogo</span><span class="p">.</span><span class="na">size</span><span class="p">();</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Pagina</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">itens</span><span class="p">,</span><span class="w"> </span><span class="n">temProxima</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>O exemplo usa <code>record</code>, recurso finalizado no Java 16 pela JEP 395, para representar dados simples de forma compacta. (<a href="https://openjdk.org/jeps/395" title="JEP 395: Records">openjdk.org</a>) Também usa <code>var</code>, recurso introduzido no Java 10 pela JEP 286, permitido em variáveis locais, variáveis do <code>for</code> tradicional e variáveis do enhanced <code>for</code>. (<a href="https://openjdk.org/jeps/286" title="JEP 286: Local-Variable Type Inference">openjdk.org</a>)</p>
+<h2 id="analisando-o-codigo">Analisando o código</h2>
+<h3 id="modelagem-inicial">Modelagem inicial</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">enum</span><span class="w"> </span><span class="n">Genero</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">METAL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">HARD_ROCK</span><span class="p">,</span>
+<span class="w">    </span><span class="n">ROCK_PROGRESSIVO</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>O <code>enum</code> representa os gêneros aceitos no catálogo. Isso evita usar strings soltas como <code>"metal"</code> ou <code>"rock"</code>, reduzindo erro de digitação e melhorando a clareza das regras.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">record</span> <span class="nc">Musica</span><span class="p">(</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">banda</span><span class="p">,</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">titulo</span><span class="p">,</span>
+<span class="w">        </span><span class="n">Genero</span><span class="w"> </span><span class="n">genero</span><span class="p">,</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">duracaoSegundos</span><span class="p">,</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">notaCuradoria</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>O <code>record</code> representa uma música do catálogo. Ele é adequado porque <code>Musica</code> é um objeto de dados simples: banda, título, gênero, duração e nota de curadoria.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">record</span> <span class="nc">Pagina</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">itens</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">temProxima</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>O <code>record Pagina&lt;T&gt;</code> representa uma resposta paginada. Ele é genérico porque pode paginar músicas, bandas, álbuns ou qualquer outro tipo.</p>
+<h3 id="uso-do-for-tradicional">Uso do <code>for</code> tradicional</h3>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">indice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">indice</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">catalogo</span><span class="p">.</span><span class="na">size</span><span class="p">();</span><span class="w"> </span><span class="n">indice</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">catalogo</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">indice</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">notaCuradoria</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">notaMinima</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">continue</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">duracaoTotal</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">musica</span><span class="p">.</span><span class="na">duracaoSegundos</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">limiteDuracaoSegundos</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">selecionadas</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">musica</span><span class="p">);</span>
+<span class="w">    </span><span class="n">duracaoTotal</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">musica</span><span class="p">.</span><span class="na">duracaoSegundos</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse trecho usa <code>for</code> tradicional porque existe uma navegação por índice.</p>
+<p>A variável <code>indice</code> começa em <code>0</code>, continua enquanto for menor que <code>catalogo.size()</code> e é incrementada ao final de cada iteração.</p>
+<p>O <code>continue</code> aparece quando a música não atinge a nota mínima. Nesse caso, a música é ignorada e o loop passa para a próxima.</p>
+<p>O <code>break</code> aparece quando adicionar a música faria a playlist ultrapassar o limite de duração. Nesse caso, não faz sentido continuar montando a playlist, então o loop é encerrado.</p>
+<p>Esse é um exemplo realista de regra de negócio: continuar enquanto os itens são válidos e parar quando um limite operacional for atingido.</p>
+<h3 id="uso-do-enhanced-for">Uso do enhanced <code>for</code></h3>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">playlist</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span>
+<span class="w">            </span><span class="s">&quot;- %s - %s (%s, %d segundos)%n&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="n">musica</span><span class="p">.</span><span class="na">banda</span><span class="p">(),</span>
+<span class="w">            </span><span class="n">musica</span><span class="p">.</span><span class="na">titulo</span><span class="p">(),</span>
+<span class="w">            </span><span class="n">musica</span><span class="p">.</span><span class="na">genero</span><span class="p">(),</span>
+<span class="w">            </span><span class="n">musica</span><span class="p">.</span><span class="na">duracaoSegundos</span><span class="p">()</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Aqui não existe necessidade de índice. O objetivo é apenas percorrer cada música da playlist.</p>
+<p>Nesse caso, o enhanced <code>for</code> deixa o código mais claro do que um <code>for</code> com contador.</p>
+<p>Compare:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">indice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">indice</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">playlist</span><span class="p">.</span><span class="na">size</span><span class="p">();</span><span class="w"> </span><span class="n">indice</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">playlist</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">indice</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Com:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">playlist</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// usa musica diretamente</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>A segunda versão comunica melhor a intenção: “para cada música da playlist”.</p>
+<h3 id="uso-do-while">Uso do <code>while</code></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="n">fila</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayDeque</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">catalogo</span><span class="p">);</span>
+
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">fila</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fila</span><span class="p">.</span><span class="na">removeFirst</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">genero</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">Genero</span><span class="p">.</span><span class="na">ROCK_PROGRESSIVO</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span>
+<span class="w">                </span><span class="s">&quot;Revisão detalhada: %s - %s%n&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="n">musica</span><span class="p">.</span><span class="na">banda</span><span class="p">(),</span>
+<span class="w">                </span><span class="n">musica</span><span class="p">.</span><span class="na">titulo</span><span class="p">()</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span>
+<span class="w">                </span><span class="s">&quot;Revisão padrão: %s - %s%n&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="n">musica</span><span class="p">.</span><span class="na">banda</span><span class="p">(),</span>
+<span class="w">                </span><span class="n">musica</span><span class="p">.</span><span class="na">titulo</span><span class="p">()</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse trecho usa <code>while</code> porque a repetição depende do estado da fila.</p>
+<p>A pergunta aqui não é “quantas vezes devo repetir?”, mas sim:</p>
+<blockquote>
+<p>“Ainda existem músicas pendentes de revisão?”</p>
+</blockquote>
+<p>Enquanto a fila não estiver vazia, o processamento continua. A cada iteração, uma música é removida da fila com <code>removeFirst()</code>.</p>
+<p>Esse padrão aparece bastante em sistemas reais: filas em memória, filas de mensagens, tarefas pendentes, jobs assíncronos e processamento em lote.</p>
+<h3 id="uso-do-dowhile">Uso do <code>do/while</code></h3>
+<div class="highlight"><pre><span></span><code><span class="k">do</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">pagina</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">buscarPagina</span><span class="p">(</span><span class="n">catalogo</span><span class="p">,</span><span class="w"> </span><span class="n">paginaAtual</span><span class="p">,</span><span class="w"> </span><span class="n">tamanhoPagina</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span>
+<span class="w">            </span><span class="s">&quot;Página %d: %d música(s)%n&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="n">paginaAtual</span><span class="p">,</span>
+<span class="w">            </span><span class="n">pagina</span><span class="p">.</span><span class="na">itens</span><span class="p">().</span><span class="na">size</span><span class="p">()</span>
+<span class="w">    </span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">pagina</span><span class="p">.</span><span class="na">itens</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span>
+<span class="w">                </span><span class="s">&quot;Enviando para índice de busca: %s - %s%n&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="n">musica</span><span class="p">.</span><span class="na">banda</span><span class="p">(),</span>
+<span class="w">                </span><span class="n">musica</span><span class="p">.</span><span class="na">titulo</span><span class="p">()</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">paginaAtual</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">pagina</span><span class="p">.</span><span class="na">temProxima</span><span class="p">());</span>
+</code></pre></div>
+<p>Esse trecho usa <code>do/while</code> porque a primeira página precisa ser buscada antes de saber se existe próxima página.</p>
+<p>Esse é um cenário comum em integrações:</p>
+<ol>
+<li>busca a primeira página;</li>
+<li>processa os itens;</li>
+<li>verifica se há próxima página;</li>
+<li>repete enquanto houver mais dados.</li>
+</ol>
+<p>A diferença para o <code>while</code> é importante. Com <code>while</code>, a condição é avaliada antes da primeira execução. Com <code>do/while</code>, a primeira execução é garantida.</p>
+<h2 id="comparacao-com-versoes-anteriores-do-java">Comparação com versões anteriores do Java</h2>
+<p>As estruturas básicas <code>for</code>, <code>while</code>, <code>do/while</code>, <code>break</code> e <code>continue</code> fazem parte da linguagem Java desde suas primeiras versões. A forma essencial de uso continua a mesma em Java 25.</p>
+<p>O que evoluiu ao redor delas foi a ergonomia da linguagem.</p>
+<h3 id="enhanced-for-java-5">Enhanced <code>for</code> — Java 5</h3>
+<p>O enhanced <code>for</code> foi introduzido no Java 5 dentro do conjunto de mudanças da JSR 201. A proposta descreve o enhanced <code>for</code> como uma forma conveniente de iterar sobre coleções sem declarar explicitamente um <code>Iterator</code>, reduzindo código repetitivo e oportunidades de erro. (<a href="https://www.jcp.org/en/jsr/detail?id=201" title="The Java Community Process(SM) Program - JSRs: Java Specification Requests - detail JSR# 201">jcp.org</a>)</p>
+<p>Antes:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">musicas</span><span class="p">.</span><span class="na">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Musica</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">musicas</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">titulo</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Depois:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Musica</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">musicas</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">titulo</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Em Java 25, esse formato continua sendo a melhor escolha quando você precisa apenas dos elementos, sem índice.</p>
+<h3 id="var-em-variaveis-locais-java-10-jep-286"><code>var</code> em variáveis locais — Java 10, JEP 286</h3>
+<p>A partir do Java 10, a JEP 286 permitiu inferência de tipo para variáveis locais, incluindo variáveis declaradas no <code>for</code> tradicional e no enhanced <code>for</code>. (<a href="https://openjdk.org/jeps/286" title="JEP 286: Local-Variable Type Inference">openjdk.org</a>)</p>
+<p>Antes:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Musica</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">musicas</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">titulo</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Depois:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">musicas</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">titulo</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Isso não torna Java uma linguagem dinamicamente tipada. O tipo continua sendo resolvido em tempo de compilação. A diferença é que o compilador infere o tipo a partir do contexto.</p>
+<p>As diretrizes de estilo do OpenJDK reforçam que <code>var</code> deve ser usado com julgamento, porque pode melhorar ou piorar a legibilidade dependendo do nome da variável e da clareza do inicializador. (<a href="https://openjdk.org/projects/amber/guides/lvti-style-guide" title="Local Variable Type Inference: Style Guidelines">openjdk.org</a>)</p>
+<h2 id="o-que-acontece-por-baixo-dos-panos">O que acontece por baixo dos panos</h2>
+<p>Loops são estruturas de alto nível da linguagem Java. Quando o código é compilado, o compilador transforma essas estruturas em bytecode executado pela JVM.</p>
+<p>Conceitualmente, um loop vira uma combinação de:</p>
+<ul>
+<li>avaliação de condição;</li>
+<li>saltos condicionais;</li>
+<li>saltos para voltar ao início do loop;</li>
+<li>saída para o ponto posterior ao loop.</li>
+</ul>
+<p>A JVM Specification do Java SE 25 documenta instruções de transferência de controle, que são a base para representar desvios de fluxo em bytecode. (<a href="https://docs.oracle.com/javase/specs/jvms/se25/html/index.html" title="The Java® Virtual Machine Specification">Oracle Docs</a>)</p>
+<p>Um <code>while</code>, por exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">contador</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">contador</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Pode ser entendido conceitualmente como:</p>
+<div class="highlight"><pre><span></span><code>verifica condição
+se falso, sai
+executa bloco
+volta para verificar condição
+</code></pre></div>
+<p>O <code>break</code> altera esse fluxo mandando a execução para depois do loop. O <code>continue</code> manda a execução para o próximo ciclo do loop.</p>
+<p>Em loops aninhados, <code>break</code> e <code>continue</code> afetam o loop mais interno por padrão:</p>
+<div class="highlight"><pre><span></span><code><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">condicaoExterna</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">musicas</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">notaCuradoria</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// O while continua.</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Nesse exemplo, o <code>break</code> interrompe apenas o <code>for</code>, não o <code>while</code>.</p>
+<p>Java também possui labels para <code>break</code> e <code>continue</code>, mas elas devem ser usadas com muito cuidado:</p>
+<div class="highlight"><pre><span></span><code><span class="nl">externo</span><span class="p">:</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">bandas</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">banda</span><span class="p">.</span><span class="na">musicas</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">titulo</span><span class="p">().</span><span class="na">equals</span><span class="p">(</span><span class="s">&quot;Time&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">break</span><span class="w"> </span><span class="n">externo</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse tipo de construção pode ser útil em casos específicos, mas frequentemente indica que o código deveria ser extraído para um método com <code>return</code>, tornando o fluxo mais simples.</p>
+<h2 id="boas-praticas">Boas práticas</h2>
+<h3 id="escolha-o-loop-pela-intencao">Escolha o loop pela intenção</h3>
+<p>Use <code>for</code> tradicional quando houver índice, contador ou limite numérico claro:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">indice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">indice</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">musicas</span><span class="p">.</span><span class="na">size</span><span class="p">();</span><span class="w"> </span><span class="n">indice</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// precisa do índice</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Use enhanced <code>for</code> quando precisar apenas percorrer elementos:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">musicas</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// usa o elemento diretamente</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Use <code>while</code> quando a repetição depender de uma condição de estado:</p>
+<div class="highlight"><pre><span></span><code><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">fila</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// processa enquanto houver itens</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Use <code>do/while</code> quando a primeira execução for obrigatória:</p>
+<div class="highlight"><pre><span></span><code><span class="k">do</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// busca uma página</span>
+<span class="p">}</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">temProximaPagina</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="evite-loops-infinitos-acidentais">Evite loops infinitos acidentais</h3>
+<p>Um loop infinito pode ser proposital:</p>
+<div class="highlight"><pre><span></span><code><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// processo contínuo</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Mas precisa ter uma condição clara de parada:</p>
+<div class="highlight"><pre><span></span><code><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">evento</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">consumidor</span><span class="p">.</span><span class="na">receber</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">evento</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">processar</span><span class="p">(</span><span class="n">evento</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Em sistemas reais, loops infinitos sem controle podem consumir CPU, travar threads, impedir shutdown da aplicação ou causar indisponibilidade.</p>
+<h3 id="cuidado-com-alteracao-da-colecao-durante-iteracao">Cuidado com alteração da coleção durante iteração</h3>
+<p>Este código pode causar problema:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">musicas</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">notaCuradoria</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">musicas</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="n">musica</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Modificar uma coleção enquanto ela está sendo percorrida pode causar comportamento incorreto ou exceções, dependendo da coleção e da forma de iteração.</p>
+<p>Alternativas melhores:</p>
+<div class="highlight"><pre><span></span><code><span class="n">musicas</span><span class="p">.</span><span class="na">removeIf</span><span class="p">(</span><span class="n">musica</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">musica</span><span class="p">.</span><span class="na">notaCuradoria</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span>
+</code></pre></div>
+<p>Ou criar uma nova lista filtrada.</p>
+<h3 id="evite-logica-complexa-demais-dentro-do-loop">Evite lógica complexa demais dentro do loop</h3>
+<p>Loops muito grandes dificultam leitura, teste e manutenção.</p>
+<p>Ruim:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">musicas</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// valida</span>
+<span class="w">    </span><span class="c1">// transforma</span>
+<span class="w">    </span><span class="c1">// acessa banco</span>
+<span class="w">    </span><span class="c1">// chama API externa</span>
+<span class="w">    </span><span class="c1">// monta resposta</span>
+<span class="w">    </span><span class="c1">// calcula estatísticas</span>
+<span class="w">    </span><span class="c1">// registra log</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Melhor:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">musicas</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">deveProcessar</span><span class="p">(</span><span class="n">musica</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">continue</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">processarMusica</span><span class="p">(</span><span class="n">musica</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="evite-concatenacao-excessiva-de-string-dentro-de-loops">Evite concatenação excessiva de <code>String</code> dentro de loops</h3>
+<p>Em loops grandes, concatenação repetida de <code>String</code> pode gerar muitos objetos intermediários. Quando for montar texto progressivamente, prefira <code>StringBuilder</code>.</p>
+<p>A documentação do Java SE 25 descreve <code>StringBuilder</code> como uma sequência mutável de caracteres, geralmente preferível a <code>StringBuffer</code> quando não há necessidade de sincronização. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api//java.base/java/lang/StringBuilder.html" title="StringBuilder (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="n">relatorio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StringBuilder</span><span class="p">();</span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">musicas</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">relatorio</span>
+<span class="w">            </span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">banda</span><span class="p">())</span>
+<span class="w">            </span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="s">&quot; - &quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">titulo</span><span class="p">())</span>
+<span class="w">            </span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">lineSeparator</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">relatorio</span><span class="p">);</span>
+</code></pre></div>
+<h2 id="erros-comuns">Erros comuns</h2>
+<h3 id="esquecer-de-atualizar-a-variavel-de-controle">Esquecer de atualizar a variável de controle</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="n">indice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">indice</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">musicas</span><span class="p">.</span><span class="na">size</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">musicas</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">indice</span><span class="p">).</span><span class="na">titulo</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse código nunca incrementa <code>indice</code>. Se a lista não estiver vazia, o loop será infinito.</p>
+<p>Correção:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="n">indice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">indice</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">musicas</span><span class="p">.</span><span class="na">size</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">musicas</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">indice</span><span class="p">).</span><span class="na">titulo</span><span class="p">());</span>
+<span class="w">    </span><span class="n">indice</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="usar-quando-deveria-usar">Usar <code>&lt;=</code> quando deveria usar <code>&lt;</code></h3>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">indice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">indice</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">musicas</span><span class="p">.</span><span class="na">size</span><span class="p">();</span><span class="w"> </span><span class="n">indice</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">musicas</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">indice</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse código tenta acessar o índice <code>musicas.size()</code>, que não existe. Em listas e arrays, os índices começam em <code>0</code> e vão até <code>size() - 1</code>.</p>
+<p>Correção:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">indice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">indice</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">musicas</span><span class="p">.</span><span class="na">size</span><span class="p">();</span><span class="w"> </span><span class="n">indice</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">musicas</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">indice</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="usar-continue-antes-de-atualizar-estado-necessario">Usar <code>continue</code> antes de atualizar estado necessário</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="n">indice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">indice</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">musicas</span><span class="p">.</span><span class="na">size</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">musicas</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">indice</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">notaCuradoria</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">continue</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">indice</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Se a primeira música tiver nota menor que 8, <code>continue</code> será executado antes do <code>indice++</code>, causando loop infinito.</p>
+<p>Correção:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="n">indice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">indice</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">musicas</span><span class="p">.</span><span class="na">size</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">musicas</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">indice</span><span class="p">);</span>
+<span class="w">    </span><span class="n">indice</span><span class="o">++</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">notaCuradoria</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">continue</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">titulo</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="usar-break-quando-deveria-usar-continue">Usar <code>break</code> quando deveria usar <code>continue</code></h3>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">musicas</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">notaCuradoria</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">titulo</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse código para no primeiro item com nota menor que 8. Se a intenção era apenas ignorar essa música e continuar com as próximas, o correto seria:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">musicas</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">notaCuradoria</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">continue</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">titulo</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="usar-dowhile-quando-a-execucao-nao-deveria-acontecer-nenhuma-vez">Usar <code>do/while</code> quando a execução não deveria acontecer nenhuma vez</h3>
+<div class="highlight"><pre><span></span><code><span class="k">do</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">processarPagamento</span><span class="p">(</span><span class="n">pedido</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">pedido</span><span class="p">.</span><span class="na">precisaTentarNovamente</span><span class="p">());</span>
+</code></pre></div>
+<p>Se existe a possibilidade de o pedido nem estar apto para pagamento, <code>do/while</code> pode ser perigoso, porque executa antes de validar a condição.</p>
+<p>Nesse caso, <code>while</code> pode ser mais seguro:</p>
+<div class="highlight"><pre><span></span><code><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">pedido</span><span class="p">.</span><span class="na">podeProcessarPagamento</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">processarPagamento</span><span class="p">(</span><span class="n">pedido</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="decisoes-de-engenharia">Decisões de engenharia</h2>
+<h3 id="quando-usar-for">Quando usar <code>for</code></h3>
+<p>Use <code>for</code> quando a quantidade de repetições ou a progressão estiver bem definida.</p>
+<p>Bom uso:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">indice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">indice</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">musicas</span><span class="p">.</span><span class="na">size</span><span class="p">();</span><span class="w"> </span><span class="n">indice</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">musicas</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">indice</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">titulo</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Use especialmente quando:</p>
+<ul>
+<li>você precisa do índice;</li>
+<li>existe início, fim e incremento claros;</li>
+<li>o loop representa uma contagem;</li>
+<li>você precisa comparar elementos vizinhos.</li>
+</ul>
+<p>Evite quando o índice não agrega valor. Nesse caso, enhanced <code>for</code> é mais legível.</p>
+<h3 id="quando-usar-enhanced-for">Quando usar enhanced <code>for</code></h3>
+<p>Use enhanced <code>for</code> quando você só precisa percorrer os elementos.</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">musicas</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">titulo</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Ele melhora a legibilidade e reduz erros de índice.</p>
+<p>Evite quando:</p>
+<ul>
+<li>você precisa do índice;</li>
+<li>precisa percorrer de trás para frente;</li>
+<li>precisa alterar posições específicas;</li>
+<li>precisa controlar o avanço manualmente.</li>
+</ul>
+<h3 id="quando-usar-while">Quando usar <code>while</code></h3>
+<p>Use <code>while</code> quando a repetição depende de um estado externo ou dinâmico.</p>
+<div class="highlight"><pre><span></span><code><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">fila</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">processar</span><span class="p">(</span><span class="n">fila</span><span class="p">.</span><span class="na">removeFirst</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>É comum em:</p>
+<ul>
+<li>filas;</li>
+<li>consumidores;</li>
+<li>polling;</li>
+<li>leitura até fim de arquivo;</li>
+<li>tentativas com condição de parada;</li>
+<li>processos que dependem de estado mutável.</li>
+</ul>
+<p>Evite quando um <code>for</code> comunicaria melhor a intenção.</p>
+<h3 id="quando-usar-dowhile">Quando usar <code>do/while</code></h3>
+<p>Use <code>do/while</code> quando o bloco precisa executar pelo menos uma vez.</p>
+<p>Bom exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="k">do</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">pagina</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">buscarPagina</span><span class="p">(</span><span class="n">numeroPagina</span><span class="p">);</span>
+<span class="w">    </span><span class="n">processar</span><span class="p">(</span><span class="n">pagina</span><span class="p">.</span><span class="na">itens</span><span class="p">());</span>
+<span class="w">    </span><span class="n">numeroPagina</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">pagina</span><span class="p">.</span><span class="na">temProxima</span><span class="p">());</span>
+</code></pre></div>
+<p>Evite quando a primeira execução depende de uma validação prévia.</p>
+<h3 id="quando-usar-break">Quando usar <code>break</code></h3>
+<p>Use <code>break</code> para parada antecipada quando continuar o loop não agrega mais valor.</p>
+<p>Exemplos:</p>
+<ul>
+<li>encontrou o item procurado;</li>
+<li>atingiu um limite;</li>
+<li>detectou uma condição de erro;</li>
+<li>completou o objetivo do loop.</li>
+</ul>
+<p>Evite <code>break</code> espalhado em loops longos. Se houver muitos pontos de saída, extraia o loop para um método e use <code>return</code>.</p>
+<h3 id="quando-usar-continue">Quando usar <code>continue</code></h3>
+<p>Use <code>continue</code> para reduzir aninhamento e ignorar casos que não devem ser processados.</p>
+<p>Sem <code>continue</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">musicas</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">notaCuradoria</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">processar</span><span class="p">(</span><span class="n">musica</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Com <code>continue</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">musicas</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">notaCuradoria</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">continue</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">processar</span><span class="p">(</span><span class="n">musica</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>A segunda forma costuma ficar melhor quando existem várias validações de descarte no início do loop.</p>
+<h3 id="alternativas-aos-loops">Alternativas aos loops</h3>
+<p>Nem todo processamento precisa ser feito com loop explícito.</p>
+<p>Em Java moderno, você também pode usar:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="n">destaques</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">musicas</span><span class="p">.</span><span class="na">stream</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="na">filter</span><span class="p">(</span><span class="n">musica</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">musica</span><span class="p">.</span><span class="na">notaCuradoria</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="na">toList</span><span class="p">();</span>
+</code></pre></div>
+<p>Streams podem melhorar a legibilidade quando a intenção é transformar, filtrar ou agregar dados.</p>
+<p>Mas loops explícitos ainda são ótimos quando:</p>
+<ul>
+<li>existe controle de fluxo com <code>break</code>;</li>
+<li>existe atualização de múltiplos estados;</li>
+<li>a regra é imperativa;</li>
+<li>performance e alocação precisam ser analisadas com cuidado;</li>
+<li>o código ficaria artificial usando Stream.</li>
+</ul>
+<h2 id="onde-isso-aparece-em-sistemas-reais">Onde isso aparece em sistemas reais</h2>
+<p>Estruturas de repetição aparecem em praticamente qualquer backend Java.</p>
+<p>Em APIs REST:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">itens</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">validar</span><span class="p">(</span><span class="n">item</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Em importação de arquivos:</p>
+<div class="highlight"><pre><span></span><code><span class="k">while</span><span class="w"> </span><span class="p">((</span><span class="n">linha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">leitor</span><span class="p">.</span><span class="na">readLine</span><span class="p">())</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">processarLinha</span><span class="p">(</span><span class="n">linha</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Em paginação:</p>
+<div class="highlight"><pre><span></span><code><span class="k">do</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">resposta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cliente</span><span class="p">.</span><span class="na">buscarPagina</span><span class="p">(</span><span class="n">pagina</span><span class="p">);</span>
+<span class="w">    </span><span class="n">salvar</span><span class="p">(</span><span class="n">resposta</span><span class="p">.</span><span class="na">itens</span><span class="p">());</span>
+<span class="w">    </span><span class="n">pagina</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">resposta</span><span class="p">.</span><span class="na">temProxima</span><span class="p">());</span>
+</code></pre></div>
+<p>Em filas:</p>
+<div class="highlight"><pre><span></span><code><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">fila</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">processar</span><span class="p">(</span><span class="n">fila</span><span class="p">.</span><span class="na">removeFirst</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Em regras de negócio:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">catalogo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">musicaPodeSerPublicada</span><span class="p">(</span><span class="n">musica</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">continue</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">publicar</span><span class="p">(</span><span class="n">musica</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Em busca com parada antecipada:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">catalogo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">titulo</span><span class="p">().</span><span class="na">equalsIgnoreCase</span><span class="p">(</span><span class="n">tituloBuscado</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">encontrada</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">musica</span><span class="p">;</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Em sistemas reais, loops precisam ser pensados não apenas pela sintaxe, mas também por impacto operacional:</p>
+<ul>
+<li>quantos itens podem ser processados?</li>
+<li>há risco de loop infinito?</li>
+<li>existe timeout?</li>
+<li>há paginação?</li>
+<li>existe limite de memória?</li>
+<li>o loop chama banco ou API externa?</li>
+<li>o processamento precisa ser interrompível?</li>
+<li>o código é legível para manutenção futura?</li>
+</ul>
+<h2 id="perguntas-de-revisao">Perguntas de revisão</h2>
+<h3 id="1-o-que-sao-estruturas-de-repeticao">1 - O que são estruturas de repetição?</h3>
+<p>Resposta: são comandos da linguagem usados para executar um bloco de código várias vezes. Em Java, as principais estruturas são <code>for</code>, <code>while</code> e <code>do/while</code>.</p>
+<h3 id="2-qual-problema-real-os-loops-resolvem">2 - Qual problema real os loops resolvem?</h3>
+<p>Resposta: eles evitam duplicação de código quando precisamos processar vários itens ou repetir uma operação enquanto uma condição for verdadeira. Por exemplo, percorrer todas as músicas de um catálogo e aplicar uma regra de curadoria.</p>
+<h3 id="3-quando-usar-for-tradicional">3 - Quando usar <code>for</code> tradicional?</h3>
+<p>Resposta: use <code>for</code> tradicional quando existe controle claro por índice, contador ou limite. Exemplo: percorrer uma lista usando posições ou executar uma operação exatamente 10 vezes.</p>
+<h3 id="4-quando-usar-enhanced-for">4 - Quando usar enhanced <code>for</code>?</h3>
+<p>Resposta: use enhanced <code>for</code> quando você precisa apenas acessar cada elemento de uma coleção ou array, sem precisar do índice.</p>
+<h3 id="5-qual-e-a-diferenca-entre-for-tradicional-e-enhanced-for">5 - Qual é a diferença entre <code>for</code> tradicional e enhanced <code>for</code>?</h3>
+<p>Resposta: o <code>for</code> tradicional dá controle sobre inicialização, condição e atualização. O enhanced <code>for</code> abstrai esse controle e entrega diretamente cada elemento da coleção.</p>
+<h3 id="6-quando-usar-while">6 - Quando usar <code>while</code>?</h3>
+<p>Resposta: use <code>while</code> quando a repetição depende de uma condição que pode mudar durante a execução. Exemplo: processar uma fila enquanto ela não estiver vazia.</p>
+<h3 id="7-quando-usar-dowhile">7 - Quando usar <code>do/while</code>?</h3>
+<p>Resposta: use <code>do/while</code> quando o bloco precisa executar pelo menos uma vez antes da condição ser verificada. Um exemplo comum é buscar a primeira página de uma API e continuar enquanto houver próxima página.</p>
+<h3 id="8-qual-e-a-diferenca-entre-while-e-dowhile">8 - Qual é a diferença entre <code>while</code> e <code>do/while</code>?</h3>
+<p>Resposta: o <code>while</code> verifica a condição antes de executar o bloco. O <code>do/while</code> executa o bloco primeiro e só depois verifica a condição.</p>
+<h3 id="9-o-que-o-break-faz">9 - O que o <code>break</code> faz?</h3>
+<p>Resposta: o <code>break</code> interrompe o loop imediatamente e continua a execução do programa após o bloco de repetição.</p>
+<h3 id="10-o-que-o-continue-faz">10 - O que o <code>continue</code> faz?</h3>
+<p>Resposta: o <code>continue</code> pula o restante da iteração atual e passa para a próxima avaliação do loop.</p>
+<h3 id="11-qual-e-a-diferenca-entre-break-e-continue">11 - Qual é a diferença entre <code>break</code> e <code>continue</code>?</h3>
+<p>Resposta: <code>break</code> encerra o loop inteiro. <code>continue</code> encerra apenas a iteração atual e permite que o loop continue.</p>
+<h3 id="12-por-que-loops-infinitos-sao-perigosos">12 - Por que loops infinitos são perigosos?</h3>
+<p>Resposta: porque podem consumir CPU indefinidamente, travar uma thread, impedir encerramento da aplicação e causar indisponibilidade. Loops infinitos só devem existir quando há controle explícito de parada, pausa, timeout ou interrupção.</p>
+<h3 id="13-o-que-acontece-se-eu-esquecer-de-incrementar-uma-variavel-em-um-while">13 - O que acontece se eu esquecer de incrementar uma variável em um <code>while</code>?</h3>
+<p>Resposta: o loop pode nunca terminar. Se a condição depende dessa variável e ela não muda, o programa fica preso repetindo o mesmo bloco.</p>
+<h3 id="14-por-que-indice-listasize-costuma-estar-errado">14 - Por que <code>indice &lt;= lista.size()</code> costuma estar errado?</h3>
+<p>Resposta: porque listas e arrays em Java começam no índice <code>0</code> e terminam em <code>size() - 1</code>. Usar <code>&lt;= lista.size()</code> tenta acessar uma posição inexistente.</p>
+<h3 id="15-var-muda-o-tipo-da-variavel-em-tempo-de-execucao">15 - <code>var</code> muda o tipo da variável em tempo de execução?</h3>
+<p>Resposta: não. <code>var</code> apenas permite que o compilador infira o tipo em tempo de compilação. Java continua sendo uma linguagem estaticamente tipada.</p>
+<h3 id="16-enhanced-for-substitui-completamente-o-for-tradicional">16 - Enhanced <code>for</code> substitui completamente o <code>for</code> tradicional?</h3>
+<p>Resposta: não. Enhanced <code>for</code> é melhor para percorrer elementos diretamente, mas o <code>for</code> tradicional continua necessário quando você precisa de índice, controle de direção, incremento customizado ou acesso a posições específicas.</p>
+<h3 id="17-streams-substituem-loops">17 - Streams substituem loops?</h3>
+<p>Resposta: não completamente. Streams são ótimas para operações declarativas como filtro, transformação e agregação. Loops explícitos ainda são melhores quando existe controle de fluxo com <code>break</code>, atualização de múltiplos estados ou lógica imperativa mais complexa.</p>
+<h3 id="18-o-break-dentro-de-um-loop-aninhado-interrompe-todos-os-loops">18 - O <code>break</code> dentro de um loop aninhado interrompe todos os loops?</h3>
+<p>Resposta: não. Por padrão, ele interrompe apenas o loop mais interno. Para sair de múltiplos níveis, é possível usar labels, mas geralmente é melhor extrair a lógica para um método e usar <code>return</code>.</p>
+<h2 id="resumo-final">Resumo final</h2>
+<p>Estruturas de repetição permitem executar código várias vezes sem duplicação manual.</p>
+<p>O <code>for</code> tradicional é indicado quando existe contador, índice ou limite claro. O enhanced <code>for</code> é ideal para percorrer elementos de arrays e coleções com mais legibilidade. O <code>while</code> funciona bem quando a repetição depende de uma condição dinâmica. O <code>do/while</code> é útil quando a primeira execução precisa acontecer antes da verificação da condição.</p>
+<p>O <code>break</code> encerra o loop antecipadamente. O <code>continue</code> pula apenas a iteração atual. Ambos são úteis, mas precisam ser usados com cuidado para não tornar o fluxo difícil de entender.</p>
+<p>Em sistemas backend, loops aparecem em validações, paginação, filas, importações, integrações, processamento em lote e regras de negócio. Dominar essas estruturas não é apenas conhecer sintaxe: é saber escolher a forma mais clara, segura e eficiente para expressar uma repetição.</p>
+<h2 id="referencias">Referências</h2>
+<ul>
+<li>Java Language Specification, Java SE 25 Edition — seções sobre <code>while</code>, <code>do</code>, <code>for</code>, <code>break</code> e <code>continue</code>. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/index.html" title="The Java® Language Specification">Oracle Docs</a>)</li>
+<li>Java Virtual Machine Specification, Java SE 25 Edition — instruções de transferência de controle. (<a href="https://docs.oracle.com/javase/specs/jvms/se25/html/index.html" title="The Java® Virtual Machine Specification">Oracle Docs</a>)</li>
+<li>Java SE 25 API Documentation — <code>StringBuilder</code>. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api//java.base/java/lang/StringBuilder.html" title="StringBuilder (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</li>
+<li>OpenJDK — JEP 286: Local-Variable Type Inference, Java 10. (<a href="https://openjdk.org/jeps/286" title="JEP 286: Local-Variable Type Inference">openjdk.org</a>)</li>
+<li>OpenJDK — Local Variable Type Inference Style Guidelines. (<a href="https://openjdk.org/projects/amber/guides/lvti-style-guide" title="Local Variable Type Inference: Style Guidelines">openjdk.org</a>)</li>
+<li>Java Community Process — JSR 201, Enhanced <code>for</code> loop, Java 5. (<a href="https://www.jcp.org/en/jsr/detail?id=201" title="The Java Community Process(SM) Program - JSRs: Java Specification Requests - detail JSR# 201">jcp.org</a>)</li>
+<li>OpenJDK — JEP 395: Records, Java 16. (<a href="https://openjdk.org/jeps/395" title="JEP 395: Records">openjdk.org</a>)</li>
+<li>Joshua Bloch — <em>Effective Java</em>, boas práticas de clareza, controle de fluxo, imutabilidade e desenho de APIs.</li>
+<li>Brian Goetz et al. — <em>Java Concurrency in Practice</em>, especialmente para entender riscos de loops em código concorrente, threads e processamento contínuo.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
