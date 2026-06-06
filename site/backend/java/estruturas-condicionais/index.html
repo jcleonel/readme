@@ -1,0 +1,2706 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../estruturas-controle-operadores/">
+      
+      
+        <link rel="next" href="../estruturas-de-repeticao/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Estruturas condicionais - README</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/css/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#estruturas-condicionais-em-java" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../../.." title="README" class="md-header__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            README
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Estruturas condicionais
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="README" class="md-nav__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    README
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Backend
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fundamentos-da-linguagem-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../convencoes-de-codigo-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convenções de código em Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../variaveis-tipos-primitivos-operadores-conversoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variáveis, tipos primitivos, operadores e conversões
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fundamentos-de-string/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de String
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../estruturas-controle-operadores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de controle e operadores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas condicionais
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas condicionais
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-no-codigo-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar no código: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-funciona-em-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como funciona em Java
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Como funciona em Java">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#if" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        if
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#if-com-else" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        if com else
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#else-if" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        else if
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#switch-tradicional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        switch tradicional
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#switch-expression" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        switch expression
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operador-ternario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operador ternário
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo prático
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analisando-o-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analisando o código
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-acontece-por-baixo-dos-panos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que acontece por baixo dos panos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="O que acontece por baixo dos panos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#escopo-de-variaveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escopo de variáveis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#campos-estaticos-nao-substituem-variaveis-locais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Campos estáticos não substituem variáveis locais
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#switch-break-e-fall-through" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        switch, break e fall-through
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipos-aceitos-no-switch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipos aceitos no switch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evolucao-do-switch-ate-java-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evolução do switch até Java 25
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bytecode-e-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bytecode e performance
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#esquecer-break-no-switch-tradicional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esquecer break no switch tradicional
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usar-varios-if-quando-as-condicoes-sao-exclusivas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usar vários if quando as condições são exclusivas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#declarar-variavel-dentro-de-um-bloco-e-tentar-usar-fora" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Declarar variável dentro de um bloco e tentar usar fora
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#confundir-variavel-local-nao-inicializada-com-nullpointerexception" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Confundir variável local não inicializada com NullPointerException
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usar-static-para-fugir-da-inicializacao-local" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usar static para fugir da inicialização local
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usar-switch-com-long-ou-double-no-java-padrao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usar switch com long ou double no Java padrão
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#colocar-regra-de-negocio-complexa-dentro-de-ternario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Colocar regra de negócio complexa dentro de ternário
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decisões de engenharia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-if" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar if
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-else-if" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar else if
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-switch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar switch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-evitar-switch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando evitar switch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impacto-em-legibilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impacto em legibilidade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impacto-em-manutencao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impacto em manutenção
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impacto-em-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impacto em performance
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../estruturas-de-repeticao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de repetição
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Orientação a Objetos (POO)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Orientação a Objetos (POO)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introducao-orientacao-a-objetos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução à POO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Spring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/api-rest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    O que é API REST?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/http/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Um pouco de HTTP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/por-que-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Por que escolher Spring?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/spring-boot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Boot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/spring-initializr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Initializr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/maven-pom/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maven e pom.xml
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-no-codigo-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar no código: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-funciona-em-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como funciona em Java
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Como funciona em Java">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#if" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        if
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#if-com-else" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        if com else
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#else-if" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        else if
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#switch-tradicional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        switch tradicional
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#switch-expression" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        switch expression
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operador-ternario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operador ternário
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo prático
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analisando-o-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analisando o código
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-acontece-por-baixo-dos-panos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que acontece por baixo dos panos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="O que acontece por baixo dos panos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#escopo-de-variaveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escopo de variáveis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#campos-estaticos-nao-substituem-variaveis-locais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Campos estáticos não substituem variáveis locais
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#switch-break-e-fall-through" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        switch, break e fall-through
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipos-aceitos-no-switch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipos aceitos no switch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evolucao-do-switch-ate-java-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evolução do switch até Java 25
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bytecode-e-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bytecode e performance
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#esquecer-break-no-switch-tradicional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Esquecer break no switch tradicional
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usar-varios-if-quando-as-condicoes-sao-exclusivas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usar vários if quando as condições são exclusivas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#declarar-variavel-dentro-de-um-bloco-e-tentar-usar-fora" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Declarar variável dentro de um bloco e tentar usar fora
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#confundir-variavel-local-nao-inicializada-com-nullpointerexception" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Confundir variável local não inicializada com NullPointerException
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usar-static-para-fugir-da-inicializacao-local" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usar static para fugir da inicialização local
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usar-switch-com-long-ou-double-no-java-padrao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usar switch com long ou double no Java padrão
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#colocar-regra-de-negocio-complexa-dentro-de-ternario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Colocar regra de negócio complexa dentro de ternário
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decisões de engenharia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-if" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar if
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-else-if" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar else if
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-switch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar switch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-evitar-switch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando evitar switch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impacto-em-legibilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impacto em legibilidade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impacto-em-manutencao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impacto em manutenção
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impacto-em-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impacto em performance
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="estruturas-condicionais-em-java">Estruturas condicionais em Java</h1>
+<p>Aplicações backend raramente executam sempre o mesmo caminho. Um sistema precisa tomar decisões: liberar ou bloquear uma operação, aplicar uma regra de desconto, validar uma entrada, escolher uma estratégia de cobrança, classificar um conteúdo, rejeitar uma requisição inválida ou decidir qual mensagem retornar para uma API.</p>
+<p>Em uma aplicação como <strong>meucatalogomusical.com</strong>, por exemplo, uma música pode receber selos diferentes conforme nota média, quantidade de avaliações, gênero, duração e tipo de usuário. Uma faixa de Rock Progressivo com mais de oito minutos pode aparecer como “faixa longa recomendada”, enquanto uma música com poucas avaliações talvez ainda não deva receber destaque.</p>
+<p>Essas decisões são representadas em Java por estruturas condicionais e expressões condicionais: <code>if</code>, <code>else</code>, <code>else if</code>, <code>switch</code>, <code>switch expression</code> e operador ternário. A linguagem Java define formalmente essas estruturas na Java Language Specification; o <code>if</code> está na seção de statements, o operador ternário em expressões e o <code>switch</code> possui regras próprias de seleção, compatibilidade de tipos, exaustividade e execução. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/index.html" title="The Java® Language Specification">Oracle Docs</a>)</p>
+<h2 id="antes-de-entrar-no-codigo-uma-ideia-simples">Antes de entrar no código: uma ideia simples</h2>
+<p>Uma estrutura condicional responde à pergunta:</p>
+<blockquote>
+<p>“Dado este estado, qual caminho o programa deve seguir?”</p>
+</blockquote>
+<p>Exemplos:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">usuarioPremium</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">liberarConteudoExclusivo</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">selo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nota</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">9</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;Destaque&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Catálogo&quot;</span><span class="p">;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">descricaoGenero</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">genero</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">HEAVY_METAL</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Metal&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">HARD_ROCK</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Hard Rock&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">ROCK_PROGRESSIVO</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Rock Progressivo&quot;</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div>
+<p>A diferença principal entre essas formas está no tipo de decisão:</p>
+<ul>
+<li><code>if</code>: melhor para condições booleanas livres.</li>
+<li><code>else if</code>: melhor para faixas, prioridades e regras encadeadas.</li>
+<li><code>switch</code>: melhor para escolher caminhos a partir de um mesmo valor.</li>
+<li><code>switch expression</code>: melhor quando a decisão precisa produzir um valor.</li>
+<li><code>operador ternário</code>: melhor quando uma condição simples escolhe entre dois valores.</li>
+</ul>
+<h2 id="definicao-tecnica">Definição técnica</h2>
+<p>Em Java, uma estrutura condicional é um mecanismo de controle de fluxo que permite executar blocos diferentes conforme uma expressão booleana ou conforme o valor de uma expressão seletora.</p>
+<p>O <code>if</code> exige uma expressão compatível com <code>boolean</code> ou <code>Boolean</code>. Se a condição for verdadeira, o bloco associado é executado. Se houver <code>else</code>, ele será executado quando a condição do <code>if</code> for falsa. Em uma cadeia <code>else if</code>, o Java testa as condições na ordem e executa o primeiro bloco cuja condição for verdadeira.</p>
+<p>O <code>switch</code> transfere o controle para um dos rótulos <code>case</code> ou <code>default</code>, de acordo com o valor da expressão seletora. No Java 25, sem habilitar recursos preview, a expressão seletora de <code>switch</code> pode ser <code>char</code>, <code>byte</code>, <code>short</code>, <code>int</code> ou tipo de referência. A própria JLS destaca que <code>boolean</code>, <code>long</code>, <code>float</code> e <code>double</code> não são tipos projetados para uso direto como seletor de <code>switch</code> padrão. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-14.html" title="Chapter 14. Blocks, Statements, and Patterns">Oracle Docs</a>)</p>
+<p>O operador ternário <code>? :</code> é uma expressão, não um statement. Ele usa o valor booleano da primeira expressão para escolher qual das outras duas expressões será avaliada. A expressão não escolhida não é avaliada naquela execução. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-15.html" title="Chapter 15. Expressions">Oracle Docs</a>)</p>
+<h2 id="como-funciona-em-java">Como funciona em Java</h2>
+<h3 id="if"><code>if</code></h3>
+<p>O <code>if</code> é a forma mais direta de condicional.</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">notaMedia</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">9</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Música em destaque.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Aqui, o bloco só será executado se <code>notaMedia &gt;= 9</code> resultar em <code>true</code>.</p>
+<h3 id="if-com-else"><code>if</code> com <code>else</code></h3>
+<p>O <code>else</code> representa o caminho alternativo.</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">notaMedia</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">9</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Música em destaque.&quot;</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Música comum no catálogo.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Se a condição do <code>if</code> for falsa, o bloco do <code>else</code> será executado.</p>
+<h3 id="else-if"><code>else if</code></h3>
+<p>O <code>else if</code> organiza decisões mutuamente exclusivas.</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">notaMedia</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">9</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Clássico essencial.&quot;</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">notaMedia</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">7</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Boa recomendação.&quot;</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">notaMedia</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Catálogo básico.&quot;</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Baixa recomendação.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse formato é diferente de escrever vários <code>if</code> separados. Em vários <code>if</code> independentes, todas as condições são testadas. Em uma cadeia <code>if / else if / else</code>, o Java para no primeiro bloco verdadeiro.</p>
+<h3 id="switch-tradicional"><code>switch</code> tradicional</h3>
+<p>O <code>switch</code> tradicional é útil quando a decisão depende de um único valor.</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">descricao</span><span class="p">;</span>
+
+<span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">nota</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span>
+<span class="w">        </span><span class="n">descricao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Muito ruim&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">2</span><span class="p">:</span>
+<span class="w">        </span><span class="n">descricao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Ruim&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">3</span><span class="p">:</span>
+<span class="w">        </span><span class="n">descricao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Razoável&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">4</span><span class="p">:</span>
+<span class="w">        </span><span class="n">descricao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Muito bom&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">5</span><span class="p">:</span>
+<span class="w">        </span><span class="n">descricao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Excelente&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">default</span><span class="p">:</span>
+<span class="w">        </span><span class="n">descricao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Nota inválida&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>O <code>break</code> encerra a execução do <code>switch</code>. Sem <code>break</code>, o fluxo continua nos próximos <code>case</code>, comportamento conhecido como <strong>fall-through</strong>. Esse comportamento existe na linguagem e pode ser intencional, mas costuma ser uma fonte de bugs quando acontece por esquecimento.</p>
+<h3 id="switch-expression"><code>switch expression</code></h3>
+<p>Desde o Java 14, por meio da JEP 361, <code>switch</code> também pode ser usado como expressão, ou seja, pode produzir um valor. Essa evolução introduziu os rótulos com seta (<code>case X -&gt;</code>) e o uso de <code>yield</code> quando um bloco precisa devolver um valor. (<a href="https://openjdk.org/jeps/361" title="JEP 361: Switch Expressions">OpenJDK</a>)</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">descricao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">nota</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Muito ruim&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Ruim&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Razoável&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Muito bom&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Excelente&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">default</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Nota inválida&quot;</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div>
+<p>Esse formato reduz a chance de esquecer <code>break</code> e deixa mais claro que o objetivo da decisão é produzir um valor.</p>
+<h3 id="operador-ternario">Operador ternário</h3>
+<p>O operador ternário é adequado para escolhas simples entre dois valores.</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">tipoAcesso</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usuarioPremium</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;Premium&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Gratuito&quot;</span><span class="p">;</span>
+</code></pre></div>
+<p>Ele deve ser usado com moderação. Quando a regra fica grande, o <code>if</code> ou um método bem nomeado costuma ser mais legível.</p>
+<h2 id="exemplo-pratico">Exemplo prático</h2>
+<p>Vamos usar um exemplo da aplicação fictícia <strong>meucatalogomusical.com</strong>. O objetivo é classificar uma música do catálogo com base em algumas regras:</p>
+<ul>
+<li>músicas com poucas avaliações não recebem selo definitivo;</li>
+<li>notas altas recebem destaque;</li>
+<li>Rock Progressivo com duração longa recebe uma descrição especial;</li>
+<li>músicas ao vivo podem receber um selo adicional para usuários premium;</li>
+<li>o gênero musical é traduzido com <code>switch expression</code>;</li>
+<li>uma condição simples usa operador ternário.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ClassificadorMusical</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">enum</span><span class="w"> </span><span class="n">Genero</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">HEAVY_METAL</span><span class="p">,</span>
+<span class="w">        </span><span class="n">HARD_ROCK</span><span class="p">,</span>
+<span class="w">        </span><span class="n">ROCK_PROGRESSIVO</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">record</span> <span class="nc">Musica</span><span class="p">(</span>
+<span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">titulo</span><span class="p">,</span>
+<span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">banda</span><span class="p">,</span>
+<span class="w">            </span><span class="n">Genero</span><span class="w"> </span><span class="n">genero</span><span class="p">,</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">duracaoEmSegundos</span><span class="p">,</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">notaMedia</span><span class="p">,</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">quantidadeAvaliacoes</span><span class="p">,</span>
+<span class="w">            </span><span class="kt">boolean</span><span class="w"> </span><span class="n">aoVivo</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Musica</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Musica</span><span class="p">(</span>
+<span class="w">                </span><span class="s">&quot;Fear of the Dark&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s">&quot;Iron Maiden&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="n">Genero</span><span class="p">.</span><span class="na">HEAVY_METAL</span><span class="p">,</span>
+<span class="w">                </span><span class="mi">438</span><span class="p">,</span>
+<span class="w">                </span><span class="mi">9</span><span class="p">,</span>
+<span class="w">                </span><span class="mi">2150</span><span class="p">,</span>
+<span class="w">                </span><span class="kc">true</span>
+<span class="w">        </span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">classificacao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">classificar</span><span class="p">(</span><span class="n">musica</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">classificacao</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">classificar</span><span class="p">(</span><span class="n">Musica</span><span class="w"> </span><span class="n">musica</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">usuarioPremium</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">quantidadeAvaliacoes</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Aguardando mais avaliações para classificação.&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">descricaoGenero</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">genero</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">HEAVY_METAL</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Heavy Metal&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">HARD_ROCK</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Hard Rock&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">ROCK_PROGRESSIVO</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Rock Progressivo&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="p">};</span>
+
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">seloNota</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">notaMedia</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">9</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">seloNota</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Clássico essencial&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">notaMedia</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">7</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">seloNota</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Boa recomendação&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">notaMedia</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">seloNota</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Catálogo básico&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">seloNota</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Baixa recomendação&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">formato</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">musica</span><span class="p">.</span><span class="na">aoVivo</span><span class="p">()</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;versão ao vivo&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">&quot;versão de estúdio&quot;</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">genero</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">Genero</span><span class="p">.</span><span class="na">ROCK_PROGRESSIVO</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">musica</span><span class="p">.</span><span class="na">duracaoEmSegundos</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">480</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;%s de %s: %s, faixa longa de %s.&quot;</span>
+<span class="w">                    </span><span class="p">.</span><span class="na">formatted</span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">titulo</span><span class="p">(),</span><span class="w"> </span><span class="n">musica</span><span class="p">.</span><span class="na">banda</span><span class="p">(),</span><span class="w"> </span><span class="n">seloNota</span><span class="p">,</span><span class="w"> </span><span class="n">descricaoGenero</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">usuarioPremium</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">musica</span><span class="p">.</span><span class="na">aoVivo</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;%s de %s: %s, %s disponível para usuários premium.&quot;</span>
+<span class="w">                    </span><span class="p">.</span><span class="na">formatted</span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">titulo</span><span class="p">(),</span><span class="w"> </span><span class="n">musica</span><span class="p">.</span><span class="na">banda</span><span class="p">(),</span><span class="w"> </span><span class="n">seloNota</span><span class="p">,</span><span class="w"> </span><span class="n">formato</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;%s de %s: %s no catálogo de %s.&quot;</span>
+<span class="w">                </span><span class="p">.</span><span class="na">formatted</span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">titulo</span><span class="p">(),</span><span class="w"> </span><span class="n">musica</span><span class="p">.</span><span class="na">banda</span><span class="p">(),</span><span class="w"> </span><span class="n">seloNota</span><span class="p">,</span><span class="w"> </span><span class="n">descricaoGenero</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="analisando-o-codigo">Analisando o código</h2>
+<p>O <code>enum Genero</code> limita os gêneros possíveis a três valores. Isso ajuda o compilador e melhora a modelagem: em vez de espalhar strings como <code>"metal"</code>, <code>"hard"</code> ou <code>"prog"</code> pelo código, o domínio trabalha com valores controlados.</p>
+<p>O <code>record Musica</code> representa uma música de forma imutável e concisa. O exemplo usa recursos modernos da linguagem para manter o foco na regra de decisão.</p>
+<p>A primeira condicional é uma <strong>guarda</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">quantidadeAvaliacoes</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Aguardando mais avaliações para classificação.&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse padrão é comum em backend. Quando uma regra impede a continuação do fluxo, o método retorna cedo. Isso evita aninhar todo o restante do código dentro de um grande <code>else</code>.</p>
+<p>Depois, o código usa <code>switch expression</code> para transformar o enum em uma descrição textual:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">descricaoGenero</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">genero</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">HEAVY_METAL</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Heavy Metal&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">HARD_ROCK</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Hard Rock&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">ROCK_PROGRESSIVO</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Rock Progressivo&quot;</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div>
+<p>Como todos os valores do enum foram tratados, o <code>default</code> não é necessário. Isso é útil porque, se um novo gênero for adicionado ao enum e o código for recompilado, o compilador pode exigir que a nova possibilidade seja tratada.</p>
+<p>A classificação por nota usa <code>if / else if / else</code>, porque a regra depende de faixas numéricas:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">notaMedia</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">9</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">seloNota</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Clássico essencial&quot;</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">notaMedia</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">7</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">seloNota</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Boa recomendação&quot;</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">notaMedia</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">seloNota</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Catálogo básico&quot;</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">seloNota</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Baixa recomendação&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Aqui a ordem importa. Se a condição <code>nota &gt;= 5</code> viesse antes de <code>nota &gt;= 9</code>, uma nota 9 cairia no bloco errado.</p>
+<p>O operador ternário aparece em uma escolha simples:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">formato</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">musica</span><span class="p">.</span><span class="na">aoVivo</span><span class="p">()</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;versão ao vivo&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">&quot;versão de estúdio&quot;</span><span class="p">;</span>
+</code></pre></div>
+<p>Essa é uma boa aplicação do ternário: uma condição simples, dois valores simples, sem cálculo complexo dentro da expressão.</p>
+<h2 id="o-que-acontece-por-baixo-dos-panos">O que acontece por baixo dos panos</h2>
+<h3 id="escopo-de-variaveis">Escopo de variáveis</h3>
+<p>Uma variável declarada dentro de um bloco só existe naquele bloco.</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">deveCobrarFrete</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">valorFrete</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">12.90</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">valorDiscos</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">valorFrete</span><span class="p">;</span><span class="w"> </span><span class="c1">// não compila</span>
+</code></pre></div>
+<p>Esse código não compila porque <code>valorFrete</code> foi declarada dentro do bloco do <code>if</code>. Fora do bloco, ela não está no escopo.</p>
+<p>O correto é declarar a variável no menor escopo possível, mas amplo o suficiente para todos os usos necessários:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="n">valorFrete</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">deveCobrarFrete</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">valorFrete</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">12.90</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">valorDiscos</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">valorFrete</span><span class="p">;</span>
+</code></pre></div>
+<p>A JLS diferencia variáveis locais de campos. Campos de classe, campos de instância e componentes de array recebem valores padrão quando são criados. Variáveis locais, por outro lado, precisam receber valor explicitamente antes de serem usadas, e isso deve ser verificável pelo compilador por meio das regras de <strong>definite assignment</strong>. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-4.html" title="Chapter 4. Types, Values, and Variables">Oracle Docs</a>)</p>
+<p>Por isso este código compila:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Pedido</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">valorFrete</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">50.0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">valorFrete</span><span class="p">;</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">total</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><code>valorFrete</code> é um campo estático. Como é um campo do tipo <code>double</code>, recebe automaticamente o valor padrão <code>0.0</code>.</p>
+<p>Mas este código não compila:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Pedido</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">valorFrete</span><span class="p">;</span>
+
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">50.0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">valorFrete</span><span class="p">;</span><span class="w"> </span><span class="c1">// variável pode não ter sido inicializada</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">total</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>A regra não muda por ser tipo primitivo ou referência. Uma variável local do tipo <code>String</code> também precisa estar definitivamente inicializada antes do uso:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">descricao</span><span class="p">;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nota</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">descricao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Excelente&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">descricao</span><span class="p">);</span><span class="w"> </span><span class="c1">// não compila</span>
+</code></pre></div>
+<p>Isso não gera <code>NullPointerException</code>. O problema acontece antes: é erro de compilação. <code>NullPointerException</code> aconteceria se a variável estivesse inicializada com <code>null</code> e o código tentasse acessar um membro dela:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">descricao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">descricao</span><span class="p">.</span><span class="na">length</span><span class="p">());</span><span class="w"> </span><span class="c1">// compila, mas lança NullPointerException em execução</span>
+</code></pre></div>
+<p>Portanto, no caso de uma variável local como <code>String descricaoNota;</code>, ela pode ser declarada sem valor inicial <strong>somente se o compilador conseguir provar que todos os caminhos até o uso atribuem algum valor a ela</strong>.</p>
+<h3 id="campos-estaticos-nao-substituem-variaveis-locais">Campos estáticos não substituem variáveis locais</h3>
+<p>Embora um campo estático receba valor padrão, isso não significa que ele deva ser usado para evitar inicialização local.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">static</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">valorFrete</span><span class="p">;</span>
+</code></pre></div>
+<p>Esse campo pertence à classe, não a uma execução específica do método. Em sistemas backend, campos estáticos mutáveis podem criar problemas sérios: estado compartilhado, dificuldade de teste, concorrência, comportamento inesperado entre requisições e acoplamento global.</p>
+<p>Para uma informação temporária de cálculo, como frete de um pedido, prefira variável local:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="n">valorFrete</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">deveCobrarFrete</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">calcularFrete</span><span class="p">()</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="kt">double</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">valorProdutos</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">valorFrete</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="switch-break-e-fall-through"><code>switch</code>, <code>break</code> e fall-through</h3>
+<p>No <code>switch</code> tradicional, quando um <code>case</code> é encontrado, a execução continua até encontrar um <code>break</code>, <code>return</code>, <code>throw</code> ou o fim do bloco.</p>
+<div class="highlight"><pre><span></span><code><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">nota</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">4</span><span class="p">:</span>
+<span class="w">        </span><span class="n">descricao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Muito bom&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">5</span><span class="p">:</span>
+<span class="w">        </span><span class="n">descricao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Excelente&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">default</span><span class="p">:</span>
+<span class="w">        </span><span class="n">descricao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Opção inválida&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Se <code>nota</code> for <code>4</code>, o código entra no <code>case 4</code>, mas continua executando <code>case 5</code> e <code>default</code>. O resultado final será <code>"Opção inválida"</code>.</p>
+<p>Com <code>break</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">nota</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">4</span><span class="p">:</span>
+<span class="w">        </span><span class="n">descricao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Muito bom&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">5</span><span class="p">:</span>
+<span class="w">        </span><span class="n">descricao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Excelente&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">default</span><span class="p">:</span>
+<span class="w">        </span><span class="n">descricao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Opção inválida&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Agora cada caso encerra corretamente sua execução.</p>
+<p>O fall-through pode ser útil quando vários casos compartilham o mesmo bloco:</p>
+<div class="highlight"><pre><span></span><code><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">diaSemana</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="s">&quot;ter&quot;</span><span class="p">:</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="s">&quot;qua&quot;</span><span class="p">:</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="s">&quot;qui&quot;</span><span class="p">:</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="s">&quot;sex&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="n">horario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;08:00 às 18:00&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="s">&quot;sab&quot;</span><span class="p">:</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="s">&quot;dom&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="n">horario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;08:00 às 12:00&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">default</span><span class="p">:</span>
+<span class="w">        </span><span class="n">horario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Fechado&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Mas, em código moderno, normalmente é mais claro usar <code>switch expression</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">horario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">diaSemana</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="s">&quot;ter&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;qua&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;qui&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;sex&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;08:00 às 18:00&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="s">&quot;sab&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;dom&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;08:00 às 12:00&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">default</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Fechado&quot;</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div>
+<h3 id="tipos-aceitos-no-switch">Tipos aceitos no <code>switch</code></h3>
+<p>No Java 25 padrão, o seletor de <code>switch</code> aceita <code>char</code>, <code>byte</code>, <code>short</code>, <code>int</code> e tipos de referência. Isso inclui wrappers como <code>Character</code>, <code>Byte</code>, <code>Short</code>, <code>Integer</code>, <code>String</code>, enums e, desde Java 21, uso mais amplo com tipos de referência em pattern matching para <code>switch</code>. A JLS deixa explícito que <code>boolean</code>, <code>long</code>, <code>float</code> e <code>double</code> não são aceitos no <code>switch</code> padrão. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-14.html" title="Chapter 14. Blocks, Statements, and Patterns">Oracle Docs</a>)</p>
+<p>Resumo prático:</p>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th style="text-align: right;"><code>switch</code> padrão em Java 25?</th>
+<th>Observação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>byte</code></td>
+<td style="text-align: right;">Sim</td>
+<td>Promovido/tratado de forma compatível com <code>int</code></td>
+</tr>
+<tr>
+<td><code>short</code></td>
+<td style="text-align: right;">Sim</td>
+<td>Promovido/tratado de forma compatível com <code>int</code></td>
+</tr>
+<tr>
+<td><code>char</code></td>
+<td style="text-align: right;">Sim</td>
+<td>Tipo integral</td>
+</tr>
+<tr>
+<td><code>int</code></td>
+<td style="text-align: right;">Sim</td>
+<td>Caso clássico</td>
+</tr>
+<tr>
+<td><code>long</code></td>
+<td style="text-align: right;">Não</td>
+<td>Não aceito no <code>switch</code> padrão</td>
+</tr>
+<tr>
+<td><code>float</code></td>
+<td style="text-align: right;">Não</td>
+<td>Não aceito no <code>switch</code> padrão</td>
+</tr>
+<tr>
+<td><code>double</code></td>
+<td style="text-align: right;">Não</td>
+<td>Não aceito no <code>switch</code> padrão</td>
+</tr>
+<tr>
+<td><code>boolean</code></td>
+<td style="text-align: right;">Não</td>
+<td>Use <code>if</code> ou ternário</td>
+</tr>
+<tr>
+<td><code>String</code></td>
+<td style="text-align: right;">Sim</td>
+<td>Suporte introduzido no Java 7</td>
+</tr>
+<tr>
+<td><code>enum</code></td>
+<td style="text-align: right;">Sim</td>
+<td>Muito recomendado para estados conhecidos</td>
+</tr>
+<tr>
+<td>wrappers (<code>Integer</code>, etc.)</td>
+<td style="text-align: right;">Sim</td>
+<td>Atenção a <code>null</code></td>
+</tr>
+<tr>
+<td>qualquer tipo de referência com pattern matching</td>
+<td style="text-align: right;">Sim, desde Java 21</td>
+<td>Regras de exaustividade e padrões</td>
+</tr>
+</tbody>
+</table>
+<p>Existe uma exceção importante em Java 25: a JEP 507, <strong>Primitive Types in Patterns, instanceof, and switch</strong>, reintroduz em preview o suporte para tipos primitivos em contextos de pattern matching, <code>instanceof</code> e <code>switch</code>, incluindo a ideia de <code>switch</code> funcionar com todos os tipos primitivos. Como é preview, não deve ser tratado como recurso estável para código produtivo sem uma decisão explícita do time. (<a href="https://openjdk.org/jeps/507" title="JEP 507: Primitive Types in Patterns, instanceof, and ...">OpenJDK</a>)</p>
+<h3 id="evolucao-do-switch-ate-java-25">Evolução do <code>switch</code> até Java 25</h3>
+<table>
+<thead>
+<tr>
+<th>Versão</th>
+<th>Evolução</th>
+<th>JEP / referência</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Java inicial</td>
+<td><code>switch</code> clássico com <code>case</code>, <code>default</code>, <code>break</code> e fall-through</td>
+<td>JLS</td>
+</tr>
+<tr>
+<td>Java 5</td>
+<td>Uso comum com enums</td>
+<td>JLS</td>
+</tr>
+<tr>
+<td>Java 7</td>
+<td><code>String</code> passou a ser aceito em <code>switch</code></td>
+<td>Documentação Oracle do Java Tutorial (<a href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/switch.html" title="The switch Statement (The Java™ Tutorials &gt; Learning ...">Oracle Docs</a>)</td>
+</tr>
+<tr>
+<td>Java 12</td>
+<td><code>switch expressions</code> em preview</td>
+<td>JEP 325</td>
+</tr>
+<tr>
+<td>Java 13</td>
+<td>refinamento em preview</td>
+<td>JEP 354</td>
+</tr>
+<tr>
+<td>Java 14</td>
+<td><code>switch expressions</code> finalizado</td>
+<td>JEP 361 (<a href="https://openjdk.org/jeps/361" title="JEP 361: Switch Expressions">OpenJDK</a>)</td>
+</tr>
+<tr>
+<td>Java 17 a 20</td>
+<td>pattern matching for switch em preview</td>
+<td>JEPs 406, 420, 427, 433</td>
+</tr>
+<tr>
+<td>Java 21</td>
+<td>pattern matching for switch finalizado</td>
+<td>JEP 441 (<a href="https://openjdk.org/jeps/441" title="JEP 441: Pattern Matching for switch">OpenJDK</a>)</td>
+</tr>
+<tr>
+<td>Java 25</td>
+<td>primitive types em patterns, <code>instanceof</code> e <code>switch</code> em terceira preview</td>
+<td>JEP 507 (<a href="https://openjdk.org/jeps/507" title="JEP 507: Primitive Types in Patterns, instanceof, and ...">OpenJDK</a>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="bytecode-e-performance">Bytecode e performance</h3>
+<p>Em alguns casos, o compilador pode transformar um <code>switch</code> em instruções específicas da JVM, como <code>tableswitch</code> e <code>lookupswitch</code>. A especificação da JVM descreve <code>tableswitch</code> como acesso a uma tabela de saltos por índice e <code>lookupswitch</code> como acesso por correspondência de chave. Ambas trabalham com chave/index do tipo <code>int</code>. (<a href="https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-6.html" title="Chapter 6. The Java Virtual Machine Instruction Set">Oracle Docs</a>)</p>
+<p>Isso não significa que todo <code>switch</code> será sempre mais rápido que <code>if</code>. Em código de negócio, a decisão entre <code>if</code> e <code>switch</code> deve priorizar clareza, manutenibilidade e modelagem. Performance só deve guiar essa escolha quando houver medição real.</p>
+<h2 id="boas-praticas">Boas práticas</h2>
+<p>Prefira <code>if</code> quando a regra for uma condição booleana clara:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">usuarioPremium</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">musica</span><span class="p">.</span><span class="na">aoVivo</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">liberarVersaoEspecial</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Prefira <code>else if</code> quando houver faixas ou prioridades:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nota</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">9</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">selo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Clássico&quot;</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nota</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">7</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">selo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Recomendado&quot;</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">selo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Catálogo&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Prefira <code>switch expression</code> quando a decisão tiver como objetivo produzir um valor:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">nomeGenero</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">genero</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">HEAVY_METAL</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Heavy Metal&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">HARD_ROCK</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Hard Rock&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">ROCK_PROGRESSIVO</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Rock Progressivo&quot;</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div>
+<p>Use <code>enum</code> para estados conhecidos em vez de strings soltas:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">enum</span><span class="w"> </span><span class="n">StatusPublicacao</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">RASCUNHO</span><span class="p">,</span>
+<span class="w">    </span><span class="n">PUBLICADO</span><span class="p">,</span>
+<span class="w">    </span><span class="n">ARQUIVADO</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Evite campos estáticos mutáveis para dados temporários. Variáveis locais são melhores para cálculos de uma execução específica.</p>
+<p>Use retornos antecipados para reduzir aninhamento:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">musica</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Música é obrigatória.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">quantidadeAvaliacoes</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Aguardando avaliações.&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">return</span><span class="w"> </span><span class="s">&quot;Classificação disponível.&quot;</span><span class="p">;</span>
+</code></pre></div>
+<p>Evite ternários aninhados:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Evite</span>
+<span class="n">String</span><span class="w"> </span><span class="n">selo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nota</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">9</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;Clássico&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">nota</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;Recomendado&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Catálogo&quot;</span><span class="p">;</span>
+</code></pre></div>
+<p>Prefira:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">selo</span><span class="p">;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nota</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">9</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">selo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Clássico&quot;</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nota</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">7</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">selo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Recomendado&quot;</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">selo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Catálogo&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="erros-comuns">Erros comuns</h2>
+<h3 id="esquecer-break-no-switch-tradicional">Esquecer <code>break</code> no <code>switch</code> tradicional</h3>
+<div class="highlight"><pre><span></span><code><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">nota</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">5</span><span class="p">:</span>
+<span class="w">        </span><span class="n">descricao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Excelente&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">default</span><span class="p">:</span>
+<span class="w">        </span><span class="n">descricao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Inválida&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Se <code>nota</code> for <code>5</code>, <code>descricao</code> terminará como <code>"Inválida"</code>.</p>
+<h3 id="usar-varios-if-quando-as-condicoes-sao-exclusivas">Usar vários <code>if</code> quando as condições são exclusivas</h3>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nota</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">selo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Catálogo&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nota</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">7</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">selo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Recomendado&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nota</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">9</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">selo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Clássico&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse código até pode funcionar, mas avalia condições desnecessárias e depende da ordem das sobrescritas. Em regras exclusivas, <code>else if</code> comunica melhor a intenção.</p>
+<h3 id="declarar-variavel-dentro-de-um-bloco-e-tentar-usar-fora">Declarar variável dentro de um bloco e tentar usar fora</h3>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">deveAplicarDesconto</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">desconto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">10.0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">valor</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">desconto</span><span class="p">;</span><span class="w"> </span><span class="c1">// não compila</span>
+</code></pre></div>
+<p>A variável <code>desconto</code> só existe dentro do bloco.</p>
+<h3 id="confundir-variavel-local-nao-inicializada-com-nullpointerexception">Confundir variável local não inicializada com <code>NullPointerException</code></h3>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">descricao</span><span class="p">;</span>
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">descricao</span><span class="p">);</span><span class="w"> </span><span class="c1">// erro de compilação</span>
+</code></pre></div>
+<p>Isso não é <code>NullPointerException</code>. É erro de compilação por falta de inicialização definitiva.</p>
+<h3 id="usar-static-para-fugir-da-inicializacao-local">Usar <code>static</code> para fugir da inicialização local</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">static</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">desconto</span><span class="p">;</span>
+</code></pre></div>
+<p>Isso evita o erro de compilação, mas muda o significado do dado. Agora <code>desconto</code> é estado global da classe. Em backend, isso pode ser perigoso.</p>
+<h3 id="usar-switch-com-long-ou-double-no-java-padrao">Usar <code>switch</code> com <code>long</code> ou <code>double</code> no Java padrão</h3>
+<div class="highlight"><pre><span></span><code><span class="kt">long</span><span class="w"> </span><span class="n">codigo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10L</span><span class="p">;</span>
+
+<span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">codigo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">10L</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Código 10&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>No Java 25 padrão, isso não compila. Para <code>long</code>, <code>double</code>, <code>float</code> e <code>boolean</code>, use <code>if</code>, normalize para um tipo aceito ou avalie explicitamente recursos preview se isso fizer sentido para o projeto.</p>
+<h3 id="colocar-regra-de-negocio-complexa-dentro-de-ternario">Colocar regra de negócio complexa dentro de ternário</h3>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="n">taxa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clienteVip</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">500</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">cupomValido</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mf">0.05</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">calcularTaxaPadrao</span><span class="p">();</span>
+</code></pre></div>
+<p>Ainda é legível para alguns casos, mas esse tipo de regra tende a crescer. Quando a condição tem muitas partes, um método nomeado melhora a leitura:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="n">taxa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">deveAplicarTaxaPromocional</span><span class="p">(</span><span class="n">cliente</span><span class="p">,</span><span class="w"> </span><span class="n">pedido</span><span class="p">)</span>
+<span class="w">        </span><span class="o">?</span><span class="w"> </span><span class="mf">0.05</span>
+<span class="w">        </span><span class="p">:</span><span class="w"> </span><span class="n">calcularTaxaPadrao</span><span class="p">();</span>
+</code></pre></div>
+<h2 id="decisoes-de-engenharia">Decisões de engenharia</h2>
+<h3 id="quando-usar-if">Quando usar <code>if</code></h3>
+<p>Use <code>if</code> quando a regra for naturalmente booleana:</p>
+<ul>
+<li>validar entrada;</li>
+<li>verificar permissão;</li>
+<li>bloquear fluxo;</li>
+<li>aplicar uma regra específica;</li>
+<li>retornar cedo em casos inválidos.</li>
+</ul>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">usuarioPremium</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;Conteúdo disponível apenas para usuários premium.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="quando-usar-else-if">Quando usar <code>else if</code></h3>
+<p>Use <code>else if</code> quando houver uma ordem de prioridade ou faixas:</p>
+<ul>
+<li>classificação por nota;</li>
+<li>cálculo por faixa de preço;</li>
+<li>regras progressivas;</li>
+<li>validações que devem parar no primeiro caso encontrado.</li>
+</ul>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nota</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">9</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Clássico essencial&quot;</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nota</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">7</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Boa recomendação&quot;</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Catálogo básico&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="quando-usar-switch">Quando usar <code>switch</code></h3>
+<p>Use <code>switch</code> quando a decisão depende de um único valor discreto:</p>
+<ul>
+<li><code>enum</code>;</li>
+<li>código de status interno;</li>
+<li>tipo de operação;</li>
+<li>categoria;</li>
+<li>estado de workflow.</li>
+</ul>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="k">return</span><span class="w"> </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">RASCUNHO</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Ainda não publicado&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">PUBLICADO</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Disponível no catálogo&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">ARQUIVADO</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Removido da navegação&quot;</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div>
+<h3 id="quando-evitar-switch">Quando evitar <code>switch</code></h3>
+<p>Evite <code>switch</code> quando:</p>
+<ul>
+<li>a lógica depende de muitas variáveis diferentes;</li>
+<li>cada caso cresce demais;</li>
+<li>os casos representam comportamentos polimórficos;</li>
+<li>a regra muda frequentemente por configuração;</li>
+<li>o código começa a virar uma grande central de decisões.</li>
+</ul>
+<p>Em casos assim, alternativas podem ser melhores:</p>
+<ul>
+<li>polimorfismo;</li>
+<li>Strategy;</li>
+<li>Specification;</li>
+<li>Map de funções;</li>
+<li>regras configuráveis;</li>
+<li>validações separadas por classe;</li>
+<li>métodos pequenos e bem nomeados.</li>
+</ul>
+<h3 id="impacto-em-legibilidade">Impacto em legibilidade</h3>
+<p><code>switch expression</code> costuma ser mais legível que <code>switch</code> tradicional quando a decisão produz valor. O formato com <code>-&gt;</code> reduz ruído e evita <code>break</code>.</p>
+<h3 id="impacto-em-manutencao">Impacto em manutenção</h3>
+<p>Condicionais longas demais indicam que talvez exista uma abstração faltando. Quando uma classe concentra muitos <code>if</code> e <code>switch</code>, ela pode estar acumulando responsabilidade demais.</p>
+<h3 id="impacto-em-performance">Impacto em performance</h3>
+<p>Para a maioria das regras de negócio, a diferença de performance entre <code>if</code> e <code>switch</code> não importa. A JVM e o compilador já fazem várias otimizações. Só vale escolher por performance quando houver evidência por benchmark, profiling ou problema real em produção.</p>
+<h2 id="onde-isso-aparece-em-sistemas-reais">Onde isso aparece em sistemas reais</h2>
+<p>Em APIs REST:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="na">titulo</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">titulo</span><span class="p">().</span><span class="na">isBlank</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">badRequest</span><span class="p">().</span><span class="na">body</span><span class="p">(</span><span class="s">&quot;Título é obrigatório.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Em regras de autorização:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">usuario</span><span class="p">.</span><span class="na">podeEditarCatalogo</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AcessoNegadoException</span><span class="p">(</span><span class="s">&quot;Usuário não pode editar o catálogo.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Em workflows:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">proximaAcao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">statusModeracao</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">PENDENTE</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Enviar para revisão&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">APROVADO</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Publicar no catálogo&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="n">REJEITADO</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;Solicitar ajustes&quot;</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div>
+<p>Em classificação de dados:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">faixaDuracao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">musica</span><span class="p">.</span><span class="na">duracaoEmSegundos</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">480</span>
+<span class="w">        </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;Faixa longa&quot;</span>
+<span class="w">        </span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Faixa curta ou média&quot;</span><span class="p">;</span>
+</code></pre></div>
+<p>Em integração com outros serviços:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">resposta</span><span class="p">.</span><span class="na">statusCode</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">500</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">reagendarProcessamento</span><span class="p">();</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">resposta</span><span class="p">.</span><span class="na">statusCode</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">404</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">registrarCatalogoNaoEncontrado</span><span class="p">();</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">processarResposta</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Em sistemas reais, condicionais não servem apenas para “imprimir mensagens”. Elas expressam decisões de negócio. Por isso, devem ser escritas com clareza, testadas com cuidado e mantidas próximas da linguagem do domínio.</p>
+<h2 id="perguntas-de-revisao">Perguntas de revisão</h2>
+<p>1 - Qual problema as estruturas condicionais resolvem?</p>
+<p>Resposta: elas permitem que o programa escolha caminhos diferentes durante a execução. Em vez de executar sempre a mesma sequência de comandos, o sistema pode validar dados, aplicar regras, bloquear operações, classificar resultados ou escolher respostas conforme o estado atual.</p>
+<p>2 - Qual é a diferença entre <code>if</code> e <code>else</code>?</p>
+<p>Resposta: o <code>if</code> executa um bloco quando a condição é verdadeira. O <code>else</code> executa um bloco alternativo quando a condição do <code>if</code> é falsa.</p>
+<p>3 - Quando usar <code>else if</code>?</p>
+<p>Resposta: use <code>else if</code> quando as condições são encadeadas e normalmente exclusivas. Ele é útil para faixas, prioridades e classificações, como nota maior ou igual a 9, depois maior ou igual a 7, depois maior ou igual a 5.</p>
+<p>4 - Qual é a diferença entre vários <code>if</code> separados e uma cadeia <code>if / else if / else</code>?</p>
+<p>Resposta: vários <code>if</code> separados são avaliados independentemente. Uma cadeia <code>if / else if / else</code> para no primeiro bloco cuja condição for verdadeira. Isso melhora a intenção quando apenas um caminho deve ser escolhido.</p>
+<p>5 - O que é escopo de variável?</p>
+<p>Resposta: escopo é a região do código onde uma variável pode ser acessada. Uma variável declarada dentro de um bloco <code>{ }</code> só existe dentro daquele bloco.</p>
+<p>6 - Por que uma variável local precisa ser inicializada antes de ser usada?</p>
+<p>Resposta: porque Java exige que variáveis locais estejam definitivamente atribuídas antes do uso. O compilador precisa conseguir provar que a variável recebeu valor em todos os caminhos possíveis até aquele ponto.</p>
+<p>7 - Por que um campo estático <code>double valorFrete;</code> não precisa ser inicializado manualmente?</p>
+<p>Resposta: porque campos de classe, campos de instância e componentes de array recebem valores padrão quando são criados. Para <code>double</code>, o padrão é <code>0.0</code>. Isso é diferente de variável local.</p>
+<p>8 - Devo usar campo estático para evitar erro de variável local não inicializada?</p>
+<p>Resposta: não. Campo estático representa estado da classe. Para valores temporários de cálculo, prefira variável local. Usar <code>static</code> sem necessidade pode gerar estado global, dificultar testes e causar problemas em aplicações concorrentes.</p>
+<p>9 - Variáveis locais de referência, como <code>String</code>, precisam ser inicializadas?</p>
+<p>Resposta: sim. A regra vale para tipos primitivos e tipos de referência. Uma variável local <code>String descricao;</code> só pode ser usada se o compilador conseguir provar que ela recebeu valor antes.</p>
+<p>10 - Uma variável local <code>String</code> não inicializada causa <code>NullPointerException</code>?</p>
+<p>Resposta: não. Ela causa erro de compilação. <code>NullPointerException</code> acontece em tempo de execução quando uma referência com valor <code>null</code> é usada para acessar membro, como <code>descricao.length()</code>.</p>
+<p>11 - Quando usar <code>switch</code>?</p>
+<p>Resposta: use <code>switch</code> quando a decisão depende de um único valor discreto, como um enum, uma string, um código inteiro ou um status.</p>
+<p>12 - O que é fall-through no <code>switch</code> tradicional?</p>
+<p>Resposta: é o comportamento em que, após entrar em um <code>case</code>, o fluxo continua executando os próximos <code>case</code> até encontrar <code>break</code>, <code>return</code>, <code>throw</code> ou o fim do bloco.</p>
+<p>13 - O <code>break</code> é sempre obrigatório no <code>switch</code> tradicional?</p>
+<p>Resposta: não é sempre obrigatório, mas geralmente é necessário para evitar fall-through acidental. Pode ser omitido de propósito quando vários <code>case</code> devem compartilhar o mesmo bloco.</p>
+<p>14 - Qual é a vantagem de <code>switch expression</code>?</p>
+<p>Resposta: ela permite que o <code>switch</code> produza um valor, reduz a necessidade de variável temporária, evita o fall-through com <code>-&gt;</code> e melhora a legibilidade quando a decisão é uma escolha de valor.</p>
+<p>15 - Quando <code>switch expression</code> precisa de <code>default</code>?</p>
+<p>Resposta: quando o compilador não consegue provar que todos os casos possíveis foram cobertos. Em um enum, se todos os valores forem tratados, o <code>default</code> pode não ser necessário.</p>
+<p>16 - O <code>switch</code> aceita <code>long</code> em Java 25?</p>
+<p>Resposta: no Java 25 padrão, não. <code>long</code>, <code>float</code>, <code>double</code> e <code>boolean</code> não são aceitos como seletores de <code>switch</code> padrão. A JEP 507 traz suporte ampliado em preview, mas isso exige habilitar recurso preview e não deve ser assumido como base estável sem decisão do projeto.</p>
+<p>17 - O <code>switch</code> aceita <code>String</code>?</p>
+<p>Resposta: sim. <code>String</code> passou a ser aceita em <code>switch</code> a partir do Java 7.</p>
+<p>18 - O <code>double</code> funciona em <code>switch</code>?</p>
+<p>Resposta: no Java padrão, não. Para decisões com <code>double</code>, normalmente use <code>if</code> com comparações por faixa ou normalize o valor para uma categoria representável por enum ou inteiro.</p>
+<p>19 - Quando usar operador ternário?</p>
+<p>Resposta: use ternário quando uma condição simples escolhe entre dois valores simples. Exemplo: <code>String tipo = premium ? "Premium" : "Gratuito";</code>.</p>
+<p>20 - Por que evitar ternário aninhado?</p>
+<p>Resposta: porque reduz a legibilidade. Quando existem várias condições, <code>if / else if / else</code>, <code>switch expression</code> ou métodos bem nomeados costumam deixar a regra mais clara.</p>
+<p>21 - Condicionais afetam arquitetura?</p>
+<p>Resposta: sim. Condicionais pequenas são normais. Mas condicionais enormes, repetidas ou espalhadas podem indicar falta de abstração, regra de negócio duplicada ou necessidade de polimorfismo, Strategy, Specification ou outro desenho melhor.</p>
+<p>22 - O que um desenvolvedor pleno ou sênior deve observar em condicionais?</p>
+<p>Resposta: deve observar clareza da regra, ordem das condições, cobertura de todos os cenários, testes para casos de borda, risco de estado global, duplicação de regras, legibilidade e facilidade de manutenção.</p>
+<h2 id="resumo-final">Resumo final</h2>
+<p>Estruturas condicionais são fundamentais para expressar decisões em Java. O <code>if</code> resolve decisões booleanas diretas. O <code>else if</code> organiza faixas e prioridades. O <code>switch</code> é útil quando a decisão depende de um único valor. O <code>switch expression</code>, finalizado no Java 14, torna a escolha de valores mais concisa e segura. O operador ternário é uma alternativa enxuta para decisões simples entre dois valores.</p>
+<p>Um ponto essencial é entender escopo e inicialização. Variáveis locais precisam ser explicitamente inicializadas antes do uso, enquanto campos recebem valores padrão. Essa diferença existe por desenho da linguagem e evita vários erros antes mesmo da execução.</p>
+<p>Em sistemas backend, condicionais devem ser tratadas como parte da modelagem do domínio. Elas não são apenas sintaxe básica: representam regras de negócio. Quanto mais importante a regra, mais clareza, testes e organização ela exige.</p>
+<h2 id="referencias">Referências</h2>
+<ul>
+<li>Java Language Specification, Java SE 25 — capítulos sobre tipos, variáveis, escopo, statements, <code>if</code>, <code>switch</code>, expressões e definite assignment. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/index.html" title="The Java® Language Specification">Oracle Docs</a>)</li>
+<li>Java Virtual Machine Specification, Java SE 25 — instruções <code>tableswitch</code> e <code>lookupswitch</code>. (<a href="https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-6.html" title="Chapter 6. The Java Virtual Machine Instruction Set">Oracle Docs</a>)</li>
+<li>OpenJDK JEP 361 — Switch Expressions, recurso finalizado no Java 14. (<a href="https://openjdk.org/jeps/361" title="JEP 361: Switch Expressions">OpenJDK</a>)</li>
+<li>OpenJDK JEP 441 — Pattern Matching for switch, finalizado no Java 21. (<a href="https://openjdk.org/jeps/441" title="JEP 441: Pattern Matching for switch">OpenJDK</a>)</li>
+<li>OpenJDK JEP 507 — Primitive Types in Patterns, instanceof, and switch, preview no Java 25. (<a href="https://openjdk.org/jeps/507" title="JEP 507: Primitive Types in Patterns, instanceof, and ...">OpenJDK</a>)</li>
+<li>Oracle Java Language Changes for Java SE 25 — histórico de mudanças da linguagem por versão. (<a href="https://docs.oracle.com/en/java/javase/25/language/java-language-changes-release.html" title="2 Java Language Changes by Release">Oracle Docs</a>)</li>
+<li>Oracle Java Tutorials — uso de <code>String</code> em <code>switch</code> a partir do Java SE 7. (<a href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/switch.html" title="The switch Statement (The Java™ Tutorials &gt; Learning ...">Oracle Docs</a>)</li>
+<li>Joshua Bloch, <em>Effective Java</em> — boas práticas de clareza, imutabilidade, enums e desenho de APIs.</li>
+<li>Brian Goetz et al., <em>Java Concurrency in Practice</em> — referência para entender riscos de estado compartilhado e concorrência em aplicações Java.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
