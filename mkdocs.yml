@@ -12,8 +12,10 @@ nav:
           - Estruturas de controle e operadores: backend/java/estruturas-controle-operadores.md
           - Estruturas condicionais: backend/java/estruturas-condicionais.md
           - Estruturas de repetição: backend/java/estruturas-de-repeticao.md
-        - Orientação a Objetos (POO):
+        - Iniciando em Orientação a Objetos (POO):
           - Introdução à POO: backend/java/introducao-orientacao-a-objetos.md
+          - Classes e objetos: backend/java/classes-e-objetos.md
+          - Classes, objetos e métodos: backend/java/classes-objetos-metodos.md
     
     - Spring:
         - O que é API REST?: backend/spring/api-rest.md

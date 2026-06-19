@@ -1,0 +1,3368 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../classes-e-objetos/">
+      
+      
+        <link rel="next" href="../../spring/api-rest/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Classes, objetos e métodos - README</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/css/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#classes-objetos-e-metodos-em-java" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../../.." title="README" class="md-header__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            README
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Classes, objetos e métodos
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="README" class="md-nav__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    README
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Backend
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fundamentos-da-linguagem-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../convencoes-de-codigo-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convenções de código em Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../variaveis-tipos-primitivos-operadores-conversoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variáveis, tipos primitivos, operadores e conversões
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fundamentos-de-string/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de String
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../estruturas-controle-operadores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de controle e operadores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../estruturas-condicionais/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas condicionais
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../estruturas-de-repeticao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de repetição
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Iniciando em Orientação a Objetos (POO)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Iniciando em Orientação a Objetos (POO)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introducao-orientacao-a-objetos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução à POO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../classes-e-objetos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes e objetos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes, objetos e métodos
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes, objetos e métodos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-no-codigo-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar no código: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-funciona-em-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como funciona em Java
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo prático
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exemplo prático">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bandajava" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Banda.java
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resumomusicajava" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ResumoMusica.java
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#musicajava" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Musica.java
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#curadoriacatalogojava" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CuradoriaCatalogo.java
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aplicacaojava" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aplicacao.java
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analisando-o-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analisando o código
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Analisando o código">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#classe-como-modelo-de-um-conceito" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classe como modelo de um conceito
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodo-void" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método void
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodo-com-retorno" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método com retorno
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodos-menores-evitam-duplicacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos menores evitam duplicação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#return-encerra-a-execucao-do-metodo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Return encerra a execução do método
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#um-ou-varios-returns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Um ou vários returns?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodos-que-retornam-objetos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos que retornam objetos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodos-com-argumentos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos com argumentos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#passando-objetos-como-argumentos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Passando objetos como argumentos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparacao-com-versoes-anteriores-do-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparação com versões anteriores do Java
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-acontece-por-baixo-dos-panos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que acontece por baixo dos panos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="O que acontece por baixo dos panos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objetos-sao-acessados-por-referencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetos são acessados por referência
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variaveis-locais-vivem-durante-a-execucao-do-metodo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variáveis locais vivem durante a execução do método
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parametros-recebem-copias-dos-valores-dos-argumentos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parâmetros recebem cópias dos valores dos argumentos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retornar-objeto-retorna-uma-referencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Retornar objeto retorna uma referência
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodos-pequenos-podem-ser-otimizados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos pequenos podem ser otimizados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boas práticas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#de-nomes-de-metodos-que-expressem-intencao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dê nomes de métodos que expressem intenção
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-verbos-para-acoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use verbos para ações
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#separe-calculo-de-apresentacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Separe cálculo de apresentação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extraia-metodos-para-eliminar-duplicacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extraia métodos para eliminar duplicação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefira-poucos-parametros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prefira poucos parâmetros
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retorne-objetos-quando-o-resultado-tiver-significado-proprio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Retorne objetos quando o resultado tiver significado próprio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mantenha-a-classe-coesa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mantenha a classe coesa
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#colocar-toda-a-logica-no-metodo-main" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Colocar toda a lógica no método main
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criar-metodos-que-dizem-uma-coisa-e-fazem-outra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Criar métodos que dizem uma coisa e fazem outra
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#duplicar-calculo-em-varios-lugares" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Duplicar cálculo em vários lugares
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criar-metodos-grandes-demais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Criar métodos grandes demais
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criar-objetos-de-retorno-sem-significado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Criar objetos de retorno sem significado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#passar-muitos-argumentos-primitivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Passar muitos argumentos primitivos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#confundir-variavel-local-com-variavel-de-instancia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Confundir variável local com variável de instância
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#achar-que-passar-objeto-como-argumento-cria-uma-copia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Achar que passar objeto como argumento cria uma cópia
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decisões de engenharia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-metodos-em-uma-classe-de-dominio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar métodos em uma classe de domínio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-evitar-colocar-o-metodo-na-propria-classe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando evitar colocar o método na própria classe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternativas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternativas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impacto-em-legibilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impacto em legibilidade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impacto-em-manutencao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impacto em manutenção
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impacto-em-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impacto em performance
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Onde isso aparece em sistemas reais">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#entidades-de-dominio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entidades de domínio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#services-de-aplicacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Services de aplicação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apis-rest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        APIs REST
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testes-automatizados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testes automatizados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refatoracao-gradual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Refatoração gradual
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Spring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/api-rest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    O que é API REST?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/http/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Um pouco de HTTP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/por-que-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Por que escolher Spring?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/spring-boot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Boot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/spring-initializr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Initializr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/maven-pom/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maven e pom.xml
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-no-codigo-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar no código: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-funciona-em-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como funciona em Java
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo prático
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exemplo prático">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bandajava" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Banda.java
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resumomusicajava" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ResumoMusica.java
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#musicajava" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Musica.java
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#curadoriacatalogojava" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CuradoriaCatalogo.java
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aplicacaojava" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aplicacao.java
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analisando-o-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analisando o código
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Analisando o código">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#classe-como-modelo-de-um-conceito" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classe como modelo de um conceito
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodo-void" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método void
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodo-com-retorno" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método com retorno
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodos-menores-evitam-duplicacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos menores evitam duplicação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#return-encerra-a-execucao-do-metodo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Return encerra a execução do método
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#um-ou-varios-returns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Um ou vários returns?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodos-que-retornam-objetos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos que retornam objetos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodos-com-argumentos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos com argumentos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#passando-objetos-como-argumentos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Passando objetos como argumentos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparacao-com-versoes-anteriores-do-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparação com versões anteriores do Java
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-acontece-por-baixo-dos-panos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que acontece por baixo dos panos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="O que acontece por baixo dos panos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objetos-sao-acessados-por-referencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetos são acessados por referência
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variaveis-locais-vivem-durante-a-execucao-do-metodo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variáveis locais vivem durante a execução do método
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parametros-recebem-copias-dos-valores-dos-argumentos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parâmetros recebem cópias dos valores dos argumentos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retornar-objeto-retorna-uma-referencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Retornar objeto retorna uma referência
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodos-pequenos-podem-ser-otimizados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos pequenos podem ser otimizados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boas práticas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#de-nomes-de-metodos-que-expressem-intencao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dê nomes de métodos que expressem intenção
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-verbos-para-acoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use verbos para ações
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#separe-calculo-de-apresentacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Separe cálculo de apresentação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extraia-metodos-para-eliminar-duplicacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extraia métodos para eliminar duplicação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefira-poucos-parametros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prefira poucos parâmetros
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retorne-objetos-quando-o-resultado-tiver-significado-proprio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Retorne objetos quando o resultado tiver significado próprio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mantenha-a-classe-coesa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mantenha a classe coesa
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#colocar-toda-a-logica-no-metodo-main" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Colocar toda a lógica no método main
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criar-metodos-que-dizem-uma-coisa-e-fazem-outra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Criar métodos que dizem uma coisa e fazem outra
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#duplicar-calculo-em-varios-lugares" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Duplicar cálculo em vários lugares
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criar-metodos-grandes-demais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Criar métodos grandes demais
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criar-objetos-de-retorno-sem-significado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Criar objetos de retorno sem significado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#passar-muitos-argumentos-primitivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Passar muitos argumentos primitivos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#confundir-variavel-local-com-variavel-de-instancia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Confundir variável local com variável de instância
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#achar-que-passar-objeto-como-argumento-cria-uma-copia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Achar que passar objeto como argumento cria uma cópia
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decisões de engenharia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-metodos-em-uma-classe-de-dominio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar métodos em uma classe de domínio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-evitar-colocar-o-metodo-na-propria-classe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando evitar colocar o método na própria classe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alternativas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternativas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impacto-em-legibilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impacto em legibilidade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impacto-em-manutencao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impacto em manutenção
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impacto-em-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impacto em performance
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Onde isso aparece em sistemas reais">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#entidades-de-dominio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entidades de domínio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#services-de-aplicacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Services de aplicação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apis-rest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        APIs REST
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testes-automatizados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testes automatizados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refatoracao-gradual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Refatoração gradual
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="classes-objetos-e-metodos-em-java">Classes, objetos e métodos em Java</h1>
+<p>Em um sistema backend real, não basta armazenar dados. Um sistema precisa representar conceitos do domínio e executar comportamentos relacionados a esses conceitos.</p>
+<p>No <code>meucatalogomusical.com</code>, por exemplo, não queremos apenas guardar textos como nome da banda, título da música, duração e quantidade de reproduções. Também queremos responder perguntas e executar ações:</p>
+<ul>
+<li>uma música é longa?</li>
+<li>qual é a duração formatada da faixa?</li>
+<li>a música deve entrar em uma lista de destaques?</li>
+<li>como gerar um resumo da música para exibir na API?</li>
+<li>como evitar repetir a mesma regra de pontuação em várias partes do sistema?</li>
+</ul>
+<p>Classes, objetos e métodos ajudam a organizar esse tipo de código. A classe define um tipo do domínio. O objeto representa uma ocorrência concreta desse tipo em memória. O método concentra um comportamento que pertence àquele tipo ou que opera sobre ele.</p>
+<p>Sem métodos, o código tende a ficar espalhado em vários arquivos, com cálculos duplicados, regras repetidas e nomes pouco expressivos. Com métodos bem definidos, a lógica ganha nome, lugar e responsabilidade.</p>
+<h2 id="antes-de-entrar-no-codigo-uma-ideia-simples">Antes de entrar no código: uma ideia simples</h2>
+<p>Uma classe pode ser vista como a definição de um conceito do sistema.</p>
+<p>No domínio de um catálogo musical, podemos ter conceitos como:</p>
+<ul>
+<li><code>Banda</code>;</li>
+<li><code>Musica</code>;</li>
+<li><code>ResumoMusica</code>;</li>
+<li><code>CuradoriaCatalogo</code>.</li>
+</ul>
+<p>Um objeto é uma instância concreta de uma classe.</p>
+<p>Por exemplo:</p>
+<ul>
+<li>uma banda chamada <code>Dream Theater</code>;</li>
+<li>uma música chamada <code>Pull Me Under</code>;</li>
+<li>um resumo gerado para essa música;</li>
+<li>uma curadoria analisando se a música merece destaque.</li>
+</ul>
+<p>Métodos são comportamentos nomeados. Eles dizem o que um objeto sabe fazer ou calcular.</p>
+<p>Por exemplo, uma música pode:</p>
+<ul>
+<li>registrar uma nova reprodução;</li>
+<li>calcular sua duração em minutos;</li>
+<li>informar se é uma faixa longa;</li>
+<li>gerar um resumo;</li>
+<li>calcular uma pontuação interna para o catálogo.</li>
+</ul>
+<p>A ideia central da orientação a objetos é aproximar dados e comportamentos relacionados. Se uma regra depende diretamente dos dados de uma música, faz sentido considerar se essa regra deveria estar perto da própria classe <code>Musica</code>.</p>
+<h2 id="definicao-tecnica">Definição técnica</h2>
+<p>Em Java, uma classe declara um tipo de referência. Ela pode conter membros, como campos e métodos.</p>
+<p>Um campo representa estado. No exemplo deste artigo, <code>titulo</code>, <code>duracaoEmSegundos</code> e <code>totalReproducoes</code> são partes do estado de uma música.</p>
+<p>Um método representa comportamento. Ele tem nome, tipo de retorno, lista de parâmetros e corpo.</p>
+<p>De forma simplificada:</p>
+<div class="highlight"><pre><span></span><code><span class="n">tipoDeRetorno</span><span class="w"> </span><span class="nf">nomeDoMetodo</span><span class="p">(</span><span class="n">parametros</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">corpoDoMetodo</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="nf">ehFaixaLonga</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">duracaoEmSegundos</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">420</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Nesse método:</p>
+<ul>
+<li><code>boolean</code> é o tipo de retorno;</li>
+<li><code>ehFaixaLonga</code> é o nome do método;</li>
+<li><code>()</code> indica que o método não recebe parâmetros;</li>
+<li>o bloco <code>{ ... }</code> contém a implementação;</li>
+<li><code>return</code> devolve o resultado para quem chamou o método.</li>
+</ul>
+<p>Quando um método não precisa devolver valor, usamos <code>void</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">registrarReproducao</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">totalReproducoes</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Um método <code>void</code> não retorna um valor para ser usado em uma variável, mas ainda assim pode alterar o estado do objeto, imprimir algo, validar uma condição ou acionar outro comportamento.</p>
+<h2 id="como-funciona-em-java">Como funciona em Java</h2>
+<p>Em Java, os métodos mais comuns em classes de domínio são métodos de instância. Isso significa que eles são chamados a partir de um objeto.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="n">musica</span><span class="p">.</span><span class="na">registrarReproducao</span><span class="p">();</span>
+</code></pre></div>
+<p>Nesse caso, <code>registrarReproducao</code> é executado sobre o objeto referenciado pela variável <code>musica</code>.</p>
+<p>Cada objeto possui seu próprio estado. Dois objetos da mesma classe compartilham a mesma estrutura definida pela classe, mas podem ter valores diferentes nos campos.</p>
+<p>Exemplo conceitual:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Musica</span><span class="w"> </span><span class="n">musica1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Musica</span><span class="p">();</span>
+<span class="n">musica1</span><span class="p">.</span><span class="na">titulo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Pull Me Under&quot;</span><span class="p">;</span>
+<span class="n">musica1</span><span class="p">.</span><span class="na">totalReproducoes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">850</span><span class="p">;</span>
+
+<span class="n">Musica</span><span class="w"> </span><span class="n">musica2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Musica</span><span class="p">();</span>
+<span class="n">musica2</span><span class="p">.</span><span class="na">titulo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Fear of the Dark&quot;</span><span class="p">;</span>
+<span class="n">musica2</span><span class="p">.</span><span class="na">totalReproducoes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1_500</span><span class="p">;</span>
+</code></pre></div>
+<p>Ambas são objetos da classe <code>Musica</code>, mas cada uma tem seus próprios valores.</p>
+<p>Quando chamamos:</p>
+<div class="highlight"><pre><span></span><code><span class="n">musica1</span><span class="p">.</span><span class="na">registrarReproducao</span><span class="p">();</span>
+<span class="n">musica2</span><span class="p">.</span><span class="na">registrarReproducao</span><span class="p">();</span>
+</code></pre></div>
+<p>o mesmo método é executado, mas sobre objetos diferentes. Por isso, o resultado altera o estado de cada objeto separadamente.</p>
+<p>Também é importante diferenciar parâmetros e argumentos.</p>
+<p>Parâmetro é a variável declarada no método:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="nf">atingiuMinimoDeReproducoes</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">minimoReproducoes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">totalReproducoes</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">minimoReproducoes</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Argumento é o valor passado na chamada:</p>
+<div class="highlight"><pre><span></span><code><span class="n">musica</span><span class="p">.</span><span class="na">atingiuMinimoDeReproducoes</span><span class="p">(</span><span class="mi">1_000</span><span class="p">);</span>
+</code></pre></div>
+<p>Nesse exemplo, <code>minimoReproducoes</code> é o parâmetro. O valor <code>1_000</code> é o argumento.</p>
+<h2 id="exemplo-pratico">Exemplo prático</h2>
+<p>Imagine que o <code>meucatalogomusical.com</code> precisa exibir músicas de bandas de Metal, Hard Rock e Rock Progressivo. Além de armazenar dados, o sistema precisa calcular pontuação, gerar resumos e decidir se uma faixa merece destaque.</p>
+<h3 id="bandajava">Banda.java</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Banda</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">;</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">estilo</span><span class="p">;</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">paisOrigem</span><span class="p">;</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p>A classe <code>Banda</code> representa uma banda cadastrada no catálogo.</p>
+<p>Neste momento, ela contém apenas estado: nome, estilo e país de origem. Por enquanto não vamos falar de encapsulamento, construtores, getters ou setters, porque esses assuntos merecem estudo próprio.</p>
+<h3 id="resumomusicajava">ResumoMusica.java</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ResumoMusica</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">descricao</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">duracaoEmSegundos</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="n">faixaLonga</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">pontuacaoCatalogo</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">mereceDestaque</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">pontuacaoCatalogo</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">80</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p>A classe <code>ResumoMusica</code> representa um objeto de retorno. Ela agrupa várias informações calculadas sobre uma música.</p>
+<p>Isso é útil porque Java não retorna múltiplos valores separados com algo como:</p>
+<div class="highlight"><pre><span></span><code><span class="k">return</span><span class="w"> </span><span class="n">descricao</span><span class="p">,</span><span class="w"> </span><span class="n">duracaoEmSegundos</span><span class="p">,</span><span class="w"> </span><span class="n">pontuacaoCatalogo</span><span class="p">;</span>
+</code></pre></div>
+<p>Esse código não compila. Quando um método precisa devolver um conjunto de informações relacionadas, uma alternativa é criar uma classe que represente esse resultado.</p>
+<p>O método <code>mereceDestaque</code> retorna um <code>boolean</code>. Em métodos booleanos, o nome pode ser escrito como uma pergunta sem ponto de interrogação:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="nf">mereceDestaque</span><span class="p">()</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="nf">ehFaixaLonga</span><span class="p">()</span>
+<span class="kt">boolean</span><span class="w"> </span><span class="nf">atingiuMinimoDeReproducoes</span><span class="p">()</span>
+</code></pre></div>
+<p>Isso deixa o código de chamada mais expressivo:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">resumo</span><span class="p">.</span><span class="na">mereceDestaque</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Adicionar aos destaques&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="musicajava">Musica.java</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Musica</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">titulo</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Banda</span><span class="w"> </span><span class="n">banda</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">duracaoEmSegundos</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">totalReproducoes</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">notaMedia</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">registrarReproducao</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">totalReproducoes</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">calcularDuracaoEmMinutos</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">duracaoEmSegundos</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">60</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">calcularSegundosRestantesDoMinuto</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">duracaoEmSegundos</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">60</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">ehFaixaLonga</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">duracaoEmSegundos</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">420</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">atingiuMinimoDeReproducoes</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">minimoReproducoes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">totalReproducoes</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">minimoReproducoes</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="nf">calcularPontuacaoCatalogo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">pontosPorNota</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">notaMedia</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">pontosPorReproducao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calcularPontosPorReproducao</span><span class="p">();</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">bonusDuracao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calcularBonusDuracao</span><span class="p">();</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">pontosPorNota</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">pontosPorReproducao</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">bonusDuracao</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="nf">calcularPontosPorReproducao</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">totalReproducoes</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1_000</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">totalReproducoes</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">10.0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">calcularBonusDuracao</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">bonus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ehFaixaLonga</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">bonus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">bonus</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">ResumoMusica</span><span class="w"> </span><span class="nf">gerarResumo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">ResumoMusica</span><span class="w"> </span><span class="n">resumo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ResumoMusica</span><span class="p">();</span>
+<span class="w">        </span><span class="n">resumo</span><span class="p">.</span><span class="na">descricao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">montarDescricao</span><span class="p">();</span>
+<span class="w">        </span><span class="n">resumo</span><span class="p">.</span><span class="na">duracaoEmSegundos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">duracaoEmSegundos</span><span class="p">;</span>
+<span class="w">        </span><span class="n">resumo</span><span class="p">.</span><span class="na">faixaLonga</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ehFaixaLonga</span><span class="p">();</span>
+<span class="w">        </span><span class="n">resumo</span><span class="p">.</span><span class="na">pontuacaoCatalogo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calcularPontuacaoCatalogo</span><span class="p">();</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">resumo</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="nf">montarDescricao</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">minutos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calcularDuracaoEmMinutos</span><span class="p">();</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">segundos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calcularSegundosRestantesDoMinuto</span><span class="p">();</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&quot;%s - %s (%d:%02d)&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="n">banda</span><span class="p">.</span><span class="na">nome</span><span class="p">,</span><span class="w"> </span><span class="n">titulo</span><span class="p">,</span><span class="w"> </span><span class="n">minutos</span><span class="p">,</span><span class="w"> </span><span class="n">segundos</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">imprimirFichaTecnica</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">titulo</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Ficha técnica incompleta.&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">ResumoMusica</span><span class="w"> </span><span class="n">resumo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gerarResumo</span><span class="p">();</span>
+
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;Música: %s%n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">resumo</span><span class="p">.</span><span class="na">descricao</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;Pontuação no catálogo: %.2f%n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">resumo</span><span class="p">.</span><span class="na">pontuacaoCatalogo</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;Faixa longa: %s%n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">resumo</span><span class="p">.</span><span class="na">faixaLonga</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;sim&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">&quot;não&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p>A classe <code>Musica</code> é mais rica que uma simples estrutura de dados. Ela não apenas armazena informações, mas também concentra comportamentos relacionados à música.</p>
+<p>Ela sabe:</p>
+<ul>
+<li>registrar uma reprodução;</li>
+<li>calcular duração;</li>
+<li>identificar se é uma faixa longa;</li>
+<li>verificar se atingiu um mínimo de reproduções;</li>
+<li>calcular uma pontuação;</li>
+<li>gerar um resumo;</li>
+<li>imprimir uma ficha técnica simples.</li>
+</ul>
+<p>Essa aproximação entre estado e comportamento é uma das ideias centrais da orientação a objetos.</p>
+<h3 id="curadoriacatalogojava">CuradoriaCatalogo.java</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CuradoriaCatalogo</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">deveEntrarEmDestaques</span><span class="p">(</span><span class="n">Musica</span><span class="w"> </span><span class="n">musica</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">minimoReproducoes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">musica</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">musica</span><span class="p">.</span><span class="na">atingiuMinimoDeReproducoes</span><span class="p">(</span><span class="n">minimoReproducoes</span><span class="p">)</span>
+<span class="w">                </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">musica</span><span class="p">.</span><span class="na">calcularPontuacaoCatalogo</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">80</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">ResumoMusica</span><span class="w"> </span><span class="nf">analisar</span><span class="p">(</span><span class="n">Musica</span><span class="w"> </span><span class="n">musica</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">musica</span><span class="p">.</span><span class="na">gerarResumo</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p>A classe <code>CuradoriaCatalogo</code> representa uma regra de curadoria do catálogo.</p>
+<p>A decisão de criar uma classe separada faz sentido quando a regra não pertence exclusivamente à música, mas ao processo de curadoria do sistema.</p>
+<p>A música sabe calcular sua própria pontuação. A curadoria decide se essa pontuação, junto com outras regras, é suficiente para colocar a faixa em destaque.</p>
+<p>Essa separação melhora a coesão:</p>
+<ul>
+<li><code>Musica</code> cuida de comportamentos diretamente ligados à música;</li>
+<li><code>CuradoriaCatalogo</code> cuida de decisões de curadoria.</li>
+</ul>
+<h3 id="aplicacaojava">Aplicacao.java</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Aplicacao</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Banda</span><span class="w"> </span><span class="n">dreamTheater</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Banda</span><span class="p">();</span>
+<span class="w">        </span><span class="n">dreamTheater</span><span class="p">.</span><span class="na">nome</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Dream Theater&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">dreamTheater</span><span class="p">.</span><span class="na">estilo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Metal Progressivo&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">dreamTheater</span><span class="p">.</span><span class="na">paisOrigem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Estados Unidos&quot;</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">Musica</span><span class="w"> </span><span class="n">pullMeUnder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Musica</span><span class="p">();</span>
+<span class="w">        </span><span class="n">pullMeUnder</span><span class="p">.</span><span class="na">titulo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Pull Me Under&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">pullMeUnder</span><span class="p">.</span><span class="na">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dreamTheater</span><span class="p">;</span>
+<span class="w">        </span><span class="n">pullMeUnder</span><span class="p">.</span><span class="na">duracaoEmSegundos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">496</span><span class="p">;</span>
+<span class="w">        </span><span class="n">pullMeUnder</span><span class="p">.</span><span class="na">totalReproducoes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">850</span><span class="p">;</span>
+<span class="w">        </span><span class="n">pullMeUnder</span><span class="p">.</span><span class="na">notaMedia</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.7</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">pullMeUnder</span><span class="p">.</span><span class="na">registrarReproducao</span><span class="p">();</span>
+<span class="w">        </span><span class="n">pullMeUnder</span><span class="p">.</span><span class="na">imprimirFichaTecnica</span><span class="p">();</span>
+
+<span class="w">        </span><span class="n">CuradoriaCatalogo</span><span class="w"> </span><span class="n">curadoria</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CuradoriaCatalogo</span><span class="p">();</span>
+<span class="w">        </span><span class="n">ResumoMusica</span><span class="w"> </span><span class="n">resumo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">curadoria</span><span class="p">.</span><span class="na">analisar</span><span class="p">(</span><span class="n">pullMeUnder</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">curadoria</span><span class="p">.</span><span class="na">deveEntrarEmDestaques</span><span class="p">(</span><span class="n">pullMeUnder</span><span class="p">,</span><span class="w"> </span><span class="mi">800</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;%s entrou nos destaques do catálogo.%n&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="n">resumo</span><span class="p">.</span><span class="na">descricao</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p>A classe <code>Aplicacao</code> apenas monta os objetos e executa o exemplo.</p>
+<p>O ponto principal está nas chamadas:</p>
+<div class="highlight"><pre><span></span><code><span class="n">pullMeUnder</span><span class="p">.</span><span class="na">registrarReproducao</span><span class="p">();</span>
+<span class="n">pullMeUnder</span><span class="p">.</span><span class="na">imprimirFichaTecnica</span><span class="p">();</span>
+<span class="n">curadoria</span><span class="p">.</span><span class="na">analisar</span><span class="p">(</span><span class="n">pullMeUnder</span><span class="p">);</span>
+<span class="n">curadoria</span><span class="p">.</span><span class="na">deveEntrarEmDestaques</span><span class="p">(</span><span class="n">pullMeUnder</span><span class="p">,</span><span class="w"> </span><span class="mi">800</span><span class="p">);</span>
+</code></pre></div>
+<p>Essas chamadas mostram quatro ideias importantes:</p>
+<ol>
+<li>um método pode alterar o estado do objeto;</li>
+<li>um método pode executar uma ação sem retornar valor;</li>
+<li>um método pode retornar outro objeto;</li>
+<li>um método pode receber um objeto como argumento.</li>
+</ol>
+<h2 id="analisando-o-codigo">Analisando o código</h2>
+<h3 id="classe-como-modelo-de-um-conceito">Classe como modelo de um conceito</h3>
+<p>A classe <code>Musica</code> define o que uma música possui e o que uma música pode fazer dentro do sistema.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Musica</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">titulo</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Banda</span><span class="w"> </span><span class="n">banda</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">duracaoEmSegundos</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">totalReproducoes</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">notaMedia</span><span class="p">;</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p>Esses campos representam o estado da música.</p>
+<p>Quando criamos um objeto com <code>new Musica()</code>, passamos a ter uma música concreta em memória.</p>
+<div class="highlight"><pre><span></span><code><span class="n">Musica</span><span class="w"> </span><span class="n">pullMeUnder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Musica</span><span class="p">();</span>
+</code></pre></div>
+<p>A variável <code>pullMeUnder</code> não é o objeto em si. Ela guarda uma referência para o objeto.</p>
+<h3 id="metodo-void">Método void</h3>
+<p>O método abaixo não retorna valor:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">registrarReproducao</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">totalReproducoes</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Mesmo sendo <code>void</code>, ele faz algo relevante: altera o estado da música, incrementando <code>totalReproducoes</code>.</p>
+<p>Um erro comum é pensar que método <code>void</code> “não faz nada”. Na verdade, <code>void</code> apenas significa que o método não devolve um valor para quem o chamou.</p>
+<h3 id="metodo-com-retorno">Método com retorno</h3>
+<p>O método abaixo retorna um <code>boolean</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="nf">ehFaixaLonga</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">duracaoEmSegundos</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">420</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Quem chama esse método pode usar o resultado diretamente em uma condição:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">pullMeUnder</span><span class="p">.</span><span class="na">ehFaixaLonga</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Faixa longa&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>O método abaixo retorna um <code>double</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="nf">calcularPontuacaoCatalogo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">pontosPorNota</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">notaMedia</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">pontosPorReproducao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calcularPontosPorReproducao</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">bonusDuracao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calcularBonusDuracao</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">pontosPorNota</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">pontosPorReproducao</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">bonusDuracao</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse método não imprime a pontuação. Ele calcula e devolve o valor.</p>
+<p>Essa diferença é muito importante. Um método chamado <code>calcularPontuacaoCatalogo</code> deve calcular. Se ele apenas imprimisse o resultado, o nome ficaria enganoso e o valor não poderia ser reutilizado por outras partes do sistema.</p>
+<h3 id="metodos-menores-evitam-duplicacao">Métodos menores evitam duplicação</h3>
+<p>Observe que <code>calcularPontuacaoCatalogo</code> não concentra toda a lógica em um único bloco enorme.</p>
+<p>Ele delega partes menores para outros métodos:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="n">pontosPorReproducao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calcularPontosPorReproducao</span><span class="p">();</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">bonusDuracao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calcularBonusDuracao</span><span class="p">();</span>
+</code></pre></div>
+<p>Isso evita duplicação e melhora a leitura.</p>
+<p>Se a regra de bônus por duração mudar, o ajuste fica centralizado em:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">calcularBonusDuracao</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">bonus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ehFaixaLonga</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">bonus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">bonus</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Sem essa separação, a mesma regra poderia aparecer repetida em tela, API, relatório, job de recomendação e teste automatizado.</p>
+<p>Código duplicado costuma parecer inofensivo no começo, mas vira um problema sério quando a regra muda.</p>
+<h3 id="return-encerra-a-execucao-do-metodo">Return encerra a execução do método</h3>
+<p>No método abaixo, o <code>return</code> é usado para sair cedo de um método <code>void</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">imprimirFichaTecnica</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">titulo</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Ficha técnica incompleta.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">ResumoMusica</span><span class="w"> </span><span class="n">resumo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gerarResumo</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;Música: %s%n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">resumo</span><span class="p">.</span><span class="na">descricao</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;Pontuação no catálogo: %.2f%n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">resumo</span><span class="p">.</span><span class="na">pontuacaoCatalogo</span><span class="p">);</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;Faixa longa: %s%n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">resumo</span><span class="p">.</span><span class="na">faixaLonga</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;sim&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">&quot;não&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Quando <code>titulo</code> ou <code>banda</code> estão ausentes, o método imprime uma mensagem e encerra. As linhas abaixo do <code>return</code> não são executadas.</p>
+<p>Em métodos que retornam valor, o <code>return</code> também encerra o método e devolve o resultado:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="nf">calcularPontosPorReproducao</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">totalReproducoes</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1_000</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">totalReproducoes</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">10.0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Em Java, código colocado depois de um <code>return</code> incondicional não é executável. Em muitos casos, isso gera erro de compilação por código inalcançável.</p>
+<h3 id="um-ou-varios-returns">Um ou vários returns?</h3>
+<p>Existe uma recomendação tradicional de manter um único ponto de saída no método. Ela pode ajudar em métodos complexos, especialmente quando há muitos caminhos de execução.</p>
+<p>Mas isso não deve ser tratado como uma regra absoluta.</p>
+<p>Em Java moderno, retornos antecipados podem melhorar a legibilidade quando usados como cláusulas de guarda:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">musica</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>O problema não é ter mais de um <code>return</code>. O problema é ter muitos retornos espalhados em um método grande e difícil de entender.</p>
+<p>Uma boa regra prática:</p>
+<ul>
+<li>use retorno único quando isso deixar o fluxo mais simples;</li>
+<li>use retorno antecipado quando isso eliminar aninhamento desnecessário;</li>
+<li>evite métodos grandes com muitos caminhos de saída.</li>
+</ul>
+<h3 id="metodos-que-retornam-objetos">Métodos que retornam objetos</h3>
+<p>O método abaixo retorna um objeto do tipo <code>ResumoMusica</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">ResumoMusica</span><span class="w"> </span><span class="nf">gerarResumo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ResumoMusica</span><span class="w"> </span><span class="n">resumo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ResumoMusica</span><span class="p">();</span>
+<span class="w">    </span><span class="n">resumo</span><span class="p">.</span><span class="na">descricao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">montarDescricao</span><span class="p">();</span>
+<span class="w">    </span><span class="n">resumo</span><span class="p">.</span><span class="na">duracaoEmSegundos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">duracaoEmSegundos</span><span class="p">;</span>
+<span class="w">    </span><span class="n">resumo</span><span class="p">.</span><span class="na">faixaLonga</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ehFaixaLonga</span><span class="p">();</span>
+<span class="w">    </span><span class="n">resumo</span><span class="p">.</span><span class="na">pontuacaoCatalogo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calcularPontuacaoCatalogo</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">resumo</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse método é útil porque agrupa dados relacionados em um objeto com significado no domínio.</p>
+<p>Em vez de retornar vários valores soltos, ele retorna um resultado nomeado: <code>ResumoMusica</code>.</p>
+<p>Isso melhora a clareza do código:</p>
+<div class="highlight"><pre><span></span><code><span class="n">ResumoMusica</span><span class="w"> </span><span class="n">resumo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pullMeUnder</span><span class="p">.</span><span class="na">gerarResumo</span><span class="p">();</span>
+</code></pre></div>
+<p>A variável <code>resumo</code> agora representa uma resposta completa da análise da música.</p>
+<h3 id="metodos-com-argumentos">Métodos com argumentos</h3>
+<p>O método abaixo recebe um valor como argumento:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="nf">atingiuMinimoDeReproducoes</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">minimoReproducoes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">totalReproducoes</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">minimoReproducoes</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse método é melhor do que fixar o número diretamente dentro da classe, porque permite variar o critério conforme o contexto.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="n">pullMeUnder</span><span class="p">.</span><span class="na">atingiuMinimoDeReproducoes</span><span class="p">(</span><span class="mi">800</span><span class="p">);</span>
+<span class="n">pullMeUnder</span><span class="p">.</span><span class="na">atingiuMinimoDeReproducoes</span><span class="p">(</span><span class="mi">1_000</span><span class="p">);</span>
+</code></pre></div>
+<p>O mesmo método pode ser usado com limites diferentes.</p>
+<h3 id="passando-objetos-como-argumentos">Passando objetos como argumentos</h3>
+<p>A classe <code>CuradoriaCatalogo</code> recebe uma <code>Musica</code> como argumento:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="nf">deveEntrarEmDestaques</span><span class="p">(</span><span class="n">Musica</span><span class="w"> </span><span class="n">musica</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">minimoReproducoes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">musica</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">musica</span><span class="p">.</span><span class="na">atingiuMinimoDeReproducoes</span><span class="p">(</span><span class="n">minimoReproducoes</span><span class="p">)</span>
+<span class="w">            </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">musica</span><span class="p">.</span><span class="na">calcularPontuacaoCatalogo</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">80</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Passar um objeto como argumento costuma ser melhor do que passar muitos valores soltos.</p>
+<p>Em vez de criar um método assim:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="nf">deveEntrarEmDestaques</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">titulo</span><span class="p">,</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">duracaoEmSegundos</span><span class="p">,</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">totalReproducoes</span><span class="p">,</span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">notaMedia</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// lógica</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>podemos passar o objeto que representa a música:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="nf">deveEntrarEmDestaques</span><span class="p">(</span><span class="n">Musica</span><span class="w"> </span><span class="n">musica</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">minimoReproducoes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// lógica</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Isso melhora a leitura e reduz o risco de trocar a ordem dos argumentos.</p>
+<h3 id="comparacao-com-versoes-anteriores-do-java">Comparação com versões anteriores do Java</h3>
+<p>O modelo básico de classes, objetos, métodos, parâmetros, argumentos e <code>return</code> é parte fundamental da linguagem Java desde suas primeiras versões. O que mudou ao longo do tempo foi a quantidade de recursos disponíveis ao redor desse modelo.</p>
+<p>No Java 10, a JEP 286 introduziu <code>var</code> para inferência de tipo em variáveis locais. Isso permite escrever:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="n">resumo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pullMeUnder</span><span class="p">.</span><span class="na">gerarResumo</span><span class="p">();</span>
+</code></pre></div>
+<p>Mesmo assim, neste artigo os exemplos evitam <code>var</code> de propósito. Para estudo de fundamentos, escrever o tipo explicitamente ajuda a enxergar melhor o que cada método retorna.</p>
+<p>No Java 16, a JEP 395 finalizou os records. Um <code>record</code> pode ser útil para representar agregados simples de dados. Por exemplo, em uma versão mais avançada do código, <code>ResumoMusica</code> poderia ser avaliado como candidato a <code>record</code>, porque representa um resultado com dados agrupados. Ainda assim, records não substituem classes comuns quando o objetivo é modelar comportamento rico, estado mutável ou regras que evoluem.</p>
+<p>No Java 25, a JEP 512 finalizou compact source files e instance main methods. Esse recurso facilita programas pequenos, estudos e scripts. Em sistemas backend profissionais, porém, ainda é comum organizar o código em classes explícitas, pacotes, camadas e arquivos separados.</p>
+<p>Portanto, mesmo usando Java 25, o fundamento continua o mesmo: boas classes e bons métodos são essenciais para escrever código orientado a objetos legível e sustentável.</p>
+<h2 id="o-que-acontece-por-baixo-dos-panos">O que acontece por baixo dos panos</h2>
+<h3 id="objetos-sao-acessados-por-referencia">Objetos são acessados por referência</h3>
+<p>Quando escrevemos:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Musica</span><span class="w"> </span><span class="n">pullMeUnder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Musica</span><span class="p">();</span>
+</code></pre></div>
+<p>o objeto é criado em memória, e a variável <code>pullMeUnder</code> passa a guardar uma referência para esse objeto.</p>
+<p>Quando chamamos:</p>
+<div class="highlight"><pre><span></span><code><span class="n">pullMeUnder</span><span class="p">.</span><span class="na">registrarReproducao</span><span class="p">();</span>
+</code></pre></div>
+<p>a JVM executa o método sobre o objeto referenciado por <code>pullMeUnder</code>.</p>
+<p>Isso explica por que dois objetos da mesma classe podem ter comportamentos iguais, mas resultados diferentes. O método é o mesmo, mas o estado consultado é o estado de cada objeto.</p>
+<h3 id="variaveis-locais-vivem-durante-a-execucao-do-metodo">Variáveis locais vivem durante a execução do método</h3>
+<p>Dentro de um método, podemos declarar variáveis locais:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="n">pontosPorNota</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">notaMedia</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
+</code></pre></div>
+<p>Essa variável existe apenas dentro da execução daquele método. Ela não faz parte do estado do objeto.</p>
+<p>Campos pertencem ao objeto:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="n">notaMedia</span><span class="p">;</span>
+</code></pre></div>
+<p>Variáveis locais pertencem à execução do método:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="n">pontosPorNota</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">notaMedia</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
+</code></pre></div>
+<p>Essa diferença é essencial para entender escopo, memória e manutenção.</p>
+<h3 id="parametros-recebem-copias-dos-valores-dos-argumentos">Parâmetros recebem cópias dos valores dos argumentos</h3>
+<p>Quando um método recebe um <code>int</code>, o parâmetro recebe uma cópia daquele valor.</p>
+<p>Quando um método recebe um objeto, o parâmetro recebe uma cópia da referência para o objeto.</p>
+<p>Isso significa que Java não passa objetos “por referência” no sentido clássico. Java passa valores. No caso de objetos, o valor passado é uma referência.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="n">ResumoMusica</span><span class="w"> </span><span class="nf">analisar</span><span class="p">(</span><span class="n">Musica</span><span class="w"> </span><span class="n">musica</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">musica</span><span class="p">.</span><span class="na">gerarResumo</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>O parâmetro <code>musica</code> recebe uma cópia da referência para o mesmo objeto usado na chamada. Por isso, o método consegue acessar os dados e comportamentos daquele objeto.</p>
+<p>Se o método alterar o estado do objeto, quem chamou perceberá a alteração, porque ambos apontam para o mesmo objeto. Mas se o método apenas fizer o parâmetro apontar para outro objeto, isso não troca a variável original de quem chamou.</p>
+<p>Esse detalhe é uma fonte comum de confusão em Java.</p>
+<h3 id="retornar-objeto-retorna-uma-referencia">Retornar objeto retorna uma referência</h3>
+<p>Quando um método faz:</p>
+<div class="highlight"><pre><span></span><code><span class="k">return</span><span class="w"> </span><span class="n">resumo</span><span class="p">;</span>
+</code></pre></div>
+<p>ele retorna uma referência para o objeto <code>ResumoMusica</code> criado dentro do método.</p>
+<p>O objeto não é “desmontado” em vários valores. Também não é automaticamente copiado em uma nova estrutura independente. Quem recebe o retorno passa a ter uma referência para aquele objeto.</p>
+<h3 id="metodos-pequenos-podem-ser-otimizados">Métodos pequenos podem ser otimizados</h3>
+<p>Uma preocupação comum é pensar que muitos métodos pequenos deixam o programa mais lento.</p>
+<p>Na prática, em aplicações Java modernas, a JVM e o compilador JIT podem otimizar muitas chamadas de métodos durante a execução, inclusive aplicando inlining em cenários apropriados.</p>
+<p>Isso não significa que performance nunca importa. Significa que, na maior parte dos códigos de negócio, clareza e coesão devem vir antes de micro-otimizações prematuras.</p>
+<p>Métodos pequenos, bem nomeados e coesos geralmente melhoram a manutenção sem causar problema real de performance.</p>
+<h2 id="boas-praticas">Boas práticas</h2>
+<h3 id="de-nomes-de-metodos-que-expressem-intencao">Dê nomes de métodos que expressem intenção</h3>
+<p>Um método deve dizer o que faz.</p>
+<p>Bons exemplos:</p>
+<div class="highlight"><pre><span></span><code><span class="n">calcularPontuacaoCatalogo</span><span class="p">()</span>
+<span class="n">gerarResumo</span><span class="p">()</span>
+<span class="n">registrarReproducao</span><span class="p">()</span>
+<span class="n">atingiuMinimoDeReproducoes</span><span class="p">()</span>
+</code></pre></div>
+<p>Nomes ruins:</p>
+<div class="highlight"><pre><span></span><code><span class="n">processar</span><span class="p">()</span>
+<span class="n">executar</span><span class="p">()</span>
+<span class="n">fazer</span><span class="p">()</span>
+<span class="n">calcular</span><span class="p">()</span>
+</code></pre></div>
+<p>Nomes genéricos demais escondem a intenção e obrigam o leitor a abrir a implementação para entender o comportamento.</p>
+<h3 id="use-verbos-para-acoes">Use verbos para ações</h3>
+<p>Métodos que executam ações costumam começar com verbos:</p>
+<div class="highlight"><pre><span></span><code><span class="n">registrarReproducao</span><span class="p">()</span>
+<span class="n">gerarResumo</span><span class="p">()</span>
+<span class="n">calcularPontuacaoCatalogo</span><span class="p">()</span>
+<span class="n">imprimirFichaTecnica</span><span class="p">()</span>
+</code></pre></div>
+<p>Métodos booleanos podem ser escritos como perguntas:</p>
+<div class="highlight"><pre><span></span><code><span class="n">ehFaixaLonga</span><span class="p">()</span>
+<span class="n">mereceDestaque</span><span class="p">()</span>
+<span class="n">atingiuMinimoDeReproducoes</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="separe-calculo-de-apresentacao">Separe cálculo de apresentação</h3>
+<p>Um método chamado <code>calcularPontuacaoCatalogo</code> deve calcular e retornar a pontuação.</p>
+<p>Evite misturar cálculo com impressão:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="nf">calcularPontuacaoCatalogo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">pontosPorNota</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">pontosPorReproducao</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">bonusDuracao</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>É melhor do que:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">calcularPontuacaoCatalogo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">pontosPorNota</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">pontosPorReproducao</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">bonusDuracao</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>O segundo exemplo calcula, mas prende o resultado à saída no console. Isso dificulta reaproveitar a pontuação em uma API, teste, relatório ou regra de curadoria.</p>
+<h3 id="extraia-metodos-para-eliminar-duplicacao">Extraia métodos para eliminar duplicação</h3>
+<p>Se uma regra aparece em dois lugares, considere centralizá-la.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="nf">ehFaixaLonga</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">duracaoEmSegundos</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">420</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Agora qualquer parte da classe pode usar:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ehFaixaLonga</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// regra</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Se o critério de faixa longa mudar de 7 para 8 minutos, a alteração acontece em um único lugar.</p>
+<h3 id="prefira-poucos-parametros">Prefira poucos parâmetros</h3>
+<p>Métodos com muitos parâmetros ficam difíceis de ler e fáceis de chamar errado.</p>
+<p>Ruim:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="nf">deveEntrarEmDestaques</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">titulo</span><span class="p">,</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">duracaoEmSegundos</span><span class="p">,</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">totalReproducoes</span><span class="p">,</span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">notaMedia</span><span class="p">,</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">minimoReproducoes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// lógica</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Melhor:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="nf">deveEntrarEmDestaques</span><span class="p">(</span><span class="n">Musica</span><span class="w"> </span><span class="n">musica</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">minimoReproducoes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// lógica</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Passar um objeto pode deixar o método mais expressivo quando os dados pertencem ao mesmo conceito.</p>
+<h3 id="retorne-objetos-quando-o-resultado-tiver-significado-proprio">Retorne objetos quando o resultado tiver significado próprio</h3>
+<p>Se um método precisa retornar várias informações relacionadas, crie uma classe de retorno com nome claro.</p>
+<p>Bom:</p>
+<div class="highlight"><pre><span></span><code><span class="n">ResumoMusica</span><span class="w"> </span><span class="nf">gerarResumo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// lógica</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Ruim:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="nf">gerarResumoComPontuacaoEDuracaoEIndicador</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// lógica misturada em texto</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Um objeto de retorno permite evoluir o resultado sem transformar tudo em texto ou em valores soltos.</p>
+<h3 id="mantenha-a-classe-coesa">Mantenha a classe coesa</h3>
+<p>Uma classe coesa tem responsabilidades relacionadas.</p>
+<p><code>Musica</code> pode calcular sua duração e pontuação.</p>
+<p>Mas talvez não deva decidir sozinha todas as regras de curadoria da página inicial, campanhas, recomendações e destaques editoriais. Essas regras podem pertencer a classes específicas, como <code>CuradoriaCatalogo</code>.</p>
+<p>Coesão evita classes que sabem demais e fazem coisas demais.</p>
+<h2 id="erros-comuns">Erros comuns</h2>
+<h3 id="colocar-toda-a-logica-no-metodo-main">Colocar toda a lógica no método main</h3>
+<p>O método de entrada deve apenas iniciar o fluxo do exemplo ou da aplicação.</p>
+<p>Quando toda a lógica fica nele, o código perde nomes de domínio, fica difícil de testar e tende a duplicar regras.</p>
+<p>Ruim:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">pontos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">notaMedia</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">totalReproducoes</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">10.0</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// muitas regras aqui</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Melhor:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="n">pontos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">musica</span><span class="p">.</span><span class="na">calcularPontuacaoCatalogo</span><span class="p">();</span>
+</code></pre></div>
+<h3 id="criar-metodos-que-dizem-uma-coisa-e-fazem-outra">Criar métodos que dizem uma coisa e fazem outra</h3>
+<p>Um método chamado <code>calcularPontuacaoCatalogo</code> deve retornar a pontuação, não apenas imprimir.</p>
+<p>Um método chamado <code>gerarResumo</code> deve gerar e devolver um resumo, não alterar várias partes do sistema sem deixar isso claro.</p>
+<p>Nome enganoso é um problema de manutenção.</p>
+<h3 id="duplicar-calculo-em-varios-lugares">Duplicar cálculo em vários lugares</h3>
+<p>Se a duração formatada é calculada em várias telas, relatórios e serviços, qualquer mudança exigirá várias alterações.</p>
+<p>Centralize:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="nf">montarDescricao</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">minutos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calcularDuracaoEmMinutos</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">segundos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calcularSegundosRestantesDoMinuto</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&quot;%s - %s (%d:%02d)&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="n">banda</span><span class="p">.</span><span class="na">nome</span><span class="p">,</span><span class="w"> </span><span class="n">titulo</span><span class="p">,</span><span class="w"> </span><span class="n">minutos</span><span class="p">,</span><span class="w"> </span><span class="n">segundos</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="criar-metodos-grandes-demais">Criar métodos grandes demais</h3>
+<p>Um método que valida, calcula, imprime, grava em banco e monta resposta HTTP provavelmente está fazendo coisas demais.</p>
+<p>Métodos grandes escondem regras importantes e dificultam testes.</p>
+<h3 id="criar-objetos-de-retorno-sem-significado">Criar objetos de retorno sem significado</h3>
+<p>Nem todo conjunto de valores merece uma classe.</p>
+<p>Uma classe como esta é fraca:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Resultado</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">valor1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">valor2</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">valor3</span><span class="p">;</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p>O nome não comunica nada.</p>
+<p>Uma classe como esta é melhor:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ResumoMusica</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">descricao</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">duracaoEmSegundos</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="n">faixaLonga</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">pontuacaoCatalogo</span><span class="p">;</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p>Ela representa uma ideia do domínio.</p>
+<h3 id="passar-muitos-argumentos-primitivos">Passar muitos argumentos primitivos</h3>
+<p>Métodos com muitos <code>String</code>, <code>int</code> e <code>double</code> seguidos aumentam o risco de erro.</p>
+<p>Exemplo problemático:</p>
+<div class="highlight"><pre><span></span><code><span class="n">cadastrarMusica</span><span class="p">(</span><span class="s">&quot;Pull Me Under&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">496</span><span class="p">,</span><span class="w"> </span><span class="mi">850</span><span class="p">,</span><span class="w"> </span><span class="mf">4.7</span><span class="p">,</span><span class="w"> </span><span class="mi">1992</span><span class="p">);</span>
+</code></pre></div>
+<p>O leitor precisa lembrar a ordem e o significado de cada número.</p>
+<p>Quando os dados pertencem ao mesmo conceito, um objeto pode melhorar a clareza.</p>
+<h3 id="confundir-variavel-local-com-variavel-de-instancia">Confundir variável local com variável de instância</h3>
+<p>Variável de instância:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">totalReproducoes</span><span class="p">;</span>
+</code></pre></div>
+<p>Variável local:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">bonus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</code></pre></div>
+<p>A variável de instância faz parte do objeto. A variável local existe apenas durante a execução do método.</p>
+<p>Confundir essas duas coisas gera bugs difíceis de rastrear.</p>
+<h3 id="achar-que-passar-objeto-como-argumento-cria-uma-copia">Achar que passar objeto como argumento cria uma cópia</h3>
+<p>Quando passamos <code>Musica</code> para um método, o objeto não é automaticamente copiado.</p>
+<p>O método recebe uma cópia da referência para o mesmo objeto.</p>
+<p>Isso é importante porque alterações no estado do objeto podem ser percebidas por quem chamou o método.</p>
+<h2 id="decisoes-de-engenharia">Decisões de engenharia</h2>
+<h3 id="quando-usar-metodos-em-uma-classe-de-dominio">Quando usar métodos em uma classe de domínio</h3>
+<p>Use métodos na própria classe quando o comportamento depende diretamente do estado daquele objeto e representa algo natural do domínio.</p>
+<p>Exemplos:</p>
+<div class="highlight"><pre><span></span><code><span class="n">musica</span><span class="p">.</span><span class="na">ehFaixaLonga</span><span class="p">()</span>
+<span class="n">musica</span><span class="p">.</span><span class="na">calcularPontuacaoCatalogo</span><span class="p">()</span>
+<span class="n">musica</span><span class="p">.</span><span class="na">gerarResumo</span><span class="p">()</span>
+</code></pre></div>
+<p>Esses métodos fazem sentido porque usam dados da própria música.</p>
+<h3 id="quando-evitar-colocar-o-metodo-na-propria-classe">Quando evitar colocar o método na própria classe</h3>
+<p>Evite colocar o método na classe quando a regra pertence a outro processo do sistema.</p>
+<p>Por exemplo, decidir se uma música entra nos destaques da página inicial pode depender de:</p>
+<ul>
+<li>estratégia editorial;</li>
+<li>quantidade mínima de reproduções;</li>
+<li>campanhas temporárias;</li>
+<li>regras de negócio externas;</li>
+<li>preferências do usuário;</li>
+<li>dados de outras músicas.</li>
+</ul>
+<p>Nesse caso, uma classe como <code>CuradoriaCatalogo</code> pode ser mais adequada.</p>
+<h3 id="alternativas">Alternativas</h3>
+<p>Algumas alternativas de modelagem são:</p>
+<ul>
+<li>classe de domínio com comportamento;</li>
+<li>classe de serviço para regras de aplicação;</li>
+<li>objeto de retorno para agrupar resultados;</li>
+<li>record para agregados simples e imutáveis de dados;</li>
+<li>DTO para transportar dados entre camadas.</li>
+</ul>
+<p>A escolha depende da responsabilidade.</p>
+<p>Se o comportamento pertence ao conceito, considere colocá-lo na classe do conceito.</p>
+<p>Se o comportamento coordena vários conceitos, considere uma classe de serviço.</p>
+<p>Se o objeto só transporta uma resposta calculada, considere uma classe de retorno ou, em versões modernas do Java, um record.</p>
+<h3 id="impacto-em-legibilidade">Impacto em legibilidade</h3>
+<p>Métodos pequenos e bem nomeados tornam o código mais fácil de ler.</p>
+<p>Compare:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">totalReproducoes</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">800</span>
+<span class="w">        </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">musica</span><span class="p">.</span><span class="na">calcularPontuacaoCatalogo</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">80</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// destaque</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>com:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">curadoria</span><span class="p">.</span><span class="na">deveEntrarEmDestaques</span><span class="p">(</span><span class="n">musica</span><span class="p">,</span><span class="w"> </span><span class="mi">800</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// destaque</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>O segundo exemplo revela a intenção da regra.</p>
+<h3 id="impacto-em-manutencao">Impacto em manutenção</h3>
+<p>Quando uma regra está centralizada em um método, a mudança é mais segura.</p>
+<p>Se amanhã o critério de destaque mudar, é melhor alterar um método com nome claro do que procurar a mesma condição repetida no controller, no service, no job e nos testes.</p>
+<h3 id="impacto-em-performance">Impacto em performance</h3>
+<p>Na maior parte dos sistemas backend, métodos pequenos não são o gargalo.</p>
+<p>Gargalos costumam aparecer em:</p>
+<ul>
+<li>consultas ao banco;</li>
+<li>chamadas HTTP;</li>
+<li>serialização;</li>
+<li>I/O;</li>
+<li>locks;</li>
+<li>algoritmos ineficientes;</li>
+<li>processamento em lote mal planejado.</li>
+</ul>
+<p>Evitar métodos pequenos por medo de custo de chamada normalmente piora o design antes de resolver qualquer problema real.</p>
+<p>Performance deve ser medida, não presumida.</p>
+<h2 id="onde-isso-aparece-em-sistemas-reais">Onde isso aparece em sistemas reais</h2>
+<h3 id="entidades-de-dominio">Entidades de domínio</h3>
+<p>Em sistemas backend, classes de domínio frequentemente possuem métodos que expressam regras.</p>
+<p>Exemplos:</p>
+<div class="highlight"><pre><span></span><code><span class="n">pedido</span><span class="p">.</span><span class="na">calcularTotal</span><span class="p">()</span>
+<span class="n">pedido</span><span class="p">.</span><span class="na">podeSerCancelado</span><span class="p">()</span>
+<span class="n">assinatura</span><span class="p">.</span><span class="na">estaAtiva</span><span class="p">()</span>
+<span class="n">musica</span><span class="p">.</span><span class="na">gerarResumo</span><span class="p">()</span>
+</code></pre></div>
+<p>Esses métodos evitam que regras importantes fiquem espalhadas.</p>
+<h3 id="services-de-aplicacao">Services de aplicação</h3>
+<p>Quando uma operação coordena vários objetos, uma classe de serviço pode ser mais adequada.</p>
+<p>Exemplo no domínio musical:</p>
+<div class="highlight"><pre><span></span><code><span class="n">curadoria</span><span class="p">.</span><span class="na">deveEntrarEmDestaques</span><span class="p">(</span><span class="n">musica</span><span class="p">,</span><span class="w"> </span><span class="mi">800</span><span class="p">);</span>
+</code></pre></div>
+<p>A curadoria pode usar dados da música, mas a decisão pertence ao processo de curadoria.</p>
+<h3 id="apis-rest">APIs REST</h3>
+<p>Em uma API, objetos de retorno podem virar respostas JSON.</p>
+<p>Um <code>ResumoMusica</code> poderia ser transformado em uma resposta como:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;descricao&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Dream Theater - Pull Me Under (8:16)&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;duracaoEmSegundos&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">496</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;faixaLonga&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;pontuacaoCatalogo&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">103.1</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>O método <code>gerarResumo</code> concentra a criação desse resultado.</p>
+<h3 id="testes-automatizados">Testes automatizados</h3>
+<p>Métodos pequenos são mais fáceis de testar.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">boolean</span><span class="w"> </span><span class="n">faixaLonga</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">musica</span><span class="p">.</span><span class="na">ehFaixaLonga</span><span class="p">();</span>
+</code></pre></div>
+<p>Esse método pode ser testado isoladamente sem depender de banco de dados, API externa ou interface gráfica.</p>
+<h3 id="refatoracao-gradual">Refatoração gradual</h3>
+<p>Em muitos sistemas legados, regras começam espalhadas em métodos grandes.</p>
+<p>Uma refatoração comum é extrair pequenos métodos com nomes de domínio:</p>
+<div class="highlight"><pre><span></span><code><span class="n">calcularPontosPorReproducao</span><span class="p">()</span>
+<span class="n">calcularBonusDuracao</span><span class="p">()</span>
+<span class="n">atingiuMinimoDeReproducoes</span><span class="p">()</span>
+</code></pre></div>
+<p>Isso melhora o código aos poucos sem precisar reescrever todo o sistema.</p>
+<h2 id="perguntas-de-revisao">Perguntas de revisão</h2>
+<p>1 - Qual é a diferença entre classe e objeto?</p>
+<p>Resposta: A classe é a definição de um tipo. Ela descreve quais dados e comportamentos aquele tipo possui. O objeto é uma instância concreta dessa classe em memória. <code>Musica</code> é uma classe; uma música específica como <code>pullMeUnder</code> é um objeto.</p>
+<p>2 - O que é um método em Java?</p>
+<p>Resposta: Um método é um bloco de código nomeado, declarado dentro de uma classe ou estrutura compatível da linguagem, que representa um comportamento. Ele pode receber parâmetros, executar uma lógica e retornar ou não um valor.</p>
+<p>3 - O que significa um método ser <code>void</code>?</p>
+<p>Resposta: Significa que o método não devolve um valor para quem o chamou. Isso não quer dizer que ele não faz nada. Um método <code>void</code> pode alterar estado, imprimir mensagens, validar regras ou chamar outros métodos.</p>
+<p>4 - Qual é a diferença entre imprimir um valor e retornar um valor?</p>
+<p>Resposta: Imprimir envia o valor para uma saída, como o console. Retornar devolve o valor para o código que chamou o método. Um valor retornado pode ser armazenado, testado, enviado em uma API ou usado em outro cálculo.</p>
+<p>5 - Por que <code>calcularPontuacaoCatalogo</code> deve retornar a pontuação em vez de apenas imprimir?</p>
+<p>Resposta: Porque o nome indica uma operação de cálculo. Ao retornar o valor, o método permite que a pontuação seja reaproveitada por outras partes do sistema, como curadoria, testes, relatórios e respostas de API.</p>
+<p>6 - O que a instrução <code>return</code> faz?</p>
+<p>Resposta: <code>return</code> encerra a execução do método. Em métodos com retorno, ela também devolve um valor. Em métodos <code>void</code>, pode ser usada sem valor para sair do método antecipadamente.</p>
+<p>7 - Código depois de um <code>return</code> sempre executa?</p>
+<p>Resposta: Não. Depois que o <code>return</code> é executado, o método termina. Um código colocado logo após um <code>return</code> incondicional não será executado e pode gerar erro de compilação por ser inalcançável.</p>
+<p>8 - É errado ter mais de um <code>return</code> no método?</p>
+<p>Resposta: Não necessariamente. Muitos retornos espalhados em métodos grandes podem dificultar a leitura, mas retornos antecipados simples podem melhorar a clareza. O importante é manter o método pequeno, legível e com fluxo fácil de entender.</p>
+<p>9 - O que é uma variável local?</p>
+<p>Resposta: É uma variável declarada dentro de um método ou bloco. Ela existe apenas naquele escopo e durante aquela execução. Exemplo: <code>double pontosPorNota</code> dentro de <code>calcularPontuacaoCatalogo</code>.</p>
+<p>10 - Qual é a diferença entre variável de instância e variável local?</p>
+<p>Resposta: variável de instância faz parte do estado do objeto. Variável local pertence apenas à execução de um método ou bloco. variáveis de instância representam dados do objeto; variáveis locais ajudam a executar uma lógica temporária.</p>
+<p>11 - Por que métodos pequenos ajudam na manutenção?</p>
+<p>Resposta: Porque dão nome às partes da regra, evitam duplicação e facilitam mudanças futuras. Uma regra centralizada em um método pode ser alterada em um único lugar.</p>
+<p>12 - Quando faz sentido um método retornar um objeto?</p>
+<p>Resposta: Quando o resultado possui vários dados relacionados e tem significado próprio. Por exemplo, <code>gerarResumo</code> retorna um <code>ResumoMusica</code>, agrupando descrição, duração, indicador de faixa longa e pontuação.</p>
+<p>13 - Java permite retornar dois valores diretamente com <code>return valor1, valor2</code>?</p>
+<p>Resposta: Não. Java não permite retornar múltiplos valores soltos dessa forma. A alternativa é criar um objeto que represente o resultado, como <code>ResumoMusica</code>.</p>
+<p>14 - O que é um parâmetro?</p>
+<p>Resposta: Parâmetro é a variável declarada na assinatura do método. Exemplo: em <code>atingiuMinimoDeReproducoes(int minimoReproducoes)</code>, <code>minimoReproducoes</code> é o parâmetro.</p>
+<p>15 - O que é um argumento?</p>
+<p>Resposta: Argumento é o valor passado na chamada do método. Exemplo: em <code>musica.atingiuMinimoDeReproducoes(800)</code>, <code>800</code> é o argumento.</p>
+<p>16 - Por que muitos parâmetros podem prejudicar a legibilidade?</p>
+<p>Resposta: Porque deixam a chamada longa, aumentam a chance de trocar valores de ordem e dificultam entender o significado de cada argumento. Quando os dados pertencem ao mesmo conceito, passar um objeto pode ser mais claro.</p>
+<p>17 - O que acontece quando passamos um objeto como argumento?</p>
+<p>Resposta: O método recebe uma cópia da referência para o objeto. Ele não recebe uma cópia completa do objeto. Por isso, pode acessar o mesmo objeto e, se alterar seu estado, a alteração pode ser percebida por quem chamou.</p>
+<p>18 - Java passa objetos por referência?</p>
+<p>Resposta: Não no sentido clássico. Java passa valores. Quando o argumento é um objeto, o valor passado é uma referência para o objeto. Essa distinção é importante para entender alterações de estado e reatribuições.</p>
+<p>19 - Como decidir se um método deve ficar na classe <code>Musica</code> ou em <code>CuradoriaCatalogo</code>?</p>
+<p>Resposta: Se o comportamento depende diretamente da música e representa algo natural dela, pode ficar em <code>Musica</code>. Se a regra coordena decisões externas, políticas editoriais ou critérios do sistema, pode fazer mais sentido ficar em <code>CuradoriaCatalogo</code>.</p>
+<p>20 - Records substituem classes comuns?</p>
+<p>Resposta: Não. Records são úteis para agregados simples de dados, especialmente quando o objetivo é representar valores de forma concisa. Classes comuns continuam sendo mais adequadas quando o objeto possui comportamento rico, estado mutável ou regras mais flexíveis.</p>
+<p>21 - Por que evitar colocar toda a lógica no <code>main</code>?</p>
+<p>Resposta: Porque o <code>main</code> deve apenas iniciar o fluxo. Quando regras de negócio ficam nele, o código perde organização, fica difícil de testar e tende a duplicar lógica que deveria estar em classes e métodos do domínio.</p>
+<p>22 - O que significa uma classe ser coesa?</p>
+<p>Resposta: Uma classe é coesa quando suas responsabilidades estão relacionadas. Uma classe <code>Musica</code> com métodos de duração, pontuação e resumo é coesa. Uma classe <code>Musica</code> que também agenda shows, processa pagamento e envia e-mail provavelmente está fazendo coisas demais.</p>
+<h2 id="resumo-final">Resumo final</h2>
+<p>Classes, objetos e métodos são fundamentos centrais da programação orientada a objetos em Java.</p>
+<p>Uma classe define um tipo. Um objeto representa uma instância concreta desse tipo. Um método dá nome a um comportamento.</p>
+<p>Métodos podem não retornar valor, usando <code>void</code>, ou podem retornar valores primitivos, textos, booleanos e objetos. Quando um resultado possui várias informações relacionadas, retornar um objeto com nome significativo costuma ser uma boa solução.</p>
+<p>Métodos menores ajudam a evitar duplicação, melhoram a leitura e tornam a manutenção mais segura. Passar objetos como argumentos pode deixar o código mais expressivo quando os dados pertencem ao mesmo conceito.</p>
+<p>Em sistemas backend reais, bons métodos ajudam a proteger regras de negócio contra duplicação e espalhamento. Eles tornam o código mais próximo da linguagem do domínio e mais fácil de evoluir.</p>
+<p>O objetivo não é criar classes cheias de métodos sem critério. O objetivo é colocar comportamento no lugar certo, com nomes claros, responsabilidades coesas e regras fáceis de encontrar.</p>
+<p>Ajustei apenas a seção <strong>Referências</strong>, agora com links em Markdown para você colar direto no artigo. Usei as fontes oficiais da Oracle/OpenJDK para Java/JEPs e páginas da InformIT/Pearson para os livros. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/index.html?utm_source=chatgpt.com" title="The Java® Language Specification">Oracle Documentation</a>)</p>
+<h2 id="referencias">Referências</h2>
+<ul>
+<li>
+<p><a href="https://docs.oracle.com/javase/specs/jls/se25/html/index.html">The Java Language Specification, Java SE 25 Edition</a> — especificação oficial da linguagem Java. Consultar especialmente os capítulos sobre tipos de referência, escopo, classes, campos, métodos, instrução <code>return</code> e invocação de métodos.</p>
+</li>
+<li>
+<p><a href="https://docs.oracle.com/en/java/javase/25/docs/api/index.html">Java SE 25 API Documentation</a> — documentação oficial da API Java SE 25 e JDK 25.</p>
+</li>
+<li>
+<p><a href="https://docs.oracle.com/en/java/javase/25/">JDK 25 Documentation</a> — página central da documentação oficial do JDK 25, incluindo guias, documentação da API e notas de release.</p>
+</li>
+<li>
+<p><a href="https://openjdk.org/projects/jdk/25/">OpenJDK — JDK 25</a> — página oficial do projeto OpenJDK para o JDK 25, implementação de referência da plataforma Java SE 25.</p>
+</li>
+<li>
+<p><a href="https://openjdk.org/jeps/286">OpenJDK — JEP 286: Local-Variable Type Inference</a> — proposta que introduziu a inferência de tipo para variáveis locais com <code>var</code>, entregue no JDK 10.</p>
+</li>
+<li>
+<p><a href="https://openjdk.org/jeps/395">OpenJDK — JEP 395: Records</a> — proposta que finalizou <code>records</code> no JDK 16, úteis para modelar agregados simples de dados.</p>
+</li>
+<li>
+<p><a href="https://openjdk.org/jeps/512">OpenJDK — JEP 512: Compact Source Files and Instance Main Methods</a> — proposta finalizada no JDK 25 para simplificar programas pequenos com compact source files e instance main methods.</p>
+</li>
+<li>
+<p><a href="https://www.informit.com/store/effective-java-9780134685991">Effective Java, 3rd Edition — Joshua Bloch</a> — referência clássica sobre boas práticas de programação Java, design de classes, métodos, APIs e uso efetivo da linguagem.</p>
+</li>
+<li>
+<p><a href="https://www.informit.com/store/java-concurrency-in-practice-9780321349606">Java Concurrency in Practice — Brian Goetz et al.</a> — referência reconhecida sobre concorrência, thread safety, composição de classes seguras para múltiplas threads e Java Memory Model.</p>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

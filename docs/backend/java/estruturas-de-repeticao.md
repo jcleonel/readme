@@ -119,6 +119,207 @@ for (var musica : musicas) {
 
 Esse formato é melhor quando você não precisa do índice, apenas do elemento atual.
 
+### `for` com múltiplas variáveis de controle
+
+O `for` tradicional também permite trabalhar com mais de uma variável na inicialização e na atualização do laço.
+
+Esse recurso é útil quando duas informações precisam evoluir ao mesmo tempo. Por exemplo, uma variável pode avançar do início para o fim de uma lista, enquanto outra retrocede do fim para o início.
+
+```java
+for (int inicio = 0, fim = 9; inicio < 10; inicio++, fim--) {
+    System.out.printf("%d - %d%n", inicio, fim);
+}
+```
+
+Nesse exemplo, existem duas variáveis de controle:
+
+* `inicio`, que começa em `0` e aumenta a cada iteração;
+* `fim`, que começa em `9` e diminui a cada iteração.
+
+A cada repetição, o bloco imprime os dois valores. Depois disso, o Java executa a parte de atualização:
+
+```java
+inicio++, fim--
+```
+
+Ou seja, primeiro incrementa `inicio` e depois decrementa `fim`.
+
+A saída será:
+
+```text
+0 - 9
+1 - 8
+2 - 7
+3 - 6
+4 - 5
+5 - 4
+6 - 3
+7 - 2
+8 - 1
+9 - 0
+```
+
+Esse tipo de `for` pode ser útil em algoritmos que precisam comparar elementos em posições opostas, como verificar pares do início e do fim de uma lista.
+
+Imagine uma regra simples no `meucatalogomusical.com`: comparar músicas em posições opostas de uma playlist para identificar combinações entre abertura e encerramento.
+
+```java
+import java.util.List;
+
+public class ComparacaoPlaylist {
+
+    record Musica(String banda, String titulo) {
+    }
+
+    public static void main(String[] args) {
+        var playlist = List.of(
+                new Musica("Iron Maiden", "The Trooper"),
+                new Musica("Metallica", "Orion"),
+                new Musica("Rush", "Tom Sawyer"),
+                new Musica("Pink Floyd", "Time")
+        );
+
+        for (int inicio = 0, fim = playlist.size() - 1;
+             inicio < fim;
+             inicio++, fim--) {
+
+            var musicaInicial = playlist.get(inicio);
+            var musicaFinal = playlist.get(fim);
+
+            System.out.printf(
+                    "Comparando: %s - %s / %s - %s%n",
+                    musicaInicial.banda(),
+                    musicaInicial.titulo(),
+                    musicaFinal.banda(),
+                    musicaFinal.titulo()
+            );
+        }
+    }
+}
+```
+
+Nesse exemplo, o loop começa comparando a primeira música com a última. Depois, compara a segunda com a penúltima. O loop continua enquanto `inicio < fim`.
+
+A condição `inicio < fim` evita comparar a mesma posição duas vezes e também evita que os índices se cruzem.
+
+Apesar de ser um recurso válido da linguagem, esse tipo de `for` deve ser usado com moderação. Ele é interessante quando as duas variáveis realmente representam partes do mesmo controle de repetição. Se a lógica começar a ficar difícil de entender, normalmente é melhor separar o código em métodos menores ou usar nomes mais descritivos.
+
+Evite escrever loops assim apenas para “economizar linhas”. O objetivo deve ser expressar uma intenção clara, não compactar código.
+
+```java
+for (int i = 0, j = musicas.size() - 1; i < j; i++, j--) {
+    // aceitável quando i e j fazem parte da mesma lógica
+}
+```
+
+Mas evite misturar controles sem relação direta:
+
+```java
+for (int indice = 0, tentativas = 3; indice < musicas.size(); indice++, tentativas--) {
+    // confuso se indice e tentativas não representam a mesma regra de repetição
+}
+```
+
+Nesse segundo caso, `indice` e `tentativas` parecem representar conceitos diferentes. Isso pode prejudicar a legibilidade e aumentar o risco de erro.
+
+### Regras importantes sobre tipos no `for` com múltiplas variáveis
+
+Quando as variáveis são declaradas dentro do próprio cabeçalho do `for`, elas fazem parte de uma única declaração local.
+
+Por isso, este código é válido:
+
+```java
+for (int inicio = 0, fim = 9; inicio < 10; inicio++, fim--) {
+    System.out.printf("%d - %d%n", inicio, fim);
+}
+```
+
+Nesse caso, `inicio` e `fim` são duas variáveis do tipo `int`.
+
+O ponto importante é que o tipo `int` vale para todos os declaradores dessa mesma declaração. Portanto, não é possível declarar variáveis de tipos diferentes nessa mesma parte do `for` fazendo algo como:
+
+```java
+for (int inicio = 0, long fim = 9L; inicio < 10; inicio++, fim--) {
+    System.out.printf("%d - %d%n", inicio, fim);
+}
+```
+
+Esse código não compila.
+
+Se você realmente precisar trabalhar com tipos diferentes, declare as variáveis antes do loop:
+
+```java
+int inicio = 0;
+long fim = 9L;
+
+for (; inicio < 10; inicio++, fim--) {
+    System.out.printf("%d - %d%n", inicio, fim);
+}
+```
+
+Nesse exemplo, a inicialização do `for` ficou vazia, porque as variáveis já foram declaradas antes. O loop continua usando a condição e a atualização normalmente.
+
+Outro detalhe importante envolve o uso de `var`.
+
+Embora `var` possa ser usado em variáveis locais desde o Java 10, ele não pode ser usado com múltiplos declaradores na mesma declaração. Portanto, este código não é válido:
+
+```java
+for (var inicio = 0, fim = 9; inicio < 10; inicio++, fim--) {
+    System.out.printf("%d - %d%n", inicio, fim);
+}
+```
+
+A forma correta, usando `var`, seria declarar as variáveis separadamente antes do `for`:
+
+```java
+var inicio = 0;
+var fim = 9;
+
+for (; inicio < 10; inicio++, fim--) {
+    System.out.printf("%d - %d%n", inicio, fim);
+}
+```
+
+Ainda assim, em muitos casos, usar o tipo explícito no cabeçalho do `for` pode ser mais direto e legível:
+
+```java
+for (int inicio = 0, fim = musicas.size() - 1;
+     inicio < fim;
+     inicio++, fim--) {
+
+    var primeira = musicas.get(inicio);
+    var ultima = musicas.get(fim);
+
+    comparar(primeira, ultima);
+}
+```
+
+A regra prática é: use múltiplas variáveis no `for` quando elas fizerem parte da mesma lógica de controle e forem naturalmente do mesmo tipo. Se os tipos forem diferentes ou se as variáveis representarem responsabilidades diferentes, prefira declará-las antes do loop ou reorganizar o código para preservar a legibilidade.
+
+
+### Use múltiplas variáveis no `for` apenas quando elas fizerem parte da mesma regra
+
+O `for` permite múltiplas variáveis de controle, mas isso não significa que sempre seja uma boa ideia.
+
+Use esse recurso quando as variáveis caminharem juntas para representar uma mesma regra de iteração:
+
+```java
+for (int esquerda = 0, direita = musicas.size() - 1;
+     esquerda < direita;
+     esquerda++, direita--) {
+
+    var primeira = musicas.get(esquerda);
+    var ultima = musicas.get(direita);
+
+    comparar(primeira, ultima);
+}
+```
+
+Esse código é aceitável porque `esquerda` e `direita` fazem parte da mesma lógica: percorrer a lista pelas duas extremidades.
+
+Evite usar múltiplas variáveis quando elas representarem responsabilidades diferentes. Nesses casos, o loop pode ficar compacto, mas menos legível.
+
+
 ### `while`
 
 O `while` avalia a condição antes de executar o bloco:
@@ -1173,6 +1374,37 @@ Resposta: não completamente. Streams são ótimas para operações declarativas
 ### 18 - O `break` dentro de um loop aninhado interrompe todos os loops?
 
 Resposta: não. Por padrão, ele interrompe apenas o loop mais interno. Para sair de múltiplos níveis, é possível usar labels, mas geralmente é melhor extrair a lógica para um método e usar `return`.
+
+### 19 - É possível usar mais de uma variável no `for` tradicional?
+
+Resposta: sim. O `for` tradicional permite múltiplas expressões na inicialização e na atualização, separadas por vírgula. Isso pode ser útil quando duas variáveis fazem parte da mesma lógica de controle, como uma avançando do início da lista e outra voltando do final.
+
+Exemplo:
+
+```java
+for (int inicio = 0, fim = musicas.size() - 1;
+     inicio < fim;
+     inicio++, fim--) {
+
+    comparar(musicas.get(inicio), musicas.get(fim));
+}
+```
+
+Nesse caso, `inicio` e `fim` são declaradas na mesma declaração local e possuem o mesmo tipo: `int`.
+
+Se as variáveis forem de tipos diferentes, elas devem ser declaradas separadamente antes do `for`:
+
+```java
+int inicio = 0;
+long fim = musicas.size() - 1L;
+
+for (; inicio < musicas.size(); inicio++, fim--) {
+    // lógica do loop
+}
+```
+
+Também é importante lembrar que `var` não pode ser usado com múltiplos declaradores na mesma declaração. Portanto, `for (var inicio = 0, fim = 9; ... )` não é válido em Java.
+
 
 ## Resumo final
 

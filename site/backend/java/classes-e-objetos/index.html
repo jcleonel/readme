@@ -1,0 +1,3835 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../introducao-orientacao-a-objetos/">
+      
+      
+        <link rel="next" href="../classes-objetos-metodos/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Classes e objetos - README</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/css/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#classes-e-objetos-em-java" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../../.." title="README" class="md-header__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            README
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Classes e objetos
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="README" class="md-nav__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    README
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Backend
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fundamentos-da-linguagem-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../convencoes-de-codigo-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convenções de código em Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../variaveis-tipos-primitivos-operadores-conversoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variáveis, tipos primitivos, operadores e conversões
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fundamentos-de-string/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de String
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../estruturas-controle-operadores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de controle e operadores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../estruturas-condicionais/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas condicionais
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../estruturas-de-repeticao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de repetição
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Iniciando em Orientação a Objetos (POO)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Iniciando em Orientação a Objetos (POO)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introducao-orientacao-a-objetos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução à POO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes e objetos
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes e objetos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-no-codigo-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar no código: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-funciona-em-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como funciona em Java
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Como funciona em Java">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#classe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#objeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objeto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#campo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Campo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comunicacao-entre-objetos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comunicação entre objetos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo prático
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exemplo prático">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#classe-banda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classe Banda
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#classe-musica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classe Musica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#classe-catalogomusical" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classe CatalogoMusical
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#classe-principal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classe principal
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analisando-o-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analisando o código
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Analisando o código">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-classe-banda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A classe Banda
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#o-papel-do-construtor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O papel do construtor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodos-de-consulta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos de consulta
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-classe-musica-e-a-composicao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A classe Musica e a composição
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-classe-catalogomusical" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A classe CatalogoMusical
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#objetos-colaborando" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetos colaborando
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-acontece-por-baixo-dos-panos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que acontece por baixo dos panos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="O que acontece por baixo dos panos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-cria-um-novo-objeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        new cria um novo objeto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#valores-padrao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Valores padrão
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#null-nao-e-objeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        null não é objeto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variaveis-de-referencia-nao-guardam-o-objeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variáveis de referência não guardam o objeto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#em-objetos-compara-referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        == em objetos compara referências
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparacao-com-versoes-anteriores-do-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparação com versões anteriores do Java
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comparação com versões anteriores do Java">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#java-tradicional-classes-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Java tradicional: classes comuns
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#java-10-var-em-variaveis-locais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Java 10: var em variáveis locais
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#java-16-record" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Java 16: record
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boas práticas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modele-classes-a-partir-do-problema-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modele classes a partir do problema real
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-nomes-especificos-e-claros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use nomes específicos e claros
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evite-repetir-o-nome-da-classe-nos-campos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evite repetir o nome da classe nos campos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inicialize-objetos-em-estado-valido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inicialize objetos em estado válido
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-composicao-para-representar-relacionamentos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use composição para representar relacionamentos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nao-inicialize-tudo-so-para-fugir-de-nullpointerexception" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Não inicialize tudo só para fugir de NullPointerException
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefira-objetos-pequenos-e-coesos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prefira objetos pequenos e coesos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#confundir-classe-com-objeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Confundir classe com objeto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#achar-que-a-variavel-e-o-objeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Achar que a variável é o objeto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acessar-campo-ou-metodo-de-referencia-nula" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Acessar campo ou método de referência nula
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criar-objetos-sem-estado-valido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Criar objetos sem estado válido
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usar-composicao-como-simples-agrupamento-de-campos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usar composição como simples agrupamento de campos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparar-objetos-com-quando-a-intencao-e-igualdade-logica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparar objetos com == quando a intenção é igualdade lógica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decisões de engenharia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-classes-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar classes comuns
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-evitar-criar-uma-classe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando evitar criar uma classe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-record" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar record
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-composicao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar composição
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impacto-em-legibilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impacto em legibilidade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impacto-em-manutencao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impacto em manutenção
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impacto-em-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impacto em performance
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Onde isso aparece em sistemas reais">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#apis-rest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        APIs REST
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#persistencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Persistência
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mensageria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mensageria
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testes-automatizados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testes automatizados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Perguntas de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-qual-e-a-diferenca-entre-classe-e-objeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 - Qual é a diferença entre classe e objeto?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-o-que-significa-dizer-que-uma-variavel-referencia-um-objeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 - O que significa dizer que uma variável referencia um objeto?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-o-que-o-operador-new-faz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 - O que o operador new faz?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-todo-objeto-criado-a-partir-da-mesma-classe-tem-os-mesmos-valores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 - Todo objeto criado a partir da mesma classe tem os mesmos valores?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-o-que-sao-campos-de-instancia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 - O que são campos de instância?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-o-que-sao-metodos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6 - O que são métodos?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-o-que-significa-dizer-que-objetos-se-comunicam-por-mensagens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7 - O que significa dizer que objetos se comunicam por mensagens?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-o-que-e-composicao-de-objetos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8 - O que é composição de objetos?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-composicao-copia-o-objeto-referenciado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9 - Composição copia o objeto referenciado?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-o-que-e-null" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 - O que é null?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-por-que-acontece-nullpointerexception" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11 - Por que acontece NullPointerException?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-quais-sao-os-valores-padrao-de-campos-de-instancia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12 - Quais são os valores padrão de campos de instância?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-por-que-int-nao-pode-ser-null" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13 - Por que int não pode ser null?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-qual-e-o-risco-de-criar-objetos-vazios-e-preencher-depois" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14 - Qual é o risco de criar objetos vazios e preencher depois?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-quando-faz-sentido-inicializar-um-campo-de-instancia-diretamente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15 - Quando faz sentido inicializar um campo de instância diretamente?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16-qual-e-a-diferenca-entre-e-equals-em-objetos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16 - Qual é a diferença entre == e equals em objetos?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17-quando-usar-classe-comum-em-vez-de-record" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17 - Quando usar classe comum em vez de record?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18-por-que-evitar-campos-publicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18 - Por que evitar campos públicos?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#19-o-que-um-desenvolvedor-backend-deve-observar-ao-modelar-objetos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19 - O que um desenvolvedor backend deve observar ao modelar objetos?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#20-objetos-bem-modelados-melhoram-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20 - Objetos bem modelados melhoram performance?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../classes-objetos-metodos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes, objetos e métodos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Spring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/api-rest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    O que é API REST?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/http/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Um pouco de HTTP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/por-que-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Por que escolher Spring?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/spring-boot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Boot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/spring-initializr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Initializr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/maven-pom/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maven e pom.xml
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-no-codigo-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar no código: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-funciona-em-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como funciona em Java
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Como funciona em Java">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#classe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#objeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objeto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#campo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Campo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comunicacao-entre-objetos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comunicação entre objetos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo prático
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exemplo prático">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#classe-banda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classe Banda
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#classe-musica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classe Musica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#classe-catalogomusical" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classe CatalogoMusical
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#classe-principal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classe principal
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analisando-o-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analisando o código
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Analisando o código">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-classe-banda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A classe Banda
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#o-papel-do-construtor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O papel do construtor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodos-de-consulta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos de consulta
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-classe-musica-e-a-composicao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A classe Musica e a composição
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-classe-catalogomusical" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A classe CatalogoMusical
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#objetos-colaborando" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetos colaborando
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-acontece-por-baixo-dos-panos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que acontece por baixo dos panos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="O que acontece por baixo dos panos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-cria-um-novo-objeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        new cria um novo objeto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#valores-padrao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Valores padrão
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#null-nao-e-objeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        null não é objeto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variaveis-de-referencia-nao-guardam-o-objeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variáveis de referência não guardam o objeto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#em-objetos-compara-referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        == em objetos compara referências
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparacao-com-versoes-anteriores-do-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparação com versões anteriores do Java
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comparação com versões anteriores do Java">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#java-tradicional-classes-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Java tradicional: classes comuns
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#java-10-var-em-variaveis-locais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Java 10: var em variáveis locais
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#java-16-record" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Java 16: record
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boas práticas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modele-classes-a-partir-do-problema-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modele classes a partir do problema real
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-nomes-especificos-e-claros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use nomes específicos e claros
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evite-repetir-o-nome-da-classe-nos-campos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evite repetir o nome da classe nos campos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inicialize-objetos-em-estado-valido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inicialize objetos em estado válido
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-composicao-para-representar-relacionamentos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use composição para representar relacionamentos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nao-inicialize-tudo-so-para-fugir-de-nullpointerexception" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Não inicialize tudo só para fugir de NullPointerException
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prefira-objetos-pequenos-e-coesos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prefira objetos pequenos e coesos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#confundir-classe-com-objeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Confundir classe com objeto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#achar-que-a-variavel-e-o-objeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Achar que a variável é o objeto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acessar-campo-ou-metodo-de-referencia-nula" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Acessar campo ou método de referência nula
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criar-objetos-sem-estado-valido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Criar objetos sem estado válido
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usar-composicao-como-simples-agrupamento-de-campos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usar composição como simples agrupamento de campos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparar-objetos-com-quando-a-intencao-e-igualdade-logica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparar objetos com == quando a intenção é igualdade lógica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decisões de engenharia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-classes-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar classes comuns
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-evitar-criar-uma-classe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando evitar criar uma classe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-record" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar record
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-composicao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar composição
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impacto-em-legibilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impacto em legibilidade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impacto-em-manutencao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impacto em manutenção
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impacto-em-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impacto em performance
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Onde isso aparece em sistemas reais">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#apis-rest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        APIs REST
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#persistencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Persistência
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mensageria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mensageria
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testes-automatizados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testes automatizados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Perguntas de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-qual-e-a-diferenca-entre-classe-e-objeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 - Qual é a diferença entre classe e objeto?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-o-que-significa-dizer-que-uma-variavel-referencia-um-objeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 - O que significa dizer que uma variável referencia um objeto?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-o-que-o-operador-new-faz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 - O que o operador new faz?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-todo-objeto-criado-a-partir-da-mesma-classe-tem-os-mesmos-valores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 - Todo objeto criado a partir da mesma classe tem os mesmos valores?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-o-que-sao-campos-de-instancia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 - O que são campos de instância?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-o-que-sao-metodos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6 - O que são métodos?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-o-que-significa-dizer-que-objetos-se-comunicam-por-mensagens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7 - O que significa dizer que objetos se comunicam por mensagens?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-o-que-e-composicao-de-objetos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8 - O que é composição de objetos?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-composicao-copia-o-objeto-referenciado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9 - Composição copia o objeto referenciado?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-o-que-e-null" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 - O que é null?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-por-que-acontece-nullpointerexception" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11 - Por que acontece NullPointerException?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-quais-sao-os-valores-padrao-de-campos-de-instancia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12 - Quais são os valores padrão de campos de instância?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-por-que-int-nao-pode-ser-null" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13 - Por que int não pode ser null?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-qual-e-o-risco-de-criar-objetos-vazios-e-preencher-depois" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14 - Qual é o risco de criar objetos vazios e preencher depois?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-quando-faz-sentido-inicializar-um-campo-de-instancia-diretamente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15 - Quando faz sentido inicializar um campo de instância diretamente?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16-qual-e-a-diferenca-entre-e-equals-em-objetos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16 - Qual é a diferença entre == e equals em objetos?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17-quando-usar-classe-comum-em-vez-de-record" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        17 - Quando usar classe comum em vez de record?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18-por-que-evitar-campos-publicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18 - Por que evitar campos públicos?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#19-o-que-um-desenvolvedor-backend-deve-observar-ao-modelar-objetos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        19 - O que um desenvolvedor backend deve observar ao modelar objetos?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#20-objetos-bem-modelados-melhoram-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20 - Objetos bem modelados melhoram performance?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="classes-e-objetos-em-java">Classes e objetos em Java</h1>
+<p>Sistemas backend existem para representar, validar e processar informações do mundo real: clientes, pedidos, pagamentos, produtos, usuários, contratos, bandas, músicas, permissões, assinaturas, documentos fiscais e muitos outros conceitos.</p>
+<p>Sem uma forma organizada de modelar esses conceitos, o código tende a virar um conjunto de variáveis soltas, mapas genéricos, listas sem significado e funções difíceis de manter. Isso até pode funcionar em programas pequenos, mas começa a falhar quando o sistema cresce.</p>
+<p>Imagine o <strong>meucatalogomusical.com</strong>, uma aplicação fictícia para catalogar bandas e músicas de Metal, Hard Rock e Rock Progressivo.</p>
+<p>O sistema precisa representar coisas como:</p>
+<ul>
+<li>uma banda;</li>
+<li>uma música;</li>
+<li>um álbum;</li>
+<li>o gênero musical;</li>
+<li>a duração de uma música;</li>
+<li>a relação entre uma música e sua banda;</li>
+<li>regras para cadastrar, exibir e validar essas informações.</li>
+</ul>
+<p>Classes e objetos resolvem exatamente esse problema: eles permitem transformar conceitos importantes do domínio em estruturas de código com <strong>estado</strong>, <strong>identidade</strong> e <strong>comportamento</strong>.</p>
+<p>Em Java, um objeto é uma instância criada dinamicamente a partir de uma classe, e variáveis de tipos de referência guardam referências para objetos, não os objetos diretamente. A Java Language Specification define objeto como uma instância de classe ou array, e explica que valores de tipos de referência são referências para objetos. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-4.html" title="Chapter 4. Types, Values, and Variables">Oracle Docs</a>)</p>
+<h2 id="antes-de-entrar-no-codigo-uma-ideia-simples">Antes de entrar no código: uma ideia simples</h2>
+<p>Uma <strong>classe</strong> é uma definição. Ela descreve como determinado tipo de coisa deve ser representado no sistema.</p>
+<p>Um <strong>objeto</strong> é uma ocorrência concreta dessa definição durante a execução do programa.</p>
+<p>No contexto do <strong>meucatalogomusical.com</strong>, podemos pensar assim:</p>
+<div class="highlight"><pre><span></span><code>Classe: Banda
+
+Objetos:
+- Metallica
+- Iron Maiden
+- Dream Theater
+- Black Sabbath
+</code></pre></div>
+<p>Todos esses objetos podem ser do mesmo tipo, <code>Banda</code>, mas cada um possui seus próprios valores.</p>
+<p>A classe define que uma banda tem, por exemplo:</p>
+<div class="highlight"><pre><span></span><code>nome
+país de origem
+ano de formação
+</code></pre></div>
+<p>Mas cada objeto terá valores diferentes:</p>
+<div class="highlight"><pre><span></span><code>Banda 1:
+nome = &quot;Metallica&quot;
+paisOrigem = &quot;Estados Unidos&quot;
+anoFormacao = 1981
+
+Banda 2:
+nome = &quot;Iron Maiden&quot;
+paisOrigem = &quot;Reino Unido&quot;
+anoFormacao = 1975
+</code></pre></div>
+<p>A classe é a estrutura. O objeto é a instância real em memória.</p>
+<h2 id="definicao-tecnica">Definição técnica</h2>
+<p>Em Java, uma classe é uma declaração que pode conter membros, como campos, métodos, construtores, classes internas e interfaces internas. A JLS descreve que o corpo de uma classe declara membros, inicializadores e construtores. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-8.html" title="Chapter 8. Classes">Oracle Docs</a>)</p>
+<p>De forma prática:</p>
+<ul>
+<li><strong>classe</strong> define um tipo;</li>
+<li><strong>objeto</strong> é uma instância desse tipo;</li>
+<li><strong>campo</strong> representa estado;</li>
+<li><strong>método</strong> representa comportamento;</li>
+<li><strong>construtor</strong> inicializa o objeto;</li>
+<li><strong>referência</strong> é o valor guardado em uma variável para acessar um objeto;</li>
+<li><strong>composição</strong> acontece quando um objeto referencia outro objeto.</li>
+</ul>
+<p>Exemplo conceitual:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Banda</span><span class="w"> </span><span class="n">metallica</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Banda</span><span class="p">(</span><span class="s">&quot;Metallica&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Estados Unidos&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1981</span><span class="p">);</span>
+</code></pre></div>
+<p>Nessa linha:</p>
+<ul>
+<li><code>Banda</code> é o tipo da variável;</li>
+<li><code>metallica</code> é a variável de referência;</li>
+<li><code>new Banda(...)</code> cria um novo objeto;</li>
+<li>o objeto criado fica disponível na memória;</li>
+<li>a variável <code>metallica</code> guarda uma referência para esse objeto.</li>
+</ul>
+<p>A expressão de criação de instância com <code>new</code> é o mecanismo usado para criar novos objetos que são instâncias de classes. A JLS especifica que uma class instance creation expression cria novos objetos que são instâncias de classes. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-15.html" title="Chapter 15. Expressions">Oracle Docs</a>)</p>
+<h2 id="como-funciona-em-java">Como funciona em Java</h2>
+<h3 id="classe">Classe</h3>
+<p>Uma classe define a estrutura e o comportamento de um tipo.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Banda</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">paisOrigem</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">anoFormacao</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Essa classe ainda não cria uma banda concreta. Ela apenas define que objetos do tipo <code>Banda</code> terão esses campos.</p>
+<h3 id="objeto">Objeto</h3>
+<p>Um objeto nasce quando a classe é instanciada.</p>
+<div class="highlight"><pre><span></span><code><span class="n">Banda</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Banda</span><span class="p">();</span>
+</code></pre></div>
+<p>Nesse exemplo, <code>new Banda()</code> cria um objeto do tipo <code>Banda</code>.</p>
+<p>A variável <code>banda</code> não é o objeto. Ela é uma referência para o objeto.</p>
+<h3 id="campo">Campo</h3>
+<p>Campos representam o estado interno do objeto.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">paisOrigem</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">anoFormacao</span><span class="p">;</span>
+</code></pre></div>
+<p>Cada objeto possui sua própria cópia dos campos de instância.</p>
+<p>Isso significa que dois objetos do tipo <code>Banda</code> podem ter os mesmos campos, mas valores diferentes.</p>
+<h3 id="metodo">Método</h3>
+<p>Métodos representam comportamentos.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">descricao</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">nome</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; é uma banda formada em &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">anoFormacao</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;.&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Quando chamamos um método, estamos enviando uma mensagem para o objeto executar determinado comportamento.</p>
+<p>Em Java, essa “mensagem” aparece como uma chamada de método:</p>
+<div class="highlight"><pre><span></span><code><span class="n">banda</span><span class="p">.</span><span class="na">descricao</span><span class="p">();</span>
+</code></pre></div>
+<p>A variável <code>banda</code> referencia o objeto que receberá a chamada. O método <code>descricao()</code> é o comportamento solicitado.</p>
+<h3 id="comunicacao-entre-objetos">Comunicação entre objetos</h3>
+<p>Quando se diz que objetos “se comunicam por mensagens”, isso não significa necessariamente mensagem de rede, fila, Kafka, HTTP ou evento assíncrono.</p>
+<p>No contexto básico de orientação a objetos, significa que um objeto interage com outro chamando seus métodos.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="n">musica</span><span class="p">.</span><span class="na">descricaoCompleta</span><span class="p">();</span>
+</code></pre></div>
+<p>Nesse caso, quem está usando <code>musica</code> pede ao objeto <code>musica</code> para executar o comportamento <code>descricaoCompleta</code>.</p>
+<p>A comunicação entre objetos costuma envolver:</p>
+<ul>
+<li>um objeto chamando método de outro;</li>
+<li>passagem de argumentos;</li>
+<li>retorno de valores;</li>
+<li>alteração controlada de estado;</li>
+<li>delegação de responsabilidade.</li>
+</ul>
+<p>Exemplo conceitual:</p>
+<div class="highlight"><pre><span></span><code><span class="n">catalogo</span><span class="p">.</span><span class="na">adicionarMusica</span><span class="p">(</span><span class="n">musica</span><span class="p">);</span>
+</code></pre></div>
+<p>Aqui, um objeto <code>catalogo</code> recebe uma mensagem: “adicione esta música”.</p>
+<p>Ele pode validar a música, armazená-la internamente, rejeitar duplicidade ou delegar a operação para outro objeto.</p>
+<p>Essa ideia é fundamental: em orientação a objetos, não pensamos apenas em dados. Pensamos em objetos que colaboram entre si para cumprir uma regra do sistema.</p>
+<h2 id="exemplo-pratico">Exemplo prático</h2>
+<p>A seguir, vamos modelar parte do <strong>meucatalogomusical.com</strong> usando Java 25.</p>
+<p>O exemplo usa classes tradicionais, campos privados, construtores e métodos. Isso é mais próximo do que se espera em aplicações backend reais, especialmente quando o objeto possui regras de negócio.</p>
+<h3 id="classe-banda">Classe <code>Banda</code></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Objects</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Banda</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">paisOrigem</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">anoFormacao</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Banda</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">paisOrigem</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">anoFormacao</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">nome</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">nome</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;nome não pode ser nulo&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">paisOrigem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">paisOrigem</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;paisOrigem não pode ser nulo&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">anoFormacao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">anoFormacao</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">nome</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">nome</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">paisOrigem</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">paisOrigem</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">anoFormacao</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">anoFormacao</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">descricao</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;%s, banda de %s formada em %d&quot;</span>
+<span class="w">                </span><span class="p">.</span><span class="na">formatted</span><span class="p">(</span><span class="n">nome</span><span class="p">,</span><span class="w"> </span><span class="n">paisOrigem</span><span class="p">,</span><span class="w"> </span><span class="n">anoFormacao</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="classe-musica">Classe <code>Musica</code></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.time.Duration</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Objects</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Musica</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">titulo</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Duration</span><span class="w"> </span><span class="n">duracao</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Banda</span><span class="w"> </span><span class="n">banda</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Musica</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">titulo</span><span class="p">,</span><span class="w"> </span><span class="n">Duration</span><span class="w"> </span><span class="n">duracao</span><span class="p">,</span><span class="w"> </span><span class="n">Banda</span><span class="w"> </span><span class="n">banda</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">titulo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">titulo</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;titulo não pode ser nulo&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">duracao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">duracao</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;duracao não pode ser nula&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">banda</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;banda não pode ser nula&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">titulo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">titulo</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Duration</span><span class="w"> </span><span class="nf">duracao</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">duracao</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Banda</span><span class="w"> </span><span class="nf">banda</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">banda</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">descricaoCompleta</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;%s - %s (%d:%02d)&quot;</span>
+<span class="w">                </span><span class="p">.</span><span class="na">formatted</span><span class="p">(</span>
+<span class="w">                        </span><span class="n">banda</span><span class="p">.</span><span class="na">nome</span><span class="p">(),</span>
+<span class="w">                        </span><span class="n">titulo</span><span class="p">,</span>
+<span class="w">                        </span><span class="n">duracao</span><span class="p">.</span><span class="na">toMinutes</span><span class="p">(),</span>
+<span class="w">                        </span><span class="n">duracao</span><span class="p">.</span><span class="na">toSecondsPart</span><span class="p">()</span>
+<span class="w">                </span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="classe-catalogomusical">Classe <code>CatalogoMusical</code></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.ArrayList</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Objects</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CatalogoMusical</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Musica</span><span class="o">&gt;</span><span class="w"> </span><span class="n">musicas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">adicionar</span><span class="p">(</span><span class="n">Musica</span><span class="w"> </span><span class="n">musica</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">musica</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;musica não pode ser nula&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">musicas</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">musica</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">listar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Musica</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">musicas</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">descricaoCompleta</span><span class="p">());</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="classe-principal">Classe principal</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.time.Duration</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Principal</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Banda</span><span class="w"> </span><span class="n">metallica</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Banda</span><span class="p">(</span><span class="s">&quot;Metallica&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Estados Unidos&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1981</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Banda</span><span class="w"> </span><span class="n">ironMaiden</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Banda</span><span class="p">(</span><span class="s">&quot;Iron Maiden&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Reino Unido&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1975</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">Musica</span><span class="w"> </span><span class="n">enterSandman</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Musica</span><span class="p">(</span>
+<span class="w">                </span><span class="s">&quot;Enter Sandman&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="n">Duration</span><span class="p">.</span><span class="na">ofMinutes</span><span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="na">plusSeconds</span><span class="p">(</span><span class="mi">31</span><span class="p">),</span>
+<span class="w">                </span><span class="n">metallica</span>
+<span class="w">        </span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">Musica</span><span class="w"> </span><span class="n">theTrooper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Musica</span><span class="p">(</span>
+<span class="w">                </span><span class="s">&quot;The Trooper&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="n">Duration</span><span class="p">.</span><span class="na">ofMinutes</span><span class="p">(</span><span class="mi">4</span><span class="p">).</span><span class="na">plusSeconds</span><span class="p">(</span><span class="mi">12</span><span class="p">),</span>
+<span class="w">                </span><span class="n">ironMaiden</span>
+<span class="w">        </span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">CatalogoMusical</span><span class="w"> </span><span class="n">catalogo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CatalogoMusical</span><span class="p">();</span>
+
+<span class="w">        </span><span class="n">catalogo</span><span class="p">.</span><span class="na">adicionar</span><span class="p">(</span><span class="n">enterSandman</span><span class="p">);</span>
+<span class="w">        </span><span class="n">catalogo</span><span class="p">.</span><span class="na">adicionar</span><span class="p">(</span><span class="n">theTrooper</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">catalogo</span><span class="p">.</span><span class="na">listar</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Saída esperada:</p>
+<div class="highlight"><pre><span></span><code>Metallica - Enter Sandman (5:31)
+Iron Maiden - The Trooper (4:12)
+</code></pre></div>
+<h2 id="analisando-o-codigo">Analisando o código</h2>
+<h3 id="a-classe-banda">A classe <code>Banda</code></h3>
+<p>A classe <code>Banda</code> representa um conceito do domínio.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Banda</span><span class="w"> </span><span class="p">{</span>
+</code></pre></div>
+<p>Ela define um tipo próprio da aplicação.</p>
+<p>Os campos:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">paisOrigem</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">anoFormacao</span><span class="p">;</span>
+</code></pre></div>
+<p>representam o estado interno de cada objeto <code>Banda</code>.</p>
+<p>Como são campos de instância, cada objeto possui seus próprios valores.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Banda</span><span class="w"> </span><span class="n">metallica</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Banda</span><span class="p">(</span><span class="s">&quot;Metallica&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Estados Unidos&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1981</span><span class="p">);</span>
+<span class="n">Banda</span><span class="w"> </span><span class="n">ironMaiden</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Banda</span><span class="p">(</span><span class="s">&quot;Iron Maiden&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Reino Unido&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1975</span><span class="p">);</span>
+</code></pre></div>
+<p><code>metallica</code> e <code>ironMaiden</code> são duas variáveis diferentes, referenciando dois objetos diferentes.</p>
+<p>Ambos são do tipo <code>Banda</code>, mas possuem estados diferentes.</p>
+<h3 id="o-papel-do-construtor">O papel do construtor</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="nf">Banda</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">paisOrigem</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">anoFormacao</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">nome</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">nome</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;nome não pode ser nulo&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">paisOrigem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">paisOrigem</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;paisOrigem não pode ser nulo&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">anoFormacao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">anoFormacao</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>O construtor inicializa o objeto em um estado válido.</p>
+<p>Sem construtor, seria possível criar uma banda sem nome, sem país e com ano de formação zero. Isso até compila, mas provavelmente não representa uma banda válida no domínio da aplicação.</p>
+<p>O método <code>Objects.requireNonNull</code> é útil para validar referências obrigatórias. A documentação oficial informa que ele verifica se uma referência é não nula e lança <code>NullPointerException</code> caso contrário. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api//java.base/java/util/Objects.html" title="Objects (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</p>
+<h3 id="metodos-de-consulta">Métodos de consulta</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">nome</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">nome</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse método permite consultar o nome da banda sem expor diretamente o campo.</p>
+<p>Neste artigo, os métodos foram nomeados como <code>nome()</code>, <code>paisOrigem()</code> e <code>anoFormacao()</code>, seguindo um estilo mais conciso. Também seria comum encontrar <code>getNome()</code>, <code>getPaisOrigem()</code> e <code>getAnoFormacao()</code> em projetos Java tradicionais, especialmente quando frameworks esperam convenções JavaBeans.</p>
+<h3 id="a-classe-musica-e-a-composicao">A classe <code>Musica</code> e a composição</h3>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="n">Banda</span><span class="w"> </span><span class="n">banda</span><span class="p">;</span>
+</code></pre></div>
+<p>Esse é um exemplo de composição entre objetos.</p>
+<p>Uma música tem uma banda associada.</p>
+<p>A classe <code>Musica</code> não copia os dados da banda. Ela mantém uma referência para um objeto <code>Banda</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">Musica</span><span class="w"> </span><span class="n">enterSandman</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Musica</span><span class="p">(</span>
+<span class="w">        </span><span class="s">&quot;Enter Sandman&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">Duration</span><span class="p">.</span><span class="na">ofMinutes</span><span class="p">(</span><span class="mi">5</span><span class="p">).</span><span class="na">plusSeconds</span><span class="p">(</span><span class="mi">31</span><span class="p">),</span>
+<span class="w">        </span><span class="n">metallica</span>
+<span class="p">);</span>
+</code></pre></div>
+<p>Aqui, o objeto <code>enterSandman</code> recebe uma referência para o objeto <code>metallica</code>.</p>
+<p>Isso significa que <code>Musica</code> e <code>Banda</code> passam a colaborar.</p>
+<p>Quando <code>Musica</code> precisa montar sua descrição completa, ela chama um método da banda:</p>
+<div class="highlight"><pre><span></span><code><span class="n">banda</span><span class="p">.</span><span class="na">nome</span><span class="p">()</span>
+</code></pre></div>
+<p>Esse é o ponto em que a comunicação entre objetos fica mais clara.</p>
+<p>O objeto <code>Musica</code> envia uma mensagem para o objeto <code>Banda</code>: “me informe seu nome”.</p>
+<h3 id="a-classe-catalogomusical">A classe <code>CatalogoMusical</code></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Musica</span><span class="o">&gt;</span><span class="w"> </span><span class="n">musicas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+</code></pre></div>
+<p>O catálogo possui uma lista de músicas.</p>
+<p>Essa linha também mostra inicialização de variável de instância. Quando um objeto <code>CatalogoMusical</code> é criado, ele já começa com uma lista vazia pronta para uso.</p>
+<p>Isso faz sentido porque um catálogo sem músicas ainda pode ter uma lista vazia. Nesse caso, inicializar a lista evita <code>null</code> desnecessário e representa bem o domínio.</p>
+<h3 id="objetos-colaborando">Objetos colaborando</h3>
+<p>Observe esta sequência:</p>
+<div class="highlight"><pre><span></span><code><span class="n">catalogo</span><span class="p">.</span><span class="na">adicionar</span><span class="p">(</span><span class="n">enterSandman</span><span class="p">);</span>
+<span class="n">catalogo</span><span class="p">.</span><span class="na">listar</span><span class="p">();</span>
+</code></pre></div>
+<p>O código principal não precisa saber como o catálogo armazena músicas internamente.</p>
+<p>Ele apenas envia mensagens para o objeto <code>catalogo</code>:</p>
+<div class="highlight"><pre><span></span><code>adicione esta música
+liste as músicas cadastradas
+</code></pre></div>
+<p>Dentro de <code>listar()</code>, o catálogo chama outro objeto:</p>
+<div class="highlight"><pre><span></span><code><span class="n">musica</span><span class="p">.</span><span class="na">descricaoCompleta</span><span class="p">()</span>
+</code></pre></div>
+<p>Dentro de <code>descricaoCompleta()</code>, a música chama outro objeto:</p>
+<div class="highlight"><pre><span></span><code><span class="n">banda</span><span class="p">.</span><span class="na">nome</span><span class="p">()</span>
+</code></pre></div>
+<p>Existe uma colaboração entre objetos:</p>
+<div class="highlight"><pre><span></span><code>Principal -&gt; CatalogoMusical -&gt; Musica -&gt; Banda
+</code></pre></div>
+<p>Isso é orientação a objetos na prática: objetos pequenos, com responsabilidades específicas, colaborando para executar um caso de uso.</p>
+<h2 id="o-que-acontece-por-baixo-dos-panos">O que acontece por baixo dos panos</h2>
+<h3 id="new-cria-um-novo-objeto"><code>new</code> cria um novo objeto</h3>
+<p>Quando executamos:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Banda</span><span class="w"> </span><span class="n">metallica</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Banda</span><span class="p">(</span><span class="s">&quot;Metallica&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Estados Unidos&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1981</span><span class="p">);</span>
+</code></pre></div>
+<p>o Java cria uma nova instância da classe <code>Banda</code>.</p>
+<p>A especificação da linguagem descreve que, ao criar uma nova instância, espaço de memória é alocado para o objeto com espaço para todas as variáveis de instância declaradas na classe e nas superclasses. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-12.html" title="Chapter 12. Execution">Oracle Docs</a>)</p>
+<p>A avaliação de uma expressão <code>new</code> também inicializa os campos com valores padrão antes da execução do construtor. A JLS especifica que o novo objeto contém novas instâncias dos campos e que cada campo é inicializado com seu valor padrão. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-15.html" title="Chapter 15. Expressions">Oracle Docs</a>)</p>
+<p>Depois disso, o construtor é executado para colocar o objeto no estado desejado.</p>
+<h3 id="valores-padrao">Valores padrão</h3>
+<p>Campos de instância recebem valores padrão quando o objeto é criado.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Exemplo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">texto</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">numero</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">ativo</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Banda</span><span class="w"> </span><span class="n">banda</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Se um objeto <code>Exemplo</code> for criado sem atribuições explícitas, os campos começam assim:</p>
+<table>
+<thead>
+<tr>
+<th>Tipo do campo</th>
+<th>Valor padrão</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>String</code></td>
+<td><code>null</code></td>
+</tr>
+<tr>
+<td><code>int</code></td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td><code>boolean</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>Banda</code></td>
+<td><code>null</code></td>
+</tr>
+<tr>
+<td>referências em geral</td>
+<td><code>null</code></td>
+</tr>
+</tbody>
+</table>
+<p>A JLS define que variáveis de classe, variáveis de instância e componentes de array são inicializados com valores padrão quando criados, incluindo zero para tipos numéricos, <code>false</code> para <code>boolean</code> e <code>null</code> para tipos de referência. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-4.html" title="Chapter 4. Types, Values, and Variables">Oracle Docs</a>)</p>
+<p>Isso explica por que um campo <code>int</code> não começa como <code>null</code>: <code>int</code> é tipo primitivo, não tipo de referência.</p>
+<p>Já <code>String</code>, <code>Banda</code>, <code>Musica</code>, <code>List&lt;Musica&gt;</code> e outros tipos baseados em classes são tipos de referência. Portanto, se não forem inicializados, começam como <code>null</code>.</p>
+<h3 id="null-nao-e-objeto"><code>null</code> não é objeto</h3>
+<p><code>null</code> representa ausência de referência.</p>
+<p>Quando temos:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="n">Banda</span><span class="w"> </span><span class="n">banda</span><span class="p">;</span>
+</code></pre></div>
+<p>e nenhum valor foi atribuído, o campo <code>banda</code> não aponta para objeto algum.</p>
+<p>Por isso, este código pode falhar:</p>
+<div class="highlight"><pre><span></span><code><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">banda</span><span class="p">().</span><span class="na">nome</span><span class="p">());</span>
+</code></pre></div>
+<p>Se <code>banda()</code> retornar <code>null</code>, a chamada <code>.nome()</code> tentará acessar um método em algo que não referencia objeto nenhum.</p>
+<p>A documentação da classe <code>NullPointerException</code> informa que essa exceção é lançada quando a aplicação tenta usar <code>null</code> em um caso em que um objeto é necessário, como chamar método de um objeto nulo ou acessar campo de um objeto nulo. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/NullPointerException.html" title="NullPointerException (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</p>
+<h3 id="variaveis-de-referencia-nao-guardam-o-objeto">Variáveis de referência não guardam o objeto</h3>
+<p>Este ponto é essencial.</p>
+<p>Considere:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Banda</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Banda</span><span class="p">(</span><span class="s">&quot;Black Sabbath&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Reino Unido&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1968</span><span class="p">);</span>
+</code></pre></div>
+<p>A variável <code>banda</code> não contém o objeto inteiro dentro dela.</p>
+<p>Ela contém uma referência para o objeto.</p>
+<p>Por isso, quando passamos um objeto para outro, não estamos copiando automaticamente o objeto inteiro.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Banda</span><span class="w"> </span><span class="n">blackSabbath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Banda</span><span class="p">(</span><span class="s">&quot;Black Sabbath&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Reino Unido&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1968</span><span class="p">);</span>
+
+<span class="n">Musica</span><span class="w"> </span><span class="n">paranoid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Musica</span><span class="p">(</span>
+<span class="w">        </span><span class="s">&quot;Paranoid&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">Duration</span><span class="p">.</span><span class="na">ofMinutes</span><span class="p">(</span><span class="mi">2</span><span class="p">).</span><span class="na">plusSeconds</span><span class="p">(</span><span class="mi">48</span><span class="p">),</span>
+<span class="w">        </span><span class="n">blackSabbath</span>
+<span class="p">);</span>
+</code></pre></div>
+<p>O objeto <code>paranoid</code> guarda uma referência para o mesmo objeto <code>blackSabbath</code>.</p>
+<p>Se o objeto <code>Banda</code> fosse mutável e seu nome fosse alterado, quem possui referência para ele passaria a enxergar o novo estado.</p>
+<p>Exemplo didático:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BandaMutavel</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">BandaMutavel</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">nome</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nome</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">nome</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">nome</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">renomear</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">novoNome</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">nome</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">novoNome</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Uso:</p>
+<div class="highlight"><pre><span></span><code><span class="n">BandaMutavel</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BandaMutavel</span><span class="p">(</span><span class="s">&quot;Nome antigo&quot;</span><span class="p">);</span>
+
+<span class="n">BandaMutavel</span><span class="w"> </span><span class="n">outraReferencia</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">banda</span><span class="p">;</span>
+
+<span class="n">outraReferencia</span><span class="p">.</span><span class="na">renomear</span><span class="p">(</span><span class="s">&quot;Nome novo&quot;</span><span class="p">);</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">banda</span><span class="p">.</span><span class="na">nome</span><span class="p">());</span>
+</code></pre></div>
+<p>Saída:</p>
+<div class="highlight"><pre><span></span><code>Nome novo
+</code></pre></div>
+<p>Isso acontece porque <code>banda</code> e <code>outraReferencia</code> referenciam o mesmo objeto.</p>
+<p>Não existem dois objetos. Existem duas variáveis apontando para a mesma instância.</p>
+<h3 id="em-objetos-compara-referencias"><code>==</code> em objetos compara referências</h3>
+<p>Quando usamos <code>==</code> entre objetos, comparamos se as duas variáveis apontam para o mesmo objeto.</p>
+<div class="highlight"><pre><span></span><code><span class="n">Banda</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Banda</span><span class="p">(</span><span class="s">&quot;Rush&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Canadá&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1968</span><span class="p">);</span>
+<span class="n">Banda</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Banda</span><span class="p">(</span><span class="s">&quot;Rush&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Canadá&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1968</span><span class="p">);</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+</code></pre></div>
+<p>Saída:</p>
+<div class="highlight"><pre><span></span><code>false
+</code></pre></div>
+<p>Apesar dos dados serem iguais, são dois objetos diferentes.</p>
+<p>A documentação de <code>Object.equals</code> informa que a implementação padrão de <code>equals</code> em <code>Object</code> retorna <code>true</code> se, e somente se, as referências apontam para o mesmo objeto. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="Object (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</p>
+<p>Para comparar igualdade lógica, normalmente sobrescrevemos <code>equals</code> e <code>hashCode</code>, ou usamos <code>record</code> quando o objetivo for representar dados de forma transparente.</p>
+<h2 id="comparacao-com-versoes-anteriores-do-java">Comparação com versões anteriores do Java</h2>
+<p>Classes, objetos, campos, métodos, construtores, <code>new</code>, referências e valores padrão fazem parte da base da linguagem Java desde o início.</p>
+<p>O que mudou ao longo das versões foi a quantidade de recursos disponíveis para escrever modelos mais expressivos e menos verbosos.</p>
+<h3 id="java-tradicional-classes-comuns">Java tradicional: classes comuns</h3>
+<p>Por muitos anos, a forma principal de modelar objetos foi a classe comum:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Banda</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Banda</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">nome</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nome</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">nome</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">nome</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Essa abordagem continua sendo a mais flexível quando o objeto tem comportamento, invariantes, encapsulamento, regras de negócio e estado interno que não deve ser exposto diretamente.</p>
+<h3 id="java-10-var-em-variaveis-locais">Java 10: <code>var</code> em variáveis locais</h3>
+<p>O Java 10 introduziu inferência de tipo para variáveis locais pela JEP 286. O recurso permite omitir o tipo explícito em variáveis locais com inicializador, mas não está disponível para campos, parâmetros de método ou tipos de retorno. (<a href="https://openjdk.org/jeps/286" title="JEP 286: Local-Variable Type Inference">OpenJDK</a>)</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Banda</span><span class="p">(</span><span class="s">&quot;Deep Purple&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Reino Unido&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1968</span><span class="p">);</span>
+</code></pre></div>
+<p>O compilador infere que <code>banda</code> é do tipo <code>Banda</code>.</p>
+<p>Apesar disso, neste artigo os exemplos evitam <code>var</code> de propósito. Para estudar classes e objetos, escrever o tipo explicitamente ajuda a visualizar melhor a relação entre tipo, variável e objeto.</p>
+<h3 id="java-16-record">Java 16: <code>record</code></h3>
+<p>O Java 16 finalizou os <code>records</code> pela JEP 395. Records são uma forma especial de classe para representar agregados simples de dados com menos cerimônia. A própria JEP descreve records como uma nova espécie de classe para modelar dados como dados. (<a href="https://openjdk.org/jeps/395" title="JEP 395: Records">OpenJDK</a>)</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">BandaResumo</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">paisOrigem</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">anoFormacao</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Um <code>record</code> gera automaticamente:</p>
+<ul>
+<li>campos privados e finais;</li>
+<li>construtor canônico;</li>
+<li>métodos de acesso;</li>
+<li><code>equals</code>;</li>
+<li><code>hashCode</code>;</li>
+<li><code>toString</code>.</li>
+</ul>
+<p>Mas <code>record</code> não substitui classe comum em todos os casos.</p>
+<p>Use <code>record</code> quando o objetivo for representar dados imutáveis e transparentes.</p>
+<p>Use classe comum quando precisar de mais controle sobre:</p>
+<ul>
+<li>identidade;</li>
+<li>ciclo de vida;</li>
+<li>encapsulamento;</li>
+<li>invariantes complexas;</li>
+<li>mutabilidade controlada;</li>
+<li>regras de negócio;</li>
+<li>integração com frameworks que exigem construtores ou proxies específicos.</li>
+</ul>
+<h2 id="boas-praticas">Boas práticas</h2>
+<h3 id="modele-classes-a-partir-do-problema-real">Modele classes a partir do problema real</h3>
+<p>Não crie classes apenas porque um substantivo apareceu no sistema.</p>
+<p>Crie classes quando houver um conceito relevante para o domínio.</p>
+<p>No <strong>meucatalogomusical.com</strong>, <code>Banda</code>, <code>Musica</code>, <code>Album</code> e <code>CatalogoMusical</code> fazem sentido.</p>
+<p>Mas talvez <code>Texto</code>, <code>Dado</code>, <code>Informacao</code> ou <code>ObjetoGenerico</code> sejam nomes vagos demais.</p>
+<h3 id="use-nomes-especificos-e-claros">Use nomes específicos e claros</h3>
+<p>Prefira:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="n">Banda</span><span class="w"> </span><span class="n">banda</span><span class="p">;</span>
+</code></pre></div>
+<p>em vez de:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="n">Banda</span><span class="w"> </span><span class="n">objeto</span><span class="p">;</span>
+</code></pre></div>
+<p>Prefira:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="n">Banda</span><span class="w"> </span><span class="n">artistaPrincipal</span><span class="p">;</span>
+</code></pre></div>
+<p>quando o papel da banda no relacionamento for mais específico.</p>
+<p>O tipo informa o que o objeto é. O nome da variável informa o papel que ele exerce naquele contexto.</p>
+<h3 id="evite-repetir-o-nome-da-classe-nos-campos">Evite repetir o nome da classe nos campos</h3>
+<p>Dentro da classe <code>Banda</code>, isto é redundante:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nomeBanda</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">paisOrigemBanda</span><span class="p">;</span>
+</code></pre></div>
+<p>Melhor:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">paisOrigem</span><span class="p">;</span>
+</code></pre></div>
+<p>O contexto da classe já informa que os campos pertencem a uma banda.</p>
+<h3 id="inicialize-objetos-em-estado-valido">Inicialize objetos em estado válido</h3>
+<p>Prefira construir objetos já válidos:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Banda</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Banda</span><span class="p">(</span><span class="s">&quot;Megadeth&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Estados Unidos&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1983</span><span class="p">);</span>
+</code></pre></div>
+<p>em vez de criar objeto vazio e preencher depois:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Banda</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Banda</span><span class="p">();</span>
+<span class="n">banda</span><span class="p">.</span><span class="na">nome</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Megadeth&quot;</span><span class="p">;</span>
+<span class="n">banda</span><span class="p">.</span><span class="na">paisOrigem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Estados Unidos&quot;</span><span class="p">;</span>
+<span class="n">banda</span><span class="p">.</span><span class="na">anoFormacao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1983</span><span class="p">;</span>
+</code></pre></div>
+<p>A segunda abordagem facilita objetos incompletos em partes do sistema.</p>
+<h3 id="use-composicao-para-representar-relacionamentos">Use composição para representar relacionamentos</h3>
+<p>Se uma música pertence a uma banda, represente isso com uma referência:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="n">Banda</span><span class="w"> </span><span class="n">banda</span><span class="p">;</span>
+</code></pre></div>
+<p>Não espalhe os dados da banda dentro da música:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nomeBanda</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">paisBanda</span><span class="p">;</span>
+<span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">anoFormacaoBanda</span><span class="p">;</span>
+</code></pre></div>
+<p>A segunda abordagem duplica dados, dificulta manutenção e enfraquece o modelo.</p>
+<h3 id="nao-inicialize-tudo-so-para-fugir-de-nullpointerexception">Não inicialize tudo só para fugir de <code>NullPointerException</code></h3>
+<p>Nem todo campo de referência precisa nascer com <code>new</code>.</p>
+<p>Isto pode ser correto:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Musica</span><span class="o">&gt;</span><span class="w"> </span><span class="n">musicas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+</code></pre></div>
+<p>Porque uma lista vazia representa bem um catálogo sem músicas.</p>
+<p>Mas isto pode ser estranho:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="n">Banda</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Banda</span><span class="p">(</span><span class="s">&quot;Desconhecida&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Desconhecido&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+</code></pre></div>
+<p>Se toda música precisa de uma banda real, criar uma banda falsa apenas para evitar <code>null</code> esconde erro de modelagem.</p>
+<p><code>null</code> não deve ser usado sem critério, mas também não deve ser escondido com objetos artificiais.</p>
+<h3 id="prefira-objetos-pequenos-e-coesos">Prefira objetos pequenos e coesos</h3>
+<p>Uma classe deve ter uma responsabilidade clara.</p>
+<p><code>Banda</code> não deve salvar a si mesma no banco de dados.</p>
+<p><code>Musica</code> não deve enviar e-mail.</p>
+<p><code>CatalogoMusical</code> não deve saber detalhes de HTTP.</p>
+<p>Em sistemas backend, essa separação ajuda a manter domínio, aplicação e infraestrutura com responsabilidades mais limpas.</p>
+<h2 id="erros-comuns">Erros comuns</h2>
+<h3 id="confundir-classe-com-objeto">Confundir classe com objeto</h3>
+<p>Classe:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Banda</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Objeto:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Banda</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Banda</span><span class="p">();</span>
+</code></pre></div>
+<p>A classe é a definição. O objeto é a instância criada em tempo de execução.</p>
+<h3 id="achar-que-a-variavel-e-o-objeto">Achar que a variável é o objeto</h3>
+<div class="highlight"><pre><span></span><code><span class="n">Banda</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Banda</span><span class="p">(</span><span class="s">&quot;Queen&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Reino Unido&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1970</span><span class="p">);</span>
+</code></pre></div>
+<p><code>banda</code> é uma variável de referência.</p>
+<p>O objeto foi criado por <code>new Banda(...)</code>.</p>
+<p>Essa diferença é essencial para entender composição, passagem de parâmetros, igualdade, mutabilidade e efeitos colaterais.</p>
+<h3 id="acessar-campo-ou-metodo-de-referencia-nula">Acessar campo ou método de referência nula</h3>
+<div class="highlight"><pre><span></span><code><span class="n">Musica</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">musica</span><span class="p">.</span><span class="na">titulo</span><span class="p">());</span>
+</code></pre></div>
+<p>Esse código lança <code>NullPointerException</code>.</p>
+<p>O problema não está no método <code>titulo()</code>. O problema é que <code>musica</code> não referencia objeto algum.</p>
+<h3 id="criar-objetos-sem-estado-valido">Criar objetos sem estado válido</h3>
+<div class="highlight"><pre><span></span><code><span class="n">Banda</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Banda</span><span class="p">();</span>
+</code></pre></div>
+<p>Se a aplicação permite criar uma banda sem nome, sem país e sem ano de formação, talvez o objeto esteja sendo criado em um estado inválido.</p>
+<p>Construtores ajudam a reduzir esse problema.</p>
+<h3 id="usar-composicao-como-simples-agrupamento-de-campos">Usar composição como simples agrupamento de campos</h3>
+<p>Composição não é apenas colocar uma classe dentro da outra.</p>
+<p>Composição deve representar uma relação real no domínio.</p>
+<p>Bom exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="n">Banda</span><span class="w"> </span><span class="n">banda</span><span class="p">;</span>
+</code></pre></div>
+<p>em <code>Musica</code>, porque uma música tem uma relação com uma banda.</p>
+<p>Exemplo duvidoso:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="n">Relatorio</span><span class="w"> </span><span class="n">relatorio</span><span class="p">;</span>
+</code></pre></div>
+<p>dentro de <code>Banda</code>, se relatório for apenas uma saída gerada pela aplicação e não parte real do conceito de banda.</p>
+<h3 id="comparar-objetos-com-quando-a-intencao-e-igualdade-logica">Comparar objetos com <code>==</code> quando a intenção é igualdade lógica</h3>
+<div class="highlight"><pre><span></span><code><span class="n">Banda</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Banda</span><span class="p">(</span><span class="s">&quot;Rush&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Canadá&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1968</span><span class="p">);</span>
+<span class="n">Banda</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Banda</span><span class="p">(</span><span class="s">&quot;Rush&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Canadá&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1968</span><span class="p">);</span>
+
+<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+</code></pre></div>
+<p>O resultado é <code>false</code>, porque são referências para objetos diferentes.</p>
+<p>Se a intenção for comparar conteúdo, implemente <code>equals</code> e <code>hashCode</code> ou use <code>record</code> quando fizer sentido.</p>
+<h2 id="decisoes-de-engenharia">Decisões de engenharia</h2>
+<h3 id="quando-usar-classes-comuns">Quando usar classes comuns</h3>
+<p>Use classes comuns quando o objeto precisa de:</p>
+<ul>
+<li>comportamento relevante;</li>
+<li>regras de negócio;</li>
+<li>validações;</li>
+<li>encapsulamento;</li>
+<li>mutabilidade controlada;</li>
+<li>identidade;</li>
+<li>composição com outros objetos;</li>
+<li>evolução interna sem expor todos os detalhes.</li>
+</ul>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CatalogoMusical</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Musica</span><span class="o">&gt;</span><span class="w"> </span><span class="n">musicas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">adicionar</span><span class="p">(</span><span class="n">Musica</span><span class="w"> </span><span class="n">musica</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Objects</span><span class="p">.</span><span class="na">requireNonNull</span><span class="p">(</span><span class="n">musica</span><span class="p">);</span>
+<span class="w">        </span><span class="n">musicas</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">musica</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Aqui faz sentido usar classe comum porque existe comportamento: adicionar e listar músicas.</p>
+<h3 id="quando-evitar-criar-uma-classe">Quando evitar criar uma classe</h3>
+<p>Evite criar classes quando elas não adicionam significado.</p>
+<p>Exemplo ruim:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">NomeDaBanda</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">valor</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Essa classe pode fazer sentido se houver validação, normalização ou regra específica para nome de banda.</p>
+<p>Mas, se for apenas um embrulho sem comportamento, talvez <code>String</code> seja suficiente naquele momento.</p>
+<h3 id="quando-usar-record">Quando usar <code>record</code></h3>
+<p>Use <code>record</code> para transportar dados imutáveis e transparentes.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">BandaResumo</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">paisOrigem</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">anoFormacao</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Isso pode ser útil para DTOs, projeções de consulta, respostas simples ou valores imutáveis.</p>
+<p>Mas evite <code>record</code> quando precisar esconder representação interna, controlar mutabilidade ou construir um modelo rico de domínio.</p>
+<h3 id="quando-usar-composicao">Quando usar composição</h3>
+<p>Use composição quando um objeto realmente possui ou se relaciona com outro objeto.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Musica</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Banda</span><span class="w"> </span><span class="n">banda</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>A música não precisa copiar os dados da banda. Ela se relaciona com uma banda.</p>
+<p>Isso melhora:</p>
+<ul>
+<li>coesão;</li>
+<li>reutilização;</li>
+<li>clareza do modelo;</li>
+<li>redução de duplicidade;</li>
+<li>manutenção futura.</li>
+</ul>
+<h3 id="impacto-em-legibilidade">Impacto em legibilidade</h3>
+<p>Um bom modelo orientado a objetos deixa o código mais próximo da linguagem do negócio.</p>
+<p>Compare:</p>
+<div class="highlight"><pre><span></span><code><span class="n">catalogo</span><span class="p">.</span><span class="na">adicionar</span><span class="p">(</span><span class="n">musica</span><span class="p">);</span>
+</code></pre></div>
+<p>com:</p>
+<div class="highlight"><pre><span></span><code><span class="n">lista</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">obj</span><span class="p">);</span>
+</code></pre></div>
+<p>A primeira versão comunica melhor a intenção.</p>
+<h3 id="impacto-em-manutencao">Impacto em manutenção</h3>
+<p>Classes bem modeladas concentram regras no lugar certo.</p>
+<p>Se a regra de descrição de música mudar, alteramos <code>Musica</code>.</p>
+<p>Se a regra de cadastro no catálogo mudar, alteramos <code>CatalogoMusical</code>.</p>
+<p>Isso evita espalhar lógica pelo sistema.</p>
+<h3 id="impacto-em-performance">Impacto em performance</h3>
+<p>Criar objetos tem custo, mas em sistemas backend comuns o maior problema raramente é a existência de objetos bem modelados.</p>
+<p>Problemas de performance costumam vir mais de:</p>
+<ul>
+<li>consultas ineficientes;</li>
+<li>excesso de I/O;</li>
+<li>serialização pesada;</li>
+<li>loops desnecessários;</li>
+<li>estruturas de dados inadequadas;</li>
+<li>criação massiva de objetos em trechos críticos;</li>
+<li>uso incorreto de cache;</li>
+<li>má modelagem de transações.</li>
+</ul>
+<p>Ainda assim, objetos devem ser criados com consciência. Em caminhos muito críticos, como processamento de milhões de registros, parsing intensivo ou aplicações de baixa latência, alocação excessiva pode pressionar o garbage collector.</p>
+<p>A decisão não deve ser “evitar objetos”. Deve ser “modelar bem e medir quando houver suspeita real de gargalo”.</p>
+<h2 id="onde-isso-aparece-em-sistemas-reais">Onde isso aparece em sistemas reais</h2>
+<h3 id="apis-rest">APIs REST</h3>
+<p>Em uma API REST, classes aparecem em várias camadas:</p>
+<div class="highlight"><pre><span></span><code>Controller -&gt; DTO -&gt; Use Case -&gt; Domain Object -&gt; Repository -&gt; Entity
+</code></pre></div>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">CadastroMusicaRequest</span><span class="p">(</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">titulo</span><span class="p">,</span>
+<span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">duracaoEmSegundos</span><span class="p">,</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">nomeBanda</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse <code>record</code> pode representar os dados recebidos na requisição.</p>
+<p>Já uma classe comum pode representar a regra de domínio:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Musica</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">titulo</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Duration</span><span class="w"> </span><span class="n">duracao</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Banda</span><span class="w"> </span><span class="n">banda</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="persistencia">Persistência</h3>
+<p>Em aplicações com banco de dados, objetos podem representar entidades persistidas.</p>
+<p>Exemplo conceitual:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BandaEntity</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">paisOrigem</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Mas é importante não confundir objeto de domínio com entidade de persistência. Em arquiteturas mais cuidadosas, como Clean Architecture, pode ser interessante separar o modelo de domínio do modelo usado pelo ORM.</p>
+<h3 id="mensageria">Mensageria</h3>
+<p>Em sistemas com Kafka, RabbitMQ ou SQS, objetos frequentemente representam mensagens.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">MusicaCadastradaEvent</span><span class="p">(</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">titulo</span><span class="p">,</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">nomeBanda</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse objeto não precisa ter comportamento complexo. Ele pode ser apenas um registro imutável de um fato ocorrido.</p>
+<h3 id="testes-automatizados">Testes automatizados</h3>
+<p>Testes também dependem de boa modelagem.</p>
+<p>Criar objetos claros torna os testes mais legíveis:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Banda</span><span class="w"> </span><span class="n">banda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Banda</span><span class="p">(</span><span class="s">&quot;Dream Theater&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Estados Unidos&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1985</span><span class="p">);</span>
+
+<span class="n">Musica</span><span class="w"> </span><span class="n">musica</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Musica</span><span class="p">(</span>
+<span class="w">        </span><span class="s">&quot;Pull Me Under&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">Duration</span><span class="p">.</span><span class="na">ofMinutes</span><span class="p">(</span><span class="mi">8</span><span class="p">).</span><span class="na">plusSeconds</span><span class="p">(</span><span class="mi">14</span><span class="p">),</span>
+<span class="w">        </span><span class="n">banda</span>
+<span class="p">);</span>
+</code></pre></div>
+<p>A intenção do teste fica mais clara quando os objetos representam conceitos reais.</p>
+<h2 id="perguntas-de-revisao">Perguntas de revisão</h2>
+<h3 id="1-qual-e-a-diferenca-entre-classe-e-objeto">1 - Qual é a diferença entre classe e objeto?</h3>
+<p>Resposta: classe é a definição de um tipo. Objeto é uma instância concreta criada a partir dessa classe durante a execução do programa. <code>Banda</code> é uma classe; <code>new Banda("Metallica", "Estados Unidos", 1981)</code> cria um objeto.</p>
+<h3 id="2-o-que-significa-dizer-que-uma-variavel-referencia-um-objeto">2 - O que significa dizer que uma variável referencia um objeto?</h3>
+<p>Resposta: significa que a variável não guarda o objeto inteiro. Ela guarda uma referência que permite acessar o objeto na memória. Por isso, duas variáveis podem apontar para o mesmo objeto.</p>
+<h3 id="3-o-que-o-operador-new-faz">3 - O que o operador <code>new</code> faz?</h3>
+<p>Resposta: <code>new</code> cria uma nova instância de uma classe, aloca espaço para seus campos, inicializa esses campos com valores padrão e executa o construtor correspondente.</p>
+<h3 id="4-todo-objeto-criado-a-partir-da-mesma-classe-tem-os-mesmos-valores">4 - Todo objeto criado a partir da mesma classe tem os mesmos valores?</h3>
+<p>Resposta: não. Objetos da mesma classe possuem a mesma estrutura, mas cada instância pode ter valores próprios. Duas bandas podem ter os campos <code>nome</code>, <code>paisOrigem</code> e <code>anoFormacao</code>, mas com valores diferentes.</p>
+<h3 id="5-o-que-sao-campos-de-instancia">5 - O que são campos de instância?</h3>
+<p>Resposta: são variáveis declaradas na classe que pertencem a cada objeto criado. Cada instância possui sua própria cópia desses campos.</p>
+<h3 id="6-o-que-sao-metodos">6 - O que são métodos?</h3>
+<p>Resposta: métodos representam comportamentos que um objeto pode executar. Em Java, objetos colaboram chamando métodos uns dos outros.</p>
+<h3 id="7-o-que-significa-dizer-que-objetos-se-comunicam-por-mensagens">7 - O que significa dizer que objetos se comunicam por mensagens?</h3>
+<p>Resposta: significa que um objeto solicita comportamento de outro por meio de chamadas de método. Por exemplo, <code>catalogo.adicionar(musica)</code> é uma mensagem enviada ao objeto <code>catalogo</code> para adicionar uma música.</p>
+<h3 id="8-o-que-e-composicao-de-objetos">8 - O que é composição de objetos?</h3>
+<p>Resposta: composição acontece quando um objeto possui uma referência para outro objeto como parte de sua estrutura. Por exemplo, <code>Musica</code> pode ter um campo <code>Banda</code>, indicando que uma música está associada a uma banda.</p>
+<h3 id="9-composicao-copia-o-objeto-referenciado">9 - Composição copia o objeto referenciado?</h3>
+<p>Resposta: não. Quando um objeto recebe outro como campo, normalmente ele guarda uma referência para o objeto recebido. Ele não cria automaticamente uma cópia profunda.</p>
+<h3 id="10-o-que-e-null">10 - O que é <code>null</code>?</h3>
+<p>Resposta: <code>null</code> representa ausência de referência. Uma variável de referência com valor <code>null</code> não aponta para nenhum objeto.</p>
+<h3 id="11-por-que-acontece-nullpointerexception">11 - Por que acontece <code>NullPointerException</code>?</h3>
+<p>Resposta: acontece quando o programa tenta usar <code>null</code> em um contexto que exige um objeto, como chamar método ou acessar campo de uma referência nula.</p>
+<h3 id="12-quais-sao-os-valores-padrao-de-campos-de-instancia">12 - Quais são os valores padrão de campos de instância?</h3>
+<p>Resposta: campos numéricos primitivos começam com zero, <code>boolean</code> começa com <code>false</code>, <code>char</code> começa com <code>'\u0000'</code> e campos de referência começam com <code>null</code>.</p>
+<h3 id="13-por-que-int-nao-pode-ser-null">13 - Por que <code>int</code> não pode ser <code>null</code>?</h3>
+<p>Resposta: porque <code>int</code> é tipo primitivo. Tipos primitivos armazenam valores diretamente e não referências. Apenas tipos de referência podem receber <code>null</code>.</p>
+<h3 id="14-qual-e-o-risco-de-criar-objetos-vazios-e-preencher-depois">14 - Qual é o risco de criar objetos vazios e preencher depois?</h3>
+<p>Resposta: o objeto pode circular pelo sistema em estado inválido ou incompleto. Construtores ajudam a criar objetos já consistentes.</p>
+<h3 id="15-quando-faz-sentido-inicializar-um-campo-de-instancia-diretamente">15 - Quando faz sentido inicializar um campo de instância diretamente?</h3>
+<p>Resposta: quando o valor inicial representa corretamente o estado natural do objeto. Por exemplo, uma lista vazia em um catálogo faz sentido. Já criar uma banda fictícia apenas para evitar <code>null</code> pode esconder erro de modelagem.</p>
+<h3 id="16-qual-e-a-diferenca-entre-e-equals-em-objetos">16 - Qual é a diferença entre <code>==</code> e <code>equals</code> em objetos?</h3>
+<p>Resposta: <code>==</code> compara se duas referências apontam para o mesmo objeto. <code>equals</code>, quando sobrescrito corretamente, pode comparar igualdade lógica entre objetos.</p>
+<h3 id="17-quando-usar-classe-comum-em-vez-de-record">17 - Quando usar classe comum em vez de <code>record</code>?</h3>
+<p>Resposta: use classe comum quando precisar de comportamento, encapsulamento, mutabilidade controlada, invariantes complexas ou identidade. Use <code>record</code> quando quiser representar dados imutáveis e transparentes.</p>
+<h3 id="18-por-que-evitar-campos-publicos">18 - Por que evitar campos públicos?</h3>
+<p>Resposta: campos públicos expõem diretamente o estado interno do objeto, dificultando validação, manutenção e evolução da classe. Campos privados com métodos controlados preservam melhor o encapsulamento.</p>
+<h3 id="19-o-que-um-desenvolvedor-backend-deve-observar-ao-modelar-objetos">19 - O que um desenvolvedor backend deve observar ao modelar objetos?</h3>
+<p>Resposta: deve observar se a classe representa um conceito real do domínio, se possui responsabilidade clara, se nasce em estado válido, se evita duplicidade de dados e se suas relações com outros objetos fazem sentido.</p>
+<h3 id="20-objetos-bem-modelados-melhoram-performance">20 - Objetos bem modelados melhoram performance?</h3>
+<p>Resposta: indiretamente, podem melhorar manutenção e reduzir erros, mas não garantem performance por si só. Em geral, a modelagem deve priorizar clareza e consistência. Otimizações de alocação devem ser feitas com medição real em trechos críticos.</p>
+<h2 id="resumo-final">Resumo final</h2>
+<p>Classes e objetos são a base da programação orientada a objetos em Java.</p>
+<p>Uma classe define um tipo. Um objeto é uma instância concreta desse tipo. Campos representam estado. Métodos representam comportamento. Construtores ajudam a inicializar objetos. Variáveis de referência apontam para objetos, mas não armazenam os objetos diretamente.</p>
+<p>Composição permite que objetos se relacionem entre si. No <strong>meucatalogomusical.com</strong>, uma <code>Musica</code> pode ter uma <code>Banda</code>, e um <code>CatalogoMusical</code> pode ter várias músicas. Essa colaboração entre objetos acontece por chamadas de métodos, que são as mensagens da orientação a objetos em Java.</p>
+<p>Entender bem classes, objetos, referências, <code>new</code>, valores padrão e <code>null</code> é essencial para avançar em temas mais profundos, como encapsulamento, imutabilidade, herança, polimorfismo, igualdade, coleções, persistência e modelagem de domínio.</p>
+<h2 id="referencias">Referências</h2>
+<ul>
+<li>Java Language Specification, Java SE 25, Chapter 4 — Types, Values, and Variables. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-4.html" title="Chapter 4. Types, Values, and Variables">Oracle Docs</a>)</li>
+<li>Java Language Specification, Java SE 25, §4.12.5 — Initial Values of Variables. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-4.html" title="Chapter 4. Types, Values, and Variables">Oracle Docs</a>)</li>
+<li>Java Language Specification, Java SE 25, Chapter 8 — Classes. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-8.html" title="Chapter 8. Classes">Oracle Docs</a>)</li>
+<li>Java Language Specification, Java SE 25, §12.5 — Creation of New Class Instances. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-12.html" title="Chapter 12. Execution">Oracle Docs</a>)</li>
+<li>Java Language Specification, Java SE 25, §15.9 — Class Instance Creation Expressions. (<a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-15.html" title="Chapter 15. Expressions">Oracle Docs</a>)</li>
+<li>Java SE 25 API Documentation — <code>java.lang.Object</code>. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html" title="Object (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</li>
+<li>Java SE 25 API Documentation — <code>java.lang.NullPointerException</code>. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/NullPointerException.html" title="NullPointerException (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</li>
+<li>Java SE 25 API Documentation — <code>java.util.Objects</code>. (<a href="https://docs.oracle.com/en/java/javase/25/docs/api//java.base/java/util/Objects.html" title="Objects (Java SE 25 &amp; JDK 25)">Oracle Docs</a>)</li>
+<li>OpenJDK — JEP 286: Local-Variable Type Inference. (<a href="https://openjdk.org/jeps/286" title="JEP 286: Local-Variable Type Inference">OpenJDK</a>)</li>
+<li>OpenJDK — JEP 395: Records. (<a href="https://openjdk.org/jeps/395" title="JEP 395: Records">OpenJDK</a>)</li>
+<li>Joshua Bloch — <em>Effective Java</em>.</li>
+<li>Brian Goetz et al. — <em>Java Concurrency in Practice</em>.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
