@@ -1,0 +1,3881 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../introducao-seguranca-aplicacoes-web/">
+      
+      
+        <link rel="next" href="../sql-injection/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>HTTP, DNS, Sessões e HTTPS na Segurança Web - README</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/css/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#http-dns-sessoes-e-https-na-seguranca-web" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../../.." title="README" class="md-header__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            README
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              HTTP, DNS, Sessões e HTTPS na Segurança Web
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="README" class="md-nav__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    README
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Backend
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/fundamentos-da-linguagem-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/convencoes-de-codigo-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convenções de código em Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/variaveis-tipos-primitivos-operadores-conversoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variáveis, tipos primitivos, operadores e conversões
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/fundamentos-de-string/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de String
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-controle-operadores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de controle e operadores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-condicionais/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas condicionais
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-de-repeticao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de repetição
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Iniciando em Orientação a Objetos (POO)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Iniciando em Orientação a Objetos (POO)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/introducao-orientacao-a-objetos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução à POO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/classes-e-objetos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes e objetos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/classes-objetos-metodos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes, objetos e métodos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Spring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/api-rest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    O que é API REST?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/http/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Um pouco de HTTP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/por-que-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Por que escolher Spring?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/spring-boot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Boot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/spring-initializr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Initializr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/maven-pom/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maven e pom.xml
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Segurança
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Segurança
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Segurança em aplicações web
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Segurança em aplicações web
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introducao-seguranca-aplicacoes-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução à Segurança de Aplicações Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTTP, DNS, Sessões e HTTPS na Segurança Web
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTTP, DNS, Sessões e HTTPS na Segurança Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-e-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que é HTTP?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http-segue-o-modelo-cliente-servidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HTTP segue o modelo cliente-servidor
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http-e-sem-estado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HTTP é sem estado
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requisicao-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requisição HTTP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resposta-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resposta HTTP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metodos-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos HTTP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#post" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-e-menos-seguro-que-post" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET é menos seguro que POST?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-deve-alterar-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET deve alterar dados?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dns-a-lista-telefonica-da-internet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DNS: a lista telefônica da internet
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dns-direto-e-dns-reverso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DNS direto e DNS reverso
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-dns-importa-para-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que DNS importa para segurança?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ciclo-simplificado-de-uma-requisicao-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ciclo simplificado de uma requisição HTTP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sessoes-em-aplicacoes-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sessões em aplicações web
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cookies-de-sessao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cookies de sessão
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#atributos-importantes-de-cookies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atributos importantes de cookies
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#httponly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HttpOnly
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#secure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Secure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#samesite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SameSite
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracao-de-sessao-em-spring-boot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuração de sessão em Spring Boot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-controller-com-sessao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de controller com sessão
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sessao-nao-substitui-autorizacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sessão não substitui autorização
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#riscos-em-sessoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Riscos em sessões
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logout-e-invalidacao-de-sessao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logout e invalidação de sessão
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#https" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HTTPS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http-vs-https" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HTTP vs HTTPS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TLS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#certificado-digital" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Certificado digital
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#https-protege-tudo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HTTPS protege tudo?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cookies-seguros-com-https" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cookies seguros com HTTPS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-seguranca-no-spring-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de segurança no Spring Security
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#headers-de-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Headers de segurança
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dados-sensiveis-nao-devem-aparecer-em-urls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dados sensíveis não devem aparecer em URLs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuidado-com-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cuidado com logs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relacao-entre-http-sessao-e-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relação entre HTTP, sessão e segurança
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-completo-fluxo-de-login-em-uma-aplicacao-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo completo: fluxo de login em uma aplicação web
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checklist-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Checklist de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#http" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HTTP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dns-e-dominio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DNS e domínio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sessao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sessão
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#httpstls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HTTPS/TLS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Perguntas de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-o-que-e-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. O que é HTTP?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-o-que-significa-dizer-que-http-e-sem-estado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. O que significa dizer que HTTP é sem estado?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-por-que-sessoes-sao-necessarias-em-aplicacoes-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Por que sessões são necessárias em aplicações web?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-qual-e-a-diferenca-entre-get-e-post" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Qual é a diferença entre GET e POST?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-get-e-mais-seguro-que-post" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. GET é mais seguro que POST?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-por-que-nao-devemos-enviar-senhas-pela-url" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Por que não devemos enviar senhas pela URL?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-o-que-e-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. O que é DNS?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-qual-e-a-diferenca-entre-dns-direto-e-dns-reverso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Qual é a diferença entre DNS direto e DNS reverso?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-o-que-e-https" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. O que é HTTPS?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-https-resolve-todos-os-problemas-de-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. HTTPS resolve todos os problemas de segurança?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-o-que-faz-o-atributo-httponly-em-um-cookie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. O que faz o atributo HttpOnly em um cookie?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-o-que-faz-o-atributo-secure-em-um-cookie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. O que faz o atributo Secure em um cookie?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-o-que-faz-o-atributo-samesite-em-um-cookie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. O que faz o atributo SameSite em um cookie?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-o-que-deve-acontecer-no-logout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. O que deve acontecer no logout?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-por-que-logs-podem-ser-um-risco-de-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Por que logs podem ser um risco de segurança?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sql-injection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Injection - Funcionamento, Impactos e Prevenção
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xss/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cross-Site Scripting (XSS)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dast-conformidade-sdlc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DAST, Conformidade e Segurança no Ciclo de Desenvolvimento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sast-source-sink-taint-flow-falso-positivo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SAST na prática - Source, Sink, Taint Flow e falso positivo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssrf-aplicacoes-java-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSRF em aplicações Java/Spring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cleartext-submission-integracoes-server-to-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cleartext Submission em integrações server-to-server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../privacy-violation-credenciais-logs-respostas-parceiros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Privacy Violation - credenciais, logs e respostas de parceiros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../path-traversal-upload-download-seguro-arquivos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Path Traversal e upload/download seguro de arquivos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unchecked-input-loop-condition-dos-processamento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unchecked Input for Loop Condition e prevenção de DoS por processamento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../headers-seguranca-hsts-json-nosniff/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Headers de segurança- HSTS, JSON explícito e nosniff
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sca-dependencias-vulneraveis-cves-gestao-bibliotecas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SCA na prática - dependências vulneráveis, CVEs e gestão de bibliotecas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../triagem-vulnerabilidades-corrigir-mitigar-not-exploitable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Triagem de vulnerabilidades - corrigir, mitigar ou marcar como Not Exploitable
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ferramentas-appsec-sast-sca-dast/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ferramentas de AppSec - como SAST, SCA e DAST encontram vulnerabilidades
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-e-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que é HTTP?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http-segue-o-modelo-cliente-servidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HTTP segue o modelo cliente-servidor
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http-e-sem-estado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HTTP é sem estado
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requisicao-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requisição HTTP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resposta-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resposta HTTP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metodos-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos HTTP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#post" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-e-menos-seguro-que-post" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET é menos seguro que POST?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-deve-alterar-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET deve alterar dados?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dns-a-lista-telefonica-da-internet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DNS: a lista telefônica da internet
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dns-direto-e-dns-reverso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DNS direto e DNS reverso
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-dns-importa-para-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que DNS importa para segurança?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ciclo-simplificado-de-uma-requisicao-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ciclo simplificado de uma requisição HTTP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sessoes-em-aplicacoes-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sessões em aplicações web
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cookies-de-sessao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cookies de sessão
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#atributos-importantes-de-cookies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atributos importantes de cookies
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#httponly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HttpOnly
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#secure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Secure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#samesite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SameSite
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracao-de-sessao-em-spring-boot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuração de sessão em Spring Boot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-controller-com-sessao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de controller com sessão
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sessao-nao-substitui-autorizacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sessão não substitui autorização
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#riscos-em-sessoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Riscos em sessões
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logout-e-invalidacao-de-sessao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logout e invalidação de sessão
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#https" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HTTPS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http-vs-https" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HTTP vs HTTPS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TLS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#certificado-digital" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Certificado digital
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#https-protege-tudo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HTTPS protege tudo?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cookies-seguros-com-https" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cookies seguros com HTTPS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-seguranca-no-spring-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de segurança no Spring Security
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#headers-de-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Headers de segurança
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dados-sensiveis-nao-devem-aparecer-em-urls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dados sensíveis não devem aparecer em URLs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuidado-com-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cuidado com logs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relacao-entre-http-sessao-e-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relação entre HTTP, sessão e segurança
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-completo-fluxo-de-login-em-uma-aplicacao-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo completo: fluxo de login em uma aplicação web
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checklist-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Checklist de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#http" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HTTP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dns-e-dominio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DNS e domínio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sessao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sessão
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#httpstls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HTTPS/TLS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Perguntas de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-o-que-e-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. O que é HTTP?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-o-que-significa-dizer-que-http-e-sem-estado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. O que significa dizer que HTTP é sem estado?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-por-que-sessoes-sao-necessarias-em-aplicacoes-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Por que sessões são necessárias em aplicações web?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-qual-e-a-diferenca-entre-get-e-post" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Qual é a diferença entre GET e POST?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-get-e-mais-seguro-que-post" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. GET é mais seguro que POST?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-por-que-nao-devemos-enviar-senhas-pela-url" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Por que não devemos enviar senhas pela URL?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-o-que-e-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. O que é DNS?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-qual-e-a-diferenca-entre-dns-direto-e-dns-reverso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Qual é a diferença entre DNS direto e DNS reverso?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-o-que-e-https" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. O que é HTTPS?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-https-resolve-todos-os-problemas-de-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. HTTPS resolve todos os problemas de segurança?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-o-que-faz-o-atributo-httponly-em-um-cookie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. O que faz o atributo HttpOnly em um cookie?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-o-que-faz-o-atributo-secure-em-um-cookie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. O que faz o atributo Secure em um cookie?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-o-que-faz-o-atributo-samesite-em-um-cookie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. O que faz o atributo SameSite em um cookie?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-o-que-deve-acontecer-no-logout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. O que deve acontecer no logout?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-por-que-logs-podem-ser-um-risco-de-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Por que logs podem ser um risco de segurança?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="http-dns-sessoes-e-https-na-seguranca-web">HTTP, DNS, Sessões e HTTPS na Segurança Web</h1>
+<p>No artigo anterior, vimos que aplicações web possuem uma natureza global, uma grande superfície de ataque e múltiplas camadas de complexidade. Também vimos que segurança de aplicações web não é a mesma coisa que segurança de rede, porque a segurança da aplicação depende diretamente de como o sistema recebe dados, processa requisições, valida usuários, autoriza ações e protege informações sensíveis.</p>
+<p>Agora vamos avançar para a base técnica que sustenta boa parte da comunicação entre navegador e servidor: HTTP, DNS, sessões e HTTPS.</p>
+<p>Esses conceitos aparecem em praticamente qualquer aplicação web moderna. Mesmo quando usamos frameworks como Spring Boot, bibliotecas de segurança e servidores gerenciados, esses fundamentos continuam existindo por baixo da abstração.</p>
+<p>Quando um usuário acessa a aplicação fictícia <code>meucatalogomusical.com</code>, várias coisas acontecem:</p>
+<ol>
+<li>O navegador precisa descobrir para qual servidor aquele domínio aponta.</li>
+<li>O cliente estabelece comunicação com o servidor.</li>
+<li>O navegador envia uma requisição HTTP.</li>
+<li>O servidor processa a requisição.</li>
+<li>A aplicação responde.</li>
+<li>O navegador renderiza o conteúdo.</li>
+<li>Se o usuário estiver autenticado, a aplicação precisa manter algum tipo de estado de sessão.</li>
+<li>Se a comunicação for segura, tudo isso deve ocorrer sobre HTTPS.</li>
+</ol>
+<p>Entender essas etapas ajuda a desenvolver aplicações mais seguras e a investigar problemas reais em produção.</p>
+<h2 id="o-que-e-http">O que é HTTP?</h2>
+<p>HTTP significa Hypertext Transfer Protocol. Ele é o protocolo usado para troca de dados na web.</p>
+<p>De forma simples, HTTP define como um cliente e um servidor se comunicam.</p>
+<p>O cliente normalmente é o navegador, mas também pode ser:</p>
+<ul>
+<li>um aplicativo mobile;</li>
+<li>uma aplicação backend;</li>
+<li>uma ferramenta de linha de comando;</li>
+<li>um serviço externo;</li>
+<li>um API Gateway;</li>
+<li>um script automatizado.</li>
+</ul>
+<p>O servidor é quem recebe a requisição, processa a solicitação e devolve uma resposta.</p>
+<p>Por exemplo, quando alguém acessa:</p>
+<div class="highlight"><pre><span></span><code>https://meucatalogomusical.com/bandas/judas-priest
+</code></pre></div>
+<p>o navegador envia uma requisição para o servidor responsável por <code>meucatalogomusical.com</code>, pedindo o recurso <code>/bandas/judas-priest</code>.</p>
+<p>O servidor pode responder com uma página HTML, um JSON, um arquivo, um redirecionamento, uma mensagem de erro ou qualquer outro tipo de resposta suportada pela aplicação.</p>
+<h2 id="http-segue-o-modelo-cliente-servidor">HTTP segue o modelo cliente-servidor</h2>
+<p>O HTTP funciona em um modelo clássico de cliente e servidor.</p>
+<p>O fluxo básico é:</p>
+<ol>
+<li>O cliente abre uma conexão.</li>
+<li>O cliente envia uma requisição.</li>
+<li>O servidor recebe a requisição.</li>
+<li>O servidor processa a requisição.</li>
+<li>O servidor envia uma resposta.</li>
+<li>O cliente interpreta a resposta.</li>
+</ol>
+<p>Em uma aplicação web, esse ciclo acontece o tempo todo.</p>
+<p>Ao abrir a página inicial de <code>meucatalogomusical.com</code>, o navegador pode fazer uma requisição para obter o HTML. Depois, pode fazer outras requisições para buscar CSS, JavaScript, imagens, fontes, dados da API e recursos adicionais.</p>
+<p>Portanto, uma única tela pode envolver várias requisições HTTP.</p>
+<h2 id="http-e-sem-estado">HTTP é sem estado</h2>
+<p>Um dos pontos mais importantes para segurança web é entender que HTTP é um protocolo sem estado.</p>
+<p>Isso significa que, por padrão, cada requisição é independente. O servidor não lembra automaticamente quem fez a requisição anterior.</p>
+<p>Por exemplo:</p>
+<div class="highlight"><pre><span></span><code>GET /bandas
+</code></pre></div>
+<p>e depois:</p>
+<div class="highlight"><pre><span></span><code>GET /usuarios/perfil
+</code></pre></div>
+<p>são duas requisições diferentes.</p>
+<p>O protocolo HTTP, sozinho, não sabe que essas duas requisições vieram do mesmo usuário. Para resolver esse problema, aplicações web usam mecanismos adicionais, como cookies, tokens e sessões.</p>
+<p>Esse detalhe é extremamente importante. Muitos problemas de segurança aparecem justamente na tentativa de criar estado sobre um protocolo originalmente sem estado.</p>
+<h2 id="requisicao-http">Requisição HTTP</h2>
+<p>Uma requisição HTTP é uma mensagem enviada pelo cliente ao servidor.</p>
+<p>Ela geralmente possui:</p>
+<ul>
+<li>método HTTP;</li>
+<li>URL ou caminho do recurso;</li>
+<li>headers;</li>
+<li>parâmetros;</li>
+<li>corpo da requisição, quando aplicável.</li>
+</ul>
+<p>Exemplo conceitual:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">GET</span> <span class="nn">/api/bandas?genero=HEAVY_METAL</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">meucatalogomusical.com</span>
+<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json</span>
+</code></pre></div>
+<p>Nesse caso, o cliente está pedindo uma lista de bandas filtradas pelo gênero <code>HEAVY_METAL</code>.</p>
+<p>Em uma API REST, esse endpoint poderia retornar bandas como:</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;nome&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Judas Priest&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;genero&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;HEAVY_METAL&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;nome&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Saxon&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;genero&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;HEAVY_METAL&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">]</span>
+</code></pre></div>
+<h2 id="resposta-http">Resposta HTTP</h2>
+<p>Uma resposta HTTP é a mensagem devolvida pelo servidor.</p>
+<p>Ela geralmente possui:</p>
+<ul>
+<li>código de status;</li>
+<li>headers;</li>
+<li>corpo da resposta.</li>
+</ul>
+<p>Exemplo conceitual:</p>
+<div class="highlight"><pre><span></span><code><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+</code></pre></div>
+<p>Com o corpo:</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;nome&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Judas Priest&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;genero&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;HEAVY_METAL&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">]</span>
+</code></pre></div>
+<p>O código <code>200 OK</code> indica que a requisição foi processada com sucesso.</p>
+<p>Outros códigos comuns são:</p>
+<ul>
+<li><code>201 Created</code>: recurso criado com sucesso;</li>
+<li><code>204 No Content</code>: sucesso sem corpo de resposta;</li>
+<li><code>400 Bad Request</code>: requisição inválida;</li>
+<li><code>401 Unauthorized</code>: usuário não autenticado;</li>
+<li><code>403 Forbidden</code>: usuário autenticado, mas sem permissão;</li>
+<li><code>404 Not Found</code>: recurso não encontrado;</li>
+<li><code>500 Internal Server Error</code>: erro interno no servidor.</li>
+</ul>
+<p>Esses códigos não são apenas detalhes técnicos. Eles comunicam para clientes, APIs e ferramentas o resultado da operação.</p>
+<h2 id="metodos-http">Métodos HTTP</h2>
+<p>Os métodos HTTP indicam a intenção da requisição.</p>
+<p>Os mais comuns são:</p>
+<ul>
+<li><code>GET</code>;</li>
+<li><code>POST</code>;</li>
+<li><code>PUT</code>;</li>
+<li><code>PATCH</code>;</li>
+<li><code>DELETE</code>.</li>
+</ul>
+<p>Neste artigo, vamos focar principalmente em <code>GET</code> e <code>POST</code>, porque eles aparecem com muita frequência em aplicações web.</p>
+<h2 id="get">GET</h2>
+<p>O método <code>GET</code> é usado para solicitar dados de um recurso.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">GET</span> <span class="nn">/api/bandas?nome=sepultura</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">meucatalogomusical.com</span>
+</code></pre></div>
+<p>Nesse caso, o cliente está solicitando dados. A intenção não deveria ser criar, alterar ou excluir informações.</p>
+<p>Exemplo em Spring:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.bandas.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.GetMapping</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RequestParam</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="nd">@RestController</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ConsultaBandaController</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ConsultaBandaService</span><span class="w"> </span><span class="n">consultaBandaService</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ConsultaBandaController</span><span class="p">(</span><span class="n">ConsultaBandaService</span><span class="w"> </span><span class="n">consultaBandaService</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">consultaBandaService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">consultaBandaService</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/api/bandas&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">BandaResponse</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">pesquisar</span><span class="p">(</span><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">consultaBandaService</span><span class="p">.</span><span class="na">pesquisarPorNome</span><span class="p">(</span><span class="n">nome</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Uma chamada possível seria:</p>
+<div class="highlight"><pre><span></span><code>GET /api/bandas?nome=Sepultura
+</code></pre></div>
+<p>O ponto de atenção é que parâmetros enviados na URL podem aparecer em histórico do navegador, logs, ferramentas de monitoramento e registros intermediários. Por isso, dados sensíveis não devem ser enviados por URL.</p>
+<p>Evite fazer algo como:</p>
+<div class="highlight"><pre><span></span><code>GET /login?usuario=admin&amp;senha=senha123
+</code></pre></div>
+<p>Esse tipo de desenho é inseguro porque expõe credenciais na própria URL.</p>
+<h2 id="post">POST</h2>
+<p>O método <code>POST</code> é normalmente usado para enviar dados ao servidor, criar recursos ou iniciar operações.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="nf">POST</span> <span class="nn">/api/bandas</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">meucatalogomusical.com</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+</code></pre></div>
+<p>Corpo da requisição:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;nome&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Megadeth&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;genero&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;THRASH_METAL&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;anoFormacao&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1983</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Exemplo em Spring:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.bandas.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.validation.Valid</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.HttpStatus</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.*</span><span class="p">;</span>
+
+<span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/api/bandas&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CadastroBandaController</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">CadastroBandaService</span><span class="w"> </span><span class="n">cadastroBandaService</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">CadastroBandaController</span><span class="p">(</span><span class="n">CadastroBandaService</span><span class="w"> </span><span class="n">cadastroBandaService</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">cadastroBandaService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cadastroBandaService</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@PostMapping</span>
+<span class="w">    </span><span class="nd">@ResponseStatus</span><span class="p">(</span><span class="n">HttpStatus</span><span class="p">.</span><span class="na">CREATED</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">BandaResponse</span><span class="w"> </span><span class="nf">cadastrar</span><span class="p">(</span><span class="nd">@Valid</span><span class="w"> </span><span class="nd">@RequestBody</span><span class="w"> </span><span class="n">CadastroBandaRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">cadastroBandaService</span><span class="p">.</span><span class="na">cadastrar</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Nesse caso, os dados são enviados no corpo da requisição, não na URL.</p>
+<p>Isso não significa que <code>POST</code> seja automaticamente seguro. O corpo da requisição também pode ser interceptado se a comunicação não estiver protegida por HTTPS. Além disso, o backend ainda precisa validar os dados, aplicar autorização e tratar erros corretamente.</p>
+<h2 id="get-e-menos-seguro-que-post">GET é menos seguro que POST?</h2>
+<p>Uma simplificação comum é dizer que <code>POST</code> é mais seguro que <code>GET</code>.</p>
+<p>Essa frase pode ser enganosa.</p>
+<p>O que acontece é que, em uma requisição <code>GET</code>, os dados normalmente aparecem na URL. Isso pode torná-los mais expostos em alguns contextos, como histórico do navegador, favoritos, logs e ferramentas de monitoramento.</p>
+<p>Já no <code>POST</code>, os dados ficam no corpo da requisição. Isso reduz a exposição na URL, mas não torna a requisição segura por si só.</p>
+<p>A segurança real depende de outros fatores:</p>
+<ul>
+<li>uso de HTTPS;</li>
+<li>autenticação;</li>
+<li>autorização;</li>
+<li>validação de entrada;</li>
+<li>proteção contra CSRF quando aplicável;</li>
+<li>controle de sessão;</li>
+<li>configuração de cookies;</li>
+<li>tratamento seguro de erros;</li>
+<li>logs sem dados sensíveis.</li>
+</ul>
+<p>Portanto, a regra prática é:</p>
+<ul>
+<li>use <code>GET</code> para leitura de recursos;</li>
+<li>use <code>POST</code> para envio de dados, criação de recursos ou operações que alteram estado;</li>
+<li>nunca envie dados sensíveis na URL;</li>
+<li>sempre use HTTPS para proteger a comunicação.</li>
+</ul>
+<h2 id="get-deve-alterar-dados">GET deve alterar dados?</h2>
+<p>Em uma aplicação bem projetada, <code>GET</code> não deve alterar estado no servidor.</p>
+<p>Isso significa que uma chamada como esta não é uma boa prática:</p>
+<div class="highlight"><pre><span></span><code>GET /api/bandas/42/excluir
+</code></pre></div>
+<p>O problema é que <code>GET</code> pode ser executado por navegador, crawler, cache, ferramenta de preview ou outros mecanismos que assumem que a requisição é apenas uma leitura.</p>
+<p>O ideal seria usar um método apropriado para exclusão:</p>
+<div class="highlight"><pre><span></span><code><span class="err">DELETE /api/bandas/42</span>
+</code></pre></div>
+<p>ou, dependendo da regra de negócio, um <code>POST</code> para uma ação específica:</p>
+<div class="highlight"><pre><span></span><code><span class="err">POST /api/bandas/42/desativacao</span>
+</code></pre></div>
+<p>A escolha do método HTTP comunica a intenção da operação.</p>
+<h2 id="dns-a-lista-telefonica-da-internet">DNS: a lista telefônica da internet</h2>
+<p>DNS significa Domain Name System.</p>
+<p>O DNS funciona como uma espécie de lista telefônica da internet. Ele associa nomes de domínio a endereços IP.</p>
+<p>Quando o usuário digita:</p>
+<div class="highlight"><pre><span></span><code>meucatalogomusical.com
+</code></pre></div>
+<p>o navegador precisa descobrir qual endereço IP corresponde a esse domínio.</p>
+<p>O usuário lembra nomes como:</p>
+<div class="highlight"><pre><span></span><code>meucatalogomusical.com
+</code></pre></div>
+<p>Mas os computadores se comunicam usando endereços IP.</p>
+<p>O DNS resolve essa diferença.</p>
+<h2 id="dns-direto-e-dns-reverso">DNS direto e DNS reverso</h2>
+<p>Existem dois conceitos importantes:</p>
+<ul>
+<li>DNS direto;</li>
+<li>DNS reverso.</li>
+</ul>
+<p>DNS direto é quando buscamos o endereço IP a partir de um nome de domínio.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>meucatalogomusical.com -&gt; 203.0.113.10
+</code></pre></div>
+<p>DNS reverso é quando buscamos o nome de domínio a partir de um endereço IP.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>203.0.113.10 -&gt; meucatalogomusical.com
+</code></pre></div>
+<p>Em termos simples:</p>
+<ul>
+<li>DNS direto: domínio para IP;</li>
+<li>DNS reverso: IP para domínio.</li>
+</ul>
+<h2 id="por-que-dns-importa-para-seguranca">Por que DNS importa para segurança?</h2>
+<p>DNS é uma parte essencial do caminho até a aplicação.</p>
+<p>Se o usuário for direcionado para o servidor errado, ele pode acabar acessando uma página falsa ou um serviço malicioso.</p>
+<p>DNS também aparece em várias atividades operacionais e de segurança, como:</p>
+<ul>
+<li>configuração de domínios;</li>
+<li>certificados TLS;</li>
+<li>validação de propriedade de domínio;</li>
+<li>investigação de incidentes;</li>
+<li>rastreamento de origem;</li>
+<li>configuração de ambientes;</li>
+<li>roteamento de tráfego;</li>
+<li>uso de CDN;</li>
+<li>proteção contra domínios falsos.</li>
+</ul>
+<p>Em ambientes corporativos, a segurança não termina no código da aplicação. O domínio, o certificado, o roteamento, os registros DNS e a infraestrutura também fazem parte da experiência segura do usuário.</p>
+<h2 id="ciclo-simplificado-de-uma-requisicao-http">Ciclo simplificado de uma requisição HTTP</h2>
+<p>Vamos imaginar o usuário acessando:</p>
+<div class="highlight"><pre><span></span><code>https://meucatalogomusical.com/bandas/motorhead
+</code></pre></div>
+<p>Um fluxo simplificado seria:</p>
+<ol>
+<li>O usuário digita a URL no navegador.</li>
+<li>O navegador consulta o DNS para descobrir o IP do domínio.</li>
+<li>O navegador estabelece conexão com o servidor.</li>
+<li>Como a URL usa HTTPS, ocorre uma negociação TLS.</li>
+<li>O navegador valida o certificado do servidor.</li>
+<li>O navegador envia uma requisição HTTP.</li>
+<li>O servidor processa a requisição.</li>
+<li>A aplicação consulta dados, se necessário.</li>
+<li>O servidor devolve uma resposta HTTP.</li>
+<li>O navegador renderiza o resultado.</li>
+</ol>
+<p>Cada etapa pode ter implicações de segurança.</p>
+<p>Se o DNS estiver incorreto, o usuário pode ir para o destino errado.</p>
+<p>Se o certificado TLS estiver inválido, a autenticidade do servidor fica comprometida.</p>
+<p>Se a requisição carregar dados sensíveis sem HTTPS, esses dados podem ser expostos.</p>
+<p>Se a sessão for mal protegida, um invasor pode tentar reutilizar identificadores de sessão.</p>
+<h2 id="sessoes-em-aplicacoes-web">Sessões em aplicações web</h2>
+<p>Como HTTP é sem estado, aplicações precisam de algum mecanismo para reconhecer o usuário entre múltiplas requisições.</p>
+<p>É aí que entram as sessões.</p>
+<p>Uma sessão representa um contexto temporário associado a um usuário ou cliente.</p>
+<p>Por exemplo, após fazer login em <code>meucatalogomusical.com</code>, o usuário pode navegar por várias páginas:</p>
+<div class="highlight"><pre><span></span><code>GET /minha-conta
+GET /minhas-bandas-favoritas
+POST /avaliacoes
+GET /meus-comentarios
+</code></pre></div>
+<p>A aplicação precisa saber que todas essas requisições pertencem ao mesmo usuário autenticado.</p>
+<h2 id="cookies-de-sessao">Cookies de sessão</h2>
+<p>Um dos mecanismos mais comuns para manter sessão é o cookie.</p>
+<p>O fluxo simplificado é:</p>
+<ol>
+<li>O usuário faz login.</li>
+<li>O servidor valida as credenciais.</li>
+<li>O servidor cria uma sessão ou emite um identificador.</li>
+<li>O servidor envia um cookie ao navegador.</li>
+<li>O navegador armazena esse cookie.</li>
+<li>Nas próximas requisições, o navegador envia o cookie automaticamente.</li>
+<li>O servidor usa o cookie para reconhecer a sessão.</li>
+</ol>
+<p>Exemplo conceitual de resposta:</p>
+<div class="highlight"><pre><span></span><code><span class="err">Set-Cookie: SESSION=abc123; Path=/; HttpOnly; Secure; SameSite=Lax</span>
+</code></pre></div>
+<p>Esse cookie pode representar a sessão do usuário.</p>
+<h2 id="atributos-importantes-de-cookies">Atributos importantes de cookies</h2>
+<p>Cookies de sessão precisam ser configurados com cuidado.</p>
+<p>Alguns atributos importantes são:</p>
+<ul>
+<li><code>HttpOnly</code>;</li>
+<li><code>Secure</code>;</li>
+<li><code>SameSite</code>;</li>
+<li><code>Path</code>;</li>
+<li><code>Domain</code>;</li>
+<li>tempo de expiração.</li>
+</ul>
+<h2 id="httponly">HttpOnly</h2>
+<p>O atributo <code>HttpOnly</code> impede que o cookie seja acessado diretamente por JavaScript no navegador.</p>
+<p>Isso é importante porque, em caso de vulnerabilidade XSS, o invasor teria mais dificuldade para ler o cookie de sessão via script.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="err">Set-Cookie: SESSION=abc123; HttpOnly</span>
+</code></pre></div>
+<p>Isso não elimina todos os riscos de XSS, mas reduz um impacto específico: o roubo direto do cookie por JavaScript.</p>
+<h2 id="secure">Secure</h2>
+<p>O atributo <code>Secure</code> instrui o navegador a enviar o cookie apenas por conexões HTTPS.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="err">Set-Cookie: SESSION=abc123; Secure</span>
+</code></pre></div>
+<p>Esse atributo ajuda a evitar que cookies sensíveis trafeguem em conexões HTTP sem criptografia.</p>
+<p>Em aplicações modernas, cookies de sessão devem usar <code>Secure</code> em produção.</p>
+<h2 id="samesite">SameSite</h2>
+<p>O atributo <code>SameSite</code> ajuda a controlar quando o navegador envia cookies em requisições cross-site.</p>
+<p>Valores comuns:</p>
+<ul>
+<li><code>Strict</code>;</li>
+<li><code>Lax</code>;</li>
+<li><code>None</code>.</li>
+</ul>
+<p>Esse atributo é importante para reduzir certos riscos envolvendo envio automático de cookies em contextos externos.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="err">Set-Cookie: SESSION=abc123; SameSite=Lax</span>
+</code></pre></div>
+<p>A escolha entre <code>Strict</code>, <code>Lax</code> e <code>None</code> depende do comportamento esperado da aplicação.</p>
+<h2 id="configuracao-de-sessao-em-spring-boot">Configuração de sessão em Spring Boot</h2>
+<p>Em uma aplicação Spring Boot, algumas configurações de cookie podem ser definidas no <code>application.yml</code>.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">server</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">servlet</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">session</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">cookie</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MEU_CATALOGO_SESSION</span>
+<span class="w">        </span><span class="nt">http-only</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">        </span><span class="nt">secure</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">        </span><span class="nt">same-site</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lax</span>
+</code></pre></div>
+<p>Essa configuração indica que o cookie de sessão:</p>
+<ul>
+<li>terá um nome específico;</li>
+<li>não deve ser acessível via JavaScript;</li>
+<li>deve trafegar apenas por HTTPS;</li>
+<li>terá política <code>SameSite=Lax</code>.</li>
+</ul>
+<p>Em produção, o atributo <code>secure: true</code> é especialmente importante porque cookies de sessão não devem trafegar por HTTP.</p>
+<h2 id="exemplo-de-controller-com-sessao">Exemplo de controller com sessão</h2>
+<p>Para fins didáticos, imagine que a aplicação permita armazenar uma preferência temporária de gênero musical na sessão do usuário.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.preferencias.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.http.HttpSession</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.*</span><span class="p">;</span>
+
+<span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/api/preferencias&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">PreferenciaController</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@PostMapping</span><span class="p">(</span><span class="s">&quot;/genero&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">definirGeneroPreferido</span><span class="p">(</span><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">genero</span><span class="p">,</span><span class="w"> </span><span class="n">HttpSession</span><span class="w"> </span><span class="n">session</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">session</span><span class="p">.</span><span class="na">setAttribute</span><span class="p">(</span><span class="s">&quot;generoPreferido&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">genero</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/genero&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">consultarGeneroPreferido</span><span class="p">(</span><span class="n">HttpSession</span><span class="w"> </span><span class="n">session</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Object</span><span class="w"> </span><span class="n">genero</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">session</span><span class="p">.</span><span class="na">getAttribute</span><span class="p">(</span><span class="s">&quot;generoPreferido&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">genero</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;Nenhum gênero preferido definido.&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">genero</span><span class="p">.</span><span class="na">toString</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse exemplo mostra como a sessão pode manter informação entre requisições.</p>
+<p>Porém, em aplicações reais, é preciso tomar cuidado com o que é armazenado na sessão. Não devemos guardar dados sensíveis desnecessariamente, objetos muito grandes ou informações que possam gerar inconsistência.</p>
+<h2 id="sessao-nao-substitui-autorizacao">Sessão não substitui autorização</h2>
+<p>Uma sessão autenticada não significa que o usuário pode fazer qualquer coisa.</p>
+<p>Depois de autenticar o usuário, a aplicação ainda precisa verificar autorização.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.admin.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.security.access.prepost.PreAuthorize</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.*</span><span class="p">;</span>
+
+<span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/api/admin/bandas&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">AdminBandaController</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">AdminBandaService</span><span class="w"> </span><span class="n">adminBandaService</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">AdminBandaController</span><span class="p">(</span><span class="n">AdminBandaService</span><span class="w"> </span><span class="n">adminBandaService</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">adminBandaService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">adminBandaService</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@DeleteMapping</span><span class="p">(</span><span class="s">&quot;/{id}&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nd">@PreAuthorize</span><span class="p">(</span><span class="s">&quot;hasRole(&#39;ADMIN&#39;)&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">excluir</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">adminBandaService</span><span class="p">.</span><span class="na">excluir</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Nesse exemplo, apenas usuários com papel <code>ADMIN</code> podem excluir uma banda.</p>
+<p>Isso reforça uma diferença importante:</p>
+<ul>
+<li>autenticação verifica quem é o usuário;</li>
+<li>autorização verifica o que ele pode fazer.</li>
+</ul>
+<h2 id="riscos-em-sessoes">Riscos em sessões</h2>
+<p>Sessões mal protegidas podem gerar vulnerabilidades sérias.</p>
+<p>Alguns riscos comuns são:</p>
+<ul>
+<li>roubo de cookie de sessão;</li>
+<li>sessão sem expiração adequada;</li>
+<li>cookie trafegando sem HTTPS;</li>
+<li>ausência de <code>HttpOnly</code>;</li>
+<li>ausência de <code>Secure</code>;</li>
+<li>sessão não invalidada após logout;</li>
+<li>sessão mantida por tempo excessivo;</li>
+<li>identificador previsível;</li>
+<li>reutilização de sessão após autenticação.</li>
+</ul>
+<p>Um cookie de sessão deve ser tratado como dado sensível. Se alguém obtém um identificador de sessão válido, pode tentar se passar pelo usuário.</p>
+<h2 id="logout-e-invalidacao-de-sessao">Logout e invalidação de sessão</h2>
+<p>Quando o usuário faz logout, a sessão precisa ser encerrada corretamente.</p>
+<p>Em aplicações com sessão no servidor, isso normalmente envolve invalidar a sessão.</p>
+<p>Exemplo didático:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.autenticacao.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.http.HttpSession</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.PostMapping</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
+
+<span class="nd">@RestController</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">LogoutController</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@PostMapping</span><span class="p">(</span><span class="s">&quot;/logout-manual&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">logout</span><span class="p">(</span><span class="n">HttpSession</span><span class="w"> </span><span class="n">session</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">session</span><span class="p">.</span><span class="na">invalidate</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Em projetos reais com Spring Security, normalmente usamos os mecanismos próprios do framework para logout, porque eles já integram limpeza de contexto de segurança, sessão e cookies conforme a configuração.</p>
+<h2 id="https">HTTPS</h2>
+<p>HTTPS significa Hypertext Transfer Protocol Secure.</p>
+<p>Ele é a versão segura do HTTP, usando TLS para proteger a comunicação entre cliente e servidor.</p>
+<p>Quando uma aplicação usa HTTPS, ela busca garantir:</p>
+<ul>
+<li>criptografia da comunicação;</li>
+<li>integridade dos dados em trânsito;</li>
+<li>autenticação do servidor por meio de certificado.</li>
+</ul>
+<p>Em termos simples, HTTPS ajuda a evitar que terceiros leiam ou alterem facilmente os dados trafegados entre navegador e servidor.</p>
+<h2 id="http-vs-https">HTTP vs HTTPS</h2>
+<p>HTTP sem TLS trafega sem criptografia.</p>
+<p>HTTPS usa TLS para proteger a comunicação.</p>
+<p>Exemplo de URL com HTTP:</p>
+<div class="highlight"><pre><span></span><code>http://meucatalogomusical.com
+</code></pre></div>
+<p>Exemplo de URL com HTTPS:</p>
+<div class="highlight"><pre><span></span><code>https://meucatalogomusical.com
+</code></pre></div>
+<p>Para aplicações modernas, especialmente aquelas que envolvem login, sessão, dados pessoais ou operações sensíveis, HTTPS é indispensável.</p>
+<h2 id="tls">TLS</h2>
+<p>TLS significa Transport Layer Security.</p>
+<p>Ele é o protocolo usado para proteger a comunicação no HTTPS.</p>
+<p>O TLS ajuda a garantir que:</p>
+<ul>
+<li>os dados trafeguem criptografados;</li>
+<li>o servidor seja autenticado por certificado;</li>
+<li>a comunicação não seja facilmente alterada no caminho.</li>
+</ul>
+<p>SSL foi um protocolo anterior ao TLS e hoje é considerado obsoleto. Em aplicações modernas, a configuração deve usar versões fortes de TLS, como TLS 1.2 e TLS 1.3, conforme compatibilidade e requisitos do ambiente.</p>
+<h2 id="certificado-digital">Certificado digital</h2>
+<p>Para usar HTTPS, o servidor precisa de um certificado digital.</p>
+<p>Esse certificado ajuda o navegador a verificar se o servidor acessado corresponde ao domínio esperado.</p>
+<p>Quando o usuário acessa:</p>
+<div class="highlight"><pre><span></span><code>https://meucatalogomusical.com
+</code></pre></div>
+<p>o navegador verifica o certificado apresentado pelo servidor.</p>
+<p>Se houver problema no certificado, o navegador pode exibir um alerta de segurança.</p>
+<p>Problemas comuns incluem:</p>
+<ul>
+<li>certificado expirado;</li>
+<li>certificado emitido para outro domínio;</li>
+<li>cadeia de confiança inválida;</li>
+<li>configuração incorreta;</li>
+<li>uso de protocolos ou algoritmos fracos.</li>
+</ul>
+<h2 id="https-protege-tudo">HTTPS protege tudo?</h2>
+<p>HTTPS é essencial, mas não resolve todos os problemas de segurança da aplicação.</p>
+<p>HTTPS protege os dados em trânsito entre cliente e servidor, mas não corrige, por exemplo:</p>
+<ul>
+<li>SQL Injection;</li>
+<li>XSS;</li>
+<li>autorização mal implementada;</li>
+<li>senha armazenada de forma insegura;</li>
+<li>regra de negócio vulnerável;</li>
+<li>exposição de dados em logs;</li>
+<li>dependências vulneráveis;</li>
+<li>erros de configuração;</li>
+<li>sessão mal gerenciada.</li>
+</ul>
+<p>Portanto, HTTPS é uma camada fundamental, mas não é a única camada de proteção.</p>
+<h2 id="cookies-seguros-com-https">Cookies seguros com HTTPS</h2>
+<p>Cookies de sessão devem ser combinados com HTTPS.</p>
+<p>Um cookie com atributo <code>Secure</code> só deve ser enviado em conexões HTTPS.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="err">Set-Cookie: MEU_CATALOGO_SESSION=abc123; HttpOnly; Secure; SameSite=Lax</span>
+</code></pre></div>
+<p>Esse tipo de configuração ajuda a proteger a sessão contra exposição em conexões não criptografadas.</p>
+<p>Em Spring Boot, a configuração poderia ser:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">server</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">servlet</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">session</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">cookie</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MEU_CATALOGO_SESSION</span>
+<span class="w">        </span><span class="nt">http-only</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">        </span><span class="nt">secure</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">        </span><span class="nt">same-site</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lax</span>
+</code></pre></div>
+<p>Além disso, em aplicações atrás de proxy, load balancer ou gateway, pode ser necessário configurar corretamente o reconhecimento de headers encaminhados, para que a aplicação entenda que a requisição original chegou por HTTPS.</p>
+<h2 id="exemplo-de-seguranca-no-spring-security">Exemplo de segurança no Spring Security</h2>
+<p>Uma configuração simples de segurança pode exigir autenticação para rotas privadas e permitir acesso público a rotas abertas.</p>
+<p>Exemplo didático:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.config</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.context.annotation.Bean</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.context.annotation.Configuration</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.security.config.annotation.web.builders.HttpSecurity</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.security.web.SecurityFilterChain</span><span class="p">;</span>
+
+<span class="nd">@Configuration</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SecurityConfig</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Bean</span>
+<span class="w">    </span><span class="n">SecurityFilterChain</span><span class="w"> </span><span class="nf">securityFilterChain</span><span class="p">(</span><span class="n">HttpSecurity</span><span class="w"> </span><span class="n">http</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">http</span>
+<span class="w">                </span><span class="p">.</span><span class="na">authorizeHttpRequests</span><span class="p">(</span><span class="n">authorize</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">authorize</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">requestMatchers</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/api/bandas/publicas/**&quot;</span><span class="p">).</span><span class="na">permitAll</span><span class="p">()</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">requestMatchers</span><span class="p">(</span><span class="s">&quot;/api/admin/**&quot;</span><span class="p">).</span><span class="na">hasRole</span><span class="p">(</span><span class="s">&quot;ADMIN&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">anyRequest</span><span class="p">().</span><span class="na">authenticated</span><span class="p">()</span>
+<span class="w">                </span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">formLogin</span><span class="p">(</span><span class="n">form</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">form</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">defaultSuccessUrl</span><span class="p">(</span><span class="s">&quot;/minha-conta&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span>
+<span class="w">                </span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">logout</span><span class="p">(</span><span class="n">logout</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">logout</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">logoutUrl</span><span class="p">(</span><span class="s">&quot;/logout&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">invalidateHttpSession</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">deleteCookies</span><span class="p">(</span><span class="s">&quot;MEU_CATALOGO_SESSION&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse exemplo mostra alguns pontos importantes:</p>
+<ul>
+<li>rotas públicas são permitidas;</li>
+<li>rotas administrativas exigem papel <code>ADMIN</code>;</li>
+<li>demais rotas exigem autenticação;</li>
+<li>logout invalida a sessão;</li>
+<li>logout remove o cookie de sessão.</li>
+</ul>
+<p>Esse código é didático. Uma aplicação real pode exigir mais configurações, como CSRF, política de CORS, autenticação via OAuth2/OpenID Connect, integração com provedor de identidade, configuração de headers e outros controles.</p>
+<h2 id="headers-de-seguranca">Headers de segurança</h2>
+<p>Além de HTTPS e cookies, aplicações web podem usar headers de segurança.</p>
+<p>Alguns exemplos são:</p>
+<ul>
+<li><code>Strict-Transport-Security</code>;</li>
+<li><code>Content-Security-Policy</code>;</li>
+<li><code>X-Content-Type-Options</code>;</li>
+<li><code>Referrer-Policy</code>;</li>
+<li><code>Frame-Options</code> ou diretivas equivalentes via CSP.</li>
+</ul>
+<p>Um header importante relacionado a HTTPS é o HSTS, representado por <code>Strict-Transport-Security</code>.</p>
+<p>Ele instrui o navegador a acessar o domínio apenas por HTTPS por determinado período.</p>
+<p>Exemplo conceitual:</p>
+<div class="highlight"><pre><span></span><code><span class="err">Strict-Transport-Security: max-age=31536000; includeSubDomains</span>
+</code></pre></div>
+<p>Esse header deve ser usado com cuidado, especialmente com <code>includeSubDomains</code>, porque uma configuração incorreta pode afetar todos os subdomínios.</p>
+<h2 id="dados-sensiveis-nao-devem-aparecer-em-urls">Dados sensíveis não devem aparecer em URLs</h2>
+<p>Como URLs podem ser armazenadas em histórico, logs e ferramentas intermediárias, evite colocar dados sensíveis nelas.</p>
+<p>Evite:</p>
+<div class="highlight"><pre><span></span><code>GET /login?email=usuario@example.com&amp;senha=123456
+</code></pre></div>
+<p>Prefira enviar credenciais no corpo de uma requisição apropriada e sempre sobre HTTPS.</p>
+<p>Mesmo assim, o backend precisa tomar cuidado para não registrar credenciais em logs.</p>
+<h2 id="cuidado-com-logs">Cuidado com logs</h2>
+<p>Logs são fundamentais para diagnóstico, auditoria e investigação de incidentes, mas também podem se tornar fonte de vazamento de dados.</p>
+<p>Evite registrar:</p>
+<ul>
+<li>senhas;</li>
+<li>tokens;</li>
+<li>cookies;</li>
+<li>dados pessoais desnecessários;</li>
+<li>números de documentos;</li>
+<li>segredos de API;</li>
+<li>headers sensíveis;</li>
+<li>payloads completos sem necessidade.</li>
+</ul>
+<p>Exemplo ruim:</p>
+<div class="highlight"><pre><span></span><code><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Tentativa de login: email={}, senha={}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">email</span><span class="p">,</span><span class="w"> </span><span class="n">senha</span><span class="p">);</span>
+</code></pre></div>
+<p>Exemplo melhor:</p>
+<div class="highlight"><pre><span></span><code><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Tentativa de login recebida para email={}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">mascararEmail</span><span class="p">(</span><span class="n">email</span><span class="p">));</span>
+</code></pre></div>
+<p>Com método auxiliar:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">mascararEmail</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">email</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">indiceArroba</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">email</span><span class="p">.</span><span class="na">indexOf</span><span class="p">(</span><span class="s">&quot;@&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">indiceArroba</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;***&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">email</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;***&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">email</span><span class="p">.</span><span class="na">substring</span><span class="p">(</span><span class="n">indiceArroba</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse tipo de cuidado reduz o risco de logs armazenarem dados sensíveis.</p>
+<h2 id="relacao-entre-http-sessao-e-seguranca">Relação entre HTTP, sessão e segurança</h2>
+<p>A relação entre esses conceitos pode ser resumida assim:</p>
+<ul>
+<li>HTTP permite a comunicação entre cliente e servidor.</li>
+<li>HTTP é sem estado.</li>
+<li>Sessões ajudam a manter contexto entre requisições.</li>
+<li>Cookies são frequentemente usados para identificar sessões.</li>
+<li>HTTPS protege a comunicação em trânsito.</li>
+<li>DNS permite localizar o servidor por meio de um domínio.</li>
+<li>Certificados ajudam a validar a identidade do servidor.</li>
+<li>Configurações incorretas podem comprometer a segurança.</li>
+</ul>
+<p>Esses elementos formam a base da segurança web.</p>
+<h2 id="exemplo-completo-fluxo-de-login-em-uma-aplicacao-web">Exemplo completo: fluxo de login em uma aplicação web</h2>
+<p>Imagine o fluxo de login em <code>meucatalogomusical.com</code>.</p>
+<ol>
+<li>O usuário acessa:</li>
+</ol>
+<div class="highlight"><pre><span></span><code>https://meucatalogomusical.com/login
+</code></pre></div>
+<ol>
+<li>
+<p>O DNS resolve o domínio para um endereço IP.</p>
+</li>
+<li>
+<p>O navegador estabelece conexão HTTPS.</p>
+</li>
+<li>
+<p>O usuário envia e-mail e senha via <code>POST</code>.</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="nf">POST</span> <span class="nn">/login</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">meucatalogomusical.com</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/x-www-form-urlencoded</span>
+</code></pre></div>
+<ol>
+<li>
+<p>O servidor valida as credenciais.</p>
+</li>
+<li>
+<p>Se estiver correto, o servidor cria uma sessão.</p>
+</li>
+<li>
+<p>O servidor envia um cookie de sessão.</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="err">Set-Cookie: MEU_CATALOGO_SESSION=abc123; HttpOnly; Secure; SameSite=Lax</span>
+</code></pre></div>
+<ol>
+<li>Nas próximas requisições, o navegador envia o cookie.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="nf">GET</span> <span class="nn">/minha-conta</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">meucatalogomusical.com</span>
+<span class="na">Cookie</span><span class="o">:</span> <span class="l">MEU_CATALOGO_SESSION=abc123</span>
+</code></pre></div>
+<ol>
+<li>
+<p>O servidor reconhece o usuário pela sessão.</p>
+</li>
+<li>
+<p>A aplicação aplica autorização para decidir o que aquele usuário pode acessar.</p>
+</li>
+</ol>
+<p>Esse fluxo mostra como HTTP, HTTPS, cookie, sessão, autenticação e autorização trabalham juntos.</p>
+<h2 id="boas-praticas">Boas práticas</h2>
+<p>Algumas boas práticas importantes:</p>
+<ul>
+<li>usar HTTPS em produção;</li>
+<li>evitar dados sensíveis em URLs;</li>
+<li>usar <code>GET</code> para leitura;</li>
+<li>usar <code>POST</code>, <code>PUT</code>, <code>PATCH</code> ou <code>DELETE</code> conforme a intenção da operação;</li>
+<li>configurar cookies de sessão com <code>HttpOnly</code>;</li>
+<li>configurar cookies de sessão com <code>Secure</code>;</li>
+<li>avaliar corretamente o uso de <code>SameSite</code>;</li>
+<li>invalidar sessão no logout;</li>
+<li>aplicar expiração adequada de sessão;</li>
+<li>não armazenar dados sensíveis desnecessários na sessão;</li>
+<li>validar entrada no backend;</li>
+<li>aplicar autorização em endpoints sensíveis;</li>
+<li>não expor detalhes internos em erros;</li>
+<li>evitar logs com credenciais, tokens e cookies;</li>
+<li>manter TLS e certificados bem configurados.</li>
+</ul>
+<h2 id="checklist-de-revisao">Checklist de revisão</h2>
+<p>Use este checklist ao revisar uma aplicação web.</p>
+<h3 id="http">HTTP</h3>
+<ul>
+<li>Os métodos HTTP representam corretamente a intenção da operação?</li>
+<li>Operações de leitura usam <code>GET</code>?</li>
+<li>Operações que alteram estado evitam <code>GET</code>?</li>
+<li>Dados sensíveis ficam fora da URL?</li>
+<li>Códigos de status são usados corretamente?</li>
+</ul>
+<h3 id="dns-e-dominio">DNS e domínio</h3>
+<ul>
+<li>O domínio aponta para o ambiente correto?</li>
+<li>Subdomínios antigos foram removidos ou protegidos?</li>
+<li>O certificado cobre o domínio correto?</li>
+<li>Ambientes de teste não expõem dados reais?</li>
+<li>Registros DNS estão documentados?</li>
+</ul>
+<h3 id="sessao">Sessão</h3>
+<ul>
+<li>Cookies de sessão usam <code>HttpOnly</code>?</li>
+<li>Cookies de sessão usam <code>Secure</code>?</li>
+<li>A política <code>SameSite</code> foi avaliada?</li>
+<li>A sessão expira após tempo adequado?</li>
+<li>O logout invalida a sessão?</li>
+<li>A aplicação evita armazenar dados sensíveis desnecessários na sessão?</li>
+</ul>
+<h3 id="httpstls">HTTPS/TLS</h3>
+<ul>
+<li>A aplicação usa HTTPS em produção?</li>
+<li>HTTP redireciona para HTTPS?</li>
+<li>Certificados são válidos e monitorados?</li>
+<li>Protocolos antigos foram desativados?</li>
+<li>HSTS foi avaliado?</li>
+<li>Cookies sensíveis só trafegam por HTTPS?</li>
+</ul>
+<h3 id="logs">Logs</h3>
+<ul>
+<li>Senhas não são registradas?</li>
+<li>Tokens não são registrados?</li>
+<li>Cookies não são registrados?</li>
+<li>Dados pessoais são mascarados quando possível?</li>
+<li>Logs possuem informação suficiente para investigação sem expor dados sensíveis?</li>
+</ul>
+<h2 id="resumo">Resumo</h2>
+<p>HTTP, DNS, sessões e HTTPS são fundamentos essenciais para entender segurança web.</p>
+<p>O HTTP permite a comunicação entre cliente e servidor, mas é sem estado. Por isso, aplicações usam sessões e cookies para manter contexto entre requisições. O DNS permite que nomes de domínio sejam traduzidos para endereços IP. O HTTPS, por meio do TLS, protege a comunicação contra leitura e alteração indevida durante o tráfego.</p>
+<p>Os principais pontos deste artigo foram:</p>
+<ul>
+<li>HTTP funciona no modelo cliente-servidor;</li>
+<li>HTTP é sem estado;</li>
+<li><code>GET</code> deve ser usado para leitura;</li>
+<li><code>POST</code> é usado para envio de dados e criação de recursos;</li>
+<li>dados sensíveis não devem ir na URL;</li>
+<li>DNS associa nomes de domínio a endereços IP;</li>
+<li>DNS direto descobre o IP a partir do domínio;</li>
+<li>DNS reverso descobre o domínio a partir do IP;</li>
+<li>sessões permitem manter contexto entre requisições;</li>
+<li>cookies de sessão devem ser protegidos;</li>
+<li><code>HttpOnly</code>, <code>Secure</code> e <code>SameSite</code> são atributos importantes;</li>
+<li>HTTPS usa TLS para proteger a comunicação;</li>
+<li>HTTPS é essencial, mas não substitui validação, autenticação, autorização e boas práticas de código.</li>
+</ul>
+<p>Esses conceitos serão fundamentais para entender os próximos temas: SQL Injection, Cross-Site Scripting, DAST, conformidade e segurança no ciclo de desenvolvimento.</p>
+<h2 id="perguntas-de-revisao">Perguntas de revisão</h2>
+<h3 id="1-o-que-e-http">1. O que é HTTP?</h3>
+<p>HTTP é o protocolo usado para troca de dados na web. Ele permite que clientes, como navegadores, façam requisições para servidores e recebam respostas.</p>
+<h3 id="2-o-que-significa-dizer-que-http-e-sem-estado">2. O que significa dizer que HTTP é sem estado?</h3>
+<p>Significa que cada requisição é independente. O servidor não lembra automaticamente das requisições anteriores apenas por causa do protocolo HTTP.</p>
+<h3 id="3-por-que-sessoes-sao-necessarias-em-aplicacoes-web">3. Por que sessões são necessárias em aplicações web?</h3>
+<p>Porque aplicações precisam reconhecer o mesmo usuário entre várias requisições, especialmente após login. Como HTTP é sem estado, sessões ajudam a manter esse contexto.</p>
+<h3 id="4-qual-e-a-diferenca-entre-get-e-post">4. Qual é a diferença entre GET e POST?</h3>
+<p><code>GET</code> é usado para solicitar dados de um recurso. <code>POST</code> é usado para enviar dados ao servidor, criar recursos ou iniciar operações.</p>
+<h3 id="5-get-e-mais-seguro-que-post">5. GET é mais seguro que POST?</h3>
+<p>Não. Na verdade, dados em <code>GET</code> aparecem na URL e podem ser mais facilmente expostos em histórico e logs. Porém, <code>POST</code> também não é seguro sozinho. A segurança depende de HTTPS, validação, autenticação, autorização e configuração adequada.</p>
+<h3 id="6-por-que-nao-devemos-enviar-senhas-pela-url">6. Por que não devemos enviar senhas pela URL?</h3>
+<p>Porque URLs podem aparecer em histórico do navegador, logs, ferramentas de monitoramento, proxies e outros registros intermediários.</p>
+<h3 id="7-o-que-e-dns">7. O que é DNS?</h3>
+<p>DNS é o sistema que associa nomes de domínio a endereços IP. Ele funciona como uma lista telefônica da internet.</p>
+<h3 id="8-qual-e-a-diferenca-entre-dns-direto-e-dns-reverso">8. Qual é a diferença entre DNS direto e DNS reverso?</h3>
+<p>DNS direto descobre o endereço IP a partir de um domínio. DNS reverso descobre o nome de domínio a partir de um endereço IP.</p>
+<h3 id="9-o-que-e-https">9. O que é HTTPS?</h3>
+<p>HTTPS é a versão segura do HTTP. Ele usa TLS para criptografar a comunicação, proteger a integridade dos dados e ajudar a autenticar o servidor.</p>
+<h3 id="10-https-resolve-todos-os-problemas-de-seguranca">10. HTTPS resolve todos os problemas de segurança?</h3>
+<p>Não. HTTPS protege dados em trânsito, mas não corrige falhas como SQL Injection, XSS, autorização incorreta, logs inseguros ou dependências vulneráveis.</p>
+<h3 id="11-o-que-faz-o-atributo-httponly-em-um-cookie">11. O que faz o atributo HttpOnly em um cookie?</h3>
+<p><code>HttpOnly</code> impede que o cookie seja acessado diretamente por JavaScript no navegador.</p>
+<h3 id="12-o-que-faz-o-atributo-secure-em-um-cookie">12. O que faz o atributo Secure em um cookie?</h3>
+<p><code>Secure</code> instrui o navegador a enviar o cookie apenas por conexões HTTPS.</p>
+<h3 id="13-o-que-faz-o-atributo-samesite-em-um-cookie">13. O que faz o atributo SameSite em um cookie?</h3>
+<p><code>SameSite</code> ajuda a controlar quando cookies são enviados em requisições cross-site, reduzindo certos riscos associados ao envio automático de cookies.</p>
+<h3 id="14-o-que-deve-acontecer-no-logout">14. O que deve acontecer no logout?</h3>
+<p>A aplicação deve encerrar a sessão, limpar o contexto de autenticação quando aplicável e remover ou invalidar cookies de sessão.</p>
+<h3 id="15-por-que-logs-podem-ser-um-risco-de-seguranca">15. Por que logs podem ser um risco de segurança?</h3>
+<p>Porque logs podem armazenar dados sensíveis, como senhas, tokens, cookies e informações pessoais, caso a aplicação registre dados sem cuidado.</p>
+<h2 id="referencias">Referências</h2>
+<ul>
+<li>MDN Web Docs — Overview of HTTP.</li>
+<li>MDN Web Docs — HTTP.</li>
+<li>IETF — RFC 9110: HTTP Semantics.</li>
+<li>OWASP Cheat Sheet Series — Session Management Cheat Sheet.</li>
+<li>OWASP Cheat Sheet Series — Transport Layer Security Cheat Sheet.</li>
+<li>Oracle — JDK 25 Documentation.</li>
+<li>Oracle — Java SE Downloads.</li>
+<li>Spring Boot Reference Documentation.</li>
+<li>Spring Security Reference Documentation.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

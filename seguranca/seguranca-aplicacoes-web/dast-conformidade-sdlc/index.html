@@ -1,0 +1,4299 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../xss/">
+      
+      
+        <link rel="next" href="../sast-source-sink-taint-flow-falso-positivo/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>DAST, Conformidade e Segurança no Ciclo de Desenvolvimento - README</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/css/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dast-conformidade-e-seguranca-no-ciclo-de-desenvolvimento" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../../.." title="README" class="md-header__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            README
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DAST, Conformidade e Segurança no Ciclo de Desenvolvimento
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="README" class="md-nav__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    README
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Backend
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/fundamentos-da-linguagem-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/convencoes-de-codigo-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convenções de código em Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/variaveis-tipos-primitivos-operadores-conversoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variáveis, tipos primitivos, operadores e conversões
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/fundamentos-de-string/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de String
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-controle-operadores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de controle e operadores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-condicionais/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas condicionais
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-de-repeticao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de repetição
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Iniciando em Orientação a Objetos (POO)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Iniciando em Orientação a Objetos (POO)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/introducao-orientacao-a-objetos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução à POO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/classes-e-objetos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes e objetos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/classes-objetos-metodos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes, objetos e métodos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Spring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/api-rest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    O que é API REST?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/http/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Um pouco de HTTP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/por-que-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Por que escolher Spring?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/spring-boot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Boot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/spring-initializr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Initializr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/maven-pom/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maven e pom.xml
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Segurança
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Segurança
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Segurança em aplicações web
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Segurança em aplicações web
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introducao-seguranca-aplicacoes-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução à Segurança de Aplicações Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../http-dns-sessoes-https/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTTP, DNS, Sessões e HTTPS na Segurança Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sql-injection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Injection - Funcionamento, Impactos e Prevenção
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xss/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cross-Site Scripting (XSS)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DAST, Conformidade e Segurança no Ciclo de Desenvolvimento
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DAST, Conformidade e Segurança no Ciclo de Desenvolvimento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-problema-real-que-esse-conceito-resolve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O problema real que esse conceito resolve
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-nos-detalhes-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar nos detalhes: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica-de-dast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica de DAST
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dast-nao-e-a-mesma-coisa-que-sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DAST não é a mesma coisa que SAST
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-dast-funciona-na-pratica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como DAST funciona na prática
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-autorizacao-em-spring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de autorização em Spring
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-auditoria-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de auditoria simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seguranca-nos-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Segurança nos testes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seguranca-no-build-e-cicd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Segurança no build e CI/CD
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preparando-a-aplicacao-para-ser-testavel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Preparando a aplicação para ser testável
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ambientes-e-dados-de-teste" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ambientes e dados de teste
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conformidade-nao-e-a-mesma-coisa-que-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conformidade não é a mesma coisa que segurança
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pci-dss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PCI DSS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gdpr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GDPR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conformidade-no-desenvolvimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conformidade no desenvolvimento
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#asvs-como-guia-de-requisitos-verificaveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ASVS como guia de requisitos verificáveis
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#samm-e-maturidade-de-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SAMM e maturidade de segurança
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seguranca-em-pull-requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Segurança em pull requests
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-checklist-no-pull-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de checklist no pull request
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checklist-de-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist de segurança
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seguranca-e-dependencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Segurança e dependências
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-fazer-com-achados-de-dast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que fazer com achados de DAST?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#priorizacao-de-vulnerabilidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Priorização de vulnerabilidades
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metricas-uteis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métricas úteis
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-usar-dast-apenas-no-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Usar DAST apenas no final
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-ignorar-falsos-positivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Ignorar falsos positivos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-achar-que-ausencia-de-alerta-significa-aplicacao-segura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Achar que ausência de alerta significa aplicação segura
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-rodar-testes-em-ambiente-errado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Rodar testes em ambiente errado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-confundir-conformidade-com-seguranca-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Confundir conformidade com segurança real
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-criar-checklist-burocratico-demais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Criar checklist burocrático demais
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-nao-envolver-desenvolvedores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Não envolver desenvolvedores
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-nao-corrigir-causa-raiz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Não corrigir causa raiz
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-nao-medir-reincidencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Não medir reincidência
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-usar-dados-reais-em-ambiente-de-teste" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Usar dados reais em ambiente de teste
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decisões de engenharia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-dast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar DAST?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-evitar-dast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando evitar DAST?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-asvs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar ASVS?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-samm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar SAMM?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-conformidade-deve-entrar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando conformidade deve entrar?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checklist-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist prático
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Checklist prático">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requisitos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requisitos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deploy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deploy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operação
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Perguntas de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-o-que-e-dast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. O que é DAST?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-qual-e-a-diferenca-entre-dast-e-sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Qual é a diferença entre DAST e SAST?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-dast-encontra-todos-os-problemas-de-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. DAST encontra todos os problemas de segurança?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-onde-dast-deve-ser-executado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Onde DAST deve ser executado?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-por-que-nao-e-ideal-rodar-dast-sem-escopo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Por que não é ideal rodar DAST sem escopo?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-o-que-e-conformidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. O que é conformidade?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-conformidade-e-igual-a-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Conformidade é igual a segurança?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-o-que-e-pci-dss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. O que é PCI DSS?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-o-que-e-gdpr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. O que é GDPR?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-o-que-e-asvs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. O que é ASVS?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-o-que-e-samm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. O que é SAMM?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-seguranca-deve-entrar-em-qual-fase-do-desenvolvimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Segurança deve entrar em qual fase do desenvolvimento?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-por-que-pull-requests-sao-importantes-para-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Por que pull requests são importantes para segurança?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-o-que-fazer-com-falsos-positivos-de-ferramentas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. O que fazer com falsos positivos de ferramentas?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-por-que-dados-reais-devem-ser-evitados-em-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Por que dados reais devem ser evitados em testes?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sast-source-sink-taint-flow-falso-positivo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SAST na prática - Source, Sink, Taint Flow e falso positivo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssrf-aplicacoes-java-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSRF em aplicações Java/Spring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cleartext-submission-integracoes-server-to-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cleartext Submission em integrações server-to-server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../privacy-violation-credenciais-logs-respostas-parceiros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Privacy Violation - credenciais, logs e respostas de parceiros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../path-traversal-upload-download-seguro-arquivos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Path Traversal e upload/download seguro de arquivos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unchecked-input-loop-condition-dos-processamento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unchecked Input for Loop Condition e prevenção de DoS por processamento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../headers-seguranca-hsts-json-nosniff/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Headers de segurança- HSTS, JSON explícito e nosniff
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sca-dependencias-vulneraveis-cves-gestao-bibliotecas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SCA na prática - dependências vulneráveis, CVEs e gestão de bibliotecas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../triagem-vulnerabilidades-corrigir-mitigar-not-exploitable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Triagem de vulnerabilidades - corrigir, mitigar ou marcar como Not Exploitable
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ferramentas-appsec-sast-sca-dast/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ferramentas de AppSec - como SAST, SCA e DAST encontram vulnerabilidades
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-problema-real-que-esse-conceito-resolve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O problema real que esse conceito resolve
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-nos-detalhes-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar nos detalhes: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica-de-dast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica de DAST
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dast-nao-e-a-mesma-coisa-que-sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DAST não é a mesma coisa que SAST
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-dast-funciona-na-pratica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como DAST funciona na prática
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-autorizacao-em-spring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de autorização em Spring
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-auditoria-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de auditoria simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seguranca-nos-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Segurança nos testes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seguranca-no-build-e-cicd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Segurança no build e CI/CD
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preparando-a-aplicacao-para-ser-testavel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Preparando a aplicação para ser testável
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ambientes-e-dados-de-teste" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ambientes e dados de teste
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conformidade-nao-e-a-mesma-coisa-que-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conformidade não é a mesma coisa que segurança
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pci-dss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PCI DSS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gdpr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GDPR
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conformidade-no-desenvolvimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conformidade no desenvolvimento
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#asvs-como-guia-de-requisitos-verificaveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ASVS como guia de requisitos verificáveis
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#samm-e-maturidade-de-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SAMM e maturidade de segurança
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seguranca-em-pull-requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Segurança em pull requests
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-checklist-no-pull-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de checklist no pull request
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checklist-de-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist de segurança
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seguranca-e-dependencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Segurança e dependências
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-fazer-com-achados-de-dast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que fazer com achados de DAST?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#priorizacao-de-vulnerabilidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Priorização de vulnerabilidades
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metricas-uteis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métricas úteis
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-usar-dast-apenas-no-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Usar DAST apenas no final
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-ignorar-falsos-positivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Ignorar falsos positivos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-achar-que-ausencia-de-alerta-significa-aplicacao-segura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Achar que ausência de alerta significa aplicação segura
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-rodar-testes-em-ambiente-errado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Rodar testes em ambiente errado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-confundir-conformidade-com-seguranca-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Confundir conformidade com segurança real
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-criar-checklist-burocratico-demais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Criar checklist burocrático demais
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-nao-envolver-desenvolvedores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Não envolver desenvolvedores
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-nao-corrigir-causa-raiz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Não corrigir causa raiz
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-nao-medir-reincidencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Não medir reincidência
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-usar-dados-reais-em-ambiente-de-teste" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Usar dados reais em ambiente de teste
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decisões de engenharia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-dast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar DAST?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-evitar-dast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando evitar DAST?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-asvs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar ASVS?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-samm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar SAMM?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-conformidade-deve-entrar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando conformidade deve entrar?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checklist-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist prático
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Checklist prático">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requisitos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requisitos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Design
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deploy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deploy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operação
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Perguntas de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-o-que-e-dast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. O que é DAST?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-qual-e-a-diferenca-entre-dast-e-sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Qual é a diferença entre DAST e SAST?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-dast-encontra-todos-os-problemas-de-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. DAST encontra todos os problemas de segurança?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-onde-dast-deve-ser-executado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Onde DAST deve ser executado?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-por-que-nao-e-ideal-rodar-dast-sem-escopo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Por que não é ideal rodar DAST sem escopo?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-o-que-e-conformidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. O que é conformidade?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-conformidade-e-igual-a-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Conformidade é igual a segurança?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-o-que-e-pci-dss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. O que é PCI DSS?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-o-que-e-gdpr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. O que é GDPR?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-o-que-e-asvs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. O que é ASVS?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-o-que-e-samm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. O que é SAMM?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-seguranca-deve-entrar-em-qual-fase-do-desenvolvimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Segurança deve entrar em qual fase do desenvolvimento?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-por-que-pull-requests-sao-importantes-para-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Por que pull requests são importantes para segurança?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-o-que-fazer-com-falsos-positivos-de-ferramentas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. O que fazer com falsos positivos de ferramentas?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-por-que-dados-reais-devem-ser-evitados-em-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Por que dados reais devem ser evitados em testes?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dast-conformidade-e-seguranca-no-ciclo-de-desenvolvimento">DAST, Conformidade e Segurança no Ciclo de Desenvolvimento</h1>
+<p>Nos artigos anteriores, estudamos os fundamentos da segurança de aplicações web, HTTP, DNS, sessões, HTTPS, SQL Injection e Cross-Site Scripting. Agora vamos fechar a série olhando para um ponto essencial: como transformar segurança em prática contínua dentro do desenvolvimento de software.</p>
+<p>Uma aplicação segura não nasce apenas de uma boa configuração isolada ou de uma correção feita no final do projeto. Segurança precisa aparecer em requisitos, design, implementação, testes, revisão, deploy, monitoramento e evolução.</p>
+<p>É nesse contexto que entram três temas importantes:</p>
+<ul>
+<li>DAST;</li>
+<li>conformidade;</li>
+<li>segurança no ciclo de desenvolvimento.</li>
+</ul>
+<p>DAST ajuda a encontrar vulnerabilidades observando a aplicação em execução. Conformidade ajuda a alinhar a aplicação a normas, regulamentações e obrigações externas. Segurança no ciclo de desenvolvimento ajuda a transformar proteção em processo contínuo, não em ação emergencial.</p>
+<p>Imagine a aplicação fictícia <code>meucatalogomusical.com</code>, um catálogo musical com bandas de Metal, Hard Rock e Rock Progressivo. Ela possui cadastro de usuários, login, comentários, avaliações, área administrativa e APIs públicas. Mesmo que o domínio seja musical, a aplicação ainda lida com dados, permissões, sessões, logs, integrações e entradas externas.</p>
+<p>Se segurança for lembrada apenas perto do deploy, muitos problemas já podem estar espalhados pelo código, arquitetura e configuração. O ideal é que segurança acompanhe todo o ciclo de vida da aplicação.</p>
+<h2 id="o-problema-real-que-esse-conceito-resolve">O problema real que esse conceito resolve</h2>
+<p>O problema real é que vulnerabilidades não aparecem apenas porque alguém “esqueceu uma validação”.</p>
+<p>Elas surgem por vários motivos:</p>
+<ul>
+<li>requisitos incompletos;</li>
+<li>regras de autorização mal definidas;</li>
+<li>falta de validação de entrada;</li>
+<li>uso incorreto de frameworks;</li>
+<li>dependências vulneráveis;</li>
+<li>configurações inseguras;</li>
+<li>logs expondo dados sensíveis;</li>
+<li>ausência de testes de segurança;</li>
+<li>desconhecimento de riscos;</li>
+<li>pressão por entrega;</li>
+<li>falta de revisão;</li>
+<li>ambientes diferentes entre desenvolvimento e produção.</li>
+</ul>
+<p>Se o time trata segurança apenas como uma etapa final, os problemas são descobertos tarde, quando a correção é mais cara, arriscada e demorada.</p>
+<p>DAST, conformidade e práticas de ciclo de desenvolvimento seguro ajudam a resolver esse problema trazendo segurança para dentro do fluxo normal de engenharia.</p>
+<p>A ideia principal é:</p>
+<blockquote>
+<p>Segurança deve ser parte do processo de construir software, não apenas uma inspeção no final.</p>
+</blockquote>
+<h2 id="antes-de-entrar-nos-detalhes-uma-ideia-simples">Antes de entrar nos detalhes: uma ideia simples</h2>
+<p>Pense no desenvolvimento de uma nova funcionalidade em <code>meucatalogomusical.com</code>: uma página para usuários avaliarem álbuns da banda Angra.</p>
+<p>Um fluxo inseguro seria:</p>
+<ol>
+<li>implementar a funcionalidade;</li>
+<li>testar apenas se funciona;</li>
+<li>publicar;</li>
+<li>esperar que nenhum problema aconteça;</li>
+<li>corrigir vulnerabilidades apenas quando alguém reportar.</li>
+</ol>
+<p>Um fluxo melhor seria:</p>
+<ol>
+<li>entender quais dados serão recebidos;</li>
+<li>definir quem pode avaliar;</li>
+<li>validar entradas;</li>
+<li>proteger contra abuso;</li>
+<li>revisar autorização;</li>
+<li>criar testes automatizados;</li>
+<li>executar análise de segurança;</li>
+<li>testar a aplicação em execução;</li>
+<li>revisar logs e configurações;</li>
+<li>monitorar produção.</li>
+</ol>
+<p>DAST entra principalmente na etapa em que a aplicação já está em execução em um ambiente controlado. Ele não substitui boas práticas de código, mas ajuda a encontrar problemas observáveis externamente.</p>
+<p>Conformidade entra como um conjunto de requisitos e evidências que demonstram que a organização segue determinados padrões.</p>
+<p>O ciclo de desenvolvimento seguro une tudo isso em um processo contínuo.</p>
+<h2 id="definicao-tecnica-de-dast">Definição técnica de DAST</h2>
+<p>DAST significa Dynamic Application Security Testing, ou Teste Dinâmico de Segurança de Aplicações.</p>
+<p>É uma abordagem de teste que avalia uma aplicação em execução, observando seu comportamento a partir de fora.</p>
+<p>Em vez de analisar diretamente o código-fonte, o DAST interage com a aplicação por meio de suas interfaces expostas, como:</p>
+<ul>
+<li>páginas web;</li>
+<li>formulários;</li>
+<li>endpoints REST;</li>
+<li>autenticação;</li>
+<li>parâmetros de URL;</li>
+<li>headers HTTP;</li>
+<li>cookies;</li>
+<li>respostas do servidor;</li>
+<li>redirecionamentos;</li>
+<li>mensagens de erro.</li>
+</ul>
+<p>A ideia é testar a aplicação de uma forma parecida com o que um cliente externo conseguiria observar.</p>
+<p>Importante: neste artigo, o foco é defensivo. DAST deve ser usado em aplicações próprias, ambientes autorizados e pipelines controlados.</p>
+<h2 id="dast-nao-e-a-mesma-coisa-que-sast">DAST não é a mesma coisa que SAST</h2>
+<p>É comum comparar DAST com SAST.</p>
+<p>SAST significa Static Application Security Testing. Ele analisa código-fonte, bytecode ou artefatos sem precisar executar a aplicação.</p>
+<p>DAST analisa a aplicação rodando.</p>
+<p>Comparação simples:</p>
+<table>
+<thead>
+<tr>
+<th>Abordagem</th>
+<th>O que analisa</th>
+<th>Quando costuma ser usada</th>
+<th>O que encontra melhor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SAST</td>
+<td>Código ou artefatos</td>
+<td>Durante desenvolvimento e build</td>
+<td>Padrões inseguros no código</td>
+</tr>
+<tr>
+<td>DAST</td>
+<td>Aplicação em execução</td>
+<td>Ambiente de teste, homologação ou staging</td>
+<td>Falhas observáveis externamente</td>
+</tr>
+<tr>
+<td>Revisão manual</td>
+<td>Código, arquitetura e regra de negócio</td>
+<td>Durante desenvolvimento e revisão</td>
+<td>Problemas de contexto e negócio</td>
+</tr>
+<tr>
+<td>Testes automatizados</td>
+<td>Comportamento esperado</td>
+<td>Durante CI/CD</td>
+<td>Regressões e regras específicas</td>
+</tr>
+<tr>
+<td>Pentest autorizado</td>
+<td>Sistema em escopo definido</td>
+<td>Validações periódicas</td>
+<td>Combinações de falhas e risco real</td>
+</tr>
+</tbody>
+</table>
+<p>Nenhuma abordagem resolve tudo sozinha.</p>
+<p>O ideal é combinar várias técnicas.</p>
+<h2 id="como-dast-funciona-na-pratica">Como DAST funciona na prática</h2>
+<p>Um teste DAST normalmente segue uma ideia parecida com esta:</p>
+<ol>
+<li>a aplicação sobe em um ambiente controlado;</li>
+<li>a ferramenta recebe uma URL base;</li>
+<li>a ferramenta navega ou interage com a aplicação;</li>
+<li>ela identifica páginas, links, formulários e endpoints;</li>
+<li>executa verificações de segurança;</li>
+<li>observa respostas, códigos HTTP, headers e comportamentos;</li>
+<li>gera um relatório de possíveis vulnerabilidades;</li>
+<li>o time analisa os achados;</li>
+<li>falsos positivos são descartados;</li>
+<li>problemas reais entram no backlog de correção.</li>
+</ol>
+<p>Exemplo de ambiente controlado:</p>
+<p>```text id="qv4z6c"
+https://staging.meucatalogomusical.com
+<div class="highlight"><pre><span></span><code>Esse ambiente deve representar produção o suficiente para que o teste seja útil, mas sem expor dados reais desnecessários.
+
+## O que DAST pode ajudar a encontrar
+
+DAST pode ajudar a detectar problemas como:
+
+* ausência de headers de segurança;
+* mensagens de erro detalhadas;
+* cookies sem atributos adequados;
+* problemas simples de autenticação;
+* problemas de configuração;
+* endpoints expostos indevidamente;
+* falhas de validação observáveis;
+* comportamentos suspeitos em formulários;
+* riscos comuns em páginas e APIs.
+
+Ele também pode ajudar a apontar possíveis riscos relacionados a vulnerabilidades como SQL Injection e XSS, mas os achados precisam ser revisados por pessoas do time.
+
+DAST gera indícios. Nem todo alerta é automaticamente uma vulnerabilidade real, e nem toda ausência de alerta significa que a aplicação está segura.
+
+## Limitações do DAST
+
+DAST é útil, mas possui limitações.
+
+Ele pode não entender:
+
+* regra de negócio;
+* autorização complexa;
+* fluxos internos;
+* validações específicas do domínio;
+* eventos assíncronos;
+* mensageria;
+* processamento em lote;
+* decisões arquiteturais;
+* permissões contextuais;
+* vulnerabilidades que exigem estado específico.
+
+Por exemplo, em `meucatalogomusical.com`, uma ferramenta DAST pode acessar a tela de avaliações. Mas ela talvez não saiba que apenas usuários que compraram ingresso para um show deveriam avaliar aquele show, caso essa fosse uma regra de negócio.
+
+Esse tipo de regra exige testes específicos, revisão de código e entendimento do domínio.
+
+## DAST deve ser usado em ambiente autorizado
+
+DAST interage ativamente com uma aplicação em execução. Por isso, deve ser usado apenas em ambientes autorizados.
+
+Não se deve apontar ferramentas de DAST para sistemas de terceiros sem permissão.
+
+Em um fluxo profissional, o escopo deve estar claro:
+
+* qual ambiente será testado;
+* quais domínios podem ser acessados;
+* quais credenciais de teste serão usadas;
+* quais dados são fictícios;
+* quais horários são adequados;
+* quem receberá alertas;
+* como lidar com falso positivo;
+* como priorizar correções.
+
+Essa organização evita impacto operacional e mantém o uso da ferramenta dentro de um contexto ético e controlado.
+
+## Segurança no ciclo de desenvolvimento
+
+Segurança no ciclo de desenvolvimento significa integrar práticas de segurança em todas as etapas do SDLC.
+
+SDLC significa Software Development Life Cycle, ou ciclo de vida de desenvolvimento de software.
+
+Um ciclo simplificado pode ter:
+
+1. requisitos;
+2. design;
+3. implementação;
+4. revisão;
+5. testes;
+6. build;
+7. deploy;
+8. operação;
+9. monitoramento;
+10. melhoria contínua.
+
+A segurança deve aparecer em todas essas fases.
+
+## Segurança em requisitos
+
+Na fase de requisitos, o time deve perguntar:
+
+* quais dados serão tratados?
+* há dados pessoais?
+* há dados de pagamento?
+* há informações sensíveis?
+* quem pode acessar cada funcionalidade?
+* quais ações precisam de auditoria?
+* existe requisito regulatório?
+* qual é o impacto se essa funcionalidade falhar?
+* quais abusos são possíveis?
+
+Exemplo para `meucatalogomusical.com`:
+
+Funcionalidade: cadastro de resenhas de álbuns da banda Rhapsody of Fire.
+
+Perguntas de segurança:
+
+* qualquer usuário pode criar resenha?
+* resenhas passam por moderação?
+* o texto aceita HTML?
+* existe limite de tamanho?
+* comentários podem ser editados?
+* quem pode excluir?
+* ações administrativas são auditadas?
+* o conteúdo será exibido em páginas públicas?
+
+Essas perguntas ajudam a evitar decisões inseguras antes mesmo do código existir.
+
+## Segurança no design
+
+Na fase de design, o time define como a funcionalidade será protegida.
+
+Algumas decisões importantes:
+
+* autenticação;
+* autorização;
+* fluxo de sessão;
+* segregação de perfis;
+* validação de entrada;
+* modelagem de dados sensíveis;
+* logs de auditoria;
+* proteção contra abuso;
+* limites de requisição;
+* mensagens de erro;
+* comunicação segura;
+* integração com serviços externos.
+
+Exemplo:
+
+Para uma área administrativa de `meucatalogomusical.com`, o design pode definir:
+
+* apenas usuários com papel `ADMIN` acessam;
+* ações críticas exigem auditoria;
+* comentários removidos mantêm registro histórico;
+* logs não armazenam dados sensíveis desnecessários;
+* endpoints administrativos não ficam misturados com endpoints públicos;
+* alterações relevantes geram eventos de auditoria.
+
+## Segurança na implementação
+
+Na implementação, o desenvolvedor transforma requisitos e design em código.
+
+Práticas importantes:
+
+* validação de entrada;
+* consultas parametrizadas;
+* codificação de saída;
+* controle de autorização;
+* uso correto de frameworks;
+* tratamento seguro de erros;
+* logs responsáveis;
+* menor privilégio;
+* proteção de sessão;
+* testes automatizados.
+
+Exemplo de validação em Java/Spring:
+
+```java id=&quot;o60aiw&quot;
+package com.meucatalogomusical.resenhas.api;
+
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
+public record NovaResenhaRequest(
+
+        @NotBlank
+        @Size(max = 120)
+        String titulo,
+
+        @NotBlank
+        @Size(max = 3000)
+        String texto,
+
+        @Min(1)
+        @Max(5)
+        int nota
+) {
+}
+</code></pre></div></p>
+<p>Esse DTO define regras básicas para uma resenha:</p>
+<ul>
+<li>título obrigatório;</li>
+<li>título com tamanho máximo;</li>
+<li>texto obrigatório;</li>
+<li>texto com tamanho máximo;</li>
+<li>nota entre 1 e 5.</li>
+</ul>
+<p>Isso não resolve todos os problemas, mas evita que qualquer entrada circule livremente pela aplicação.</p>
+<h2 id="exemplo-de-autorizacao-em-spring">Exemplo de autorização em Spring</h2>
+<p>Uma funcionalidade administrativa deve validar permissão no backend.</p>
+<p>```java id="nnawz7"
+package com.meucatalogomusical.admin.api;</p>
+<p>import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;</p>
+<p>@RestController
+@RequestMapping("/api/admin/resenhas")
+public class AdminResenhaController {</p>
+<div class="highlight"><pre><span></span><code>private final AdminResenhaService adminResenhaService;
+
+public AdminResenhaController(AdminResenhaService adminResenhaService) {
+    this.adminResenhaService = adminResenhaService;
+}
+
+@DeleteMapping(&quot;/{id}&quot;)
+@PreAuthorize(&quot;hasRole(&#39;ADMIN&#39;)&quot;)
+public void removerResenha(@PathVariable Long id) {
+    adminResenhaService.remover(id);
+}
+</code></pre></div>
+<p>}
+<code>``
+
+A anotação</code>@PreAuthorize("hasRole('ADMIN')")` reforça que apenas usuários autorizados podem executar a ação.
+
+A interface da aplicação também deve esconder botões indevidos, mas a proteção real precisa estar no backend.
+</p>
+<h2 id="exemplo-de-auditoria-simples">Exemplo de auditoria simples</h2>
+<p>Ações sensíveis devem deixar rastros úteis.
+
+<code>java id="4fhf1p"
+package com.meucatalogomusical.auditoria.domain;
+
+import java.time.OffsetDateTime;
+
+public record EventoAuditoria(
+        String usuario,
+        String acao,
+        String recurso,
+        Long recursoId,
+        OffsetDateTime ocorridoEm
+) {
+}</code></p>
+<p>Uso conceitual em um serviço:</p>
+<p>```java id="lk7lp5"
+package com.meucatalogomusical.admin.application;</p>
+<p>import com.meucatalogomusical.auditoria.domain.EventoAuditoria;</p>
+<p>import java.time.OffsetDateTime;</p>
+<p>public class AdminResenhaService {</p>
+<div class="highlight"><pre><span></span><code>private final ResenhaRepository resenhaRepository;
+private final AuditoriaService auditoriaService;
+
+public AdminResenhaService(
+        ResenhaRepository resenhaRepository,
+        AuditoriaService auditoriaService
+) {
+    this.resenhaRepository = resenhaRepository;
+    this.auditoriaService = auditoriaService;
+}
+
+public void remover(Long resenhaId, String usuarioAtual) {
+    resenhaRepository.remover(resenhaId);
+
+    auditoriaService.registrar(new EventoAuditoria(
+            usuarioAtual,
+            &quot;REMOCAO_RESENHA&quot;,
+            &quot;RESENHA&quot;,
+            resenhaId,
+            OffsetDateTime.now()
+    ));
+}
+</code></pre></div>
+<p>}
+```
+
+Esse exemplo mostra uma ideia importante: segurança também envolve rastreabilidade.
+
+Porém, logs e auditoria não devem expor dados sensíveis sem necessidade.
+</p>
+<h2 id="seguranca-nos-testes">Segurança nos testes</h2>
+<p>Os testes automatizados ajudam a evitar regressões.
+
+Exemplos de testes importantes:
+
+* usuário anônimo não acessa área privada;
+* usuário comum não acessa área administrativa;
+* entrada inválida retorna erro adequado;
+* campos obrigatórios são validados;
+* dados sensíveis não aparecem na resposta;
+* endpoint usa status HTTP correto;
+* erros não expõem stack trace;
+* autorização é aplicada no backend.
+
+Exemplo de teste com Spring:
+
+<code>java id="7yanas"
+package com.meucatalogomusical.admin.api;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.web.servlet.MockMvc;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+@WebMvcTest(AdminResenhaController.class)
+class AdminResenhaControllerTest {
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @Test
+    @WithMockUser(roles = "USER")
+    void deveBloquearUsuarioComumAoRemoverResenha() throws Exception {
+        mockMvc.perform(delete("/api/admin/resenhas/10"))
+                .andExpect(status().isForbidden());
+    }
+}</code></p>
+<p>Esse teste garante que um usuário com papel <code>USER</code> não consegue remover uma resenha administrativa.</p>
+<p>Esse tipo de teste é simples, mas importante. Ele protege regras de autorização contra regressões futuras.</p>
+<h2 id="seguranca-no-build-e-cicd">Segurança no build e CI/CD</h2>
+<p>Em um pipeline de CI/CD, o time pode incluir verificações como:</p>
+<ul>
+<li>testes unitários;</li>
+<li>testes de integração;</li>
+<li>análise de dependências;</li>
+<li>análise estática;</li>
+<li>validação de configuração;</li>
+<li>geração de artefato;</li>
+<li>deploy em ambiente de teste;</li>
+<li>DAST em ambiente controlado;</li>
+<li>publicação somente se critérios mínimos forem atendidos.</li>
+</ul>
+<p>Um fluxo simplificado:</p>
+<p>```text id="dmzycd"
+commit -&gt; build -&gt; testes -&gt; análise -&gt; deploy em staging -&gt; DAST -&gt; revisão -&gt; produção
+<div class="highlight"><pre><span></span><code>A ideia não é bloquear toda entrega por qualquer alerta sem contexto. A ideia é criar critérios claros.
+
+Exemplos:
+
+* falhas críticas bloqueiam produção;
+* alertas médios entram no backlog com prazo;
+* falsos positivos são documentados;
+* exceções precisam de justificativa;
+* problemas recorrentes viram melhoria de processo.
+
+## Exemplo conceitual de pipeline
+
+Um pipeline simplificado poderia ser:
+
+```yaml id=&quot;bf1m8c&quot;
+name: seguranca-aplicacao
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar código
+        uses: actions/checkout@v4
+
+      - name: Configurar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: &#39;25&#39;
+
+      - name: Executar testes
+        run: ./gradlew test
+
+      - name: Gerar aplicação
+        run: ./gradlew bootJar
+</code></pre></div></p>
+<p>Esse exemplo não executa DAST diretamente. Ele mostra apenas a base de um pipeline.</p>
+<p>Em projetos reais, a etapa DAST normalmente exigiria:</p>
+<ul>
+<li>subir a aplicação;</li>
+<li>usar banco de dados de teste;</li>
+<li>configurar credenciais de teste;</li>
+<li>apontar a ferramenta para ambiente autorizado;</li>
+<li>armazenar relatório;</li>
+<li>definir critérios de falha;</li>
+<li>revisar resultados.</li>
+</ul>
+<h2 id="preparando-a-aplicacao-para-ser-testavel">Preparando a aplicação para ser testável</h2>
+<p>Para que DAST e testes de segurança sejam úteis, a aplicação precisa ser testável.</p>
+<p>Isso significa:</p>
+<ul>
+<li>ambientes reproduzíveis;</li>
+<li>dados fictícios;</li>
+<li>usuários de teste;</li>
+<li>rotas documentadas;</li>
+<li>autenticação configurável para testes autorizados;</li>
+<li>logs com correlationId;</li>
+<li>erros padronizados;</li>
+<li>deploy automatizado;</li>
+<li>reset de ambiente;</li>
+<li>documentação de escopo.</li>
+</ul>
+<p>Exemplo de usuários de teste para <code>meucatalogomusical.com</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Usuário</th>
+<th>Perfil</th>
+<th>Finalidade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>leitor.teste</code></td>
+<td>USER</td>
+<td>Validar acesso comum</td>
+</tr>
+<tr>
+<td><code>moderador.teste</code></td>
+<td>MODERATOR</td>
+<td>Validar moderação</td>
+</tr>
+<tr>
+<td><code>admin.teste</code></td>
+<td>ADMIN</td>
+<td>Validar área administrativa</td>
+</tr>
+</tbody>
+</table>
+<p>Esses usuários devem existir apenas em ambiente controlado e usar dados fictícios.</p>
+<h2 id="ambientes-e-dados-de-teste">Ambientes e dados de teste</h2>
+<p>DAST não deve ser executado contra produção sem planejamento rigoroso e autorização explícita.</p>
+<p>O melhor é usar ambientes como:</p>
+<ul>
+<li>local;</li>
+<li>integração;</li>
+<li>staging;</li>
+<li>homologação;</li>
+<li>ambiente efêmero de pull request.</li>
+</ul>
+<p>Dados usados nesses ambientes devem ser fictícios ou devidamente mascarados.</p>
+<p>Evite usar:</p>
+<ul>
+<li>e-mails reais;</li>
+<li>dados pessoais reais;</li>
+<li>credenciais reais;</li>
+<li>tokens de produção;</li>
+<li>dados de pagamento reais;</li>
+<li>segredos de produção.</li>
+</ul>
+<p>Uma boa prática é automatizar criação e limpeza de dados de teste.</p>
+<h2 id="conformidade-nao-e-a-mesma-coisa-que-seguranca">Conformidade não é a mesma coisa que segurança</h2>
+<p>Conformidade significa atender a requisitos de normas, leis, padrões ou contratos.</p>
+<p>Segurança significa reduzir riscos reais.</p>
+<p>Essas duas coisas se relacionam, mas não são iguais.</p>
+<p>Uma aplicação pode estar em conformidade com vários requisitos e ainda assim ter decisões inseguras em pontos específicos.</p>
+<p>Também pode existir uma aplicação tecnicamente bem protegida, mas sem evidências, documentação e processos exigidos por uma auditoria.</p>
+<p>O ideal é buscar os dois:</p>
+<ul>
+<li>segurança real;</li>
+<li>evidência de conformidade.</li>
+</ul>
+<h2 id="pci-dss">PCI DSS</h2>
+<p>PCI DSS é um padrão de segurança voltado à proteção de dados de contas de pagamento.</p>
+<p>Ele é relevante para organizações que armazenam, processam ou transmitem dados de cartão.</p>
+<p>Se <code>meucatalogomusical.com</code> vendesse ingressos ou produtos oficiais de bandas como Avantasia, Stratovarius ou Kamelot e processasse pagamentos com cartão, o escopo de PCI poderia se tornar relevante.</p>
+<p>A melhor decisão de engenharia, muitas vezes, é reduzir o escopo:</p>
+<ul>
+<li>usar um provedor de pagamento confiável;</li>
+<li>evitar armazenar dados de cartão;</li>
+<li>tokenizar quando aplicável;</li>
+<li>não trafegar dados sensíveis desnecessariamente;</li>
+<li>segmentar responsabilidades;</li>
+<li>seguir requisitos do provedor e do padrão aplicável.</li>
+</ul>
+<p>Reduzir escopo não significa ignorar segurança. Significa projetar a aplicação para lidar com menos dados sensíveis diretamente.</p>
+<h2 id="gdpr">GDPR</h2>
+<p>GDPR é uma regulamentação europeia de proteção de dados pessoais.</p>
+<p>Mesmo que uma aplicação seja brasileira, o GDPR pode ser relevante se ela tratar dados de pessoas localizadas na União Europeia, dependendo do contexto de oferta de serviços, monitoramento ou operação.</p>
+<p>Conceitos importantes relacionados a privacidade:</p>
+<ul>
+<li>transparência;</li>
+<li>finalidade;</li>
+<li>minimização de dados;</li>
+<li>limitação de armazenamento;</li>
+<li>precisão;</li>
+<li>integridade;</li>
+<li>confidencialidade;</li>
+<li>responsabilidade.</li>
+</ul>
+<p>Em <code>meucatalogomusical.com</code>, dados pessoais podem incluir:</p>
+<ul>
+<li>nome;</li>
+<li>e-mail;</li>
+<li>identificador de usuário;</li>
+<li>endereço IP;</li>
+<li>preferências;</li>
+<li>histórico de interação;</li>
+<li>dados de conta.</li>
+</ul>
+<p>Uma boa decisão de engenharia é coletar apenas o necessário.</p>
+<p>Exemplo: se o sistema só precisa de e-mail para login e recuperação de conta, talvez não precise pedir data de nascimento, telefone ou endereço.</p>
+<h2 id="conformidade-no-desenvolvimento">Conformidade no desenvolvimento</h2>
+<p>Conformidade deve influenciar o desenvolvimento desde cedo.</p>
+<p>Exemplos de perguntas:</p>
+<ul>
+<li>quais dados pessoais são coletados?</li>
+<li>por que esses dados são necessários?</li>
+<li>por quanto tempo serão armazenados?</li>
+<li>quem tem acesso?</li>
+<li>existe auditoria?</li>
+<li>os dados são protegidos em trânsito?</li>
+<li>os dados são protegidos em repouso quando necessário?</li>
+<li>o usuário consegue exercer direitos previstos?</li>
+<li>há processo de exclusão ou anonimização?</li>
+<li>incidentes são tratados?</li>
+<li>evidências são armazenadas?</li>
+</ul>
+<p>Essas perguntas ajudam a transformar conformidade em decisões concretas de software.</p>
+<h2 id="asvs-como-guia-de-requisitos-verificaveis">ASVS como guia de requisitos verificáveis</h2>
+<p>O OWASP ASVS pode ser usado como referência para requisitos técnicos de segurança.</p>
+<p>Ele ajuda times a transformar segurança em requisitos verificáveis.</p>
+<p>Em vez de dizer apenas:</p>
+<p>```text id="5g4d2x"
+A aplicação deve ser segura.
+<div class="highlight"><pre><span></span><code>podemos ter requisitos mais específicos:
+
+```text id=&quot;onxmyb&quot;
+A aplicação deve validar autorização no backend para todas as ações administrativas.
+</code></pre></div></p>
+<p>Ou:</p>
+<p>```text id="suxm0n"
+Cookies de sessão devem usar atributos seguros em produção.
+<div class="highlight"><pre><span></span><code>Ou:
+
+```text id=&quot;3p99dk&quot;
+Mensagens de erro não devem expor detalhes internos.
+</code></pre></div></p>
+<p>Requisitos verificáveis são melhores porque podem virar teste, checklist, revisão de código ou critério de aceite.</p>
+<h2 id="samm-e-maturidade-de-seguranca">SAMM e maturidade de segurança</h2>
+<p>OWASP SAMM é um modelo de maturidade para melhorar segurança no ciclo de desenvolvimento.</p>
+<p>A ideia não é que todas as empresas apliquem exatamente o mesmo processo. O modelo é orientado a risco e pode evoluir conforme a organização amadurece.</p>
+<p>Em uma equipe pequena, o primeiro passo pode ser:</p>
+<ul>
+<li>checklist de segurança em pull requests;</li>
+<li>validação de dependências;</li>
+<li>revisão de autorização;</li>
+<li>testes básicos;</li>
+<li>DAST em staging antes de produção.</li>
+</ul>
+<p>Em uma organização maior, pode envolver:</p>
+<ul>
+<li>governança;</li>
+<li>políticas;</li>
+<li>métricas;</li>
+<li>treinamento;</li>
+<li>threat modeling;</li>
+<li>automação;</li>
+<li>gestão formal de risco;</li>
+<li>integração com auditoria;</li>
+<li>resposta a incidentes;</li>
+<li>maturidade por times e produtos.</li>
+</ul>
+<p>O ponto principal é: segurança evolui por maturidade, não por uma ação única.</p>
+<h2 id="seguranca-em-pull-requests">Segurança em pull requests</h2>
+<p>Pull requests são uma excelente oportunidade para revisar segurança.</p>
+<p>Um checklist simples pode incluir:</p>
+<ul>
+<li>a funcionalidade recebe entrada externa?</li>
+<li>a entrada é validada?</li>
+<li>há dados sensíveis?</li>
+<li>há mudança de autorização?</li>
+<li>há novo endpoint?</li>
+<li>há query dinâmica?</li>
+<li>há uso de HTML não escapado?</li>
+<li>há novo cookie?</li>
+<li>há alteração em configuração?</li>
+<li>há log com dados sensíveis?</li>
+<li>há dependência nova?</li>
+<li>há impacto em conformidade?</li>
+</ul>
+<p>Esse checklist não precisa ser burocrático. Ele ajuda o time a criar hábito.</p>
+<h2 id="exemplo-de-checklist-no-pull-request">Exemplo de checklist no pull request</h2>
+<p>```markdown id="7o2tym"</p>
+<h2 id="checklist-de-seguranca">Checklist de segurança</h2>
+<ul>
+<li>[ ] A entrada externa foi validada no backend.</li>
+<li>[ ] Endpoints privados exigem autenticação.</li>
+<li>[ ] A autorização foi revisada.</li>
+<li>[ ] Dados sensíveis não são registrados em logs.</li>
+<li>[ ] Consultas ao banco usam parâmetros.</li>
+<li>[ ] Saída em HTML é escapada.</li>
+<li>[ ] Cookies e sessão não foram enfraquecidos.</li>
+<li>[ ] Dependências novas foram justificadas.</li>
+<li>[ ] Mensagens de erro não expõem detalhes internos.</li>
+<li>[ ] Impactos de privacidade/conformidade foram avaliados.
+<div class="highlight"><pre><span></span><code>Esse tipo de checklist é simples, mas ajuda a lembrar pontos que costumam passar despercebidos.
+
+## Segurança e observabilidade
+
+Segurança não termina no deploy.
+
+Depois que a aplicação está em produção, é importante observar comportamentos.
+
+Exemplos de eventos úteis:
+
+* muitas tentativas de login malsucedidas;
+* acessos negados repetidos;
+* erros incomuns em endpoints críticos;
+* tentativas de acessar rotas administrativas;
+* picos de requisições;
+* falhas de validação em massa;
+* alterações administrativas;
+* criação ou remoção de permissões;
+* comportamento anormal por usuário ou IP.
+
+Isso não significa vigiar usuários de forma invasiva. Significa registrar eventos relevantes para proteger a aplicação e investigar incidentes.
+
+## Exemplo de correlationId
+
+Um `correlationId` ajuda a rastrear uma requisição entre logs.
+
+Exemplo de filtro simples:
+
+```java id=&quot;u3pbbh&quot;
+package com.meucatalogomusical.config;
+
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.slf4j.MDC;
+import org.springframework.web.filter.OncePerRequestFilter;
+
+import java.io.IOException;
+import java.util.UUID;
+
+public class CorrelationIdFilter extends OncePerRequestFilter {
+
+    private static final String HEADER_NAME = &quot;X-Correlation-Id&quot;;
+    private static final String MDC_KEY = &quot;correlationId&quot;;
+
+    @Override
+    protected void doFilterInternal(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            FilterChain filterChain
+    ) throws ServletException, IOException {
+
+        String correlationId = request.getHeader(HEADER_NAME);
+
+        if (correlationId == null || correlationId.isBlank()) {
+            correlationId = UUID.randomUUID().toString();
+        }
+
+        MDC.put(MDC_KEY, correlationId);
+        response.setHeader(HEADER_NAME, correlationId);
+
+        try {
+            filterChain.doFilter(request, response);
+        } finally {
+            MDC.remove(MDC_KEY);
+        }
+    }
+}
+</code></pre></div></li>
+</ul>
+<p>Esse filtro cria ou reaproveita um identificador de correlação.</p>
+<p>Com isso, logs relacionados à mesma requisição podem ser agrupados com mais facilidade.</p>
+<p>Importante: correlationId não deve conter dados sensíveis.</p>
+<h2 id="seguranca-e-dependencias">Segurança e dependências</h2>
+<p>Aplicações modernas usam muitas dependências.</p>
+<p>Cada biblioteca adicionada ao projeto pode trazer:</p>
+<ul>
+<li>funcionalidades;</li>
+<li>produtividade;</li>
+<li>riscos;</li>
+<li>vulnerabilidades transitivas;</li>
+<li>necessidade de atualização;</li>
+<li>impacto de compatibilidade.</li>
+</ul>
+<p>Boas práticas:</p>
+<ul>
+<li>adicionar dependência apenas quando houver necessidade;</li>
+<li>preferir bibliotecas conhecidas e mantidas;</li>
+<li>acompanhar vulnerabilidades;</li>
+<li>atualizar versões;</li>
+<li>remover dependências não utilizadas;</li>
+<li>evitar bibliotecas abandonadas;</li>
+<li>revisar mudanças em upgrades.</li>
+</ul>
+<p>Em Java/Spring, dependências são parte central do projeto. Logo, gestão de dependências também é segurança.</p>
+<h2 id="o-que-fazer-com-achados-de-dast">O que fazer com achados de DAST?</h2>
+<p>Um erro comum é tratar relatório de ferramenta como verdade absoluta.</p>
+<p>O fluxo ideal é:</p>
+<ol>
+<li>receber o relatório;</li>
+<li>classificar achados;</li>
+<li>remover duplicidades;</li>
+<li>avaliar falsos positivos;</li>
+<li>confirmar impacto;</li>
+<li>definir severidade;</li>
+<li>criar tarefas;</li>
+<li>corrigir;</li>
+<li>testar novamente;</li>
+<li>registrar evidências.</li>
+</ol>
+<p>Um alerta crítico deve ter prioridade alta. Um alerta informativo pode virar melhoria futura. Um falso positivo deve ser documentado para não gerar ruído recorrente.</p>
+<h2 id="priorizacao-de-vulnerabilidades">Priorização de vulnerabilidades</h2>
+<p>Nem toda vulnerabilidade tem o mesmo risco.</p>
+<p>A priorização pode considerar:</p>
+<ul>
+<li>facilidade de exploração;</li>
+<li>impacto nos dados;</li>
+<li>exposição pública;</li>
+<li>existência de autenticação;</li>
+<li>perfil afetado;</li>
+<li>criticidade do sistema;</li>
+<li>requisitos regulatórios;</li>
+<li>existência de mitigação;</li>
+<li>histórico de incidentes;</li>
+<li>sensibilidade do dado;</li>
+<li>ambiente afetado.</li>
+</ul>
+<p>Exemplo:</p>
+<p>Uma falha em uma página pública de login pode ser mais urgente do que uma falha em uma ferramenta interna isolada, dependendo do impacto.</p>
+<p>Mas uma falha interna em área administrativa também pode ser crítica se afetar dados sensíveis ou permissões.</p>
+<h2 id="metricas-uteis">Métricas úteis</h2>
+<p>Algumas métricas podem ajudar a acompanhar maturidade:</p>
+<ul>
+<li>quantidade de vulnerabilidades por severidade;</li>
+<li>tempo médio de correção;</li>
+<li>reincidência por tipo de falha;</li>
+<li>percentual de endpoints cobertos por testes;</li>
+<li>dependências vulneráveis abertas;</li>
+<li>falhas críticas por release;</li>
+<li>cobertura de revisão de segurança;</li>
+<li>quantidade de exceções abertas;</li>
+<li>tempo de atualização de dependências;</li>
+<li>número de incidentes ou quase incidentes.</li>
+</ul>
+<p>Métrica boa ajuda a tomar decisão. Métrica ruim vira burocracia.</p>
+<p>O objetivo não é punir times, mas melhorar o processo.</p>
+<h2 id="boas-praticas">Boas práticas</h2>
+<p>Boas práticas para DAST, conformidade e ciclo seguro:</p>
+<ul>
+<li>executar DAST apenas em ambientes autorizados;</li>
+<li>usar dados fictícios em testes;</li>
+<li>definir escopo antes dos testes;</li>
+<li>revisar achados antes de criar tarefas;</li>
+<li>documentar falsos positivos;</li>
+<li>integrar segurança ao CI/CD;</li>
+<li>validar segurança em pull requests;</li>
+<li>usar ASVS como base para requisitos verificáveis;</li>
+<li>usar SAMM para evoluir maturidade;</li>
+<li>tratar conformidade desde requisitos;</li>
+<li>reduzir coleta de dados pessoais;</li>
+<li>reduzir escopo de dados de pagamento;</li>
+<li>aplicar menor privilégio;</li>
+<li>manter evidências de correção;</li>
+<li>monitorar produção;</li>
+<li>treinar desenvolvedores;</li>
+<li>revisar dependências;</li>
+<li>priorizar vulnerabilidades por risco.</li>
+</ul>
+<h2 id="erros-comuns">Erros comuns</h2>
+<h3 id="1-usar-dast-apenas-no-final">1. Usar DAST apenas no final</h3>
+<p>Se DAST roda apenas antes de produção, os problemas aparecem tarde demais.</p>
+<p>O ideal é executar testes de segurança ao longo do ciclo.</p>
+<h3 id="2-ignorar-falsos-positivos">2. Ignorar falsos positivos</h3>
+<p>Falsos positivos precisam ser analisados e documentados. Ignorar tudo reduz confiança no processo.</p>
+<h3 id="3-achar-que-ausencia-de-alerta-significa-aplicacao-segura">3. Achar que ausência de alerta significa aplicação segura</h3>
+<p>DAST não encontra tudo. Ele é uma camada, não uma garantia absoluta.</p>
+<h3 id="4-rodar-testes-em-ambiente-errado">4. Rodar testes em ambiente errado</h3>
+<p>DAST deve ser usado em ambiente autorizado, controlado e com dados apropriados.</p>
+<h3 id="5-confundir-conformidade-com-seguranca-real">5. Confundir conformidade com segurança real</h3>
+<p>Estar em conformidade não garante que todas as decisões técnicas são seguras.</p>
+<h3 id="6-criar-checklist-burocratico-demais">6. Criar checklist burocrático demais</h3>
+<p>Checklist precisa ajudar o time, não virar obstáculo sem valor.</p>
+<h3 id="7-nao-envolver-desenvolvedores">7. Não envolver desenvolvedores</h3>
+<p>Segurança não deve ser responsabilidade apenas de um time externo. Desenvolvedores precisam entender os riscos principais.</p>
+<h3 id="8-nao-corrigir-causa-raiz">8. Não corrigir causa raiz</h3>
+<p>Corrigir apenas um endpoint vulnerável pode não resolver o padrão inseguro usado em outros lugares.</p>
+<h3 id="9-nao-medir-reincidencia">9. Não medir reincidência</h3>
+<p>Se o mesmo problema aparece sempre, talvez falte treinamento, padrão de código ou melhoria arquitetural.</p>
+<h3 id="10-usar-dados-reais-em-ambiente-de-teste">10. Usar dados reais em ambiente de teste</h3>
+<p>Ambientes de teste devem evitar dados reais. Quando inevitável, dados precisam ser minimizados, mascarados ou protegidos conforme o risco.</p>
+<h2 id="decisoes-de-engenharia">Decisões de engenharia</h2>
+<h3 id="quando-usar-dast">Quando usar DAST?</h3>
+<p>Use DAST quando houver uma aplicação em execução em ambiente controlado.</p>
+<p>Ele é útil para:</p>
+<ul>
+<li>validar configurações;</li>
+<li>identificar problemas observáveis;</li>
+<li>testar endpoints expostos;</li>
+<li>complementar SAST e testes automatizados;</li>
+<li>apoiar evidências de segurança;</li>
+<li>detectar regressões.</li>
+</ul>
+<h3 id="quando-evitar-dast">Quando evitar DAST?</h3>
+<p>Evite executar DAST:</p>
+<ul>
+<li>em sistemas sem autorização;</li>
+<li>em produção sem planejamento;</li>
+<li>com dados reais desnecessários;</li>
+<li>sem escopo definido;</li>
+<li>sem equipe para analisar resultados;</li>
+<li>sem critério de priorização.</li>
+</ul>
+<h3 id="quando-usar-asvs">Quando usar ASVS?</h3>
+<p>Use ASVS quando precisar transformar segurança em requisitos verificáveis.</p>
+<p>Ele é útil para:</p>
+<ul>
+<li>checklists técnicos;</li>
+<li>critérios de aceite;</li>
+<li>revisões de arquitetura;</li>
+<li>definição de padrões internos;</li>
+<li>avaliação de maturidade técnica;</li>
+<li>preparação para auditorias.</li>
+</ul>
+<h3 id="quando-usar-samm">Quando usar SAMM?</h3>
+<p>Use SAMM quando a organização quiser evoluir maturidade de segurança no ciclo de desenvolvimento.</p>
+<p>Ele é útil para:</p>
+<ul>
+<li>estruturar programa de segurança;</li>
+<li>medir evolução;</li>
+<li>definir roadmap;</li>
+<li>alinhar times;</li>
+<li>melhorar governança;</li>
+<li>equilibrar risco e esforço.</li>
+</ul>
+<h3 id="quando-conformidade-deve-entrar">Quando conformidade deve entrar?</h3>
+<p>Conformidade deve entrar desde requisitos.</p>
+<p>Se a aplicação trata dados pessoais, dados de pagamento ou informações reguladas, o time precisa saber disso antes de desenhar a solução.</p>
+<p>Quanto mais tarde a conformidade entra, maior o risco de retrabalho.</p>
+<h2 id="onde-isso-aparece-em-sistemas-reais">Onde isso aparece em sistemas reais</h2>
+<p>Esses temas aparecem em praticamente qualquer aplicação corporativa.</p>
+<p>Exemplos:</p>
+<ul>
+<li>bancos;</li>
+<li>fintechs;</li>
+<li>e-commerces;</li>
+<li>sistemas de saúde;</li>
+<li>sistemas educacionais;</li>
+<li>plataformas SaaS;</li>
+<li>marketplaces;</li>
+<li>APIs públicas;</li>
+<li>aplicações internas;</li>
+<li>backoffices;</li>
+<li>sistemas com login;</li>
+<li>sistemas que tratam dados pessoais;</li>
+<li>sistemas que processam pagamento.</li>
+</ul>
+<p>Mesmo uma aplicação de catálogo musical pode evoluir para funcionalidades sensíveis:</p>
+<ul>
+<li>venda de ingressos;</li>
+<li>assinatura premium;</li>
+<li>pagamento com cartão;</li>
+<li>mensagens privadas;</li>
+<li>perfis públicos;</li>
+<li>integrações com parceiros;</li>
+<li>recomendação personalizada;</li>
+<li>moderação de conteúdo;</li>
+<li>área administrativa.</li>
+</ul>
+<p>Quanto mais o sistema cresce, mais importante é ter segurança integrada ao processo.</p>
+<h2 id="checklist-pratico">Checklist prático</h2>
+<h3 id="requisitos">Requisitos</h3>
+<ul>
+<li>Há dados pessoais?</li>
+<li>Há dados de pagamento?</li>
+<li>Há dados sensíveis?</li>
+<li>Os perfis de acesso foram definidos?</li>
+<li>Há necessidade de auditoria?</li>
+<li>Requisitos regulatórios foram identificados?</li>
+<li>Riscos principais foram discutidos?</li>
+</ul>
+<h3 id="design">Design</h3>
+<ul>
+<li>Autenticação foi definida?</li>
+<li>Autorização foi modelada?</li>
+<li>Dados sensíveis foram minimizados?</li>
+<li>Logs foram planejados?</li>
+<li>Erros foram padronizados?</li>
+<li>Integrações externas foram avaliadas?</li>
+<li>Menor privilégio foi considerado?</li>
+</ul>
+<h3 id="implementacao">Implementação</h3>
+<ul>
+<li>Entradas são validadas?</li>
+<li>SQL usa parâmetros?</li>
+<li>Saída HTML é escapada?</li>
+<li>Cookies são seguros?</li>
+<li>Dados sensíveis não vão para logs?</li>
+<li>Endpoints administrativos têm proteção?</li>
+<li>Dependências novas foram avaliadas?</li>
+</ul>
+<h3 id="testes">Testes</h3>
+<ul>
+<li>Há testes de autorização?</li>
+<li>Há testes para entradas inválidas?</li>
+<li>Há testes de erros?</li>
+<li>Há testes para endpoints privados?</li>
+<li>Há testes de regressão?</li>
+<li>DAST roda em ambiente autorizado?</li>
+<li>Achados são revisados?</li>
+</ul>
+<h3 id="deploy">Deploy</h3>
+<ul>
+<li>HTTPS está ativo?</li>
+<li>Secrets estão protegidos?</li>
+<li>Configuração de produção foi revisada?</li>
+<li>Debug está desativado?</li>
+<li>Headers de segurança foram avaliados?</li>
+<li>Banco usa menor privilégio?</li>
+<li>Logs vão para local seguro?</li>
+</ul>
+<h3 id="operacao">Operação</h3>
+<ul>
+<li>Há monitoramento?</li>
+<li>Eventos sensíveis são auditados?</li>
+<li>Existe correlationId?</li>
+<li>Alertas têm responsável?</li>
+<li>Vulnerabilidades são priorizadas?</li>
+<li>Dependências são atualizadas?</li>
+<li>Incidentes têm processo de resposta?</li>
+</ul>
+<h2 id="resumo-final">Resumo final</h2>
+<p>DAST, conformidade e segurança no ciclo de desenvolvimento ajudam a transformar segurança em prática contínua.</p>
+<p>DAST testa a aplicação em execução, observando comportamentos externos. Ele é útil para encontrar problemas de configuração, validação, headers, cookies, autenticação e outros riscos observáveis. Mas ele não substitui revisão de código, testes automatizados, SAST, modelagem de ameaças ou entendimento de regra de negócio.</p>
+<p>Conformidade ajuda a atender requisitos de normas e regulamentações, como PCI DSS e GDPR. Porém, conformidade não é sinônimo automático de segurança. O ideal é buscar segurança real e evidências de conformidade.</p>
+<p>Segurança no ciclo de desenvolvimento significa pensar em proteção desde requisitos até operação. Isso inclui validação, autorização, logs, testes, CI/CD, monitoramento, gestão de dependências, auditoria, resposta a incidentes e melhoria contínua.</p>
+<p>A principal lição deste artigo é:</p>
+<blockquote>
+<p>Segurança não deve ser um evento no final do projeto. Segurança deve ser uma disciplina contínua dentro da engenharia de software.</p>
+</blockquote>
+<h2 id="perguntas-de-revisao">Perguntas de revisão</h2>
+<h3 id="1-o-que-e-dast">1. O que é DAST?</h3>
+<p>DAST é uma abordagem de teste dinâmico de segurança que avalia uma aplicação em execução a partir de suas interfaces expostas, como páginas, formulários e APIs.</p>
+<h3 id="2-qual-e-a-diferenca-entre-dast-e-sast">2. Qual é a diferença entre DAST e SAST?</h3>
+<p>SAST analisa código ou artefatos sem executar a aplicação. DAST analisa a aplicação rodando, observando comportamentos externos.</p>
+<h3 id="3-dast-encontra-todos-os-problemas-de-seguranca">3. DAST encontra todos os problemas de segurança?</h3>
+<p>Não. DAST é uma camada importante, mas não entende completamente regra de negócio, autorização complexa e fluxos internos.</p>
+<h3 id="4-onde-dast-deve-ser-executado">4. Onde DAST deve ser executado?</h3>
+<p>Em ambientes autorizados e controlados, como staging, homologação, integração ou ambientes efêmeros de pull request.</p>
+<h3 id="5-por-que-nao-e-ideal-rodar-dast-sem-escopo">5. Por que não é ideal rodar DAST sem escopo?</h3>
+<p>Porque a ferramenta pode gerar impacto, ruído, falsos positivos ou acessar áreas que não deveriam fazer parte do teste.</p>
+<h3 id="6-o-que-e-conformidade">6. O que é conformidade?</h3>
+<p>Conformidade é o atendimento a requisitos de normas, leis, padrões, contratos ou políticas aplicáveis a uma organização ou sistema.</p>
+<h3 id="7-conformidade-e-igual-a-seguranca">7. Conformidade é igual a segurança?</h3>
+<p>Não. Conformidade ajuda, mas não garante que todas as decisões técnicas são seguras. Segurança real exige análise de risco e boas práticas de engenharia.</p>
+<h3 id="8-o-que-e-pci-dss">8. O que é PCI DSS?</h3>
+<p>PCI DSS é um padrão de segurança voltado à proteção de dados de contas de pagamento, especialmente em ambientes que armazenam, processam ou transmitem dados de cartão.</p>
+<h3 id="9-o-que-e-gdpr">9. O que é GDPR?</h3>
+<p>GDPR é uma regulamentação europeia de proteção de dados pessoais, baseada em princípios como transparência, finalidade, minimização, integridade, confidencialidade e responsabilidade.</p>
+<h3 id="10-o-que-e-asvs">10. O que é ASVS?</h3>
+<p>ASVS é um padrão da OWASP que fornece requisitos técnicos verificáveis para segurança de aplicações web.</p>
+<h3 id="11-o-que-e-samm">11. O que é SAMM?</h3>
+<p>SAMM é um modelo de maturidade da OWASP para ajudar organizações a analisar e melhorar segurança ao longo do ciclo de desenvolvimento.</p>
+<h3 id="12-seguranca-deve-entrar-em-qual-fase-do-desenvolvimento">12. Segurança deve entrar em qual fase do desenvolvimento?</h3>
+<p>Segurança deve entrar em todas as fases: requisitos, design, implementação, revisão, testes, build, deploy, operação e melhoria contínua.</p>
+<h3 id="13-por-que-pull-requests-sao-importantes-para-seguranca">13. Por que pull requests são importantes para segurança?</h3>
+<p>Porque permitem revisar mudanças antes de chegarem à produção, incluindo validação de entrada, autorização, logs, dependências e configurações.</p>
+<h3 id="14-o-que-fazer-com-falsos-positivos-de-ferramentas">14. O que fazer com falsos positivos de ferramentas?</h3>
+<p>Eles devem ser analisados e documentados. Ignorá-los sem critério reduz a confiança no processo.</p>
+<h3 id="15-por-que-dados-reais-devem-ser-evitados-em-testes">15. Por que dados reais devem ser evitados em testes?</h3>
+<p>Porque ambientes de teste podem ter controles mais fracos que produção. Usar dados reais aumenta risco de vazamento e impacto regulatório.</p>
+<h2 id="referencias">Referências</h2>
+<ul>
+<li>OWASP Web Security Testing Guide.</li>
+<li>OWASP DevSecOps Guideline — Dynamic Application Security Testing.</li>
+<li>OWASP Application Security Verification Standard.</li>
+<li>OWASP Software Assurance Maturity Model.</li>
+<li>OWASP Integration Standards — OWASP in SDLC.</li>
+<li>PCI Security Standards Council — PCI Data Security Standard.</li>
+<li>Regulation EU 2016/679 — General Data Protection Regulation.</li>
+<li>Oracle JDK 25 Documentation.</li>
+<li>Spring Boot Reference Documentation.</li>
+<li>Spring Security Reference Documentation.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

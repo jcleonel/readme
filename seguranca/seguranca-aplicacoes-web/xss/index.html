@@ -1,0 +1,4375 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../sql-injection/">
+      
+      
+        <link rel="next" href="../dast-conformidade-sdlc/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Cross-Site Scripting (XSS) - README</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/css/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#cross-site-scripting-xss-tipos-riscos-e-prevencao" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../../.." title="README" class="md-header__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            README
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Cross-Site Scripting (XSS)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="README" class="md-nav__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    README
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Backend
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/fundamentos-da-linguagem-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/convencoes-de-codigo-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convenções de código em Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/variaveis-tipos-primitivos-operadores-conversoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variáveis, tipos primitivos, operadores e conversões
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/fundamentos-de-string/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de String
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-controle-operadores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de controle e operadores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-condicionais/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas condicionais
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-de-repeticao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de repetição
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Iniciando em Orientação a Objetos (POO)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Iniciando em Orientação a Objetos (POO)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/introducao-orientacao-a-objetos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução à POO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/classes-e-objetos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes e objetos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/classes-objetos-metodos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes, objetos e métodos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Spring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/api-rest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    O que é API REST?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/http/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Um pouco de HTTP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/por-que-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Por que escolher Spring?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/spring-boot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Boot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/spring-initializr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Initializr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/maven-pom/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maven e pom.xml
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Segurança
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Segurança
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Segurança em aplicações web
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Segurança em aplicações web
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introducao-seguranca-aplicacoes-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução à Segurança de Aplicações Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../http-dns-sessoes-https/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTTP, DNS, Sessões e HTTPS na Segurança Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sql-injection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Injection - Funcionamento, Impactos e Prevenção
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cross-Site Scripting (XSS)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cross-Site Scripting (XSS)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-problema-real-que-xss-resolve-no-estudo-de-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O problema real que XSS resolve no estudo de segurança
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-nos-detalhes-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar nos detalhes: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-o-nome-e-cross-site-scripting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que o nome é Cross-Site Scripting?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-xss-e-perigoso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que XSS é perigoso?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xss-explora-a-confianca-do-usuario-na-aplicacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XSS explora a confiança do usuário na aplicação
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipos-principais-de-xss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipos principais de XSS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xss-armazenado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XSS armazenado
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xss-refletido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XSS refletido
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xss-baseado-em-dom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XSS baseado em DOM
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-xss-pode-causar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que XSS pode causar?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roubo-de-informacoes-sensiveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Roubo de informações sensíveis
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#atividades-nao-autorizadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atividades não autorizadas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sequestro-de-sessao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sequestro de sessão
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alteracao-visual-da-pagina" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alteração visual da página
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-xss-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde XSS aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#regra-principal-codificacao-de-saida-contextual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regra principal: codificação de saída contextual
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validacao-de-entrada-ajuda-mas-nao-basta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validação de entrada ajuda, mas não basta
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-inseguro-com-thymeleaf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo inseguro com Thymeleaf
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-seguro-com-thymeleaf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo seguro com Thymeleaf
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#regra-pratica-para-templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regra prática para templates
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-controller-em-spring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de controller em Spring
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#devemos-escapar-antes-de-salvar-no-banco" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Devemos escapar antes de salvar no banco?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-com-resposta-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo com resposta JSON
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sanitizacao-quando-faz-sentido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sanitização: quando faz sentido?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-filtros-simples-sao-perigosos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que filtros simples são perigosos?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#content-security-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Content Security Policy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configurando-csp-com-spring-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configurando CSP com Spring Security
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cookies-e-xss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cookies e XSS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xss-e-autorizacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XSS e autorização
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xss-e-apis-rest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XSS e APIs REST
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#frameworks-ajudam-mas-nao-fazem-milagre" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frameworks ajudam, mas não fazem milagre
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-erro-em-mensagem-de-busca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de erro em mensagem de busca
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#codificacao-por-contexto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Codificação por contexto
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Codificação por contexto">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#corpo-html" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Corpo HTML
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atributo-html" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atributo HTML
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#url" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        URL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#javascript" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JavaScript
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xss-em-mensagens-de-erro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XSS em mensagens de erro
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xss-em-logs-e-paineis-internos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XSS em logs e painéis internos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-achar-que-xss-e-problema-apenas-do-frontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Achar que XSS é problema apenas do frontend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-usar-saida-nao-escapada-sem-necessidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Usar saída não escapada sem necessidade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-usar-innerhtml-com-dados-externos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Usar innerHTML com dados externos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-confiar-apenas-em-validacao-de-entrada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Confiar apenas em validação de entrada
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-criar-sanitizador-manual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Criar sanitizador manual
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-achar-que-csp-resolve-tudo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Achar que CSP resolve tudo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-esquecer-telas-administrativas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Esquecer telas administrativas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-exibir-mensagens-de-erro-com-dados-nao-confiaveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Exibir mensagens de erro com dados não confiáveis
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decisões de engenharia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quando-apenas-escapar-saida-e-suficiente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando apenas escapar saída é suficiente?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-permitir-html-limitado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando permitir HTML limitado?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-csp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar CSP?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-httponly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar HttpOnly?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-innerhtml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar innerHTML?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checklist-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist prático
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Checklist prático">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#entrada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entrada
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#saida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Saída
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frontend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sessao-e-cookies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sessão e cookies
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#headers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Headers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operação
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-revisao-em-meucatalogomusicalcom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de revisão em meucatalogomusical.com
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Perguntas de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-o-que-e-xss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. O que é XSS?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-por-que-xss-e-perigoso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Por que XSS é perigoso?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-o-que-e-xss-armazenado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. O que é XSS armazenado?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-o-que-e-xss-refletido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. O que é XSS refletido?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-o-que-e-xss-baseado-em-dom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. O que é XSS baseado em DOM?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-validacao-de-entrada-resolve-xss-sozinha" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Validação de entrada resolve XSS sozinha?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-o-que-e-codificacao-de-saida-contextual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. O que é codificação de saída contextual?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-por-que-innerhtml-pode-ser-perigoso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Por que innerHTML pode ser perigoso?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-qual-e-a-alternativa-mais-segura-ao-innerhtml-quando-a-intencao-e-exibir-texto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Qual é a alternativa mais segura ao innerHTML quando a intenção é exibir texto?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-em-thymeleaf-qual-e-a-diferenca-entre-thtext-e-thutext" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Em Thymeleaf, qual é a diferença entre th:text e th:utext?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-csp-resolve-xss-completamente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. CSP resolve XSS completamente?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-por-que-httponly-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Por que HttpOnly é importante?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-telas-administrativas-tambem-podem-ter-xss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Telas administrativas também podem ter XSS?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-devemos-salvar-texto-ja-escapado-no-banco" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Devemos salvar texto já escapado no banco?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-quando-sanitizacao-faz-sentido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Quando sanitização faz sentido?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dast-conformidade-sdlc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DAST, Conformidade e Segurança no Ciclo de Desenvolvimento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sast-source-sink-taint-flow-falso-positivo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SAST na prática - Source, Sink, Taint Flow e falso positivo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssrf-aplicacoes-java-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSRF em aplicações Java/Spring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cleartext-submission-integracoes-server-to-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cleartext Submission em integrações server-to-server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../privacy-violation-credenciais-logs-respostas-parceiros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Privacy Violation - credenciais, logs e respostas de parceiros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../path-traversal-upload-download-seguro-arquivos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Path Traversal e upload/download seguro de arquivos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unchecked-input-loop-condition-dos-processamento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unchecked Input for Loop Condition e prevenção de DoS por processamento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../headers-seguranca-hsts-json-nosniff/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Headers de segurança- HSTS, JSON explícito e nosniff
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sca-dependencias-vulneraveis-cves-gestao-bibliotecas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SCA na prática - dependências vulneráveis, CVEs e gestão de bibliotecas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../triagem-vulnerabilidades-corrigir-mitigar-not-exploitable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Triagem de vulnerabilidades - corrigir, mitigar ou marcar como Not Exploitable
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ferramentas-appsec-sast-sca-dast/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ferramentas de AppSec - como SAST, SCA e DAST encontram vulnerabilidades
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-problema-real-que-xss-resolve-no-estudo-de-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O problema real que XSS resolve no estudo de segurança
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-nos-detalhes-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar nos detalhes: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-o-nome-e-cross-site-scripting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que o nome é Cross-Site Scripting?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-xss-e-perigoso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que XSS é perigoso?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xss-explora-a-confianca-do-usuario-na-aplicacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XSS explora a confiança do usuário na aplicação
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipos-principais-de-xss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipos principais de XSS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xss-armazenado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XSS armazenado
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xss-refletido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XSS refletido
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xss-baseado-em-dom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XSS baseado em DOM
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-xss-pode-causar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que XSS pode causar?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roubo-de-informacoes-sensiveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Roubo de informações sensíveis
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#atividades-nao-autorizadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atividades não autorizadas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sequestro-de-sessao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sequestro de sessão
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alteracao-visual-da-pagina" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alteração visual da página
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-xss-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde XSS aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#regra-principal-codificacao-de-saida-contextual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regra principal: codificação de saída contextual
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validacao-de-entrada-ajuda-mas-nao-basta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validação de entrada ajuda, mas não basta
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-inseguro-com-thymeleaf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo inseguro com Thymeleaf
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-seguro-com-thymeleaf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo seguro com Thymeleaf
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#regra-pratica-para-templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regra prática para templates
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-controller-em-spring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de controller em Spring
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#devemos-escapar-antes-de-salvar-no-banco" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Devemos escapar antes de salvar no banco?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-com-resposta-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo com resposta JSON
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sanitizacao-quando-faz-sentido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sanitização: quando faz sentido?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-filtros-simples-sao-perigosos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que filtros simples são perigosos?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#content-security-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Content Security Policy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configurando-csp-com-spring-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configurando CSP com Spring Security
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cookies-e-xss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cookies e XSS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xss-e-autorizacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XSS e autorização
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xss-e-apis-rest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XSS e APIs REST
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#frameworks-ajudam-mas-nao-fazem-milagre" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frameworks ajudam, mas não fazem milagre
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-erro-em-mensagem-de-busca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de erro em mensagem de busca
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#codificacao-por-contexto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Codificação por contexto
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Codificação por contexto">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#corpo-html" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Corpo HTML
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#atributo-html" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atributo HTML
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#url" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        URL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#javascript" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JavaScript
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xss-em-mensagens-de-erro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XSS em mensagens de erro
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xss-em-logs-e-paineis-internos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XSS em logs e painéis internos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-achar-que-xss-e-problema-apenas-do-frontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Achar que XSS é problema apenas do frontend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-usar-saida-nao-escapada-sem-necessidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Usar saída não escapada sem necessidade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-usar-innerhtml-com-dados-externos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Usar innerHTML com dados externos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-confiar-apenas-em-validacao-de-entrada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Confiar apenas em validação de entrada
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-criar-sanitizador-manual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Criar sanitizador manual
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-achar-que-csp-resolve-tudo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Achar que CSP resolve tudo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-esquecer-telas-administrativas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Esquecer telas administrativas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-exibir-mensagens-de-erro-com-dados-nao-confiaveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Exibir mensagens de erro com dados não confiáveis
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decisões de engenharia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quando-apenas-escapar-saida-e-suficiente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando apenas escapar saída é suficiente?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-permitir-html-limitado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando permitir HTML limitado?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-csp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar CSP?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-httponly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar HttpOnly?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-innerhtml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar innerHTML?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checklist-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist prático
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Checklist prático">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#entrada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entrada
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#saida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Saída
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Frontend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sessao-e-cookies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sessão e cookies
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#headers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Headers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operação
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-revisao-em-meucatalogomusicalcom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de revisão em meucatalogomusical.com
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Perguntas de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-o-que-e-xss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. O que é XSS?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-por-que-xss-e-perigoso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Por que XSS é perigoso?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-o-que-e-xss-armazenado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. O que é XSS armazenado?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-o-que-e-xss-refletido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. O que é XSS refletido?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-o-que-e-xss-baseado-em-dom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. O que é XSS baseado em DOM?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-validacao-de-entrada-resolve-xss-sozinha" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Validação de entrada resolve XSS sozinha?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-o-que-e-codificacao-de-saida-contextual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. O que é codificação de saída contextual?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-por-que-innerhtml-pode-ser-perigoso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Por que innerHTML pode ser perigoso?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-qual-e-a-alternativa-mais-segura-ao-innerhtml-quando-a-intencao-e-exibir-texto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Qual é a alternativa mais segura ao innerHTML quando a intenção é exibir texto?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-em-thymeleaf-qual-e-a-diferenca-entre-thtext-e-thutext" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Em Thymeleaf, qual é a diferença entre th:text e th:utext?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-csp-resolve-xss-completamente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. CSP resolve XSS completamente?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-por-que-httponly-e-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Por que HttpOnly é importante?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-telas-administrativas-tambem-podem-ter-xss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Telas administrativas também podem ter XSS?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-devemos-salvar-texto-ja-escapado-no-banco" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Devemos salvar texto já escapado no banco?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-quando-sanitizacao-faz-sentido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Quando sanitização faz sentido?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="cross-site-scripting-xss-tipos-riscos-e-prevencao">Cross-Site Scripting (XSS): Tipos, Riscos e Prevenção</h1>
+<p>Cross-Site Scripting, mais conhecido como XSS, é uma vulnerabilidade de segurança em aplicações web que permite que conteúdo não confiável seja executado no navegador do usuário como se fizesse parte legítima da aplicação.</p>
+<p>Em termos simples, o problema acontece quando uma aplicação recebe dados externos e depois exibe esses dados em uma página, resposta HTML, template, script ou atributo sem o tratamento correto.</p>
+<p>Imagine a aplicação fictícia <code>meucatalogomusical.com</code>, um catálogo musical onde usuários podem comentar sobre bandas, avaliar álbuns, montar listas de favoritos e escrever resenhas sobre shows de Metal e Hard Rock.</p>
+<p>Uma funcionalidade aparentemente simples, como comentários em uma página da banda Nightwish, já pode abrir espaço para XSS se a aplicação não tratar corretamente o conteúdo enviado pelos usuários.</p>
+<p>Por exemplo, o usuário deveria escrever algo como:</p>
+<div class="highlight"><pre><span></span><code>Esse álbum do Nightwish tem uma atmosfera excelente.
+</code></pre></div>
+<p>A aplicação deveria armazenar esse comentário como texto e exibi-lo como texto.</p>
+<p>O problema começa quando a aplicação permite que o conteúdo enviado seja interpretado pelo navegador como HTML, JavaScript ou outro tipo de código executável.</p>
+<p>XSS é perigoso porque acontece no navegador da vítima, dentro do contexto de confiança da aplicação acessada.</p>
+<h2 id="o-problema-real-que-xss-resolve-no-estudo-de-seguranca">O problema real que XSS resolve no estudo de segurança</h2>
+<p>Estudar XSS ajuda a entender uma regra fundamental de segurança web:</p>
+<blockquote>
+<p>Toda entrada externa deve ser tratada como dado não confiável, inclusive quando ela será apenas exibida na tela.</p>
+</blockquote>
+<p>Muitos desenvolvedores associam segurança apenas ao banco de dados, autenticação ou backend. Porém, XSS mostra que a camada de apresentação também é uma parte crítica da segurança.</p>
+<p>Mesmo que o backend esteja protegido contra SQL Injection, a aplicação ainda pode ser vulnerável se exibir dados não confiáveis de forma insegura.</p>
+<p>A pergunta central é:</p>
+<blockquote>
+<p>Quando eu mostro uma informação na página, o navegador vai interpretá-la como texto ou como código?</p>
+</blockquote>
+<p>A prevenção contra XSS depende principalmente de garantir que conteúdo não confiável seja tratado como texto comum, e não como instrução executável.</p>
+<h2 id="antes-de-entrar-nos-detalhes-uma-ideia-simples">Antes de entrar nos detalhes: uma ideia simples</h2>
+<p>Pense em uma página de comentários da banda Blind Guardian.</p>
+<p>O usuário envia um comentário.</p>
+<p>A aplicação salva no banco.</p>
+<p>Depois, outros usuários acessam a página e veem aquele comentário.</p>
+<p>Fluxo esperado:</p>
+<div class="highlight"><pre><span></span><code>Usuário envia comentário -&gt; aplicação salva -&gt; página exibe comentário como texto
+</code></pre></div>
+<p>Fluxo perigoso:</p>
+<div class="highlight"><pre><span></span><code>Usuário envia conteúdo não confiável -&gt; aplicação salva -&gt; página exibe como HTML/código
+</code></pre></div>
+<p>O erro está em permitir que o navegador interprete o conteúdo enviado pelo usuário como parte da estrutura da página.</p>
+<p>Em uma aplicação segura, comentários, nomes de usuário, títulos, descrições e resenhas devem ser exibidos como dados, não como código.</p>
+<h2 id="definicao-tecnica">Definição técnica</h2>
+<p>Cross-Site Scripting é uma vulnerabilidade em que conteúdo não confiável é inserido em uma página web sem tratamento adequado, permitindo que o navegador execute esse conteúdo no contexto da aplicação.</p>
+<p>Esse conteúdo pode chegar por vários caminhos:</p>
+<ul>
+<li>comentários;</li>
+<li>formulários;</li>
+<li>parâmetros de URL;</li>
+<li>campos de perfil;</li>
+<li>mensagens;</li>
+<li>nomes de exibição;</li>
+<li>uploads;</li>
+<li>dados vindos de APIs;</li>
+<li>dados importados;</li>
+<li>conteúdo de integrações;</li>
+<li>dados armazenados no banco;</li>
+<li>mensagens de erro;</li>
+<li>trechos usados em JavaScript dinâmico.</li>
+</ul>
+<p>O ponto central é que o navegador não sabe automaticamente qual conteúdo é confiável e qual não é. Se a aplicação entrega uma resposta dizendo que algo é HTML ou JavaScript, o navegador tende a interpretar esse conteúdo conforme o contexto.</p>
+<h2 id="por-que-o-nome-e-cross-site-scripting">Por que o nome é Cross-Site Scripting?</h2>
+<p>O nome Cross-Site Scripting vem de ataques históricos em que scripts eram executados em um contexto envolvendo sites diferentes. Com o tempo, o termo passou a ser usado de forma mais ampla para vulnerabilidades em que conteúdo malicioso é injetado e executado no navegador dentro do contexto de uma aplicação confiável.</p>
+<p>Na prática, o nome mais importante para o desenvolvedor é XSS.</p>
+<p>Quando alguém fala “essa tela tem XSS”, normalmente significa:</p>
+<blockquote>
+<p>A aplicação está permitindo que entrada não confiável seja executada no navegador do usuário.</p>
+</blockquote>
+<h2 id="por-que-xss-e-perigoso">Por que XSS é perigoso?</h2>
+<p>XSS é perigoso porque o código roda no navegador da vítima, dentro do contexto da aplicação.</p>
+<p>Dependendo do cenário, isso pode permitir:</p>
+<ul>
+<li>roubo de informações sensíveis exibidas na página;</li>
+<li>execução de ações em nome do usuário;</li>
+<li>sequestro de sessão;</li>
+<li>alteração visual da página;</li>
+<li>redirecionamento para fluxos enganosos;</li>
+<li>captura de dados digitados;</li>
+<li>manipulação de requisições;</li>
+<li>impersonificação de usuário;</li>
+<li>dano à reputação da aplicação.</li>
+</ul>
+<p>Em <code>meucatalogomusical.com</code>, uma falha de XSS poderia afetar páginas como:</p>
+<ul>
+<li>comentários de álbuns;</li>
+<li>resenhas de shows;</li>
+<li>perfil do usuário;</li>
+<li>biografia de bandas;</li>
+<li>mensagens entre usuários;</li>
+<li>busca por bandas;</li>
+<li>área administrativa;</li>
+<li>painel de moderação.</li>
+</ul>
+<p>Mesmo um campo simples como “nome de exibição” pode ser perigoso se for exibido sem escape.</p>
+<h2 id="xss-explora-a-confianca-do-usuario-na-aplicacao">XSS explora a confiança do usuário na aplicação</h2>
+<p>Um usuário confia que a página de <code>meucatalogomusical.com</code> está entregando conteúdo legítimo.</p>
+<p>Se a aplicação exibe um conteúdo malicioso como se fosse parte da própria página, o navegador executa aquele conteúdo dentro do domínio confiável.</p>
+<p>Esse é o problema: o usuário não está necessariamente acessando um site estranho. Ele está acessando a aplicação que conhece.</p>
+<p>Por isso, XSS é uma vulnerabilidade de aplicação, não apenas um problema do navegador.</p>
+<h2 id="tipos-principais-de-xss">Tipos principais de XSS</h2>
+<p>Os tipos mais comuns de XSS são:</p>
+<ul>
+<li>XSS armazenado;</li>
+<li>XSS refletido;</li>
+<li>XSS baseado em DOM.</li>
+</ul>
+<h2 id="xss-armazenado">XSS armazenado</h2>
+<p>XSS armazenado acontece quando o conteúdo não confiável é salvo pela aplicação e depois exibido para outros usuários de forma insegura.</p>
+<p>Exemplo conceitual:</p>
+<ol>
+<li>Um usuário envia um comentário.</li>
+<li>A aplicação salva o comentário no banco de dados.</li>
+<li>Outro usuário abre a página.</li>
+<li>A aplicação carrega o comentário salvo.</li>
+<li>O navegador interpreta o conteúdo como código.</li>
+</ol>
+<p>Esse tipo é especialmente perigoso porque o conteúdo fica persistido.</p>
+<p>Em <code>meucatalogomusical.com</code>, isso poderia acontecer em:</p>
+<ul>
+<li>comentários sobre um álbum do Opeth;</li>
+<li>resenhas de shows do Scorpions;</li>
+<li>biografia colaborativa de uma banda;</li>
+<li>nome de usuário;</li>
+<li>descrição de playlist;</li>
+<li>mensagens privadas;</li>
+<li>avaliações textuais.</li>
+</ul>
+<p>O problema não está em permitir comentários. O problema está em exibir comentários sem codificação de saída adequada.</p>
+<h2 id="xss-refletido">XSS refletido</h2>
+<p>XSS refletido acontece quando a entrada enviada na requisição é devolvida imediatamente na resposta da aplicação sem tratamento adequado.</p>
+<p>Exemplo conceitual:</p>
+<div class="highlight"><pre><span></span><code>GET /buscar?termo=Queensryche
+</code></pre></div>
+<p>A página de busca pode exibir:</p>
+<div class="highlight"><pre><span></span><code>Resultados para: Queensryche
+</code></pre></div>
+<p>Isso é normal.</p>
+<p>O risco aparece se o valor de <code>termo</code> for incluído na página sem escape.</p>
+<p>Nesse caso, a entrada vem na requisição e é refletida na resposta.</p>
+<p>Em <code>meucatalogomusical.com</code>, esse risco poderia aparecer em:</p>
+<ul>
+<li>página de busca;</li>
+<li>mensagens de erro;</li>
+<li>filtros;</li>
+<li>páginas de resultado;</li>
+<li>parâmetros de redirecionamento;</li>
+<li>telas que mostram “você pesquisou por...”.</li>
+</ul>
+<p>XSS refletido normalmente depende de o usuário acessar uma URL ou fluxo específico contendo uma entrada manipulada. Mesmo assim, é uma falha séria.</p>
+<h2 id="xss-baseado-em-dom">XSS baseado em DOM</h2>
+<p>XSS baseado em DOM acontece quando o próprio JavaScript do frontend manipula dados não confiáveis e insere esses dados no DOM de forma insegura.</p>
+<p>DOM significa Document Object Model. É a representação da página HTML em memória no navegador.</p>
+<p>Esse tipo de XSS pode ocorrer mesmo quando o backend não devolve diretamente conteúdo inseguro. O problema pode estar no JavaScript do lado do cliente.</p>
+<p>Exemplo conceitual inseguro:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">URLSearchParams</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">search</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">termo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;termo&quot;</span><span class="p">);</span>
+
+<span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;resultado&quot;</span><span class="p">).</span><span class="nx">innerHTML</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Resultados para: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">termo</span><span class="p">;</span>
+</code></pre></div>
+<p>O risco está no uso de <code>innerHTML</code> com dado vindo da URL.</p>
+<p>Uma alternativa mais segura, quando a intenção é exibir texto, é usar <code>textContent</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">params</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">URLSearchParams</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">search</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">termo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">params</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;termo&quot;</span><span class="p">);</span>
+
+<span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;resultado&quot;</span><span class="p">).</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Resultados para: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">termo</span><span class="p">;</span>
+</code></pre></div>
+<p>A diferença é importante:</p>
+<ul>
+<li><code>innerHTML</code> interpreta o valor como HTML;</li>
+<li><code>textContent</code> trata o valor como texto.</li>
+</ul>
+<p>Em aplicações modernas, muito conteúdo é montado no frontend. Por isso, XSS não é apenas uma preocupação do backend.</p>
+<h2 id="o-que-xss-pode-causar">O que XSS pode causar?</h2>
+<p>Os principais riscos de XSS incluem:</p>
+<ul>
+<li>roubo de informações sensíveis;</li>
+<li>atividades não autorizadas;</li>
+<li>sequestro de sessão;</li>
+<li>alteração da página;</li>
+<li>abuso da confiança do usuário;</li>
+<li>exposição de dados privados;</li>
+<li>danos à reputação.</li>
+</ul>
+<h2 id="roubo-de-informacoes-sensiveis">Roubo de informações sensíveis</h2>
+<p>Se uma página exibe dados privados, um XSS pode permitir que o conteúdo malicioso interaja com esses dados dentro do navegador.</p>
+<p>Em <code>meucatalogomusical.com</code>, isso poderia envolver:</p>
+<ul>
+<li>e-mail do usuário;</li>
+<li>dados do perfil;</li>
+<li>listas privadas;</li>
+<li>histórico de avaliações;</li>
+<li>informações administrativas exibidas em tela;</li>
+<li>preferências pessoais.</li>
+</ul>
+<p>Mesmo que os dados não sejam extremamente críticos, a exposição indevida ainda é um problema de privacidade e confiança.</p>
+<h2 id="atividades-nao-autorizadas">Atividades não autorizadas</h2>
+<p>Um XSS pode induzir o navegador do usuário a executar ações dentro da aplicação.</p>
+<p>Se o usuário estiver autenticado, o navegador pode enviar cookies e credenciais automaticamente, dependendo da configuração da aplicação.</p>
+<p>Por isso, XSS pode ser combinado com ações indevidas, como:</p>
+<ul>
+<li>alterar dados de perfil;</li>
+<li>publicar comentários;</li>
+<li>modificar preferências;</li>
+<li>acionar endpoints;</li>
+<li>interagir com funcionalidades que o usuário autenticado pode acessar.</li>
+</ul>
+<p>Isso reforça a importância de várias camadas de defesa, como validação, autorização, proteção de sessão, CSRF quando aplicável e Content Security Policy.</p>
+<h2 id="sequestro-de-sessao">Sequestro de sessão</h2>
+<p>Sessões web muitas vezes dependem de cookies.</p>
+<p>Se cookies de sessão forem mal protegidos, um XSS pode aumentar o risco de comprometimento da sessão.</p>
+<p>O atributo <code>HttpOnly</code> ajuda porque impede que JavaScript acesse diretamente o cookie. Porém, ele não resolve todos os impactos de XSS. Mesmo com <code>HttpOnly</code>, um script executado no contexto da página pode tentar interagir com a aplicação em nome do usuário.</p>
+<p>Por isso, <code>HttpOnly</code> é uma defesa importante, mas não substitui prevenção contra XSS.</p>
+<h2 id="alteracao-visual-da-pagina">Alteração visual da página</h2>
+<p>Um XSS pode alterar o conteúdo exibido para o usuário.</p>
+<p>Isso pode ser usado para:</p>
+<ul>
+<li>simular mensagens falsas;</li>
+<li>alterar botões;</li>
+<li>esconder avisos;</li>
+<li>modificar formulários;</li>
+<li>induzir ações;</li>
+<li>prejudicar a credibilidade da aplicação.</li>
+</ul>
+<p>Em uma aplicação como <code>meucatalogomusical.com</code>, uma página de review poderia ser visualmente adulterada para enganar usuários ou administradores.</p>
+<h2 id="onde-xss-aparece-em-sistemas-reais">Onde XSS aparece em sistemas reais</h2>
+<p>XSS pode aparecer em muitos lugares:</p>
+<ul>
+<li>comentários;</li>
+<li>fóruns;</li>
+<li>avaliações;</li>
+<li>chats;</li>
+<li>nomes de usuário;</li>
+<li>descrições de perfil;</li>
+<li>mensagens administrativas;</li>
+<li>dashboards;</li>
+<li>resultados de busca;</li>
+<li>páginas de erro;</li>
+<li>templates de e-mail;</li>
+<li>parâmetros de URL;</li>
+<li>campos importados de planilhas;</li>
+<li>dados vindos de integrações;</li>
+<li>sistemas internos de atendimento;</li>
+<li>painéis de backoffice.</li>
+</ul>
+<p>Um erro comum é pensar que XSS só existe em sites públicos. Sistemas internos também podem ser vulneráveis, especialmente quando exibem dados enviados por usuários, clientes, integrações ou arquivos importados.</p>
+<h2 id="regra-principal-codificacao-de-saida-contextual">Regra principal: codificação de saída contextual</h2>
+<p>A principal defesa contra XSS é fazer codificação de saída adequada ao contexto.</p>
+<p>Isso significa que a aplicação deve transformar caracteres especiais em uma forma segura antes de inserir dados não confiáveis na resposta.</p>
+<p>Mas essa codificação depende do local onde o dado será inserido.</p>
+<p>Não é a mesma coisa inserir dado em:</p>
+<ul>
+<li>corpo HTML;</li>
+<li>atributo HTML;</li>
+<li>JavaScript;</li>
+<li>CSS;</li>
+<li>URL.</li>
+</ul>
+<p>Cada contexto possui regras próprias.</p>
+<p>Exemplo de contextos:</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Comentário aqui<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">input</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Comentário aqui&quot;</span><span class="p">&gt;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">comentario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Comentário aqui&quot;</span><span class="p">;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nt">background-image</span><span class="o">:</span><span class="w"> </span><span class="nt">url</span><span class="o">(</span><span class="s2">&quot;valor-aqui&quot;</span><span class="o">);</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;valor-aqui&quot;</span><span class="p">&gt;</span>Link<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>A saída precisa ser codificada conforme o contexto correto.</p>
+<h2 id="validacao-de-entrada-ajuda-mas-nao-basta">Validação de entrada ajuda, mas não basta</h2>
+<p>Validação de entrada é importante.</p>
+<p>Ela responde perguntas como:</p>
+<ul>
+<li>o campo é obrigatório?</li>
+<li>o tamanho máximo foi respeitado?</li>
+<li>o valor faz sentido?</li>
+<li>o formato é esperado?</li>
+<li>o tipo está correto?</li>
+<li>o valor pertence a uma lista permitida?</li>
+</ul>
+<p>Por exemplo, um comentário pode ter limite de tamanho:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.comentarios.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.validation.constraints.NotBlank</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.validation.constraints.Size</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">NovoComentarioRequest</span><span class="p">(</span>
+
+<span class="w">        </span><span class="nd">@NotBlank</span>
+<span class="w">        </span><span class="nd">@Size</span><span class="p">(</span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">)</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">conteudo</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Essa validação é útil, mas não substitui codificação de saída.</p>
+<p>Um texto pode ter tamanho válido e ainda assim conter caracteres que precisam ser escapados ao ser exibido.</p>
+<p>Portanto:</p>
+<ul>
+<li>valide na entrada;</li>
+<li>codifique na saída;</li>
+<li>sanitize apenas quando realmente precisar permitir HTML limitado.</li>
+</ul>
+<h2 id="exemplo-inseguro-com-thymeleaf">Exemplo inseguro com Thymeleaf</h2>
+<p>Em aplicações Spring MVC, é comum usar Thymeleaf para renderizar HTML no servidor.</p>
+<p>Imagine uma página que exibe comentários sobre um álbum do Rush.</p>
+<p>Exemplo perigoso:</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;comentario&quot;</span> <span class="na">th:utext</span><span class="o">=</span><span class="s">&quot;${comentario.conteudo}&quot;</span><span class="p">&gt;</span>
+    Comentário do usuário
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>O atributo <code>th:utext</code> renderiza conteúdo sem escape.</p>
+<p>Isso pode ser perigoso se <code>comentario.conteudo</code> vier de usuário ou de qualquer fonte não confiável.</p>
+<p>A aplicação está dizendo ao template:</p>
+<blockquote>
+<p>Renderize este conteúdo como HTML.</p>
+</blockquote>
+<p>Se o conteúdo não for totalmente confiável e sanitizado, isso pode abrir espaço para XSS.</p>
+<h2 id="exemplo-seguro-com-thymeleaf">Exemplo seguro com Thymeleaf</h2>
+<p>Se a intenção é exibir o comentário como texto, use escape de saída.</p>
+<p>Exemplo mais seguro:</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;comentario&quot;</span> <span class="na">th:text</span><span class="o">=</span><span class="s">&quot;${comentario.conteudo}&quot;</span><span class="p">&gt;</span>
+    Comentário do usuário
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>Nesse caso, o conteúdo é tratado como texto.</p>
+<p>Se o usuário escreveu:</p>
+<div class="highlight"><pre><span></span><code>Esse show do Rush foi excelente.
+</code></pre></div>
+<p>a página exibe o texto normalmente.</p>
+<p>Se o usuário tentar enviar caracteres especiais de HTML, eles devem ser exibidos como texto, não interpretados como estrutura da página.</p>
+<h2 id="regra-pratica-para-templates">Regra prática para templates</h2>
+<p>Uma boa regra é:</p>
+<blockquote>
+<p>Use saída escapada por padrão. Só use saída não escapada quando houver uma justificativa forte, sanitização robusta e revisão de segurança.</p>
+</blockquote>
+<p>Em outras palavras:</p>
+<ul>
+<li>prefira <code>th:text</code>;</li>
+<li>evite <code>th:utext</code> para conteúdo de usuário;</li>
+<li>não renderize HTML livre enviado por usuário;</li>
+<li>se precisar permitir formatação, use uma biblioteca de sanitização confiável;</li>
+<li>revise cuidadosamente qualquer exceção.</li>
+</ul>
+<h2 id="exemplo-de-controller-em-spring">Exemplo de controller em Spring</h2>
+<p>Vamos criar um fluxo simples para comentários em <code>meucatalogomusical.com</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.comentarios.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.validation.Valid</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.HttpStatus</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.*</span><span class="p">;</span>
+
+<span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/api/albuns/{albumId}/comentarios&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ComentarioController</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ComentarioService</span><span class="w"> </span><span class="n">comentarioService</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ComentarioController</span><span class="p">(</span><span class="n">ComentarioService</span><span class="w"> </span><span class="n">comentarioService</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">comentarioService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">comentarioService</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@PostMapping</span>
+<span class="w">    </span><span class="nd">@ResponseStatus</span><span class="p">(</span><span class="n">HttpStatus</span><span class="p">.</span><span class="na">CREATED</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ComentarioResponse</span><span class="w"> </span><span class="nf">comentar</span><span class="p">(</span>
+<span class="w">            </span><span class="nd">@PathVariable</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">albumId</span><span class="p">,</span>
+<span class="w">            </span><span class="nd">@Valid</span><span class="w"> </span><span class="nd">@RequestBody</span><span class="w"> </span><span class="n">NovoComentarioRequest</span><span class="w"> </span><span class="n">request</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">comentarioService</span><span class="p">.</span><span class="na">comentar</span><span class="p">(</span><span class="n">albumId</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>O DTO de entrada:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.comentarios.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.validation.constraints.NotBlank</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.validation.constraints.Size</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">NovoComentarioRequest</span><span class="p">(</span>
+
+<span class="w">        </span><span class="nd">@NotBlank</span>
+<span class="w">        </span><span class="nd">@Size</span><span class="p">(</span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">)</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">conteudo</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>O DTO de saída:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.comentarios.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.time.OffsetDateTime</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">ComentarioResponse</span><span class="p">(</span>
+<span class="w">        </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">,</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">autor</span><span class="p">,</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">conteudo</span><span class="p">,</span>
+<span class="w">        </span><span class="n">OffsetDateTime</span><span class="w"> </span><span class="n">criadoEm</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse backend valida tamanho e obrigatoriedade, mas não tenta “executar” nem “interpretar” o comentário.</p>
+<p>A responsabilidade de exibir o conteúdo de forma segura continua sendo da camada de apresentação.</p>
+<h2 id="devemos-escapar-antes-de-salvar-no-banco">Devemos escapar antes de salvar no banco?</h2>
+<p>Em geral, não é recomendado salvar o texto já escapado no banco como regra universal.</p>
+<p>O ideal costuma ser:</p>
+<ul>
+<li>armazenar o dado original como dado;</li>
+<li>validar regras de domínio;</li>
+<li>codificar/escapar na saída conforme o contexto.</li>
+</ul>
+<p>Por quê?</p>
+<p>Porque o mesmo dado pode ser exibido em contextos diferentes:</p>
+<ul>
+<li>HTML;</li>
+<li>JSON;</li>
+<li>atributo HTML;</li>
+<li>PDF;</li>
+<li>e-mail;</li>
+<li>log;</li>
+<li>JavaScript;</li>
+<li>mobile app.</li>
+</ul>
+<p>Cada contexto pode exigir tratamento diferente.</p>
+<p>Se você salva o dado já escapado para HTML, pode acabar criando problemas em outros contextos, como exibição duplicadamente escapada ou tratamento incorreto.</p>
+<h2 id="exemplo-com-resposta-json">Exemplo com resposta JSON</h2>
+<p>APIs REST geralmente retornam JSON.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;autor&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;joao&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;conteudo&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Esse álbum do Van Halen é clássico.&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;criadoEm&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-06-22T10:30:00-03:00&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Retornar JSON corretamente não significa que o frontend pode jogar <code>conteudo</code> diretamente em <code>innerHTML</code>.</p>
+<p>No frontend, se a intenção é mostrar texto, deve-se usar APIs que tratem o valor como texto.</p>
+<p>Exemplo seguro:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">elemento</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;comentario&quot;</span><span class="p">);</span>
+<span class="nx">elemento</span><span class="p">.</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">comentario</span><span class="p">.</span><span class="nx">conteudo</span><span class="p">;</span>
+</code></pre></div>
+<p>Exemplo arriscado:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">elemento</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;comentario&quot;</span><span class="p">);</span>
+<span class="nx">elemento</span><span class="p">.</span><span class="nx">innerHTML</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">comentario</span><span class="p">.</span><span class="nx">conteudo</span><span class="p">;</span>
+</code></pre></div>
+<p>A API pode estar correta, mas o frontend ainda pode introduzir XSS se renderizar o dado de forma insegura.</p>
+<h2 id="sanitizacao-quando-faz-sentido">Sanitização: quando faz sentido?</h2>
+<p>Sanitização é o processo de limpar um conteúdo, removendo ou neutralizando partes perigosas.</p>
+<p>Ela faz sentido quando a aplicação realmente precisa permitir algum HTML controlado.</p>
+<p>Exemplo: permitir que uma resenha use apenas formatação simples, como negrito, itálico e listas.</p>
+<p>Mesmo nesse caso, a aplicação não deve aceitar HTML livre. Ela deve usar uma biblioteca confiável de sanitização e permitir apenas um conjunto restrito de tags e atributos.</p>
+<p>Regra prática:</p>
+<ul>
+<li>se não precisa permitir HTML, não permita;</li>
+<li>se precisa permitir HTML, sanitize com biblioteca confiável;</li>
+<li>mesmo sanitizando, codifique corretamente no contexto de saída;</li>
+<li>não crie sanitizador manual baseado em substituições simples.</li>
+</ul>
+<h2 id="por-que-filtros-simples-sao-perigosos">Por que filtros simples são perigosos?</h2>
+<p>Um erro comum é tentar bloquear algumas palavras ou caracteres específicos.</p>
+<p>Exemplo de ideia ruim:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">conteudoSeguro</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">conteudo</span><span class="p">.</span><span class="na">replace</span><span class="p">(</span><span class="s">&quot;&lt;script&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>Esse tipo de abordagem é frágil.</p>
+<p>XSS possui muitos contextos e variações. Bloquear algumas substrings raramente é suficiente.</p>
+<p>A defesa correta não é tentar adivinhar todas as formas perigosas de entrada. A defesa correta é:</p>
+<ul>
+<li>usar saída escapada;</li>
+<li>aplicar codificação contextual;</li>
+<li>evitar APIs perigosas;</li>
+<li>sanitizar corretamente quando HTML for necessário;</li>
+<li>usar Content Security Policy como camada adicional;</li>
+<li>proteger cookies;</li>
+<li>revisar fluxos sensíveis.</li>
+</ul>
+<h2 id="content-security-policy">Content Security Policy</h2>
+<p>Content Security Policy, ou CSP, é um header HTTP que permite declarar quais fontes de conteúdo a página pode carregar e executar.</p>
+<p>Ele pode ajudar a mitigar impactos de XSS, restringindo de onde scripts, estilos, imagens e outros recursos podem ser carregados.</p>
+<p>Exemplo conceitual:</p>
+<div class="highlight"><pre><span></span><code><span class="err">Content-Security-Policy: default-src &#39;self&#39;; script-src &#39;self&#39;</span>
+</code></pre></div>
+<p>Essa política diz, de forma simplificada, que recursos devem vir da própria origem.</p>
+<p>CSP é uma camada importante de defesa, mas não deve ser vista como substituto para corrigir XSS na origem.</p>
+<p>Se a aplicação renderiza conteúdo de usuário sem escape, a falha continua existindo. O CSP pode reduzir o impacto, mas não justifica manter uma renderização insegura.</p>
+<h2 id="configurando-csp-com-spring-security">Configurando CSP com Spring Security</h2>
+<p>Em uma aplicação Spring, é possível configurar headers de segurança no Spring Security.</p>
+<p>Exemplo didático:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.config</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.context.annotation.Bean</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.context.annotation.Configuration</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.security.config.Customizer</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.security.config.annotation.web.builders.HttpSecurity</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.security.web.SecurityFilterChain</span><span class="p">;</span>
+
+<span class="nd">@Configuration</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SecurityConfig</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Bean</span>
+<span class="w">    </span><span class="n">SecurityFilterChain</span><span class="w"> </span><span class="nf">securityFilterChain</span><span class="p">(</span><span class="n">HttpSecurity</span><span class="w"> </span><span class="n">http</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">http</span>
+<span class="w">                </span><span class="p">.</span><span class="na">headers</span><span class="p">(</span><span class="n">headers</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">headers</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">contentSecurityPolicy</span><span class="p">(</span><span class="n">csp</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">csp</span>
+<span class="w">                                </span><span class="p">.</span><span class="na">policyDirectives</span><span class="p">(</span><span class="s">&quot;default-src &#39;self&#39;; script-src &#39;self&#39;; object-src &#39;none&#39;; base-uri &#39;self&#39;&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="p">)</span>
+<span class="w">                </span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">authorizeHttpRequests</span><span class="p">(</span><span class="n">authorize</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">authorize</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">requestMatchers</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/bandas/**&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/albuns/**&quot;</span><span class="p">).</span><span class="na">permitAll</span><span class="p">()</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">anyRequest</span><span class="p">().</span><span class="na">authenticated</span><span class="p">()</span>
+<span class="w">                </span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">formLogin</span><span class="p">(</span><span class="n">Customizer</span><span class="p">.</span><span class="na">withDefaults</span><span class="p">())</span>
+<span class="w">                </span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Essa configuração é apenas um ponto de partida didático.</p>
+<p>Uma política CSP real precisa ser planejada conforme:</p>
+<ul>
+<li>scripts usados pela aplicação;</li>
+<li>CDN;</li>
+<li>estilos;</li>
+<li>imagens;</li>
+<li>fontes;</li>
+<li>integrações;</li>
+<li>analytics;</li>
+<li>ferramentas de observabilidade;</li>
+<li>ambiente de produção;</li>
+<li>necessidades do frontend.</li>
+</ul>
+<p>Uma CSP muito permissiva perde valor. Uma CSP muito restritiva pode quebrar a aplicação.</p>
+<h2 id="cookies-e-xss">Cookies e XSS</h2>
+<p>Cookies de sessão devem usar atributos seguros.</p>
+<p>Exemplo de configuração em Spring Boot:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">server</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">servlet</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">session</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">cookie</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MEU_CATALOGO_SESSION</span>
+<span class="w">        </span><span class="nt">http-only</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">        </span><span class="nt">secure</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">        </span><span class="nt">same-site</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lax</span>
+</code></pre></div>
+<p>Esses atributos ajudam:</p>
+<ul>
+<li><code>HttpOnly</code>: dificulta acesso direto ao cookie por JavaScript;</li>
+<li><code>Secure</code>: envia o cookie apenas por HTTPS;</li>
+<li><code>SameSite</code>: ajuda a controlar envio em contextos cross-site.</li>
+</ul>
+<p>Esses atributos são importantes, mas não eliminam XSS.</p>
+<p>Eles reduzem impacto em alguns cenários, mas a aplicação ainda precisa impedir que conteúdo não confiável execute no navegador.</p>
+<h2 id="xss-e-autorizacao">XSS e autorização</h2>
+<p>XSS não é apenas problema de frontend.</p>
+<p>Se um usuário autenticado possui permissões administrativas, um XSS executado no navegador desse usuário pode ter impacto maior.</p>
+<p>Por exemplo, imagine um moderador de <code>meucatalogomusical.com</code> acessando uma tela de comentários pendentes. Se essa tela renderizar comentários sem escape, um conteúdo malicioso armazenado por outro usuário poderia afetar o navegador do moderador.</p>
+<p>Isso mostra por que telas administrativas também precisam de cuidado.</p>
+<p>Na verdade, elas precisam de cuidado ainda maior, porque usuários administrativos têm mais permissões.</p>
+<h2 id="xss-e-apis-rest">XSS e APIs REST</h2>
+<p>Mesmo quando o backend é apenas uma API REST, ele ainda participa da prevenção contra XSS.</p>
+<p>A API deve:</p>
+<ul>
+<li>validar entradas;</li>
+<li>definir tipos corretos de conteúdo;</li>
+<li>evitar retornar HTML quando deveria retornar JSON;</li>
+<li>não misturar dados com scripts;</li>
+<li>não expor mensagens de erro com conteúdo não confiável;</li>
+<li>documentar contratos de dados;</li>
+<li>evitar armazenar HTML livre sem necessidade.</li>
+</ul>
+<p>O frontend, por sua vez, deve:</p>
+<ul>
+<li>renderizar dados como texto;</li>
+<li>evitar <code>innerHTML</code> com dados não confiáveis;</li>
+<li>usar frameworks corretamente;</li>
+<li>evitar bypass de mecanismos de escape;</li>
+<li>aplicar sanitização quando necessário;</li>
+<li>adotar CSP.</li>
+</ul>
+<h2 id="frameworks-ajudam-mas-nao-fazem-milagre">Frameworks ajudam, mas não fazem milagre</h2>
+<p>Frameworks modernos ajudam bastante na prevenção de XSS.</p>
+<p>Muitos template engines escapam valores por padrão. Muitos frameworks frontend também tratam interpolação de texto de forma segura.</p>
+<p>Mas vulnerabilidades aparecem quando o desenvolvedor desativa ou contorna esses mecanismos.</p>
+<p>Exemplos de risco:</p>
+<ul>
+<li>usar saída não escapada;</li>
+<li>usar <code>innerHTML</code>;</li>
+<li>montar HTML por concatenação;</li>
+<li>permitir HTML livre;</li>
+<li>inserir dados em JavaScript sem codificação adequada;</li>
+<li>usar bibliotecas antigas ou vulneráveis;</li>
+<li>copiar trechos de código sem entender o contexto;</li>
+<li>ignorar alertas de análise de segurança.</li>
+</ul>
+<p>A regra é: entenda o padrão seguro do framework e evite APIs de escape bypass sem motivo forte.</p>
+<h2 id="exemplo-de-erro-em-mensagem-de-busca">Exemplo de erro em mensagem de busca</h2>
+<p>Imagine uma tela de busca:</p>
+<div class="highlight"><pre><span></span><code>GET /buscar?termo=Kiss
+</code></pre></div>
+<p>A página exibe:</p>
+<div class="highlight"><pre><span></span><code>Resultados para: Kiss
+</code></pre></div>
+<p>No backend, o controller poderia ser:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.busca.web</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Controller</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.ui.Model</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.GetMapping</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RequestParam</span><span class="p">;</span>
+
+<span class="nd">@Controller</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BuscaController</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/buscar&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">buscar</span><span class="p">(</span><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">termo</span><span class="p">,</span><span class="w"> </span><span class="n">Model</span><span class="w"> </span><span class="n">model</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">model</span><span class="p">.</span><span class="na">addAttribute</span><span class="p">(</span><span class="s">&quot;termo&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">termo</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;busca/resultados&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse controller apenas coloca o termo no model.</p>
+<p>O risco depende de como o template renderiza esse valor.</p>
+<p>Template seguro:</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Resultados para: <span class="p">&lt;</span><span class="nt">span</span> <span class="na">th:text</span><span class="o">=</span><span class="s">&quot;${termo}&quot;</span><span class="p">&gt;</span>termo<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>Template perigoso:</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Resultados para: <span class="p">&lt;</span><span class="nt">span</span> <span class="na">th:utext</span><span class="o">=</span><span class="s">&quot;${termo}&quot;</span><span class="p">&gt;</span>termo<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>O problema não está necessariamente no controller. Está na decisão de saída do template.</p>
+<h2 id="codificacao-por-contexto">Codificação por contexto</h2>
+<p>A forma correta de escapar depende do contexto.</p>
+<h3 id="corpo-html">Corpo HTML</h3>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">p</span> <span class="na">th:text</span><span class="o">=</span><span class="s">&quot;${comentario.conteudo}&quot;</span><span class="p">&gt;</span>Comentário<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>O valor deve ser tratado como texto HTML.</p>
+<h3 id="atributo-html">Atributo HTML</h3>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">th:value</span><span class="o">=</span><span class="s">&quot;${perfil.nomeExibicao}&quot;</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>O valor precisa ser seguro para atributo HTML.</p>
+<h3 id="url">URL</h3>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">a</span> <span class="na">th:href</span><span class="o">=</span><span class="s">&quot;@{/bandas/{id}(id=${banda.id})}&quot;</span><span class="p">&gt;</span>Ver banda<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>URLs precisam ser construídas com mecanismos apropriados, não por concatenação manual insegura.</p>
+<h3 id="javascript">JavaScript</h3>
+<p>Inserir dados diretamente dentro de JavaScript exige muito cuidado.</p>
+<p>Evite montar scripts com concatenação de dados não confiáveis.</p>
+<p>Quando possível, prefira transferir dados por JSON seguro e deixar o framework lidar com serialização e renderização.</p>
+<h2 id="xss-em-mensagens-de-erro">XSS em mensagens de erro</h2>
+<p>Mensagens de erro também podem gerar XSS.</p>
+<p>Exemplo de risco:</p>
+<div class="highlight"><pre><span></span><code>Não foi possível buscar por: [termo informado pelo usuário]
+</code></pre></div>
+<p>Se o termo for refletido na página sem escape, a mensagem de erro vira vetor de XSS.</p>
+<p>Portanto, até mensagens de erro precisam renderizar dados como texto.</p>
+<p>Além disso, mensagens de erro não devem expor detalhes internos da aplicação.</p>
+<h2 id="xss-em-logs-e-paineis-internos">XSS em logs e painéis internos</h2>
+<p>Um ponto menos óbvio: logs e painéis administrativos também podem sofrer XSS.</p>
+<p>Imagine que a aplicação registre o <code>User-Agent</code>, parâmetros de busca ou mensagens de erro. Depois, um painel interno exibe esses logs em HTML.</p>
+<p>Se esse painel renderizar os dados sem escape, um valor malicioso registrado no log pode afetar o navegador de um analista, desenvolvedor ou administrador.</p>
+<p>Portanto:</p>
+<ul>
+<li>dados em logs também são dados não confiáveis;</li>
+<li>painéis internos também precisam escapar saída;</li>
+<li>backoffices também fazem parte da superfície de ataque.</li>
+</ul>
+<h2 id="boas-praticas">Boas práticas</h2>
+<p>As principais boas práticas contra XSS são:</p>
+<ul>
+<li>escapar saída por padrão;</li>
+<li>usar codificação contextual;</li>
+<li>evitar renderizar HTML livre enviado por usuário;</li>
+<li>usar <code>textContent</code> em vez de <code>innerHTML</code> quando a intenção for texto;</li>
+<li>preferir <code>th:text</code> em vez de <code>th:utext</code> para conteúdo não confiável;</li>
+<li>validar entradas no backend;</li>
+<li>limitar tamanho de campos textuais;</li>
+<li>usar listas permitidas quando possível;</li>
+<li>sanitizar com biblioteca confiável quando HTML limitado for realmente necessário;</li>
+<li>configurar CSP como camada adicional;</li>
+<li>proteger cookies com <code>HttpOnly</code>, <code>Secure</code> e <code>SameSite</code>;</li>
+<li>evitar dados sensíveis acessíveis no frontend;</li>
+<li>aplicar autorização corretamente;</li>
+<li>testar telas públicas e administrativas;</li>
+<li>revisar templates e componentes de UI;</li>
+<li>evitar mensagens de erro que reflitam entrada sem escape;</li>
+<li>manter dependências atualizadas.</li>
+</ul>
+<h2 id="erros-comuns">Erros comuns</h2>
+<h3 id="1-achar-que-xss-e-problema-apenas-do-frontend">1. Achar que XSS é problema apenas do frontend</h3>
+<p>XSS envolve frontend e backend.</p>
+<p>O backend recebe, valida, armazena e devolve dados. O frontend renderiza esses dados.</p>
+<p>Ambos precisam trabalhar de forma segura.</p>
+<h3 id="2-usar-saida-nao-escapada-sem-necessidade">2. Usar saída não escapada sem necessidade</h3>
+<p>Em Thymeleaf, usar <code>th:utext</code> com conteúdo de usuário é uma decisão perigosa.</p>
+<p>Prefira <code>th:text</code>.</p>
+<h3 id="3-usar-innerhtml-com-dados-externos">3. Usar <code>innerHTML</code> com dados externos</h3>
+<p>Se a intenção é exibir texto, use <code>textContent</code>.</p>
+<h3 id="4-confiar-apenas-em-validacao-de-entrada">4. Confiar apenas em validação de entrada</h3>
+<p>Validação ajuda, mas não substitui codificação de saída.</p>
+<h3 id="5-criar-sanitizador-manual">5. Criar sanitizador manual</h3>
+<p>Sanitização é difícil. Substituições simples não cobrem todos os contextos.</p>
+<h3 id="6-achar-que-csp-resolve-tudo">6. Achar que CSP resolve tudo</h3>
+<p>CSP é uma camada de mitigação. Ela não substitui correção da renderização insegura.</p>
+<h3 id="7-esquecer-telas-administrativas">7. Esquecer telas administrativas</h3>
+<p>Backoffice, dashboards, logs e painéis internos também podem ser alvos.</p>
+<h3 id="8-exibir-mensagens-de-erro-com-dados-nao-confiaveis">8. Exibir mensagens de erro com dados não confiáveis</h3>
+<p>Toda saída que inclui entrada do usuário precisa ser escapada.</p>
+<h2 id="decisoes-de-engenharia">Decisões de engenharia</h2>
+<h3 id="quando-apenas-escapar-saida-e-suficiente">Quando apenas escapar saída é suficiente?</h3>
+<p>Quando a aplicação só precisa exibir texto.</p>
+<p>Exemplos:</p>
+<ul>
+<li>comentários simples;</li>
+<li>nome de usuário;</li>
+<li>título de playlist;</li>
+<li>resenha sem formatação;</li>
+<li>campo de busca;</li>
+<li>descrição curta.</li>
+</ul>
+<p>Nesses casos, a melhor decisão costuma ser armazenar o texto e escapar na saída.</p>
+<h3 id="quando-permitir-html-limitado">Quando permitir HTML limitado?</h3>
+<p>Permitir HTML limitado só faz sentido quando existe necessidade real de formatação.</p>
+<p>Exemplos:</p>
+<ul>
+<li>editor rico de artigos;</li>
+<li>descrição formatada;</li>
+<li>documentação interna;</li>
+<li>conteúdo editorial controlado.</li>
+</ul>
+<p>Mesmo assim, a aplicação deve usar sanitização confiável e permitir apenas tags e atributos seguros.</p>
+<h3 id="quando-usar-csp">Quando usar CSP?</h3>
+<p>Use CSP como camada adicional em aplicações web.</p>
+<p>Ela é especialmente útil para reduzir impacto de injeções de conteúdo, controlar origem de scripts e dificultar execução de recursos inesperados.</p>
+<p>Mas CSP deve ser planejada e testada para não quebrar a aplicação.</p>
+<h3 id="quando-usar-httponly">Quando usar <code>HttpOnly</code>?</h3>
+<p>Use <code>HttpOnly</code> em cookies de sessão sempre que possível.</p>
+<p>Cookies de sessão não devem ser acessados por JavaScript.</p>
+<h3 id="quando-usar-innerhtml">Quando usar <code>innerHTML</code>?</h3>
+<p>Evite <code>innerHTML</code> com dados não confiáveis.</p>
+<p>Use apenas quando houver necessidade real de inserir HTML e quando o conteúdo estiver controlado ou sanitizado adequadamente.</p>
+<p>Na maioria dos casos de exibição de texto, <code>textContent</code> é a escolha correta.</p>
+<h2 id="checklist-pratico">Checklist prático</h2>
+<p>Use este checklist ao revisar uma aplicação contra XSS.</p>
+<h3 id="entrada">Entrada</h3>
+<ul>
+<li>Campos textuais possuem tamanho máximo?</li>
+<li>Entradas obrigatórias são validadas?</li>
+<li>Valores controlados usam enum ou lista permitida?</li>
+<li>A aplicação evita aceitar HTML livre sem necessidade?</li>
+<li>Uploads e importações são tratados como não confiáveis?</li>
+</ul>
+<h3 id="saida">Saída</h3>
+<ul>
+<li>Dados de usuário são escapados ao serem exibidos?</li>
+<li>Templates usam saída escapada por padrão?</li>
+<li>Há uso de saída não escapada?</li>
+<li>Todo uso de saída não escapada foi justificado e revisado?</li>
+<li>Dados em atributos HTML são tratados corretamente?</li>
+<li>Dados inseridos em JavaScript são tratados com cuidado?</li>
+<li>Dados em URLs são construídos com APIs seguras?</li>
+</ul>
+<h3 id="frontend">Frontend</h3>
+<ul>
+<li>O código evita <code>innerHTML</code> com dados externos?</li>
+<li>Usa <code>textContent</code> quando a intenção é texto?</li>
+<li>Frameworks frontend são usados sem bypass de escape?</li>
+<li>Componentes de UI tratam dados como texto por padrão?</li>
+<li>Conteúdo vindo da API é renderizado com segurança?</li>
+</ul>
+<h3 id="sessao-e-cookies">Sessão e cookies</h3>
+<ul>
+<li>Cookies de sessão usam <code>HttpOnly</code>?</li>
+<li>Cookies de sessão usam <code>Secure</code>?</li>
+<li><code>SameSite</code> foi avaliado?</li>
+<li>A aplicação usa HTTPS?</li>
+<li>Logout invalida sessão corretamente?</li>
+</ul>
+<h3 id="headers">Headers</h3>
+<ul>
+<li>Existe CSP?</li>
+<li>A política CSP é restritiva o suficiente?</li>
+<li>A política CSP foi testada?</li>
+<li>Headers de segurança estão configurados?</li>
+<li>Ambientes de produção e homologação foram revisados?</li>
+</ul>
+<h3 id="operacao">Operação</h3>
+<ul>
+<li>Logs são exibidos com escape em painéis internos?</li>
+<li>Mensagens de erro não refletem entrada sem escape?</li>
+<li>Eventos suspeitos são monitorados?</li>
+<li>Dependências são atualizadas?</li>
+<li>Revisões de código verificam uso de APIs perigosas?</li>
+</ul>
+<h2 id="exemplo-de-revisao-em-meucatalogomusicalcom">Exemplo de revisão em <code>meucatalogomusical.com</code></h2>
+<p>Imagine que a aplicação possui uma tela de comentários sobre álbuns do AC/DC.</p>
+<p>Pontos a revisar:</p>
+<ol>
+<li>O campo de comentário tem limite de tamanho?</li>
+<li>O backend valida a entrada?</li>
+<li>O comentário é salvo como texto?</li>
+<li>O template usa <code>th:text</code>?</li>
+<li>Não há <code>th:utext</code> para comentário?</li>
+<li>O frontend não usa <code>innerHTML</code>?</li>
+<li>Cookies usam <code>HttpOnly</code> e <code>Secure</code>?</li>
+<li>Existe CSP em produção?</li>
+<li>A tela administrativa de moderação também escapa comentários?</li>
+<li>Logs e painéis internos também tratam o comentário como texto?</li>
+</ol>
+<p>Se todas essas respostas forem positivas, a aplicação está muito mais bem protegida contra XSS.</p>
+<h2 id="resumo-final">Resumo final</h2>
+<p>Cross-Site Scripting é uma vulnerabilidade em que conteúdo não confiável é executado no navegador do usuário dentro do contexto de uma aplicação confiável.</p>
+<p>Os principais tipos são:</p>
+<ul>
+<li>XSS armazenado;</li>
+<li>XSS refletido;</li>
+<li>XSS baseado em DOM.</li>
+</ul>
+<p>Os principais riscos são:</p>
+<ul>
+<li>roubo de informações sensíveis;</li>
+<li>atividades não autorizadas;</li>
+<li>sequestro de sessão;</li>
+<li>alteração visual da página;</li>
+<li>abuso da confiança do usuário;</li>
+<li>impacto reputacional.</li>
+</ul>
+<p>A defesa principal é a codificação de saída contextual.</p>
+<p>Além disso, aplicações seguras devem combinar:</p>
+<ul>
+<li>validação de entrada;</li>
+<li>escape na saída;</li>
+<li>uso seguro de templates;</li>
+<li>cuidado com JavaScript no frontend;</li>
+<li>sanitização confiável quando HTML limitado for necessário;</li>
+<li>CSP;</li>
+<li>cookies seguros;</li>
+<li>autorização;</li>
+<li>revisão de telas públicas e administrativas.</li>
+</ul>
+<p>A regra mais importante é:</p>
+<blockquote>
+<p>Se veio de fora da aplicação, trate como dado não confiável. Se vai para a tela, escape conforme o contexto.</p>
+</blockquote>
+<h2 id="perguntas-de-revisao">Perguntas de revisão</h2>
+<h3 id="1-o-que-e-xss">1. O que é XSS?</h3>
+<p>XSS é uma vulnerabilidade em que conteúdo não confiável é inserido em uma página web sem tratamento adequado, permitindo que o navegador execute esse conteúdo no contexto da aplicação.</p>
+<h3 id="2-por-que-xss-e-perigoso">2. Por que XSS é perigoso?</h3>
+<p>Porque o conteúdo executa no navegador da vítima, dentro do contexto de uma aplicação confiável. Isso pode permitir roubo de dados, ações indevidas, sequestro de sessão e alteração da página.</p>
+<h3 id="3-o-que-e-xss-armazenado">3. O que é XSS armazenado?</h3>
+<p>É o XSS em que o conteúdo malicioso é salvo pela aplicação, por exemplo em banco de dados, e depois exibido para outros usuários de forma insegura.</p>
+<h3 id="4-o-que-e-xss-refletido">4. O que é XSS refletido?</h3>
+<p>É o XSS em que a entrada enviada em uma requisição é devolvida imediatamente na resposta da aplicação sem tratamento adequado.</p>
+<h3 id="5-o-que-e-xss-baseado-em-dom">5. O que é XSS baseado em DOM?</h3>
+<p>É o XSS que ocorre quando o JavaScript do frontend manipula dados não confiáveis e os insere no DOM de forma insegura.</p>
+<h3 id="6-validacao-de-entrada-resolve-xss-sozinha">6. Validação de entrada resolve XSS sozinha?</h3>
+<p>Não. Validação ajuda, mas a principal defesa contra XSS é a codificação de saída contextual.</p>
+<h3 id="7-o-que-e-codificacao-de-saida-contextual">7. O que é codificação de saída contextual?</h3>
+<p>É escapar dados de acordo com o local onde eles serão inseridos, como corpo HTML, atributo HTML, JavaScript, CSS ou URL.</p>
+<h3 id="8-por-que-innerhtml-pode-ser-perigoso">8. Por que <code>innerHTML</code> pode ser perigoso?</h3>
+<p>Porque <code>innerHTML</code> interpreta o valor como HTML. Se o valor vier de fonte não confiável, pode permitir execução de conteúdo indesejado.</p>
+<h3 id="9-qual-e-a-alternativa-mais-segura-ao-innerhtml-quando-a-intencao-e-exibir-texto">9. Qual é a alternativa mais segura ao <code>innerHTML</code> quando a intenção é exibir texto?</h3>
+<p>A alternativa é usar <code>textContent</code>, pois ele trata o valor como texto.</p>
+<h3 id="10-em-thymeleaf-qual-e-a-diferenca-entre-thtext-e-thutext">10. Em Thymeleaf, qual é a diferença entre <code>th:text</code> e <code>th:utext</code>?</h3>
+<p><code>th:text</code> exibe o valor com escape. <code>th:utext</code> exibe o valor sem escape. Para conteúdo não confiável, <code>th:text</code> é a opção mais segura.</p>
+<h3 id="11-csp-resolve-xss-completamente">11. CSP resolve XSS completamente?</h3>
+<p>Não. CSP é uma camada adicional de mitigação. A aplicação ainda precisa corrigir renderizações inseguras e aplicar escape adequado.</p>
+<h3 id="12-por-que-httponly-e-importante">12. Por que <code>HttpOnly</code> é importante?</h3>
+<p>Porque impede que JavaScript acesse diretamente o cookie. Isso reduz o impacto de alguns cenários de XSS envolvendo cookies de sessão.</p>
+<h3 id="13-telas-administrativas-tambem-podem-ter-xss">13. Telas administrativas também podem ter XSS?</h3>
+<p>Sim. Backoffices, dashboards e painéis internos também podem exibir dados não confiáveis e precisam aplicar escape de saída.</p>
+<h3 id="14-devemos-salvar-texto-ja-escapado-no-banco">14. Devemos salvar texto já escapado no banco?</h3>
+<p>Em geral, não. O ideal é salvar o dado original e aplicar escape na saída conforme o contexto em que ele será exibido.</p>
+<h3 id="15-quando-sanitizacao-faz-sentido">15. Quando sanitização faz sentido?</h3>
+<p>Sanitização faz sentido quando a aplicação realmente precisa permitir HTML limitado. Mesmo assim, deve ser feita com biblioteca confiável e política restritiva.</p>
+<h2 id="referencias">Referências</h2>
+<ul>
+<li>OWASP Cross-Site Scripting Prevention Cheat Sheet.</li>
+<li>OWASP DOM Based XSS Prevention Cheat Sheet.</li>
+<li>OWASP Cross Site Scripting.</li>
+<li>MDN Web Docs — Cross-site scripting.</li>
+<li>MDN Web Docs — Content Security Policy.</li>
+<li>OWASP Content Security Policy Cheat Sheet.</li>
+<li>OWASP Session Management Cheat Sheet.</li>
+<li>Spring Security Reference — Security HTTP Response Headers.</li>
+<li>Thymeleaf Documentation — Using Thymeleaf.</li>
+<li>Oracle JDK 25 Documentation.</li>
+<li>Spring Boot Reference Documentation.</li>
+</ul>
+<p>Para os exemplos, mantive Java 25 como LTS atual e Spring Boot 4.x/Spring Framework 7.x como base moderna compatível para o ecossistema Spring; a Oracle lista o JDK 25 como LTS mais recente e a documentação do Spring Boot informa compatibilidade da linha 4.1 com Java até 26 e Spring Framework 7.0.8 ou superior. (<a href="https://www.oracle.com/br/java/technologies/downloads/" title="Java Downloads | Oracle Brasil">oracle.com</a>)</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

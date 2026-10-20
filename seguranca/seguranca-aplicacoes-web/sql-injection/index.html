@@ -1,0 +1,3946 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../http-dns-sessoes-https/">
+      
+      
+        <link rel="next" href="../xss/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>SQL Injection - Funcionamento, Impactos e Prevenção - README</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/css/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sql-injection-funcionamento-impactos-e-prevencao" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../../.." title="README" class="md-header__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            README
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SQL Injection - Funcionamento, Impactos e Prevenção
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="README" class="md-nav__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    README
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Backend
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/fundamentos-da-linguagem-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/convencoes-de-codigo-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convenções de código em Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/variaveis-tipos-primitivos-operadores-conversoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variáveis, tipos primitivos, operadores e conversões
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/fundamentos-de-string/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de String
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-controle-operadores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de controle e operadores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-condicionais/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas condicionais
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-de-repeticao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de repetição
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Iniciando em Orientação a Objetos (POO)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Iniciando em Orientação a Objetos (POO)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/introducao-orientacao-a-objetos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução à POO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/classes-e-objetos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes e objetos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/classes-objetos-metodos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes, objetos e métodos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Spring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/api-rest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    O que é API REST?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/http/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Um pouco de HTTP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/por-que-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Por que escolher Spring?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/spring-boot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Boot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/spring-initializr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Initializr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/maven-pom/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maven e pom.xml
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Segurança
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Segurança
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Segurança em aplicações web
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Segurança em aplicações web
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introducao-seguranca-aplicacoes-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução à Segurança de Aplicações Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../http-dns-sessoes-https/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTTP, DNS, Sessões e HTTPS na Segurança Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Injection - Funcionamento, Impactos e Prevenção
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Injection - Funcionamento, Impactos e Prevenção
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-problema-real-que-sql-injection-resolve-no-estudo-de-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O problema real que SQL Injection resolve no estudo de segurança
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-nos-detalhes-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar nos detalhes: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-sql-injection-e-perigoso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que SQL Injection é perigoso?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-sql-injection-acontece-na-pratica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como SQL Injection acontece na prática
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-concatenacao-e-perigosa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que concatenação é perigosa?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#correcao-com-parametros-usando-jdbctemplate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Correção com parâmetros usando JdbcTemplate
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analisando-o-codigo-seguro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analisando o código seguro
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#correcao-com-preparedstatement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Correção com PreparedStatement
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#correcao-com-spring-data-jpa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Correção com Spring Data JPA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#consulta-derivada-com-spring-data-jpa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Consulta derivada com Spring Data JPA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entidade-de-exemplo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entidade de exemplo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validacao-de-entrada-nao-substitui-consulta-parametrizada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validação de entrada não substitui consulta parametrizada
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validacao-por-lista-permitida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validação por lista permitida
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuidado-especial-com-ordenacao-dinamica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cuidado especial com ordenação dinâmica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#impactos-de-sql-injection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impactos de SQL Injection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perda-de-confidencialidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perda de confidencialidade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exposicao-de-dados-sensiveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exposição de dados sensíveis
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perda-ou-alteracao-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perda ou alteração de dados
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#violacao-de-autenticacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Violação de autenticação
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#menor-privilegio-no-banco-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Menor privilégio no banco de dados
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#separar-usuarios-de-aplicacao-migracao-e-administracao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Separar usuários de aplicação, migração e administração
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-conceitual-de-privilegios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo conceitual de privilégios
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tratamento-seguro-de-erros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tratamento seguro de erros
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-tratamento-de-erro-com-spring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de tratamento de erro com Spring
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logs-e-sql-injection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logs e SQL Injection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-injection-e-orms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL Injection e ORMs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#native-queries-exigem-cuidado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Native queries exigem cuidado
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-concatenar-parametros-em-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Concatenar parâmetros em SQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-achar-que-validacao-sozinha-resolve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Achar que validação sozinha resolve
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-achar-que-orm-elimina-qualquer-risco" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Achar que ORM elimina qualquer risco
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-usar-usuario-administrador-na-aplicacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Usar usuário administrador na aplicação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-expor-erro-sql-para-o-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Expor erro SQL para o usuário
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-aceitar-campos-de-ordenacao-livres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Aceitar campos de ordenação livres
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-registrar-dados-sensiveis-em-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Registrar dados sensíveis em logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decisões de engenharia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-consultas-derivadas-do-spring-data-jpa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar consultas derivadas do Spring Data JPA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-query-com-jpql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar @Query com JPQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-sql-nativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar SQL nativo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-jdbctemplate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar JdbcTemplate
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checklist-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist prático
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Checklist prático">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#consultas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Consultas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#entrada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entrada
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#banco-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Banco de dados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#erros-e-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros e logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arquitetura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arquitetura
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Perguntas de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-o-que-e-sql-injection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. O que é SQL Injection?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-qual-e-a-causa-mais-comum-de-sql-injection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Qual é a causa mais comum de SQL Injection?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-por-que-concatenacao-de-sql-e-perigosa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Por que concatenação de SQL é perigosa?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-qual-e-a-principal-defesa-contra-sql-injection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Qual é a principal defesa contra SQL Injection?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-validacao-de-entrada-substitui-consulta-parametrizada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Validação de entrada substitui consulta parametrizada?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-orm-elimina-sql-injection-automaticamente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. ORM elimina SQL Injection automaticamente?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-o-que-e-menor-privilegio-no-banco-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. O que é menor privilégio no banco de dados?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-por-que-mensagens-de-erro-detalhadas-sao-perigosas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Por que mensagens de erro detalhadas são perigosas?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-por-que-campos-de-ordenacao-dinamica-exigem-cuidado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Por que campos de ordenação dinâmica exigem cuidado?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-quando-sql-nativo-pode-ser-usado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Quando SQL nativo pode ser usado?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-qual-e-o-papel-dos-logs-na-prevencao-e-resposta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Qual é o papel dos logs na prevenção e resposta?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-qual-e-a-diferenca-entre-parametro-e-concatenacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Qual é a diferença entre parâmetro e concatenação?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xss/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cross-Site Scripting (XSS)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dast-conformidade-sdlc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DAST, Conformidade e Segurança no Ciclo de Desenvolvimento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sast-source-sink-taint-flow-falso-positivo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SAST na prática - Source, Sink, Taint Flow e falso positivo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssrf-aplicacoes-java-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSRF em aplicações Java/Spring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cleartext-submission-integracoes-server-to-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cleartext Submission em integrações server-to-server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../privacy-violation-credenciais-logs-respostas-parceiros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Privacy Violation - credenciais, logs e respostas de parceiros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../path-traversal-upload-download-seguro-arquivos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Path Traversal e upload/download seguro de arquivos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unchecked-input-loop-condition-dos-processamento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unchecked Input for Loop Condition e prevenção de DoS por processamento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../headers-seguranca-hsts-json-nosniff/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Headers de segurança- HSTS, JSON explícito e nosniff
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sca-dependencias-vulneraveis-cves-gestao-bibliotecas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SCA na prática - dependências vulneráveis, CVEs e gestão de bibliotecas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../triagem-vulnerabilidades-corrigir-mitigar-not-exploitable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Triagem de vulnerabilidades - corrigir, mitigar ou marcar como Not Exploitable
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ferramentas-appsec-sast-sca-dast/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ferramentas de AppSec - como SAST, SCA e DAST encontram vulnerabilidades
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-problema-real-que-sql-injection-resolve-no-estudo-de-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O problema real que SQL Injection resolve no estudo de segurança
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-nos-detalhes-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar nos detalhes: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-sql-injection-e-perigoso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que SQL Injection é perigoso?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-sql-injection-acontece-na-pratica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como SQL Injection acontece na prática
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-concatenacao-e-perigosa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que concatenação é perigosa?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#correcao-com-parametros-usando-jdbctemplate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Correção com parâmetros usando JdbcTemplate
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analisando-o-codigo-seguro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analisando o código seguro
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#correcao-com-preparedstatement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Correção com PreparedStatement
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#correcao-com-spring-data-jpa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Correção com Spring Data JPA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#consulta-derivada-com-spring-data-jpa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Consulta derivada com Spring Data JPA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entidade-de-exemplo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entidade de exemplo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validacao-de-entrada-nao-substitui-consulta-parametrizada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validação de entrada não substitui consulta parametrizada
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validacao-por-lista-permitida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validação por lista permitida
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuidado-especial-com-ordenacao-dinamica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cuidado especial com ordenação dinâmica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#impactos-de-sql-injection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impactos de SQL Injection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perda-de-confidencialidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perda de confidencialidade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exposicao-de-dados-sensiveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exposição de dados sensíveis
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perda-ou-alteracao-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perda ou alteração de dados
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#violacao-de-autenticacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Violação de autenticação
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#menor-privilegio-no-banco-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Menor privilégio no banco de dados
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#separar-usuarios-de-aplicacao-migracao-e-administracao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Separar usuários de aplicação, migração e administração
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-conceitual-de-privilegios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo conceitual de privilégios
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tratamento-seguro-de-erros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tratamento seguro de erros
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-tratamento-de-erro-com-spring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de tratamento de erro com Spring
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logs-e-sql-injection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logs e SQL Injection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-injection-e-orms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL Injection e ORMs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#native-queries-exigem-cuidado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Native queries exigem cuidado
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-concatenar-parametros-em-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Concatenar parâmetros em SQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-achar-que-validacao-sozinha-resolve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Achar que validação sozinha resolve
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-achar-que-orm-elimina-qualquer-risco" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Achar que ORM elimina qualquer risco
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-usar-usuario-administrador-na-aplicacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Usar usuário administrador na aplicação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-expor-erro-sql-para-o-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Expor erro SQL para o usuário
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-aceitar-campos-de-ordenacao-livres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Aceitar campos de ordenação livres
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-registrar-dados-sensiveis-em-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Registrar dados sensíveis em logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decisões de engenharia">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-consultas-derivadas-do-spring-data-jpa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar consultas derivadas do Spring Data JPA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-query-com-jpql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar @Query com JPQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-sql-nativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar SQL nativo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quando-usar-jdbctemplate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar JdbcTemplate
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checklist-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist prático
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Checklist prático">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#consultas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Consultas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#entrada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entrada
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#banco-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Banco de dados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#erros-e-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros e logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arquitetura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arquitetura
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Perguntas de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-o-que-e-sql-injection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. O que é SQL Injection?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-qual-e-a-causa-mais-comum-de-sql-injection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Qual é a causa mais comum de SQL Injection?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-por-que-concatenacao-de-sql-e-perigosa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Por que concatenação de SQL é perigosa?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-qual-e-a-principal-defesa-contra-sql-injection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Qual é a principal defesa contra SQL Injection?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-validacao-de-entrada-substitui-consulta-parametrizada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Validação de entrada substitui consulta parametrizada?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-orm-elimina-sql-injection-automaticamente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. ORM elimina SQL Injection automaticamente?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-o-que-e-menor-privilegio-no-banco-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. O que é menor privilégio no banco de dados?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-por-que-mensagens-de-erro-detalhadas-sao-perigosas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Por que mensagens de erro detalhadas são perigosas?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-por-que-campos-de-ordenacao-dinamica-exigem-cuidado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Por que campos de ordenação dinâmica exigem cuidado?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-quando-sql-nativo-pode-ser-usado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Quando SQL nativo pode ser usado?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-qual-e-o-papel-dos-logs-na-prevencao-e-resposta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Qual é o papel dos logs na prevenção e resposta?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-qual-e-a-diferenca-entre-parametro-e-concatenacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Qual é a diferença entre parâmetro e concatenação?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="sql-injection-funcionamento-impactos-e-prevencao">SQL Injection: Funcionamento, Impactos e Prevenção</h1>
+<p>SQL Injection é uma das vulnerabilidades mais conhecidas em aplicações web. Ela acontece quando dados externos, geralmente vindos de usuários, são misturados de forma insegura com comandos SQL.</p>
+<p>Em uma aplicação web, é comum receber dados por parâmetros de URL, formulários, corpo JSON, filtros de pesquisa, telas de login, campos de ordenação e APIs. Esses dados muitas vezes são usados para consultar, inserir, atualizar ou excluir informações no banco de dados.</p>
+<p>O problema começa quando a aplicação trata a entrada do usuário como se fosse parte confiável da consulta SQL.</p>
+<p>Imagine a aplicação fictícia <code>meucatalogomusical.com</code>, um catálogo musical de bandas de Metal, Hard Rock e Rock Progressivo. Ela permite pesquisar bandas, cadastrar álbuns, avaliar músicas, favoritar artistas e administrar conteúdo.</p>
+<p>Uma funcionalidade simples de busca poderia receber um nome de banda:</p>
+<div class="highlight"><pre><span></span><code>GET /api/bandas?nome=Pantera
+</code></pre></div>
+<p>Esse valor <code>Pantera</code> pode parecer inofensivo. Porém, tecnicamente, ele veio de fora da aplicação. Logo, deve ser tratado como dado não confiável.</p>
+<p>SQL Injection surge quando esse dado externo é incorporado de maneira insegura em uma consulta SQL.</p>
+<h2 id="o-problema-real-que-sql-injection-resolve-no-estudo-de-seguranca">O problema real que SQL Injection resolve no estudo de segurança</h2>
+<p>Estudar SQL Injection ajuda a entender um problema maior: a separação entre código e dados.</p>
+<p>Uma consulta SQL é código interpretado pelo banco de dados. Já a entrada do usuário deveria ser apenas dado.</p>
+<p>Quando a aplicação não separa corretamente esses dois mundos, o banco pode interpretar parte da entrada como comando.</p>
+<p>Esse é o ponto central da vulnerabilidade:</p>
+<blockquote>
+<p>SQL Injection acontece quando entrada não confiável consegue alterar o significado de uma consulta SQL.</p>
+</blockquote>
+<p>O objetivo defensivo é garantir que dados enviados pelo usuário sejam tratados apenas como valores, nunca como parte da estrutura do comando SQL.</p>
+<h2 id="antes-de-entrar-nos-detalhes-uma-ideia-simples">Antes de entrar nos detalhes: uma ideia simples</h2>
+<p>Pense em uma aplicação que permite buscar bandas pelo nome.</p>
+<p>O usuário deveria informar algo como:</p>
+<div class="highlight"><pre><span></span><code>Dio
+</code></pre></div>
+<p>A aplicação deveria procurar bandas cujo nome contenha <code>Dio</code>.</p>
+<p>Mas se a aplicação montar a consulta concatenando texto manualmente, ela pode acabar criando um comando SQL cujo significado muda conforme a entrada.</p>
+<p>É como escrever uma frase com uma lacuna:</p>
+<div class="highlight"><pre><span></span><code>Buscar bandas onde o nome seja igual a: [entrada do usuário]
+</code></pre></div>
+<p>Se a aplicação apenas cola o que o usuário enviou dentro da frase, sem separar corretamente dado e comando, o resultado pode deixar de ser uma simples busca e virar uma instrução inesperada para o banco.</p>
+<p>A prevenção começa quando a aplicação deixa claro para o banco:</p>
+<blockquote>
+<p>“Isto aqui é o comando SQL. Isto aqui é apenas um valor.”</p>
+</blockquote>
+<h2 id="definicao-tecnica">Definição técnica</h2>
+<p>SQL Injection é uma vulnerabilidade de injeção em que dados não confiáveis são enviados para um interpretador SQL de forma que possam alterar a estrutura ou o comportamento da consulta executada.</p>
+<p>Em aplicações Java/Spring, isso normalmente acontece quando consultas são montadas por concatenação de strings com valores recebidos de fora da aplicação.</p>
+<p>Exemplos de entradas externas:</p>
+<ul>
+<li>parâmetros de URL;</li>
+<li>campos de formulário;</li>
+<li>corpo JSON;</li>
+<li>headers HTTP;</li>
+<li>cookies;</li>
+<li>campos de ordenação;</li>
+<li>filtros de relatório;</li>
+<li>dados recebidos de integrações;</li>
+<li>mensagens vindas de filas;</li>
+<li>dados importados de arquivos.</li>
+</ul>
+<p>A vulnerabilidade não está no SQL em si. SQL é uma linguagem legítima e necessária. O problema está em construir comandos SQL de maneira insegura.</p>
+<h2 id="por-que-sql-injection-e-perigoso">Por que SQL Injection é perigoso?</h2>
+<p>SQL Injection é perigoso porque o banco de dados normalmente guarda informações críticas da aplicação.</p>
+<p>Em <code>meucatalogomusical.com</code>, o banco pode conter:</p>
+<ul>
+<li>usuários;</li>
+<li>e-mails;</li>
+<li>senhas com hash;</li>
+<li>bandas cadastradas;</li>
+<li>álbuns;</li>
+<li>avaliações;</li>
+<li>comentários;</li>
+<li>permissões;</li>
+<li>logs administrativos;</li>
+<li>dados de auditoria;</li>
+<li>tokens ou chaves internas, caso tenham sido mal armazenados.</li>
+</ul>
+<p>Uma falha de SQL Injection pode permitir impactos como:</p>
+<ul>
+<li>leitura indevida de dados;</li>
+<li>alteração de informações;</li>
+<li>exclusão de registros;</li>
+<li>acesso indevido a áreas restritas;</li>
+<li>violação de autenticação;</li>
+<li>vazamento de informações internas;</li>
+<li>comprometimento da integridade dos dados;</li>
+<li>indisponibilidade parcial ou total;</li>
+<li>danos financeiros e reputacionais.</li>
+</ul>
+<p>O impacto depende do tipo de falha, dos privilégios da conta do banco, da arquitetura da aplicação e dos controles adicionais existentes.</p>
+<h2 id="como-sql-injection-acontece-na-pratica">Como SQL Injection acontece na prática</h2>
+<p>A causa mais clássica é montar SQL por concatenação.</p>
+<p>Exemplo inseguro:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.bandas.infra</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.jdbc.core.JdbcTemplate</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Repository</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="nd">@Repository</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BandaRepositoryInseguro</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">JdbcTemplate</span><span class="w"> </span><span class="n">jdbcTemplate</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">BandaRepositoryInseguro</span><span class="p">(</span><span class="n">JdbcTemplate</span><span class="w"> </span><span class="n">jdbcTemplate</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">jdbcTemplate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jdbcTemplate</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">BandaResumo</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">pesquisarPorNome</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">sql</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">                SELECT id, nome, genero</span>
+<span class="s">                FROM bandas</span>
+<span class="s">                WHERE nome = &#39;&quot;&quot;&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nome</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;&#39;&quot;</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">jdbcTemplate</span><span class="p">.</span><span class="na">query</span><span class="p">(</span>
+<span class="w">                </span><span class="n">sql</span><span class="p">,</span>
+<span class="w">                </span><span class="p">(</span><span class="n">rs</span><span class="p">,</span><span class="w"> </span><span class="n">rowNum</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BandaResumo</span><span class="p">(</span>
+<span class="w">                        </span><span class="n">rs</span><span class="p">.</span><span class="na">getLong</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">),</span>
+<span class="w">                        </span><span class="n">rs</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;nome&quot;</span><span class="p">),</span>
+<span class="w">                        </span><span class="n">rs</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;genero&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">)</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse código é inseguro porque o valor <code>nome</code> foi concatenado diretamente dentro da consulta.</p>
+<p>A aplicação queria tratar <code>nome</code> como dado. Mas, ao concatenar o valor na string SQL, ela permite que a entrada influencie a estrutura final do comando.</p>
+<p>Mesmo que o usuário envie apenas <code>Pantera</code>, o padrão continua inseguro. O problema não depende de uma entrada específica. O problema é o desenho da consulta.</p>
+<h2 id="por-que-concatenacao-e-perigosa">Por que concatenação é perigosa?</h2>
+<p>A concatenação mistura duas coisas que deveriam ficar separadas:</p>
+<ul>
+<li>estrutura da consulta;</li>
+<li>valores fornecidos pelo usuário.</li>
+</ul>
+<p>A estrutura da consulta deveria ser fixa e controlada pelo desenvolvedor.</p>
+<p>Os valores deveriam ser enviados ao banco como parâmetros.</p>
+<p>Quando tudo vira uma única string, o banco recebe apenas o resultado final. Ele não sabe quais trechos vieram do código da aplicação e quais vieram da entrada do usuário.</p>
+<p>Isso cria uma brecha para que dados externos alterem o significado da consulta.</p>
+<h2 id="correcao-com-parametros-usando-jdbctemplate">Correção com parâmetros usando JdbcTemplate</h2>
+<p>Uma forma segura é usar consulta parametrizada.</p>
+<p>Exemplo defensivo:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.bandas.infra</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.jdbc.core.JdbcTemplate</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Repository</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="nd">@Repository</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BandaRepository</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">JdbcTemplate</span><span class="w"> </span><span class="n">jdbcTemplate</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">BandaRepository</span><span class="p">(</span><span class="n">JdbcTemplate</span><span class="w"> </span><span class="n">jdbcTemplate</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">jdbcTemplate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jdbcTemplate</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">BandaResumo</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">pesquisarPorNome</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">sql</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">                SELECT id, nome, genero</span>
+<span class="s">                FROM bandas</span>
+<span class="s">                WHERE nome = ?</span>
+<span class="s">                &quot;&quot;&quot;</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">jdbcTemplate</span><span class="p">.</span><span class="na">query</span><span class="p">(</span>
+<span class="w">                </span><span class="n">sql</span><span class="p">,</span>
+<span class="w">                </span><span class="p">(</span><span class="n">rs</span><span class="p">,</span><span class="w"> </span><span class="n">rowNum</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BandaResumo</span><span class="p">(</span>
+<span class="w">                        </span><span class="n">rs</span><span class="p">.</span><span class="na">getLong</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">),</span>
+<span class="w">                        </span><span class="n">rs</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;nome&quot;</span><span class="p">),</span>
+<span class="w">                        </span><span class="n">rs</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;genero&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">),</span>
+<span class="w">                </span><span class="n">nome</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Agora a consulta tem um marcador <code>?</code>.</p>
+<p>Esse marcador representa um parâmetro. O valor de <code>nome</code> não é colado diretamente dentro da string SQL. Ele é enviado separadamente para o driver JDBC.</p>
+<p>A ideia é:</p>
+<ul>
+<li>a consulta define a estrutura do comando;</li>
+<li>o parâmetro define apenas o valor;</li>
+<li>o banco trata o parâmetro como dado.</li>
+</ul>
+<p>Essa separação é a principal defesa contra SQL Injection.</p>
+<h2 id="analisando-o-codigo-seguro">Analisando o código seguro</h2>
+<p>A consulta segura é:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">sql</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        SELECT id, nome, genero</span>
+<span class="s">        FROM bandas</span>
+<span class="s">        WHERE nome = ?</span>
+<span class="s">        &quot;&quot;&quot;</span><span class="p">;</span>
+</code></pre></div>
+<p>O ponto importante é o <code>?</code>.</p>
+<p>Ele indica ao JDBC que aquele trecho será preenchido por um valor, não por uma parte da sintaxe SQL.</p>
+<p>Depois, o valor é passado separadamente:</p>
+<div class="highlight"><pre><span></span><code><span class="n">nome</span>
+</code></pre></div>
+<p>Com isso, mesmo que o usuário envie caracteres inesperados, o valor será tratado como conteúdo do parâmetro.</p>
+<p>Essa é uma diferença fundamental em relação à concatenação.</p>
+<h2 id="correcao-com-preparedstatement">Correção com PreparedStatement</h2>
+<p>Por baixo de muitas abstrações, a ideia é semelhante ao uso de <code>PreparedStatement</code>.</p>
+<p>Exemplo com JDBC puro:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.bandas.infra</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.Connection</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.PreparedStatement</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.ResultSet</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.sql.SQLException</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BandaJdbcRepository</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">BandaResumo</span><span class="w"> </span><span class="nf">buscarPorNome</span><span class="p">(</span><span class="n">Connection</span><span class="w"> </span><span class="n">connection</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">SQLException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">sql</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">                SELECT id, nome, genero</span>
+<span class="s">                FROM bandas</span>
+<span class="s">                WHERE nome = ?</span>
+<span class="s">                &quot;&quot;&quot;</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">PreparedStatement</span><span class="w"> </span><span class="n">statement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">connection</span><span class="p">.</span><span class="na">prepareStatement</span><span class="p">(</span><span class="n">sql</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">statement</span><span class="p">.</span><span class="na">setString</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">nome</span><span class="p">);</span>
+
+<span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">(</span><span class="n">ResultSet</span><span class="w"> </span><span class="n">resultSet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">statement</span><span class="p">.</span><span class="na">executeQuery</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">resultSet</span><span class="p">.</span><span class="na">next</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">                </span><span class="p">}</span>
+
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BandaResumo</span><span class="p">(</span>
+<span class="w">                        </span><span class="n">resultSet</span><span class="p">.</span><span class="na">getLong</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">),</span>
+<span class="w">                        </span><span class="n">resultSet</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;nome&quot;</span><span class="p">),</span>
+<span class="w">                        </span><span class="n">resultSet</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;genero&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Aqui, a consulta é preparada antes da entrada ser aplicada.</p>
+<p>O método:</p>
+<div class="highlight"><pre><span></span><code><span class="n">statement</span><span class="p">.</span><span class="na">setString</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">nome</span><span class="p">);</span>
+</code></pre></div>
+<p>define o primeiro parâmetro da consulta.</p>
+<p>O valor é tratado como dado textual, não como SQL.</p>
+<h2 id="correcao-com-spring-data-jpa">Correção com Spring Data JPA</h2>
+<p>Em aplicações Spring, é comum usar Spring Data JPA.</p>
+<p>Uma consulta segura com parâmetro nomeado poderia ser escrita assim:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.bandas.infra</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.data.jpa.repository.JpaRepository</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.data.jpa.repository.Query</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.data.repository.query.Param</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">BandaRepository</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">BandaEntity</span><span class="p">,</span><span class="w"> </span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Query</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">            select b</span>
+<span class="s">            from BandaEntity b</span>
+<span class="s">            where lower(b.nome) like lower(concat(&#39;%&#39;, :nome, &#39;%&#39;))</span>
+<span class="s">            &quot;&quot;&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">BandaEntity</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">pesquisarPorNome</span><span class="p">(</span><span class="nd">@Param</span><span class="p">(</span><span class="s">&quot;nome&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Nesse exemplo, <code>:nome</code> é um parâmetro nomeado.</p>
+<p>O valor recebido no método é vinculado ao parâmetro por meio de:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@Param</span><span class="p">(</span><span class="s">&quot;nome&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nome</span>
+</code></pre></div>
+<p>A consulta continua sendo definida pela aplicação, e o valor continua sendo tratado como parâmetro.</p>
+<h2 id="consulta-derivada-com-spring-data-jpa">Consulta derivada com Spring Data JPA</h2>
+<p>Em muitos casos, nem é necessário escrever a query manualmente.</p>
+<p>O Spring Data JPA permite consultas derivadas pelo nome do método:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.bandas.infra</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.data.jpa.repository.JpaRepository</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">BandaRepository</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">JpaRepository</span><span class="o">&lt;</span><span class="n">BandaEntity</span><span class="p">,</span><span class="w"> </span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">BandaEntity</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findByNomeContainingIgnoreCase</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse método pode ser suficiente para uma busca simples por nome.</p>
+<p>A vantagem é que o desenvolvedor evita montar SQL ou JPQL manualmente.</p>
+<p>Porém, isso não elimina a necessidade de validação, paginação, autorização e cuidado com performance.</p>
+<h2 id="entidade-de-exemplo">Entidade de exemplo</h2>
+<p>Uma entidade simples para a aplicação poderia ser:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.bandas.infra</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.persistence.*</span><span class="p">;</span>
+
+<span class="nd">@Entity</span>
+<span class="nd">@Table</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;bandas&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BandaEntity</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Id</span>
+<span class="w">    </span><span class="nd">@GeneratedValue</span><span class="p">(</span><span class="n">strategy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GenerationType</span><span class="p">.</span><span class="na">IDENTITY</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@Column</span><span class="p">(</span><span class="n">nullable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">120</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@Column</span><span class="p">(</span><span class="n">nullable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">80</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">genero</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@Column</span><span class="p">(</span><span class="n">nullable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">anoFormacao</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="nf">BandaEntity</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">BandaEntity</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">genero</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="n">anoFormacao</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">nome</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nome</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">genero</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">genero</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">anoFormacao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">anoFormacao</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="nf">getId</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getNome</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">nome</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getGenero</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">genero</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Integer</span><span class="w"> </span><span class="nf">getAnoFormacao</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">anoFormacao</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Essa entidade representa a tabela <code>bandas</code>.</p>
+<p>Exemplos de dados válidos poderiam ser:</p>
+<ul>
+<li><code>Slayer</code>;</li>
+<li><code>Anthrax</code>;</li>
+<li><code>Dio</code>;</li>
+<li><code>Helloween</code>;</li>
+<li><code>Dream Theater</code>;</li>
+<li><code>Rainbow</code>.</li>
+</ul>
+<p>Nenhum desses valores deve ser usado para montar SQL por concatenação.</p>
+<p>Mesmo valores aparentemente normais precisam passar pelo mesmo padrão seguro de parametrização.</p>
+<h2 id="validacao-de-entrada-nao-substitui-consulta-parametrizada">Validação de entrada não substitui consulta parametrizada</h2>
+<p>Validação é importante, mas não substitui parametrização.</p>
+<p>Exemplo de entrada para busca:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.bandas.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.validation.constraints.Size</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">PesquisaBandaRequest</span><span class="p">(</span>
+
+<span class="w">        </span><span class="nd">@Size</span><span class="p">(</span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">120</span><span class="p">)</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">nome</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Essa validação limita o tamanho do campo.</p>
+<p>Isso ajuda a evitar entradas exageradas e melhora a consistência da aplicação.</p>
+<p>Mas a consulta ainda precisa ser parametrizada.</p>
+<p>Validação responde à pergunta:</p>
+<blockquote>
+<p>Esse valor faz sentido para a minha aplicação?</p>
+</blockquote>
+<p>Parametrização responde à pergunta:</p>
+<blockquote>
+<p>Esse valor será tratado apenas como dado pelo banco?</p>
+</blockquote>
+<p>As duas práticas são complementares.</p>
+<h2 id="validacao-por-lista-permitida">Validação por lista permitida</h2>
+<p>Quando o campo possui um conjunto limitado de valores, uma lista permitida é uma boa defesa.</p>
+<p>Por exemplo, em vez de aceitar qualquer texto para o gênero musical, podemos usar um enum:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.bandas.domain</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">GeneroMusical</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">HEAVY_METAL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">THRASH_METAL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">POWER_METAL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">PROGRESSIVE_METAL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">HARD_ROCK</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>E usar o enum no filtro:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.bandas.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.meucatalogomusical.bandas.domain.GeneroMusical</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">FiltroBandaRequest</span><span class="p">(</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">,</span>
+<span class="w">        </span><span class="n">GeneroMusical</span><span class="w"> </span><span class="n">genero</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Essa abordagem reduz entradas inesperadas.</p>
+<p>Em campos como ordenação, lista permitida é ainda mais importante, porque nomes de colunas e direções de ordenação muitas vezes não podem ser parametrizados da mesma forma que valores comuns.</p>
+<h2 id="cuidado-especial-com-ordenacao-dinamica">Cuidado especial com ordenação dinâmica</h2>
+<p>Um caso comum de risco é a ordenação dinâmica.</p>
+<p>Imagine um endpoint:</p>
+<div class="highlight"><pre><span></span><code>GET /api/bandas?ordenarPor=nome
+</code></pre></div>
+<p>Um erro seria concatenar diretamente o campo recebido:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">sql</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        SELECT id, nome, genero</span>
+<span class="s">        FROM bandas</span>
+<span class="s">        ORDER BY &quot;&quot;&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ordenarPor</span><span class="p">;</span>
+</code></pre></div>
+<p>Esse padrão é inseguro, porque <code>ordenarPor</code> altera a estrutura da consulta.</p>
+<p>A solução é mapear entradas permitidas para colunas conhecidas.</p>
+<p>Exemplo defensivo:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.bandas.infra</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">OrdenacaoBanda</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">NOME</span><span class="p">(</span><span class="s">&quot;nome&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">GENERO</span><span class="p">(</span><span class="s">&quot;genero&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">ANO_FORMACAO</span><span class="p">(</span><span class="s">&quot;ano_formacao&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">coluna</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">OrdenacaoBanda</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">coluna</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">coluna</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">coluna</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">coluna</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">coluna</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Uso:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">montarOrdenacao</span><span class="p">(</span><span class="n">OrdenacaoBanda</span><span class="w"> </span><span class="n">ordenacao</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">ordenacao</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">NOME</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;nome&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">GENERO</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;genero&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="n">ANO_FORMACAO</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s">&quot;ano_formacao&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Aqui, a aplicação não aceita qualquer nome de coluna vindo do usuário.</p>
+<p>Ela aceita apenas opções previamente definidas.</p>
+<h2 id="impactos-de-sql-injection">Impactos de SQL Injection</h2>
+<p>SQL Injection pode gerar vários impactos, dependendo da falha e do ambiente.</p>
+<p>Os principais são:</p>
+<ul>
+<li>perda de confidencialidade;</li>
+<li>exposição de dados sensíveis;</li>
+<li>perda ou alteração de dados;</li>
+<li>violação de autenticação;</li>
+<li>comprometimento da integridade;</li>
+<li>indisponibilidade;</li>
+<li>impacto regulatório;</li>
+<li>prejuízo reputacional.</li>
+</ul>
+<h2 id="perda-de-confidencialidade">Perda de confidencialidade</h2>
+<p>A confidencialidade é perdida quando dados privados são acessados por quem não deveria.</p>
+<p>Em <code>meucatalogomusical.com</code>, isso poderia envolver:</p>
+<ul>
+<li>e-mails de usuários;</li>
+<li>dados de perfil;</li>
+<li>listas privadas;</li>
+<li>informações administrativas;</li>
+<li>registros internos.</li>
+</ul>
+<p>Mesmo que a aplicação não seja financeira ou hospitalar, dados de usuários continuam merecendo proteção.</p>
+<h2 id="exposicao-de-dados-sensiveis">Exposição de dados sensíveis</h2>
+<p>Uma falha pode expor dados que a aplicação nunca deveria retornar.</p>
+<p>Por exemplo, uma busca pública por bandas não deveria retornar dados da tabela de usuários.</p>
+<p>O endpoint:</p>
+<div class="highlight"><pre><span></span><code>GET /api/bandas?nome=Rainbow
+</code></pre></div>
+<p>deveria retornar apenas informações públicas sobre bandas.</p>
+<p>Se por causa de uma falha a aplicação expõe dados internos, há violação de segurança.</p>
+<h2 id="perda-ou-alteracao-de-dados">Perda ou alteração de dados</h2>
+<p>Dependendo dos privilégios da conta usada pela aplicação no banco, uma falha pode permitir alteração ou exclusão de dados.</p>
+<p>Isso pode afetar:</p>
+<ul>
+<li>bandas cadastradas;</li>
+<li>álbuns;</li>
+<li>avaliações;</li>
+<li>comentários;</li>
+<li>permissões;</li>
+<li>registros administrativos.</li>
+</ul>
+<p>A gravidade aumenta muito quando a aplicação usa uma conta de banco com privilégios excessivos.</p>
+<h2 id="violacao-de-autenticacao">Violação de autenticação</h2>
+<p>SQL Injection também pode afetar fluxos de autenticação quando consultas de login são construídas de forma insegura.</p>
+<p>Um login seguro nunca deve depender de SQL concatenado.</p>
+<p>Além disso, senhas não devem ser armazenadas em texto puro. Elas devem ser protegidas com algoritmo adequado de hash de senha.</p>
+<p>Mesmo usando hash de senha, a consulta de autenticação precisa ser parametrizada.</p>
+<h2 id="menor-privilegio-no-banco-de-dados">Menor privilégio no banco de dados</h2>
+<p>Uma das defesas mais importantes é aplicar o princípio do menor privilégio.</p>
+<p>A conta usada pela aplicação em produção deve ter apenas as permissões necessárias.</p>
+<p>Por exemplo, uma API de catálogo talvez precise:</p>
+<ul>
+<li>ler bandas;</li>
+<li>inserir avaliações;</li>
+<li>atualizar comentários do próprio usuário;</li>
+<li>consultar dados públicos.</li>
+</ul>
+<p>Mas ela provavelmente não deveria ter permissão para:</p>
+<ul>
+<li>remover tabelas;</li>
+<li>criar extensões;</li>
+<li>alterar estrutura do banco;</li>
+<li>acessar schemas administrativos;</li>
+<li>gerenciar usuários do banco;</li>
+<li>executar comandos privilegiados.</li>
+</ul>
+<p>Mesmo se uma falha ocorrer, privilégios limitados reduzem o dano possível.</p>
+<h2 id="separar-usuarios-de-aplicacao-migracao-e-administracao">Separar usuários de aplicação, migração e administração</h2>
+<p>Uma boa prática é separar responsabilidades.</p>
+<p>Por exemplo:</p>
+<ul>
+<li>usuário administrador do banco: usado apenas por DBAs ou automação controlada;</li>
+<li>usuário de migração: usado por ferramentas como Flyway ou Liquibase;</li>
+<li>usuário da aplicação: usado pelo backend em execução;</li>
+<li>usuário de leitura: usado por relatórios quando aplicável.</li>
+</ul>
+<p>A aplicação em produção não precisa se conectar com o mesmo usuário que cria tabelas e altera schema.</p>
+<p>Essa separação ajuda a limitar danos.</p>
+<h2 id="exemplo-conceitual-de-privilegios">Exemplo conceitual de privilégios</h2>
+<p>Em um banco relacional, a conta da aplicação poderia receber permissões apenas nas tabelas necessárias.</p>
+<p>Exemplo conceitual:</p>
+<div class="highlight"><pre><span></span><code><span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="k">INSERT</span><span class="p">,</span><span class="w"> </span><span class="k">UPDATE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">bandas</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">app_meucatalogo</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="k">INSERT</span><span class="p">,</span><span class="w"> </span><span class="k">UPDATE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">avaliacoes</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">app_meucatalogo</span><span class="p">;</span>
+</code></pre></div>
+<p>Esse exemplo é apenas ilustrativo. A estratégia real depende do banco, do schema, da arquitetura, da ferramenta de migração e dos processos operacionais.</p>
+<p>O importante é evitar que a aplicação rode com privilégios administrativos sem necessidade.</p>
+<h2 id="tratamento-seguro-de-erros">Tratamento seguro de erros</h2>
+<p>Mensagens de erro também podem ajudar um invasor a entender a estrutura interna da aplicação.</p>
+<p>Evite retornar detalhes internos como:</p>
+<ul>
+<li>nome de tabela;</li>
+<li>nome de coluna;</li>
+<li>stack trace;</li>
+<li>SQL completo;</li>
+<li>nome do banco;</li>
+<li>driver;</li>
+<li>caminho interno;</li>
+<li>detalhes de infraestrutura.</li>
+</ul>
+<p>Exemplo ruim de resposta:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;erro&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Erro SQL na tabela bandas, coluna nome, consulta SELECT ...&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Exemplo melhor:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;erro&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Não foi possível processar a solicitação.&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Internamente, a aplicação pode registrar um log técnico controlado, sem expor dados sensíveis para o usuário final.</p>
+<h2 id="exemplo-de-tratamento-de-erro-com-spring">Exemplo de tratamento de erro com Spring</h2>
+<p>Um <code>ControllerAdvice</code> pode padronizar respostas de erro.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.config</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.HttpStatus</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.*</span><span class="p">;</span>
+
+<span class="nd">@RestControllerAdvice</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ApiExceptionHandler</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@ExceptionHandler</span><span class="p">(</span><span class="n">Exception</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="w">    </span><span class="nd">@ResponseStatus</span><span class="p">(</span><span class="n">HttpStatus</span><span class="p">.</span><span class="na">INTERNAL_SERVER_ERROR</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ErroResponse</span><span class="w"> </span><span class="nf">tratarErroInesperado</span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">exception</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ErroResponse</span><span class="p">(</span><span class="s">&quot;Não foi possível processar a solicitação.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">ErroResponse</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">mensagem</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse exemplo é simples e didático.</p>
+<p>Em uma aplicação real, também seria importante:</p>
+<ul>
+<li>registrar logs internos com correlação;</li>
+<li>diferenciar erros de validação;</li>
+<li>tratar exceções de negócio;</li>
+<li>evitar capturar tudo de forma genérica sem observabilidade;</li>
+<li>não vazar detalhes internos para o cliente.</li>
+</ul>
+<h2 id="logs-e-sql-injection">Logs e SQL Injection</h2>
+<p>Logs são úteis para investigação, mas podem vazar dados se forem mal utilizados.</p>
+<p>Evite registrar:</p>
+<ul>
+<li>SQL completo com dados sensíveis;</li>
+<li>senhas;</li>
+<li>tokens;</li>
+<li>cookies;</li>
+<li>dados pessoais desnecessários;</li>
+<li>payloads completos enviados por usuários;</li>
+<li>stack traces em resposta HTTP.</li>
+</ul>
+<p>Um log seguro deve permitir investigação sem transformar o arquivo de log em uma nova fonte de vazamento.</p>
+<p>Exemplo melhor:</p>
+<div class="highlight"><pre><span></span><code><span class="n">log</span><span class="p">.</span><span class="na">warn</span><span class="p">(</span><span class="s">&quot;Falha ao pesquisar bandas. correlationId={}, motivo={}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">correlationId</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;erro_consulta&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>O log deve ajudar a operação, mas não deve expor indevidamente a entrada completa do usuário.</p>
+<h2 id="sql-injection-e-orms">SQL Injection e ORMs</h2>
+<p>Usar ORM, como JPA/Hibernate, reduz o risco de SQL Injection em muitos cenários, mas não elimina o problema automaticamente.</p>
+<p>Consultas derivadas e parâmetros nomeados ajudam bastante.</p>
+<p>Porém, ainda é possível escrever código inseguro se o desenvolvedor montar JPQL, HQL ou SQL nativo por concatenação.</p>
+<p>Exemplo inseguro em JPQL:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">jpql</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;select b from BandaEntity b where b.nome = &#39;&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nome</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;&#39;&quot;</span><span class="p">;</span>
+</code></pre></div>
+<p>Mesmo não sendo SQL nativo, o padrão continua perigoso.</p>
+<p>A correção é usar parâmetros:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">jpql</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;select b from BandaEntity b where b.nome = :nome&quot;</span><span class="p">;</span>
+</code></pre></div>
+<p>E vincular o valor como parâmetro.</p>
+<h2 id="native-queries-exigem-cuidado">Native queries exigem cuidado</h2>
+<p>Às vezes, uma aplicação precisa usar SQL nativo por performance, relatórios ou recursos específicos do banco.</p>
+<p>Isso não é proibido, mas exige disciplina.</p>
+<p>Exemplo com Spring Data JPA:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.bandas.infra</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.data.jpa.repository.Query</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.data.repository.Repository</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.data.repository.query.Param</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">RelatorioBandaRepository</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Repository</span><span class="o">&lt;</span><span class="n">BandaEntity</span><span class="p">,</span><span class="w"> </span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Query</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">            SELECT b.id, b.nome, b.genero</span>
+<span class="s">            FROM bandas b</span>
+<span class="s">            WHERE b.genero = :genero</span>
+<span class="s">            ORDER BY b.nome</span>
+<span class="s">            &quot;&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">nativeQuery</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">BandaProjection</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">listarPorGenero</span><span class="p">(</span><span class="nd">@Param</span><span class="p">(</span><span class="s">&quot;genero&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">genero</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Mesmo com SQL nativo, o valor <code>genero</code> deve ser parametrizado.</p>
+<p>O problema não é usar SQL nativo. O problema é montar SQL nativo com entrada externa concatenada.</p>
+<h2 id="boas-praticas">Boas práticas</h2>
+<p>As principais boas práticas contra SQL Injection são:</p>
+<ul>
+<li>usar consultas parametrizadas;</li>
+<li>evitar concatenação de SQL com entrada externa;</li>
+<li>usar <code>PreparedStatement</code> quando estiver com JDBC puro;</li>
+<li>usar parâmetros nomeados em JPQL/HQL;</li>
+<li>usar recursos seguros do Spring Data JPA;</li>
+<li>validar entradas no backend;</li>
+<li>usar lista permitida para valores controlados;</li>
+<li>mapear campos de ordenação em vez de aceitar nomes livres;</li>
+<li>aplicar menor privilégio no banco;</li>
+<li>separar usuários de aplicação, migração e administração;</li>
+<li>evitar mensagens de erro detalhadas para o usuário;</li>
+<li>evitar logs com dados sensíveis;</li>
+<li>revisar consultas nativas com atenção;</li>
+<li>testar fluxos críticos;</li>
+<li>manter dependências atualizadas.</li>
+</ul>
+<h2 id="erros-comuns">Erros comuns</h2>
+<h3 id="1-concatenar-parametros-em-sql">1. Concatenar parâmetros em SQL</h3>
+<p>Esse é o erro clássico:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">sql</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SELECT * FROM bandas WHERE nome = &#39;&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nome</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;&#39;&quot;</span><span class="p">;</span>
+</code></pre></div>
+<p>A solução é usar parâmetro:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">sql</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SELECT * FROM bandas WHERE nome = ?&quot;</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="2-achar-que-validacao-sozinha-resolve">2. Achar que validação sozinha resolve</h3>
+<p>Validar entrada é importante, mas não substitui consulta parametrizada.</p>
+<p>A aplicação precisa fazer as duas coisas.</p>
+<h3 id="3-achar-que-orm-elimina-qualquer-risco">3. Achar que ORM elimina qualquer risco</h3>
+<p>JPA e Hibernate ajudam, mas ainda é possível escrever queries inseguras por concatenação.</p>
+<h3 id="4-usar-usuario-administrador-na-aplicacao">4. Usar usuário administrador na aplicação</h3>
+<p>A aplicação não deve se conectar ao banco com conta administrativa em produção.</p>
+<h3 id="5-expor-erro-sql-para-o-usuario">5. Expor erro SQL para o usuário</h3>
+<p>Mensagens técnicas ajudam invasores a entender a estrutura interna.</p>
+<h3 id="6-aceitar-campos-de-ordenacao-livres">6. Aceitar campos de ordenação livres</h3>
+<p>Parâmetros como <code>orderBy</code>, <code>sort</code> e <code>direction</code> devem ser tratados com lista permitida.</p>
+<h3 id="7-registrar-dados-sensiveis-em-logs">7. Registrar dados sensíveis em logs</h3>
+<p>Logs inseguros podem expor informações tão perigosas quanto uma resposta HTTP mal projetada.</p>
+<h2 id="decisoes-de-engenharia">Decisões de engenharia</h2>
+<h3 id="quando-usar-consultas-derivadas-do-spring-data-jpa">Quando usar consultas derivadas do Spring Data JPA</h3>
+<p>Use quando a consulta for simples e expressável pelo nome do método.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="n">List</span><span class="o">&lt;</span><span class="n">BandaEntity</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findByNomeContainingIgnoreCase</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">);</span>
+</code></pre></div>
+<p>Vantagens:</p>
+<ul>
+<li>menos código;</li>
+<li>menor risco de concatenação manual;</li>
+<li>boa legibilidade para consultas simples.</li>
+</ul>
+<p>Evite quando:</p>
+<ul>
+<li>a consulta ficar complexa demais;</li>
+<li>o nome do método ficar enorme;</li>
+<li>houver necessidade de otimização específica.</li>
+</ul>
+<h3 id="quando-usar-query-com-jpql">Quando usar <code>@Query</code> com JPQL</h3>
+<p>Use quando a consulta precisa ser explícita, mas ainda trabalha com entidades.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@Query</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">        select b</span>
+<span class="s">        from BandaEntity b</span>
+<span class="s">        where lower(b.nome) like lower(concat(&#39;%&#39;, :nome, &#39;%&#39;))</span>
+<span class="s">        &quot;&quot;&quot;</span><span class="p">)</span>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">BandaEntity</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">pesquisarPorNome</span><span class="p">(</span><span class="nd">@Param</span><span class="p">(</span><span class="s">&quot;nome&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">);</span>
+</code></pre></div>
+<p>Vantagens:</p>
+<ul>
+<li>consulta clara;</li>
+<li>parâmetros nomeados;</li>
+<li>integração com JPA.</li>
+</ul>
+<p>Evite quando:</p>
+<ul>
+<li>a query depende fortemente de recursos específicos do banco;</li>
+<li>há perda significativa de performance;</li>
+<li>a consulta se torna difícil de manter.</li>
+</ul>
+<h3 id="quando-usar-sql-nativo">Quando usar SQL nativo</h3>
+<p>Use quando houver uma justificativa técnica real:</p>
+<ul>
+<li>performance;</li>
+<li>relatórios complexos;</li>
+<li>uso de funções específicas do banco;</li>
+<li>consultas difíceis de expressar em JPQL.</li>
+</ul>
+<p>Cuidados:</p>
+<ul>
+<li>parametrizar valores;</li>
+<li>revisar com atenção;</li>
+<li>evitar concatenação;</li>
+<li>testar performance;</li>
+<li>limitar privilégios;</li>
+<li>documentar o motivo.</li>
+</ul>
+<h3 id="quando-usar-jdbctemplate">Quando usar JdbcTemplate</h3>
+<p>Use quando quiser controle maior sobre SQL e mapeamento sem usar JPA em determinado caso.</p>
+<p>Vantagens:</p>
+<ul>
+<li>simplicidade;</li>
+<li>controle direto;</li>
+<li>boa opção para queries específicas.</li>
+</ul>
+<p>Cuidados:</p>
+<ul>
+<li>sempre usar placeholders;</li>
+<li>nunca concatenar entrada externa;</li>
+<li>mapear resultados com clareza;</li>
+<li>manter SQL legível.</li>
+</ul>
+<h2 id="onde-isso-aparece-em-sistemas-reais">Onde isso aparece em sistemas reais</h2>
+<p>SQL Injection pode aparecer em vários pontos:</p>
+<ul>
+<li>tela de login;</li>
+<li>busca por nome;</li>
+<li>filtros de relatório;</li>
+<li>exportação de dados;</li>
+<li>endpoints administrativos;</li>
+<li>consultas com ordenação dinâmica;</li>
+<li>dashboards;</li>
+<li>importação de arquivos;</li>
+<li>integrações externas;</li>
+<li>APIs públicas;</li>
+<li>telas de auditoria;</li>
+<li>pesquisas com múltiplos filtros.</li>
+</ul>
+<p>Em sistemas corporativos, endpoints de relatório merecem atenção especial, porque frequentemente possuem filtros complexos e SQL nativo.</p>
+<h2 id="checklist-pratico">Checklist prático</h2>
+<p>Use este checklist ao revisar código com acesso a banco.</p>
+<h3 id="consultas">Consultas</h3>
+<ul>
+<li>A query usa parâmetros?</li>
+<li>Existe concatenação de entrada externa?</li>
+<li>Campos de ordenação são controlados por lista permitida?</li>
+<li>SQL nativo foi revisado?</li>
+<li>JPQL/HQL usa parâmetros nomeados?</li>
+<li>Consultas dinâmicas foram testadas?</li>
+</ul>
+<h3 id="entrada">Entrada</h3>
+<ul>
+<li>Parâmetros de URL são validados?</li>
+<li>Corpo JSON é validado?</li>
+<li>Campos possuem tamanho máximo?</li>
+<li>Valores controlados usam enum ou lista permitida?</li>
+<li>Filtros de relatório possuem limites?</li>
+</ul>
+<h3 id="banco-de-dados">Banco de dados</h3>
+<ul>
+<li>A conta da aplicação tem menor privilégio?</li>
+<li>A aplicação evita usar conta administrativa?</li>
+<li>Usuário de migração é separado do usuário da aplicação?</li>
+<li>Permissões foram revisadas por ambiente?</li>
+<li>A aplicação tem acesso apenas ao schema necessário?</li>
+</ul>
+<h3 id="erros-e-logs">Erros e logs</h3>
+<ul>
+<li>Erros SQL não são expostos ao usuário?</li>
+<li>Stack traces não aparecem na resposta HTTP?</li>
+<li>Logs evitam dados sensíveis?</li>
+<li>Existe correlationId para investigação?</li>
+<li>Falhas suspeitas são monitoradas?</li>
+</ul>
+<h3 id="arquitetura">Arquitetura</h3>
+<ul>
+<li>A aplicação usa camada de repositório bem definida?</li>
+<li>A regra de autorização é aplicada antes de ações sensíveis?</li>
+<li>Consultas críticas têm testes automatizados?</li>
+<li>Dependências são mantidas atualizadas?</li>
+</ul>
+<h2 id="resumo-final">Resumo final</h2>
+<p>SQL Injection é uma vulnerabilidade que ocorre quando entrada não confiável consegue alterar o significado de uma consulta SQL.</p>
+<p>A principal defesa é separar código SQL de dados usando consultas parametrizadas.</p>
+<p>Em Java e Spring, isso pode ser feito com:</p>
+<ul>
+<li><code>PreparedStatement</code>;</li>
+<li><code>JdbcTemplate</code> com placeholders;</li>
+<li>Spring Data JPA com queries derivadas;</li>
+<li>JPQL com parâmetros nomeados;</li>
+<li>SQL nativo parametrizado quando necessário.</li>
+</ul>
+<p>Além disso, uma aplicação segura precisa combinar várias camadas de proteção:</p>
+<ul>
+<li>validação de entrada;</li>
+<li>lista permitida;</li>
+<li>menor privilégio no banco;</li>
+<li>tratamento seguro de erros;</li>
+<li>logs responsáveis;</li>
+<li>revisão de queries dinâmicas;</li>
+<li>separação entre usuários de aplicação, migração e administração.</li>
+</ul>
+<p>SQL Injection não é apenas um problema antigo. É um exemplo clássico de uma regra fundamental de segurança:</p>
+<blockquote>
+<p>Entrada externa deve ser tratada como dado não confiável e nunca deve controlar diretamente a estrutura de comandos executados pela aplicação.</p>
+</blockquote>
+<h2 id="perguntas-de-revisao">Perguntas de revisão</h2>
+<h3 id="1-o-que-e-sql-injection">1. O que é SQL Injection?</h3>
+<p>SQL Injection é uma vulnerabilidade em que dados não confiáveis são incorporados de forma insegura em uma consulta SQL, permitindo que a entrada altere o significado do comando executado pelo banco.</p>
+<h3 id="2-qual-e-a-causa-mais-comum-de-sql-injection">2. Qual é a causa mais comum de SQL Injection?</h3>
+<p>A causa mais comum é montar consultas SQL por concatenação de strings com valores recebidos de usuários ou sistemas externos.</p>
+<h3 id="3-por-que-concatenacao-de-sql-e-perigosa">3. Por que concatenação de SQL é perigosa?</h3>
+<p>Porque mistura a estrutura da consulta com dados externos. Assim, a entrada do usuário pode influenciar o comando SQL final.</p>
+<h3 id="4-qual-e-a-principal-defesa-contra-sql-injection">4. Qual é a principal defesa contra SQL Injection?</h3>
+<p>A principal defesa é usar consultas parametrizadas, como <code>PreparedStatement</code>, placeholders no <code>JdbcTemplate</code> ou parâmetros nomeados em JPQL/Spring Data JPA.</p>
+<h3 id="5-validacao-de-entrada-substitui-consulta-parametrizada">5. Validação de entrada substitui consulta parametrizada?</h3>
+<p>Não. Validação e parametrização são complementares. Validação verifica se o dado faz sentido para a aplicação. Parametrização garante que o banco trate o valor como dado, não como comando.</p>
+<h3 id="6-orm-elimina-sql-injection-automaticamente">6. ORM elimina SQL Injection automaticamente?</h3>
+<p>Não. ORMs reduzem o risco em muitos cenários, mas ainda é possível criar vulnerabilidades se o desenvolvedor montar JPQL, HQL ou SQL nativo por concatenação.</p>
+<h3 id="7-o-que-e-menor-privilegio-no-banco-de-dados">7. O que é menor privilégio no banco de dados?</h3>
+<p>É conceder à conta da aplicação apenas as permissões necessárias para executar suas funções, evitando privilégios administrativos desnecessários.</p>
+<h3 id="8-por-que-mensagens-de-erro-detalhadas-sao-perigosas">8. Por que mensagens de erro detalhadas são perigosas?</h3>
+<p>Porque podem revelar nomes de tabelas, colunas, queries, tecnologias, caminhos internos e outras informações úteis para um invasor.</p>
+<h3 id="9-por-que-campos-de-ordenacao-dinamica-exigem-cuidado">9. Por que campos de ordenação dinâmica exigem cuidado?</h3>
+<p>Porque nomes de colunas e direções de ordenação podem alterar a estrutura da consulta. Por isso, devem ser controlados com lista permitida.</p>
+<h3 id="10-quando-sql-nativo-pode-ser-usado">10. Quando SQL nativo pode ser usado?</h3>
+<p>SQL nativo pode ser usado quando houver justificativa técnica, como performance, relatórios complexos ou recursos específicos do banco. Mesmo assim, os valores devem ser parametrizados.</p>
+<h3 id="11-qual-e-o-papel-dos-logs-na-prevencao-e-resposta">11. Qual é o papel dos logs na prevenção e resposta?</h3>
+<p>Logs ajudam a investigar falhas e comportamentos suspeitos, mas devem evitar expor dados sensíveis, tokens, cookies, senhas ou SQL completo com informações privadas.</p>
+<h3 id="12-qual-e-a-diferenca-entre-parametro-e-concatenacao">12. Qual é a diferença entre parâmetro e concatenação?</h3>
+<p>No parâmetro, o valor é enviado separadamente e tratado como dado. Na concatenação, o valor vira parte da string SQL final, podendo alterar a estrutura do comando.</p>
+<h2 id="referencias">Referências</h2>
+<ul>
+<li>OWASP Top 10:2025 — A05: Injection.</li>
+<li>OWASP SQL Injection Prevention Cheat Sheet.</li>
+<li>OWASP SQL Injection — OWASP Community.</li>
+<li>Oracle Java SE 25 — <code>java.sql.PreparedStatement</code>.</li>
+<li>Spring Data JPA Reference Documentation — Query Methods e Named Parameters.</li>
+<li>Spring Boot Reference Documentation — Data Access.</li>
+<li>PostgreSQL Documentation — Privileges e GRANT.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

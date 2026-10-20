@@ -1,0 +1,5357 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../triagem-vulnerabilidades-corrigir-mitigar-not-exploitable/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Ferramentas de AppSec - como SAST, SCA e DAST encontram vulnerabilidades - README</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/css/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ferramentas-de-appsec-como-sast-sca-e-dast-encontram-vulnerabilidades" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../../.." title="README" class="md-header__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            README
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Ferramentas de AppSec - como SAST, SCA e DAST encontram vulnerabilidades
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="README" class="md-nav__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    README
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Backend
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/fundamentos-da-linguagem-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/convencoes-de-codigo-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convenções de código em Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/variaveis-tipos-primitivos-operadores-conversoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variáveis, tipos primitivos, operadores e conversões
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/fundamentos-de-string/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de String
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-controle-operadores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de controle e operadores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-condicionais/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas condicionais
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-de-repeticao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de repetição
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Iniciando em Orientação a Objetos (POO)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Iniciando em Orientação a Objetos (POO)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/introducao-orientacao-a-objetos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução à POO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/classes-e-objetos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes e objetos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/classes-objetos-metodos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes, objetos e métodos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Spring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/api-rest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    O que é API REST?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/http/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Um pouco de HTTP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/por-que-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Por que escolher Spring?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/spring-boot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Boot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/spring-initializr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Initializr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/maven-pom/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maven e pom.xml
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Segurança
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Segurança
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Segurança em aplicações web
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Segurança em aplicações web
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introducao-seguranca-aplicacoes-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução à Segurança de Aplicações Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../http-dns-sessoes-https/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTTP, DNS, Sessões e HTTPS na Segurança Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sql-injection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Injection - Funcionamento, Impactos e Prevenção
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xss/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cross-Site Scripting (XSS)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dast-conformidade-sdlc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DAST, Conformidade e Segurança no Ciclo de Desenvolvimento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sast-source-sink-taint-flow-falso-positivo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SAST na prática - Source, Sink, Taint Flow e falso positivo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssrf-aplicacoes-java-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSRF em aplicações Java/Spring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cleartext-submission-integracoes-server-to-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cleartext Submission em integrações server-to-server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../privacy-violation-credenciais-logs-respostas-parceiros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Privacy Violation - credenciais, logs e respostas de parceiros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../path-traversal-upload-download-seguro-arquivos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Path Traversal e upload/download seguro de arquivos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unchecked-input-loop-condition-dos-processamento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unchecked Input for Loop Condition e prevenção de DoS por processamento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../headers-seguranca-hsts-json-nosniff/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Headers de segurança- HSTS, JSON explícito e nosniff
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sca-dependencias-vulneraveis-cves-gestao-bibliotecas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SCA na prática - dependências vulneráveis, CVEs e gestão de bibliotecas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../triagem-vulnerabilidades-corrigir-mitigar-not-exploitable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Triagem de vulnerabilidades - corrigir, mitigar ou marcar como Not Exploitable
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ferramentas de AppSec - como SAST, SCA e DAST encontram vulnerabilidades
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ferramentas de AppSec - como SAST, SCA e DAST encontram vulnerabilidades
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-problema-real-que-essas-ferramentas-resolvem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O problema real que essas ferramentas resolvem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-nos-detalhes-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar nos detalhes: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sast-analise-estatica-de-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SAST: análise estática de código
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-o-sast-sabe-que-um-trecho-pode-ser-vulneravel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como o SAST “sabe” que um trecho pode ser vulnerável?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-sink-e-sanitizer-em-javaspring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Source, sink e sanitizer em Java/Spring
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-flow-e-taint-tracking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data flow e taint tracking
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#queries-e-regras" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Queries e regras
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-conceitual-de-regra-semgrep" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo conceitual de regra Semgrep
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-existem-falsos-positivos-em-sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que existem falsos positivos em SAST?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#veracode-como-enxerga-flaws" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Veracode: como enxerga flaws
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checkmarx-como-enxerga-findings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checkmarx: como enxerga findings
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#codeql-e-github-advanced-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CodeQL e GitHub Advanced Security
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sonarqube-e-sonarcloud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SonarQube e SonarCloud
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#semgrep" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Semgrep
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sca-analise-de-dependencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SCA: análise de dependências
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-o-sca-sabe-que-uma-lib-e-vulneravel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como o SCA “sabe” que uma lib é vulnerável?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-com-maven" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo com Maven
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#owasp-dependency-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OWASP Dependency-Check
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#owasp-dependency-track" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OWASP Dependency-Track
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checkmarx-sca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checkmarx SCA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#veracode-sca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Veracode SCA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#snyk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Snyk
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dast-analise-dinamica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DAST: análise dinâmica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-o-dast-sabe-que-existe-vulnerabilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como o DAST “sabe” que existe vulnerabilidade?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dast-passivo-e-ativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DAST passivo e ativo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-finding-dast-missing-hsts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de finding DAST: Missing HSTS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-finding-dast-nosniff-ausente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de finding DAST: nosniff ausente
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-owasp-zap-em-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de OWASP ZAP em pipeline
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#burp-suite-dast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Burp Suite DAST
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-sast-sca-e-dast-encontram-coisas-diferentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que SAST, SCA e DAST encontram coisas diferentes?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Por que SAST, SCA e DAST encontram coisas diferentes?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sast-ve-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SAST vê código
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sca-ve-bibliotecas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SCA vê bibliotecas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dast-ve-comportamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DAST vê comportamento
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#matriz-comparativa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Matriz comparativa
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ferramentas-comerciais-e-open-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ferramentas comerciais e open source
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ferramentas comerciais e open source">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comerciais-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comerciais comuns
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#open-source-ou-com-uso-gratuito-relevante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Open source ou com uso gratuito relevante
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trivy-e-container-scanning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trivy e container scanning
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#secret-scanning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Secret scanning
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-ferramentas-validam-se-uma-vulnerabilidade-foi-corrigida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como ferramentas validam se uma vulnerabilidade foi corrigida?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Como ferramentas validam se uma vulnerabilidade foi corrigida?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SAST
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SCA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DAST
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secret-scanning_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Secret scanning
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-completo-do-codigo-ao-scanner" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo completo: do código ao scanner
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exemplo completo: do código ao scanner">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#o-que-o-sast-ve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que o SAST vê
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#o-que-o-dast-pode-ver" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que o DAST pode ver
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#o-que-o-sca-ve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que o SCA vê
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#correcao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Correção
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-a-ferramenta-ainda-pode-apontar-depois-da-correcao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que a ferramenta ainda pode apontar depois da correção?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ferramenta-nao-substitui-triagem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ferramenta não substitui triagem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas-para-usar-ferramentas-de-appsec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas para usar ferramentas de AppSec
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boas práticas para usar ferramentas de AppSec">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-rode-cedo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Rode cedo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-rode-em-pull-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Rode em pull request
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-tenha-baseline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Tenha baseline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-configure-severity-gate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Configure severity gate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-evite-ruido-excessivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Evite ruído excessivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-ajuste-regras-corporativas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Ajuste regras corporativas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-combine-ferramentas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Combine ferramentas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-gere-evidencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Gere evidência
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-treine-o-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Treine o time
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-nao-corrija-so-para-ficar-verde" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Não corrija só para “ficar verde”
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-achar-que-ferramenta-encontra-tudo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Achar que ferramenta encontra tudo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-ignorar-tudo-como-falso-positivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Ignorar tudo como falso positivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-corrigir-sem-entender" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Corrigir sem entender
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-usar-sca-sem-olhar-transitivas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Usar SCA sem olhar transitivas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-usar-dast-em-producao-sem-cuidado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Usar DAST em produção sem cuidado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-nao-configurar-autenticacao-no-dast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Não configurar autenticação no DAST
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-nao-versionar-excecoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Não versionar exceções
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-nao-rodar-novo-scan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Não rodar novo scan
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-nao-ajustar-para-frameworks-internos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Não ajustar para frameworks internos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-usar-muitas-ferramentas-sem-processo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Usar muitas ferramentas sem processo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-usar-sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar SAST?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-usar-sca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar SCA?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-usar-dast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar DAST?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-usar-secret-scanning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar secret scanning?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-usar-container-scanning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar container scanning?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checklist-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist prático
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Checklist prático">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sast_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SAST
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sca_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SCA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dast_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DAST
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secret-scanning_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Secret scanning
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operação
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Perguntas de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-o-que-e-sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. O que é SAST?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-o-que-e-sca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. O que é SCA?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-o-que-e-dast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. O que é DAST?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-como-sast-encontra-vulnerabilidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Como SAST encontra vulnerabilidades?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-como-sca-encontra-vulnerabilidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Como SCA encontra vulnerabilidades?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-como-dast-encontra-vulnerabilidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Como DAST encontra vulnerabilidades?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-o-que-e-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. O que é source?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-o-que-e-sink" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. O que é sink?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-o-que-e-sanitizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. O que é sanitizer?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-por-que-existem-falsos-positivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Por que existem falsos positivos?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-veracode-e-checkmarx-fazem-a-mesma-coisa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Veracode e Checkmarx fazem a mesma coisa?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-sast-substitui-dast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. SAST substitui DAST?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-sca-substitui-sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. SCA substitui SAST?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-ferramenta-open-source-basta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Ferramenta open source basta?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-qual-e-a-principal-regra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Qual é a principal regra?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-problema-real-que-essas-ferramentas-resolvem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O problema real que essas ferramentas resolvem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-nos-detalhes-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar nos detalhes: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sast-analise-estatica-de-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SAST: análise estática de código
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-o-sast-sabe-que-um-trecho-pode-ser-vulneravel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como o SAST “sabe” que um trecho pode ser vulnerável?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-sink-e-sanitizer-em-javaspring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Source, sink e sanitizer em Java/Spring
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-flow-e-taint-tracking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data flow e taint tracking
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#queries-e-regras" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Queries e regras
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-conceitual-de-regra-semgrep" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo conceitual de regra Semgrep
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-existem-falsos-positivos-em-sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que existem falsos positivos em SAST?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#veracode-como-enxerga-flaws" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Veracode: como enxerga flaws
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checkmarx-como-enxerga-findings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checkmarx: como enxerga findings
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#codeql-e-github-advanced-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CodeQL e GitHub Advanced Security
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sonarqube-e-sonarcloud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SonarQube e SonarCloud
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#semgrep" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Semgrep
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sca-analise-de-dependencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SCA: análise de dependências
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-o-sca-sabe-que-uma-lib-e-vulneravel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como o SCA “sabe” que uma lib é vulnerável?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-com-maven" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo com Maven
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#owasp-dependency-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OWASP Dependency-Check
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#owasp-dependency-track" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OWASP Dependency-Track
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checkmarx-sca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checkmarx SCA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#veracode-sca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Veracode SCA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#snyk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Snyk
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dast-analise-dinamica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DAST: análise dinâmica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-o-dast-sabe-que-existe-vulnerabilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como o DAST “sabe” que existe vulnerabilidade?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dast-passivo-e-ativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DAST passivo e ativo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-finding-dast-missing-hsts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de finding DAST: Missing HSTS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-finding-dast-nosniff-ausente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de finding DAST: nosniff ausente
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-owasp-zap-em-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de OWASP ZAP em pipeline
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#burp-suite-dast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Burp Suite DAST
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-sast-sca-e-dast-encontram-coisas-diferentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que SAST, SCA e DAST encontram coisas diferentes?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Por que SAST, SCA e DAST encontram coisas diferentes?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sast-ve-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SAST vê código
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sca-ve-bibliotecas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SCA vê bibliotecas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dast-ve-comportamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DAST vê comportamento
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#matriz-comparativa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Matriz comparativa
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ferramentas-comerciais-e-open-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ferramentas comerciais e open source
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ferramentas comerciais e open source">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comerciais-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comerciais comuns
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#open-source-ou-com-uso-gratuito-relevante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Open source ou com uso gratuito relevante
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trivy-e-container-scanning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trivy e container scanning
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#secret-scanning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Secret scanning
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-ferramentas-validam-se-uma-vulnerabilidade-foi-corrigida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como ferramentas validam se uma vulnerabilidade foi corrigida?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Como ferramentas validam se uma vulnerabilidade foi corrigida?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SAST
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SCA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DAST
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secret-scanning_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Secret scanning
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-completo-do-codigo-ao-scanner" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo completo: do código ao scanner
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exemplo completo: do código ao scanner">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#o-que-o-sast-ve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que o SAST vê
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#o-que-o-dast-pode-ver" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que o DAST pode ver
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#o-que-o-sca-ve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que o SCA vê
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#correcao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Correção
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-a-ferramenta-ainda-pode-apontar-depois-da-correcao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que a ferramenta ainda pode apontar depois da correção?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ferramenta-nao-substitui-triagem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ferramenta não substitui triagem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas-para-usar-ferramentas-de-appsec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas para usar ferramentas de AppSec
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boas práticas para usar ferramentas de AppSec">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-rode-cedo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Rode cedo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-rode-em-pull-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Rode em pull request
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-tenha-baseline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Tenha baseline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-configure-severity-gate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Configure severity gate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-evite-ruido-excessivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Evite ruído excessivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-ajuste-regras-corporativas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Ajuste regras corporativas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-combine-ferramentas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Combine ferramentas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-gere-evidencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Gere evidência
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-treine-o-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Treine o time
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-nao-corrija-so-para-ficar-verde" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Não corrija só para “ficar verde”
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-achar-que-ferramenta-encontra-tudo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Achar que ferramenta encontra tudo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-ignorar-tudo-como-falso-positivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Ignorar tudo como falso positivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-corrigir-sem-entender" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Corrigir sem entender
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-usar-sca-sem-olhar-transitivas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Usar SCA sem olhar transitivas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-usar-dast-em-producao-sem-cuidado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Usar DAST em produção sem cuidado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-nao-configurar-autenticacao-no-dast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Não configurar autenticação no DAST
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-nao-versionar-excecoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Não versionar exceções
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-nao-rodar-novo-scan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Não rodar novo scan
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-nao-ajustar-para-frameworks-internos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Não ajustar para frameworks internos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-usar-muitas-ferramentas-sem-processo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Usar muitas ferramentas sem processo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-usar-sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar SAST?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-usar-sca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar SCA?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-usar-dast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar DAST?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-usar-secret-scanning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar secret scanning?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-usar-container-scanning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar container scanning?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checklist-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist prático
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Checklist prático">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sast_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SAST
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sca_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SCA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dast_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DAST
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secret-scanning_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Secret scanning
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operação
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Perguntas de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-o-que-e-sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. O que é SAST?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-o-que-e-sca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. O que é SCA?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-o-que-e-dast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. O que é DAST?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-como-sast-encontra-vulnerabilidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Como SAST encontra vulnerabilidades?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-como-sca-encontra-vulnerabilidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Como SCA encontra vulnerabilidades?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-como-dast-encontra-vulnerabilidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Como DAST encontra vulnerabilidades?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-o-que-e-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. O que é source?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-o-que-e-sink" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. O que é sink?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-o-que-e-sanitizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. O que é sanitizer?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-por-que-existem-falsos-positivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Por que existem falsos positivos?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-veracode-e-checkmarx-fazem-a-mesma-coisa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Veracode e Checkmarx fazem a mesma coisa?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-sast-substitui-dast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. SAST substitui DAST?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-sca-substitui-sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. SCA substitui SAST?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-ferramenta-open-source-basta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Ferramenta open source basta?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-qual-e-a-principal-regra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Qual é a principal regra?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="ferramentas-de-appsec-como-sast-sca-e-dast-encontram-vulnerabilidades">Ferramentas de AppSec: como SAST, SCA e DAST encontram vulnerabilidades</h1>
+<p>Ao longo dos artigos anteriores, falamos várias vezes sobre “ferramentas”: SAST, SCA, DAST, scanners, análise de dependências, taint flow, source, sink, CVE, false positive e Not Exploitable.</p>
+<p>Agora chegou o momento de entender melhor essas ferramentas.</p>
+<p>A pergunta central deste artigo é:</p>
+<blockquote>
+<p>Como uma ferramenta sabe que um trecho de código, uma resposta HTTP ou uma biblioteca pode representar uma vulnerabilidade?</p>
+</blockquote>
+<p>A resposta depende do tipo de ferramenta.</p>
+<p>De forma geral:</p>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>O que analisa</th>
+<th>Exemplo de ferramenta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SAST</td>
+<td>Código-fonte, bytecode ou artefatos</td>
+<td>Checkmarx, Veracode, CodeQL, SonarQube, Semgrep</td>
+</tr>
+<tr>
+<td>SCA</td>
+<td>Dependências, bibliotecas, SBOM, CVEs</td>
+<td>Veracode SCA, Checkmarx SCA, Snyk, OWASP Dependency-Check, Dependency-Track</td>
+</tr>
+<tr>
+<td>DAST</td>
+<td>Aplicação em execução</td>
+<td>OWASP ZAP, Burp Suite DAST, Veracode Dynamic Analysis</td>
+</tr>
+<tr>
+<td>Container/IaC scanning</td>
+<td>Imagens, pacotes de sistema, Dockerfile, Kubernetes, Terraform</td>
+<td>Trivy, Snyk Container, Checkmarx IaC, GitHub Advanced Security</td>
+</tr>
+<tr>
+<td>Secret scanning</td>
+<td>Chaves, tokens e credenciais em código/repositório</td>
+<td>GitHub Secret Scanning, Gitleaks, TruffleHog, Snyk, Trivy</td>
+</tr>
+</tbody>
+</table>
+<h2 id="o-problema-real-que-essas-ferramentas-resolvem">O problema real que essas ferramentas resolvem</h2>
+<p>Em uma aplicação Java/Spring, existem muitos lugares onde vulnerabilidades podem aparecer.</p>
+<p>Exemplo em <code>meucatalogomusical.com</code>, nossa aplicação fictícia de catálogo musical:</p>
+<ul>
+<li>busca por bandas;</li>
+<li>upload de capas de álbuns;</li>
+<li>download de arquivos;</li>
+<li>importação de planilhas;</li>
+<li>integração com parceiros;</li>
+<li>autenticação;</li>
+<li>autorização;</li>
+<li>comentários;</li>
+<li>logs;</li>
+<li>headers HTTP;</li>
+<li>dependências Maven;</li>
+<li>containers;</li>
+<li>configurações.</li>
+</ul>
+<p>Um desenvolvedor pode revisar muito código manualmente, mas ainda assim deixar passar pontos importantes.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/buscar&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">BandaResponse</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">buscar</span><span class="p">(</span><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">bandaRepository</span><span class="p">.</span><span class="na">buscarPorNome</span><span class="p">(</span><span class="n">nome</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse trecho parece simples.</p>
+<p>Mas uma ferramenta SAST pode querer saber:</p>
+<div class="highlight"><pre><span></span><code>Esse nome entra em uma query SQL?
+Esse nome vai para uma resposta HTML?
+Esse nome controla um arquivo?
+Esse nome controla uma URL outbound?
+Esse nome vai para log?
+</code></pre></div>
+<p>Já uma ferramenta SCA pode olhar para o <code>pom.xml</code> e perguntar:</p>
+<div class="highlight"><pre><span></span><code>Quais bibliotecas esse projeto usa?
+Há alguma CVE conhecida?
+Essa dependência é direta ou transitiva?
+Existe versão corrigida?
+</code></pre></div>
+<p>E uma ferramenta DAST pode rodar contra a aplicação em execução e perguntar:</p>
+<div class="highlight"><pre><span></span><code>O endpoint retorna HSTS?
+O Content-Type está correto?
+Há formulário vulnerável?
+Há comportamento suspeito quando envio entradas inesperadas?
+</code></pre></div>
+<p>Cada ferramenta enxerga um ângulo diferente do mesmo sistema.</p>
+<h2 id="antes-de-entrar-nos-detalhes-uma-ideia-simples">Antes de entrar nos detalhes: uma ideia simples</h2>
+<p>Pense em um show de Metal.</p>
+<p>A segurança do evento não depende de uma única pessoa.</p>
+<p>Existe:</p>
+<ul>
+<li>segurança na entrada;</li>
+<li>equipe de palco;</li>
+<li>técnico de som;</li>
+<li>bombeiro;</li>
+<li>controle de acesso;</li>
+<li>monitoramento;</li>
+<li>checagem dos equipamentos;</li>
+<li>inspeção da estrutura;</li>
+<li>plano de emergência.</li>
+</ul>
+<p>Cada equipe olha para um risco diferente.</p>
+<p>Com AppSec é igual.</p>
+<p>SAST olha o código.</p>
+<p>SCA olha os componentes.</p>
+<p>DAST olha a aplicação funcionando.</p>
+<p>Secret scanning olha segredos vazados.</p>
+<p>Container scanning olha a imagem.</p>
+<p>IaC scanning olha infraestrutura como código.</p>
+<p>Nenhuma ferramenta vê tudo.</p>
+<p>A segurança vem da combinação.</p>
+<h2 id="definicao-tecnica">Definição técnica</h2>
+<p>Ferramentas de AppSec são ferramentas usadas para identificar, priorizar, corrigir, monitorar ou prevenir vulnerabilidades em aplicações, dependências, configurações e ambientes.</p>
+<p>As categorias mais comuns são:</p>
+<ul>
+<li><strong>SAST</strong>: Static Application Security Testing;</li>
+<li><strong>SCA</strong>: Software Composition Analysis;</li>
+<li><strong>DAST</strong>: Dynamic Application Security Testing;</li>
+<li><strong>IAST</strong>: Interactive Application Security Testing;</li>
+<li><strong>RASP</strong>: Runtime Application Self-Protection;</li>
+<li><strong>Secret scanning</strong>;</li>
+<li><strong>Container scanning</strong>;</li>
+<li><strong>IaC scanning</strong>;</li>
+<li><strong>SBOM analysis</strong>.</li>
+</ul>
+<p>A OWASP descreve análise estática como ferramentas que analisam código não executado, usando técnicas como <strong>taint analysis</strong> e <strong>data flow analysis</strong>; na análise de taint, variáveis controláveis por usuário são rastreadas até funções sensíveis, chamadas de sinks.</p>
+<p>Essa definição conversa diretamente com os artigos anteriores sobre source, sink e taint flow.</p>
+<h2 id="sast-analise-estatica-de-codigo">SAST: análise estática de código</h2>
+<p>SAST significa <strong>Static Application Security Testing</strong>.</p>
+<p>É a análise de segurança feita sem executar a aplicação.</p>
+<p>A ferramenta analisa:</p>
+<ul>
+<li>código-fonte;</li>
+<li>bytecode;</li>
+<li>artefatos compilados;</li>
+<li>AST;</li>
+<li>fluxo de dados;</li>
+<li>fluxo de controle;</li>
+<li>chamadas de método;</li>
+<li>imports;</li>
+<li>frameworks;</li>
+<li>padrões de código;</li>
+<li>regras de segurança.</li>
+</ul>
+<p>No Java/Spring, SAST pode procurar vulnerabilidades como:</p>
+<ul>
+<li>SQL Injection;</li>
+<li>XSS;</li>
+<li>SSRF;</li>
+<li>Path Traversal;</li>
+<li>Privacy Violation;</li>
+<li>Cleartext Submission;</li>
+<li>Unchecked Input for Loop Condition;</li>
+<li>hardcoded secrets;</li>
+<li>uso inseguro de criptografia;</li>
+<li>logs com dados sensíveis;</li>
+<li>validação ausente;</li>
+<li>autorização incorreta;</li>
+<li>má configuração de headers.</li>
+</ul>
+<p>Ferramentas conhecidas:</p>
+<ul>
+<li>Checkmarx SAST;</li>
+<li>Veracode Static Analysis;</li>
+<li>GitHub CodeQL;</li>
+<li>SonarQube/SonarCloud;</li>
+<li>Semgrep;</li>
+<li>Fortify;</li>
+<li>Coverity;</li>
+<li>CodeQL CLI;</li>
+<li>SpotBugs com plugins de segurança;</li>
+<li>PMD com regras customizadas.</li>
+</ul>
+<p>O Checkmarx SAST é descrito pela própria documentação como uma solução de análise de código-fonte para identificar, rastrear e reparar falhas técnicas e lógicas, incluindo vulnerabilidades de segurança, compliance e problemas de lógica de negócio.</p>
+<h2 id="como-o-sast-sabe-que-um-trecho-pode-ser-vulneravel">Como o SAST “sabe” que um trecho pode ser vulnerável?</h2>
+<p>SAST não “entende” o sistema como um humano.</p>
+<p>Ele usa modelos.</p>
+<p>Esses modelos podem incluir:</p>
+<ul>
+<li>regras;</li>
+<li>padrões;</li>
+<li>queries;</li>
+<li>AST;</li>
+<li>call graph;</li>
+<li>control flow graph;</li>
+<li>data flow;</li>
+<li>taint analysis;</li>
+<li>listas de APIs perigosas;</li>
+<li>modelos de frameworks;</li>
+<li>sources conhecidos;</li>
+<li>sinks conhecidos;</li>
+<li>sanitizers conhecidos;</li>
+<li>validators conhecidos.</li>
+</ul>
+<p>Exemplo conceitual:</p>
+<div class="highlight"><pre><span></span><code>Source:
+@RequestParam
+@RequestBody
+MultipartFile
+HttpServletRequest.getHeader()
+
+Sink:
+JdbcTemplate.query(String sql)
+Files.write(...)
+RestClient.uri(...)
+log.info(...)
+ResponseEntity.ok(...)
+</code></pre></div>
+<p>A ferramenta tenta descobrir se existe um caminho entre o source e o sink.</p>
+<p>Se existir e não houver sanitizer adequado, ela abre um finding.</p>
+<h2 id="source-sink-e-sanitizer-em-javaspring">Source, sink e sanitizer em Java/Spring</h2>
+<p>Exemplo inseguro:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/api/bandas&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BandaController</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">JdbcTemplate</span><span class="w"> </span><span class="n">jdbcTemplate</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">BandaController</span><span class="p">(</span><span class="n">JdbcTemplate</span><span class="w"> </span><span class="n">jdbcTemplate</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">jdbcTemplate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jdbcTemplate</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/buscar&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">BandaResponse</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">buscar</span><span class="p">(</span><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">sql</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;select id, nome, genero from bandas where nome = &#39;&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nome</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;&#39;&quot;</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">jdbcTemplate</span><span class="p">.</span><span class="na">query</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">rs</span><span class="p">,</span><span class="w"> </span><span class="n">rowNum</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BandaResponse</span><span class="p">(</span>
+<span class="w">                </span><span class="n">rs</span><span class="p">.</span><span class="na">getLong</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">),</span>
+<span class="w">                </span><span class="n">rs</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;nome&quot;</span><span class="p">),</span>
+<span class="w">                </span><span class="n">rs</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;genero&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Uma ferramenta SAST pode modelar assim:</p>
+<div class="highlight"><pre><span></span><code>Source:
+@RequestParam String nome
+
+Propagation:
+nome -&gt; concatenação de String -&gt; sql
+
+Sink:
+jdbcTemplate.query(sql)
+
+Possível vulnerabilidade:
+SQL Injection
+</code></pre></div>
+<p>Correção:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/buscar&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">BandaResponse</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">buscar</span><span class="p">(</span><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">sql</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">            select id, nome, genero</span>
+<span class="s">            from bandas</span>
+<span class="s">            where nome = ?</span>
+<span class="s">            &quot;&quot;&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">jdbcTemplate</span><span class="p">.</span><span class="na">query</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">rs</span><span class="p">,</span><span class="w"> </span><span class="n">rowNum</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BandaResponse</span><span class="p">(</span>
+<span class="w">            </span><span class="n">rs</span><span class="p">.</span><span class="na">getLong</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">),</span>
+<span class="w">            </span><span class="n">rs</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;nome&quot;</span><span class="p">),</span>
+<span class="w">            </span><span class="n">rs</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;genero&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">),</span><span class="w"> </span><span class="n">nome</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Agora a ferramenta pode reconhecer que o valor entra como parâmetro, não como parte da string SQL.</p>
+<p>Esse é o motivo pelo qual ferramentas falam tanto de taint flow.</p>
+<h2 id="data-flow-e-taint-tracking">Data flow e taint tracking</h2>
+<p>GitHub CodeQL documenta bibliotecas de <strong>data flow</strong> e <strong>taint tracking</strong> para rastrear o fluxo de dados em programas Java/Kotlin; o taint tracking estende a análise de fluxo para passos em que o valor pode não ser preservado exatamente, mas o objeto potencialmente inseguro continua propagado.</p>
+<p>Isso é importante porque vulnerabilidades raramente aparecem em uma única linha.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/capas&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">salvarCapa</span><span class="p">(</span><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nomeArquivo</span><span class="p">,</span><span class="w"> </span><span class="n">MultipartFile</span><span class="w"> </span><span class="n">arquivo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">capaService</span><span class="p">.</span><span class="na">salvar</span><span class="p">(</span><span class="n">nomeArquivo</span><span class="p">,</span><span class="w"> </span><span class="n">arquivo</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nd">@Service</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CapaService</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">FileStorage</span><span class="w"> </span><span class="n">fileStorage</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">CapaService</span><span class="p">(</span><span class="n">FileStorage</span><span class="w"> </span><span class="n">fileStorage</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">fileStorage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fileStorage</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">salvar</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nomeArquivo</span><span class="p">,</span><span class="w"> </span><span class="n">MultipartFile</span><span class="w"> </span><span class="n">arquivo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">fileStorage</span><span class="p">.</span><span class="na">salvar</span><span class="p">(</span><span class="n">nomeArquivo</span><span class="p">,</span><span class="w"> </span><span class="n">arquivo</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">FileStorage</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Path</span><span class="w"> </span><span class="n">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;/var/app/uploads&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">salvar</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nomeArquivo</span><span class="p">,</span><span class="w"> </span><span class="n">MultipartFile</span><span class="w"> </span><span class="n">arquivo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Path</span><span class="w"> </span><span class="n">destino</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base</span><span class="p">.</span><span class="na">resolve</span><span class="p">(</span><span class="n">nomeArquivo</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Files</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">destino</span><span class="p">,</span><span class="w"> </span><span class="n">arquivo</span><span class="p">.</span><span class="na">getBytes</span><span class="p">());</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;Falha ao salvar arquivo.&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ex</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>O finding pode ser:</p>
+<div class="highlight"><pre><span></span><code>Source:
+@RequestParam String nomeArquivo
+
+Flow:
+Controller -&gt; Service -&gt; FileStorage
+
+Sink:
+Files.write
+
+Possível vulnerabilidade:
+Path Traversal
+</code></pre></div>
+<p>O SAST precisa seguir o dado entre classes, métodos e arquivos.</p>
+<p>Por isso, ferramentas mais avançadas falam em <strong>interprocedural analysis</strong>, <strong>cross-file analysis</strong> e <strong>whole-program analysis</strong>.</p>
+<h2 id="queries-e-regras">Queries e regras</h2>
+<p>Cada ferramenta tem seu jeito de expressar regras.</p>
+<p>No CodeQL, uma vulnerabilidade pode ser descrita por uma query.</p>
+<p>No Semgrep, uma regra pode ser escrita em YAML.</p>
+<p>No Checkmarx, existem queries SAST customizáveis; a documentação do Checkmarx SAST Scanner informa que o Query Editor permite customizar queries de análise ou configurar queries adicionais para segurança, qualidade e lógica de aplicação.</p>
+<p>No SonarQube, existem regras de segurança e taint analysis; a documentação da SonarSource explica que o fluxo se torna problema quando o usuário controla a entrada, essa entrada não é validada ou sanitizada e chega a uma função sensível, ou sink.</p>
+<p>Exemplo conceitual de regra:</p>
+<div class="highlight"><pre><span></span><code>Se:
+  dado externo chega em RestClient.uri(...)
+
+E:
+  não passa por validação de host permitido
+
+Então:
+  possível SSRF
+</code></pre></div>
+<p>Essa é uma simplificação, mas ajuda a entender o raciocínio.</p>
+<h2 id="exemplo-conceitual-de-regra-semgrep">Exemplo conceitual de regra Semgrep</h2>
+<p>Semgrep tem um modo de taint analysis que usa conceitos como sources e sinks; a documentação da Semgrep define source como código que define dado tainted, geralmente input de usuário, e sink como função vulnerável chamada com dado potencialmente tainted.</p>
+<p>Exemplo didático de regra:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">rules</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">spring-restclient-ssrf</span>
+<span class="w">    </span><span class="nt">message</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Possível</span><span class="nv"> </span><span class="s">SSRF:</span><span class="nv"> </span><span class="s">entrada</span><span class="nv"> </span><span class="s">externa</span><span class="nv"> </span><span class="s">usada</span><span class="nv"> </span><span class="s">como</span><span class="nv"> </span><span class="s">URI</span><span class="nv"> </span><span class="s">outbound.&quot;</span>
+<span class="w">    </span><span class="nt">severity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ERROR</span>
+<span class="w">    </span><span class="nt">languages</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">java</span>
+<span class="w">    </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">taint</span>
+<span class="w">    </span><span class="nt">pattern-sources</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">@RequestParam String $URL</span>
+<span class="w">    </span><span class="nt">pattern-sinks</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">$CLIENT.get().uri($URL)</span>
+</code></pre></div>
+<p>Essa regra é simplificada.</p>
+<p>Uma regra real precisaria tratar:</p>
+<ul>
+<li>nomes variados;</li>
+<li>métodos diferentes;</li>
+<li><code>RestClient</code>;</li>
+<li><code>RestTemplate</code>;</li>
+<li><code>WebClient</code>;</li>
+<li><code>HttpClient</code>;</li>
+<li>sanitizers;</li>
+<li>validators;</li>
+<li>allowlists;</li>
+<li>falsos positivos.</li>
+</ul>
+<p>Mas a ideia é clara:</p>
+<div class="highlight"><pre><span></span><code>Entrada HTTP -&gt; cliente HTTP outbound = possível SSRF
+</code></pre></div>
+<h2 id="por-que-existem-falsos-positivos-em-sast">Por que existem falsos positivos em SAST?</h2>
+<p>Falsos positivos acontecem porque a ferramenta trabalha por modelos.</p>
+<p>Ela pode não entender:</p>
+<ul>
+<li>regra de negócio;</li>
+<li>configuração de gateway;</li>
+<li>validação customizada;</li>
+<li>serializers;</li>
+<li>DTOs públicos;</li>
+<li>filtros globais;</li>
+<li>annotations internas;</li>
+<li>constraints de domínio;</li>
+<li>limites matemáticos;</li>
+<li>contexto JSON versus HTML;</li>
+<li>uso real da dependência;</li>
+<li>fluxo inalcançável;</li>
+<li>contrato legado.</li>
+</ul>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="n">URI</span><span class="w"> </span><span class="n">endpointValidado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">outboundUriValidator</span><span class="p">.</span><span class="na">requireAllowedHttpsEndpoint</span><span class="p">(</span><span class="n">endpoint</span><span class="p">);</span>
+
+<span class="n">restClient</span>
+<span class="w">        </span><span class="p">.</span><span class="na">get</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="na">uri</span><span class="p">(</span><span class="n">endpointValidado</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="na">retrieve</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="na">body</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+</code></pre></div>
+<p>Se a ferramenta não reconhece <code>requireAllowedHttpsEndpoint</code> como sanitizer/validator, ela pode continuar apontando SSRF.</p>
+<p>Por isso, em muitos projetos corporativos, o time AppSec precisa ajustar regras ou cadastrar sanitizers customizados.</p>
+<h2 id="veracode-como-enxerga-flaws">Veracode: como enxerga flaws</h2>
+<p>A documentação da Veracode informa que o Upload and Scan executa Static Analysis para encontrar flaws no código e SCA para identificar bibliotecas open source vulneráveis, bibliotecas maliciosas e licenças.</p>
+<p>A Veracode também documenta que sua metodologia aplica rating de explorabilidade a findings de Static Analysis e considera informações sobre o caminho de data flow, especificamente a source do dado tainted.</p>
+<p>Na prática, para um desenvolvedor, isso significa que a Veracode pode reportar:</p>
+<ul>
+<li>categoria da falha;</li>
+<li>severidade;</li>
+<li>arquivo;</li>
+<li>linha;</li>
+<li>source;</li>
+<li>sink;</li>
+<li>caminho de fluxo;</li>
+<li>recomendação;</li>
+<li>status;</li>
+<li>histórico entre scans.</li>
+</ul>
+<p>Esse modelo é parecido com o que estudamos nos artigos de SAST e triagem.</p>
+<h2 id="checkmarx-como-enxerga-findings">Checkmarx: como enxerga findings</h2>
+<p>A documentação do Checkmarx SAST Scanner informa que o input de SAST é o código-fonte, não binários; também menciona queries, inputs, sinks e sanitizers nas configurações de análise.</p>
+<p>Isso explica algo que você viu na prática: o Checkmarx pode seguir um dado desde um controller até um utilitário, como <code>FileUtil</code>, e apontar vulnerabilidades como:</p>
+<ul>
+<li>SSRF;</li>
+<li>Absolute Path Traversal;</li>
+<li>Reflected XSS;</li>
+<li>Privacy Violation;</li>
+<li>Cleartext Submission;</li>
+<li>Unchecked Input for Loop Condition.</li>
+</ul>
+<p>O scanner não está “adivinhando”.</p>
+<p>Ele está aplicando queries sobre o código-fonte e tentando montar caminhos entre entradas e operações sensíveis.</p>
+<h2 id="codeql-e-github-advanced-security">CodeQL e GitHub Advanced Security</h2>
+<p>CodeQL é o mecanismo de análise de código desenvolvido pelo GitHub para automatizar verificações de segurança; a documentação do GitHub afirma que especialistas do GitHub, pesquisadores de segurança e contribuidores mantêm queries padrão usadas no code scanning.</p>
+<p>O CodeQL funciona de forma interessante:</p>
+<div class="highlight"><pre><span></span><code>Código-fonte -&gt; banco CodeQL -&gt; queries -&gt; alerts
+</code></pre></div>
+<p>A ferramenta transforma o código em uma base consultável.</p>
+<p>Depois, queries procuram padrões vulneráveis.</p>
+<p>Isso é poderoso porque permite criar queries customizadas para regras específicas da empresa.</p>
+<p>Exemplo de uso:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">codeql</span>
+
+<span class="nt">on</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">pull_request</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">push</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">branches</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">main</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">analyze</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+
+<span class="w">    </span><span class="nt">permissions</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">security-events</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">write</span>
+<span class="w">      </span><span class="nt">packages</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">read</span>
+<span class="w">      </span><span class="nt">actions</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">read</span>
+<span class="w">      </span><span class="nt">contents</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">read</span>
+
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">github/codeql-action/init@v3</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">languages</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">java-kotlin</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">github/codeql-action/analyze@v3</span>
+</code></pre></div>
+<p>Esse pipeline executa CodeQL em Java/Kotlin.</p>
+<h2 id="sonarqube-e-sonarcloud">SonarQube e SonarCloud</h2>
+<p>SonarQube é muito conhecido por qualidade de código, mas também possui regras de segurança.</p>
+<p>A documentação da SonarQube informa que, para mostrar fluxo de issues tainted, usa tecnologia de taint analysis em código-fonte; o problema ocorre quando entrada controlada pelo usuário chega a funções sensíveis sem validação ou sanitização adequada.</p>
+<p>Exemplo de configuração básica:</p>
+<div class="highlight"><pre><span></span><code><span class="na">sonar.projectKey</span><span class="o">=</span><span class="s">meucatalogomusical</span>
+<span class="na">sonar.projectName</span><span class="o">=</span><span class="s">meucatalogomusical</span>
+<span class="na">sonar.sources</span><span class="o">=</span><span class="s">src/main/java</span>
+<span class="na">sonar.tests</span><span class="o">=</span><span class="s">src/test/java</span>
+<span class="na">sonar.java.binaries</span><span class="o">=</span><span class="s">target/classes</span>
+</code></pre></div>
+<p>Em pipelines Java/Spring, Sonar costuma ser usado para:</p>
+<ul>
+<li>bugs;</li>
+<li>code smells;</li>
+<li>coverage;</li>
+<li>duplicação;</li>
+<li>vulnerabilities;</li>
+<li>security hotspots;</li>
+<li>quality gate.</li>
+</ul>
+<p>Ele não substitui Checkmarx ou Veracode em todos os contextos, mas pode ser uma camada importante.</p>
+<h2 id="semgrep">Semgrep</h2>
+<p>Semgrep é conhecido por regras rápidas e customizáveis.</p>
+<p>Ele é útil quando o time quer criar regras específicas do projeto.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">rules</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">no-sensitive-log</span>
+<span class="w">    </span><span class="nt">message</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Não</span><span class="nv"> </span><span class="s">registre</span><span class="nv"> </span><span class="s">clientSecret</span><span class="nv"> </span><span class="s">em</span><span class="nv"> </span><span class="s">logs.&quot;</span>
+<span class="w">    </span><span class="nt">severity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ERROR</span>
+<span class="w">    </span><span class="nt">languages</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">java</span>
+<span class="w">    </span><span class="nt">patterns</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">$LOG.$METHOD(..., $SECRET, ...)</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">metavariable-regex</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">metavariable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$SECRET</span>
+<span class="w">          </span><span class="nt">regex</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;.*(secret|password|token).*&quot;</span>
+</code></pre></div>
+<p>Essa regra é simplificada, mas ilustra uma ideia útil:</p>
+<div class="highlight"><pre><span></span><code>Podemos escrever regras para padrões próprios da empresa.
+</code></pre></div>
+<p>No mundo real, regras de log seguro precisam ser bem planejadas para evitar ruído.</p>
+<h2 id="sca-analise-de-dependencias">SCA: análise de dependências</h2>
+<p>SCA significa <strong>Software Composition Analysis</strong>.</p>
+<p>A ferramenta não está procurando uma concatenação insegura de SQL no seu código.</p>
+<p>Ela está procurando riscos nos componentes usados pela aplicação.</p>
+<p>A Veracode descreve SCA como uma forma de construir inventário de componentes de terceiros para identificar bibliotecas maliciosas e vulnerabilidades em bibliotecas open source e código comercial; ela compila uma lista de bibliotecas da aplicação e identifica vulnerabilidades conhecidas em cada biblioteca.</p>
+<p>Ferramentas SCA conhecidas:</p>
+<ul>
+<li>Veracode SCA;</li>
+<li>Checkmarx SCA;</li>
+<li>Snyk Open Source;</li>
+<li>OWASP Dependency-Check;</li>
+<li>OWASP Dependency-Track;</li>
+<li>GitHub Dependabot;</li>
+<li>GitHub Dependency Review;</li>
+<li>Sonatype Nexus Lifecycle;</li>
+<li>Mend;</li>
+<li>Black Duck;</li>
+<li>Trivy;</li>
+<li>Grype.</li>
+</ul>
+<h2 id="como-o-sca-sabe-que-uma-lib-e-vulneravel">Como o SCA “sabe” que uma lib é vulnerável?</h2>
+<p>O SCA normalmente faz algo como:</p>
+<div class="highlight"><pre><span></span><code>1. Lê manifestos do projeto
+   pom.xml, build.gradle, package-lock.json, requirements.txt...
+
+2. Resolve dependências
+   diretas e transitivas
+
+3. Identifica pacotes
+   groupId, artifactId, version, package-url, CPE, hashes, metadados
+
+4. Consulta bases de vulnerabilidades
+   NVD, CVE, bases próprias, advisories, GitHub Advisory Database...
+
+5. Compara versão instalada com ranges vulneráveis
+
+6. Gera finding
+   biblioteca, versão, CVE, severidade, caminho de dependência, correção
+</code></pre></div>
+<p>A Snyk documenta que, ao escanear open source, cria uma árvore hierárquica com dependências diretas e indiretas representadas no manifest e usa sua base de vulnerabilidades para encontrar vulnerabilidades em qualquer pacote da árvore.</p>
+<p>O OWASP Dependency-Check identifica dependências do projeto e verifica vulnerabilidades publicamente divulgadas; se identifica um CPE, lista CVEs associadas no relatório.</p>
+<h2 id="exemplo-com-maven">Exemplo com Maven</h2>
+<p><code>pom.xml</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;dependencies&gt;</span>
+<span class="w">    </span><span class="nt">&lt;dependency&gt;</span>
+<span class="w">        </span><span class="nt">&lt;groupId&gt;</span>org.apache.poi<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">        </span><span class="nt">&lt;artifactId&gt;</span>poi-ooxml<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/dependency&gt;</span>
+<span class="nt">&lt;/dependencies&gt;</span>
+</code></pre></div>
+<p>Comando:</p>
+<div class="highlight"><pre><span></span><code>mvn<span class="w"> </span>dependency:tree
+</code></pre></div>
+<p>Saída conceitual:</p>
+<div class="highlight"><pre><span></span><code>com.meucatalogomusical:api:jar:1.0.0
+\- org.apache.poi:poi-ooxml:jar:5.x
+   +- org.apache.xmlbeans:xmlbeans:jar:x.x
+   \- org.apache.commons:commons-compress:jar:x.x
+</code></pre></div>
+<p>Uma ferramenta SCA olha essa árvore e pergunta:</p>
+<div class="highlight"><pre><span></span><code>Alguma dessas versões possui CVE conhecida?
+Existe versão corrigida?
+A dependência é direta ou transitiva?
+</code></pre></div>
+<h2 id="owasp-dependency-check">OWASP Dependency-Check</h2>
+<p>Exemplo de execução:</p>
+<div class="highlight"><pre><span></span><code>mvn<span class="w"> </span>org.owasp:dependency-check-maven:check
+</code></pre></div>
+<p>Exemplo de plugin:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;build&gt;</span>
+<span class="w">    </span><span class="nt">&lt;plugins&gt;</span>
+<span class="w">        </span><span class="nt">&lt;plugin&gt;</span>
+<span class="w">            </span><span class="nt">&lt;groupId&gt;</span>org.owasp<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>dependency-check-maven<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;version&gt;</span>12.1.8<span class="nt">&lt;/version&gt;</span>
+<span class="w">            </span><span class="nt">&lt;configuration&gt;</span>
+<span class="w">                </span><span class="nt">&lt;failBuildOnCVSS&gt;</span>7.0<span class="nt">&lt;/failBuildOnCVSS&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/configuration&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/plugin&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/plugins&gt;</span>
+<span class="nt">&lt;/build&gt;</span>
+</code></pre></div>
+<p>O OWASP Dependency-Check é uma ferramenta SCA que tenta detectar vulnerabilidades publicamente divulgadas em dependências do projeto; ele cruza evidências das dependências com CPE/CVE e gera relatório.</p>
+<h2 id="owasp-dependency-track">OWASP Dependency-Track</h2>
+<p>Dependency-Track é diferente de simplesmente rodar um scanner local.</p>
+<p>Ele trabalha muito bem com SBOM.</p>
+<p>A OWASP descreve Dependency-Track como uma plataforma de Component Analysis que usa SBOM para identificar e reduzir risco na cadeia de suprimentos de software.</p>
+<p>Fluxo típico:</p>
+<div class="highlight"><pre><span></span><code>Projeto gera SBOM
+    -&gt; SBOM enviado ao Dependency-Track
+    -&gt; Dependency-Track monitora componentes
+    -&gt; novas vulnerabilidades aparecem
+    -&gt; projeto é notificado
+</code></pre></div>
+<p>Isso é útil porque uma aplicação pode estar segura hoje e vulnerável amanhã, quando uma nova CVE for publicada.</p>
+<h2 id="checkmarx-sca">Checkmarx SCA</h2>
+<p>A documentação do Checkmarx SCA informa que, para cada CVE suportada, o time de pesquisa identifica a função ou funções exatas que precisam ser chamadas para a vulnerabilidade ser disparada e documenta sua assinatura.</p>
+<p>Isso é importante porque SCA tradicional pode dizer:</p>
+<div class="highlight"><pre><span></span><code>Você usa biblioteca vulnerável.
+</code></pre></div>
+<p>Mas reachability/exploitable path tenta responder:</p>
+<div class="highlight"><pre><span></span><code>Seu código realmente chama o método vulnerável?
+</code></pre></div>
+<p>Isso reduz ruído e ajuda a priorizar.</p>
+<h2 id="veracode-sca">Veracode SCA</h2>
+<p>A documentação da Veracode SCA informa que os scans agent-based analisam componentes open source, bibliotecas e licenças cedo no SDLC; para cada biblioteca identificada, a Veracode reporta vulnerabilidades com base em sua base de vulnerabilidades. Ela também menciona coleta de métodos vulneráveis encontrados durante criação de call chains do código.</p>
+<p>Isso aproxima SCA de SAST em alguns casos:</p>
+<div class="highlight"><pre><span></span><code>biblioteca vulnerável
++
+seu código chama método vulnerável
+=
+prioridade maior
+</code></pre></div>
+<h2 id="snyk">Snyk</h2>
+<p>Snyk Open Source analisa dependências e licenças; a documentação do <code>snyk test</code> informa que o comando verifica projetos em busca de vulnerabilidades open source e problemas de licença.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>snyk<span class="w"> </span><span class="nb">test</span>
+</code></pre></div>
+<p>Exemplo monitoramento contínuo:</p>
+<div class="highlight"><pre><span></span><code>snyk<span class="w"> </span>monitor
+</code></pre></div>
+<p>O <code>snyk monitor</code> cria um projeto na conta Snyk para monitoramento contínuo de vulnerabilidades open source e issues de licença.</p>
+<h2 id="dast-analise-dinamica">DAST: análise dinâmica</h2>
+<p>DAST significa <strong>Dynamic Application Security Testing</strong>.</p>
+<p>Ao contrário do SAST, ele não lê seu código.</p>
+<p>Ele testa a aplicação rodando.</p>
+<p>O DAST interage com:</p>
+<ul>
+<li>URLs;</li>
+<li>formulários;</li>
+<li>APIs;</li>
+<li>headers;</li>
+<li>cookies;</li>
+<li>autenticação;</li>
+<li>parâmetros;</li>
+<li>respostas;</li>
+<li>redirects;</li>
+<li>conteúdo HTML;</li>
+<li>status HTTP;</li>
+<li>erros.</li>
+</ul>
+<p>Ferramentas comuns:</p>
+<ul>
+<li>OWASP ZAP;</li>
+<li>Burp Suite;</li>
+<li>Burp Suite DAST;</li>
+<li>Veracode Dynamic Analysis;</li>
+<li>Invicti;</li>
+<li>Acunetix;</li>
+<li>StackHawk;</li>
+<li>Qualys WAS;</li>
+<li>Rapid7 InsightAppSec.</li>
+</ul>
+<h2 id="como-o-dast-sabe-que-existe-vulnerabilidade">Como o DAST “sabe” que existe vulnerabilidade?</h2>
+<p>DAST geralmente trabalha em duas fases:</p>
+<div class="highlight"><pre><span></span><code>Crawl:
+descobrir páginas, endpoints, links, formulários e parâmetros
+
+Audit/Scan:
+enviar entradas de teste, observar respostas e inferir vulnerabilidades
+</code></pre></div>
+<p>Burp Scanner é documentado como ferramenta que realiza crawl e audit; a documentação informa que o scanner foi projetado para replicar ações e metodologias de um testador manual habilidoso.</p>
+<p>O OWASP ZAP, em seus materiais de introdução, explica que pode fazer passive scan de requests/responses trafegados por ele e active scan para atacar páginas, funcionalidades e parâmetros descobertos.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>DAST envia:
+GET /api/bandas?nome=...
+
+Observa:
+status 500
+mensagem SQL no erro
+tempo de resposta diferente
+header ausente
+reflexão do input na resposta
+cookie sem Secure
+ausência de HSTS
+</code></pre></div>
+<p>Com isso, ele abre findings.</p>
+<h2 id="dast-passivo-e-ativo">DAST passivo e ativo</h2>
+<p>DAST passivo observa.</p>
+<p>Ele pode encontrar:</p>
+<ul>
+<li>headers ausentes;</li>
+<li>cookies sem <code>Secure</code>;</li>
+<li>cookies sem <code>HttpOnly</code>;</li>
+<li><code>Content-Type</code> inseguro;</li>
+<li>informações sensíveis em resposta;</li>
+<li>versões expostas;</li>
+<li>erros detalhados;</li>
+<li>ausência de HSTS;</li>
+<li>ausência de <code>nosniff</code>.</li>
+</ul>
+<p>DAST ativo interage.</p>
+<p>Ele pode enviar entradas para testar:</p>
+<ul>
+<li>XSS;</li>
+<li>SQL Injection;</li>
+<li>command injection;</li>
+<li>path traversal;</li>
+<li>open redirect;</li>
+<li>SSRF em alguns casos;</li>
+<li>autenticação fraca;</li>
+<li>métodos HTTP inseguros.</li>
+</ul>
+<p>PortSwigger alerta que checks ativos intrusivos simulam ataques reais e podem modificar ou danificar a aplicação ou seus dados.</p>
+<p>Por isso, DAST deve rodar em ambiente autorizado e controlado.</p>
+<h2 id="exemplo-de-finding-dast-missing-hsts">Exemplo de finding DAST: Missing HSTS</h2>
+<p>DAST não precisa ver seu código para apontar HSTS ausente.</p>
+<p>Ele faz uma requisição:</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-I<span class="w"> </span>https://meucatalogomusical.com/api/bandas/1
+</code></pre></div>
+<p>Resposta:</p>
+<div class="highlight"><pre><span></span><code><span class="kr">HTTP</span><span class="o">/</span><span class="m">2</span> <span class="m">200</span>
+<span class="na">content-type</span><span class="o">:</span> <span class="l">application/json</span>
+</code></pre></div>
+<p>Se não houver:</p>
+<div class="highlight"><pre><span></span><code><span class="err">Strict-Transport-Security: max-age=...</span>
+</code></pre></div>
+<p>a ferramenta pode apontar:</p>
+<div class="highlight"><pre><span></span><code>Missing Strict-Transport-Security Header
+</code></pre></div>
+<p>A correção pode ser na aplicação, no gateway ou no load balancer.</p>
+<p>O DAST só sabe o que a resposta real mostra.</p>
+<h2 id="exemplo-de-finding-dast-nosniff-ausente">Exemplo de finding DAST: nosniff ausente</h2>
+<p>Resposta:</p>
+<div class="highlight"><pre><span></span><code><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+</code></pre></div>
+<p>Sem:</p>
+<div class="highlight"><pre><span></span><code><span class="err">X-Content-Type-Options: nosniff</span>
+</code></pre></div>
+<p>Finding:</p>
+<div class="highlight"><pre><span></span><code>Missing X-Content-Type-Options Header
+</code></pre></div>
+<p>A ferramenta detecta porque compara a resposta HTTP com um conjunto de políticas esperadas.</p>
+<h2 id="exemplo-de-owasp-zap-em-pipeline">Exemplo de OWASP ZAP em pipeline</h2>
+<p>Exemplo conceitual:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dast-zap</span>
+
+<span class="nt">on</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">workflow_dispatch</span><span class="p">:</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">zap</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Start application</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docker compose up -d</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ZAP baseline scan</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">zaproxy/action-baseline@v0.12.0</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;http://localhost:8080&#39;</span>
+</code></pre></div>
+<p>Esse tipo de scan deve ser ajustado para o ambiente real.</p>
+<p>Para áreas autenticadas, é necessário configurar autenticação.</p>
+<h2 id="burp-suite-dast">Burp Suite DAST</h2>
+<p>Burp Suite é muito usado em testes manuais e DAST.</p>
+<p>A documentação do Burp Suite DAST fala em configurações de crawl e audit, escopo e scans recorrentes/automatizados.</p>
+<p>Na prática:</p>
+<div class="highlight"><pre><span></span><code>Burp DAST
+    -&gt; recebe site/API
+    -&gt; faz crawl
+    -&gt; audita endpoints
+    -&gt; abre findings
+    -&gt; prioriza itens
+    -&gt; gera relatório
+</code></pre></div>
+<p>Burp é muito forte porque combina automação com uso manual.</p>
+<p>Em times maduros, ele costuma ser usado tanto por AppSec quanto por pentesters.</p>
+<h2 id="por-que-sast-sca-e-dast-encontram-coisas-diferentes">Por que SAST, SCA e DAST encontram coisas diferentes?</h2>
+<p>Porque cada ferramenta tem visibilidade diferente.</p>
+<h3 id="sast-ve-codigo">SAST vê código</h3>
+<p>Ele pode encontrar:</p>
+<div class="highlight"><pre><span></span><code>@RequestParam -&gt; Files.write
+</code></pre></div>
+<p>Mesmo sem executar a aplicação.</p>
+<p>Mas pode não saber se o endpoint é alcançável em produção.</p>
+<h3 id="sca-ve-bibliotecas">SCA vê bibliotecas</h3>
+<p>Ele pode encontrar:</p>
+<div class="highlight"><pre><span></span><code>commons-compress versão X possui CVE Y
+</code></pre></div>
+<p>Mesmo que seu código pareça seguro.</p>
+<p>Mas pode não saber se você usa o método vulnerável.</p>
+<h3 id="dast-ve-comportamento">DAST vê comportamento</h3>
+<p>Ele pode encontrar:</p>
+<div class="highlight"><pre><span></span><code>Resposta real não possui HSTS.
+</code></pre></div>
+<p>Mesmo sem conhecer seu código.</p>
+<p>Mas pode não alcançar endpoints autenticados ou fluxos complexos.</p>
+<p>Por isso, ferramentas se complementam.</p>
+<h2 id="matriz-comparativa">Matriz comparativa</h2>
+<table>
+<thead>
+<tr>
+<th>Categoria</th>
+<th style="text-align: right;">Vê código?</th>
+<th style="text-align: right;">Executa app?</th>
+<th style="text-align: right;">Vê dependências?</th>
+<th>Exemplo de finding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SAST</td>
+<td style="text-align: right;">Sim</td>
+<td style="text-align: right;">Não</td>
+<td style="text-align: right;">Parcial</td>
+<td>Path Traversal em <code>Files.write</code></td>
+</tr>
+<tr>
+<td>SCA</td>
+<td style="text-align: right;">Parcial</td>
+<td style="text-align: right;">Não</td>
+<td style="text-align: right;">Sim</td>
+<td>CVE em biblioteca Maven</td>
+</tr>
+<tr>
+<td>DAST</td>
+<td style="text-align: right;">Não</td>
+<td style="text-align: right;">Sim</td>
+<td style="text-align: right;">Não</td>
+<td>HSTS ausente</td>
+</tr>
+<tr>
+<td>Container scan</td>
+<td style="text-align: right;">Não necessariamente</td>
+<td style="text-align: right;">Não</td>
+<td style="text-align: right;">Pacotes da imagem</td>
+<td>CVE em imagem base</td>
+</tr>
+<tr>
+<td>Secret scan</td>
+<td style="text-align: right;">Sim</td>
+<td style="text-align: right;">Não</td>
+<td style="text-align: right;">Não</td>
+<td>Token commitado</td>
+</tr>
+<tr>
+<td>IaC scan</td>
+<td style="text-align: right;">Sim</td>
+<td style="text-align: right;">Não</td>
+<td style="text-align: right;">Não</td>
+<td>Security group aberto</td>
+</tr>
+</tbody>
+</table>
+<h2 id="ferramentas-comerciais-e-open-source">Ferramentas comerciais e open source</h2>
+<h3 id="comerciais-comuns">Comerciais comuns</h3>
+<ul>
+<li>Veracode;</li>
+<li>Checkmarx;</li>
+<li>Snyk;</li>
+<li>SonarQube commercial editions;</li>
+<li>Fortify;</li>
+<li>Black Duck;</li>
+<li>Mend;</li>
+<li>Invicti;</li>
+<li>Acunetix;</li>
+<li>Burp Suite Enterprise/DAST;</li>
+<li>GitHub Advanced Security.</li>
+</ul>
+<h3 id="open-source-ou-com-uso-gratuito-relevante">Open source ou com uso gratuito relevante</h3>
+<ul>
+<li>OWASP ZAP;</li>
+<li>OWASP Dependency-Check;</li>
+<li>OWASP Dependency-Track;</li>
+<li>Semgrep Community Edition;</li>
+<li>CodeQL para projetos open source e uso conforme licença;</li>
+<li>Trivy;</li>
+<li>Gitleaks;</li>
+<li>TruffleHog;</li>
+<li>SpotBugs;</li>
+<li>PMD;</li>
+<li>Bandit para Python;</li>
+<li>ESLint security plugins para JavaScript.</li>
+</ul>
+<p>A OWASP mantém listas de ferramentas de análise de código-fonte, incluindo ferramentas comerciais e open source.</p>
+<h2 id="trivy-e-container-scanning">Trivy e container scanning</h2>
+<p>Trivy é uma ferramenta muito usada para escanear containers, dependências, IaC, secrets e SBOM.</p>
+<p>A documentação do Trivy informa que ele detecta automaticamente pacotes de sistema operacional ao escanear imagens de container e realiza detecção de vulnerabilidades com base no sistema operacional identificado.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>trivy<span class="w"> </span>image<span class="w"> </span>meucatalogomusical-api:1.0.0
+</code></pre></div>
+<p>Ele pode encontrar:</p>
+<div class="highlight"><pre><span></span><code>CVE em pacote Debian/Ubuntu/Alpine
+CVE em biblioteca Java
+Segredo em imagem
+Misconfiguration
+</code></pre></div>
+<p>Isso complementa o SCA Maven.</p>
+<p>Uma aplicação Java pode estar com <code>pom.xml</code> limpo, mas rodar em uma imagem base vulnerável.</p>
+<h2 id="secret-scanning">Secret scanning</h2>
+<p>Secret scanning procura segredos em código e histórico.</p>
+<p>Exemplos:</p>
+<ul>
+<li>API key;</li>
+<li>token GitHub;</li>
+<li>senha;</li>
+<li>private key;</li>
+<li>JWT;</li>
+<li>AWS access key;</li>
+<li>client secret;</li>
+<li>connection string.</li>
+</ul>
+<p>Exemplo de segredo acidental:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">integracoes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">backstage</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">client-secret</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;SECRET-NAO-DEVERIA-ESTAR-AQUI&quot;</span>
+</code></pre></div>
+<p>Ferramentas:</p>
+<ul>
+<li>GitHub Secret Scanning;</li>
+<li>Gitleaks;</li>
+<li>TruffleHog;</li>
+<li>Snyk;</li>
+<li>Trivy secret scanning;</li>
+<li>detect-secrets.</li>
+</ul>
+<p>O ideal é usar secrets por variável de ambiente, vault ou secret manager, nunca versionar em repositório.</p>
+<h2 id="como-ferramentas-validam-se-uma-vulnerabilidade-foi-corrigida">Como ferramentas validam se uma vulnerabilidade foi corrigida?</h2>
+<p>Depende da ferramenta.</p>
+<h3 id="sast">SAST</h3>
+<p>Roda novamente e verifica se o fluxo desapareceu ou se agora passa por sanitizer reconhecido.</p>
+<p>Antes:</p>
+<div class="highlight"><pre><span></span><code>@RequestParam nomeArquivo -&gt; Files.write
+</code></pre></div>
+<p>Depois:</p>
+<div class="highlight"><pre><span></span><code>MultipartFile -&gt; nome interno gerado -&gt; SafePathResolver -&gt; Files.write
+</code></pre></div>
+<h3 id="sca">SCA</h3>
+<p>Roda novamente e verifica se a versão vulnerável saiu da árvore.</p>
+<p>Antes:</p>
+<div class="highlight"><pre><span></span><code>biblioteca 1.2.0 vulnerável
+</code></pre></div>
+<p>Depois:</p>
+<div class="highlight"><pre><span></span><code>biblioteca 1.2.3 corrigida
+</code></pre></div>
+<h3 id="dast">DAST</h3>
+<p>Roda novamente e observa comportamento.</p>
+<p>Antes:</p>
+<div class="highlight"><pre><span></span><code><span class="err">sem Strict-Transport-Security</span>
+</code></pre></div>
+<p>Depois:</p>
+<div class="highlight"><pre><span></span><code><span class="err">Strict-Transport-Security: max-age=31536000</span>
+</code></pre></div>
+<h3 id="secret-scanning_1">Secret scanning</h3>
+<p>Roda novamente e verifica se o segredo não está mais presente.</p>
+<p>Mas atenção: remover segredo do último commit pode não limpar histórico. Em muitos casos, é preciso revogar o segredo.</p>
+<h2 id="exemplo-completo-do-codigo-ao-scanner">Exemplo completo: do código ao scanner</h2>
+<p>Funcionalidade:</p>
+<div class="highlight"><pre><span></span><code>Importar capa de álbum da banda Saxon.
+</code></pre></div>
+<p>Código inseguro:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@PostMapping</span><span class="p">(</span><span class="s">&quot;/albuns/{albumId}/capa&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">upload</span><span class="p">(</span>
+<span class="w">        </span><span class="nd">@PathVariable</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">albumId</span><span class="p">,</span>
+<span class="w">        </span><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nomeArquivo</span><span class="p">,</span>
+<span class="w">        </span><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">MultipartFile</span><span class="w"> </span><span class="n">arquivo</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Path</span><span class="w"> </span><span class="n">destino</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;/var/app/uploads&quot;</span><span class="p">).</span><span class="na">resolve</span><span class="p">(</span><span class="n">nomeArquivo</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Files</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">destino</span><span class="p">,</span><span class="w"> </span><span class="n">arquivo</span><span class="p">.</span><span class="na">getBytes</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;Falha ao salvar arquivo.&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ex</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="o-que-o-sast-ve">O que o SAST vê</h3>
+<div class="highlight"><pre><span></span><code>Source:
+@RequestParam String nomeArquivo
+
+Sink:
+Files.write
+
+Finding:
+Path Traversal
+</code></pre></div>
+<h3 id="o-que-o-dast-pode-ver">O que o DAST pode ver</h3>
+<p>Se houver upload ativo em ambiente de teste, DAST pode tentar entradas anômalas.</p>
+<p>Mas talvez não consiga explorar sem autenticação ou sem entender o fluxo.</p>
+<h3 id="o-que-o-sca-ve">O que o SCA vê</h3>
+<p>Nada sobre esse bug, porque ele está no código próprio, não em dependência.</p>
+<h3 id="correcao">Correção</h3>
+<div class="highlight"><pre><span></span><code><span class="nd">@PostMapping</span><span class="p">(</span><span class="s">&quot;/albuns/{albumId}/capa&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">CapaResponse</span><span class="w"> </span><span class="nf">upload</span><span class="p">(</span>
+<span class="w">        </span><span class="nd">@PathVariable</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">albumId</span><span class="p">,</span>
+<span class="w">        </span><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">MultipartFile</span><span class="w"> </span><span class="n">arquivo</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">nomeInterno</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fileStorage</span><span class="p">.</span><span class="na">salvar</span><span class="p">(</span><span class="n">arquivo</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CapaResponse</span><span class="p">(</span><span class="n">albumId</span><span class="p">,</span><span class="w"> </span><span class="n">nomeInterno</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">FileStorage</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Path</span><span class="w"> </span><span class="n">baseDirectory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;/var/app/uploads&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="na">toAbsolutePath</span><span class="p">()</span>
+<span class="w">            </span><span class="p">.</span><span class="na">normalize</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">salvar</span><span class="p">(</span><span class="n">MultipartFile</span><span class="w"> </span><span class="n">arquivo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">nomeInterno</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UUID</span><span class="p">.</span><span class="na">randomUUID</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;.jpg&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Path</span><span class="w"> </span><span class="n">destino</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">baseDirectory</span><span class="p">.</span><span class="na">resolve</span><span class="p">(</span><span class="n">nomeInterno</span><span class="p">).</span><span class="na">normalize</span><span class="p">();</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">destino</span><span class="p">.</span><span class="na">startsWith</span><span class="p">(</span><span class="n">baseDirectory</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Caminho inválido.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Files</span><span class="p">.</span><span class="na">createDirectories</span><span class="p">(</span><span class="n">baseDirectory</span><span class="p">);</span>
+<span class="w">            </span><span class="n">Files</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">destino</span><span class="p">,</span><span class="w"> </span><span class="n">arquivo</span><span class="p">.</span><span class="na">getBytes</span><span class="p">());</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">nomeInterno</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;Falha ao salvar arquivo.&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ex</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Agora o usuário não controla o caminho.</p>
+<h2 id="por-que-a-ferramenta-ainda-pode-apontar-depois-da-correcao">Por que a ferramenta ainda pode apontar depois da correção?</h2>
+<p>Porque ela pode não reconhecer a correção.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="w"> </span><span class="n">destino</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">safePathResolver</span><span class="p">.</span><span class="na">resolve</span><span class="p">(</span><span class="n">nomeInterno</span><span class="p">);</span>
+<span class="n">Files</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">destino</span><span class="p">,</span><span class="w"> </span><span class="n">arquivo</span><span class="p">.</span><span class="na">getBytes</span><span class="p">());</span>
+</code></pre></div>
+<p>Se o scanner não sabe que <code>safePathResolver.resolve</code> valida o path, ele pode continuar apontando.</p>
+<p>Nesse caso:</p>
+<ul>
+<li>crie testes;</li>
+<li>documente source/sink;</li>
+<li>mostre validação;</li>
+<li>peça revisão AppSec;</li>
+<li>configure sanitizer customizado se a ferramenta permitir;</li>
+<li>evite gambiarra anti-scanner.</li>
+</ul>
+<h2 id="ferramenta-nao-substitui-triagem">Ferramenta não substitui triagem</h2>
+<p>Ferramentas encontram sinais.</p>
+<p>A triagem decide.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>SAST:
+Privacy Violation
+
+Triagem:
+client_secret sai apenas para token endpoint OAuth HTTPS.
+Sem logs.
+Resposta filtrada.
+Bloqueio de reflexão.
+Teste cobrindo segredo refletido.
+Classificação: risco mitigado / Not Exploitable.
+</code></pre></div>
+<p>Esse tipo de decisão exige conhecimento humano.</p>
+<p>Ferramenta ajuda, mas não é juiz final.</p>
+<h2 id="boas-praticas-para-usar-ferramentas-de-appsec">Boas práticas para usar ferramentas de AppSec</h2>
+<h3 id="1-rode-cedo">1. Rode cedo</h3>
+<p>Quanto mais cedo o finding aparece, mais barato é corrigir.</p>
+<h3 id="2-rode-em-pull-request">2. Rode em pull request</h3>
+<p>O desenvolvedor vê o problema antes do merge.</p>
+<h3 id="3-tenha-baseline">3. Tenha baseline</h3>
+<p>Projetos legados podem ter muitos findings. Defina baseline e impeça novos problemas.</p>
+<h3 id="4-configure-severity-gate">4. Configure severity gate</h3>
+<p>Bloqueie o que realmente precisa bloquear.</p>
+<h3 id="5-evite-ruido-excessivo">5. Evite ruído excessivo</h3>
+<p>Ferramenta com muito falso positivo perde credibilidade.</p>
+<h3 id="6-ajuste-regras-corporativas">6. Ajuste regras corporativas</h3>
+<p>Frameworks internos precisam de sources, sinks e sanitizers customizados.</p>
+<h3 id="7-combine-ferramentas">7. Combine ferramentas</h3>
+<p>SAST, SCA e DAST cobrem ângulos diferentes.</p>
+<h3 id="8-gere-evidencia">8. Gere evidência</h3>
+<p>Relatório, teste, scan novo e justificativa.</p>
+<h3 id="9-treine-o-time">9. Treine o time</h3>
+<p>Desenvolvedor precisa entender source, sink, CVE, taint flow e false positive.</p>
+<h3 id="10-nao-corrija-so-para-ficar-verde">10. Não corrija só para “ficar verde”</h3>
+<p>Corrija risco real.</p>
+<h2 id="erros-comuns">Erros comuns</h2>
+<h3 id="1-achar-que-ferramenta-encontra-tudo">1. Achar que ferramenta encontra tudo</h3>
+<p>Nenhuma ferramenta encontra tudo.</p>
+<h3 id="2-ignorar-tudo-como-falso-positivo">2. Ignorar tudo como falso positivo</h3>
+<p>Isso deixa risco real aberto.</p>
+<h3 id="3-corrigir-sem-entender">3. Corrigir sem entender</h3>
+<p>Pode quebrar regra de negócio.</p>
+<h3 id="4-usar-sca-sem-olhar-transitivas">4. Usar SCA sem olhar transitivas</h3>
+<p>Vulnerabilidade pode vir de dependência indireta.</p>
+<h3 id="5-usar-dast-em-producao-sem-cuidado">5. Usar DAST em produção sem cuidado</h3>
+<p>Scans ativos podem alterar dados.</p>
+<h3 id="6-nao-configurar-autenticacao-no-dast">6. Não configurar autenticação no DAST</h3>
+<p>A ferramenta só verá páginas públicas.</p>
+<h3 id="7-nao-versionar-excecoes">7. Não versionar exceções</h3>
+<p>Exceção sem prazo vira dívida invisível.</p>
+<h3 id="8-nao-rodar-novo-scan">8. Não rodar novo scan</h3>
+<p>Sem novo scan, não há evidência de correção.</p>
+<h3 id="9-nao-ajustar-para-frameworks-internos">9. Não ajustar para frameworks internos</h3>
+<p>Ferramentas podem não entender validadores próprios.</p>
+<h3 id="10-usar-muitas-ferramentas-sem-processo">10. Usar muitas ferramentas sem processo</h3>
+<p>Mais ferramentas sem triagem geram mais ruído, não mais segurança.</p>
+<h2 id="decisoes-de-engenharia">Decisões de engenharia</h2>
+<h2 id="quando-usar-sast">Quando usar SAST?</h2>
+<p>Use SAST para encontrar problemas no código antes de executar a aplicação.</p>
+<p>Ideal para:</p>
+<ul>
+<li>PR;</li>
+<li>branch;</li>
+<li>pipeline;</li>
+<li>revisão de código;</li>
+<li>legado;</li>
+<li>correção SAST corporativa.</li>
+</ul>
+<h2 id="quando-usar-sca">Quando usar SCA?</h2>
+<p>Use SCA sempre que houver dependências de terceiros.</p>
+<p>Ideal para:</p>
+<ul>
+<li>Maven;</li>
+<li>Gradle;</li>
+<li>npm;</li>
+<li>Python;</li>
+<li>Docker;</li>
+<li>SBOM;</li>
+<li>monitoramento contínuo.</li>
+</ul>
+<h2 id="quando-usar-dast">Quando usar DAST?</h2>
+<p>Use DAST quando a aplicação estiver rodando em ambiente controlado.</p>
+<p>Ideal para:</p>
+<ul>
+<li>homologação;</li>
+<li>staging;</li>
+<li>pré-produção;</li>
+<li>testes recorrentes;</li>
+<li>validação de headers;</li>
+<li>comportamento real.</li>
+</ul>
+<h2 id="quando-usar-secret-scanning">Quando usar secret scanning?</h2>
+<p>Use sempre em repositórios.</p>
+<p>Ideal para:</p>
+<ul>
+<li>bloquear segredo em PR;</li>
+<li>detectar segredo em histórico;</li>
+<li>proteger tokens;</li>
+<li>reduzir incidentes.</li>
+</ul>
+<h2 id="quando-usar-container-scanning">Quando usar container scanning?</h2>
+<p>Use se a aplicação roda em container.</p>
+<p>Ideal para:</p>
+<ul>
+<li>imagem base;</li>
+<li>pacotes de SO;</li>
+<li>JRE;</li>
+<li>CVEs de sistema;</li>
+<li>Kubernetes;</li>
+<li>CI/CD.</li>
+</ul>
+<h2 id="onde-isso-aparece-em-sistemas-reais">Onde isso aparece em sistemas reais</h2>
+<p>Ferramentas de AppSec aparecem em:</p>
+<ul>
+<li>GitHub Actions;</li>
+<li>Jenkins;</li>
+<li>GitLab CI;</li>
+<li>Azure DevOps;</li>
+<li>Bitbucket Pipelines;</li>
+<li>IDE;</li>
+<li>PR;</li>
+<li>quality gate;</li>
+<li>release gate;</li>
+<li>auditoria;</li>
+<li>AppSec corporativo;</li>
+<li>pipelines de container;</li>
+<li>esteiras DevSecOps.</li>
+</ul>
+<p>Em projetos Java/Spring, o fluxo comum é:</p>
+<div class="highlight"><pre><span></span><code>Pull Request
+    -&gt; build
+    -&gt; testes
+    -&gt; SAST
+    -&gt; SCA
+    -&gt; secret scanning
+    -&gt; merge
+    -&gt; deploy em staging
+    -&gt; DAST
+    -&gt; deploy produção
+    -&gt; monitoramento contínuo
+</code></pre></div>
+<h2 id="checklist-pratico">Checklist prático</h2>
+<h3 id="sast_1">SAST</h3>
+<ul>
+<li>A ferramenta entende Java/Spring?</li>
+<li>Reconhece controllers?</li>
+<li>Reconhece sources?</li>
+<li>Reconhece sinks?</li>
+<li>Reconhece validators internos?</li>
+<li>Permite customizar regras?</li>
+<li>Roda no PR?</li>
+<li>Gera path de fluxo?</li>
+<li>Permite triagem?</li>
+<li>Tem integração com IDE?</li>
+</ul>
+<h3 id="sca_1">SCA</h3>
+<ul>
+<li>Lê <code>pom.xml</code> e <code>build.gradle</code>?</li>
+<li>Mostra dependências transitivas?</li>
+<li>Mostra CVEs?</li>
+<li>Mostra versão corrigida?</li>
+<li>Mostra caminho da dependência?</li>
+<li>Gera SBOM?</li>
+<li>Monitora novas CVEs?</li>
+<li>Tem política de exceção?</li>
+<li>Distingue runtime e test?</li>
+<li>Indica reachability?</li>
+</ul>
+<h3 id="dast_1">DAST</h3>
+<ul>
+<li>Roda em ambiente autorizado?</li>
+<li>Tem autenticação configurada?</li>
+<li>Tem escopo limitado?</li>
+<li>Evita dados reais?</li>
+<li>Gera evidência HTTP?</li>
+<li>Detecta headers?</li>
+<li>Faz crawl adequado?</li>
+<li>Faz scan ativo com cuidado?</li>
+<li>Permite recorrência?</li>
+<li>Integra com CI/CD?</li>
+</ul>
+<h3 id="secret-scanning_2">Secret scanning</h3>
+<ul>
+<li>Roda em PR?</li>
+<li>Roda no histórico?</li>
+<li>Bloqueia tokens conhecidos?</li>
+<li>Orienta revogação?</li>
+<li>Cobre arquivos YAML/properties?</li>
+<li>Cobre Dockerfile?</li>
+<li>Cobre scripts?</li>
+</ul>
+<h3 id="operacao">Operação</h3>
+<ul>
+<li>Quem faz triagem?</li>
+<li>Quem aprova falso positivo?</li>
+<li>Quem aceita risco?</li>
+<li>Qual SLA por severidade?</li>
+<li>Onde ficam evidências?</li>
+<li>Como exceções expiram?</li>
+<li>Como novos findings são acompanhados?</li>
+</ul>
+<h2 id="resumo-final">Resumo final</h2>
+<p>Ferramentas de AppSec não “adivinham” vulnerabilidades.</p>
+<p>Elas aplicam modelos.</p>
+<p>SAST analisa código, procurando fluxos entre sources e sinks, padrões inseguros, ausência de sanitização e uso de APIs sensíveis.</p>
+<p>SCA analisa dependências, versões, transitivas, CVEs, licenças, SBOM e bases de vulnerabilidade.</p>
+<p>DAST analisa a aplicação rodando, observando comportamento real, headers, respostas, formulários, parâmetros e erros.</p>
+<p>Ferramentas como <strong>Veracode</strong>, <strong>Checkmarx</strong>, <strong>CodeQL</strong>, <strong>SonarQube</strong>, <strong>Semgrep</strong>, <strong>Snyk</strong>, <strong>OWASP Dependency-Check</strong>, <strong>Dependency-Track</strong>, <strong>OWASP ZAP</strong>, <strong>Burp Suite DAST</strong> e <strong>Trivy</strong> olham para partes diferentes do risco.</p>
+<p>A principal lição é:</p>
+<blockquote>
+<p>Ferramenta aponta sinais. Engenharia transforma sinais em decisão técnica.</p>
+</blockquote>
+<h2 id="perguntas-de-revisao">Perguntas de revisão</h2>
+<h3 id="1-o-que-e-sast">1. O que é SAST?</h3>
+<p>SAST é análise estática de segurança. Ela analisa código-fonte, bytecode ou artefatos sem executar a aplicação.</p>
+<h3 id="2-o-que-e-sca">2. O que é SCA?</h3>
+<p>SCA é análise de composição de software. Ela identifica dependências, bibliotecas, versões, CVEs, licenças e riscos de componentes.</p>
+<h3 id="3-o-que-e-dast">3. O que é DAST?</h3>
+<p>DAST é análise dinâmica. Ela testa a aplicação em execução por meio de URLs, formulários, APIs, headers e respostas.</p>
+<h3 id="4-como-sast-encontra-vulnerabilidades">4. Como SAST encontra vulnerabilidades?</h3>
+<p>Ele usa regras, queries, data flow, taint analysis, sources, sinks, sanitizers e modelos de frameworks.</p>
+<h3 id="5-como-sca-encontra-vulnerabilidades">5. Como SCA encontra vulnerabilidades?</h3>
+<p>Ele identifica dependências diretas e transitivas e cruza as versões com bases de vulnerabilidades, CVEs, advisories e bancos próprios.</p>
+<h3 id="6-como-dast-encontra-vulnerabilidades">6. Como DAST encontra vulnerabilidades?</h3>
+<p>Ele interage com a aplicação rodando, envia requisições, observa respostas e compara comportamentos com padrões de vulnerabilidade.</p>
+<h3 id="7-o-que-e-source">7. O que é source?</h3>
+<p>É o ponto onde dado externo ou não confiável entra na aplicação.</p>
+<h3 id="8-o-que-e-sink">8. O que é sink?</h3>
+<p>É uma operação sensível, como query SQL, escrita de arquivo, chamada HTTP outbound, log ou resposta HTML.</p>
+<h3 id="9-o-que-e-sanitizer">9. O que é sanitizer?</h3>
+<p>É um controle que torna o dado seguro para determinado contexto.</p>
+<h3 id="10-por-que-existem-falsos-positivos">10. Por que existem falsos positivos?</h3>
+<p>Porque a ferramenta trabalha por modelos e pode não entender regra de negócio, validação customizada ou configuração real.</p>
+<h3 id="11-veracode-e-checkmarx-fazem-a-mesma-coisa">11. Veracode e Checkmarx fazem a mesma coisa?</h3>
+<p>Ambas possuem soluções SAST e SCA, mas cada uma tem arquitetura, engine, relatórios, regras e modelo de priorização próprios.</p>
+<h3 id="12-sast-substitui-dast">12. SAST substitui DAST?</h3>
+<p>Não. SAST vê código. DAST vê comportamento em runtime.</p>
+<h3 id="13-sca-substitui-sast">13. SCA substitui SAST?</h3>
+<p>Não. SCA vê dependências. SAST vê código próprio.</p>
+<h3 id="14-ferramenta-open-source-basta">14. Ferramenta open source basta?</h3>
+<p>Depende do contexto. Ferramentas open source são excelentes, mas empresas maiores podem precisar de governança, integração, relatórios, SLA, suporte e compliance.</p>
+<h3 id="15-qual-e-a-principal-regra">15. Qual é a principal regra?</h3>
+<p>Não trate ferramenta como oráculo nem como burocracia. Use como instrumento de engenharia, com triagem e evidência.</p>
+<h2 id="referencias">Referências</h2>
+<ul>
+<li><a href="https://community.owasp.org/controls/Static_Code_Analysis">OWASP — Static Code Analysis</a></li>
+<li><a href="https://community.owasp.org/Source_Code_Analysis_Tools">OWASP — Source Code Analysis Tools</a></li>
+<li><a href="https://docs.veracode.com/r/Veracode_Upload_and_Scan">Veracode Docs — Upload and Scan</a></li>
+<li><a href="https://docs.veracode.com/r/Software_Composition_Analysis">Veracode Docs — Software Composition Analysis</a></li>
+<li><a href="https://docs.veracode.com/r/Agent_Based_Scans">Veracode Docs — SCA Agent-Based Scan</a></li>
+<li><a href="https://docs.checkmarx.com/en/34965-46311-checkmarx-sast-overview.html">Checkmarx Docs — SAST Overview</a></li>
+<li><a href="https://docs.checkmarx.com/en/34965-324470-sast-scanner.html">Checkmarx Docs — SAST Scanner</a></li>
+<li><a href="https://docs.checkmarx.com/en/34965-322318-sca-scanner.html">Checkmarx Docs — SCA Scanner</a></li>
+<li><a href="https://docs.github.com/en/code-security/concepts/code-scanning/codeql/codeql-code-scanning">GitHub Docs — Code scanning with CodeQL</a></li>
+<li><a href="https://codeql.github.com/docs/codeql-language-guides/analyzing-data-flow-in-java/">CodeQL Docs — Analyzing data flow in Java and Kotlin</a></li>
+<li><a href="https://codeql.github.com/docs/writing-codeql-queries/about-data-flow-analysis/">CodeQL Docs — About data flow analysis</a></li>
+<li><a href="https://docs.sonarsource.com/sonarqube-server/2025.1/user-guide/rules/security-related-rules">SonarQube Docs — Security-related rules</a></li>
+<li><a href="https://semgrep.dev/docs/writing-rules/glossary">Semgrep Docs — Glossary</a></li>
+<li><a href="https://docs.snyk.io/developer-tools/snyk-cli/scan-and-maintain-projects-using-the-cli/snyk-cli-for-open-source">Snyk Docs — Snyk CLI for Open Source</a></li>
+<li><a href="https://docs.snyk.io/developer-tools/snyk-cli/commands/test">Snyk Docs — snyk test</a></li>
+<li><a href="https://owasp.org/projects/dependency-check">OWASP Dependency-Check</a></li>
+<li><a href="https://owasp.org/projects/dependency-track">OWASP Dependency-Track</a></li>
+<li><a href="https://www.zaproxy.org/getting-started/">OWASP ZAP — Getting Started</a></li>
+<li><a href="https://www.zaproxy.org/docs/desktop/addons/passive-scanner/">OWASP ZAP — Passive Scanner</a></li>
+<li><a href="https://portswigger.net/burp/documentation/scanner">PortSwigger — Burp Scanner</a></li>
+<li><a href="https://portswigger.net/burp/documentation/scanner/auditing">PortSwigger — Auditing</a></li>
+<li><a href="https://trivy.dev/docs/latest/guide/scanner/vulnerability/">Trivy Docs — Vulnerability Scanning</a></li>
+<li><a href="https://docs.oracle.com/en/java/javase/25/">Oracle JDK 25 Documentation</a></li>
+<li><a href="https://www.oracle.com/java/technologies/downloads/">Oracle Java Downloads — JDK 25 LTS</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

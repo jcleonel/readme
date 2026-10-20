@@ -1,0 +1,5022 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../sast-source-sink-taint-flow-falso-positivo/">
+      
+      
+        <link rel="next" href="../cleartext-submission-integracoes-server-to-server/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>SSRF em aplicações Java/Spring - README</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/css/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ssrf-em-aplicacoes-javaspring" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../../.." title="README" class="md-header__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            README
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SSRF em aplicações Java/Spring
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="README" class="md-nav__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    README
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Backend
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/fundamentos-da-linguagem-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/convencoes-de-codigo-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convenções de código em Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/variaveis-tipos-primitivos-operadores-conversoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variáveis, tipos primitivos, operadores e conversões
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/fundamentos-de-string/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de String
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-controle-operadores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de controle e operadores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-condicionais/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas condicionais
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-de-repeticao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de repetição
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Iniciando em Orientação a Objetos (POO)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Iniciando em Orientação a Objetos (POO)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/introducao-orientacao-a-objetos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução à POO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/classes-e-objetos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes e objetos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/classes-objetos-metodos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes, objetos e métodos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Spring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/api-rest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    O que é API REST?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/http/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Um pouco de HTTP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/por-que-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Por que escolher Spring?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/spring-boot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Boot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/spring-initializr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Initializr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/maven-pom/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maven e pom.xml
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Segurança
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Segurança
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Segurança em aplicações web
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Segurança em aplicações web
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introducao-seguranca-aplicacoes-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução à Segurança de Aplicações Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../http-dns-sessoes-https/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTTP, DNS, Sessões e HTTPS na Segurança Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sql-injection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Injection - Funcionamento, Impactos e Prevenção
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xss/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cross-Site Scripting (XSS)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dast-conformidade-sdlc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DAST, Conformidade e Segurança no Ciclo de Desenvolvimento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sast-source-sink-taint-flow-falso-positivo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SAST na prática - Source, Sink, Taint Flow e falso positivo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSRF em aplicações Java/Spring
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSRF em aplicações Java/Spring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-problema-real-que-ssrf-resolve-no-estudo-de-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O problema real que SSRF resolve no estudo de segurança
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-nos-detalhes-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar nos detalhes: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-ssrf-e-perigoso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que SSRF é perigoso?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ssrf-em-aplicacoes-javaspring_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSRF em aplicações Java/Spring
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#https-e-necessario-mas-nao-suficiente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HTTPS é necessário, mas não suficiente
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-melhor-defesa-nao-aceitar-url-livre" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A melhor defesa: não aceitar URL livre
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resolver-endpoint-por-allowlist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resolver endpoint por allowlist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validador-de-uri-outbound" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validador de URI outbound
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#servico-seguro-com-restclient" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Serviço seguro com RestClient
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuidado-com-uribuilder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cuidado com uriBuilder
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#redirecionamentos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Redirecionamentos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usando-httpclient-com-redirects-desabilitados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usando HttpClient com redirects desabilitados
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#separar-uri-e-body" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Separar URI e body
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ssrf-e-headers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSRF e headers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ssrf-e-configuracao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSRF e configuração
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validacao-proxima-ao-sink" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validação próxima ao sink
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#falha-fechada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Falha fechada
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ssrf-e-allowlist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSRF e allowlist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ssrf-e-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSRF e DNS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ssrf-e-infraestrutura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSRF e infraestrutura
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-completo-importacao-segura-de-dados-de-banda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo completo: importação segura de dados de banda
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exemplo completo: importação segura de dados de banda">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enum-de-parceiros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enum de parceiros
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#request" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Request
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#controller" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Controller
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validador" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validador
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resolver" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resolver
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Service
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testes-do-validador" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testes do validador
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#teste-do-resolver" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Teste do resolver
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-um-sast-pode-enxergar-esse-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como um SAST pode enxergar esse código?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-ssrf-aparece-como-falso-positivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando SSRF aparece como falso positivo?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quando SSRF aparece como falso positivo?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-o-usuario-controla-o-body-nao-a-uri" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. O usuário controla o body, não a URI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-endpoint-vem-de-configuracao-validada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Endpoint vem de configuração validada
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-o-scanner-nao-reconhece-o-validador-customizado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. O scanner não reconhece o validador customizado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-ssrf-e-verdadeiro-positivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando SSRF é verdadeiro positivo?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#diferenca-entre-ssrf-e-open-redirect" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Diferença entre SSRF e Open Redirect
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#diferenca-entre-ssrf-e-chamada-outbound-normal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Diferença entre SSRF e chamada outbound normal
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boas práticas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-nao-aceite-url-livre" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Não aceite URL livre
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-use-allowlist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Use allowlist
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-valide-uri-estruturalmente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Valide URI estruturalmente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-valide-proximo-ao-sink" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Valide próximo ao sink
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-desabilite-redirects-automaticos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Desabilite redirects automáticos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-separe-uri-e-body" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Separe URI e body
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-configure-timeouts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Configure timeouts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-use-egress-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Use egress control
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-nao-logue-segredos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Não logue segredos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-crie-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Crie testes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-validar-apenas-startswithhttps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Validar apenas startsWith("https://")
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-usar-denylist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Usar denylist
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-aceitar-url-livre-por-flexibilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Aceitar URL livre por “flexibilidade”
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-confiar-em-autenticacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Confiar em autenticação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-validar-longe-do-sink" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Validar longe do sink
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-esquecer-redirects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Esquecer redirects
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-misturar-destino-com-payload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Misturar destino com payload
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-tratar-configuracao-como-sempre-confiavel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Tratar configuração como sempre confiável
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-esconder-fluxo-do-scanner-sem-controle-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Esconder fluxo do scanner sem controle real
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-nao-documentar-risco-residual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Não documentar risco residual
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-aceitar-url-externa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando aceitar URL externa?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-usar-allowlist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar allowlist?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-usar-configuracao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar configuração?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-usar-proxy-corporativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar proxy corporativo?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-classificar-como-falso-positivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando classificar como falso positivo?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checklist-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist prático
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Checklist prático">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#entrada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entrada
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#destino" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Destino
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Código
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#infraestrutura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Infraestrutura
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Perguntas de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-o-que-e-ssrf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. O que é SSRF?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-por-que-ssrf-e-perigoso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Por que SSRF é perigoso?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-qual-e-o-padrao-tipico-de-ssrf-em-sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Qual é o padrão típico de SSRF em SAST?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-https-resolve-ssrf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. HTTPS resolve SSRF?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-por-que-startswithhttps-e-insuficiente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Por que startsWith("https://") é insuficiente?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-qual-e-a-melhor-defesa-contra-ssrf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Qual é a melhor defesa contra SSRF?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-o-usuario-pode-escolher-um-parceiro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. O usuário pode escolher um parceiro?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-o-que-e-allowlist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. O que é allowlist?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-por-que-redirects-sao-perigosos-em-ssrf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Por que redirects são perigosos em SSRF?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-o-que-significa-falhar-fechado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. O que significa falhar fechado?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-configuracao-e-sempre-confiavel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Configuração é sempre confiável?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-qual-e-a-diferenca-entre-ssrf-e-open-redirect" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Qual é a diferença entre SSRF e Open Redirect?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-timeouts-corrigem-ssrf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Timeouts corrigem SSRF?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-quando-um-finding-ssrf-pode-ser-falso-positivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Quando um finding SSRF pode ser falso positivo?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-qual-e-a-regra-mais-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Qual é a regra mais importante?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cleartext-submission-integracoes-server-to-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cleartext Submission em integrações server-to-server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../privacy-violation-credenciais-logs-respostas-parceiros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Privacy Violation - credenciais, logs e respostas de parceiros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../path-traversal-upload-download-seguro-arquivos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Path Traversal e upload/download seguro de arquivos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unchecked-input-loop-condition-dos-processamento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unchecked Input for Loop Condition e prevenção de DoS por processamento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../headers-seguranca-hsts-json-nosniff/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Headers de segurança- HSTS, JSON explícito e nosniff
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sca-dependencias-vulneraveis-cves-gestao-bibliotecas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SCA na prática - dependências vulneráveis, CVEs e gestão de bibliotecas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../triagem-vulnerabilidades-corrigir-mitigar-not-exploitable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Triagem de vulnerabilidades - corrigir, mitigar ou marcar como Not Exploitable
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ferramentas-appsec-sast-sca-dast/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ferramentas de AppSec - como SAST, SCA e DAST encontram vulnerabilidades
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-problema-real-que-ssrf-resolve-no-estudo-de-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O problema real que SSRF resolve no estudo de segurança
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-nos-detalhes-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar nos detalhes: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-ssrf-e-perigoso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que SSRF é perigoso?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ssrf-em-aplicacoes-javaspring_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSRF em aplicações Java/Spring
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#https-e-necessario-mas-nao-suficiente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HTTPS é necessário, mas não suficiente
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-melhor-defesa-nao-aceitar-url-livre" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A melhor defesa: não aceitar URL livre
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resolver-endpoint-por-allowlist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resolver endpoint por allowlist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validador-de-uri-outbound" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validador de URI outbound
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#servico-seguro-com-restclient" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Serviço seguro com RestClient
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuidado-com-uribuilder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cuidado com uriBuilder
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#redirecionamentos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Redirecionamentos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usando-httpclient-com-redirects-desabilitados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usando HttpClient com redirects desabilitados
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#separar-uri-e-body" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Separar URI e body
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ssrf-e-headers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSRF e headers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ssrf-e-configuracao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSRF e configuração
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validacao-proxima-ao-sink" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validação próxima ao sink
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#falha-fechada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Falha fechada
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ssrf-e-allowlist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSRF e allowlist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ssrf-e-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSRF e DNS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ssrf-e-infraestrutura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSRF e infraestrutura
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-completo-importacao-segura-de-dados-de-banda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo completo: importação segura de dados de banda
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exemplo completo: importação segura de dados de banda">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enum-de-parceiros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enum de parceiros
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#request" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Request
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#controller" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Controller
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validador" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validador
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resolver" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resolver
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Service
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testes-do-validador" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testes do validador
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#teste-do-resolver" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Teste do resolver
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-um-sast-pode-enxergar-esse-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como um SAST pode enxergar esse código?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-ssrf-aparece-como-falso-positivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando SSRF aparece como falso positivo?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quando SSRF aparece como falso positivo?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-o-usuario-controla-o-body-nao-a-uri" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. O usuário controla o body, não a URI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-endpoint-vem-de-configuracao-validada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Endpoint vem de configuração validada
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-o-scanner-nao-reconhece-o-validador-customizado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. O scanner não reconhece o validador customizado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-ssrf-e-verdadeiro-positivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando SSRF é verdadeiro positivo?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#diferenca-entre-ssrf-e-open-redirect" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Diferença entre SSRF e Open Redirect
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#diferenca-entre-ssrf-e-chamada-outbound-normal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Diferença entre SSRF e chamada outbound normal
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boas práticas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-nao-aceite-url-livre" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Não aceite URL livre
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-use-allowlist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Use allowlist
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-valide-uri-estruturalmente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Valide URI estruturalmente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-valide-proximo-ao-sink" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Valide próximo ao sink
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-desabilite-redirects-automaticos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Desabilite redirects automáticos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-separe-uri-e-body" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Separe URI e body
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-configure-timeouts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Configure timeouts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-use-egress-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Use egress control
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-nao-logue-segredos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Não logue segredos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-crie-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Crie testes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-validar-apenas-startswithhttps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Validar apenas startsWith("https://")
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-usar-denylist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Usar denylist
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-aceitar-url-livre-por-flexibilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Aceitar URL livre por “flexibilidade”
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-confiar-em-autenticacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Confiar em autenticação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-validar-longe-do-sink" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Validar longe do sink
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-esquecer-redirects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Esquecer redirects
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-misturar-destino-com-payload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Misturar destino com payload
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-tratar-configuracao-como-sempre-confiavel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Tratar configuração como sempre confiável
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-esconder-fluxo-do-scanner-sem-controle-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Esconder fluxo do scanner sem controle real
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-nao-documentar-risco-residual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Não documentar risco residual
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-aceitar-url-externa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando aceitar URL externa?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-usar-allowlist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar allowlist?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-usar-configuracao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar configuração?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-usar-proxy-corporativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar proxy corporativo?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-classificar-como-falso-positivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando classificar como falso positivo?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checklist-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist prático
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Checklist prático">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#entrada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entrada
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#destino" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Destino
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Código
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#infraestrutura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Infraestrutura
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Perguntas de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-o-que-e-ssrf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. O que é SSRF?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-por-que-ssrf-e-perigoso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Por que SSRF é perigoso?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-qual-e-o-padrao-tipico-de-ssrf-em-sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Qual é o padrão típico de SSRF em SAST?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-https-resolve-ssrf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. HTTPS resolve SSRF?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-por-que-startswithhttps-e-insuficiente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Por que startsWith("https://") é insuficiente?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-qual-e-a-melhor-defesa-contra-ssrf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Qual é a melhor defesa contra SSRF?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-o-usuario-pode-escolher-um-parceiro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. O usuário pode escolher um parceiro?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-o-que-e-allowlist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. O que é allowlist?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-por-que-redirects-sao-perigosos-em-ssrf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Por que redirects são perigosos em SSRF?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-o-que-significa-falhar-fechado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. O que significa falhar fechado?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-configuracao-e-sempre-confiavel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Configuração é sempre confiável?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-qual-e-a-diferenca-entre-ssrf-e-open-redirect" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Qual é a diferença entre SSRF e Open Redirect?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-timeouts-corrigem-ssrf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Timeouts corrigem SSRF?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-quando-um-finding-ssrf-pode-ser-falso-positivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Quando um finding SSRF pode ser falso positivo?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-qual-e-a-regra-mais-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Qual é a regra mais importante?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="ssrf-em-aplicacoes-javaspring">SSRF em aplicações Java/Spring</h1>
+<p>SSRF significa Server-Side Request Forgery, ou falsificação de requisição do lado do servidor.</p>
+<p>Essa vulnerabilidade acontece quando uma aplicação backend faz uma requisição para um recurso externo ou interno usando um destino que pode ser controlado, direta ou indiretamente, por entrada não confiável.</p>
+<p>Em aplicações Java/Spring, esse risco costuma aparecer em pontos como:</p>
+<ul>
+<li>chamadas HTTP com <code>RestClient</code>;</li>
+<li>chamadas HTTP com <code>RestTemplate</code>;</li>
+<li>chamadas HTTP com <code>WebClient</code>;</li>
+<li>uso direto de <code>java.net.http.HttpClient</code>;</li>
+<li>download de arquivos informando URL;</li>
+<li>upload para serviço externo;</li>
+<li>geração de URL dinâmica;</li>
+<li>integração com APIs parceiras;</li>
+<li>consumo de webhooks;</li>
+<li>redirecionamentos automáticos;</li>
+<li>leitura de arquivos remotos;</li>
+<li>proxies internos;</li>
+<li>gateways corporativos.</li>
+</ul>
+<p>O problema central é simples:</p>
+<blockquote>
+<p>A aplicação não deve permitir que o usuário decida livremente para onde o servidor vai fazer uma requisição.</p>
+</blockquote>
+<p>No navegador, quando um usuário acessa uma URL, a requisição sai da máquina do usuário. Em SSRF, quem faz a requisição é o servidor da aplicação. Isso muda completamente o risco.</p>
+<p>O servidor pode estar dentro de uma rede corporativa, com acesso a recursos internos, credenciais de ambiente, serviços privados, APIs restritas ou endpoints que não deveriam ser acessíveis diretamente pelo usuário.</p>
+<p>Por isso, SSRF não é apenas “validar uma URL”. É controlar a fronteira outbound da aplicação.</p>
+<h2 id="o-problema-real-que-ssrf-resolve-no-estudo-de-seguranca">O problema real que SSRF resolve no estudo de segurança</h2>
+<p>Estudar SSRF ajuda a entender um ponto importante de arquitetura:</p>
+<blockquote>
+<p>Toda chamada outbound feita pelo backend precisa ter destino controlado.</p>
+</blockquote>
+<p>Muitos desenvolvedores se preocupam com entrada de dados em banco, tela ou arquivo, mas esquecem que uma chamada HTTP feita pelo servidor também é um sink sensível.</p>
+<p>Quando a aplicação recebe uma URL, concatena valores em um endpoint ou monta dinamicamente o destino de uma chamada, ela pode abrir uma porta para que a entrada externa influencie a rede interna.</p>
+<p>Na aplicação fictícia <code>meucatalogomusical.com</code>, imagine uma funcionalidade que busca informações de shows, capas de álbuns ou dados de bandas em APIs parceiras.</p>
+<p>Um fluxo seguro seria:</p>
+<div class="highlight"><pre><span></span><code>Usuário escolhe um parceiro permitido
+    -&gt; aplicação resolve o endpoint internamente
+    -&gt; aplicação valida o destino
+    -&gt; aplicação faz a chamada outbound
+</code></pre></div>
+<p>Um fluxo perigoso seria:</p>
+<div class="highlight"><pre><span></span><code>Usuário envia uma URL
+    -&gt; aplicação usa essa URL diretamente
+    -&gt; servidor faz a chamada para o destino informado
+</code></pre></div>
+<p>A diferença é enorme.</p>
+<p>No primeiro caso, o usuário escolhe uma opção de negócio.</p>
+<p>No segundo, ele controla o destino técnico da requisição server-side.</p>
+<h2 id="antes-de-entrar-nos-detalhes-uma-ideia-simples">Antes de entrar nos detalhes: uma ideia simples</h2>
+<p>Pense em <code>meucatalogomusical.com</code>.</p>
+<p>A aplicação possui uma funcionalidade para importar informações públicas sobre bandas de Hard Rock. Um usuário administrativo quer enriquecer o catálogo com dados da banda <strong>Whitesnake</strong>.</p>
+<p>Uma abordagem ingênua seria permitir que o usuário informe a URL completa da API parceira:</p>
+<div class="highlight"><pre><span></span><code>POST /api/importacoes/banda?url=https://api-parceira.example/bandas/whitesnake
+</code></pre></div>
+<p>O backend recebe o parâmetro <code>url</code> e faz a chamada.</p>
+<p>Parece flexível.</p>
+<p>Mas flexibilidade excessiva em destino outbound pode ser perigosa.</p>
+<p>Uma abordagem melhor é permitir que o usuário escolha um parceiro já cadastrado:</p>
+<div class="highlight"><pre><span></span><code>POST /api/importacoes/banda?parceiro=CATALOGO_OFICIAL&amp;banda=Whitesnake
+</code></pre></div>
+<p>A aplicação então monta internamente a chamada para um destino conhecido, validado e permitido.</p>
+<p>Essa mudança reduz a superfície de ataque porque o usuário não controla a URL final.</p>
+<h2 id="definicao-tecnica">Definição técnica</h2>
+<p>SSRF é uma vulnerabilidade em que um atacante consegue induzir o servidor da aplicação a fazer requisições para destinos não pretendidos.</p>
+<p>Em termos de SAST, o padrão costuma aparecer assim:</p>
+<div class="highlight"><pre><span></span><code>source: entrada controlada pelo usuário
+    -&gt; controller
+    -&gt; service
+    -&gt; montagem de URL/URI/request
+sink: cliente HTTP fazendo requisição outbound
+</code></pre></div>
+<p>Exemplos de sources:</p>
+<ul>
+<li><code>@RequestParam String url</code>;</li>
+<li><code>@RequestParam String fileId</code>;</li>
+<li><code>@RequestParam String nomeArquivo</code>;</li>
+<li><code>@RequestBody</code> com campo de endpoint;</li>
+<li>headers HTTP;</li>
+<li>dados vindos de arquivo;</li>
+<li>dados vindos de banco;</li>
+<li>dados vindos de storage;</li>
+<li>dados vindos de configuração editável;</li>
+<li>parâmetros usados para montar path, query string ou host.</li>
+</ul>
+<p>Exemplos de sinks:</p>
+<ul>
+<li><code>RestClient.get().uri(...).retrieve()</code>;</li>
+<li><code>RestTemplate.getForObject(...)</code>;</li>
+<li><code>WebClient.get().uri(...).retrieve()</code>;</li>
+<li><code>HttpClient.send(...)</code>;</li>
+<li><code>HttpURLConnection</code>;</li>
+<li>SDKs que fazem transferência de arquivo;</li>
+<li>clientes de storage;</li>
+<li>métodos como <code>transferTo</code>, quando encapsulam chamada remota;</li>
+<li>bibliotecas internas que montam URL de upload/download.</li>
+</ul>
+<p>O risco não está em usar cliente HTTP. O risco está em deixar entrada não confiável controlar o destino da requisição.</p>
+<h2 id="por-que-ssrf-e-perigoso">Por que SSRF é perigoso?</h2>
+<p>SSRF é perigoso porque a requisição parte do servidor, não do navegador do usuário.</p>
+<p>O servidor pode ter acessos que o usuário não tem, como:</p>
+<ul>
+<li>serviços internos;</li>
+<li>APIs privadas;</li>
+<li>endpoints administrativos;</li>
+<li>redes internas;</li>
+<li>metadados de ambiente;</li>
+<li>credenciais temporárias;</li>
+<li>serviços de infraestrutura;</li>
+<li>storage interno;</li>
+<li>painéis restritos;</li>
+<li>bancos expostos apenas na rede interna;</li>
+<li>sistemas legados acessíveis somente pelo backend.</li>
+</ul>
+<p>Mesmo quando a aplicação é interna, SSRF continua relevante. Um usuário autenticado, um sistema consumidor ou uma integração comprometida pode tentar influenciar destinos outbound.</p>
+<p>Autenticação reduz superfície, mas não substitui validação de destino.</p>
+<h2 id="ssrf-em-aplicacoes-javaspring_1">SSRF em aplicações Java/Spring</h2>
+<p>Em Java/Spring, SSRF costuma aparecer quando o código aceita entrada externa para montar uma URL.</p>
+<p>Exemplo inseguro:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.importacao.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.*</span><span class="p">;</span>
+
+<span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/api/importacoes&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ImportacaoBandaController</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ImportacaoBandaService</span><span class="w"> </span><span class="n">importacaoBandaService</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ImportacaoBandaController</span><span class="p">(</span><span class="n">ImportacaoBandaService</span><span class="w"> </span><span class="n">importacaoBandaService</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">importacaoBandaService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">importacaoBandaService</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@PostMapping</span><span class="p">(</span><span class="s">&quot;/banda&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">importar</span><span class="p">(</span><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">url</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">importacaoBandaService</span><span class="p">.</span><span class="na">importar</span><span class="p">(</span><span class="n">url</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Service inseguro:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.importacao.application</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.client.RestClient</span><span class="p">;</span>
+
+<span class="nd">@Service</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ImportacaoBandaService</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">RestClient</span><span class="w"> </span><span class="n">restClient</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ImportacaoBandaService</span><span class="p">(</span><span class="n">RestClient</span><span class="p">.</span><span class="na">Builder</span><span class="w"> </span><span class="n">restClientBuilder</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">restClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">restClientBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">importar</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">url</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">restClient</span>
+<span class="w">                </span><span class="p">.</span><span class="na">get</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="na">uri</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">retrieve</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="na">body</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>O problema está aqui:</p>
+<div class="highlight"><pre><span></span><code><span class="p">.</span><span class="na">uri</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</code></pre></div>
+<p>A entrada <code>url</code> veio do usuário e foi usada como destino da chamada outbound.</p>
+<p>O SAST poderia apontar algo como:</p>
+<div class="highlight"><pre><span></span><code>Query: SSRF
+Source: ImportacaoBandaController.importar(url)
+Sink: RestClient.uri(url).retrieve()
+</code></pre></div>
+<p>Esse finding merece atenção porque o usuário controla o destino acessado pelo servidor.</p>
+<h2 id="https-e-necessario-mas-nao-suficiente">HTTPS é necessário, mas não suficiente</h2>
+<p>Uma primeira reação comum é validar se a URL começa com <code>https://</code>.</p>
+<p>Isso é melhor do que aceitar qualquer coisa, mas não resolve SSRF por completo.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">url</span><span class="p">.</span><span class="na">startsWith</span><span class="p">(</span><span class="s">&quot;https://&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;A URL deve usar HTTPS.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Essa validação é fraca por vários motivos:</p>
+<ul>
+<li><code>startsWith</code> não entende URI de forma estrutural;</li>
+<li>não valida host;</li>
+<li>não valida porta;</li>
+<li>não valida destino permitido;</li>
+<li>não trata normalização;</li>
+<li>não lida bem com variações de formato;</li>
+<li>não impede que um host HTTPS não autorizado seja acessado;</li>
+<li>não resolve redirecionamentos;</li>
+<li>não diferencia URL de entrada e URL final após redirect.</li>
+</ul>
+<p>HTTPS protege o canal, mas não responde à pergunta:</p>
+<blockquote>
+<p>Este destino é permitido para esta aplicação?</p>
+</blockquote>
+<p>SSRF exige controle de destino, não apenas criptografia.</p>
+<h2 id="a-melhor-defesa-nao-aceitar-url-livre">A melhor defesa: não aceitar URL livre</h2>
+<p>A defesa mais forte é evitar receber URL livre do usuário.</p>
+<p>Em vez disso, aceite uma opção de negócio e resolva o endpoint internamente.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.importacao.domain</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">ParceiroMusical</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">CATALOGO_OFICIAL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">AGENDA_SHOWS</span><span class="p">,</span>
+<span class="w">    </span><span class="n">MIDIA_BANDAS</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Request:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.importacao.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.meucatalogomusical.importacao.domain.ParceiroMusical</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.validation.constraints.NotBlank</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.validation.constraints.NotNull</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.validation.constraints.Size</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">ImportacaoBandaRequest</span><span class="p">(</span>
+
+<span class="w">        </span><span class="nd">@NotNull</span>
+<span class="w">        </span><span class="n">ParceiroMusical</span><span class="w"> </span><span class="n">parceiro</span><span class="p">,</span>
+
+<span class="w">        </span><span class="nd">@NotBlank</span>
+<span class="w">        </span><span class="nd">@Size</span><span class="p">(</span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">120</span><span class="p">)</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">nomeBanda</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Controller:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.importacao.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.validation.Valid</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.*</span><span class="p">;</span>
+
+<span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/api/importacoes&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ImportacaoBandaController</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ImportacaoBandaService</span><span class="w"> </span><span class="n">importacaoBandaService</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ImportacaoBandaController</span><span class="p">(</span><span class="n">ImportacaoBandaService</span><span class="w"> </span><span class="n">importacaoBandaService</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">importacaoBandaService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">importacaoBandaService</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@PostMapping</span><span class="p">(</span><span class="s">&quot;/banda&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ImportacaoBandaResponse</span><span class="w"> </span><span class="nf">importar</span><span class="p">(</span><span class="nd">@Valid</span><span class="w"> </span><span class="nd">@RequestBody</span><span class="w"> </span><span class="n">ImportacaoBandaRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">importacaoBandaService</span><span class="p">.</span><span class="na">importar</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Agora o usuário não envia <code>https://...</code>.</p>
+<p>Ele informa:</p>
+<ul>
+<li>parceiro;</li>
+<li>nome da banda.</li>
+</ul>
+<p>A aplicação decide o destino real.</p>
+<p>Isso muda o desenho de segurança.</p>
+<h2 id="resolver-endpoint-por-allowlist">Resolver endpoint por allowlist</h2>
+<p>Agora podemos resolver endpoints por lista permitida.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.importacao.infra</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.meucatalogomusical.importacao.domain.ParceiroMusical</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Component</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.net.URI</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Map</span><span class="p">;</span>
+
+<span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ParceiroMusicalEndpointResolver</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">ParceiroMusical</span><span class="p">,</span><span class="w"> </span><span class="n">URI</span><span class="o">&gt;</span><span class="w"> </span><span class="n">endpoints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Map</span><span class="p">.</span><span class="na">of</span><span class="p">(</span>
+<span class="w">            </span><span class="n">ParceiroMusical</span><span class="p">.</span><span class="na">CATALOGO_OFICIAL</span><span class="p">,</span><span class="w"> </span><span class="n">URI</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="s">&quot;https://catalogo-parceiro.example/api/bandas&quot;</span><span class="p">),</span>
+<span class="w">            </span><span class="n">ParceiroMusical</span><span class="p">.</span><span class="na">AGENDA_SHOWS</span><span class="p">,</span><span class="w"> </span><span class="n">URI</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="s">&quot;https://agenda-parceira.example/api/shows&quot;</span><span class="p">),</span>
+<span class="w">            </span><span class="n">ParceiroMusical</span><span class="p">.</span><span class="na">MIDIA_BANDAS</span><span class="p">,</span><span class="w"> </span><span class="n">URI</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="s">&quot;https://midia-parceira.example/api/artistas&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">OutboundUriValidator</span><span class="w"> </span><span class="n">outboundUriValidator</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ParceiroMusicalEndpointResolver</span><span class="p">(</span><span class="n">OutboundUriValidator</span><span class="w"> </span><span class="n">outboundUriValidator</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">outboundUriValidator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">outboundUriValidator</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">URI</span><span class="w"> </span><span class="nf">resolver</span><span class="p">(</span><span class="n">ParceiroMusical</span><span class="w"> </span><span class="n">parceiro</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">URI</span><span class="w"> </span><span class="n">endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endpoints</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">parceiro</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">endpoint</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Parceiro musical não autorizado.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">outboundUriValidator</span><span class="p">.</span><span class="na">requireAllowedHttpsEndpoint</span><span class="p">(</span><span class="n">endpoint</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Aqui a origem do destino não é o usuário.</p>
+<p>O destino vem de uma lista controlada pela aplicação.</p>
+<p>O usuário escolhe uma opção permitida, não uma URL arbitrária.</p>
+<h2 id="validador-de-uri-outbound">Validador de URI outbound</h2>
+<p>Um validador defensivo pode deixar explícitas as regras mínimas para chamadas outbound.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.importacao.infra</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Component</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.net.URI</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Set</span><span class="p">;</span>
+
+<span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">OutboundUriValidator</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">HOSTS_PERMITIDOS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Set</span><span class="p">.</span><span class="na">of</span><span class="p">(</span>
+<span class="w">            </span><span class="s">&quot;catalogo-parceiro.example&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;agenda-parceira.example&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;midia-parceira.example&quot;</span>
+<span class="w">    </span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">URI</span><span class="w"> </span><span class="nf">requireAllowedHttpsEndpoint</span><span class="p">(</span><span class="n">URI</span><span class="w"> </span><span class="n">uri</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">uri</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Endpoint outbound é obrigatório.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">uri</span><span class="p">.</span><span class="na">isAbsolute</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Endpoint outbound deve ser absoluto.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="s">&quot;https&quot;</span><span class="p">.</span><span class="na">equalsIgnoreCase</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="na">getScheme</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Endpoint outbound deve usar HTTPS.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="na">getHost</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">uri</span><span class="p">.</span><span class="na">getHost</span><span class="p">().</span><span class="na">isBlank</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Endpoint outbound deve possuir host.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">HOSTS_PERMITIDOS</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="na">getHost</span><span class="p">().</span><span class="na">toLowerCase</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Host outbound não autorizado.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">porta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">uri</span><span class="p">.</span><span class="na">getPort</span><span class="p">();</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">porta</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">porta</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">443</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Porta outbound não autorizada.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">uri</span><span class="p">.</span><span class="na">normalize</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse código valida:</p>
+<ul>
+<li>URI obrigatória;</li>
+<li>URI absoluta;</li>
+<li>esquema HTTPS;</li>
+<li>host presente;</li>
+<li>host dentro da allowlist;</li>
+<li>porta permitida;</li>
+<li>normalização da URI.</li>
+</ul>
+<p>Em um ambiente corporativo real, essa lista poderia vir de configuração, mas ainda assim deveria ser tratada como configuração controlada, revisada e testada.</p>
+<h2 id="servico-seguro-com-restclient">Serviço seguro com RestClient</h2>
+<p>Agora o serviço pode usar o endpoint resolvido internamente.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.importacao.api</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">ImportacaoBandaResponse</span><span class="p">(</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">parceiro</span><span class="p">,</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">nomeBanda</span><span class="p">,</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">status</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.importacao.application</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.meucatalogomusical.importacao.api.ImportacaoBandaRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.meucatalogomusical.importacao.api.ImportacaoBandaResponse</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.meucatalogomusical.importacao.infra.ParceiroMusicalEndpointResolver</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.client.RestClient</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.net.URI</span><span class="p">;</span>
+
+<span class="nd">@Service</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ImportacaoBandaService</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">RestClient</span><span class="w"> </span><span class="n">restClient</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ParceiroMusicalEndpointResolver</span><span class="w"> </span><span class="n">endpointResolver</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ImportacaoBandaService</span><span class="p">(</span>
+<span class="w">            </span><span class="n">RestClient</span><span class="p">.</span><span class="na">Builder</span><span class="w"> </span><span class="n">restClientBuilder</span><span class="p">,</span>
+<span class="w">            </span><span class="n">ParceiroMusicalEndpointResolver</span><span class="w"> </span><span class="n">endpointResolver</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">restClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">restClientBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">endpointResolver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endpointResolver</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ImportacaoBandaResponse</span><span class="w"> </span><span class="nf">importar</span><span class="p">(</span><span class="n">ImportacaoBandaRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">URI</span><span class="w"> </span><span class="n">endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endpointResolver</span><span class="p">.</span><span class="na">resolver</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="na">parceiro</span><span class="p">());</span>
+
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">respostaParceiro</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">restClient</span>
+<span class="w">                </span><span class="p">.</span><span class="na">get</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="na">uri</span><span class="p">(</span><span class="n">uriBuilder</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">uriBuilder</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">scheme</span><span class="p">(</span><span class="n">endpoint</span><span class="p">.</span><span class="na">getScheme</span><span class="p">())</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">host</span><span class="p">(</span><span class="n">endpoint</span><span class="p">.</span><span class="na">getHost</span><span class="p">())</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">path</span><span class="p">(</span><span class="n">endpoint</span><span class="p">.</span><span class="na">getPath</span><span class="p">())</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">queryParam</span><span class="p">(</span><span class="s">&quot;banda&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">nomeBanda</span><span class="p">())</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">build</span><span class="p">())</span>
+<span class="w">                </span><span class="p">.</span><span class="na">retrieve</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="na">body</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ImportacaoBandaResponse</span><span class="p">(</span>
+<span class="w">                </span><span class="n">request</span><span class="p">.</span><span class="na">parceiro</span><span class="p">().</span><span class="na">name</span><span class="p">(),</span>
+<span class="w">                </span><span class="n">request</span><span class="p">.</span><span class="na">nomeBanda</span><span class="p">(),</span>
+<span class="w">                </span><span class="n">respostaParceiro</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;SEM_RESPOSTA&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">&quot;IMPORTADO&quot;</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Nesse exemplo, o usuário controla apenas o valor de negócio <code>nomeBanda</code>, que é enviado como parâmetro.</p>
+<p>Ele não controla:</p>
+<ul>
+<li>esquema;</li>
+<li>host;</li>
+<li>porta;</li>
+<li>path base;</li>
+<li>destino da chamada;</li>
+<li>protocolo;</li>
+<li>redirecionamento.</li>
+</ul>
+<p>Esse desenho é muito mais seguro.</p>
+<h2 id="cuidado-com-uribuilder">Cuidado com uriBuilder</h2>
+<p>O <code>uriBuilder</code> ajuda a montar query parameters corretamente, mas ele não substitui validação de destino.</p>
+<p>Se você fizer isto:</p>
+<div class="highlight"><pre><span></span><code><span class="p">.</span><span class="na">uri</span><span class="p">(</span><span class="n">urlRecebidaDoUsuario</span><span class="p">)</span>
+</code></pre></div>
+<p>continua perigoso.</p>
+<p>Se fizer isto:</p>
+<div class="highlight"><pre><span></span><code><span class="p">.</span><span class="na">uri</span><span class="p">(</span><span class="n">uriBuilder</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">uriBuilder</span>
+<span class="w">        </span><span class="p">.</span><span class="na">scheme</span><span class="p">(</span><span class="n">esquemaRecebidoDoUsuario</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="na">host</span><span class="p">(</span><span class="n">hostRecebidoDoUsuario</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="na">path</span><span class="p">(</span><span class="n">pathRecebidoDoUsuario</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="na">build</span><span class="p">())</span>
+</code></pre></div>
+<p>também continua perigoso.</p>
+<p>O ponto é: builder de URI não é sanitizer de SSRF.</p>
+<p>Ele ajuda a construir a URI, mas não decide se o destino é permitido.</p>
+<h2 id="redirecionamentos">Redirecionamentos</h2>
+<p>Redirecionamentos são uma preocupação importante em SSRF.</p>
+<p>Mesmo que a primeira URL seja permitida, um servidor pode responder com redirect para outro destino.</p>
+<p>Fluxo perigoso:</p>
+<div class="highlight"><pre><span></span><code>Aplicação chama destino permitido
+    -&gt; servidor responde redirect
+    -&gt; cliente HTTP segue redirect automaticamente
+    -&gt; requisição final vai para destino não pretendido
+</code></pre></div>
+<p>Por isso, em chamadas sensíveis, é comum desabilitar redirects automáticos ou validar novamente o destino após redirect.</p>
+<p>Em Spring Boot, a configuração de clientes HTTP pode ser centralizada. Um exemplo conceitual de configuração para não seguir redirects automaticamente:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">spring</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">http</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">clients</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">redirects</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dont-follow</span>
+</code></pre></div>
+<p>A configuração exata pode variar conforme versão do Spring Boot, cliente HTTP subjacente e starter utilizado. O princípio defensivo é: não permita que redirects transformem um destino validado em outro destino não validado.</p>
+<h2 id="usando-httpclient-com-redirects-desabilitados">Usando HttpClient com redirects desabilitados</h2>
+<p>Se você usar diretamente o <code>java.net.http.HttpClient</code>, também pode deixar a política explícita.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.importacao.infra</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Component</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.net.http.HttpClient</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.time.Duration</span><span class="p">;</span>
+
+<span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SecureHttpClientFactory</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">HttpClient</span><span class="w"> </span><span class="nf">create</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">HttpClient</span><span class="p">.</span><span class="na">newBuilder</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="na">connectTimeout</span><span class="p">(</span><span class="n">Duration</span><span class="p">.</span><span class="na">ofSeconds</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">followRedirects</span><span class="p">(</span><span class="n">HttpClient</span><span class="p">.</span><span class="na">Redirect</span><span class="p">.</span><span class="na">NEVER</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse exemplo define:</p>
+<ul>
+<li>timeout de conexão;</li>
+<li>redirects desabilitados.</li>
+</ul>
+<p>Timeout não é correção de SSRF, mas ajuda a reduzir impacto operacional em chamadas externas.</p>
+<p>Redirect desabilitado ajuda a evitar bypass de validação por redirecionamento.</p>
+<h2 id="separar-uri-e-body">Separar URI e body</h2>
+<p>Um aprendizado importante em aplicações reais é separar claramente:</p>
+<ul>
+<li>destino da requisição;</li>
+<li>corpo da requisição;</li>
+<li>headers;</li>
+<li>credenciais;</li>
+<li>parâmetros de negócio.</li>
+</ul>
+<p>Código perigoso mistura tudo:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">host</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;?payload=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">payloadRecebido</span><span class="p">;</span>
+<span class="n">restClient</span><span class="p">.</span><span class="na">post</span><span class="p">().</span><span class="na">uri</span><span class="p">(</span><span class="n">url</span><span class="p">).</span><span class="na">retrieve</span><span class="p">();</span>
+</code></pre></div>
+<p>Código melhor mantém o destino controlado e envia dados como body ou query parameter controlado:</p>
+<div class="highlight"><pre><span></span><code><span class="n">URI</span><span class="w"> </span><span class="n">endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endpointResolver</span><span class="p">.</span><span class="na">resolver</span><span class="p">(</span><span class="n">parceiro</span><span class="p">);</span>
+
+<span class="n">restClient</span>
+<span class="w">        </span><span class="p">.</span><span class="na">post</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="na">uri</span><span class="p">(</span><span class="n">endpoint</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="na">contentType</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="na">body</span><span class="p">(</span><span class="n">requestParceiro</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="na">retrieve</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="na">body</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+</code></pre></div>
+<p>Separar URI e body ajuda em três aspectos:</p>
+<ol>
+<li>reduz risco de entrada influenciar o destino;</li>
+<li>facilita análise humana;</li>
+<li>facilita interpretação do SAST.</li>
+</ol>
+<p>A regra prática é:</p>
+<blockquote>
+<p>Dados de negócio podem ir no body. Destino da chamada deve vir de configuração controlada ou allowlist.</p>
+</blockquote>
+<h2 id="ssrf-e-headers">SSRF e headers</h2>
+<p>Headers também podem influenciar chamadas outbound.</p>
+<p>Exemplo perigoso:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">partnerHost</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">getHeader</span><span class="p">(</span><span class="s">&quot;X-Partner-Host&quot;</span><span class="p">);</span>
+<span class="n">URI</span><span class="w"> </span><span class="n">endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">URI</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="s">&quot;https://&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">partnerHost</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;/api/bandas&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>Mesmo usando HTTPS, o usuário controla o host.</p>
+<p>Uma abordagem melhor é usar headers apenas para dados de negócio ou correlação, não para escolher destino técnico.</p>
+<p>Se o parceiro precisa ser selecionado dinamicamente, use identificadores controlados:</p>
+<div class="highlight"><pre><span></span><code><span class="n">ParceiroMusical</span><span class="w"> </span><span class="n">parceiro</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ParceiroMusical</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="na">getHeader</span><span class="p">(</span><span class="s">&quot;X-Partner-Code&quot;</span><span class="p">));</span>
+<span class="n">URI</span><span class="w"> </span><span class="n">endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endpointResolver</span><span class="p">.</span><span class="na">resolver</span><span class="p">(</span><span class="n">parceiro</span><span class="p">);</span>
+</code></pre></div>
+<p>Ainda assim, é melhor validar e tratar erro adequadamente, porque <code>valueOf</code> lança exceção para valores inválidos.</p>
+<h2 id="ssrf-e-configuracao">SSRF e configuração</h2>
+<p>Nem todo SSRF vem diretamente de <code>@RequestParam</code>.</p>
+<p>Às vezes, o destino vem de configuração:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">integracoes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">agenda-shows-url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://agenda-parceira.example/api/shows</span>
+</code></pre></div>
+<p>Isso geralmente é melhor do que receber URL do usuário, mas ainda exige validação.</p>
+<p>Por quê?</p>
+<p>Porque configuração também pode ser alterada por erro humano, variável de ambiente incorreta, pipeline mal configurado ou segredo/configuração comprometida.</p>
+<p>Por isso, é útil validar configuração na inicialização ou imediatamente antes do sink.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@PostConstruct</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">validarConfiguracao</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">outboundUriValidator</span><span class="p">.</span><span class="na">requireAllowedHttpsEndpoint</span><span class="p">(</span><span class="n">agendaShowsUri</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Ou validar imediatamente antes da chamada, que é ainda mais próximo do sink.</p>
+<h2 id="validacao-proxima-ao-sink">Validação próxima ao sink</h2>
+<p>Em segurança, é útil validar perto do ponto sensível.</p>
+<p>Para SSRF, o ponto sensível é a chamada HTTP.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="n">URI</span><span class="w"> </span><span class="n">endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endpointResolver</span><span class="p">.</span><span class="na">resolver</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="na">parceiro</span><span class="p">());</span>
+
+<span class="n">URI</span><span class="w"> </span><span class="n">endpointValidado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">outboundUriValidator</span><span class="p">.</span><span class="na">requireAllowedHttpsEndpoint</span><span class="p">(</span><span class="n">endpoint</span><span class="p">);</span>
+
+<span class="k">return</span><span class="w"> </span><span class="n">restClient</span>
+<span class="w">        </span><span class="p">.</span><span class="na">get</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="na">uri</span><span class="p">(</span><span class="n">endpointValidado</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="na">retrieve</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="na">body</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+</code></pre></div>
+<p>Mesmo que o endpoint já tenha sido validado antes, repetir a validação imediatamente antes da chamada pode ser aceitável quando o risco é alto.</p>
+<p>Essa redundância não é necessariamente duplicação ruim. Pode ser uma fronteira de segurança explícita.</p>
+<h2 id="falha-fechada">Falha fechada</h2>
+<p>Em SSRF, a aplicação deve falhar fechada.</p>
+<p>Ou seja:</p>
+<ul>
+<li>se a URI for nula, rejeite;</li>
+<li>se for relativa, rejeite;</li>
+<li>se não tiver host, rejeite;</li>
+<li>se não for HTTPS, rejeite;</li>
+<li>se o host não estiver autorizado, rejeite;</li>
+<li>se a porta não for permitida, rejeite;</li>
+<li>se houver redirect não validado, rejeite;</li>
+<li>se a configuração estiver ausente, rejeite.</li>
+</ul>
+<p>Não faça fallback inseguro.</p>
+<p>Exemplo ruim:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">endpoint</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">URI</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="na">urlAlternativa</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Exemplo melhor:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">endpoint</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;Endpoint parceiro não configurado.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Quando a aplicação não sabe para onde deve chamar, ela não deve chamar lugar nenhum.</p>
+<h2 id="ssrf-e-allowlist">SSRF e allowlist</h2>
+<p>Allowlist é uma lista positiva do que é permitido.</p>
+<p>Para SSRF, allowlist costuma ser melhor que denylist.</p>
+<p>Denylist tenta bloquear destinos ruins.</p>
+<p>Allowlist permite apenas destinos bons.</p>
+<p>Exemplo de denylist fraca:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">host</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="s">&quot;localhost&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Host proibido.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Isso é fraco porque existem muitas formas de representar destinos, hosts e redes.</p>
+<p>Exemplo de allowlist melhor:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">HOSTS_PERMITIDOS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Set</span><span class="p">.</span><span class="na">of</span><span class="p">(</span>
+<span class="w">        </span><span class="s">&quot;catalogo-parceiro.example&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;agenda-parceira.example&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;midia-parceira.example&quot;</span>
+<span class="p">);</span>
+</code></pre></div>
+<p>Com allowlist, a pergunta muda de:</p>
+<blockquote>
+<p>Esse destino parece perigoso?</p>
+</blockquote>
+<p>para:</p>
+<blockquote>
+<p>Esse destino está explicitamente permitido?</p>
+</blockquote>
+<p>Essa segunda pergunta é muito mais segura.</p>
+<h2 id="ssrf-e-dns">SSRF e DNS</h2>
+<p>Em ambientes mais sensíveis, validar apenas o nome do host pode não ser suficiente.</p>
+<p>Por quê?</p>
+<p>Porque nomes de domínio são resolvidos por DNS, e o IP resultante pode mudar.</p>
+<p>Alguns cenários exigem verificar:</p>
+<ul>
+<li>se o domínio é permitido;</li>
+<li>quais IPs ele resolve;</li>
+<li>se os IPs pertencem a faixas permitidas;</li>
+<li>se não apontam para redes internas;</li>
+<li>se não há mudança entre validação e uso;</li>
+<li>se o cliente HTTP não resolve diferente do validador;</li>
+<li>se a infraestrutura usa proxy controlado.</li>
+</ul>
+<p>Esse tema é mais avançado e depende da arquitetura da empresa.</p>
+<p>Para muitos sistemas corporativos, a melhor estratégia é não permitir URL arbitrária, usar allowlist de parceiros e centralizar egress em infraestrutura controlada.</p>
+<h2 id="ssrf-e-infraestrutura">SSRF e infraestrutura</h2>
+<p>Código ajuda, mas SSRF também deve ser tratado na infraestrutura.</p>
+<p>Controles possíveis:</p>
+<ul>
+<li>egress control;</li>
+<li>firewall de saída;</li>
+<li>proxy corporativo;</li>
+<li>service mesh;</li>
+<li>network policies;</li>
+<li>bloqueio de redes internas sensíveis;</li>
+<li>credenciais com menor privilégio;</li>
+<li>segmentação de rede;</li>
+<li>mTLS entre serviços autorizados;</li>
+<li>monitoramento de chamadas outbound;</li>
+<li>alertas para destinos inesperados.</li>
+</ul>
+<p>Mesmo com código seguro, infraestrutura deve limitar danos.</p>
+<p>E mesmo com infraestrutura forte, código deve validar destino.</p>
+<p>É defesa em profundidade.</p>
+<h2 id="exemplo-completo-importacao-segura-de-dados-de-banda">Exemplo completo: importação segura de dados de banda</h2>
+<p>Vamos consolidar um fluxo seguro.</p>
+<h3 id="enum-de-parceiros">Enum de parceiros</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.importacao.domain</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">ParceiroMusical</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">CATALOGO_OFICIAL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">AGENDA_SHOWS</span><span class="p">,</span>
+<span class="w">    </span><span class="n">MIDIA_BANDAS</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="request">Request</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.importacao.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.meucatalogomusical.importacao.domain.ParceiroMusical</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.validation.constraints.NotBlank</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.validation.constraints.NotNull</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.validation.constraints.Size</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">ImportacaoBandaRequest</span><span class="p">(</span>
+
+<span class="w">        </span><span class="nd">@NotNull</span>
+<span class="w">        </span><span class="n">ParceiroMusical</span><span class="w"> </span><span class="n">parceiro</span><span class="p">,</span>
+
+<span class="w">        </span><span class="nd">@NotBlank</span>
+<span class="w">        </span><span class="nd">@Size</span><span class="p">(</span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">120</span><span class="p">)</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">nomeBanda</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="controller">Controller</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.importacao.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.validation.Valid</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.HttpStatus</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.*</span><span class="p">;</span>
+
+<span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/api/importacoes/bandas&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ImportacaoBandaController</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ImportacaoBandaService</span><span class="w"> </span><span class="n">importacaoBandaService</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ImportacaoBandaController</span><span class="p">(</span><span class="n">ImportacaoBandaService</span><span class="w"> </span><span class="n">importacaoBandaService</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">importacaoBandaService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">importacaoBandaService</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@PostMapping</span>
+<span class="w">    </span><span class="nd">@ResponseStatus</span><span class="p">(</span><span class="n">HttpStatus</span><span class="p">.</span><span class="na">ACCEPTED</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ImportacaoBandaResponse</span><span class="w"> </span><span class="nf">importar</span><span class="p">(</span><span class="nd">@Valid</span><span class="w"> </span><span class="nd">@RequestBody</span><span class="w"> </span><span class="n">ImportacaoBandaRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">importacaoBandaService</span><span class="p">.</span><span class="na">importar</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="validador">Validador</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.importacao.infra</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Component</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.net.URI</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Set</span><span class="p">;</span>
+
+<span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">OutboundUriValidator</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">HOSTS_PERMITIDOS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Set</span><span class="p">.</span><span class="na">of</span><span class="p">(</span>
+<span class="w">            </span><span class="s">&quot;catalogo-parceiro.example&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;agenda-parceira.example&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;midia-parceira.example&quot;</span>
+<span class="w">    </span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">URI</span><span class="w"> </span><span class="nf">requireAllowedHttpsEndpoint</span><span class="p">(</span><span class="n">URI</span><span class="w"> </span><span class="n">endpoint</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">endpoint</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Endpoint outbound é obrigatório.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">endpoint</span><span class="p">.</span><span class="na">isAbsolute</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Endpoint outbound deve ser absoluto.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="s">&quot;https&quot;</span><span class="p">.</span><span class="na">equalsIgnoreCase</span><span class="p">(</span><span class="n">endpoint</span><span class="p">.</span><span class="na">getScheme</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Endpoint outbound deve usar HTTPS.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endpoint</span><span class="p">.</span><span class="na">getHost</span><span class="p">();</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">host</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">host</span><span class="p">.</span><span class="na">isBlank</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Endpoint outbound deve possuir host.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">HOSTS_PERMITIDOS</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">host</span><span class="p">.</span><span class="na">toLowerCase</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Host outbound não autorizado.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endpoint</span><span class="p">.</span><span class="na">getPort</span><span class="p">();</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">port</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">port</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">443</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Porta outbound não autorizada.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">endpoint</span><span class="p">.</span><span class="na">normalize</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="resolver">Resolver</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.importacao.infra</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.meucatalogomusical.importacao.domain.ParceiroMusical</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Component</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.net.URI</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Map</span><span class="p">;</span>
+
+<span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ParceiroMusicalEndpointResolver</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">ParceiroMusical</span><span class="p">,</span><span class="w"> </span><span class="n">URI</span><span class="o">&gt;</span><span class="w"> </span><span class="n">endpoints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Map</span><span class="p">.</span><span class="na">of</span><span class="p">(</span>
+<span class="w">            </span><span class="n">ParceiroMusical</span><span class="p">.</span><span class="na">CATALOGO_OFICIAL</span><span class="p">,</span><span class="w"> </span><span class="n">URI</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="s">&quot;https://catalogo-parceiro.example/api/bandas&quot;</span><span class="p">),</span>
+<span class="w">            </span><span class="n">ParceiroMusical</span><span class="p">.</span><span class="na">AGENDA_SHOWS</span><span class="p">,</span><span class="w"> </span><span class="n">URI</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="s">&quot;https://agenda-parceira.example/api/shows&quot;</span><span class="p">),</span>
+<span class="w">            </span><span class="n">ParceiroMusical</span><span class="p">.</span><span class="na">MIDIA_BANDAS</span><span class="p">,</span><span class="w"> </span><span class="n">URI</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="s">&quot;https://midia-parceira.example/api/artistas&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">OutboundUriValidator</span><span class="w"> </span><span class="n">outboundUriValidator</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ParceiroMusicalEndpointResolver</span><span class="p">(</span><span class="n">OutboundUriValidator</span><span class="w"> </span><span class="n">outboundUriValidator</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">outboundUriValidator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">outboundUriValidator</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">URI</span><span class="w"> </span><span class="nf">resolver</span><span class="p">(</span><span class="n">ParceiroMusical</span><span class="w"> </span><span class="n">parceiro</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">URI</span><span class="w"> </span><span class="n">endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endpoints</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">parceiro</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">endpoint</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Parceiro não autorizado.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">outboundUriValidator</span><span class="p">.</span><span class="na">requireAllowedHttpsEndpoint</span><span class="p">(</span><span class="n">endpoint</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="service">Service</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.importacao.api</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">ImportacaoBandaResponse</span><span class="p">(</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">banda</span><span class="p">,</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">parceiro</span><span class="p">,</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">status</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.importacao.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.meucatalogomusical.importacao.infra.ParceiroMusicalEndpointResolver</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.MediaType</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.client.RestClient</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.net.URI</span><span class="p">;</span>
+
+<span class="nd">@Service</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ImportacaoBandaService</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">RestClient</span><span class="w"> </span><span class="n">restClient</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ParceiroMusicalEndpointResolver</span><span class="w"> </span><span class="n">endpointResolver</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ImportacaoBandaService</span><span class="p">(</span>
+<span class="w">            </span><span class="n">RestClient</span><span class="p">.</span><span class="na">Builder</span><span class="w"> </span><span class="n">restClientBuilder</span><span class="p">,</span>
+<span class="w">            </span><span class="n">ParceiroMusicalEndpointResolver</span><span class="w"> </span><span class="n">endpointResolver</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">restClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">restClientBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">endpointResolver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endpointResolver</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ImportacaoBandaResponse</span><span class="w"> </span><span class="nf">importar</span><span class="p">(</span><span class="n">ImportacaoBandaRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">URI</span><span class="w"> </span><span class="n">endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endpointResolver</span><span class="p">.</span><span class="na">resolver</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="na">parceiro</span><span class="p">());</span>
+
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">resposta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">restClient</span>
+<span class="w">                </span><span class="p">.</span><span class="na">get</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="na">uri</span><span class="p">(</span><span class="n">uriBuilder</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">uriBuilder</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">scheme</span><span class="p">(</span><span class="n">endpoint</span><span class="p">.</span><span class="na">getScheme</span><span class="p">())</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">host</span><span class="p">(</span><span class="n">endpoint</span><span class="p">.</span><span class="na">getHost</span><span class="p">())</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">path</span><span class="p">(</span><span class="n">endpoint</span><span class="p">.</span><span class="na">getPath</span><span class="p">())</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">queryParam</span><span class="p">(</span><span class="s">&quot;nome&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="na">nomeBanda</span><span class="p">())</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">build</span><span class="p">())</span>
+<span class="w">                </span><span class="p">.</span><span class="na">accept</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">retrieve</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="na">body</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">resposta</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">resposta</span><span class="p">.</span><span class="na">isBlank</span><span class="p">()</span>
+<span class="w">                </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;SEM_DADOS&quot;</span>
+<span class="w">                </span><span class="p">:</span><span class="w"> </span><span class="s">&quot;IMPORTADO&quot;</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ImportacaoBandaResponse</span><span class="p">(</span>
+<span class="w">                </span><span class="n">request</span><span class="p">.</span><span class="na">nomeBanda</span><span class="p">(),</span>
+<span class="w">                </span><span class="n">request</span><span class="p">.</span><span class="na">parceiro</span><span class="p">().</span><span class="na">name</span><span class="p">(),</span>
+<span class="w">                </span><span class="n">status</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Exemplo de uso:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;parceiro&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CATALOGO_OFICIAL&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;nomeBanda&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Black Label Society&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>A banda entra como dado de negócio.</p>
+<p>O parceiro entra como enum.</p>
+<p>O endpoint real é resolvido pela aplicação.</p>
+<p>Esse é o tipo de desenho que reduz risco de SSRF.</p>
+<h2 id="testes-do-validador">Testes do validador</h2>
+<p>Testes ajudam a transformar a política de segurança em comportamento verificável.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.importacao.infra</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.net.URI</span><span class="p">;</span>
+
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.*</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">OutboundUriValidatorTest</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">OutboundUriValidator</span><span class="w"> </span><span class="n">validator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OutboundUriValidator</span><span class="p">();</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">deveAceitarEndpointHttpsComHostPermitido</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">URI</span><span class="w"> </span><span class="n">endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">URI</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="s">&quot;https://catalogo-parceiro.example/api/bandas&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">URI</span><span class="w"> </span><span class="n">validado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">validator</span><span class="p">.</span><span class="na">requireAllowedHttpsEndpoint</span><span class="p">(</span><span class="n">endpoint</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span><span class="w"> </span><span class="n">validado</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">deveRejeitarHttp</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">URI</span><span class="w"> </span><span class="n">endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">URI</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="s">&quot;http://catalogo-parceiro.example/api/bandas&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">assertThrows</span><span class="p">(</span><span class="n">IllegalArgumentException</span><span class="p">.</span><span class="na">class</span><span class="p">,</span>
+<span class="w">                </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">validator</span><span class="p">.</span><span class="na">requireAllowedHttpsEndpoint</span><span class="p">(</span><span class="n">endpoint</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">deveRejeitarUriRelativa</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">URI</span><span class="w"> </span><span class="n">endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">URI</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="s">&quot;/api/bandas&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">assertThrows</span><span class="p">(</span><span class="n">IllegalArgumentException</span><span class="p">.</span><span class="na">class</span><span class="p">,</span>
+<span class="w">                </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">validator</span><span class="p">.</span><span class="na">requireAllowedHttpsEndpoint</span><span class="p">(</span><span class="n">endpoint</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">deveRejeitarHostNaoPermitido</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">URI</span><span class="w"> </span><span class="n">endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">URI</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="s">&quot;https://nao-autorizado.example/api/bandas&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">assertThrows</span><span class="p">(</span><span class="n">IllegalArgumentException</span><span class="p">.</span><span class="na">class</span><span class="p">,</span>
+<span class="w">                </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">validator</span><span class="p">.</span><span class="na">requireAllowedHttpsEndpoint</span><span class="p">(</span><span class="n">endpoint</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">deveRejeitarPortaNaoAutorizada</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">URI</span><span class="w"> </span><span class="n">endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">URI</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="s">&quot;https://catalogo-parceiro.example:8443/api/bandas&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">assertThrows</span><span class="p">(</span><span class="n">IllegalArgumentException</span><span class="p">.</span><span class="na">class</span><span class="p">,</span>
+<span class="w">                </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">validator</span><span class="p">.</span><span class="na">requireAllowedHttpsEndpoint</span><span class="p">(</span><span class="n">endpoint</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esses testes validam o comportamento esperado:</p>
+<ul>
+<li>HTTPS permitido;</li>
+<li>HTTP rejeitado;</li>
+<li>URI relativa rejeitada;</li>
+<li>host desconhecido rejeitado;</li>
+<li>porta não autorizada rejeitada.</li>
+</ul>
+<p>Esse tipo de teste é essencial para sustentar a correção em scans futuros.</p>
+<h2 id="teste-do-resolver">Teste do resolver</h2>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.importacao.infra</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.meucatalogomusical.importacao.domain.ParceiroMusical</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.net.URI</span><span class="p">;</span>
+
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.assertEquals</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">ParceiroMusicalEndpointResolverTest</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ParceiroMusicalEndpointResolver</span><span class="w"> </span><span class="n">resolver</span><span class="w"> </span><span class="o">=</span>
+<span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">ParceiroMusicalEndpointResolver</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">OutboundUriValidator</span><span class="p">());</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">deveResolverCatalogoOficialParaEndpointPermitido</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">URI</span><span class="w"> </span><span class="n">endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">resolver</span><span class="p">.</span><span class="na">resolver</span><span class="p">(</span><span class="n">ParceiroMusical</span><span class="p">.</span><span class="na">CATALOGO_OFICIAL</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="s">&quot;https&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">endpoint</span><span class="p">.</span><span class="na">getScheme</span><span class="p">());</span>
+<span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="s">&quot;catalogo-parceiro.example&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">endpoint</span><span class="p">.</span><span class="na">getHost</span><span class="p">());</span>
+<span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="s">&quot;/api/bandas&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">endpoint</span><span class="p">.</span><span class="na">getPath</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse teste garante que a opção de negócio se transforma em destino técnico permitido.</p>
+<h2 id="como-um-sast-pode-enxergar-esse-codigo">Como um SAST pode enxergar esse código?</h2>
+<p>Na versão insegura, o fluxo era:</p>
+<div class="highlight"><pre><span></span><code>@RequestParam url
+    -&gt; service.importar(url)
+    -&gt; restClient.uri(url)
+</code></pre></div>
+<p>Na versão segura, o fluxo passa a ser:</p>
+<div class="highlight"><pre><span></span><code>@RequestBody parceiro
+    -&gt; enum ParceiroMusical
+    -&gt; resolver interno
+    -&gt; endpoint de allowlist
+    -&gt; validação HTTPS/host/porta
+    -&gt; restClient.uri(endpoint validado)
+</code></pre></div>
+<p>A diferença para o scanner e para o revisor humano é grande.</p>
+<p>O usuário não controla mais a URL.</p>
+<p>Ele controla uma opção de negócio limitada.</p>
+<p>O destino é resolvido e validado dentro da aplicação.</p>
+<h2 id="quando-ssrf-aparece-como-falso-positivo">Quando SSRF aparece como falso positivo?</h2>
+<p>SSRF pode aparecer como falso positivo quando a ferramenta acredita que o usuário controla o destino, mas o código real não permite isso.</p>
+<p>Exemplos:</p>
+<h3 id="1-o-usuario-controla-o-body-nao-a-uri">1. O usuário controla o body, não a URI</h3>
+<p>O scanner pode ver que um valor vindo do request chega perto de uma chamada HTTP.</p>
+<p>Mas, na prática, esse valor pode estar apenas no corpo da requisição.</p>
+<p>Exemplo seguro:</p>
+<div class="highlight"><pre><span></span><code><span class="n">URI</span><span class="w"> </span><span class="n">endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endpointResolver</span><span class="p">.</span><span class="na">resolver</span><span class="p">(</span><span class="n">ParceiroMusical</span><span class="p">.</span><span class="na">CATALOGO_OFICIAL</span><span class="p">);</span>
+
+<span class="n">restClient</span>
+<span class="w">        </span><span class="p">.</span><span class="na">post</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="na">uri</span><span class="p">(</span><span class="n">endpoint</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="na">body</span><span class="p">(</span><span class="n">requestParceiro</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="na">retrieve</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="na">body</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+</code></pre></div>
+<p>Se <code>requestParceiro</code> vem do usuário, ele influencia o body, não o destino.</p>
+<p>Isso não é SSRF por si só.</p>
+<p>Pode haver outros riscos, mas não controle do destino outbound.</p>
+<h3 id="2-endpoint-vem-de-configuracao-validada">2. Endpoint vem de configuração validada</h3>
+<p>Se o endpoint vem de configuração controlada e é validado como HTTPS, absoluto e host permitido antes do sink, o risco de SSRF pode estar mitigado.</p>
+<p>Ainda assim, é preciso documentar:</p>
+<ul>
+<li>quem controla a configuração;</li>
+<li>quando ela é validada;</li>
+<li>quais hosts são permitidos;</li>
+<li>se redirects são seguidos;</li>
+<li>quais testes existem;</li>
+<li>qual risco residual permanece.</li>
+</ul>
+<h3 id="3-o-scanner-nao-reconhece-o-validador-customizado">3. O scanner não reconhece o validador customizado</h3>
+<p>Uma ferramenta SAST pode não entender que este método é uma barreira de segurança:</p>
+<div class="highlight"><pre><span></span><code><span class="n">outboundUriValidator</span><span class="p">.</span><span class="na">requireAllowedHttpsEndpoint</span><span class="p">(</span><span class="n">endpoint</span><span class="p">);</span>
+</code></pre></div>
+<p>Nesse caso, não é correto criar um wrapper artificial apenas para o scanner.</p>
+<p>O melhor caminho é:</p>
+<ul>
+<li>manter o controle real;</li>
+<li>criar testes;</li>
+<li>documentar source, sink e fluxo;</li>
+<li>pedir avaliação do time AppSec;</li>
+<li>eventualmente configurar a query corporativa para reconhecer a guarda, se fizer sentido.</li>
+</ul>
+<h2 id="quando-ssrf-e-verdadeiro-positivo">Quando SSRF é verdadeiro positivo?</h2>
+<p>SSRF tende a ser verdadeiro positivo quando:</p>
+<ul>
+<li>o usuário envia URL completa;</li>
+<li>o usuário controla host;</li>
+<li>o usuário controla esquema;</li>
+<li>o usuário controla porta;</li>
+<li>o usuário controla path usado como URL final;</li>
+<li>o usuário controla fileId usado para montar URL de upload/download sem validação;</li>
+<li>a aplicação segue redirects automaticamente;</li>
+<li>não há allowlist;</li>
+<li>não há validação perto do sink;</li>
+<li>há concatenação de URL com dados externos;</li>
+<li>o sink faz chamada HTTP, transferência remota ou acesso a recurso externo.</li>
+</ul>
+<p>Exemplo de forte indício:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">uploadUrl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">baseUrl</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;/&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nomeArquivo</span><span class="p">;</span>
+<span class="n">restClient</span><span class="p">.</span><span class="na">post</span><span class="p">().</span><span class="na">uri</span><span class="p">(</span><span class="n">uploadUrl</span><span class="p">).</span><span class="na">retrieve</span><span class="p">();</span>
+</code></pre></div>
+<p>Se <code>nomeArquivo</code> influencia o destino e não há validação, o finding merece correção.</p>
+<h2 id="diferenca-entre-ssrf-e-open-redirect">Diferença entre SSRF e Open Redirect</h2>
+<p>SSRF e Open Redirect podem parecer parecidos porque ambos envolvem URL.</p>
+<p>Mas são diferentes.</p>
+<p>Open Redirect acontece quando a aplicação redireciona o navegador do usuário para uma URL controlada.</p>
+<p>SSRF acontece quando o servidor faz a requisição.</p>
+<p>Comparação:</p>
+<table>
+<thead>
+<tr>
+<th>Vulnerabilidade</th>
+<th>Quem faz a requisição?</th>
+<th>Risco principal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Open Redirect</td>
+<td>Navegador do usuário</td>
+<td>Phishing, redirecionamento para site malicioso</td>
+</tr>
+<tr>
+<td>SSRF</td>
+<td>Servidor da aplicação</td>
+<td>Acesso indevido a recursos internos ou não pretendidos</td>
+</tr>
+</tbody>
+</table>
+<p>Em SSRF, o risco é maior porque o servidor pode acessar destinos que o usuário não conseguiria acessar diretamente.</p>
+<h2 id="diferenca-entre-ssrf-e-chamada-outbound-normal">Diferença entre SSRF e chamada outbound normal</h2>
+<p>Nem toda chamada outbound é SSRF.</p>
+<p>Uma chamada normal:</p>
+<div class="highlight"><pre><span></span><code>Aplicação chama endpoint fixo e autorizado de parceiro
+</code></pre></div>
+<p>Uma chamada com risco SSRF:</p>
+<div class="highlight"><pre><span></span><code>Aplicação chama endpoint definido por entrada externa
+</code></pre></div>
+<p>A diferença está no controle do destino.</p>
+<p>Chamadas outbound são normais em sistemas corporativos.</p>
+<p>O problema é deixar o destino ser controlado por quem não deveria controlá-lo.</p>
+<h2 id="boas-praticas">Boas práticas</h2>
+<h3 id="1-nao-aceite-url-livre">1. Não aceite URL livre</h3>
+<p>Prefira identificadores de negócio, enums ou chaves de parceiro.</p>
+<h3 id="2-use-allowlist">2. Use allowlist</h3>
+<p>Permita apenas destinos conhecidos.</p>
+<h3 id="3-valide-uri-estruturalmente">3. Valide URI estruturalmente</h3>
+<p>Use <code>URI</code>, não apenas <code>startsWith</code>.</p>
+<p>Valide:</p>
+<ul>
+<li>esquema;</li>
+<li>host;</li>
+<li>porta;</li>
+<li>URI absoluta;</li>
+<li>normalização;</li>
+<li>destino permitido.</li>
+</ul>
+<h3 id="4-valide-proximo-ao-sink">4. Valide próximo ao sink</h3>
+<p>Faça a validação imediatamente antes da chamada HTTP sempre que possível.</p>
+<h3 id="5-desabilite-redirects-automaticos">5. Desabilite redirects automáticos</h3>
+<p>Ou valide novamente o destino final.</p>
+<h3 id="6-separe-uri-e-body">6. Separe URI e body</h3>
+<p>Entrada de usuário pode compor body ou parâmetros de negócio, mas não deve controlar host/esquema/porta.</p>
+<h3 id="7-configure-timeouts">7. Configure timeouts</h3>
+<p>Timeout não corrige SSRF, mas evita travamentos e reduz impacto operacional.</p>
+<h3 id="8-use-egress-control">8. Use egress control</h3>
+<p>A infraestrutura deve limitar para onde a aplicação pode sair.</p>
+<h3 id="9-nao-logue-segredos">9. Não logue segredos</h3>
+<p>Falhas de integração não devem registrar tokens, credenciais ou bodies sensíveis.</p>
+<h3 id="10-crie-testes">10. Crie testes</h3>
+<p>Teste HTTP rejeitado, host não permitido, URI relativa, porta indevida e redirect quando aplicável.</p>
+<h2 id="erros-comuns">Erros comuns</h2>
+<h3 id="1-validar-apenas-startswithhttps">1. Validar apenas <code>startsWith("https://")</code></h3>
+<p>Isso não garante host permitido.</p>
+<h3 id="2-usar-denylist">2. Usar denylist</h3>
+<p>Denylist é frágil para SSRF.</p>
+<h3 id="3-aceitar-url-livre-por-flexibilidade">3. Aceitar URL livre por “flexibilidade”</h3>
+<p>Flexibilidade de integração pode virar controle externo do servidor.</p>
+<h3 id="4-confiar-em-autenticacao">4. Confiar em autenticação</h3>
+<p>Usuários autenticados também podem explorar falhas.</p>
+<h3 id="5-validar-longe-do-sink">5. Validar longe do sink</h3>
+<p>O dado pode mudar entre a validação e o uso.</p>
+<h3 id="6-esquecer-redirects">6. Esquecer redirects</h3>
+<p>Redirect pode transformar destino permitido em destino não permitido.</p>
+<h3 id="7-misturar-destino-com-payload">7. Misturar destino com payload</h3>
+<p>URI e body devem ter responsabilidades separadas.</p>
+<h3 id="8-tratar-configuracao-como-sempre-confiavel">8. Tratar configuração como sempre confiável</h3>
+<p>Configuração também pode estar errada ou comprometida.</p>
+<h3 id="9-esconder-fluxo-do-scanner-sem-controle-real">9. Esconder fluxo do scanner sem controle real</h3>
+<p>Wrappers artificiais não melhoram segurança.</p>
+<h3 id="10-nao-documentar-risco-residual">10. Não documentar risco residual</h3>
+<p>Toda mitigação deve deixar claro o que ainda depende de infraestrutura, governança ou contrato.</p>
+<h2 id="decisoes-de-engenharia">Decisões de engenharia</h2>
+<h2 id="quando-aceitar-url-externa">Quando aceitar URL externa?</h2>
+<p>Evite aceitar URL externa sempre que possível.</p>
+<p>Só considere aceitar URL externa quando essa for realmente a regra de negócio, como em um produto cujo objetivo é validar ou monitorar URLs informadas por clientes.</p>
+<p>Mesmo nesses casos, a aplicação precisa de controles muito mais fortes:</p>
+<ul>
+<li>validação de esquema;</li>
+<li>validação de host;</li>
+<li>bloqueio de redes internas;</li>
+<li>resolução DNS controlada;</li>
+<li>egress control;</li>
+<li>sandbox;</li>
+<li>proxy;</li>
+<li>limites de tempo;</li>
+<li>limites de tamanho;</li>
+<li>redirects controlados;</li>
+<li>auditoria.</li>
+</ul>
+<p>Para sistemas corporativos comuns, aceitar URL livre raramente é necessário.</p>
+<h2 id="quando-usar-allowlist">Quando usar allowlist?</h2>
+<p>Use allowlist quando os destinos são conhecidos.</p>
+<p>Esse é o cenário mais comum em integrações corporativas:</p>
+<ul>
+<li>API de parceiro;</li>
+<li>gateway interno;</li>
+<li>serviço de documentos;</li>
+<li>serviço de autenticação;</li>
+<li>storage corporativo;</li>
+<li>bureau externo;</li>
+<li>plataforma de pagamento.</li>
+</ul>
+<h2 id="quando-usar-configuracao">Quando usar configuração?</h2>
+<p>Use configuração para destinos que variam por ambiente, como homologação e produção.</p>
+<p>Mas valide a configuração.</p>
+<p>Configuração não deve ser um bypass da política de segurança.</p>
+<h2 id="quando-usar-proxy-corporativo">Quando usar proxy corporativo?</h2>
+<p>Use proxy ou gateway outbound quando a empresa precisa controlar chamadas de saída de forma centralizada.</p>
+<p>Isso ajuda em:</p>
+<ul>
+<li>auditoria;</li>
+<li>bloqueio de destinos;</li>
+<li>observabilidade;</li>
+<li>aplicação de política;</li>
+<li>rastreabilidade;</li>
+<li>resposta a incidentes.</li>
+</ul>
+<p>Mesmo usando proxy, o código deve manter validação de destino.</p>
+<h2 id="quando-classificar-como-falso-positivo">Quando classificar como falso positivo?</h2>
+<p>Considere falso positivo quando:</p>
+<ul>
+<li>o usuário não controla o destino;</li>
+<li>o valor apontado pelo scanner vai para o body, não para a URI;</li>
+<li>a URI vem de allowlist;</li>
+<li>há validação imediatamente antes do sink;</li>
+<li>redirects estão bloqueados ou revalidados;</li>
+<li>existem testes;</li>
+<li>há evidência clara de que a exploração não ocorre.</li>
+</ul>
+<h2 id="onde-isso-aparece-em-sistemas-reais">Onde isso aparece em sistemas reais</h2>
+<p>SSRF aparece em muitas funcionalidades:</p>
+<ul>
+<li>importação por URL;</li>
+<li>upload para serviço externo;</li>
+<li>download de arquivo remoto;</li>
+<li>preview de link;</li>
+<li>leitura de avatar por URL;</li>
+<li>integração com APIs parceiras;</li>
+<li>webhooks;</li>
+<li>geração de PDF com imagens externas;</li>
+<li>conversão de documentos;</li>
+<li>validação de callback;</li>
+<li>proxy interno;</li>
+<li>upload de anexos;</li>
+<li>serviços de transferência;</li>
+<li>clientes HTTP genéricos;</li>
+<li>SDKs que escondem chamadas HTTP.</li>
+</ul>
+<p>Em sistemas Java/Spring, os pontos mais comuns são services de integração, classes utilitárias, clientes HTTP e módulos de arquivo/anexo.</p>
+<h2 id="checklist-pratico">Checklist prático</h2>
+<h3 id="entrada">Entrada</h3>
+<ul>
+<li>O usuário envia URL completa?</li>
+<li>O usuário controla host?</li>
+<li>O usuário controla esquema?</li>
+<li>O usuário controla porta?</li>
+<li>O usuário controla path usado para montar URL?</li>
+<li>O usuário controla identificador que vira URL?</li>
+<li>O valor vem de header?</li>
+<li>O valor vem de arquivo ou storage?</li>
+</ul>
+<h3 id="destino">Destino</h3>
+<ul>
+<li>O destino vem de allowlist?</li>
+<li>O destino vem de configuração controlada?</li>
+<li>O destino é HTTPS?</li>
+<li>O host é permitido?</li>
+<li>A porta é permitida?</li>
+<li>A URI é absoluta?</li>
+<li>Redirects são bloqueados ou revalidados?</li>
+</ul>
+<h3 id="codigo">Código</h3>
+<ul>
+<li>A validação ocorre perto do sink?</li>
+<li>URI e body estão separados?</li>
+<li>Existe concatenação de URL?</li>
+<li><code>RestClient</code>, <code>RestTemplate</code>, <code>WebClient</code> ou <code>HttpClient</code> usam destino validado?</li>
+<li>Existem timeouts?</li>
+<li>Erros não expõem URI sensível?</li>
+<li>Logs não registram credenciais?</li>
+</ul>
+<h3 id="testes">Testes</h3>
+<ul>
+<li>HTTP é rejeitado?</li>
+<li>URI relativa é rejeitada?</li>
+<li>Host não permitido é rejeitado?</li>
+<li>Porta não permitida é rejeitada?</li>
+<li>Parceiro válido é aceito?</li>
+<li>Redirect é tratado?</li>
+<li>Configuração inválida falha fechado?</li>
+</ul>
+<h3 id="infraestrutura">Infraestrutura</h3>
+<ul>
+<li>Existe egress control?</li>
+<li>Existe proxy corporativo?</li>
+<li>Chamadas outbound são monitoradas?</li>
+<li>Serviços internos sensíveis são protegidos?</li>
+<li>A aplicação tem menor privilégio?</li>
+<li>Há alertas para destinos inesperados?</li>
+</ul>
+<h2 id="resumo-final">Resumo final</h2>
+<p>SSRF acontece quando uma aplicação backend faz requisições server-side para destinos controlados, direta ou indiretamente, por entrada não confiável.</p>
+<p>Em aplicações Java/Spring, o risco costuma aparecer em chamadas outbound com <code>RestClient</code>, <code>RestTemplate</code>, <code>WebClient</code>, <code>HttpClient</code>, SDKs internos, upload/download e serviços de integração.</p>
+<p>As principais defesas são:</p>
+<ul>
+<li>não aceitar URL livre;</li>
+<li>usar identificadores de negócio;</li>
+<li>resolver endpoints internamente;</li>
+<li>aplicar allowlist;</li>
+<li>validar HTTPS, host, porta e URI absoluta;</li>
+<li>separar destino de body;</li>
+<li>desabilitar redirects automáticos;</li>
+<li>validar próximo ao sink;</li>
+<li>configurar timeouts;</li>
+<li>aplicar egress control;</li>
+<li>criar testes;</li>
+<li>documentar risco residual.</li>
+</ul>
+<p>A principal lição é:</p>
+<blockquote>
+<p>O usuário pode escolher uma ação de negócio. Ele não deve escolher livremente para onde o servidor vai se conectar.</p>
+</blockquote>
+<h2 id="perguntas-de-revisao">Perguntas de revisão</h2>
+<h3 id="1-o-que-e-ssrf">1. O que é SSRF?</h3>
+<p>SSRF é uma vulnerabilidade em que um atacante consegue induzir o servidor da aplicação a fazer requisições para destinos não pretendidos.</p>
+<h3 id="2-por-que-ssrf-e-perigoso">2. Por que SSRF é perigoso?</h3>
+<p>Porque a requisição parte do servidor, que pode ter acesso a redes, serviços e credenciais que o usuário não acessaria diretamente.</p>
+<h3 id="3-qual-e-o-padrao-tipico-de-ssrf-em-sast">3. Qual é o padrão típico de SSRF em SAST?</h3>
+<p>Entrada controlada pelo usuário chega a um sink de chamada HTTP ou transferência remota sem validação adequada do destino.</p>
+<h3 id="4-https-resolve-ssrf">4. HTTPS resolve SSRF?</h3>
+<p>Não. HTTPS protege o canal, mas não garante que o destino é permitido.</p>
+<h3 id="5-por-que-startswithhttps-e-insuficiente">5. Por que <code>startsWith("https://")</code> é insuficiente?</h3>
+<p>Porque não valida host, porta, allowlist, normalização, redirects ou destino final.</p>
+<h3 id="6-qual-e-a-melhor-defesa-contra-ssrf">6. Qual é a melhor defesa contra SSRF?</h3>
+<p>Evitar URL livre e usar allowlist de destinos permitidos.</p>
+<h3 id="7-o-usuario-pode-escolher-um-parceiro">7. O usuário pode escolher um parceiro?</h3>
+<p>Sim, desde que escolha uma opção de negócio controlada, como um enum, e a aplicação resolva internamente o endpoint real.</p>
+<h3 id="8-o-que-e-allowlist">8. O que é allowlist?</h3>
+<p>É uma lista positiva de destinos explicitamente permitidos. Tudo que não está na lista é rejeitado.</p>
+<h3 id="9-por-que-redirects-sao-perigosos-em-ssrf">9. Por que redirects são perigosos em SSRF?</h3>
+<p>Porque um destino inicialmente permitido pode redirecionar para outro destino não validado.</p>
+<h3 id="10-o-que-significa-falhar-fechado">10. O que significa falhar fechado?</h3>
+<p>Significa rejeitar a operação quando a aplicação não consegue validar o destino com segurança.</p>
+<h3 id="11-configuracao-e-sempre-confiavel">11. Configuração é sempre confiável?</h3>
+<p>Não. Configuração pode estar errada ou comprometida. Ela também deve ser validada.</p>
+<h3 id="12-qual-e-a-diferenca-entre-ssrf-e-open-redirect">12. Qual é a diferença entre SSRF e Open Redirect?</h3>
+<p>No Open Redirect, o navegador do usuário é redirecionado. No SSRF, o servidor faz a requisição.</p>
+<h3 id="13-timeouts-corrigem-ssrf">13. Timeouts corrigem SSRF?</h3>
+<p>Não. Timeouts ajudam na resiliência, mas não impedem que o servidor acesse destino indevido.</p>
+<h3 id="14-quando-um-finding-ssrf-pode-ser-falso-positivo">14. Quando um finding SSRF pode ser falso positivo?</h3>
+<p>Quando o usuário não controla o destino, o valor vai apenas para o body, há allowlist validada, redirects estão controlados e existem evidências de teste.</p>
+<h3 id="15-qual-e-a-regra-mais-importante">15. Qual é a regra mais importante?</h3>
+<p>O destino da chamada outbound deve ser controlado pela aplicação, não pelo usuário.</p>
+<h2 id="referencias">Referências</h2>
+<ul>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html">OWASP Server-Side Request Forgery Prevention Cheat Sheet</a></li>
+<li><a href="https://top10.owasp.org/2021/A10_2021-Server-Side_Request_Forgery_%28SSRF%29/">OWASP Top 10:2021 — A10 Server-Side Request Forgery</a></li>
+<li><a href="https://top10.owasp.org/2021/pt-BR/A10_2021-Server-Side_Request_Forgery_%28SSRF%29/">OWASP Top 10:2021 — A10 SSRF em português</a></li>
+<li><a href="https://top10proactive.owasp.org/the-top-10/c10-stop-server-side-request-forgery/">OWASP Proactive Controls — C10 Stop Server Side Request Forgery</a></li>
+<li><a href="https://cwe.mitre.org/data/definitions/918.html">CWE-918 — Server-Side Request Forgery</a></li>
+<li><a href="https://docs.spring.io/spring-framework/reference/integration/rest-clients.html">Spring Framework Reference — REST Clients</a></li>
+<li><a href="https://docs.spring.io/spring-boot/reference/io/rest-client.html">Spring Boot Reference — Calling REST Services</a></li>
+<li><a href="https://docs.oracle.com/en/java/javase/25/">Oracle JDK 25 Documentation</a></li>
+<li><a href="https://www.oracle.com/java/technologies/downloads/">Oracle Java Downloads — JDK 25 LTS</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
