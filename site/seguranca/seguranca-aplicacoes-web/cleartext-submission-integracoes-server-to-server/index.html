@@ -1,0 +1,4871 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../ssrf-aplicacoes-java-spring/">
+      
+      
+        <link rel="next" href="../privacy-violation-credenciais-logs-respostas-parceiros/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Cleartext Submission em integrações server-to-server - README</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/css/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#cleartext-submission-em-integracoes-server-to-server" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../../.." title="README" class="md-header__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            README
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Cleartext Submission em integrações server-to-server
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="README" class="md-nav__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    README
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Backend
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/fundamentos-da-linguagem-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/convencoes-de-codigo-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convenções de código em Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/variaveis-tipos-primitivos-operadores-conversoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variáveis, tipos primitivos, operadores e conversões
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/fundamentos-de-string/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de String
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-controle-operadores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de controle e operadores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-condicionais/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas condicionais
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-de-repeticao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de repetição
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Iniciando em Orientação a Objetos (POO)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Iniciando em Orientação a Objetos (POO)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/introducao-orientacao-a-objetos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução à POO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/classes-e-objetos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes e objetos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/classes-objetos-metodos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes, objetos e métodos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Spring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/api-rest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    O que é API REST?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/http/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Um pouco de HTTP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/por-que-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Por que escolher Spring?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/spring-boot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Boot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/spring-initializr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Initializr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/maven-pom/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maven e pom.xml
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Segurança
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Segurança
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Segurança em aplicações web
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Segurança em aplicações web
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introducao-seguranca-aplicacoes-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução à Segurança de Aplicações Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../http-dns-sessoes-https/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTTP, DNS, Sessões e HTTPS na Segurança Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sql-injection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Injection - Funcionamento, Impactos e Prevenção
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xss/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cross-Site Scripting (XSS)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dast-conformidade-sdlc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DAST, Conformidade e Segurança no Ciclo de Desenvolvimento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sast-source-sink-taint-flow-falso-positivo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SAST na prática - Source, Sink, Taint Flow e falso positivo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssrf-aplicacoes-java-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSRF em aplicações Java/Spring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cleartext Submission em integrações server-to-server
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cleartext Submission em integrações server-to-server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-problema-real-que-esse-conceito-resolve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O problema real que esse conceito resolve
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-nos-detalhes-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar nos detalhes: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cleartext-nao-e-apenas-senha-em-texto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cleartext não é apenas “senha em texto”
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#server-to-server-tambem-precisa-de-tls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server-to-server também precisa de TLS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-inseguro-com-restclient" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo inseguro com RestClient
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#corrigindo-com-validacao-de-uri-https" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Corrigindo com validação de URI HTTPS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#corrigindo-o-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Corrigindo o service
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-validar-perto-do-sink" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que validar perto do sink?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#https-obrigatorio-nao-e-detalhe-operacional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HTTPS obrigatório não é detalhe operacional
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#falha-fechada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Falha fechada
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#redirects-e-cleartext" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Redirects e Cleartext
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-com-java-httpclient" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo com Java HttpClient
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-envio-seguro-com-httpclient" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de envio seguro com HttpClient
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#separar-endpoint-headers-e-body" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Separar endpoint, headers e body
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dados-sensiveis-nao-devem-ir-na-url" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dados sensíveis não devem ir na URL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cleartext-e-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cleartext e logs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cleartext-e-mensagens-de-erro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cleartext e mensagens de erro
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#oauth-client_credentials-e-cleartext" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OAuth client_credentials e Cleartext
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tratamento-de-resposta-do-parceiro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tratamento de resposta do parceiro
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bloqueio-de-reflexao-de-credenciais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bloqueio de reflexão de credenciais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mtls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mTLS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tls-nao-protege-dados-em-repouso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TLS não protege dados em repouso
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testes-do-validador-https" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testes do validador HTTPS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#teste-para-nao-registrar-segredo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Teste para não registrar segredo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testes-de-integracao-com-servidor-fake" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testes de integração com servidor fake
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-o-sast-pode-enxergar-a-correcao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como o SAST pode enxergar a correção
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-o-finding-pode-persistir" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando o finding pode persistir
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#falso-positivo-risco-mitigado-ou-vulnerabilidade-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Falso positivo, risco mitigado ou vulnerabilidade real?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Falso positivo, risco mitigado ou vulnerabilidade real?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vulnerabilidade-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vulnerabilidade real
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#risco-mitigado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Risco mitigado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#falso-positivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Falso positivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boas práticas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-imponha-https-no-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Imponha HTTPS no código
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-valide-perto-do-sink" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Valide perto do sink
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-separe-uri-e-body" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Separe URI e body
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-nao-coloque-segredo-na-url" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Não coloque segredo na URL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-proiba-fallback-para-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Proíba fallback para HTTP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-controle-redirects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Controle redirects
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-nao-registre-credenciais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Não registre credenciais
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-sanitize-mensagens-de-erro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Sanitize mensagens de erro
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-use-allowlist-quando-possivel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Use allowlist quando possível
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-escreva-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Escreva testes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-achar-que-base64-protege-segredo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Achar que Base64 protege segredo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-achar-que-rede-interna-dispensa-tls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Achar que rede interna dispensa TLS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-usar-http-em-homologacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Usar http:// em homologação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-colocar-segredo-na-query-string" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Colocar segredo na query string
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-fazer-fallback-para-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Fazer fallback para HTTP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-seguir-redirects-sem-controle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Seguir redirects sem controle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-logar-body-completo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Logar body completo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-corrigir-removendo-credencial-funcional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Corrigir removendo credencial funcional
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-mascarar-dado-antes-de-enviar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Mascarar dado antes de enviar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-criar-wrapper-sem-controle-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Criar wrapper sem controle real
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-bloquear-http-totalmente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando bloquear HTTP totalmente?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-aceitar-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando aceitar HTTP?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-usar-mtls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar mTLS?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-usar-validacao-de-host" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar validação de host?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-classificar-como-not-exploitable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando classificar como Not Exploitable?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checklist-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist prático
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Checklist prático">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dados-sensiveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dados sensíveis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#canal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Canal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Código
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuracao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuração
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operação
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Perguntas de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-o-que-e-cleartext-submission" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. O que é Cleartext Submission?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-cleartext-acontece-apenas-com-senha" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Cleartext acontece apenas com senha?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-base64-protege-segredo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Base64 protege segredo?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-server-to-server-precisa-de-https" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Server-to-server precisa de HTTPS?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-https-resolve-tudo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. HTTPS resolve tudo?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-por-que-validar-a-uri-perto-do-sink" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Por que validar a URI perto do sink?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-por-que-nao-colocar-segredo-na-url" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Por que não colocar segredo na URL?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-o-que-significa-falhar-fechado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. O que significa falhar fechado?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-redirect-pode-causar-cleartext" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Redirect pode causar Cleartext?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-o-que-fazer-se-o-protocolo-exige-client_secret" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. O que fazer se o protocolo exige client_secret?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-quando-usar-mtls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Quando usar mTLS?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-quando-um-finding-pode-ser-risco-mitigado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Quando um finding pode ser risco mitigado?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-qual-e-a-diferenca-entre-mascarar-para-log-e-mascarar-para-envio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Qual é a diferença entre mascarar para log e mascarar para envio?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-qual-e-a-relacao-entre-cleartext-e-ssrf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Qual é a relação entre Cleartext e SSRF?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-qual-e-a-principal-licao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Qual é a principal lição?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../privacy-violation-credenciais-logs-respostas-parceiros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Privacy Violation - credenciais, logs e respostas de parceiros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../path-traversal-upload-download-seguro-arquivos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Path Traversal e upload/download seguro de arquivos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unchecked-input-loop-condition-dos-processamento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unchecked Input for Loop Condition e prevenção de DoS por processamento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../headers-seguranca-hsts-json-nosniff/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Headers de segurança- HSTS, JSON explícito e nosniff
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sca-dependencias-vulneraveis-cves-gestao-bibliotecas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SCA na prática - dependências vulneráveis, CVEs e gestão de bibliotecas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../triagem-vulnerabilidades-corrigir-mitigar-not-exploitable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Triagem de vulnerabilidades - corrigir, mitigar ou marcar como Not Exploitable
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ferramentas-appsec-sast-sca-dast/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ferramentas de AppSec - como SAST, SCA e DAST encontram vulnerabilidades
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-problema-real-que-esse-conceito-resolve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O problema real que esse conceito resolve
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-nos-detalhes-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar nos detalhes: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cleartext-nao-e-apenas-senha-em-texto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cleartext não é apenas “senha em texto”
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#server-to-server-tambem-precisa-de-tls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server-to-server também precisa de TLS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-inseguro-com-restclient" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo inseguro com RestClient
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#corrigindo-com-validacao-de-uri-https" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Corrigindo com validação de URI HTTPS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#corrigindo-o-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Corrigindo o service
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-validar-perto-do-sink" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que validar perto do sink?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#https-obrigatorio-nao-e-detalhe-operacional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HTTPS obrigatório não é detalhe operacional
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#falha-fechada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Falha fechada
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#redirects-e-cleartext" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Redirects e Cleartext
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-com-java-httpclient" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo com Java HttpClient
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-envio-seguro-com-httpclient" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de envio seguro com HttpClient
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#separar-endpoint-headers-e-body" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Separar endpoint, headers e body
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dados-sensiveis-nao-devem-ir-na-url" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dados sensíveis não devem ir na URL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cleartext-e-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cleartext e logs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cleartext-e-mensagens-de-erro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cleartext e mensagens de erro
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#oauth-client_credentials-e-cleartext" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OAuth client_credentials e Cleartext
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tratamento-de-resposta-do-parceiro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tratamento de resposta do parceiro
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bloqueio-de-reflexao-de-credenciais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bloqueio de reflexão de credenciais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mtls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        mTLS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tls-nao-protege-dados-em-repouso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TLS não protege dados em repouso
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testes-do-validador-https" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testes do validador HTTPS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#teste-para-nao-registrar-segredo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Teste para não registrar segredo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testes-de-integracao-com-servidor-fake" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testes de integração com servidor fake
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-o-sast-pode-enxergar-a-correcao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como o SAST pode enxergar a correção
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-o-finding-pode-persistir" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando o finding pode persistir
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#falso-positivo-risco-mitigado-ou-vulnerabilidade-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Falso positivo, risco mitigado ou vulnerabilidade real?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Falso positivo, risco mitigado ou vulnerabilidade real?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vulnerabilidade-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vulnerabilidade real
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#risco-mitigado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Risco mitigado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#falso-positivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Falso positivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boas práticas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-imponha-https-no-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Imponha HTTPS no código
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-valide-perto-do-sink" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Valide perto do sink
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-separe-uri-e-body" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Separe URI e body
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-nao-coloque-segredo-na-url" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Não coloque segredo na URL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-proiba-fallback-para-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Proíba fallback para HTTP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-controle-redirects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Controle redirects
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-nao-registre-credenciais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Não registre credenciais
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-sanitize-mensagens-de-erro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Sanitize mensagens de erro
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-use-allowlist-quando-possivel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Use allowlist quando possível
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-escreva-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Escreva testes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-achar-que-base64-protege-segredo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Achar que Base64 protege segredo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-achar-que-rede-interna-dispensa-tls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Achar que rede interna dispensa TLS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-usar-http-em-homologacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Usar http:// em homologação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-colocar-segredo-na-query-string" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Colocar segredo na query string
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-fazer-fallback-para-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Fazer fallback para HTTP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-seguir-redirects-sem-controle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Seguir redirects sem controle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-logar-body-completo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Logar body completo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-corrigir-removendo-credencial-funcional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Corrigir removendo credencial funcional
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-mascarar-dado-antes-de-enviar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Mascarar dado antes de enviar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-criar-wrapper-sem-controle-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Criar wrapper sem controle real
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-bloquear-http-totalmente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando bloquear HTTP totalmente?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-aceitar-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando aceitar HTTP?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-usar-mtls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar mTLS?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-usar-validacao-de-host" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar validação de host?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-classificar-como-not-exploitable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando classificar como Not Exploitable?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checklist-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist prático
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Checklist prático">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dados-sensiveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dados sensíveis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#canal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Canal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Código
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuracao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuração
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operação
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Perguntas de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-o-que-e-cleartext-submission" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. O que é Cleartext Submission?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-cleartext-acontece-apenas-com-senha" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Cleartext acontece apenas com senha?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-base64-protege-segredo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Base64 protege segredo?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-server-to-server-precisa-de-https" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Server-to-server precisa de HTTPS?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-https-resolve-tudo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. HTTPS resolve tudo?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-por-que-validar-a-uri-perto-do-sink" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Por que validar a URI perto do sink?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-por-que-nao-colocar-segredo-na-url" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Por que não colocar segredo na URL?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-o-que-significa-falhar-fechado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. O que significa falhar fechado?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-redirect-pode-causar-cleartext" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Redirect pode causar Cleartext?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-o-que-fazer-se-o-protocolo-exige-client_secret" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. O que fazer se o protocolo exige client_secret?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-quando-usar-mtls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Quando usar mTLS?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-quando-um-finding-pode-ser-risco-mitigado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Quando um finding pode ser risco mitigado?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-qual-e-a-diferenca-entre-mascarar-para-log-e-mascarar-para-envio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Qual é a diferença entre mascarar para log e mascarar para envio?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-qual-e-a-relacao-entre-cleartext-e-ssrf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Qual é a relação entre Cleartext e SSRF?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-qual-e-a-principal-licao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Qual é a principal lição?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="cleartext-submission-em-integracoes-server-to-server">Cleartext Submission em integrações server-to-server</h1>
+<p><code>Cleartext Submission of Sensitive Information</code> é uma vulnerabilidade relacionada ao envio de dados sensíveis por um canal sem proteção adequada.</p>
+<p>Em termos simples, ela acontece quando uma aplicação transmite informações sensíveis, como credenciais, tokens, senhas, documentos, dados pessoais ou segredos de integração, por um canal que pode ser observado por terceiros.</p>
+<p>Em aplicações Java/Spring, esse problema costuma aparecer em integrações server-to-server, principalmente quando o backend chama outro sistema usando HTTP sem TLS, configuração incompleta ou validação fraca do endpoint.</p>
+<p>Exemplos comuns:</p>
+<ul>
+<li>envio de <code>client_id</code> e <code>client_secret</code> para endpoint OAuth;</li>
+<li>envio de usuário e senha para sistema legado;</li>
+<li>chamada <code>application/x-www-form-urlencoded</code> com credenciais;</li>
+<li>integração com bureau externo;</li>
+<li>envio de token em header;</li>
+<li>envio de arquivo com dados sensíveis;</li>
+<li>chamada para API parceira usando endpoint configurável;</li>
+<li>uso de <code>RestClient</code>, <code>RestTemplate</code>, <code>WebClient</code> ou <code>HttpClient</code>;</li>
+<li>configuração que aceita <code>http://</code> por engano;</li>
+<li>fallback inseguro quando endpoint HTTPS falha.</li>
+</ul>
+<p>A ideia central é:</p>
+<blockquote>
+<p>Se o dado é sensível, ele não deve trafegar por um canal sem proteção criptográfica adequada.</p>
+</blockquote>
+<p>No contexto da aplicação fictícia <code>meucatalogomusical.com</code>, imagine uma integração com um parceiro chamado <code>RockPartner</code>, responsável por validar dados de licenciamento de bandas e liberar acesso a conteúdos exclusivos. Para consultar esse parceiro, a aplicação precisa enviar <code>client_id</code>, <code>client_secret</code> e dados da banda consultada.</p>
+<p>Se essa chamada for feita por HTTP, as credenciais podem ficar expostas no caminho entre os servidores.</p>
+<p>Esse é o problema que Cleartext Submission tenta detectar.</p>
+<h2 id="o-problema-real-que-esse-conceito-resolve">O problema real que esse conceito resolve</h2>
+<p>Em sistemas corporativos, integrações server-to-server são muito comuns.</p>
+<p>Uma aplicação raramente vive sozinha. Ela chama:</p>
+<ul>
+<li>APIs internas;</li>
+<li>sistemas legados;</li>
+<li>serviços de autenticação;</li>
+<li>gateways corporativos;</li>
+<li>bureaus externos;</li>
+<li>parceiros comerciais;</li>
+<li>serviços de storage;</li>
+<li>filas;</li>
+<li>proxies;</li>
+<li>sistemas de documentos;</li>
+<li>plataformas de pagamento;</li>
+<li>serviços de observabilidade.</li>
+</ul>
+<p>Essas chamadas frequentemente carregam dados sensíveis.</p>
+<p>O risco surge quando a equipe trata uma integração interna como automaticamente segura.</p>
+<p>Frases comuns em projetos reais:</p>
+<div class="highlight"><pre><span></span><code>É interno, então pode ser HTTP.
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Está dentro da rede da empresa.
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Só o sistema legado chama.
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Esse endpoint nunca vai para internet.
+</code></pre></div>
+<p>Essas premissas podem até reduzir o risco, mas não eliminam a necessidade de proteger o canal.</p>
+<p>Redes internas também podem ter:</p>
+<ul>
+<li>proxies;</li>
+<li>balanceadores;</li>
+<li>logs intermediários;</li>
+<li>ambientes compartilhados;</li>
+<li>tráfego lateral;</li>
+<li>configurações erradas;</li>
+<li>capturas de pacotes;</li>
+<li>serviços comprometidos;</li>
+<li>usuários internos maliciosos;</li>
+<li>vazamentos por observabilidade;</li>
+<li>problemas de roteamento.</li>
+</ul>
+<p>Por isso, a regra segura é:</p>
+<blockquote>
+<p>Dados sensíveis devem trafegar por HTTPS/TLS também em integrações server-to-server.</p>
+</blockquote>
+<h2 id="antes-de-entrar-nos-detalhes-uma-ideia-simples">Antes de entrar nos detalhes: uma ideia simples</h2>
+<p>Pense no <code>meucatalogomusical.com</code>.</p>
+<p>A aplicação possui uma integração para liberar conteúdo premium de bandas como <strong>Dokken</strong>, <strong>Twisted Sister</strong> e <strong>Skid Row</strong>.</p>
+<p>Para consultar o parceiro, o backend precisa enviar:</p>
+<div class="highlight"><pre><span></span><code>client_id=meucatalogo
+client_secret=segredo-super-confidencial
+grant_type=client_credentials
+</code></pre></div>
+<p>Se a aplicação envia isso para:</p>
+<div class="highlight"><pre><span></span><code>http://auth.rockpartner.example/oauth/token
+</code></pre></div>
+<p>há risco de Cleartext Submission.</p>
+<p>Se envia para:</p>
+<div class="highlight"><pre><span></span><code>https://auth.rockpartner.example/oauth/token
+</code></pre></div>
+<p>o canal passa a usar TLS.</p>
+<p>Mas ainda não acabou.</p>
+<p>A aplicação também precisa garantir que:</p>
+<ul>
+<li>o endpoint é realmente HTTPS;</li>
+<li>a URI é absoluta;</li>
+<li>o host é permitido;</li>
+<li>redirects não levem para HTTP;</li>
+<li>credenciais não apareçam em logs;</li>
+<li>erros não exponham payloads;</li>
+<li>o endpoint validado é o mesmo usado no sink HTTP;</li>
+<li>não existe fallback para HTTP;</li>
+<li>o contrato legado foi preservado;</li>
+<li>o novo comportamento falha fechado.</li>
+</ul>
+<p>HTTPS é a base, mas a engenharia em volta também importa.</p>
+<h2 id="definicao-tecnica">Definição técnica</h2>
+<p>Cleartext Submission of Sensitive Information ocorre quando uma aplicação envia dados sensíveis por um canal sem criptografia ou com proteção insuficiente.</p>
+<p>Em um relatório SAST, o finding costuma aparecer como um fluxo entre:</p>
+<div class="highlight"><pre><span></span><code>source: dado sensível
+    -&gt; montagem de request
+    -&gt; chamada HTTP
+sink: envio outbound por canal potencialmente inseguro
+</code></pre></div>
+<p>Exemplos de source:</p>
+<ul>
+<li>senha;</li>
+<li>token;</li>
+<li><code>client_secret</code>;</li>
+<li><code>Authorization</code> header;</li>
+<li>API key;</li>
+<li>credenciais decodificadas;</li>
+<li>CPF/CNPJ;</li>
+<li>e-mail;</li>
+<li>dados pessoais;</li>
+<li>documento;</li>
+<li>payload de autenticação;</li>
+<li>arquivo sensível.</li>
+</ul>
+<p>Exemplos de sink:</p>
+<ul>
+<li><code>RestClient.post()</code>;</li>
+<li><code>RestTemplate.postForEntity()</code>;</li>
+<li><code>WebClient.post()</code>;</li>
+<li><code>HttpClient.send()</code>;</li>
+<li>SDK interno de transferência;</li>
+<li>método utilitário de upload;</li>
+<li>cliente legado;</li>
+<li>chamada <code>form-urlencoded</code>;</li>
+<li>envio multipart;</li>
+<li>envio JSON para parceiro.</li>
+</ul>
+<p>O problema não é enviar credenciais. Muitas integrações exigem isso.</p>
+<p>O problema é enviar credenciais por canal que não garante confidencialidade e integridade adequadas.</p>
+<h2 id="cleartext-nao-e-apenas-senha-em-texto">Cleartext não é apenas “senha em texto”</h2>
+<p>O nome pode dar a impressão de que o problema acontece apenas quando a senha aparece literalmente em texto.</p>
+<p>Mas o conceito é mais amplo.</p>
+<p>Pode envolver:</p>
+<ul>
+<li>senha;</li>
+<li>token;</li>
+<li>segredo;</li>
+<li>header de autenticação;</li>
+<li>documento;</li>
+<li>identificador pessoal;</li>
+<li>payload com dados privados;</li>
+<li>arquivo;</li>
+<li>resposta de parceiro;</li>
+<li>corpo de autenticação;</li>
+<li>dados de negócio confidenciais.</li>
+</ul>
+<p>Além disso, codificar não é criptografar.</p>
+<p>Base64, URL encoding e form encoding não protegem segredo.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>client_secret=abc123
+</code></pre></div>
+<p>Enviado como <code>application/x-www-form-urlencoded</code> continua sendo sensível.</p>
+<p>Mesmo que vire:</p>
+<div class="highlight"><pre><span></span><code>client_secret=abc123%21
+</code></pre></div>
+<p>isso não é criptografia.</p>
+<p>O canal ainda precisa ser protegido por TLS.</p>
+<h2 id="server-to-server-tambem-precisa-de-tls">Server-to-server também precisa de TLS</h2>
+<p>Um erro comum é pensar que HTTPS é importante apenas entre navegador e backend.</p>
+<p>Mas integrações backend-to-backend também carregam dados críticos.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>meucatalogomusical.com
+    -&gt; auth.rockpartner.example
+    -&gt; catalog-api.partner.example
+    -&gt; payment-gateway.example
+</code></pre></div>
+<p>Cada seta é uma comunicação que pode envolver dados sensíveis.</p>
+<p>Se uma dessas setas usa HTTP, há risco.</p>
+<p>Em aplicações corporativas, o tráfego pode passar por múltiplos componentes:</p>
+<ul>
+<li>API Gateway;</li>
+<li>proxy;</li>
+<li>load balancer;</li>
+<li>service mesh;</li>
+<li>firewall;</li>
+<li>NAT;</li>
+<li>observabilidade;</li>
+<li>logs de rede;</li>
+<li>appliance de segurança;</li>
+<li>infraestrutura compartilhada.</li>
+</ul>
+<p>Por isso, proteger apenas a entrada pública da aplicação não basta.</p>
+<h2 id="exemplo-inseguro-com-restclient">Exemplo inseguro com RestClient</h2>
+<p>Imagine uma integração de <code>meucatalogomusical.com</code> com um parceiro que fornece dados de licenciamento para conteúdos da banda <strong>Europe</strong>.</p>
+<p>Controller:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.licenciamento.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.validation.Valid</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.*</span><span class="p">;</span>
+
+<span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/api/licenciamentos&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">LicenciamentoController</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">LicenciamentoService</span><span class="w"> </span><span class="n">licenciamentoService</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">LicenciamentoController</span><span class="p">(</span><span class="n">LicenciamentoService</span><span class="w"> </span><span class="n">licenciamentoService</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">licenciamentoService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">licenciamentoService</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@PostMapping</span><span class="p">(</span><span class="s">&quot;/consulta&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">LicenciamentoResponse</span><span class="w"> </span><span class="nf">consultar</span><span class="p">(</span><span class="nd">@Valid</span><span class="w"> </span><span class="nd">@RequestBody</span><span class="w"> </span><span class="n">LicenciamentoRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">licenciamentoService</span><span class="p">.</span><span class="na">consultar</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Request:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.licenciamento.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.validation.constraints.NotBlank</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.validation.constraints.Size</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">LicenciamentoRequest</span><span class="p">(</span>
+
+<span class="w">        </span><span class="nd">@NotBlank</span>
+<span class="w">        </span><span class="nd">@Size</span><span class="p">(</span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">120</span><span class="p">)</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">nomeBanda</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Service inseguro:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.licenciamento.application</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.meucatalogomusical.licenciamento.api.LicenciamentoRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.meucatalogomusical.licenciamento.api.LicenciamentoResponse</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.beans.factory.annotation.Value</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.MediaType</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.client.RestClient</span><span class="p">;</span>
+
+<span class="nd">@Service</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">LicenciamentoService</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">RestClient</span><span class="w"> </span><span class="n">restClient</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@Value</span><span class="p">(</span><span class="s">&quot;${integracoes.rockpartner.token-url}&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">tokenUrl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@Value</span><span class="p">(</span><span class="s">&quot;${integracoes.rockpartner.client-id}&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">clientId</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@Value</span><span class="p">(</span><span class="s">&quot;${integracoes.rockpartner.client-secret}&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">clientSecret</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">LicenciamentoService</span><span class="p">(</span><span class="n">RestClient</span><span class="p">.</span><span class="na">Builder</span><span class="w"> </span><span class="n">restClientBuilder</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">restClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">restClientBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">LicenciamentoResponse</span><span class="w"> </span><span class="nf">consultar</span><span class="p">(</span><span class="n">LicenciamentoRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">restClient</span>
+<span class="w">                </span><span class="p">.</span><span class="na">post</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="na">uri</span><span class="p">(</span><span class="n">tokenUrl</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">contentType</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_FORM_URLENCODED</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">body</span><span class="p">(</span><span class="s">&quot;client_id=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">clientId</span>
+<span class="w">                        </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;&amp;client_secret=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">clientSecret</span>
+<span class="w">                        </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;&amp;grant_type=client_credentials&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">retrieve</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="na">body</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LicenciamentoResponse</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="na">nomeBanda</span><span class="p">(),</span><span class="w"> </span><span class="n">token</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;SEM_TOKEN&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">&quot;CONSULTADO&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>O problema está na combinação:</p>
+<div class="highlight"><pre><span></span><code><span class="p">.</span><span class="na">uri</span><span class="p">(</span><span class="n">tokenUrl</span><span class="p">)</span>
+</code></pre></div>
+<p>com credenciais no corpo:</p>
+<div class="highlight"><pre><span></span><code><span class="n">client_secret</span><span class="o">=</span><span class="s">&quot; + clientSecret</span>
+</code></pre></div>
+<p>Se <code>tokenUrl</code> estiver configurada como <code>http://...</code>, as credenciais trafegam sem TLS.</p>
+<p>O SAST pode apontar:</p>
+<div class="highlight"><pre><span></span><code>Query: Cleartext Submission of Sensitive Information
+Source: clientSecret
+Sink: RestClient.post().uri(tokenUrl)
+</code></pre></div>
+<p>Mesmo que o valor venha de configuração, o risco existe se a aplicação não impõe HTTPS.</p>
+<h2 id="corrigindo-com-validacao-de-uri-https">Corrigindo com validação de URI HTTPS</h2>
+<p>Uma correção mais robusta é criar uma fronteira de validação outbound.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.integracoes.infra</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Component</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.net.URI</span><span class="p">;</span>
+
+<span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">HttpsEndpointValidator</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">URI</span><span class="w"> </span><span class="nf">requireHttps</span><span class="p">(</span><span class="n">URI</span><span class="w"> </span><span class="n">uri</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">uri</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Endpoint é obrigatório.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">uri</span><span class="p">.</span><span class="na">isAbsolute</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Endpoint deve ser absoluto.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="s">&quot;https&quot;</span><span class="p">.</span><span class="na">equalsIgnoreCase</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="na">getScheme</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Endpoint deve usar HTTPS.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="na">getHost</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">uri</span><span class="p">.</span><span class="na">getHost</span><span class="p">().</span><span class="na">isBlank</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Endpoint deve possuir host.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">uri</span><span class="p">.</span><span class="na">normalize</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse validador garante:</p>
+<ul>
+<li>URI obrigatória;</li>
+<li>URI absoluta;</li>
+<li>esquema HTTPS;</li>
+<li>host presente;</li>
+<li>normalização.</li>
+</ul>
+<p>Esse controle não resolve todos os riscos de SSRF, mas resolve o ponto central do Cleartext: impedir que dados sensíveis sejam enviados por canal HTTP.</p>
+<p>Em integrações críticas, o ideal é combinar com allowlist de hosts, como vimos no artigo sobre SSRF.</p>
+<h2 id="corrigindo-o-service">Corrigindo o service</h2>
+<p>Agora o endpoint é transformado em <code>URI</code> e validado antes do sink HTTP.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.licenciamento.application</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.meucatalogomusical.integracoes.infra.HttpsEndpointValidator</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.meucatalogomusical.licenciamento.api.LicenciamentoRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.meucatalogomusical.licenciamento.api.LicenciamentoResponse</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.beans.factory.annotation.Value</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.MediaType</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.util.LinkedMultiValueMap</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.util.MultiValueMap</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.client.RestClient</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.net.URI</span><span class="p">;</span>
+
+<span class="nd">@Service</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">LicenciamentoService</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">RestClient</span><span class="w"> </span><span class="n">restClient</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">HttpsEndpointValidator</span><span class="w"> </span><span class="n">endpointValidator</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">URI</span><span class="w"> </span><span class="n">tokenEndpoint</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">clientId</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">clientSecret</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">LicenciamentoService</span><span class="p">(</span>
+<span class="w">            </span><span class="n">RestClient</span><span class="p">.</span><span class="na">Builder</span><span class="w"> </span><span class="n">restClientBuilder</span><span class="p">,</span>
+<span class="w">            </span><span class="n">HttpsEndpointValidator</span><span class="w"> </span><span class="n">endpointValidator</span><span class="p">,</span>
+<span class="w">            </span><span class="nd">@Value</span><span class="p">(</span><span class="s">&quot;${integracoes.rockpartner.token-url}&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">URI</span><span class="w"> </span><span class="n">tokenEndpoint</span><span class="p">,</span>
+<span class="w">            </span><span class="nd">@Value</span><span class="p">(</span><span class="s">&quot;${integracoes.rockpartner.client-id}&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">clientId</span><span class="p">,</span>
+<span class="w">            </span><span class="nd">@Value</span><span class="p">(</span><span class="s">&quot;${integracoes.rockpartner.client-secret}&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">clientSecret</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">restClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">restClientBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">endpointValidator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endpointValidator</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">tokenEndpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tokenEndpoint</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">clientId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clientId</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">clientSecret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clientSecret</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">LicenciamentoResponse</span><span class="w"> </span><span class="nf">consultar</span><span class="p">(</span><span class="n">LicenciamentoRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">URI</span><span class="w"> </span><span class="n">endpointValidado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endpointValidator</span><span class="p">.</span><span class="na">requireHttps</span><span class="p">(</span><span class="n">tokenEndpoint</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">MultiValueMap</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LinkedMultiValueMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="n">body</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;client_id&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">clientId</span><span class="p">);</span>
+<span class="w">        </span><span class="n">body</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;client_secret&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">clientSecret</span><span class="p">);</span>
+<span class="w">        </span><span class="n">body</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;grant_type&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;client_credentials&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">tokenResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">restClient</span>
+<span class="w">                </span><span class="p">.</span><span class="na">post</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="na">uri</span><span class="p">(</span><span class="n">endpointValidado</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">contentType</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_FORM_URLENCODED</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">body</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">retrieve</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="na">body</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tokenResponse</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">tokenResponse</span><span class="p">.</span><span class="na">isBlank</span><span class="p">()</span>
+<span class="w">                </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;SEM_TOKEN&quot;</span>
+<span class="w">                </span><span class="p">:</span><span class="w"> </span><span class="s">&quot;CONSULTADO&quot;</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LicenciamentoResponse</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="na">nomeBanda</span><span class="p">(),</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Resposta:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.licenciamento.api</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">LicenciamentoResponse</span><span class="p">(</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">nomeBanda</span><span class="p">,</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">status</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse exemplo melhora o desenho em vários pontos:</p>
+<ul>
+<li>o endpoint precisa ser HTTPS;</li>
+<li>a URI é validada antes do envio;</li>
+<li>credenciais vão no body funcional exigido pelo protocolo;</li>
+<li>o body não é montado por concatenação manual;</li>
+<li>a resposta pública não devolve o token;</li>
+<li>a aplicação falha se o endpoint estiver mal configurado.</li>
+</ul>
+<h2 id="por-que-validar-perto-do-sink">Por que validar perto do sink?</h2>
+<p>Em SAST, é comum o scanner rastrear o fluxo até o ponto de envio.</p>
+<p>Se a validação acontece muito longe, pode ficar difícil provar que o valor validado é o mesmo valor usado no sink.</p>
+<p>Por isso, uma prática defensiva é validar imediatamente antes da chamada HTTP.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="n">URI</span><span class="w"> </span><span class="n">endpointValidado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endpointValidator</span><span class="p">.</span><span class="na">requireHttps</span><span class="p">(</span><span class="n">tokenEndpoint</span><span class="p">);</span>
+
+<span class="n">restClient</span>
+<span class="w">        </span><span class="p">.</span><span class="na">post</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="na">uri</span><span class="p">(</span><span class="n">endpointValidado</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="na">body</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="na">retrieve</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="na">body</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+</code></pre></div>
+<p>Essa estrutura deixa o invariante explícito:</p>
+<blockquote>
+<p>O sink recebe uma URI validada como HTTPS.</p>
+</blockquote>
+<p>Isso ajuda:</p>
+<ul>
+<li>o desenvolvedor;</li>
+<li>o revisor;</li>
+<li>o time de AppSec;</li>
+<li>os testes;</li>
+<li>o SAST;</li>
+<li>a documentação da triagem.</li>
+</ul>
+<h2 id="https-obrigatorio-nao-e-detalhe-operacional">HTTPS obrigatório não é detalhe operacional</h2>
+<p>Não trate HTTPS como uma recomendação opcional.</p>
+<p>Para dados sensíveis, HTTPS é requisito de segurança.</p>
+<p>Exemplo de configuração inválida:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">integracoes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">rockpartner</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">token-url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://auth.rockpartner.example/oauth/token</span>
+</code></pre></div>
+<p>Exemplo correto:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">integracoes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">rockpartner</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">token-url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://auth.rockpartner.example/oauth/token</span>
+</code></pre></div>
+<p>Mas a aplicação não deve depender apenas da revisão visual do YAML.</p>
+<p>Ela deve rejeitar a configuração inválida em runtime.</p>
+<h2 id="falha-fechada">Falha fechada</h2>
+<p>A aplicação deve falhar fechada quando o endpoint não é seguro.</p>
+<p>Falhar fechado significa:</p>
+<ul>
+<li>não tentar chamada HTTP;</li>
+<li>não fazer fallback para HTTP;</li>
+<li>não enviar credenciais;</li>
+<li>não mascarar o problema;</li>
+<li>não seguir com comportamento inseguro;</li>
+<li>gerar erro controlado;</li>
+<li>não expor segredos na mensagem de erro.</li>
+</ul>
+<p>Exemplo ruim:</p>
+<div class="highlight"><pre><span></span><code><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">chamarHttps</span><span class="p">();</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">chamarHttpFallback</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Exemplo melhor:</p>
+<div class="highlight"><pre><span></span><code><span class="n">URI</span><span class="w"> </span><span class="n">endpointValidado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endpointValidator</span><span class="p">.</span><span class="na">requireHttps</span><span class="p">(</span><span class="n">tokenEndpoint</span><span class="p">);</span>
+</code></pre></div>
+<p>Se a validação falhar, a chamada não acontece.</p>
+<p>Esse comportamento é intencional.</p>
+<h2 id="redirects-e-cleartext">Redirects e Cleartext</h2>
+<p>Redirects podem reintroduzir risco.</p>
+<p>Fluxo perigoso:</p>
+<div class="highlight"><pre><span></span><code>POST https://auth.rockpartner.example/oauth/token
+    -&gt; 302 Location: http://auth-backup.rockpartner.example/oauth/token
+    -&gt; cliente segue redirect
+    -&gt; credenciais são reenviadas por HTTP
+</code></pre></div>
+<p>Por isso, em chamadas que carregam credenciais, é recomendável:</p>
+<ul>
+<li>não seguir redirects automaticamente;</li>
+<li>ou revalidar o destino final antes de reenviar qualquer dado sensível;</li>
+<li>evitar reenviar bodies sensíveis após redirect;</li>
+<li>testar comportamento do cliente HTTP usado.</li>
+</ul>
+<p>Em integrações server-to-server, redirects raramente são necessários para endpoints de autenticação e APIs estáveis.</p>
+<p>Se houver redirect, ele precisa ser uma decisão explícita, não comportamento automático invisível.</p>
+<h2 id="exemplo-com-java-httpclient">Exemplo com Java HttpClient</h2>
+<p>Com <code>java.net.http.HttpClient</code>, é possível deixar redirect desabilitado explicitamente.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.integracoes.infra</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Component</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.net.http.HttpClient</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.time.Duration</span><span class="p">;</span>
+
+<span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SecureHttpClientFactory</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">HttpClient</span><span class="w"> </span><span class="nf">create</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">HttpClient</span><span class="p">.</span><span class="na">newBuilder</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="na">connectTimeout</span><span class="p">(</span><span class="n">Duration</span><span class="p">.</span><span class="na">ofSeconds</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">followRedirects</span><span class="p">(</span><span class="n">HttpClient</span><span class="p">.</span><span class="na">Redirect</span><span class="p">.</span><span class="na">NEVER</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse cliente:</p>
+<ul>
+<li>define timeout;</li>
+<li>não segue redirects automaticamente.</li>
+</ul>
+<p>Timeout não corrige Cleartext, mas melhora resiliência.</p>
+<p>Redirect desabilitado evita reenviar dados sensíveis para destino não validado.</p>
+<h2 id="exemplo-de-envio-seguro-com-httpclient">Exemplo de envio seguro com HttpClient</h2>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.integracoes.infra</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Component</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.net.URI</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.net.URLEncoder</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.net.http.HttpRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.net.http.HttpResponse</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.charset.StandardCharsets</span><span class="p">;</span>
+
+<span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">TokenPartnerClient</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">SecureHttpClientFactory</span><span class="w"> </span><span class="n">httpClientFactory</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">HttpsEndpointValidator</span><span class="w"> </span><span class="n">endpointValidator</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">TokenPartnerClient</span><span class="p">(</span>
+<span class="w">            </span><span class="n">SecureHttpClientFactory</span><span class="w"> </span><span class="n">httpClientFactory</span><span class="p">,</span>
+<span class="w">            </span><span class="n">HttpsEndpointValidator</span><span class="w"> </span><span class="n">endpointValidator</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">httpClientFactory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">httpClientFactory</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">endpointValidator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endpointValidator</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">solicitarToken</span><span class="p">(</span>
+<span class="w">            </span><span class="n">URI</span><span class="w"> </span><span class="n">tokenEndpoint</span><span class="p">,</span>
+<span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">clientId</span><span class="p">,</span>
+<span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">clientSecret</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">URI</span><span class="w"> </span><span class="n">endpointValidado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endpointValidator</span><span class="p">.</span><span class="na">requireHttps</span><span class="p">(</span><span class="n">tokenEndpoint</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;client_id=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">encode</span><span class="p">(</span><span class="n">clientId</span><span class="p">)</span>
+<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;&amp;client_secret=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">encode</span><span class="p">(</span><span class="n">clientSecret</span><span class="p">)</span>
+<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;&amp;grant_type=client_credentials&quot;</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">HttpRequest</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HttpRequest</span><span class="p">.</span><span class="na">newBuilder</span><span class="p">(</span><span class="n">endpointValidado</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">header</span><span class="p">(</span><span class="s">&quot;Content-Type&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;application/x-www-form-urlencoded&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">timeout</span><span class="p">(</span><span class="n">java</span><span class="p">.</span><span class="na">time</span><span class="p">.</span><span class="na">Duration</span><span class="p">.</span><span class="na">ofSeconds</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">POST</span><span class="p">(</span><span class="n">HttpRequest</span><span class="p">.</span><span class="na">BodyPublishers</span><span class="p">.</span><span class="na">ofString</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">HttpResponse</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">httpClientFactory</span><span class="p">.</span><span class="na">create</span><span class="p">()</span>
+<span class="w">                    </span><span class="p">.</span><span class="na">send</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">HttpResponse</span><span class="p">.</span><span class="na">BodyHandlers</span><span class="p">.</span><span class="na">ofString</span><span class="p">());</span>
+
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">response</span><span class="p">.</span><span class="na">body</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;Falha de comunicação com parceiro.&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ex</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">InterruptedException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Thread</span><span class="p">.</span><span class="na">currentThread</span><span class="p">().</span><span class="na">interrupt</span><span class="p">();</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;Chamada ao parceiro foi interrompida.&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ex</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">encode</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">URLEncoder</span><span class="p">.</span><span class="na">encode</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">StandardCharsets</span><span class="p">.</span><span class="na">UTF_8</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse exemplo demonstra:</p>
+<ul>
+<li>endpoint validado antes do <code>HttpRequest</code>;</li>
+<li>body separado da URI;</li>
+<li>form encoding para o corpo;</li>
+<li>timeout;</li>
+<li>redirect controlado no <code>HttpClient</code>;</li>
+<li>exceção pública sem expor credenciais.</li>
+</ul>
+<p>Atenção: <code>URLEncoder</code> protege a formação do body <code>application/x-www-form-urlencoded</code>; ele não protege o canal. A proteção do canal vem do HTTPS/TLS.</p>
+<h2 id="separar-endpoint-headers-e-body">Separar endpoint, headers e body</h2>
+<p>Uma das práticas mais importantes é manter separação clara entre:</p>
+<ul>
+<li>endpoint;</li>
+<li>headers;</li>
+<li>body;</li>
+<li>credenciais;</li>
+<li>dados de negócio.</li>
+</ul>
+<p>Exemplo ruim:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tokenUrl</span>
+<span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;?client_id=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">clientId</span>
+<span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;&amp;client_secret=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">clientSecret</span><span class="p">;</span>
+
+<span class="n">restClient</span><span class="p">.</span><span class="na">post</span><span class="p">().</span><span class="na">uri</span><span class="p">(</span><span class="n">url</span><span class="p">).</span><span class="na">retrieve</span><span class="p">();</span>
+</code></pre></div>
+<p>Problemas:</p>
+<ul>
+<li>segredo aparece na URL;</li>
+<li>URL pode ir para logs;</li>
+<li>segredo pode aparecer em histórico de proxy;</li>
+<li>segredo pode aparecer em métricas;</li>
+<li>segredo pode aparecer em erro;</li>
+<li>destino e credencial ficam misturados.</li>
+</ul>
+<p>Exemplo melhor:</p>
+<div class="highlight"><pre><span></span><code><span class="n">MultiValueMap</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LinkedMultiValueMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="n">body</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;client_id&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">clientId</span><span class="p">);</span>
+<span class="n">body</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;client_secret&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">clientSecret</span><span class="p">);</span>
+<span class="n">body</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;grant_type&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;client_credentials&quot;</span><span class="p">);</span>
+
+<span class="n">restClient</span>
+<span class="w">        </span><span class="p">.</span><span class="na">post</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="na">uri</span><span class="p">(</span><span class="n">endpointValidado</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="na">contentType</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_FORM_URLENCODED</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="na">body</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="na">retrieve</span><span class="p">()</span>
+<span class="w">        </span><span class="p">.</span><span class="na">body</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+</code></pre></div>
+<p>Agora:</p>
+<ul>
+<li>destino é uma URI validada;</li>
+<li>credenciais estão no body exigido pelo protocolo;</li>
+<li>body não define destino;</li>
+<li>logs podem evitar registrar o body;</li>
+<li>o canal HTTPS protege a transmissão.</li>
+</ul>
+<h2 id="dados-sensiveis-nao-devem-ir-na-url">Dados sensíveis não devem ir na URL</h2>
+<p>Mesmo com HTTPS, evite colocar dados sensíveis na URL.</p>
+<p>Motivos:</p>
+<ul>
+<li>URLs podem aparecer em logs;</li>
+<li>proxies podem registrar path e query string;</li>
+<li>ferramentas APM podem capturar URLs;</li>
+<li>gateways podem registrar rotas;</li>
+<li>erros podem incluir URL;</li>
+<li>métricas podem indexar query string;</li>
+<li>histórico e debug podem expor valores.</li>
+</ul>
+<p>Exemplo ruim:</p>
+<div class="highlight"><pre><span></span><code>https://auth.rockpartner.example/oauth/token?client_secret=abc123
+</code></pre></div>
+<p>Exemplo melhor:</p>
+<div class="highlight"><pre><span></span><code>POST https://auth.rockpartner.example/oauth/token
+Content-Type: application/x-www-form-urlencoded
+</code></pre></div>
+<p>Com o segredo no corpo e o canal protegido por HTTPS.</p>
+<h2 id="cleartext-e-logs">Cleartext e logs</h2>
+<p>Cleartext Submission trata principalmente transmissão por canal inseguro, mas logs também entram no raciocínio de exposição de dados.</p>
+<p>Não adianta enviar por HTTPS e depois registrar o body completo no log.</p>
+<p>Exemplo ruim:</p>
+<div class="highlight"><pre><span></span><code><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Enviando body ao parceiro: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">body</span><span class="p">);</span>
+</code></pre></div>
+<p>Exemplo melhor:</p>
+<div class="highlight"><pre><span></span><code><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Solicitando token ao parceiro RockPartner.&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>Em erro:</p>
+<div class="highlight"><pre><span></span><code><span class="n">log</span><span class="p">.</span><span class="na">warn</span><span class="p">(</span><span class="s">&quot;Falha ao solicitar token ao parceiro. tipoErro={}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ex</span><span class="p">.</span><span class="na">getClass</span><span class="p">().</span><span class="na">getSimpleName</span><span class="p">());</span>
+</code></pre></div>
+<p>Evite registrar:</p>
+<ul>
+<li><code>client_secret</code>;</li>
+<li>senha;</li>
+<li>token;</li>
+<li>header <code>Authorization</code>;</li>
+<li>cookie;</li>
+<li>payload completo de autenticação;</li>
+<li>resposta completa de token;</li>
+<li>URL com query string sensível;</li>
+<li>stack trace contendo body ou headers.</li>
+</ul>
+<p>Logs precisam ser úteis, mas não podem virar canal de vazamento.</p>
+<h2 id="cleartext-e-mensagens-de-erro">Cleartext e mensagens de erro</h2>
+<p>Erros também podem vazar dados.</p>
+<p>Exemplo ruim:</p>
+<div class="highlight"><pre><span></span><code><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;Erro ao chamar &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tokenEndpoint</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; com secret &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">clientSecret</span><span class="p">);</span>
+</code></pre></div>
+<p>Exemplo melhor:</p>
+<div class="highlight"><pre><span></span><code><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;Falha ao consultar serviço de autenticação parceiro.&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>A mensagem pública deve informar o suficiente para diagnóstico operacional, sem expor segredo.</p>
+<p>Detalhes técnicos podem ir para logs controlados, mas ainda assim sem credenciais.</p>
+<h2 id="oauth-client_credentials-e-cleartext">OAuth client_credentials e Cleartext</h2>
+<p>O fluxo <code>client_credentials</code> exige envio de credenciais do cliente para o servidor de autorização.</p>
+<p>Isso é normal.</p>
+<p>O envio de <code>client_id</code> e <code>client_secret</code> não é automaticamente vulnerabilidade.</p>
+<p>O risco aparece se:</p>
+<ul>
+<li>o endpoint usa HTTP;</li>
+<li>o endpoint é controlável pelo usuário;</li>
+<li>o host não é permitido;</li>
+<li>redirects podem levar para HTTP;</li>
+<li>credenciais aparecem em logs;</li>
+<li>resposta pública reflete segredo;</li>
+<li>erro inclui payload;</li>
+<li>token é devolvido para cliente indevido;</li>
+<li>configuração pode ser alterada sem governança.</li>
+</ul>
+<p>Ou seja:</p>
+<blockquote>
+<p>O fluxo funcional pode ser legítimo, mas precisa ter controles.</p>
+</blockquote>
+<p>Em um finding SAST, isso pode ser classificado como vulnerabilidade real, risco mitigado ou <code>Not Exploitable</code>, dependendo das evidências.</p>
+<h2 id="tratamento-de-resposta-do-parceiro">Tratamento de resposta do parceiro</h2>
+<p>Além de proteger o envio, é importante cuidar da resposta.</p>
+<p>Um endpoint de token pode retornar:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;access_token&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;token-gerado&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;token_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Bearer&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;expires_in&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3600</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse retorno é sensível.</p>
+<p>A aplicação deve avaliar:</p>
+<ul>
+<li>quem realmente precisa receber esse token;</li>
+<li>se o token deve ficar apenas no backend;</li>
+<li>se deve ser armazenado em cache;</li>
+<li>se logs devem ocultar a resposta;</li>
+<li>se campos inesperados devem ser filtrados;</li>
+<li>se o parceiro poderia refletir dados sensíveis enviados.</li>
+</ul>
+<p>Em integrações legadas, às vezes o contrato exige devolver a resposta completa ao consumidor. Nesses casos, o risco precisa ser documentado e mitigado tanto quanto possível.</p>
+<h2 id="bloqueio-de-reflexao-de-credenciais">Bloqueio de reflexão de credenciais</h2>
+<p>Um controle útil é rejeitar respostas de parceiro que ecoem credenciais recebidas.</p>
+<p>Exemplo conceitual:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.integracoes.infra</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.fasterxml.jackson.databind.JsonNode</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Component</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Iterator</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Map</span><span class="p">;</span>
+
+<span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CredentialReflectionGuard</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">rejectCredentialReflection</span><span class="p">(</span>
+<span class="w">            </span><span class="n">JsonNode</span><span class="w"> </span><span class="n">response</span><span class="p">,</span>
+<span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">clientId</span><span class="p">,</span>
+<span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">clientSecret</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">response</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">verifyNode</span><span class="p">(</span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">clientId</span><span class="p">,</span><span class="w"> </span><span class="n">clientSecret</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">verifyNode</span><span class="p">(</span><span class="n">JsonNode</span><span class="w"> </span><span class="n">node</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">clientId</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">clientSecret</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">isTextual</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="na">asText</span><span class="p">();</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">clientSecret</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;Resposta do parceiro refletiu segredo.&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">isObject</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Map</span><span class="p">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">JsonNode</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">fields</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="na">fields</span><span class="p">();</span>
+
+<span class="w">            </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">fields</span><span class="p">.</span><span class="na">hasNext</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">Map</span><span class="p">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">JsonNode</span><span class="o">&gt;</span><span class="w"> </span><span class="n">field</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fields</span><span class="p">.</span><span class="na">next</span><span class="p">();</span>
+
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">isSecretField</span><span class="p">(</span><span class="n">field</span><span class="p">.</span><span class="na">getKey</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;Resposta do parceiro contém campo sensível.&quot;</span><span class="p">);</span>
+<span class="w">                </span><span class="p">}</span>
+
+<span class="w">                </span><span class="n">verifyNode</span><span class="p">(</span><span class="n">field</span><span class="p">.</span><span class="na">getValue</span><span class="p">(),</span><span class="w"> </span><span class="n">clientId</span><span class="p">,</span><span class="w"> </span><span class="n">clientSecret</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">isArray</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">JsonNode</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">node</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">verifyNode</span><span class="p">(</span><span class="n">item</span><span class="p">,</span><span class="w"> </span><span class="n">clientId</span><span class="p">,</span><span class="w"> </span><span class="n">clientSecret</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isSecretField</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">fieldName</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">normalized</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fieldName</span><span class="p">.</span><span class="na">toLowerCase</span><span class="p">();</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">normalized</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="s">&quot;password&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="o">||</span><span class="w"> </span><span class="n">normalized</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="s">&quot;secret&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="o">||</span><span class="w"> </span><span class="n">normalized</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="s">&quot;credential&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="o">||</span><span class="w"> </span><span class="n">normalized</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="s">&quot;authorization&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse tipo de guarda não substitui HTTPS.</p>
+<p>Ela resolve outro risco: impedir que a resposta pública carregue de volta segredo enviado ao parceiro.</p>
+<p>Em sistemas reais, essa regra precisa ser cuidadosamente testada para não quebrar contratos válidos.</p>
+<h2 id="mtls">mTLS</h2>
+<p>HTTPS autentica o servidor para o cliente e protege o canal com TLS.</p>
+<p>Em integrações mais sensíveis, pode ser necessário usar mTLS, Mutual TLS.</p>
+<p>No mTLS, ambos os lados apresentam certificados:</p>
+<ul>
+<li>o cliente valida o servidor;</li>
+<li>o servidor valida o cliente.</li>
+</ul>
+<p>Isso é útil quando a integração precisa garantir que apenas clientes autorizados consigam se conectar.</p>
+<p>mTLS pode ser útil em:</p>
+<ul>
+<li>integrações financeiras;</li>
+<li>APIs internas críticas;</li>
+<li>comunicação entre microsserviços;</li>
+<li>parceiros de alta criticidade;</li>
+<li>ambientes com requisitos regulatórios;</li>
+<li>tráfego entre domínios corporativos.</li>
+</ul>
+<p>Mas mTLS não substitui boas práticas de aplicação:</p>
+<ul>
+<li>não logar segredo;</li>
+<li>validar endpoint;</li>
+<li>não aceitar HTTP;</li>
+<li>controlar redirects;</li>
+<li>aplicar menor privilégio;</li>
+<li>proteger tokens;</li>
+<li>criar testes.</li>
+</ul>
+<h2 id="tls-nao-protege-dados-em-repouso">TLS não protege dados em repouso</h2>
+<p>TLS protege dados em trânsito.</p>
+<p>Depois que a mensagem chega ao destino, o dado pode:</p>
+<ul>
+<li>ser processado;</li>
+<li>entrar em log;</li>
+<li>ser armazenado;</li>
+<li>ir para cache;</li>
+<li>ser retornado;</li>
+<li>ser propagado para outro sistema;</li>
+<li>ser exibido em erro;</li>
+<li>ser persistido em banco.</li>
+</ul>
+<p>Portanto, TLS é necessário, mas não resolve tudo.</p>
+<p>Para dados sensíveis, pense no ciclo completo:</p>
+<div class="highlight"><pre><span></span><code>entrada -&gt; processamento -&gt; transmissão -&gt; resposta -&gt; logs -&gt; cache -&gt; armazenamento -&gt; descarte
+</code></pre></div>
+<p>Cleartext Submission foca na transmissão, mas a segurança real precisa olhar o fluxo inteiro.</p>
+<h2 id="testes-do-validador-https">Testes do validador HTTPS</h2>
+<p>Teste o comportamento esperado da política.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.integracoes.infra</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.net.URI</span><span class="p">;</span>
+
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.*</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">HttpsEndpointValidatorTest</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">HttpsEndpointValidator</span><span class="w"> </span><span class="n">validator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HttpsEndpointValidator</span><span class="p">();</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">deveAceitarEndpointHttpsAbsolutoComHost</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">URI</span><span class="w"> </span><span class="n">endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">URI</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="s">&quot;https://auth.rockpartner.example/oauth/token&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">URI</span><span class="w"> </span><span class="n">validado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">validator</span><span class="p">.</span><span class="na">requireHttps</span><span class="p">(</span><span class="n">endpoint</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span><span class="w"> </span><span class="n">validado</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">deveRejeitarEndpointHttp</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">URI</span><span class="w"> </span><span class="n">endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">URI</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="s">&quot;http://auth.rockpartner.example/oauth/token&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">assertThrows</span><span class="p">(</span><span class="n">IllegalArgumentException</span><span class="p">.</span><span class="na">class</span><span class="p">,</span>
+<span class="w">                </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">validator</span><span class="p">.</span><span class="na">requireHttps</span><span class="p">(</span><span class="n">endpoint</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">deveRejeitarUriRelativa</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">URI</span><span class="w"> </span><span class="n">endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">URI</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="s">&quot;/oauth/token&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">assertThrows</span><span class="p">(</span><span class="n">IllegalArgumentException</span><span class="p">.</span><span class="na">class</span><span class="p">,</span>
+<span class="w">                </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">validator</span><span class="p">.</span><span class="na">requireHttps</span><span class="p">(</span><span class="n">endpoint</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">deveRejeitarUriSemHost</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">URI</span><span class="w"> </span><span class="n">endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">URI</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="s">&quot;https:///oauth/token&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">assertThrows</span><span class="p">(</span><span class="n">IllegalArgumentException</span><span class="p">.</span><span class="na">class</span><span class="p">,</span>
+<span class="w">                </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">validator</span><span class="p">.</span><span class="na">requireHttps</span><span class="p">(</span><span class="n">endpoint</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">deveRejeitarEndpointNulo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">assertThrows</span><span class="p">(</span><span class="n">IllegalArgumentException</span><span class="p">.</span><span class="na">class</span><span class="p">,</span>
+<span class="w">                </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">validator</span><span class="p">.</span><span class="na">requireHttps</span><span class="p">(</span><span class="kc">null</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esses testes comprovam que a aplicação falha fechado quando o endpoint não é seguro.</p>
+<h2 id="teste-para-nao-registrar-segredo">Teste para não registrar segredo</h2>
+<p>Um teste completo de logs depende da configuração de logging do projeto, mas a ideia é validar que marcadores sensíveis não aparecem.</p>
+<p>Exemplo conceitual:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.integracoes.infra</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
+
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.assertFalse</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">LogSanitizationTest</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">naoDeveRegistrarClientSecret</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">clientSecret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SEGREDO-TESTE-DEF-LEPPARD&quot;</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">mensagemLog</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Falha ao solicitar token ao parceiro.&quot;</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">assertFalse</span><span class="p">(</span><span class="n">mensagemLog</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">clientSecret</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Em um projeto real, o ideal seria capturar o appender de log em teste e procurar por marcadores sintéticos.</p>
+<p>Exemplo de marcadores:</p>
+<div class="highlight"><pre><span></span><code>SEGREDO-TESTE-DEF-LEPPARD
+TOKEN-TESTE-POISON
+AUTHORIZATION-TESTE-CINDERELLA
+</code></pre></div>
+<p>A regra é: nenhum marcador sensível deve aparecer nos logs.</p>
+<h2 id="testes-de-integracao-com-servidor-fake">Testes de integração com servidor fake</h2>
+<p>Para validar que o endpoint HTTPS é obrigatório sem chamar um parceiro real, é possível usar servidor fake em testes.</p>
+<p>A ideia geral:</p>
+<ul>
+<li>configurar endpoint <code>http://...</code>;</li>
+<li>executar o fluxo;</li>
+<li>verificar que a aplicação rejeita antes da chamada;</li>
+<li>configurar endpoint <code>https://...</code>;</li>
+<li>verificar que a requisição é montada corretamente;</li>
+<li>validar que credenciais não aparecem em logs.</li>
+</ul>
+<p>Mesmo que o teste fake não valide TLS real, ele ajuda a provar que o código bloqueia HTTP antes do sink.</p>
+<h2 id="como-o-sast-pode-enxergar-a-correcao">Como o SAST pode enxergar a correção</h2>
+<p>Antes:</p>
+<div class="highlight"><pre><span></span><code>clientSecret
+    -&gt; body
+    -&gt; tokenUrl possivelmente HTTP
+    -&gt; RestClient.post()
+</code></pre></div>
+<p>Depois:</p>
+<div class="highlight"><pre><span></span><code>tokenEndpoint
+    -&gt; HttpsEndpointValidator.requireHttps
+    -&gt; endpointValidado
+    -&gt; RestClient.post(endpointValidado)
+
+clientSecret
+    -&gt; body form-urlencoded
+    -&gt; enviado somente para endpointValidado
+</code></pre></div>
+<p>Essa separação ajuda a explicar a correção:</p>
+<ul>
+<li>o segredo continua existindo porque o protocolo exige;</li>
+<li>o segredo continua no body porque o contrato exige;</li>
+<li>o endpoint agora precisa ser HTTPS;</li>
+<li>a chamada falha antes do envio se a URI for insegura;</li>
+<li>redirects devem ser proibidos ou revalidados;</li>
+<li>logs não recebem segredo.</li>
+</ul>
+<h2 id="quando-o-finding-pode-persistir">Quando o finding pode persistir</h2>
+<p>Mesmo após corrigir, o SAST pode continuar apontando o fluxo.</p>
+<p>Isso pode acontecer quando a ferramenta:</p>
+<ul>
+<li>não reconhece o validador customizado;</li>
+<li>não entende que <code>endpointValidado</code> só pode ser HTTPS;</li>
+<li>propaga taint pelo objeto de configuração;</li>
+<li>associa body sensível ao retorno da chamada;</li>
+<li>não diferencia endpoint de payload;</li>
+<li>não reconhece testes;</li>
+<li>não analisa configuração efetiva de redirects.</li>
+</ul>
+<p>Nesse caso, não crie código artificial para enganar a ferramenta.</p>
+<p>Faça uma triagem técnica:</p>
+<ol>
+<li>explique source;</li>
+<li>explique sink;</li>
+<li>mostre a validação HTTPS;</li>
+<li>mostre que a falha ocorre antes do envio;</li>
+<li>mostre testes;</li>
+<li>mostre que logs não contêm segredos;</li>
+<li>documente risco residual;</li>
+<li>solicite avaliação AppSec se necessário.</li>
+</ol>
+<h2 id="falso-positivo-risco-mitigado-ou-vulnerabilidade-real">Falso positivo, risco mitigado ou vulnerabilidade real?</h2>
+<h3 id="vulnerabilidade-real">Vulnerabilidade real</h3>
+<p>É vulnerabilidade real quando:</p>
+<ul>
+<li>dados sensíveis podem ser enviados para <code>http://</code>;</li>
+<li>não há validação de endpoint;</li>
+<li>existe fallback HTTP;</li>
+<li>redirects podem levar para HTTP;</li>
+<li>o endpoint vem de usuário;</li>
+<li>credenciais aparecem em URL;</li>
+<li>credenciais aparecem em logs;</li>
+<li>erros expõem o payload.</li>
+</ul>
+<h3 id="risco-mitigado">Risco mitigado</h3>
+<p>É risco mitigado quando:</p>
+<ul>
+<li>o protocolo exige envio de credencial;</li>
+<li>o endpoint é validado como HTTPS;</li>
+<li>o host é controlado ou permitido;</li>
+<li>redirects são proibidos ou revalidados;</li>
+<li>logs não expõem segredo;</li>
+<li>erros são sanitizados;</li>
+<li>testes comprovam o comportamento;</li>
+<li>o contrato funcional precisa ser preservado.</li>
+</ul>
+<h3 id="falso-positivo">Falso positivo</h3>
+<p>Pode ser falso positivo quando:</p>
+<ul>
+<li>o scanner aponta envio claro, mas o sink só recebe URI HTTPS validada;</li>
+<li>o valor sensível não chega ao canal indicado;</li>
+<li>o dado é usado apenas para HMAC/cache, não para log;</li>
+<li>o scanner confunde argumento enviado com resposta recebida;</li>
+<li>o fluxo é funcional e obrigatório, com controles demonstráveis.</li>
+</ul>
+<p>Mesmo em falso positivo, pode valer aplicar hardening defensivo para deixar o controle mais explícito.</p>
+<h2 id="boas-praticas">Boas práticas</h2>
+<h3 id="1-imponha-https-no-codigo">1. Imponha HTTPS no código</h3>
+<p>Não dependa apenas de documentação ou revisão manual.</p>
+<h3 id="2-valide-perto-do-sink">2. Valide perto do sink</h3>
+<p>A URI usada pelo cliente HTTP deve ser validada imediatamente antes da chamada.</p>
+<h3 id="3-separe-uri-e-body">3. Separe URI e body</h3>
+<p>O destino não deve ser misturado com payload sensível.</p>
+<h3 id="4-nao-coloque-segredo-na-url">4. Não coloque segredo na URL</h3>
+<p>Use body ou header apropriado conforme o protocolo, sempre sobre HTTPS.</p>
+<h3 id="5-proiba-fallback-para-http">5. Proíba fallback para HTTP</h3>
+<p>Falha em HTTPS deve ser falha operacional, não motivo para baixar segurança.</p>
+<h3 id="6-controle-redirects">6. Controle redirects</h3>
+<p>Não siga redirects automaticamente quando a requisição carrega credenciais, ou revalide o destino final.</p>
+<h3 id="7-nao-registre-credenciais">7. Não registre credenciais</h3>
+<p>Logs devem registrar eventos, não segredos.</p>
+<h3 id="8-sanitize-mensagens-de-erro">8. Sanitize mensagens de erro</h3>
+<p>Erros não devem carregar endpoint completo com query sensível, body, token ou senha.</p>
+<h3 id="9-use-allowlist-quando-possivel">9. Use allowlist quando possível</h3>
+<p>Cleartext e SSRF muitas vezes aparecem juntos. HTTPS obrigatório é necessário; host permitido também pode ser necessário.</p>
+<h3 id="10-escreva-testes">10. Escreva testes</h3>
+<p>Teste HTTP rejeitado, URI relativa rejeitada, ausência de host, logs sem segredo e comportamento com endpoint válido.</p>
+<h2 id="erros-comuns">Erros comuns</h2>
+<h3 id="1-achar-que-base64-protege-segredo">1. Achar que Base64 protege segredo</h3>
+<p>Base64 é codificação, não criptografia.</p>
+<h3 id="2-achar-que-rede-interna-dispensa-tls">2. Achar que rede interna dispensa TLS</h3>
+<p>Rede interna também precisa de proteção, especialmente para credenciais.</p>
+<h3 id="3-usar-http-em-homologacao">3. Usar <code>http://</code> em homologação</h3>
+<p>Ambiente de homologação frequentemente carrega dados e credenciais reais ou parecidas com reais. Não deve ensinar a aplicação a aceitar HTTP.</p>
+<h3 id="4-colocar-segredo-na-query-string">4. Colocar segredo na query string</h3>
+<p>Query string aparece facilmente em logs e ferramentas intermediárias.</p>
+<h3 id="5-fazer-fallback-para-http">5. Fazer fallback para HTTP</h3>
+<p>Fallback inseguro destrói a garantia do canal.</p>
+<h3 id="6-seguir-redirects-sem-controle">6. Seguir redirects sem controle</h3>
+<p>Redirect pode levar para canal inseguro.</p>
+<h3 id="7-logar-body-completo">7. Logar body completo</h3>
+<p>O body pode conter segredo, token ou dados pessoais.</p>
+<h3 id="8-corrigir-removendo-credencial-funcional">8. Corrigir removendo credencial funcional</h3>
+<p>Se o protocolo exige credencial, removê-la quebra a integração. A correção é proteger o envio, não destruir o contrato.</p>
+<h3 id="9-mascarar-dado-antes-de-enviar">9. Mascarar dado antes de enviar</h3>
+<p>Mascarar <code>client_secret</code> antes de enviar quebra autenticação. Mascaramento é para log e resposta pública, não para o protocolo funcional.</p>
+<h3 id="10-criar-wrapper-sem-controle-real">10. Criar wrapper sem controle real</h3>
+<p>Wrapper vazio pode calar scanner, mas não protege o canal.</p>
+<h2 id="decisoes-de-engenharia">Decisões de engenharia</h2>
+<h2 id="quando-bloquear-http-totalmente">Quando bloquear HTTP totalmente?</h2>
+<p>Bloqueie HTTP sempre que a chamada carregar:</p>
+<ul>
+<li>credenciais;</li>
+<li>tokens;</li>
+<li>documentos;</li>
+<li>dados pessoais;</li>
+<li>dados financeiros;</li>
+<li>dados regulados;</li>
+<li>payloads de autenticação;</li>
+<li>informações confidenciais;</li>
+<li>dados de negócio sensíveis.</li>
+</ul>
+<p>Na prática, em sistemas corporativos modernos, o padrão deve ser HTTPS.</p>
+<h2 id="quando-aceitar-http">Quando aceitar HTTP?</h2>
+<p>Raramente.</p>
+<p>Só faria sentido em cenários muito controlados, sem dados sensíveis, com rede isolada e justificativa formal. Mesmo assim, normalmente é melhor corrigir a infraestrutura para suportar HTTPS.</p>
+<p>Para integrações server-to-server com credenciais, HTTP não deve ser aceito.</p>
+<h2 id="quando-usar-mtls">Quando usar mTLS?</h2>
+<p>Use mTLS quando a integração exige autenticação forte entre serviços ou parceiros.</p>
+<p>Exemplos:</p>
+<ul>
+<li>comunicação entre microsserviços críticos;</li>
+<li>APIs financeiras;</li>
+<li>integrações com parceiros regulados;</li>
+<li>ambientes com requisitos de autenticação mútua;</li>
+<li>sistemas com alto impacto em caso de uso indevido.</li>
+</ul>
+<h2 id="quando-usar-validacao-de-host">Quando usar validação de host?</h2>
+<p>Use validação de host quando:</p>
+<ul>
+<li>há risco de SSRF;</li>
+<li>endpoint vem de configuração;</li>
+<li>há múltiplos parceiros;</li>
+<li>o destino pode variar por ambiente;</li>
+<li>você precisa provar que só chama hosts autorizados.</li>
+</ul>
+<h2 id="quando-classificar-como-not-exploitable">Quando classificar como Not Exploitable?</h2>
+<p>Considere <code>Not Exploitable</code> quando:</p>
+<ul>
+<li>o envio sensível é funcional e obrigatório;</li>
+<li>o endpoint é validado como HTTPS;</li>
+<li>não há caminho HTTP;</li>
+<li>redirects estão controlados;</li>
+<li>logs não expõem dados;</li>
+<li>erros não expõem payload;</li>
+<li>resposta pública não reflete segredo;</li>
+<li>testes comprovam tudo.</li>
+</ul>
+<h2 id="onde-isso-aparece-em-sistemas-reais">Onde isso aparece em sistemas reais</h2>
+<p>Cleartext Submission aparece em:</p>
+<ul>
+<li>autenticação OAuth;</li>
+<li>Basic Auth server-to-server;</li>
+<li>APIs legadas;</li>
+<li>integração com bureaus;</li>
+<li>pagamento;</li>
+<li>consulta cadastral;</li>
+<li>upload de documentos;</li>
+<li>download de arquivos;</li>
+<li>mensageria HTTP;</li>
+<li>webhooks;</li>
+<li>callbacks;</li>
+<li>proxy interno;</li>
+<li>geração de token;</li>
+<li>serviços de storage;</li>
+<li>comunicação com gateway corporativo.</li>
+</ul>
+<p>Em Java/Spring, os pontos mais comuns são:</p>
+<ul>
+<li>services de integração;</li>
+<li>clients HTTP;</li>
+<li>classes utilitárias;</li>
+<li>módulos de autenticação;</li>
+<li>decorators de cache;</li>
+<li>código legado com <code>RestTemplate</code>;</li>
+<li>código moderno com <code>RestClient</code>;</li>
+<li>uso direto de <code>HttpClient</code>;</li>
+<li>configurações em YAML/properties;</li>
+<li>montagem manual de body form-urlencoded;</li>
+<li>tratamento de logs e exceções.</li>
+</ul>
+<h2 id="checklist-pratico">Checklist prático</h2>
+<h3 id="dados-sensiveis">Dados sensíveis</h3>
+<ul>
+<li>Há senha?</li>
+<li>Há token?</li>
+<li>Há <code>client_secret</code>?</li>
+<li>Há header <code>Authorization</code>?</li>
+<li>Há API key?</li>
+<li>Há documento?</li>
+<li>Há dados pessoais?</li>
+<li>Há payload de autenticação?</li>
+<li>Há arquivo sensível?</li>
+</ul>
+<h3 id="canal">Canal</h3>
+<ul>
+<li>O endpoint é HTTPS?</li>
+<li>A URI é absoluta?</li>
+<li>Há host válido?</li>
+<li>HTTP é rejeitado?</li>
+<li>URI relativa é rejeitada?</li>
+<li>Há fallback para HTTP?</li>
+<li>Redirects são seguidos?</li>
+<li>Redirects são revalidados?</li>
+</ul>
+<h3 id="codigo">Código</h3>
+<ul>
+<li>A validação ocorre antes do sink?</li>
+<li>O sink recebe a URI validada?</li>
+<li>URI e body estão separados?</li>
+<li>Segredo não vai na URL?</li>
+<li>Body usa <code>form-urlencoded</code> corretamente quando exigido?</li>
+<li>Erros não expõem payload?</li>
+<li>Logs não expõem segredo?</li>
+</ul>
+<h3 id="configuracao">Configuração</h3>
+<ul>
+<li>Endpoints de produção usam HTTPS?</li>
+<li>Endpoints de homologação usam HTTPS?</li>
+<li>Secrets não estão versionados?</li>
+<li>Configuração inválida falha fechado?</li>
+<li>Host autorizado é controlado?</li>
+<li>Porta é esperada?</li>
+</ul>
+<h3 id="testes">Testes</h3>
+<ul>
+<li>HTTP é rejeitado?</li>
+<li>URI relativa é rejeitada?</li>
+<li>URI sem host é rejeitada?</li>
+<li>Endpoint HTTPS válido é aceito?</li>
+<li>Logs não contêm segredo sintético?</li>
+<li>Erros não contêm credenciais?</li>
+<li>Redirect é tratado?</li>
+<li>Novo scan foi executado?</li>
+</ul>
+<h3 id="operacao">Operação</h3>
+<ul>
+<li>Certificados são monitorados?</li>
+<li>Expiração de certificado gera alerta?</li>
+<li>Há proxy corporativo?</li>
+<li>Há controle de egress?</li>
+<li>Há observabilidade sem vazamento?</li>
+<li>Há rotação de credenciais?</li>
+<li>Há política de retenção de logs?</li>
+</ul>
+<h2 id="resumo-final">Resumo final</h2>
+<p>Cleartext Submission em integrações server-to-server acontece quando uma aplicação envia dados sensíveis por um canal sem proteção adequada.</p>
+<p>Em Java/Spring, esse risco aparece principalmente em chamadas outbound com <code>RestClient</code>, <code>RestTemplate</code>, <code>WebClient</code>, <code>HttpClient</code> e SDKs internos de integração.</p>
+<p>A principal defesa é impor HTTPS/TLS antes do envio de dados sensíveis.</p>
+<p>Mas uma solução profissional envolve mais do que trocar <code>http://</code> por <code>https://</code>.</p>
+<p>É preciso:</p>
+<ul>
+<li>validar URI;</li>
+<li>rejeitar HTTP;</li>
+<li>falhar fechado;</li>
+<li>separar endpoint e body;</li>
+<li>evitar segredo na URL;</li>
+<li>controlar redirects;</li>
+<li>não logar credenciais;</li>
+<li>tratar erros sem expor payload;</li>
+<li>criar testes;</li>
+<li>preservar contrato funcional;</li>
+<li>documentar risco residual.</li>
+</ul>
+<p>A regra mais importante é:</p>
+<blockquote>
+<p>Se a integração carrega credencial ou dado sensível, o canal seguro não é opcional. Ele faz parte do contrato de segurança da aplicação.</p>
+</blockquote>
+<h2 id="perguntas-de-revisao">Perguntas de revisão</h2>
+<h3 id="1-o-que-e-cleartext-submission">1. O que é Cleartext Submission?</h3>
+<p>É o envio de dados sensíveis por um canal sem criptografia ou com proteção insuficiente.</p>
+<h3 id="2-cleartext-acontece-apenas-com-senha">2. Cleartext acontece apenas com senha?</h3>
+<p>Não. Pode envolver tokens, documentos, dados pessoais, API keys, headers de autenticação, arquivos e dados de negócio sensíveis.</p>
+<h3 id="3-base64-protege-segredo">3. Base64 protege segredo?</h3>
+<p>Não. Base64 é codificação, não criptografia.</p>
+<h3 id="4-server-to-server-precisa-de-https">4. Server-to-server precisa de HTTPS?</h3>
+<p>Sim. Integrações entre servidores também podem transportar credenciais e dados sensíveis.</p>
+<h3 id="5-https-resolve-tudo">5. HTTPS resolve tudo?</h3>
+<p>Não. HTTPS protege o canal, mas ainda é preciso evitar logs sensíveis, erros com payload, redirects inseguros e endpoints não autorizados.</p>
+<h3 id="6-por-que-validar-a-uri-perto-do-sink">6. Por que validar a URI perto do sink?</h3>
+<p>Porque isso garante que a URI enviada ao cliente HTTP é a mesma que passou pela validação de segurança.</p>
+<h3 id="7-por-que-nao-colocar-segredo-na-url">7. Por que não colocar segredo na URL?</h3>
+<p>Porque URLs aparecem facilmente em logs, proxies, métricas, erros e ferramentas de observabilidade.</p>
+<h3 id="8-o-que-significa-falhar-fechado">8. O que significa falhar fechado?</h3>
+<p>Significa rejeitar a operação quando o endpoint não atende aos requisitos de segurança, sem fazer fallback inseguro.</p>
+<h3 id="9-redirect-pode-causar-cleartext">9. Redirect pode causar Cleartext?</h3>
+<p>Sim. Um endpoint HTTPS pode redirecionar para HTTP se o cliente seguir redirects automaticamente.</p>
+<h3 id="10-o-que-fazer-se-o-protocolo-exige-client_secret">10. O que fazer se o protocolo exige <code>client_secret</code>?</h3>
+<p>Enviar o segredo pelo canal correto, normalmente HTTPS, sem logar, sem expor em erros e sem permitir endpoint inseguro.</p>
+<h3 id="11-quando-usar-mtls">11. Quando usar mTLS?</h3>
+<p>Quando a integração exige autenticação forte entre cliente e servidor, especialmente em ambientes críticos ou regulados.</p>
+<h3 id="12-quando-um-finding-pode-ser-risco-mitigado">12. Quando um finding pode ser risco mitigado?</h3>
+<p>Quando o fluxo sensível é funcional e obrigatório, mas há HTTPS obrigatório, logs seguros, erros controlados, redirects tratados e testes comprovando o comportamento.</p>
+<h3 id="13-qual-e-a-diferenca-entre-mascarar-para-log-e-mascarar-para-envio">13. Qual é a diferença entre mascarar para log e mascarar para envio?</h3>
+<p>Mascarar para log é correto. Mascarar antes de enviar pode quebrar o protocolo, porque o parceiro precisa receber o valor real.</p>
+<h3 id="14-qual-e-a-relacao-entre-cleartext-e-ssrf">14. Qual é a relação entre Cleartext e SSRF?</h3>
+<p>Cleartext foca no canal inseguro. SSRF foca no controle indevido do destino. Os dois podem aparecer juntos em chamadas outbound.</p>
+<h3 id="15-qual-e-a-principal-licao">15. Qual é a principal lição?</h3>
+<p>Credenciais podem precisar sair da aplicação por requisito funcional, mas nunca devem sair por canal inseguro ou sem controles claros.</p>
+<h2 id="referencias">Referências</h2>
+<ul>
+<li><a href="https://cwe.mitre.org/data/definitions/319">CWE-319 — Cleartext Transmission of Sensitive Information</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Security_Cheat_Sheet.html">OWASP Transport Layer Security Cheat Sheet</a></li>
+<li><a href="https://owasp.github.io/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/09-Weak_Cryptography/03-Sensitive_Information_Sent_via_Unencrypted_Channels">OWASP Web Security Testing Guide — Sensitive Information Sent via Unencrypted Channels</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Web_Service_Security_Cheat_Sheet.html">OWASP Web Service Security Cheat Sheet</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html">OWASP Logging Cheat Sheet</a></li>
+<li><a href="https://docs.spring.io/spring-framework/reference/integration/rest-clients.html">Spring Framework Reference — REST Clients</a></li>
+<li><a href="https://docs.spring.io/spring-boot/reference/io/rest-client.html">Spring Boot Reference — Calling REST Services</a></li>
+<li><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.net.http/java/net/http/HttpClient.html">Oracle Java SE 25 — HttpClient</a></li>
+<li><a href="https://docs.oracle.com/en/java/javase/25/">Oracle Java SE 25 Documentation</a></li>
+<li><a href="https://www.oracle.com/java/technologies/downloads/">Oracle Java Downloads — JDK 25 LTS</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

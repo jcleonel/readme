@@ -1,0 +1,4897 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../headers-seguranca-hsts-json-nosniff/">
+      
+      
+        <link rel="next" href="../triagem-vulnerabilidades-corrigir-mitigar-not-exploitable/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>SCA na prática - dependências vulneráveis, CVEs e gestão de bibliotecas - README</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/css/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sca-na-pratica-dependencias-vulneraveis-cves-e-gestao-de-bibliotecas" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../../.." title="README" class="md-header__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            README
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SCA na prática - dependências vulneráveis, CVEs e gestão de bibliotecas
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="README" class="md-nav__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    README
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Backend
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/fundamentos-da-linguagem-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/convencoes-de-codigo-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convenções de código em Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/variaveis-tipos-primitivos-operadores-conversoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variáveis, tipos primitivos, operadores e conversões
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/fundamentos-de-string/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de String
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-controle-operadores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de controle e operadores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-condicionais/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas condicionais
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-de-repeticao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de repetição
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Iniciando em Orientação a Objetos (POO)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Iniciando em Orientação a Objetos (POO)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/introducao-orientacao-a-objetos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução à POO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/classes-e-objetos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes e objetos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/classes-objetos-metodos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes, objetos e métodos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Spring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/api-rest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    O que é API REST?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/http/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Um pouco de HTTP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/por-que-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Por que escolher Spring?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/spring-boot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Boot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/spring-initializr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Initializr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/maven-pom/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maven e pom.xml
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Segurança
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Segurança
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Segurança em aplicações web
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Segurança em aplicações web
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introducao-seguranca-aplicacoes-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução à Segurança de Aplicações Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../http-dns-sessoes-https/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTTP, DNS, Sessões e HTTPS na Segurança Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sql-injection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Injection - Funcionamento, Impactos e Prevenção
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xss/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cross-Site Scripting (XSS)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dast-conformidade-sdlc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DAST, Conformidade e Segurança no Ciclo de Desenvolvimento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sast-source-sink-taint-flow-falso-positivo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SAST na prática - Source, Sink, Taint Flow e falso positivo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssrf-aplicacoes-java-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSRF em aplicações Java/Spring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cleartext-submission-integracoes-server-to-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cleartext Submission em integrações server-to-server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../privacy-violation-credenciais-logs-respostas-parceiros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Privacy Violation - credenciais, logs e respostas de parceiros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../path-traversal-upload-download-seguro-arquivos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Path Traversal e upload/download seguro de arquivos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unchecked-input-loop-condition-dos-processamento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unchecked Input for Loop Condition e prevenção de DoS por processamento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../headers-seguranca-hsts-json-nosniff/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Headers de segurança- HSTS, JSON explícito e nosniff
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SCA na prática - dependências vulneráveis, CVEs e gestão de bibliotecas
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SCA na prática - dependências vulneráveis, CVEs e gestão de bibliotecas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-problema-real-que-sca-resolve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O problema real que SCA resolve
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-nos-detalhes-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar nos detalhes: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sast-dast-e-sca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SAST, DAST e SCA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-e-cve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que é CVE?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-e-cvss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que é CVSS?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-e-cwe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que é CWE?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-e-cpe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que é CPE?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependencia-direta-e-transitiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dependência direta e transitiva
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#maven-dependencytree" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Maven dependency:tree
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-pom-com-spring-boot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de POM com Spring Boot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bom-e-dependency-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BOM e dependency management
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evite-sobrescrever-versoes-sem-necessidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evite sobrescrever versões sem necessidade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-vulnerabilidade-em-dependencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de vulnerabilidade em dependência
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#escopos-de-dependencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escopos de dependência
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependencia-transitiva-vulneravel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dependência transitiva vulnerável
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-com-dependencymanagement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo com dependencyManagement
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rodando-owasp-dependency-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rodando OWASP Dependency-Check
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuidado-com-failbuildoncvss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cuidado com failBuildOnCVSS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sbom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SBOM
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-sbom-importa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que SBOM importa?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fluxo-pratico-de-triagem-sca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fluxo prático de triagem SCA
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fluxo prático de triagem SCA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-identificar-o-componente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Identificar o componente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-identificar-a-cve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Identificar a CVE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-verificar-contexto-da-aplicacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Verificar contexto da aplicação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-escolher-tratamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Escolher tratamento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-testar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Testar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-documentar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Documentar
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-pratico-com-meucatalogomusicalcom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo prático com meucatalogomusical.com
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#atualizar-spring-boot-pode-corrigir-varias-dependencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atualizar Spring Boot pode corrigir várias dependências
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#remover-dependencia-pode-ser-melhor-que-atualizar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remover dependência pode ser melhor que atualizar
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuidado-com-dependencias-opcionais-e-escopos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cuidado com dependências opcionais e escopos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#falso-positivo-em-sca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Falso positivo em SCA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#not-exploitable-em-sca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Not Exploitable em SCA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#priorizacao-de-vulnerabilidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Priorização de vulnerabilidades
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gestao-de-excecoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gestão de exceções
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sca-no-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SCA no pipeline
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sca-e-imagens-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SCA e imagens Docker
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boas práticas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-use-bom-e-dependency-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Use BOM e dependency management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-nao-sobrescreva-versoes-sem-justificativa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Não sobrescreva versões sem justificativa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-rode-dependencytree" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Rode dependency:tree
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-rode-sca-no-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Rode SCA no pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-gere-sbom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Gere SBOM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-atualize-com-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Atualize com testes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-remova-dependencias-nao-usadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Remova dependências não usadas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-trate-transitivas-com-cuidado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Trate transitivas com cuidado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-documente-excecoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Documente exceções
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-monitore-continuamente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Monitore continuamente
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-achar-que-sca-e-so-atualizar-versao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Achar que SCA é só atualizar versão
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-ignorar-dependencia-transitiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Ignorar dependência transitiva
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-forcar-versao-sem-testar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Forçar versão sem testar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-ignorar-dependencia-de-teste-sempre" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Ignorar dependência de teste sempre
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-nao-gerar-sbom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Não gerar SBOM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-aceitar-risco-sem-prazo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Aceitar risco sem prazo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-atualizar-tudo-de-uma-vez-sem-estrategia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Atualizar tudo de uma vez sem estratégia
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-nao-revisar-release-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Não revisar release notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-nao-escanear-imagem-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Não escanear imagem Docker
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-tratar-cvss-como-unica-verdade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Tratar CVSS como única verdade
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-atualizar-so-a-biblioteca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando atualizar só a biblioteca?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-atualizar-spring-boot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando atualizar Spring Boot?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-excluir-transitiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando excluir transitiva?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-substituir-biblioteca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando substituir biblioteca?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-aceitar-risco-temporariamente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando aceitar risco temporariamente?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-bloquear-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando bloquear build?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checklist-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist prático
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Checklist prático">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inventario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inventário
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relatorio-sca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relatório SCA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contexto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contexto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#correcao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Correção
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operação
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Perguntas de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-o-que-e-sca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. O que é SCA?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-sca-e-igual-a-sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. SCA é igual a SAST?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-o-que-e-cve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. O que é CVE?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-o-que-e-cvss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. O que é CVSS?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-o-que-e-dependencia-transitiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. O que é dependência transitiva?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-por-que-dependencytree-e-util" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Por que dependency:tree é útil?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-o-que-e-bom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. O que é BOM?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-o-que-e-sbom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. O que é SBOM?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-toda-cve-em-dependencia-e-exploravel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Toda CVE em dependência é explorável?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-uma-dependencia-de-teste-importa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Uma dependência de teste importa?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-o-que-fazer-com-dependencia-transitiva-vulneravel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. O que fazer com dependência transitiva vulnerável?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-e-seguro-sobrescrever-versoes-gerenciadas-pelo-spring-boot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. É seguro sobrescrever versões gerenciadas pelo Spring Boot?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-quando-uma-excecao-de-risco-e-aceitavel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Quando uma exceção de risco é aceitável?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-sca-substitui-scan-de-imagem-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. SCA substitui scan de imagem Docker?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-qual-e-a-principal-regra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Qual é a principal regra?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../triagem-vulnerabilidades-corrigir-mitigar-not-exploitable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Triagem de vulnerabilidades - corrigir, mitigar ou marcar como Not Exploitable
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ferramentas-appsec-sast-sca-dast/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ferramentas de AppSec - como SAST, SCA e DAST encontram vulnerabilidades
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-problema-real-que-sca-resolve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O problema real que SCA resolve
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-nos-detalhes-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar nos detalhes: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sast-dast-e-sca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SAST, DAST e SCA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-e-cve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que é CVE?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-e-cvss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que é CVSS?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-e-cwe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que é CWE?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-e-cpe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que é CPE?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependencia-direta-e-transitiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dependência direta e transitiva
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#maven-dependencytree" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Maven dependency:tree
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-pom-com-spring-boot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de POM com Spring Boot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bom-e-dependency-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BOM e dependency management
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evite-sobrescrever-versoes-sem-necessidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evite sobrescrever versões sem necessidade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-vulnerabilidade-em-dependencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de vulnerabilidade em dependência
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#escopos-de-dependencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escopos de dependência
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependencia-transitiva-vulneravel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dependência transitiva vulnerável
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-com-dependencymanagement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo com dependencyManagement
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rodando-owasp-dependency-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rodando OWASP Dependency-Check
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuidado-com-failbuildoncvss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cuidado com failBuildOnCVSS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sbom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SBOM
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-sbom-importa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que SBOM importa?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fluxo-pratico-de-triagem-sca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fluxo prático de triagem SCA
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fluxo prático de triagem SCA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-identificar-o-componente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Identificar o componente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-identificar-a-cve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Identificar a CVE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-verificar-contexto-da-aplicacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Verificar contexto da aplicação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-escolher-tratamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Escolher tratamento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-testar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Testar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-documentar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Documentar
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-pratico-com-meucatalogomusicalcom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo prático com meucatalogomusical.com
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#atualizar-spring-boot-pode-corrigir-varias-dependencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atualizar Spring Boot pode corrigir várias dependências
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#remover-dependencia-pode-ser-melhor-que-atualizar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remover dependência pode ser melhor que atualizar
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuidado-com-dependencias-opcionais-e-escopos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cuidado com dependências opcionais e escopos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#falso-positivo-em-sca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Falso positivo em SCA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#not-exploitable-em-sca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Not Exploitable em SCA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#priorizacao-de-vulnerabilidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Priorização de vulnerabilidades
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gestao-de-excecoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gestão de exceções
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sca-no-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SCA no pipeline
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sca-e-imagens-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SCA e imagens Docker
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boas práticas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-use-bom-e-dependency-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Use BOM e dependency management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-nao-sobrescreva-versoes-sem-justificativa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Não sobrescreva versões sem justificativa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-rode-dependencytree" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Rode dependency:tree
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-rode-sca-no-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Rode SCA no pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-gere-sbom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Gere SBOM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-atualize-com-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Atualize com testes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-remova-dependencias-nao-usadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Remova dependências não usadas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-trate-transitivas-com-cuidado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Trate transitivas com cuidado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-documente-excecoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Documente exceções
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-monitore-continuamente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Monitore continuamente
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-achar-que-sca-e-so-atualizar-versao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Achar que SCA é só atualizar versão
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-ignorar-dependencia-transitiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Ignorar dependência transitiva
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-forcar-versao-sem-testar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Forçar versão sem testar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-ignorar-dependencia-de-teste-sempre" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Ignorar dependência de teste sempre
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-nao-gerar-sbom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Não gerar SBOM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-aceitar-risco-sem-prazo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Aceitar risco sem prazo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-atualizar-tudo-de-uma-vez-sem-estrategia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Atualizar tudo de uma vez sem estratégia
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-nao-revisar-release-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Não revisar release notes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-nao-escanear-imagem-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Não escanear imagem Docker
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-tratar-cvss-como-unica-verdade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Tratar CVSS como única verdade
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-atualizar-so-a-biblioteca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando atualizar só a biblioteca?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-atualizar-spring-boot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando atualizar Spring Boot?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-excluir-transitiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando excluir transitiva?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-substituir-biblioteca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando substituir biblioteca?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-aceitar-risco-temporariamente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando aceitar risco temporariamente?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-bloquear-build" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando bloquear build?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checklist-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist prático
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Checklist prático">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inventario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inventário
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relatorio-sca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relatório SCA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contexto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contexto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#correcao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Correção
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operação
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Perguntas de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-o-que-e-sca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. O que é SCA?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-sca-e-igual-a-sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. SCA é igual a SAST?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-o-que-e-cve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. O que é CVE?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-o-que-e-cvss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. O que é CVSS?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-o-que-e-dependencia-transitiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. O que é dependência transitiva?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-por-que-dependencytree-e-util" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Por que dependency:tree é útil?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-o-que-e-bom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. O que é BOM?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-o-que-e-sbom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. O que é SBOM?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-toda-cve-em-dependencia-e-exploravel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Toda CVE em dependência é explorável?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-uma-dependencia-de-teste-importa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Uma dependência de teste importa?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-o-que-fazer-com-dependencia-transitiva-vulneravel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. O que fazer com dependência transitiva vulnerável?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-e-seguro-sobrescrever-versoes-gerenciadas-pelo-spring-boot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. É seguro sobrescrever versões gerenciadas pelo Spring Boot?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-quando-uma-excecao-de-risco-e-aceitavel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Quando uma exceção de risco é aceitável?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-sca-substitui-scan-de-imagem-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. SCA substitui scan de imagem Docker?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-qual-e-a-principal-regra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Qual é a principal regra?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="sca-na-pratica-dependencias-vulneraveis-cves-e-gestao-de-bibliotecas">SCA na prática: dependências vulneráveis, CVEs e gestão de bibliotecas</h1>
+<p>SCA significa <strong>Software Composition Analysis</strong>, ou Análise de Composição de Software.</p>
+<p>Na prática, SCA é a disciplina de analisar os componentes que formam uma aplicação: bibliotecas, frameworks, plugins, dependências diretas, dependências transitivas, versões, licenças, CVEs e artefatos de terceiros.</p>
+<p>Em aplicações Java/Spring, isso é extremamente importante porque uma aplicação corporativa raramente é feita apenas com código próprio.</p>
+<p>Um projeto Spring Boot normalmente depende de:</p>
+<ul>
+<li>Spring Framework;</li>
+<li>Spring Boot;</li>
+<li>Jackson;</li>
+<li>Hibernate;</li>
+<li>Bean Validation;</li>
+<li>Tomcat, Jetty ou outro servidor embarcado;</li>
+<li>drivers JDBC;</li>
+<li>bibliotecas de logging;</li>
+<li>bibliotecas de parsing;</li>
+<li>clientes HTTP;</li>
+<li>bibliotecas de segurança;</li>
+<li>bibliotecas de teste;</li>
+<li>plugins Maven ou Gradle;</li>
+<li>dependências transitivas trazidas por outras dependências.</li>
+</ul>
+<p>Mesmo que o código da aplicação esteja bem escrito, uma biblioteca vulnerável pode criar risco.</p>
+<p>A ideia central é:</p>
+<blockquote>
+<p>Segurança da aplicação não depende apenas do código que você escreve. Depende também do código que você importa.</p>
+</blockquote>
+<p>Na aplicação fictícia <code>meucatalogomusical.com</code>, imagine que usamos bibliotecas para importar planilhas de discografias de bandas como <strong>Queensrÿche</strong>, <strong>Doro</strong>, <strong>Running Wild</strong> e <strong>Hanoi Rocks</strong>. Se uma dessas bibliotecas tiver uma vulnerabilidade conhecida, a aplicação pode ficar exposta mesmo que nosso controller, service e repository estejam bem implementados.</p>
+<h2 id="o-problema-real-que-sca-resolve">O problema real que SCA resolve</h2>
+<p>O desenvolvimento moderno é baseado em reutilização.</p>
+<p>Isso é positivo. Ninguém quer implementar do zero:</p>
+<ul>
+<li>serialização JSON;</li>
+<li>cliente HTTP;</li>
+<li>parser XLSX;</li>
+<li>criptografia;</li>
+<li>servidor web;</li>
+<li>conexão com banco;</li>
+<li>logging;</li>
+<li>validação;</li>
+<li>autenticação;</li>
+<li>compressão;</li>
+<li>parsing XML;</li>
+<li>geração de PDF.</li>
+</ul>
+<p>O problema é que cada biblioteca adicionada ao projeto aumenta a superfície de manutenção e risco.</p>
+<p>Uma dependência pode:</p>
+<ul>
+<li>conter vulnerabilidade conhecida;</li>
+<li>trazer dependências transitivas vulneráveis;</li>
+<li>estar sem manutenção;</li>
+<li>ter licença incompatível;</li>
+<li>ser substituída por pacote malicioso;</li>
+<li>mudar comportamento em atualização;</li>
+<li>introduzir conflito de versão;</li>
+<li>carregar código não usado, mas ainda empacotado;</li>
+<li>gerar risco apenas em certas configurações;</li>
+<li>exigir upgrade que quebra compatibilidade.</li>
+</ul>
+<p>SCA ajuda a responder perguntas como:</p>
+<div class="highlight"><pre><span></span><code>Quais bibliotecas estão no projeto?
+Quais versões estão em uso?
+Existe alguma CVE conhecida?
+A vulnerabilidade afeta dependência direta ou transitiva?
+Existe versão corrigida?
+A biblioteca vulnerável está realmente no artefato final?
+A aplicação usa a parte vulnerável?
+Qual é o impacto de atualizar?
+</code></pre></div>
+<p>Sem SCA, o time pode corrigir SQL Injection, XSS, SSRF e Path Traversal no código próprio, mas continuar empacotando bibliotecas vulneráveis.</p>
+<h2 id="antes-de-entrar-nos-detalhes-uma-ideia-simples">Antes de entrar nos detalhes: uma ideia simples</h2>
+<p>Pense em uma banda.</p>
+<p>O show não depende apenas do vocalista.</p>
+<p>Depende também de:</p>
+<ul>
+<li>guitarrista;</li>
+<li>baixista;</li>
+<li>baterista;</li>
+<li>técnico de som;</li>
+<li>roadies;</li>
+<li>instrumentos;</li>
+<li>cabos;</li>
+<li>pedais;</li>
+<li>amplificadores;</li>
+<li>mesa de som;</li>
+<li>iluminação.</li>
+</ul>
+<p>Se um cabo importante falha, o show pode ser prejudicado.</p>
+<p>Com software é parecido.</p>
+<p>O código da aplicação é só uma parte do sistema.</p>
+<p>As dependências também fazem parte da entrega.</p>
+<p>Em <code>meucatalogomusical.com</code>, podemos escrever um código excelente para importar álbuns do <strong>Mr. Big</strong>, mas se a biblioteca de upload, JSON, XML ou compressão tiver uma CVE crítica explorável no nosso contexto, o risco continua existindo.</p>
+<p>SCA serve para enxergar essa composição.</p>
+<h2 id="definicao-tecnica">Definição técnica</h2>
+<p>SCA é o processo de identificar, inventariar e analisar componentes de terceiros usados por uma aplicação, com foco em vulnerabilidades conhecidas, licenças, versões, dependências transitivas e risco de cadeia de suprimentos.</p>
+<p>O OWASP Software Component Verification Standard define Component Analysis como o processo de identificar áreas potenciais de risco pelo uso de componentes de software de terceiros e open source.</p>
+<p>Em um projeto Java/Spring, SCA normalmente analisa:</p>
+<ul>
+<li><code>pom.xml</code>;</li>
+<li><code>build.gradle</code>;</li>
+<li>lockfiles;</li>
+<li>dependências resolvidas;</li>
+<li>plugins;</li>
+<li>artefatos empacotados;</li>
+<li>SBOM;</li>
+<li>imagem Docker;</li>
+<li>bibliotecas diretas e transitivas;</li>
+<li>metadados de vulnerabilidade;</li>
+<li>CVEs;</li>
+<li>CPEs;</li>
+<li>pacotes Maven;</li>
+<li>versões efetivas.</li>
+</ul>
+<p>A diferença importante é:</p>
+<div class="highlight"><pre><span></span><code>SAST analisa o código.
+SCA analisa os componentes usados pelo código.
+</code></pre></div>
+<p>Ambos são necessários.</p>
+<h2 id="sast-dast-e-sca">SAST, DAST e SCA</h2>
+<p>Na série anterior, estudamos SAST e DAST.</p>
+<p>Agora o SCA entra como terceira camada.</p>
+<table>
+<thead>
+<tr>
+<th>Técnica</th>
+<th>O que analisa</th>
+<th>Exemplo de problema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SAST</td>
+<td>Código-fonte ou bytecode</td>
+<td>SQL Injection, SSRF, Path Traversal</td>
+</tr>
+<tr>
+<td>DAST</td>
+<td>Aplicação em execução</td>
+<td>Headers ausentes, comportamento inseguro em runtime</td>
+</tr>
+<tr>
+<td>SCA</td>
+<td>Dependências e componentes</td>
+<td>Biblioteca com CVE conhecida</td>
+</tr>
+</tbody>
+</table>
+<p>Exemplo prático:</p>
+<div class="highlight"><pre><span></span><code>SAST:
+&quot;Este parâmetro chega em Files.write sem validação.&quot;
+
+DAST:
+&quot;A resposta real não possui X-Content-Type-Options.&quot;
+
+SCA:
+&quot;O projeto empacota uma versão vulnerável de uma biblioteca de parsing.&quot;
+</code></pre></div>
+<p>Uma aplicação madura usa as três abordagens de forma complementar.</p>
+<h2 id="o-que-e-cve">O que é CVE?</h2>
+<p>CVE significa <strong>Common Vulnerabilities and Exposures</strong>.</p>
+<p>É um identificador padronizado para vulnerabilidades conhecidas publicamente.</p>
+<p>Exemplo conceitual:</p>
+<div class="highlight"><pre><span></span><code>CVE-2026-12345
+</code></pre></div>
+<p>A página oficial do CVE Program descreve o programa como uma iniciativa que trabalha com membros da comunidade para expandir o conteúdo CVE e seu uso.</p>
+<p>Uma CVE normalmente ajuda a responder:</p>
+<ul>
+<li>qual vulnerabilidade foi identificada;</li>
+<li>qual produto ou componente é afetado;</li>
+<li>quais versões são afetadas;</li>
+<li>qual é a descrição pública;</li>
+<li>quais referências existem;</li>
+<li>qual fornecedor ou CNA publicou;</li>
+<li>quais correções ou versões podem existir.</li>
+</ul>
+<p>Mas uma CVE não diz sozinha se a sua aplicação está explorável.</p>
+<p>Ela indica que existe uma vulnerabilidade conhecida associada a determinado componente ou produto.</p>
+<h2 id="o-que-e-cvss">O que é CVSS?</h2>
+<p>CVSS significa <strong>Common Vulnerability Scoring System</strong>.</p>
+<p>É um sistema de pontuação usado para classificar severidade de vulnerabilidades.</p>
+<p>O NVD informa suporte a CVSS v2.0, v3.x e v4.0, além de classificações qualitativas como Low, Medium e High conforme as faixas definidas pelas respectivas versões do padrão.</p>
+<p>Em relatórios SCA, é comum aparecer algo como:</p>
+<div class="highlight"><pre><span></span><code>CVSS: 9.8 Critical
+</code></pre></div>
+<p>Isso indica severidade alta na métrica, mas ainda não substitui análise de contexto.</p>
+<p>Uma CVE crítica em uma biblioteca que nem está empacotada em produção pode ter prioridade diferente de uma CVE alta em um componente exposto diretamente à internet.</p>
+<h2 id="o-que-e-cwe">O que é CWE?</h2>
+<p>CWE significa <strong>Common Weakness Enumeration</strong>.</p>
+<p>Enquanto CVE identifica uma vulnerabilidade específica, CWE descreve uma classe ou tipo de fraqueza.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>CVE-2026-12345 -&gt; vulnerabilidade específica
+CWE-22 -&gt; classe Path Traversal
+CWE-79 -&gt; classe XSS
+CWE-918 -&gt; classe SSRF
+</code></pre></div>
+<p>Em relatórios SCA, CVE e CWE podem aparecer juntos.</p>
+<p>A CVE diz “qual vulnerabilidade”.</p>
+<p>A CWE ajuda a entender “qual tipo de falha”.</p>
+<h2 id="o-que-e-cpe">O que é CPE?</h2>
+<p>CPE significa <strong>Common Platform Enumeration</strong>.</p>
+<p>Ferramentas SCA podem tentar associar uma dependência do projeto a um CPE para cruzar com bases de vulnerabilidade. A OWASP Dependency-Check, por exemplo, informa que, se um CPE é identificado, as CVEs associadas são listadas no relatório.</p>
+<p>Esse processo pode gerar acertos e falsos positivos.</p>
+<p>Por quê?</p>
+<p>Porque nem sempre é simples mapear um pacote Maven para um produto afetado por uma CVE.</p>
+<p>Às vezes:</p>
+<ul>
+<li>nomes são parecidos;</li>
+<li>artefatos são diferentes;</li>
+<li>forks confundem;</li>
+<li>a vulnerabilidade afeta outro módulo;</li>
+<li>a ferramenta associa o CPE errado;</li>
+<li>a dependência existe apenas em teste;</li>
+<li>a versão empacotada não é a mesma usada em runtime.</li>
+</ul>
+<p>Por isso, SCA também exige triagem.</p>
+<h2 id="dependencia-direta-e-transitiva">Dependência direta e transitiva</h2>
+<p>Em Maven, uma dependência direta é aquela declarada explicitamente no <code>pom.xml</code>.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;dependency&gt;</span>
+<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>org.apache.poi<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>poi-ooxml<span class="nt">&lt;/artifactId&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div>
+<p>Uma dependência transitiva é trazida por outra dependência.</p>
+<p>Exemplo conceitual:</p>
+<div class="highlight"><pre><span></span><code>meucatalogomusical.com
+    -&gt; poi-ooxml
+        -&gt; xmlbeans
+        -&gt; commons-compress
+        -&gt; outras bibliotecas
+</code></pre></div>
+<p>Você não declarou todas manualmente, mas elas podem entrar no classpath.</p>
+<p>É por isso que SCA é importante.</p>
+<p>O risco pode estar em uma dependência que você nem sabia que estava usando.</p>
+<h2 id="maven-dependencytree">Maven dependency:tree</h2>
+<p>O Maven Dependency Plugin possui o objetivo <code>dependency:tree</code>, que exibe a árvore de dependências do projeto.</p>
+<p>Comando:</p>
+<div class="highlight"><pre><span></span><code>mvn<span class="w"> </span>dependency:tree
+</code></pre></div>
+<p>Para filtrar uma dependência específica:</p>
+<div class="highlight"><pre><span></span><code>mvn<span class="w"> </span>dependency:tree<span class="w"> </span>-Dincludes<span class="o">=</span>org.apache.poi
+</code></pre></div>
+<p>Para gravar em arquivo:</p>
+<div class="highlight"><pre><span></span><code>mvn<span class="w"> </span>dependency:tree<span class="w"> </span>-DoutputFile<span class="o">=</span>dependency-tree.txt
+</code></pre></div>
+<p>Exemplo conceitual de saída:</p>
+<div class="highlight"><pre><span></span><code>com.meucatalogomusical:api:jar:1.0.0
++- org.springframework.boot:spring-boot-starter-web:jar:4.0.8:compile
+|  +- org.springframework:spring-webmvc:jar:7.0.9:compile
+|  +- com.fasterxml.jackson.core:jackson-databind:jar:2.x:compile
++- org.apache.poi:poi-ooxml:jar:5.x:compile
+   +- org.apache.xmlbeans:xmlbeans:jar:x.x:compile
+   +- org.apache.commons:commons-compress:jar:x.x:compile
+</code></pre></div>
+<p>Esse comando ajuda a responder:</p>
+<div class="highlight"><pre><span></span><code>Quem está trazendo essa biblioteca?
+É dependência direta ou transitiva?
+Qual versão foi resolvida?
+Existe conflito de versão?
+</code></pre></div>
+<h2 id="exemplo-de-pom-com-spring-boot">Exemplo de POM com Spring Boot</h2>
+<p>Em aplicações Spring Boot, é comum usar o parent do Spring Boot ou importar o BOM de dependências.</p>
+<p>Exemplo com parent:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;project&gt;</span>
+<span class="w">    </span><span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>com.meucatalogomusical<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>meucatalogomusical-api<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;version&gt;</span>1.0.0<span class="nt">&lt;/version&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;parent&gt;</span>
+<span class="w">        </span><span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">        </span><span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-parent<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">        </span><span class="nt">&lt;version&gt;</span>4.0.8<span class="nt">&lt;/version&gt;</span>
+<span class="w">        </span><span class="nt">&lt;relativePath/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/parent&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;properties&gt;</span>
+<span class="w">        </span><span class="nt">&lt;java.version&gt;</span>25<span class="nt">&lt;/java.version&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/properties&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;dependencies&gt;</span>
+<span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
+<span class="w">            </span><span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-webmvc<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
+
+<span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
+<span class="w">            </span><span class="nt">&lt;groupId&gt;</span>org.apache.poi<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>poi-ooxml<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/dependencies&gt;</span>
+<span class="nt">&lt;/project&gt;</span>
+</code></pre></div>
+<p>O Spring Boot 4.0.8 exige pelo menos Java 17, é compatível até Java 26 e requer Spring Framework 7.0.9 ou superior; por isso, usar Java 25 LTS com Spring Boot 4.x está alinhado com a geração moderna do ecossistema Spring.</p>
+<p>O ponto importante aqui é que muitas versões são gerenciadas pelo Spring Boot.</p>
+<p>Você não precisa colocar versão manual em toda dependência.</p>
+<h2 id="bom-e-dependency-management">BOM e dependency management</h2>
+<p>BOM significa <strong>Bill of Materials</strong>.</p>
+<p>No Maven, um BOM ajuda a centralizar versões de dependências para manter compatibilidade.</p>
+<p>O guia de dependências do Maven explica que dependency management permite especificar versões de artefatos a serem usadas quando aparecem como dependências transitivas ou quando dependências não possuem versão especificada.</p>
+<p>O Spring Boot usa o <code>spring-boot-dependencies</code> como BOM para gerenciar versões compatíveis de muitas bibliotecas. A documentação do Spring Boot Gradle Plugin informa que o plugin pode importar automaticamente o BOM <code>spring-boot-dependencies</code> da versão do Spring Boot em uso.</p>
+<p>Isso é bom porque reduz combinações incompatíveis.</p>
+<p>Mas não significa que você nunca terá CVE.</p>
+<p>Significa apenas que o ecossistema está mais controlado.</p>
+<h2 id="evite-sobrescrever-versoes-sem-necessidade">Evite sobrescrever versões sem necessidade</h2>
+<p>Um erro comum é sobrescrever versões gerenciadas pelo Spring Boot sem uma razão clara.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;dependency&gt;</span>
+<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>com.fasterxml.jackson.core<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>jackson-databind<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;version&gt;</span>2.12.0<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div>
+<p>Se o Spring Boot já gerencia Jackson, forçar uma versão antiga pode criar risco.</p>
+<p>Motivos aceitáveis para sobrescrever versão:</p>
+<ul>
+<li>correção emergencial de CVE;</li>
+<li>incompatibilidade conhecida;</li>
+<li>recomendação oficial;</li>
+<li>necessidade de versão corrigida ainda não gerenciada pelo BOM;</li>
+<li>decisão documentada de arquitetura.</li>
+</ul>
+<p>Mesmo assim, a alteração precisa ser testada.</p>
+<h2 id="exemplo-de-vulnerabilidade-em-dependencia">Exemplo de vulnerabilidade em dependência</h2>
+<p>Imagine que <code>meucatalogomusical.com</code> usa uma biblioteca para ler metadados de álbuns de <strong>Symphony X</strong>.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;dependency&gt;</span>
+<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>com.exemplo<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>album-metadata-parser<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;version&gt;</span>1.2.0<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div>
+<p>O SCA aponta:</p>
+<div class="highlight"><pre><span></span><code>Dependency: com.exemplo:album-metadata-parser:1.2.0
+Vulnerability: CVE-2026-99999
+Severity: High
+Fixed version: 1.2.3
+</code></pre></div>
+<p>A correção pode parecer simples:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;dependency&gt;</span>
+<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>com.exemplo<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>album-metadata-parser<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;version&gt;</span>1.2.3<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div>
+<p>Mas antes de atualizar, precisamos analisar:</p>
+<ul>
+<li>a biblioteca é usada em produção?</li>
+<li>está no escopo <code>compile</code>, <code>runtime</code> ou <code>test</code>?</li>
+<li>a versão corrigida é compatível?</li>
+<li>há breaking changes?</li>
+<li>o trecho vulnerável é usado?</li>
+<li>existe mitigação temporária?</li>
+<li>os testes cobrem o fluxo?</li>
+<li>há risco de regressão?</li>
+<li>a versão corrigida é estável?</li>
+<li>o upgrade afeta dependências transitivas?</li>
+</ul>
+<p>SCA não é apenas “mudar número de versão”.</p>
+<p>É gestão de risco e compatibilidade.</p>
+<h2 id="escopos-de-dependencia">Escopos de dependência</h2>
+<p>Em Maven, o escopo importa.</p>
+<p>Exemplos:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;scope&gt;</span>compile<span class="nt">&lt;/scope&gt;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;scope&gt;</span>runtime<span class="nt">&lt;/scope&gt;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+</code></pre></div>
+<p>Uma CVE em dependência de teste normalmente tem prioridade diferente de uma CVE em dependência empacotada em produção.</p>
+<p>Mas cuidado: plugins de build e dependências de teste também podem representar risco em cadeia de suprimentos, especialmente no pipeline.</p>
+<p>Avalie o contexto.</p>
+<h2 id="dependencia-transitiva-vulneravel">Dependência transitiva vulnerável</h2>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>meucatalogomusical-api
+    -&gt; biblioteca-importacao-discografia
+        -&gt; parser-xml-vulneravel
+</code></pre></div>
+<p>Você não declarou <code>parser-xml-vulneravel</code>, mas ele entrou no projeto.</p>
+<p>Opções possíveis:</p>
+<ol>
+<li>atualizar a dependência principal;</li>
+<li>excluir a dependência transitiva;</li>
+<li>forçar versão corrigida no dependency management;</li>
+<li>substituir a biblioteca principal;</li>
+<li>remover funcionalidade;</li>
+<li>aceitar risco temporariamente com justificativa.</li>
+</ol>
+<p>Exemplo de exclusão:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;dependency&gt;</span>
+<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>com.exemplo<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>biblioteca-importacao-discografia<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;version&gt;</span>3.1.0<span class="nt">&lt;/version&gt;</span>
+<span class="w">    </span><span class="nt">&lt;exclusions&gt;</span>
+<span class="w">        </span><span class="nt">&lt;exclusion&gt;</span>
+<span class="w">            </span><span class="nt">&lt;groupId&gt;</span>com.exemplo<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>parser-xml-vulneravel<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/exclusion&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/exclusions&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div>
+<p>Depois, incluir versão segura:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;dependency&gt;</span>
+<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>com.exemplo<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>parser-xml-vulneravel<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;version&gt;</span>3.1.4<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div>
+<p>Esse tipo de correção exige teste.</p>
+<p>Exclusão transitiva pode quebrar comportamento.</p>
+<h2 id="exemplo-com-dependencymanagement">Exemplo com dependencyManagement</h2>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;dependencyManagement&gt;</span>
+<span class="w">    </span><span class="nt">&lt;dependencies&gt;</span>
+<span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
+<span class="w">            </span><span class="nt">&lt;groupId&gt;</span>com.exemplo<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>parser-xml-vulneravel<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;version&gt;</span>3.1.4<span class="nt">&lt;/version&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/dependencies&gt;</span>
+<span class="nt">&lt;/dependencyManagement&gt;</span>
+</code></pre></div>
+<p>Isso força a versão resolvida quando a dependência aparecer na árvore.</p>
+<p>Mas use com cuidado.</p>
+<p>Forçar versão corrigida pode resolver CVE, mas também pode criar incompatibilidade com a biblioteca que esperava outra versão.</p>
+<p>Sempre execute testes.</p>
+<h2 id="rodando-owasp-dependency-check">Rodando OWASP Dependency-Check</h2>
+<p>O OWASP Dependency-Check é uma ferramenta SCA que detecta vulnerabilidades publicamente divulgadas em dependências do projeto.</p>
+<p>Exemplo de execução via Maven:</p>
+<div class="highlight"><pre><span></span><code>mvn<span class="w"> </span>org.owasp:dependency-check-maven:check
+</code></pre></div>
+<p>Exemplo de plugin no <code>pom.xml</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;build&gt;</span>
+<span class="w">    </span><span class="nt">&lt;plugins&gt;</span>
+<span class="w">        </span><span class="nt">&lt;plugin&gt;</span>
+<span class="w">            </span><span class="nt">&lt;groupId&gt;</span>org.owasp<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>dependency-check-maven<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;version&gt;</span>12.1.8<span class="nt">&lt;/version&gt;</span>
+<span class="w">            </span><span class="nt">&lt;configuration&gt;</span>
+<span class="w">                </span><span class="nt">&lt;failBuildOnCVSS&gt;</span>7.0<span class="nt">&lt;/failBuildOnCVSS&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/configuration&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/plugin&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/plugins&gt;</span>
+<span class="nt">&lt;/build&gt;</span>
+</code></pre></div>
+<p>O número exato de versão do plugin deve ser revisado no momento da implementação, porque ferramentas de segurança evoluem com frequência.</p>
+<p>O ponto do exemplo é mostrar a ideia:</p>
+<div class="highlight"><pre><span></span><code>Rodar SCA no build.
+Gerar relatório.
+Falhar o build acima de certo limiar.
+Triar resultados.
+</code></pre></div>
+<h2 id="cuidado-com-failbuildoncvss">Cuidado com failBuildOnCVSS</h2>
+<p>Falhar build automaticamente pode ser útil, mas precisa de governança.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;failBuildOnCVSS&gt;</span>7.0<span class="nt">&lt;/failBuildOnCVSS&gt;</span>
+</code></pre></div>
+<p>Isso pode bloquear builds com CVSS alto.</p>
+<p>Mas existem perguntas:</p>
+<ul>
+<li>a dependência está em produção?</li>
+<li>é falso positivo?</li>
+<li>há versão corrigida?</li>
+<li>a correção quebra compatibilidade?</li>
+<li>a vulnerabilidade é explorável no nosso uso?</li>
+<li>existe mitigação temporária?</li>
+<li>quem aprova exceção?</li>
+<li>qual prazo de correção?</li>
+</ul>
+<p>Um pipeline maduro não é apenas bloqueio cego.</p>
+<p>É bloqueio com processo.</p>
+<h2 id="sbom">SBOM</h2>
+<p>SBOM significa <strong>Software Bill of Materials</strong>.</p>
+<p>É uma lista estruturada dos componentes que compõem um software.</p>
+<p>A CISA descreve SBOM como uma lista aninhada de ingredientes que compõem componentes de software. Ela também compara com uma lista de ingredientes em embalagem de alimentos, ajudando produtores e consumidores a entender componentes e riscos.</p>
+<p>No ecossistema Java, uma forma comum de gerar SBOM é com CycloneDX.</p>
+<p>O CycloneDX Maven Plugin gera SBOM contendo dependências diretas e transitivas do projeto.</p>
+<p>Exemplo de plugin:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;build&gt;</span>
+<span class="w">    </span><span class="nt">&lt;plugins&gt;</span>
+<span class="w">        </span><span class="nt">&lt;plugin&gt;</span>
+<span class="w">            </span><span class="nt">&lt;groupId&gt;</span>org.cyclonedx<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>cyclonedx-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">            </span><span class="nt">&lt;version&gt;</span>2.9.1<span class="nt">&lt;/version&gt;</span>
+<span class="w">            </span><span class="nt">&lt;executions&gt;</span>
+<span class="w">                </span><span class="nt">&lt;execution&gt;</span>
+<span class="w">                    </span><span class="nt">&lt;phase&gt;</span>package<span class="nt">&lt;/phase&gt;</span>
+<span class="w">                    </span><span class="nt">&lt;goals&gt;</span>
+<span class="w">                        </span><span class="nt">&lt;goal&gt;</span>makeAggregateBom<span class="nt">&lt;/goal&gt;</span>
+<span class="w">                    </span><span class="nt">&lt;/goals&gt;</span>
+<span class="w">                </span><span class="nt">&lt;/execution&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/executions&gt;</span>
+<span class="w">            </span><span class="nt">&lt;configuration&gt;</span>
+<span class="w">                </span><span class="nt">&lt;outputFormat&gt;</span>json<span class="nt">&lt;/outputFormat&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/configuration&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/plugin&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/plugins&gt;</span>
+<span class="nt">&lt;/build&gt;</span>
+</code></pre></div>
+<p>Saída conceitual:</p>
+<div class="highlight"><pre><span></span><code>target/bom.json
+</code></pre></div>
+<p>O SBOM pode ser arquivado como evidência da composição da versão entregue.</p>
+<h2 id="por-que-sbom-importa">Por que SBOM importa?</h2>
+<p>SBOM ajuda quando surge uma nova CVE.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>Nova CVE publicada em biblioteca X.
+</code></pre></div>
+<p>Sem SBOM, você precisa descobrir manualmente:</p>
+<div class="highlight"><pre><span></span><code>Quais aplicações usam biblioteca X?
+Quais versões?
+Em quais ambientes?
+Em quais releases?
+</code></pre></div>
+<p>Com SBOM, a empresa pode consultar inventário.</p>
+<p>Isso melhora:</p>
+<ul>
+<li>resposta a incidentes;</li>
+<li>auditoria;</li>
+<li>rastreabilidade;</li>
+<li>gestão de risco;</li>
+<li>comunicação com clientes;</li>
+<li>conformidade;</li>
+<li>governança de supply chain.</li>
+</ul>
+<p>SBOM não corrige vulnerabilidade sozinho.</p>
+<p>Ele melhora visibilidade.</p>
+<h2 id="fluxo-pratico-de-triagem-sca">Fluxo prático de triagem SCA</h2>
+<p>Quando um relatório SCA apontar vulnerabilidade, siga um fluxo.</p>
+<h3 id="1-identificar-o-componente">1. Identificar o componente</h3>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>org.exemplo:catalog-parser:1.4.0
+</code></pre></div>
+<p>Perguntas:</p>
+<ul>
+<li>é dependência direta?</li>
+<li>é transitiva?</li>
+<li>qual módulo traz?</li>
+<li>está em produção?</li>
+<li>está em teste?</li>
+<li>está no artefato final?</li>
+</ul>
+<h3 id="2-identificar-a-cve">2. Identificar a CVE</h3>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>CVE-2026-12345
+</code></pre></div>
+<p>Perguntas:</p>
+<ul>
+<li>qual descrição?</li>
+<li>quais versões afetadas?</li>
+<li>qual versão corrigida?</li>
+<li>qual severidade?</li>
+<li>há exploit público?</li>
+<li>há mitigação oficial?</li>
+<li>há nota do fornecedor?</li>
+</ul>
+<h3 id="3-verificar-contexto-da-aplicacao">3. Verificar contexto da aplicação</h3>
+<p>Perguntas:</p>
+<ul>
+<li>usamos o recurso vulnerável?</li>
+<li>o endpoint é exposto?</li>
+<li>a entrada é controlável?</li>
+<li>a dependência roda em runtime?</li>
+<li>a biblioteca é usada apenas em testes?</li>
+<li>há configuração que reduz risco?</li>
+<li>há outra camada de defesa?</li>
+</ul>
+<h3 id="4-escolher-tratamento">4. Escolher tratamento</h3>
+<p>Opções:</p>
+<ul>
+<li>atualizar dependência;</li>
+<li>atualizar Spring Boot;</li>
+<li>atualizar BOM;</li>
+<li>forçar versão corrigida;</li>
+<li>excluir transitiva;</li>
+<li>substituir biblioteca;</li>
+<li>remover funcionalidade;</li>
+<li>mitigar configuração;</li>
+<li>aceitar risco temporário;</li>
+<li>marcar falso positivo.</li>
+</ul>
+<h3 id="5-testar">5. Testar</h3>
+<p>Execute:</p>
+<div class="highlight"><pre><span></span><code>mvn<span class="w"> </span><span class="nb">test</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>mvn<span class="w"> </span>verify
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>mvn<span class="w"> </span>dependency:tree
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>mvn<span class="w"> </span>org.owasp:dependency-check-maven:check
+</code></pre></div>
+<p>Teste funcionalmente os fluxos que usam a biblioteca.</p>
+<h3 id="6-documentar">6. Documentar</h3>
+<p>Registre:</p>
+<ul>
+<li>CVE;</li>
+<li>biblioteca;</li>
+<li>versão afetada;</li>
+<li>versão corrigida;</li>
+<li>decisão;</li>
+<li>testes;</li>
+<li>risco residual;</li>
+<li>prazo;</li>
+<li>responsável.</li>
+</ul>
+<h2 id="exemplo-pratico-com-meucatalogomusicalcom">Exemplo prático com meucatalogomusical.com</h2>
+<p>Imagine que <code>meucatalogomusical.com</code> usa uma biblioteca fictícia para importar discografias de <strong>Winger</strong>, <strong>FireHouse</strong> e <strong>Extreme</strong>.</p>
+<p>Dependência:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;dependency&gt;</span>
+<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>com.rockdata<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>discography-importer<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;version&gt;</span>2.0.0<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div>
+<p>O relatório SCA aponta:</p>
+<div class="highlight"><pre><span></span><code>Component: com.rockdata:discography-importer:2.0.0
+CVE: CVE-2026-45678
+Severity: High
+Fixed version: 2.0.3
+</code></pre></div>
+<p>Primeiro, ver a árvore:</p>
+<div class="highlight"><pre><span></span><code>mvn<span class="w"> </span>dependency:tree<span class="w"> </span>-Dincludes<span class="o">=</span>com.rockdata:discography-importer
+</code></pre></div>
+<p>Depois, atualizar:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;dependency&gt;</span>
+<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>com.rockdata<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>discography-importer<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;version&gt;</span>2.0.3<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div>
+<p>Executar testes:</p>
+<div class="highlight"><pre><span></span><code>mvn<span class="w"> </span><span class="nb">test</span>
+mvn<span class="w"> </span>verify
+</code></pre></div>
+<p>Rodar novo SCA:</p>
+<div class="highlight"><pre><span></span><code>mvn<span class="w"> </span>org.owasp:dependency-check-maven:check
+</code></pre></div>
+<p>Testar fluxo real:</p>
+<div class="highlight"><pre><span></span><code>Importar discografia de Winger.
+Importar discografia de FireHouse.
+Importar discografia com arquivo inválido.
+Importar discografia grande.
+Verificar logs.
+Verificar erros.
+</code></pre></div>
+<p>A correção termina quando:</p>
+<ul>
+<li>versão vulnerável saiu da árvore;</li>
+<li>testes passaram;</li>
+<li>fluxo funcional continua;</li>
+<li>novo relatório não aponta a CVE;</li>
+<li>decisão foi documentada.</li>
+</ul>
+<h2 id="atualizar-spring-boot-pode-corrigir-varias-dependencias">Atualizar Spring Boot pode corrigir várias dependências</h2>
+<p>Às vezes, a melhor correção não é atualizar uma biblioteca isolada.</p>
+<p>É atualizar o Spring Boot.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;parent&gt;</span>
+<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-parent<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;version&gt;</span>4.0.8<span class="nt">&lt;/version&gt;</span>
+<span class="w">    </span><span class="nt">&lt;relativePath/&gt;</span>
+<span class="nt">&lt;/parent&gt;</span>
+</code></pre></div>
+<p>Como o Spring Boot gerencia versões de várias dependências, subir uma versão patch pode atualizar um conjunto compatível de bibliotecas.</p>
+<p>Isso costuma ser mais seguro do que forçar versões isoladas sem necessidade.</p>
+<p>Mas ainda exige:</p>
+<ul>
+<li>ler release notes;</li>
+<li>executar testes;</li>
+<li>validar compatibilidade;</li>
+<li>revisar breaking changes;</li>
+<li>rodar SCA novamente;</li>
+<li>gerar novo SBOM.</li>
+</ul>
+<h2 id="remover-dependencia-pode-ser-melhor-que-atualizar">Remover dependência pode ser melhor que atualizar</h2>
+<p>Às vezes, o melhor tratamento é remover a biblioteca.</p>
+<p>Perguntas:</p>
+<div class="highlight"><pre><span></span><code>Ainda usamos essa dependência?
+Ela está no classpath sem necessidade?
+Existe alternativa no JDK?
+O Spring já fornece algo equivalente?
+A biblioteca está abandonada?
+A funcionalidade ainda existe?
+</code></pre></div>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>mvn<span class="w"> </span>dependency:tree<span class="w"> </span>-Dincludes<span class="o">=</span>com.exemplo:biblioteca-antiga
+</code></pre></div>
+<p>Se não for mais usada, remova do POM.</p>
+<p>Menos dependências significa:</p>
+<ul>
+<li>menos superfície;</li>
+<li>menos CVEs;</li>
+<li>menos conflitos;</li>
+<li>menos manutenção;</li>
+<li>builds menores.</li>
+</ul>
+<h2 id="cuidado-com-dependencias-opcionais-e-escopos">Cuidado com dependências opcionais e escopos</h2>
+<p>Algumas dependências aparecem apenas por causa de testes, plugins ou escopos específicos.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;dependency&gt;</span>
+<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>com.exemplo<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>biblioteca-de-testes<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div>
+<p>Se a CVE está em dependência <code>test</code>, o risco de produção pode ser menor.</p>
+<p>Mas não ignore automaticamente.</p>
+<p>Ela ainda pode afetar:</p>
+<ul>
+<li>pipeline;</li>
+<li>build;</li>
+<li>testes;</li>
+<li>geração de artefato;</li>
+<li>plugins;</li>
+<li>execução local;</li>
+<li>supply chain.</li>
+</ul>
+<p>A triagem deve registrar o contexto.</p>
+<h2 id="falso-positivo-em-sca">Falso positivo em SCA</h2>
+<p>SCA pode gerar falso positivo.</p>
+<p>Cenários comuns:</p>
+<ul>
+<li>CPE associado incorretamente;</li>
+<li>biblioteca com nome parecido;</li>
+<li>dependência não empacotada;</li>
+<li>dependência apenas de teste;</li>
+<li>CVE afeta outro módulo;</li>
+<li>versão corrigida já está presente, mas ferramenta não reconheceu;</li>
+<li>vulnerabilidade depende de configuração que não existe;</li>
+<li>componente sombreado ou relocado;</li>
+<li>relatório baseado em cache antigo.</li>
+</ul>
+<p>Mas falso positivo exige evidência.</p>
+<p>Justificativa fraca:</p>
+<div class="highlight"><pre><span></span><code>Não usamos isso.
+</code></pre></div>
+<p>Justificativa melhor:</p>
+<div class="highlight"><pre><span></span><code>A CVE aponta o componente X em contexto de parsing XML remoto. No projeto, a dependência aparece apenas em escopo test, não é empacotada no artefato de produção, conforme dependency:tree e inspeção do JAR final. O fluxo vulnerável não é executado em runtime. Classificação proposta: falso positivo para produção, manter monitoramento no pipeline.
+</code></pre></div>
+<h2 id="not-exploitable-em-sca">Not Exploitable em SCA</h2>
+<p>Às vezes, a dependência está em produção, mas a vulnerabilidade não é explorável no contexto.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>A CVE exige uso de modo servidor.
+A aplicação usa apenas modo cliente.
+</code></pre></div>
+<p>Ou:</p>
+<div class="highlight"><pre><span></span><code>A CVE exige parser de XML externo.
+A aplicação nunca processa XML vindo de usuário.
+</code></pre></div>
+<p>Ou:</p>
+<div class="highlight"><pre><span></span><code>A CVE afeta endpoint de administração da biblioteca.
+A aplicação não expõe esse endpoint.
+</code></pre></div>
+<p>Mesmo assim, cuidado.</p>
+<p>A melhor correção geralmente continua sendo atualizar a biblioteca.</p>
+<p><code>Not Exploitable</code> deve ser exceção temporária ou justificativa bem documentada, não desculpa permanente.</p>
+<h2 id="priorizacao-de-vulnerabilidades">Priorização de vulnerabilidades</h2>
+<p>Nem toda CVE tem a mesma prioridade.</p>
+<p>Critérios úteis:</p>
+<ul>
+<li>severidade CVSS;</li>
+<li>componente exposto à internet;</li>
+<li>exploração pública conhecida;</li>
+<li>dependência em produção;</li>
+<li>facilidade de exploração;</li>
+<li>dados afetados;</li>
+<li>existência de patch;</li>
+<li>impacto em confidencialidade, integridade e disponibilidade;</li>
+<li>compensating controls;</li>
+<li>criticidade do sistema;</li>
+<li>uso real da biblioteca;</li>
+<li>existência de mitigação;</li>
+<li>prazo de correção.</li>
+</ul>
+<p>Exemplo de prioridade alta:</p>
+<div class="highlight"><pre><span></span><code>CVE crítica em biblioteca usada em endpoint público que processa entrada externa.
+</code></pre></div>
+<p>Exemplo de prioridade menor:</p>
+<div class="highlight"><pre><span></span><code>CVE média em dependência de teste não empacotada em produção.
+</code></pre></div>
+<p>A severidade ajuda, mas o contexto decide a prioridade operacional.</p>
+<h2 id="gestao-de-excecoes">Gestão de exceções</h2>
+<p>Nem sempre é possível corrigir imediatamente.</p>
+<p>Pode acontecer:</p>
+<ul>
+<li>não existe versão corrigida;</li>
+<li>a versão corrigida quebra compatibilidade;</li>
+<li>a biblioteca é legado crítico;</li>
+<li>a correção depende de fornecedor;</li>
+<li>a atualização exige refatoração maior;</li>
+<li>o risco é mitigado por configuração;</li>
+<li>a dependência está em módulo sem exposição.</li>
+</ul>
+<p>Nesses casos, crie exceção formal.</p>
+<p>A exceção deve ter:</p>
+<ul>
+<li>CVE;</li>
+<li>componente;</li>
+<li>versão;</li>
+<li>motivo;</li>
+<li>risco;</li>
+<li>mitigação;</li>
+<li>data de revisão;</li>
+<li>responsável;</li>
+<li>prazo de expiração;</li>
+<li>plano de correção.</li>
+</ul>
+<p>Exceção sem prazo vira dívida invisível.</p>
+<h2 id="sca-no-pipeline">SCA no pipeline</h2>
+<p>Um fluxo saudável pode ser:</p>
+<div class="highlight"><pre><span></span><code>pull request
+    -&gt; build
+    -&gt; testes
+    -&gt; SAST
+    -&gt; SCA
+    -&gt; geração de SBOM
+    -&gt; empacotamento
+    -&gt; deploy em homologação
+</code></pre></div>
+<p>SCA deve rodar cedo.</p>
+<p>O OWASP DevSecOps Guideline recomenda colocar Component Analysis cedo, antes de testes como SAST/DAST, para evitar que bibliotecas vulneráveis cheguem a produção e para permitir monitoramento contínuo.</p>
+<p>Exemplo conceitual de pipeline:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">security-checks</span>
+
+<span class="nt">on</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">pull_request</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">push</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">branches</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">main</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">sca</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Checkout</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Set up Java</span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/setup-java@v4</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">distribution</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">temurin</span>
+<span class="w">          </span><span class="nt">java-version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;25&#39;</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Build and test</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mvn verify</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Dependency tree</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mvn dependency:tree -DoutputFile=target/dependency-tree.txt</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OWASP Dependency-Check</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mvn org.owasp:dependency-check-maven:check</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Generate SBOM</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mvn org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom</span>
+</code></pre></div>
+<p>Esse exemplo mostra a ideia. Em uma empresa, a ferramenta pode ser Checkmarx SCA, GitHub Advanced Security, Snyk, Mend, Sonatype, OWASP Dependency-Check ou outra solução homologada.</p>
+<h2 id="sca-e-imagens-docker">SCA e imagens Docker</h2>
+<p>SCA de aplicação não substitui análise de imagem.</p>
+<p>Uma aplicação Spring Boot empacotada em container também depende de:</p>
+<ul>
+<li>imagem base;</li>
+<li>distribuição Linux;</li>
+<li>pacotes do sistema;</li>
+<li>JRE/JDK;</li>
+<li>certificados;</li>
+<li>bibliotecas nativas;</li>
+<li>ferramentas instaladas;</li>
+<li>usuário do container.</li>
+</ul>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">eclipse-temurin:25-jre</span>
+<span class="k">COPY</span><span class="w"> </span>target/meucatalogomusical-api.jar<span class="w"> </span>app.jar
+<span class="k">ENTRYPOINT</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;java&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;-jar&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;/app.jar&quot;</span><span class="p">]</span>
+</code></pre></div>
+<p>Mesmo que o <code>pom.xml</code> esteja limpo, a imagem base pode ter vulnerabilidades.</p>
+<p>Portanto, em ambientes containerizados, combine:</p>
+<div class="highlight"><pre><span></span><code>SCA de dependências Java
++
+scan de imagem container
++
+SBOM
++
+atualização de imagem base
+</code></pre></div>
+<h2 id="boas-praticas">Boas práticas</h2>
+<h3 id="1-use-bom-e-dependency-management">1. Use BOM e dependency management</h3>
+<p>Evite versões espalhadas e incompatíveis.</p>
+<h3 id="2-nao-sobrescreva-versoes-sem-justificativa">2. Não sobrescreva versões sem justificativa</h3>
+<p>Deixe Spring Boot gerenciar o que ele já gerencia, salvo necessidade documentada.</p>
+<h3 id="3-rode-dependencytree">3. Rode dependency:tree</h3>
+<p>Entenda quem traz a dependência vulnerável.</p>
+<h3 id="4-rode-sca-no-pipeline">4. Rode SCA no pipeline</h3>
+<p>Não espere auditoria manual.</p>
+<h3 id="5-gere-sbom">5. Gere SBOM</h3>
+<p>Tenha inventário da composição do software.</p>
+<h3 id="6-atualize-com-testes">6. Atualize com testes</h3>
+<p>Upgrade sem teste pode corrigir CVE e quebrar funcionalidade.</p>
+<h3 id="7-remova-dependencias-nao-usadas">7. Remova dependências não usadas</h3>
+<p>A melhor vulnerabilidade é aquela que não está no projeto.</p>
+<h3 id="8-trate-transitivas-com-cuidado">8. Trate transitivas com cuidado</h3>
+<p>Exclusões e overrides precisam de teste.</p>
+<h3 id="9-documente-excecoes">9. Documente exceções</h3>
+<p>Risco aceito precisa de prazo e responsável.</p>
+<h3 id="10-monitore-continuamente">10. Monitore continuamente</h3>
+<p>Nova CVE pode surgir depois do deploy.</p>
+<h2 id="erros-comuns">Erros comuns</h2>
+<h3 id="1-achar-que-sca-e-so-atualizar-versao">1. Achar que SCA é só atualizar versão</h3>
+<p>SCA envolve contexto, teste, compatibilidade e risco.</p>
+<h3 id="2-ignorar-dependencia-transitiva">2. Ignorar dependência transitiva</h3>
+<p>Muitas CVEs entram por transitivas.</p>
+<h3 id="3-forcar-versao-sem-testar">3. Forçar versão sem testar</h3>
+<p>Pode quebrar runtime de forma sutil.</p>
+<h3 id="4-ignorar-dependencia-de-teste-sempre">4. Ignorar dependência de teste sempre</h3>
+<p>Escopo test reduz risco de produção, mas ainda afeta pipeline.</p>
+<h3 id="5-nao-gerar-sbom">5. Não gerar SBOM</h3>
+<p>Sem inventário, resposta a novas CVEs fica lenta.</p>
+<h3 id="6-aceitar-risco-sem-prazo">6. Aceitar risco sem prazo</h3>
+<p>Exceção precisa expirar.</p>
+<h3 id="7-atualizar-tudo-de-uma-vez-sem-estrategia">7. Atualizar tudo de uma vez sem estratégia</h3>
+<p>Pode criar regressões grandes.</p>
+<h3 id="8-nao-revisar-release-notes">8. Não revisar release notes</h3>
+<p>Algumas atualizações têm breaking changes.</p>
+<h3 id="9-nao-escanear-imagem-docker">9. Não escanear imagem Docker</h3>
+<p>Dependências do sistema operacional também importam.</p>
+<h3 id="10-tratar-cvss-como-unica-verdade">10. Tratar CVSS como única verdade</h3>
+<p>CVSS ajuda, mas contexto da aplicação decide prioridade.</p>
+<h2 id="decisoes-de-engenharia">Decisões de engenharia</h2>
+<h2 id="quando-atualizar-so-a-biblioteca">Quando atualizar só a biblioteca?</h2>
+<p>Quando:</p>
+<ul>
+<li>a versão corrigida é compatível;</li>
+<li>o impacto é pequeno;</li>
+<li>a dependência é direta;</li>
+<li>testes cobrem o uso;</li>
+<li>não há conflito com BOM;</li>
+<li>a correção é urgente.</li>
+</ul>
+<h2 id="quando-atualizar-spring-boot">Quando atualizar Spring Boot?</h2>
+<p>Quando:</p>
+<ul>
+<li>a vulnerabilidade está em dependência gerenciada pelo Boot;</li>
+<li>há versão patch do Boot que atualiza a árvore;</li>
+<li>você quer manter compatibilidade do ecossistema;</li>
+<li>várias dependências serão corrigidas juntas.</li>
+</ul>
+<h2 id="quando-excluir-transitiva">Quando excluir transitiva?</h2>
+<p>Quando:</p>
+<ul>
+<li>a transitiva vulnerável não é necessária;</li>
+<li>outra versão segura será usada;</li>
+<li>a biblioteca principal funciona sem ela;</li>
+<li>testes confirmam.</li>
+</ul>
+<h2 id="quando-substituir-biblioteca">Quando substituir biblioteca?</h2>
+<p>Quando:</p>
+<ul>
+<li>a biblioteca está abandonada;</li>
+<li>não há versão corrigida;</li>
+<li>há CVEs recorrentes;</li>
+<li>manutenção é fraca;</li>
+<li>existe alternativa melhor;</li>
+<li>o custo de manter exceções é alto.</li>
+</ul>
+<h2 id="quando-aceitar-risco-temporariamente">Quando aceitar risco temporariamente?</h2>
+<p>Quando:</p>
+<ul>
+<li>não há patch disponível;</li>
+<li>a exploração não é possível no contexto atual;</li>
+<li>existe mitigação;</li>
+<li>o impacto é baixo;</li>
+<li>há prazo curto para revisão;</li>
+<li>AppSec aprova.</li>
+</ul>
+<h2 id="quando-bloquear-build">Quando bloquear build?</h2>
+<p>Quando:</p>
+<ul>
+<li>CVE crítica em runtime;</li>
+<li>exploração pública;</li>
+<li>componente exposto;</li>
+<li>patch disponível;</li>
+<li>risco incompatível com política;</li>
+<li>não há exceção aprovada.</li>
+</ul>
+<h2 id="onde-isso-aparece-em-sistemas-reais">Onde isso aparece em sistemas reais</h2>
+<p>SCA aparece em:</p>
+<ul>
+<li>APIs Java/Spring;</li>
+<li>microsserviços;</li>
+<li>monólitos;</li>
+<li>batchs;</li>
+<li>jobs;</li>
+<li>aplicações serverless;</li>
+<li>containers;</li>
+<li>bibliotecas internas;</li>
+<li>SDKs corporativos;</li>
+<li>plugins Maven;</li>
+<li>pipelines CI/CD;</li>
+<li>imagens Docker;</li>
+<li>produtos SaaS;</li>
+<li>sistemas legados.</li>
+</ul>
+<p>Em Java/Spring, os pontos mais comuns são:</p>
+<ul>
+<li><code>pom.xml</code>;</li>
+<li><code>build.gradle</code>;</li>
+<li>starters;</li>
+<li>drivers;</li>
+<li>parsers;</li>
+<li>clients HTTP;</li>
+<li>logging;</li>
+<li>JSON/XML;</li>
+<li>segurança;</li>
+<li>testes;</li>
+<li>plugins;</li>
+<li>BOMs;</li>
+<li>imagens base.</li>
+</ul>
+<h2 id="checklist-pratico">Checklist prático</h2>
+<h3 id="inventario">Inventário</h3>
+<ul>
+<li>Existe SBOM?</li>
+<li>Existe dependency tree?</li>
+<li>As dependências diretas são conhecidas?</li>
+<li>As transitivas críticas são conhecidas?</li>
+<li>Há dependências não usadas?</li>
+<li>Há bibliotecas abandonadas?</li>
+</ul>
+<h3 id="relatorio-sca">Relatório SCA</h3>
+<ul>
+<li>Qual componente foi apontado?</li>
+<li>Qual versão?</li>
+<li>Qual CVE?</li>
+<li>Qual severidade?</li>
+<li>Existe versão corrigida?</li>
+<li>A dependência é direta ou transitiva?</li>
+<li>Está em runtime, compile ou test?</li>
+</ul>
+<h3 id="contexto">Contexto</h3>
+<ul>
+<li>A aplicação usa a parte vulnerável?</li>
+<li>O componente está exposto a entrada externa?</li>
+<li>Está em produção?</li>
+<li>Existe mitigação?</li>
+<li>Existe exploit conhecido?</li>
+<li>Há compensating controls?</li>
+</ul>
+<h3 id="correcao">Correção</h3>
+<ul>
+<li>Atualizar dependência resolve?</li>
+<li>Atualizar Spring Boot resolve?</li>
+<li>Excluir transitiva resolve?</li>
+<li>Substituir biblioteca é melhor?</li>
+<li>A correção quebra compatibilidade?</li>
+<li>Os testes cobrem o fluxo?</li>
+</ul>
+<h3 id="pipeline">Pipeline</h3>
+<ul>
+<li>SCA roda em PR?</li>
+<li>SCA roda na main?</li>
+<li>O build falha para severidade crítica?</li>
+<li>Exceções têm prazo?</li>
+<li>SBOM é gerado?</li>
+<li>Relatórios são arquivados?</li>
+</ul>
+<h3 id="operacao">Operação</h3>
+<ul>
+<li>Novas CVEs são monitoradas?</li>
+<li>Imagens Docker são escaneadas?</li>
+<li>Patches têm SLA?</li>
+<li>Riscos aceitos são revisados?</li>
+<li>Dependências internas também são monitoradas?</li>
+<li>O time sabe quem aprova exceções?</li>
+</ul>
+<h2 id="resumo-final">Resumo final</h2>
+<p>SCA é a análise de composição de software.</p>
+<p>Ela responde uma pergunta que SAST e DAST não respondem completamente:</p>
+<blockquote>
+<p>Quais riscos existem nas bibliotecas e componentes que a aplicação usa?</p>
+</blockquote>
+<p>Em aplicações Java/Spring, SCA é essencial porque o projeto depende de muitas bibliotecas diretas e transitivas.</p>
+<p>Os conceitos principais são:</p>
+<ul>
+<li>dependência direta;</li>
+<li>dependência transitiva;</li>
+<li>CVE;</li>
+<li>CVSS;</li>
+<li>CWE;</li>
+<li>CPE;</li>
+<li>BOM;</li>
+<li>SBOM;</li>
+<li>dependency tree;</li>
+<li>falso positivo;</li>
+<li>exceção de risco;</li>
+<li>gestão de atualização.</li>
+</ul>
+<p>As principais práticas são:</p>
+<ul>
+<li>usar Spring Boot BOM;</li>
+<li>evitar versões manuais desnecessárias;</li>
+<li>rodar <code>mvn dependency:tree</code>;</li>
+<li>executar SCA no pipeline;</li>
+<li>gerar SBOM;</li>
+<li>atualizar dependências com teste;</li>
+<li>remover dependências não usadas;</li>
+<li>documentar exceções;</li>
+<li>escanear imagens container;</li>
+<li>monitorar novas CVEs continuamente.</li>
+</ul>
+<p>A principal lição é:</p>
+<blockquote>
+<p>O código da aplicação pode estar seguro, mas uma dependência vulnerável também faz parte do risco da aplicação.</p>
+</blockquote>
+<h2 id="perguntas-de-revisao">Perguntas de revisão</h2>
+<h3 id="1-o-que-e-sca">1. O que é SCA?</h3>
+<p>SCA é Software Composition Analysis, a análise dos componentes, bibliotecas e dependências usados por uma aplicação.</p>
+<h3 id="2-sca-e-igual-a-sast">2. SCA é igual a SAST?</h3>
+<p>Não. SAST analisa código. SCA analisa dependências e componentes.</p>
+<h3 id="3-o-que-e-cve">3. O que é CVE?</h3>
+<p>CVE é um identificador padronizado para vulnerabilidades conhecidas publicamente.</p>
+<h3 id="4-o-que-e-cvss">4. O que é CVSS?</h3>
+<p>CVSS é um sistema de pontuação usado para indicar severidade de vulnerabilidades.</p>
+<h3 id="5-o-que-e-dependencia-transitiva">5. O que é dependência transitiva?</h3>
+<p>É uma dependência trazida por outra dependência, mesmo que você não a declare diretamente.</p>
+<h3 id="6-por-que-dependencytree-e-util">6. Por que <code>dependency:tree</code> é útil?</h3>
+<p>Porque mostra a árvore de dependências resolvida e ajuda a descobrir quem está trazendo determinada biblioteca.</p>
+<h3 id="7-o-que-e-bom">7. O que é BOM?</h3>
+<p>BOM é Bill of Materials. No Maven, ajuda a centralizar versões compatíveis de dependências.</p>
+<h3 id="8-o-que-e-sbom">8. O que é SBOM?</h3>
+<p>SBOM é Software Bill of Materials, um inventário estruturado dos componentes que compõem o software.</p>
+<h3 id="9-toda-cve-em-dependencia-e-exploravel">9. Toda CVE em dependência é explorável?</h3>
+<p>Não. É preciso analisar contexto, escopo, uso real e exposição.</p>
+<h3 id="10-uma-dependencia-de-teste-importa">10. Uma dependência de teste importa?</h3>
+<p>Pode importar. Geralmente tem risco menor para produção, mas ainda pode afetar pipeline e cadeia de suprimentos.</p>
+<h3 id="11-o-que-fazer-com-dependencia-transitiva-vulneravel">11. O que fazer com dependência transitiva vulnerável?</h3>
+<p>Atualizar a dependência principal, excluir a transitiva, forçar versão corrigida, substituir biblioteca ou documentar exceção temporária.</p>
+<h3 id="12-e-seguro-sobrescrever-versoes-gerenciadas-pelo-spring-boot">12. É seguro sobrescrever versões gerenciadas pelo Spring Boot?</h3>
+<p>Só com justificativa. Preferencialmente, deixe o BOM gerenciar versões compatíveis.</p>
+<h3 id="13-quando-uma-excecao-de-risco-e-aceitavel">13. Quando uma exceção de risco é aceitável?</h3>
+<p>Quando há justificativa, mitigação, responsável, prazo de expiração e aprovação adequada.</p>
+<h3 id="14-sca-substitui-scan-de-imagem-docker">14. SCA substitui scan de imagem Docker?</h3>
+<p>Não. Dependências Java e pacotes da imagem base são camadas diferentes.</p>
+<h3 id="15-qual-e-a-principal-regra">15. Qual é a principal regra?</h3>
+<p>Dependência também é código da aplicação. Se ela é empacotada e executada, ela precisa ser gerenciada como risco.</p>
+<h2 id="referencias">Referências</h2>
+<ul>
+<li><a href="https://owasp.org/projects/dependency-check">OWASP Dependency-Check</a></li>
+<li><a href="https://devguide.owasp.org/en/05-implementation/02-dependencies/01-dependency-check/">OWASP Developer Guide — Dependency-Check</a></li>
+<li><a href="https://scvs.owasp.org/scvs/v5-component-analysis/">OWASP Software Component Verification Standard — Component Analysis Requirements</a></li>
+<li><a href="https://owasp.github.io/www-project-devsecops-guideline/latest/02d-Software-Composition-Analysis">OWASP DevSecOps Guideline — Software Composition Analysis</a></li>
+<li><a href="https://www.cve.org/">CVE Program</a></li>
+<li><a href="https://nvd.nist.gov/general/FAQ-Sections/CVE-FAQs">NVD — CVE FAQs</a></li>
+<li><a href="https://nvd.nist.gov/vuln-metrics/cvss">NVD — Vulnerability Metrics / CVSS</a></li>
+<li><a href="https://maven.apache.org/plugins/maven-dependency-plugin/tree-mojo.html">Apache Maven Dependency Plugin — dependency:tree</a></li>
+<li><a href="https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html">Apache Maven — Introduction to the Dependency Mechanism</a></li>
+<li><a href="https://docs.spring.io/spring-boot/gradle-plugin/managing-dependencies.html">Spring Boot — Managing Dependencies</a></li>
+<li><a href="https://docs.spring.io/spring-boot/4.0/system-requirements.html">Spring Boot — System Requirements</a></li>
+<li><a href="https://cyclonedx.github.io/cyclonedx-maven-plugin/">CycloneDX Maven Plugin</a></li>
+<li><a href="https://cyclonedx.github.io/cyclonedx-maven-plugin/makeBom-mojo.html">CycloneDX Maven Plugin — makeBom</a></li>
+<li><a href="https://docs.oracle.com/en/java/javase/25/">Oracle JDK 25 Documentation</a></li>
+<li><a href="https://www.oracle.com/java/technologies/downloads/">Oracle Java Downloads — JDK 25 LTS</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

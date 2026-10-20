@@ -1,0 +1,4769 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../cleartext-submission-integracoes-server-to-server/">
+      
+      
+        <link rel="next" href="../path-traversal-upload-download-seguro-arquivos/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Privacy Violation - credenciais, logs e respostas de parceiros - README</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/css/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#privacy-violation-credenciais-logs-e-respostas-de-parceiros" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../../.." title="README" class="md-header__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            README
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Privacy Violation - credenciais, logs e respostas de parceiros
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="README" class="md-nav__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    README
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Backend
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/fundamentos-da-linguagem-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/convencoes-de-codigo-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convenções de código em Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/variaveis-tipos-primitivos-operadores-conversoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variáveis, tipos primitivos, operadores e conversões
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/fundamentos-de-string/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de String
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-controle-operadores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de controle e operadores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-condicionais/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas condicionais
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-de-repeticao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de repetição
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Iniciando em Orientação a Objetos (POO)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Iniciando em Orientação a Objetos (POO)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/introducao-orientacao-a-objetos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução à POO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/classes-e-objetos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes e objetos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/classes-objetos-metodos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes, objetos e métodos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Spring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/api-rest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    O que é API REST?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/http/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Um pouco de HTTP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/por-que-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Por que escolher Spring?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/spring-boot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Boot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/spring-initializr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Initializr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/maven-pom/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maven e pom.xml
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Segurança
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Segurança
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Segurança em aplicações web
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Segurança em aplicações web
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introducao-seguranca-aplicacoes-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução à Segurança de Aplicações Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../http-dns-sessoes-https/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTTP, DNS, Sessões e HTTPS na Segurança Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sql-injection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Injection - Funcionamento, Impactos e Prevenção
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xss/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cross-Site Scripting (XSS)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dast-conformidade-sdlc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DAST, Conformidade e Segurança no Ciclo de Desenvolvimento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sast-source-sink-taint-flow-falso-positivo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SAST na prática - Source, Sink, Taint Flow e falso positivo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssrf-aplicacoes-java-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSRF em aplicações Java/Spring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cleartext-submission-integracoes-server-to-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cleartext Submission em integrações server-to-server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Privacy Violation - credenciais, logs e respostas de parceiros
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Privacy Violation - credenciais, logs e respostas de parceiros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-problema-real-que-privacy-violation-resolve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O problema real que Privacy Violation resolve
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-nos-detalhes-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar nos detalhes: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#privacy-violation-nao-e-sempre-erro-de-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Privacy Violation não é sempre erro de código
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-inseguro-credencial-em-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo inseguro: credencial em log
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#correcao-logar-evento-nao-segredo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Correção: logar evento, não segredo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-nao-deve-ir-para-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que não deve ir para logs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-inseguro-exception-com-segredo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo inseguro: exception com segredo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#correcao-mensagem-segura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Correção: mensagem segura
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#privacy-violation-em-respostas-de-parceiros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Privacy Violation em respostas de parceiros
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#controle-bloquear-reflexao-de-credenciais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Controle: bloquear reflexão de credenciais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#copia-segura-da-resposta-publica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cópia segura da resposta pública
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuidado-com-serializacao-automatica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cuidado com serialização automática
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-completo-fluxo-seguro-com-parceiro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo completo: fluxo seguro com parceiro
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exemplo completo: fluxo seguro com parceiro">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuracao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuração
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validador-https" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validador HTTPS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#client-http-seguro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Client HTTP seguro
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logs-operacionais-seguros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logs operacionais seguros
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#privacy-violation-em-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Privacy Violation em cache
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chave-hmac-para-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chave HMAC para cache
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#minimizacao-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Minimização de dados
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#privacy-violation-e-apis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Privacy Violation e APIs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#privacy-violation-e-tostring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Privacy Violation e toString()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#privacy-violation-e-tracing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Privacy Violation e tracing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tratando-erros-de-parceiro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tratando erros de parceiro
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testando-ausencia-de-segredo-nos-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testando ausência de segredo nos logs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testando-bloqueio-de-reflexao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testando bloqueio de reflexão
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-um-privacy-violation-e-vulnerabilidade-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando um Privacy Violation é vulnerabilidade real?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-e-risco-mitigado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando é risco mitigado?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-pode-ser-falso-positivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando pode ser falso positivo?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-escrever-justificativa-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como escrever justificativa técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boas práticas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-nao-logue-segredos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Não logue segredos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-use-dtos-publicos-explicitos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Use DTOs públicos explícitos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-trate-resposta-de-parceiro-como-nao-confiavel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Trate resposta de parceiro como não confiável
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-bloqueie-reflexao-de-credenciais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Bloqueie reflexão de credenciais
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-separe-dado-funcional-de-dado-publico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Separe dado funcional de dado público
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-proteja-logs-e-tracing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Proteja logs e tracing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-use-correlation-id-opaco" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Use correlation id opaco
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-nao-use-segredo-puro-como-chave-de-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Não use segredo puro como chave de cache
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-falhe-fechado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Falhe fechado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-crie-testes-com-marcadores-sensiveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Crie testes com marcadores sensíveis
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-logar-objeto-inteiro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Logar objeto inteiro
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-confiar-no-tostring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Confiar no toString()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-devolver-resposta-bruta-do-parceiro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Devolver resposta bruta do parceiro
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-confundir-envio-funcional-com-vazamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Confundir envio funcional com vazamento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-colocar-segredo-em-exception" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Colocar segredo em exception
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-usar-token-como-correlation-id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Usar token como correlation id
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-guardar-segredo-como-chave-de-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Guardar segredo como chave de cache
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-achar-que-https-resolve-privacy-violation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Achar que HTTPS resolve Privacy Violation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-criar-sanitizacao-artificial-para-sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Criar sanitização artificial para SAST
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-nao-documentar-fluxo-funcional-autorizado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Não documentar fluxo funcional autorizado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-devolver-resposta-bruta-do-parceiro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando devolver resposta bruta do parceiro?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-usar-guarda-de-reflexao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar guarda de reflexão?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-mascarar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando mascarar?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-classificar-como-not-exploitable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando classificar como Not Exploitable?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-envolver-appsec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando envolver AppSec?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checklist-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist prático
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Checklist prático">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dados-sensiveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dados sensíveis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#respostas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Respostas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integracoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integrações
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cache
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Perguntas de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-o-que-e-privacy-violation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. O que é Privacy Violation?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-todo-fluxo-de-credencial-e-vulnerabilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Todo fluxo de credencial é vulnerabilidade?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-por-que-logs-sao-perigosos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Por que logs são perigosos?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-o-que-nao-deve-ir-para-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. O que não deve ir para logs?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-https-resolve-privacy-violation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. HTTPS resolve Privacy Violation?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-por-que-resposta-de-parceiro-deve-ser-tratada-como-nao-confiavel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Por que resposta de parceiro deve ser tratada como não confiável?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-o-que-e-reflexao-de-credencial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. O que é reflexão de credencial?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-o-que-e-dto-publico-explicito" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. O que é DTO público explícito?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-e-correto-mascarar-segredo-antes-de-enviar-ao-parceiro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. É correto mascarar segredo antes de enviar ao parceiro?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-por-que-tostring-pode-ser-perigoso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Por que toString() pode ser perigoso?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-o-que-e-correlation-id-seguro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. O que é correlation id seguro?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-quando-usar-hmac-em-chave-de-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Quando usar HMAC em chave de cache?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-quando-um-finding-pode-ser-falso-positivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Quando um finding pode ser falso positivo?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-o-que-deve-ter-em-uma-justificativa-de-not-exploitable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. O que deve ter em uma justificativa de Not Exploitable?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-qual-e-a-principal-regra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Qual é a principal regra?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../path-traversal-upload-download-seguro-arquivos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Path Traversal e upload/download seguro de arquivos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unchecked-input-loop-condition-dos-processamento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unchecked Input for Loop Condition e prevenção de DoS por processamento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../headers-seguranca-hsts-json-nosniff/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Headers de segurança- HSTS, JSON explícito e nosniff
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sca-dependencias-vulneraveis-cves-gestao-bibliotecas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SCA na prática - dependências vulneráveis, CVEs e gestão de bibliotecas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../triagem-vulnerabilidades-corrigir-mitigar-not-exploitable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Triagem de vulnerabilidades - corrigir, mitigar ou marcar como Not Exploitable
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ferramentas-appsec-sast-sca-dast/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ferramentas de AppSec - como SAST, SCA e DAST encontram vulnerabilidades
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-problema-real-que-privacy-violation-resolve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O problema real que Privacy Violation resolve
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-nos-detalhes-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar nos detalhes: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#privacy-violation-nao-e-sempre-erro-de-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Privacy Violation não é sempre erro de código
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-inseguro-credencial-em-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo inseguro: credencial em log
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#correcao-logar-evento-nao-segredo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Correção: logar evento, não segredo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-nao-deve-ir-para-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que não deve ir para logs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-inseguro-exception-com-segredo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo inseguro: exception com segredo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#correcao-mensagem-segura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Correção: mensagem segura
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#privacy-violation-em-respostas-de-parceiros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Privacy Violation em respostas de parceiros
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#controle-bloquear-reflexao-de-credenciais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Controle: bloquear reflexão de credenciais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#copia-segura-da-resposta-publica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cópia segura da resposta pública
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuidado-com-serializacao-automatica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cuidado com serialização automática
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-completo-fluxo-seguro-com-parceiro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo completo: fluxo seguro com parceiro
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exemplo completo: fluxo seguro com parceiro">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuracao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuração
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validador-https" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validador HTTPS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#client-http-seguro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Client HTTP seguro
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logs-operacionais-seguros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logs operacionais seguros
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#privacy-violation-em-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Privacy Violation em cache
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chave-hmac-para-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chave HMAC para cache
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#minimizacao-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Minimização de dados
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#privacy-violation-e-apis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Privacy Violation e APIs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#privacy-violation-e-tostring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Privacy Violation e toString()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#privacy-violation-e-tracing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Privacy Violation e tracing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tratando-erros-de-parceiro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tratando erros de parceiro
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testando-ausencia-de-segredo-nos-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testando ausência de segredo nos logs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testando-bloqueio-de-reflexao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testando bloqueio de reflexão
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-um-privacy-violation-e-vulnerabilidade-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando um Privacy Violation é vulnerabilidade real?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-e-risco-mitigado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando é risco mitigado?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-pode-ser-falso-positivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando pode ser falso positivo?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-escrever-justificativa-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como escrever justificativa técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boas práticas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-nao-logue-segredos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Não logue segredos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-use-dtos-publicos-explicitos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Use DTOs públicos explícitos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-trate-resposta-de-parceiro-como-nao-confiavel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Trate resposta de parceiro como não confiável
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-bloqueie-reflexao-de-credenciais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Bloqueie reflexão de credenciais
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-separe-dado-funcional-de-dado-publico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Separe dado funcional de dado público
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-proteja-logs-e-tracing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Proteja logs e tracing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-use-correlation-id-opaco" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Use correlation id opaco
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-nao-use-segredo-puro-como-chave-de-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Não use segredo puro como chave de cache
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-falhe-fechado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Falhe fechado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-crie-testes-com-marcadores-sensiveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Crie testes com marcadores sensíveis
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-logar-objeto-inteiro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Logar objeto inteiro
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-confiar-no-tostring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Confiar no toString()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-devolver-resposta-bruta-do-parceiro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Devolver resposta bruta do parceiro
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-confundir-envio-funcional-com-vazamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Confundir envio funcional com vazamento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-colocar-segredo-em-exception" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Colocar segredo em exception
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-usar-token-como-correlation-id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Usar token como correlation id
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-guardar-segredo-como-chave-de-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Guardar segredo como chave de cache
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-achar-que-https-resolve-privacy-violation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Achar que HTTPS resolve Privacy Violation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-criar-sanitizacao-artificial-para-sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Criar sanitização artificial para SAST
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-nao-documentar-fluxo-funcional-autorizado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Não documentar fluxo funcional autorizado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-devolver-resposta-bruta-do-parceiro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando devolver resposta bruta do parceiro?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-usar-guarda-de-reflexao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar guarda de reflexão?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-mascarar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando mascarar?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-classificar-como-not-exploitable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando classificar como Not Exploitable?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-envolver-appsec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando envolver AppSec?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checklist-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist prático
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Checklist prático">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dados-sensiveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dados sensíveis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#respostas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Respostas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integracoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integrações
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cache
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Perguntas de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-o-que-e-privacy-violation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. O que é Privacy Violation?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-todo-fluxo-de-credencial-e-vulnerabilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Todo fluxo de credencial é vulnerabilidade?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-por-que-logs-sao-perigosos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Por que logs são perigosos?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-o-que-nao-deve-ir-para-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. O que não deve ir para logs?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-https-resolve-privacy-violation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. HTTPS resolve Privacy Violation?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-por-que-resposta-de-parceiro-deve-ser-tratada-como-nao-confiavel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Por que resposta de parceiro deve ser tratada como não confiável?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-o-que-e-reflexao-de-credencial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. O que é reflexão de credencial?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-o-que-e-dto-publico-explicito" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. O que é DTO público explícito?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-e-correto-mascarar-segredo-antes-de-enviar-ao-parceiro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. É correto mascarar segredo antes de enviar ao parceiro?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-por-que-tostring-pode-ser-perigoso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Por que toString() pode ser perigoso?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-o-que-e-correlation-id-seguro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. O que é correlation id seguro?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-quando-usar-hmac-em-chave-de-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Quando usar HMAC em chave de cache?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-quando-um-finding-pode-ser-falso-positivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Quando um finding pode ser falso positivo?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-o-que-deve-ter-em-uma-justificativa-de-not-exploitable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. O que deve ter em uma justificativa de Not Exploitable?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-qual-e-a-principal-regra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Qual é a principal regra?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="privacy-violation-credenciais-logs-e-respostas-de-parceiros">Privacy Violation: credenciais, logs e respostas de parceiros</h1>
+<p><code>Privacy Violation</code> é um tipo de finding comum em ferramentas SAST quando a aplicação manipula dados sensíveis e esses dados parecem sair de uma fronteira segura.</p>
+<p>Essa saída pode acontecer de várias formas:</p>
+<ul>
+<li>envio para serviço externo;</li>
+<li>retorno em resposta HTTP;</li>
+<li>escrita em log;</li>
+<li>armazenamento em cache;</li>
+<li>propagação para outro sistema;</li>
+<li>inclusão em exceção;</li>
+<li>exposição em mensagem de erro;</li>
+<li>serialização de objeto com campos sensíveis;</li>
+<li>resposta de parceiro refletindo dados enviados;</li>
+<li>uso de credenciais em fluxos de autenticação.</li>
+</ul>
+<p>Em aplicações Java/Spring, esse tipo de finding aparece muito em integrações server-to-server, especialmente quando o backend lida com:</p>
+<ul>
+<li><code>client_id</code>;</li>
+<li><code>client_secret</code>;</li>
+<li>senha;</li>
+<li>token;</li>
+<li>API key;</li>
+<li>header <code>Authorization</code>;</li>
+<li>documentos;</li>
+<li>dados pessoais;</li>
+<li>identificadores de cliente;</li>
+<li>payloads de autenticação;</li>
+<li>respostas de parceiros.</li>
+</ul>
+<p>O ponto mais importante é entender que nem todo fluxo de dado sensível é automaticamente vulnerabilidade.</p>
+<p>Muitas vezes, a aplicação precisa enviar uma credencial para um parceiro por requisito funcional. Por exemplo, no fluxo OAuth <code>client_credentials</code>, o <code>client_id</code> e o <code>client_secret</code> precisam ser enviados ao servidor de autorização.</p>
+<p>A pergunta correta não é apenas:</p>
+<blockquote>
+<p>Existe dado sensível saindo da aplicação?</p>
+</blockquote>
+<p>A pergunta correta é:</p>
+<blockquote>
+<p>Esse dado sensível está saindo para o destino correto, pelo canal correto, pelo motivo correto, sem ser exposto em logs, erros, respostas públicas ou locais indevidos?</p>
+</blockquote>
+<p>Este artigo explica como interpretar e tratar <code>Privacy Violation</code> em aplicações Java/Spring, com foco em credenciais, logs e respostas de parceiros.</p>
+<h2 id="o-problema-real-que-privacy-violation-resolve">O problema real que Privacy Violation resolve</h2>
+<p>Aplicações corporativas manipulam muitos dados sensíveis.</p>
+<p>Mesmo uma aplicação fictícia como <code>meucatalogomusical.com</code>, um catálogo musical de bandas de Metal e Hard Rock, pode lidar com:</p>
+<ul>
+<li>e-mail do usuário;</li>
+<li>senha;</li>
+<li>token de sessão;</li>
+<li>token de API;</li>
+<li>credencial de parceiro;</li>
+<li>identificador interno;</li>
+<li>dados de assinatura;</li>
+<li>preferência privada;</li>
+<li>histórico de acesso;</li>
+<li>logs de operação;</li>
+<li>payloads de integração.</li>
+</ul>
+<p>Imagine que <code>meucatalogomusical.com</code> tenha uma integração com um parceiro chamado <code>BackstagePartner</code>, responsável por liberar conteúdos premium de bandas como <strong>Alice Cooper</strong>, <strong>Mötley Crüe</strong> e <strong>Ratt</strong>.</p>
+<p>Para obter um token, a aplicação envia:</p>
+<div class="highlight"><pre><span></span><code>client_id=meucatalogo
+client_secret=segredo-super-confidencial
+grant_type=client_credentials
+</code></pre></div>
+<p>Esse envio pode ser totalmente legítimo.</p>
+<p>Mas se o mesmo <code>client_secret</code> aparecer em um log, em uma resposta HTTP, em uma mensagem de erro ou em uma resposta refletida pelo parceiro, temos um problema de privacidade e exposição de dados sensíveis.</p>
+<p>Privacy Violation ajuda a detectar esse tipo de risco.</p>
+<h2 id="antes-de-entrar-nos-detalhes-uma-ideia-simples">Antes de entrar nos detalhes: uma ideia simples</h2>
+<p>Pense em três fronteiras:</p>
+<div class="highlight"><pre><span></span><code>Cliente -&gt; meucatalogomusical.com -&gt; parceiro externo
+</code></pre></div>
+<p>A aplicação recebe uma requisição de um cliente, chama um parceiro e devolve uma resposta.</p>
+<p>Durante esse fluxo, dados sensíveis podem aparecer em vários pontos:</p>
+<div class="highlight"><pre><span></span><code>Header de entrada
+    -&gt; DTO
+    -&gt; service
+    -&gt; client HTTP
+    -&gt; parceiro
+    -&gt; resposta do parceiro
+    -&gt; logs
+    -&gt; cache
+    -&gt; resposta pública
+</code></pre></div>
+<p>O risco de Privacy Violation aparece quando um dado sensível atravessa uma fronteira indevida.</p>
+<p>Exemplos:</p>
+<div class="highlight"><pre><span></span><code>client_secret -&gt; log
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>senha -&gt; response body público
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Authorization header -&gt; mensagem de erro
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>token -&gt; stack trace
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>credencial enviada ao parceiro -&gt; resposta do parceiro -&gt; controller
+</code></pre></div>
+<p>A correção não é simplesmente remover todo dado sensível do sistema. Isso quebraria muitas integrações.</p>
+<p>A correção é controlar onde o dado pode circular.</p>
+<h2 id="definicao-tecnica">Definição técnica</h2>
+<p>Privacy Violation, no contexto de SAST, é um finding em que a ferramenta identifica um possível fluxo de dado sensível para um destino onde esse dado não deveria aparecer.</p>
+<p>Em termos de análise de fluxo:</p>
+<div class="highlight"><pre><span></span><code>source: dado sensível
+    -&gt; transformações intermediárias
+sink: saída, log, resposta, arquivo, sistema externo ou outro destino sensível
+</code></pre></div>
+<p>Exemplos de source:</p>
+<ul>
+<li>senha;</li>
+<li>token;</li>
+<li><code>client_secret</code>;</li>
+<li>header <code>Authorization</code>;</li>
+<li>API key;</li>
+<li>CPF/CNPJ;</li>
+<li>e-mail;</li>
+<li>documento;</li>
+<li>payload de autenticação;</li>
+<li>credencial decodificada;</li>
+<li>resposta de parceiro contendo segredo;</li>
+<li>objeto de domínio com dados pessoais.</li>
+</ul>
+<p>Exemplos de sink:</p>
+<ul>
+<li>log;</li>
+<li>resposta HTTP;</li>
+<li>exceção;</li>
+<li>arquivo;</li>
+<li>cache externo;</li>
+<li>banco de dados;</li>
+<li>chamada outbound;</li>
+<li>métrica;</li>
+<li>tracing;</li>
+<li>evento de auditoria;</li>
+<li>payload enviado a outro sistema.</li>
+</ul>
+<p>O finding precisa ser analisado no contexto. Às vezes é vulnerabilidade real. Às vezes é risco mitigado. Às vezes é falso positivo.</p>
+<h2 id="privacy-violation-nao-e-sempre-erro-de-codigo">Privacy Violation não é sempre erro de código</h2>
+<p>Este é um ponto importante.</p>
+<p>Uma ferramenta SAST pode apontar Privacy Violation em um fluxo funcional legítimo.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>client_secret -&gt; token endpoint OAuth
+</code></pre></div>
+<p>Esse fluxo é esperado no grant <code>client_credentials</code>.</p>
+<p>O problema não é o envio em si.</p>
+<p>O problema seria:</p>
+<ul>
+<li>enviar por HTTP;</li>
+<li>enviar para endpoint não autorizado;</li>
+<li>registrar em log;</li>
+<li>devolver para o cliente;</li>
+<li>incluir em exception;</li>
+<li>permitir que o parceiro reflita na resposta;</li>
+<li>armazenar sem necessidade;</li>
+<li>propagar para sistemas sem finalidade;</li>
+<li>manter em cache sem controle.</li>
+</ul>
+<p>Portanto, a análise deve separar:</p>
+<div class="highlight"><pre><span></span><code>Fluxo sensível funcional
+</code></pre></div>
+<p>de:</p>
+<div class="highlight"><pre><span></span><code>Exposição indevida de dado sensível
+</code></pre></div>
+<p>Essa diferença é essencial para não quebrar integrações reais apenas para satisfazer o scanner.</p>
+<h2 id="exemplo-inseguro-credencial-em-log">Exemplo inseguro: credencial em log</h2>
+<p>Imagine um serviço de autenticação com parceiro para liberar conteúdo exclusivo da banda <strong>Quiet Riot</strong>.</p>
+<p>Código inseguro:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.parceiros.application</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.Logger</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.LoggerFactory</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
+
+<span class="nd">@Service</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">PartnerTokenService</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">log</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">PartnerTokenService</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">solicitarToken</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">clientId</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">clientSecret</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Solicitando token com clientId={} e clientSecret={}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">clientId</span><span class="p">,</span><span class="w"> </span><span class="n">clientSecret</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// chamada ao parceiro</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse log é perigoso.</p>
+<p>O <code>clientSecret</code> passa a existir em:</p>
+<ul>
+<li>arquivo de log;</li>
+<li>plataforma de observabilidade;</li>
+<li>agregador de logs;</li>
+<li>backup;</li>
+<li>ferramenta de busca;</li>
+<li>exportações;</li>
+<li>alertas;</li>
+<li>dashboards;</li>
+<li>possíveis tickets de suporte.</li>
+</ul>
+<p>Mesmo que o canal com o parceiro seja HTTPS, o segredo foi exposto em outro lugar.</p>
+<h2 id="correcao-logar-evento-nao-segredo">Correção: logar evento, não segredo</h2>
+<p>Uma correção melhor é registrar o evento operacional sem incluir o segredo.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.parceiros.application</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.Logger</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.LoggerFactory</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
+
+<span class="nd">@Service</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">PartnerTokenService</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">log</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">PartnerTokenService</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">solicitarToken</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">clientId</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">clientSecret</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Solicitando token ao parceiro. clientId={}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">mascararClientId</span><span class="p">(</span><span class="n">clientId</span><span class="p">));</span>
+
+<span class="w">        </span><span class="c1">// chamada ao parceiro usando clientSecret, mas sem registrar o segredo</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">mascararClientId</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">clientId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">clientId</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">clientId</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;***&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">clientId</span><span class="p">.</span><span class="na">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;***&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Aqui o log continua útil:</p>
+<div class="highlight"><pre><span></span><code>Solicitando token ao parceiro. clientId=meu***
+</code></pre></div>
+<p>Mas o segredo não é registrado.</p>
+<p>Em muitos casos, até o <code>clientId</code> pode ser sensível dependendo do ambiente. Por isso, mascarar ou substituir por identificador interno pode ser melhor.</p>
+<h2 id="o-que-nao-deve-ir-para-logs">O que não deve ir para logs</h2>
+<p>Logs são fundamentais para operação, auditoria e diagnóstico, mas não devem receber qualquer dado.</p>
+<p>Evite registrar:</p>
+<ul>
+<li>senhas;</li>
+<li>tokens;</li>
+<li><code>client_secret</code>;</li>
+<li>header <code>Authorization</code>;</li>
+<li>cookies;</li>
+<li>refresh tokens;</li>
+<li>API keys;</li>
+<li>documentos pessoais;</li>
+<li>payload completo de autenticação;</li>
+<li>body completo de resposta de token;</li>
+<li>query string com dados sensíveis;</li>
+<li>stack trace contendo segredo;</li>
+<li>exceções de bibliotecas que incluam headers;</li>
+<li>objetos inteiros com <code>toString()</code> inseguro.</li>
+</ul>
+<p>Um erro comum é fazer:</p>
+<div class="highlight"><pre><span></span><code><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Request recebido: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="p">);</span>
+</code></pre></div>
+<p>Se <code>request</code> contém credenciais, isso é perigoso.</p>
+<p>Outro erro comum:</p>
+<div class="highlight"><pre><span></span><code><span class="n">log</span><span class="p">.</span><span class="na">error</span><span class="p">(</span><span class="s">&quot;Erro ao chamar parceiro&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">exception</span><span class="p">);</span>
+</code></pre></div>
+<p>Isso pode ser aceitável em alguns contextos, mas precisa ser avaliado. Algumas exceções carregam mensagens com URL, headers, body ou detalhes sensíveis.</p>
+<h2 id="exemplo-inseguro-exception-com-segredo">Exemplo inseguro: exception com segredo</h2>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.parceiros.application</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">PartnerAuthException</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">RuntimeException</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">PartnerAuthException</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">clientId</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">clientSecret</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">super</span><span class="p">(</span><span class="s">&quot;Falha ao autenticar parceiro com clientId=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">clientId</span>
+<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; e clientSecret=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">clientSecret</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Essa exceção é insegura porque o segredo entra na mensagem.</p>
+<p>A mensagem pode aparecer em:</p>
+<ul>
+<li>log;</li>
+<li>resposta HTTP;</li>
+<li>APM;</li>
+<li>tracing;</li>
+<li>alertas;</li>
+<li>ticket;</li>
+<li>tela administrativa.</li>
+</ul>
+<h2 id="correcao-mensagem-segura">Correção: mensagem segura</h2>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.parceiros.application</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">PartnerAuthException</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">RuntimeException</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">PartnerAuthException</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">super</span><span class="p">(</span><span class="s">&quot;Falha ao autenticar com parceiro.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>A mensagem pública informa o erro sem expor dados.</p>
+<p>Se for necessário diagnosticar, use correlation id, nome lógico do parceiro e código de erro, não o segredo.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="n">log</span><span class="p">.</span><span class="na">warn</span><span class="p">(</span><span class="s">&quot;Falha ao autenticar com parceiro. parceiro={}, correlationId={}&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">parceiro</span><span class="p">,</span><span class="w"> </span><span class="n">correlationId</span><span class="p">);</span>
+</code></pre></div>
+<h2 id="privacy-violation-em-respostas-de-parceiros">Privacy Violation em respostas de parceiros</h2>
+<p>Um caso mais sutil acontece quando a aplicação envia uma credencial ao parceiro e depois devolve a resposta do parceiro para o cliente.</p>
+<p>Fluxo:</p>
+<div class="highlight"><pre><span></span><code>meucatalogomusical.com
+    -&gt; envia client_id/client_secret ao parceiro
+    -&gt; parceiro responde JSON
+    -&gt; aplicação devolve JSON ao consumidor
+</code></pre></div>
+<p>Se o parceiro responder corretamente:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;access_token&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;token-gerado&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;token_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Bearer&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;expires_in&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3600</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>talvez o contrato funcione.</p>
+<p>Mas imagine que, por erro do parceiro, ele devolva:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;client_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;meucatalogo&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;client_secret&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;segredo-super-confidencial&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;access_token&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;token-gerado&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Se a aplicação repassar essa resposta sem filtro, ela pode expor o segredo.</p>
+<p>Esse é o tipo de situação em que uma ferramenta SAST pode apontar Privacy Violation.</p>
+<p>Mesmo que o envio da credencial ao parceiro seja legítimo, devolver a credencial para o consumidor pode ser uma vulnerabilidade.</p>
+<h2 id="controle-bloquear-reflexao-de-credenciais">Controle: bloquear reflexão de credenciais</h2>
+<p>Uma forma de tratar isso é criar uma guarda que rejeita respostas de parceiro contendo segredo.</p>
+<p>Exemplo didático:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.parceiros.infra</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.fasterxml.jackson.databind.JsonNode</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Component</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Iterator</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Map</span><span class="p">;</span>
+
+<span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CredentialReflectionGuard</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">rejectCredentialReflection</span><span class="p">(</span>
+<span class="w">            </span><span class="n">JsonNode</span><span class="w"> </span><span class="n">response</span><span class="p">,</span>
+<span class="w">            </span><span class="n">PartnerCredentials</span><span class="w"> </span><span class="n">credentials</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">response</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">verify</span><span class="p">(</span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">credentials</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">verify</span><span class="p">(</span><span class="n">JsonNode</span><span class="w"> </span><span class="n">node</span><span class="p">,</span><span class="w"> </span><span class="n">PartnerCredentials</span><span class="w"> </span><span class="n">credentials</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">isTextual</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="na">asText</span><span class="p">();</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">credentials</span><span class="p">.</span><span class="na">clientSecret</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;Resposta do parceiro refletiu segredo.&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">isObject</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">Map</span><span class="p">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">JsonNode</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">fields</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="na">fields</span><span class="p">();</span>
+
+<span class="w">            </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">fields</span><span class="p">.</span><span class="na">hasNext</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">Map</span><span class="p">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">JsonNode</span><span class="o">&gt;</span><span class="w"> </span><span class="n">field</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fields</span><span class="p">.</span><span class="na">next</span><span class="p">();</span>
+
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">isSecretField</span><span class="p">(</span><span class="n">field</span><span class="p">.</span><span class="na">getKey</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;Resposta do parceiro contém campo sensível.&quot;</span><span class="p">);</span>
+<span class="w">                </span><span class="p">}</span>
+
+<span class="w">                </span><span class="n">verify</span><span class="p">(</span><span class="n">field</span><span class="p">.</span><span class="na">getValue</span><span class="p">(),</span><span class="w"> </span><span class="n">credentials</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="k">return</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">isArray</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">JsonNode</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">node</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">verify</span><span class="p">(</span><span class="n">item</span><span class="p">,</span><span class="w"> </span><span class="n">credentials</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isSecretField</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">fieldName</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">normalized</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fieldName</span><span class="p">.</span><span class="na">toLowerCase</span><span class="p">();</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">normalized</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="s">&quot;password&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="o">||</span><span class="w"> </span><span class="n">normalized</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="s">&quot;secret&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="o">||</span><span class="w"> </span><span class="n">normalized</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="s">&quot;credential&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="o">||</span><span class="w"> </span><span class="n">normalized</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="s">&quot;authorization&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="o">||</span><span class="w"> </span><span class="n">normalized</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="s">&quot;token&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>DTO de credenciais:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.parceiros.infra</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">PartnerCredentials</span><span class="p">(</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">clientId</span><span class="p">,</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">clientSecret</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse exemplo rejeita:</p>
+<ul>
+<li>campos com nomes sensíveis;</li>
+<li>valor textual igual ao <code>clientSecret</code>.</li>
+</ul>
+<p>Em um sistema real, a regra precisa ser ajustada com cuidado. Por exemplo, rejeitar qualquer campo <code>token</code> pode ser inadequado se a resposta esperada é justamente um token. Nesse caso, a guarda deve distinguir campos permitidos de campos proibidos conforme o contrato do parceiro.</p>
+<p>O ponto principal é: a resposta do parceiro também precisa ser tratada como dado não confiável.</p>
+<h2 id="copia-segura-da-resposta-publica">Cópia segura da resposta pública</h2>
+<p>Outra prática defensiva é construir uma resposta pública explícita em vez de devolver o objeto inteiro do parceiro.</p>
+<p>Exemplo de resposta interna do parceiro:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.parceiros.infra</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">PartnerTokenResponse</span><span class="p">(</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">accessToken</span><span class="p">,</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">tokenType</span><span class="p">,</span>
+<span class="w">        </span><span class="n">Long</span><span class="w"> </span><span class="n">expiresIn</span><span class="p">,</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">clientSecret</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse DTO contém um campo que não deveria ir para fora.</p>
+<p>Resposta pública segura:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.parceiros.api</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">PublicTokenResponse</span><span class="p">(</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">tokenType</span><span class="p">,</span>
+<span class="w">        </span><span class="n">Long</span><span class="w"> </span><span class="n">expiresIn</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Mapper:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.parceiros.application</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.meucatalogomusical.parceiros.api.PublicTokenResponse</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.meucatalogomusical.parceiros.infra.PartnerTokenResponse</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Component</span><span class="p">;</span>
+
+<span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">PartnerTokenResponseMapper</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">PublicTokenResponse</span><span class="w"> </span><span class="nf">toPublicResponse</span><span class="p">(</span><span class="n">PartnerTokenResponse</span><span class="w"> </span><span class="n">partnerResponse</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PublicTokenResponse</span><span class="p">(</span>
+<span class="w">                </span><span class="n">partnerResponse</span><span class="p">.</span><span class="na">tokenType</span><span class="p">(),</span>
+<span class="w">                </span><span class="n">partnerResponse</span><span class="p">.</span><span class="na">expiresIn</span><span class="p">()</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Essa abordagem evita depender do cliente para ignorar campos sensíveis.</p>
+<p>A API deve devolver apenas o que o consumidor precisa.</p>
+<h2 id="cuidado-com-serializacao-automatica">Cuidado com serialização automática</h2>
+<p>Um erro comum em APIs Java/Spring é retornar entidades, objetos internos ou DTOs de parceiros diretamente.</p>
+<p>Exemplo perigoso:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/token&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">PartnerTokenResponse</span><span class="w"> </span><span class="nf">token</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">partnerTokenService</span><span class="p">.</span><span class="na">solicitarToken</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Se <code>PartnerTokenResponse</code> contém <code>accessToken</code>, <code>refreshToken</code>, <code>clientSecret</code> ou dados internos, tudo pode ser serializado.</p>
+<p>Prefira criar DTOs públicos explícitos.</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/token&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">PublicTokenResponse</span><span class="w"> </span><span class="nf">token</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">PartnerTokenResponse</span><span class="w"> </span><span class="n">partnerResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">partnerTokenService</span><span class="p">.</span><span class="na">solicitarToken</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">mapper</span><span class="p">.</span><span class="na">toPublicResponse</span><span class="p">(</span><span class="n">partnerResponse</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Essa decisão reduz risco de exposição acidental.</p>
+<h2 id="exemplo-completo-fluxo-seguro-com-parceiro">Exemplo completo: fluxo seguro com parceiro</h2>
+<p>Imagine que <code>meucatalogomusical.com</code> precisa consultar um parceiro para liberar conteúdo premium da banda <strong>W.A.S.P.</strong>.</p>
+<h3 id="configuracao">Configuração</h3>
+<div class="highlight"><pre><span></span><code><span class="nt">integracoes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">backstage</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">token-url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://auth.backstagepartner.example/oauth/token</span>
+<span class="w">    </span><span class="nt">client-id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meucatalogo</span>
+<span class="w">    </span><span class="nt">client-secret</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${BACKSTAGE_CLIENT_SECRET}</span>
+</code></pre></div>
+<h3 id="validador-https">Validador HTTPS</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.parceiros.infra</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Component</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.net.URI</span><span class="p">;</span>
+
+<span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">HttpsEndpointValidator</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">URI</span><span class="w"> </span><span class="nf">requireHttps</span><span class="p">(</span><span class="n">URI</span><span class="w"> </span><span class="n">uri</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">uri</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Endpoint é obrigatório.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">uri</span><span class="p">.</span><span class="na">isAbsolute</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Endpoint deve ser absoluto.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="s">&quot;https&quot;</span><span class="p">.</span><span class="na">equalsIgnoreCase</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="na">getScheme</span><span class="p">()))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Endpoint deve usar HTTPS.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="na">getHost</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">uri</span><span class="p">.</span><span class="na">getHost</span><span class="p">().</span><span class="na">isBlank</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Endpoint deve possuir host.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">uri</span><span class="p">.</span><span class="na">normalize</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="client-http-seguro">Client HTTP seguro</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.parceiros.infra</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.fasterxml.jackson.databind.JsonNode</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.beans.factory.annotation.Value</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.MediaType</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Component</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.util.LinkedMultiValueMap</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.util.MultiValueMap</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.client.RestClient</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.net.URI</span><span class="p">;</span>
+
+<span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BackstagePartnerClient</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">RestClient</span><span class="w"> </span><span class="n">restClient</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">HttpsEndpointValidator</span><span class="w"> </span><span class="n">endpointValidator</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">CredentialReflectionGuard</span><span class="w"> </span><span class="n">credentialReflectionGuard</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">URI</span><span class="w"> </span><span class="n">tokenEndpoint</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">PartnerCredentials</span><span class="w"> </span><span class="n">credentials</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">BackstagePartnerClient</span><span class="p">(</span>
+<span class="w">            </span><span class="n">RestClient</span><span class="p">.</span><span class="na">Builder</span><span class="w"> </span><span class="n">restClientBuilder</span><span class="p">,</span>
+<span class="w">            </span><span class="n">HttpsEndpointValidator</span><span class="w"> </span><span class="n">endpointValidator</span><span class="p">,</span>
+<span class="w">            </span><span class="n">CredentialReflectionGuard</span><span class="w"> </span><span class="n">credentialReflectionGuard</span><span class="p">,</span>
+<span class="w">            </span><span class="nd">@Value</span><span class="p">(</span><span class="s">&quot;${integracoes.backstage.token-url}&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">URI</span><span class="w"> </span><span class="n">tokenEndpoint</span><span class="p">,</span>
+<span class="w">            </span><span class="nd">@Value</span><span class="p">(</span><span class="s">&quot;${integracoes.backstage.client-id}&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">clientId</span><span class="p">,</span>
+<span class="w">            </span><span class="nd">@Value</span><span class="p">(</span><span class="s">&quot;${integracoes.backstage.client-secret}&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">clientSecret</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">restClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">restClientBuilder</span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">endpointValidator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endpointValidator</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">credentialReflectionGuard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">credentialReflectionGuard</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">tokenEndpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tokenEndpoint</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">credentials</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PartnerCredentials</span><span class="p">(</span><span class="n">clientId</span><span class="p">,</span><span class="w"> </span><span class="n">clientSecret</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">JsonNode</span><span class="w"> </span><span class="nf">solicitarToken</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">URI</span><span class="w"> </span><span class="n">endpointValidado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endpointValidator</span><span class="p">.</span><span class="na">requireHttps</span><span class="p">(</span><span class="n">tokenEndpoint</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">MultiValueMap</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LinkedMultiValueMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="n">body</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;client_id&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">credentials</span><span class="p">.</span><span class="na">clientId</span><span class="p">());</span>
+<span class="w">        </span><span class="n">body</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;client_secret&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">credentials</span><span class="p">.</span><span class="na">clientSecret</span><span class="p">());</span>
+<span class="w">        </span><span class="n">body</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;grant_type&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;client_credentials&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">JsonNode</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">restClient</span>
+<span class="w">                </span><span class="p">.</span><span class="na">post</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="na">uri</span><span class="p">(</span><span class="n">endpointValidado</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">contentType</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_FORM_URLENCODED</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">body</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">retrieve</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="na">body</span><span class="p">(</span><span class="n">JsonNode</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">credentialReflectionGuard</span><span class="p">.</span><span class="na">rejectCredentialReflection</span><span class="p">(</span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">credentials</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">response</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse código demonstra:</p>
+<ul>
+<li>endpoint validado como HTTPS;</li>
+<li>credenciais enviadas somente ao parceiro;</li>
+<li>body separado da URI;</li>
+<li>resposta tratada como não confiável;</li>
+<li>bloqueio de reflexão de segredo;</li>
+<li>ausência de logs com credenciais.</li>
+</ul>
+<h2 id="logs-operacionais-seguros">Logs operacionais seguros</h2>
+<p>Um log útil não precisa conter segredo.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.parceiros.application</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.Logger</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.LoggerFactory</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
+
+<span class="nd">@Service</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ConteudoPremiumService</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">log</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">ConteudoPremiumService</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">BackstageTokenService</span><span class="w"> </span><span class="n">backstageTokenService</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ConteudoPremiumService</span><span class="p">(</span><span class="n">BackstageTokenService</span><span class="w"> </span><span class="n">backstageTokenService</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">backstageTokenService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">backstageTokenService</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">liberarConteudoPremium</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">banda</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Iniciando liberação de conteúdo premium. banda={}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">banda</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">backstageTokenService</span><span class="p">.</span><span class="na">obterToken</span><span class="p">();</span>
+
+<span class="w">        </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Conteúdo premium liberado com sucesso. banda={}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">banda</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse log usa dado de negócio não sensível, como o nome da banda.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>Iniciando liberação de conteúdo premium. banda=W.A.S.P.
+</code></pre></div>
+<p>Não registra:</p>
+<ul>
+<li><code>client_secret</code>;</li>
+<li>token;</li>
+<li>header;</li>
+<li>body;</li>
+<li>resposta do parceiro.</li>
+</ul>
+<h2 id="privacy-violation-em-cache">Privacy Violation em cache</h2>
+<p>Outro ponto comum é o cache.</p>
+<p>Imagine que a aplicação guarda tokens por alguns segundos para evitar chamadas repetidas ao parceiro.</p>
+<p>Código perigoso:</p>
+<div class="highlight"><pre><span></span><code><span class="n">cache</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">clientSecret</span><span class="p">,</span><span class="w"> </span><span class="n">tokenResponse</span><span class="p">);</span>
+</code></pre></div>
+<p>Aqui o segredo vira chave do cache.</p>
+<p>Mesmo que o cache esteja em memória, isso pode ser ruim:</p>
+<ul>
+<li>o segredo fica mais tempo em memória;</li>
+<li>dumps podem expor;</li>
+<li>logs do cache podem registrar chave;</li>
+<li>métricas podem coletar chave;</li>
+<li>debug pode mostrar chave;</li>
+<li>a estrutura pode ser migrada futuramente para Redis ou outro storage.</li>
+</ul>
+<p>Uma alternativa melhor é derivar uma chave segura, sem armazenar o segredo diretamente.</p>
+<h2 id="chave-hmac-para-cache">Chave HMAC para cache</h2>
+<p>Exemplo didático:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.parceiros.infra</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.crypto.Mac</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.crypto.spec.SecretKeySpec</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.charset.StandardCharsets</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Base64</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CacheKeyGenerator</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">pepper</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">CacheKeyGenerator</span><span class="p">(</span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">pepper</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">pepper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pepper</span><span class="p">.</span><span class="na">clone</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">generate</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">clientId</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">clientSecret</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Mac</span><span class="w"> </span><span class="n">mac</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Mac</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="s">&quot;HmacSHA256&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="n">mac</span><span class="p">.</span><span class="na">init</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">SecretKeySpec</span><span class="p">(</span><span class="n">pepper</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;HmacSHA256&quot;</span><span class="p">));</span>
+
+<span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">material</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clientId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;:&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">clientSecret</span><span class="p">;</span>
+<span class="w">            </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">digest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mac</span><span class="p">.</span><span class="na">doFinal</span><span class="p">(</span><span class="n">material</span><span class="p">.</span><span class="na">getBytes</span><span class="p">(</span><span class="n">StandardCharsets</span><span class="p">.</span><span class="na">UTF_8</span><span class="p">));</span>
+
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">Base64</span><span class="p">.</span><span class="na">getUrlEncoder</span><span class="p">().</span><span class="na">withoutPadding</span><span class="p">().</span><span class="na">encodeToString</span><span class="p">(</span><span class="n">digest</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;Não foi possível gerar chave de cache.&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ex</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse exemplo evita usar o segredo diretamente como chave.</p>
+<p>Atenção: HMAC não elimina a existência do segredo no fluxo. Ele apenas evita que o segredo seja usado como identificador visível no cache.</p>
+<p>O segredo ainda deve ser protegido.</p>
+<h2 id="minimizacao-de-dados">Minimização de dados</h2>
+<p>Um princípio essencial em Privacy Violation é minimização.</p>
+<p>A aplicação deve carregar, armazenar, logar e devolver apenas o necessário.</p>
+<p>Exemplo ruim:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">UsuarioResponse</span><span class="p">(</span>
+<span class="w">        </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">,</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">,</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">email</span><span class="p">,</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">passwordHash</span><span class="p">,</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">documento</span><span class="p">,</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">internalRole</span><span class="p">,</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">tokenInterno</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Exemplo melhor:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">UsuarioPublicoResponse</span><span class="p">(</span>
+<span class="w">        </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">,</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">nome</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>A pergunta prática é:</p>
+<blockquote>
+<p>O consumidor realmente precisa deste campo?</p>
+</blockquote>
+<p>Se não precisa, não devolva.</p>
+<h2 id="privacy-violation-e-apis">Privacy Violation e APIs</h2>
+<p>APIs frequentemente expõem dados demais quando serializam objetos internos diretamente.</p>
+<p>Exemplo perigoso:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/usuarios/{id}&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">UsuarioEntity</span><span class="w"> </span><span class="nf">buscar</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">usuarioRepository</span><span class="p">.</span><span class="na">findById</span><span class="p">(</span><span class="n">id</span><span class="p">).</span><span class="na">orElseThrow</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Se <code>UsuarioEntity</code> contém campos internos, eles podem ir para a resposta.</p>
+<p>Melhor:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/usuarios/{id}&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">UsuarioPublicoResponse</span><span class="w"> </span><span class="nf">buscar</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Usuario</span><span class="w"> </span><span class="n">usuario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">usuarioService</span><span class="p">.</span><span class="na">buscar</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UsuarioPublicoResponse</span><span class="p">(</span>
+<span class="w">            </span><span class="n">usuario</span><span class="p">.</span><span class="na">id</span><span class="p">(),</span>
+<span class="w">            </span><span class="n">usuario</span><span class="p">.</span><span class="na">nomeExibicao</span><span class="p">()</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>DTO público explícito é uma defesa importante contra exposição acidental.</p>
+<h2 id="privacy-violation-e-tostring">Privacy Violation e <code>toString()</code></h2>
+<p>Muitas classes Java usam Lombok ou records, que geram representação textual automaticamente.</p>
+<p>Exemplo perigoso:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">PartnerCredentials</span><span class="p">(</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">clientId</span><span class="p">,</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">clientSecret</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Se alguém fizer:</p>
+<div class="highlight"><pre><span></span><code><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Credenciais: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">credentials</span><span class="p">);</span>
+</code></pre></div>
+<p>o <code>record</code> pode imprimir ambos os campos.</p>
+<p>Uma alternativa é sobrescrever <code>toString()</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.parceiros.infra</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">PartnerCredentials</span><span class="p">(</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">clientId</span><span class="p">,</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">clientSecret</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">toString</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;PartnerCredentials[clientId=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">mascarar</span><span class="p">(</span><span class="n">clientId</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;, clientSecret=***]&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">mascarar</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">value</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;***&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">value</span><span class="p">.</span><span class="na">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;***&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Isso não autoriza logar credenciais, mas reduz dano acidental.</p>
+<p>A melhor prática continua sendo não passar o objeto sensível para log.</p>
+<h2 id="privacy-violation-e-tracing">Privacy Violation e tracing</h2>
+<p>Além de logs tradicionais, aplicações modernas usam:</p>
+<ul>
+<li>tracing;</li>
+<li>APM;</li>
+<li>métricas;</li>
+<li>spans;</li>
+<li>tags;</li>
+<li>baggage;</li>
+<li>correlation id;</li>
+<li>dashboards.</li>
+</ul>
+<p>Esses mecanismos também podem vazar dados.</p>
+<p>Evite colocar em tags de tracing:</p>
+<ul>
+<li>token;</li>
+<li>email completo;</li>
+<li>documento;</li>
+<li><code>client_secret</code>;</li>
+<li>senha;</li>
+<li>body;</li>
+<li>payload de autenticação;</li>
+<li>query string sensível.</li>
+</ul>
+<p>Um <code>correlationId</code> deve ser opaco e não sensível.</p>
+<p>Exemplo seguro:</p>
+<div class="highlight"><pre><span></span><code>correlationId=8f0b6f52-8f4d-4c0f-a725-5f4f9e9b2a7a
+</code></pre></div>
+<p>Exemplo ruim:</p>
+<div class="highlight"><pre><span></span><code>correlationId=email-do-usuario@example.com
+</code></pre></div>
+<h2 id="tratando-erros-de-parceiro">Tratando erros de parceiro</h2>
+<p>Quando um parceiro falha, a aplicação precisa responder sem expor detalhes sensíveis.</p>
+<p>Exemplo ruim:</p>
+<div class="highlight"><pre><span></span><code><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;Erro ao chamar parceiro com body: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">body</span><span class="p">,</span><span class="w"> </span><span class="n">ex</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Exemplo melhor:</p>
+<div class="highlight"><pre><span></span><code><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">log</span><span class="p">.</span><span class="na">warn</span><span class="p">(</span><span class="s">&quot;Falha ao chamar parceiro. tipoErro={}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ex</span><span class="p">.</span><span class="na">getClass</span><span class="p">().</span><span class="na">getSimpleName</span><span class="p">());</span>
+<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BadGatewayException</span><span class="p">(</span><span class="s">&quot;Falha ao consultar parceiro.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Exceção pública:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.shared.api</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BadGatewayException</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">RuntimeException</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">BadGatewayException</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">super</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>A mensagem pública não contém segredo.</p>
+<p>O log não contém body.</p>
+<p>A operação ainda é diagnosticável pelo tipo de erro e correlation id.</p>
+<h2 id="testando-ausencia-de-segredo-nos-logs">Testando ausência de segredo nos logs</h2>
+<p>Em um projeto real, você pode criar testes que usam marcadores sintéticos.</p>
+<p>Exemplo conceitual:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.parceiros.application</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
+
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.assertFalse</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">LogPrivacyTest</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">mensagemDeLogNaoDeveConterSecret</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">clientSecret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SECRET-TESTE-MOTLEY-CRUE&quot;</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">mensagem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Falha ao chamar parceiro. tipoErro=TimeoutException&quot;</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">assertFalse</span><span class="p">(</span><span class="n">mensagem</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">clientSecret</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse teste é simples demais para um sistema real, mas ilustra a ideia.</p>
+<p>Em um teste mais robusto, você capturaria o appender de log e validaria que nenhum marcador sensível apareceu após executar o fluxo completo.</p>
+<p>Marcadores úteis:</p>
+<div class="highlight"><pre><span></span><code>SECRET-TESTE-MOTLEY-CRUE
+TOKEN-TESTE-ALICE-COOPER
+AUTHORIZATION-TESTE-RATT
+PASSWORD-TESTE-QUIET-RIOT
+</code></pre></div>
+<p>Nenhum deles deve aparecer em logs.</p>
+<h2 id="testando-bloqueio-de-reflexao">Testando bloqueio de reflexão</h2>
+<p>Exemplo de teste para <code>CredentialReflectionGuard</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.parceiros.infra</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.fasterxml.jackson.databind.JsonNode</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.fasterxml.jackson.databind.ObjectMapper</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
+
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.assertThrows</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">CredentialReflectionGuardTest</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ObjectMapper</span><span class="w"> </span><span class="n">objectMapper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ObjectMapper</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">CredentialReflectionGuard</span><span class="w"> </span><span class="n">guard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CredentialReflectionGuard</span><span class="p">();</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">deveRejeitarRespostaComClientSecretRefletido</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">PartnerCredentials</span><span class="w"> </span><span class="n">credentials</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PartnerCredentials</span><span class="p">(</span>
+<span class="w">                </span><span class="s">&quot;meucatalogo&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s">&quot;SECRET-TESTE-WASP&quot;</span>
+<span class="w">        </span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">JsonNode</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">objectMapper</span><span class="p">.</span><span class="na">readTree</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">                {</span>
+<span class="s">                  &quot;access_token&quot;: &quot;token-valido&quot;,</span>
+<span class="s">                  &quot;client_secret&quot;: &quot;SECRET-TESTE-WASP&quot;</span>
+<span class="s">                }</span>
+<span class="s">                &quot;&quot;&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">assertThrows</span><span class="p">(</span><span class="n">IllegalStateException</span><span class="p">.</span><span class="na">class</span><span class="p">,</span>
+<span class="w">                </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">guard</span><span class="p">.</span><span class="na">rejectCredentialReflection</span><span class="p">(</span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">credentials</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">deveRejeitarCampoComNomeSensivel</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">PartnerCredentials</span><span class="w"> </span><span class="n">credentials</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PartnerCredentials</span><span class="p">(</span>
+<span class="w">                </span><span class="s">&quot;meucatalogo&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s">&quot;SECRET-TESTE-WASP&quot;</span>
+<span class="w">        </span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">JsonNode</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">objectMapper</span><span class="p">.</span><span class="na">readTree</span><span class="p">(</span><span class="s">&quot;&quot;&quot;</span>
+<span class="s">                {</span>
+<span class="s">                  &quot;access_token&quot;: &quot;token-valido&quot;,</span>
+<span class="s">                  &quot;credential&quot;: &quot;algum-valor&quot;</span>
+<span class="s">                }</span>
+<span class="s">                &quot;&quot;&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">assertThrows</span><span class="p">(</span><span class="n">IllegalStateException</span><span class="p">.</span><span class="na">class</span><span class="p">,</span>
+<span class="w">                </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">guard</span><span class="p">.</span><span class="na">rejectCredentialReflection</span><span class="p">(</span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">credentials</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esses testes provam que uma resposta insegura do parceiro falha fechado.</p>
+<h2 id="quando-um-privacy-violation-e-vulnerabilidade-real">Quando um Privacy Violation é vulnerabilidade real?</h2>
+<p>É vulnerabilidade real quando:</p>
+<ul>
+<li>segredo aparece em log;</li>
+<li>token é devolvido ao cliente errado;</li>
+<li>senha aparece em mensagem de erro;</li>
+<li><code>client_secret</code> é retornado em resposta pública;</li>
+<li>DTO interno é serializado com campos sensíveis;</li>
+<li>dado pessoal é enviado a terceiro sem finalidade;</li>
+<li>payload sensível é registrado por tracing;</li>
+<li>cache expõe chave baseada em segredo puro;</li>
+<li>arquivo gerado contém dados sensíveis sem proteção;</li>
+<li>resposta de parceiro é repassada sem filtro e contém segredo.</li>
+</ul>
+<p>Nesses casos, a correção deve ser no código, no contrato ou na arquitetura.</p>
+<h2 id="quando-e-risco-mitigado">Quando é risco mitigado?</h2>
+<p>É risco mitigado quando:</p>
+<ul>
+<li>o dado sensível precisa circular por requisito funcional;</li>
+<li>o destino é correto;</li>
+<li>o canal é seguro;</li>
+<li>logs não expõem;</li>
+<li>erros não expõem;</li>
+<li>resposta pública é filtrada;</li>
+<li>reflexão de segredo é bloqueada;</li>
+<li>cache usa chave derivada segura;</li>
+<li>há testes;</li>
+<li>há documentação de risco residual.</li>
+</ul>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>client_secret -&gt; token endpoint OAuth HTTPS
+</code></pre></div>
+<p>Esse fluxo pode ser aceitável se controlado.</p>
+<h2 id="quando-pode-ser-falso-positivo">Quando pode ser falso positivo?</h2>
+<p>Pode ser falso positivo quando:</p>
+<ul>
+<li>a ferramenta associa argumento sensível ao retorno de uma chamada, mas o código filtra a resposta;</li>
+<li>o segredo é usado apenas para gerar HMAC, não vai para log;</li>
+<li>a chamada de log não recebe o valor sensível;</li>
+<li>o DTO sensível não é serializado publicamente;</li>
+<li>o caminho apontado é inalcançável;</li>
+<li>o scanner não reconhece uma guarda customizada;</li>
+<li>o dado sensível é substituído por identificador opaco antes do sink.</li>
+</ul>
+<p>Mesmo quando for falso positivo, vale perguntar:</p>
+<blockquote>
+<p>O código está claro o suficiente para humanos e ferramentas entenderem o controle?</p>
+</blockquote>
+<p>Se não estiver, pode valer aplicar hardening.</p>
+<h2 id="como-escrever-justificativa-tecnica">Como escrever justificativa técnica</h2>
+<p>Justificativa fraca:</p>
+<div class="highlight"><pre><span></span><code>Não é vulnerabilidade porque é interno.
+</code></pre></div>
+<p>Justificativa forte:</p>
+<div class="highlight"><pre><span></span><code>O finding aponta fluxo de client_secret para resposta pública. O envio de client_id/client_secret ao token endpoint é funcional e obrigatório no fluxo OAuth client_credentials. O endpoint é validado como HTTPS absoluto antes do envio. O body não é registrado em logs e exceções públicas não incluem credenciais. A resposta do parceiro passa por CredentialReflectionGuard, que rejeita campos secretos e valores iguais ao clientSecret antes de qualquer resposta pública. A resposta pública é construída por DTO explícito, sem receber PartnerCredentials. Testes cobrem rejeição de segredo refletido e ausência de marcadores sensíveis em logs. Classificação proposta: risco mitigado ou Not Exploitable.
+</code></pre></div>
+<p>A segunda justificativa explica:</p>
+<ul>
+<li>source;</li>
+<li>sink;</li>
+<li>fluxo funcional;</li>
+<li>controles;</li>
+<li>testes;</li>
+<li>classificação.</li>
+</ul>
+<h2 id="boas-praticas">Boas práticas</h2>
+<h3 id="1-nao-logue-segredos">1. Não logue segredos</h3>
+<p>Nunca registre senha, token, <code>client_secret</code>, API key ou header <code>Authorization</code>.</p>
+<h3 id="2-use-dtos-publicos-explicitos">2. Use DTOs públicos explícitos</h3>
+<p>Não devolva entidades ou DTOs internos diretamente.</p>
+<h3 id="3-trate-resposta-de-parceiro-como-nao-confiavel">3. Trate resposta de parceiro como não confiável</h3>
+<p>Parceiros também podem errar, refletir dados ou mudar contrato.</p>
+<h3 id="4-bloqueie-reflexao-de-credenciais">4. Bloqueie reflexão de credenciais</h3>
+<p>Se você envia segredo, impeça que ele volte para a resposta pública.</p>
+<h3 id="5-separe-dado-funcional-de-dado-publico">5. Separe dado funcional de dado público</h3>
+<p>O que é necessário para autenticar não é necessariamente permitido na resposta.</p>
+<h3 id="6-proteja-logs-e-tracing">6. Proteja logs e tracing</h3>
+<p>Logs, spans, tags e métricas também são superfícies de vazamento.</p>
+<h3 id="7-use-correlation-id-opaco">7. Use correlation id opaco</h3>
+<p>Não use email, documento ou token como identificador de correlação.</p>
+<h3 id="8-nao-use-segredo-puro-como-chave-de-cache">8. Não use segredo puro como chave de cache</h3>
+<p>Use derivação segura quando precisar identificar combinações sensíveis.</p>
+<h3 id="9-falhe-fechado">9. Falhe fechado</h3>
+<p>Se uma resposta contém campo secreto inesperado, rejeite.</p>
+<h3 id="10-crie-testes-com-marcadores-sensiveis">10. Crie testes com marcadores sensíveis</h3>
+<p>Use valores sintéticos e prove que eles não aparecem onde não deveriam.</p>
+<h2 id="erros-comuns">Erros comuns</h2>
+<h3 id="1-logar-objeto-inteiro">1. Logar objeto inteiro</h3>
+<p><code>log.info("request={}", request)</code> pode expor campos sensíveis.</p>
+<h3 id="2-confiar-no-tostring">2. Confiar no <code>toString()</code></h3>
+<p>Records, Lombok e IDEs podem gerar <code>toString()</code> com todos os campos.</p>
+<h3 id="3-devolver-resposta-bruta-do-parceiro">3. Devolver resposta bruta do parceiro</h3>
+<p>O parceiro pode incluir campos que você não deveria expor.</p>
+<h3 id="4-confundir-envio-funcional-com-vazamento">4. Confundir envio funcional com vazamento</h3>
+<p>Enviar <code>client_secret</code> ao OAuth pode ser legítimo. Vazamento é expor esse segredo fora do destino correto.</p>
+<h3 id="5-colocar-segredo-em-exception">5. Colocar segredo em exception</h3>
+<p>Mensagens de erro circulam por logs, APIs e observabilidade.</p>
+<h3 id="6-usar-token-como-correlation-id">6. Usar token como correlation id</h3>
+<p>Correlation id deve ser opaco e não sensível.</p>
+<h3 id="7-guardar-segredo-como-chave-de-cache">7. Guardar segredo como chave de cache</h3>
+<p>Chaves de cache podem aparecer em logs, métricas ou dumps.</p>
+<h3 id="8-achar-que-https-resolve-privacy-violation">8. Achar que HTTPS resolve Privacy Violation</h3>
+<p>HTTPS protege transmissão. Não protege logs, respostas, cache ou serialização indevida.</p>
+<h3 id="9-criar-sanitizacao-artificial-para-sast">9. Criar sanitização artificial para SAST</h3>
+<p>A correção deve reduzir risco real, não apenas quebrar o taint flow.</p>
+<h3 id="10-nao-documentar-fluxo-funcional-autorizado">10. Não documentar fluxo funcional autorizado</h3>
+<p>Se a credencial precisa sair por requisito, documente destino, canal, controles e testes.</p>
+<h2 id="decisoes-de-engenharia">Decisões de engenharia</h2>
+<h2 id="quando-devolver-resposta-bruta-do-parceiro">Quando devolver resposta bruta do parceiro?</h2>
+<p>Evite devolver resposta bruta.</p>
+<p>Só considere quando:</p>
+<ul>
+<li>o contrato legado exige;</li>
+<li>o consumidor é confiável;</li>
+<li>a resposta é validada;</li>
+<li>campos sensíveis são rejeitados;</li>
+<li>há testes;</li>
+<li>há documentação de risco.</li>
+</ul>
+<p>Mesmo assim, prefira mapear para DTO público.</p>
+<h2 id="quando-usar-guarda-de-reflexao">Quando usar guarda de reflexão?</h2>
+<p>Use quando:</p>
+<ul>
+<li>você envia credenciais ao parceiro;</li>
+<li>a resposta do parceiro pode ser repassada;</li>
+<li>o contrato do parceiro não é totalmente controlado;</li>
+<li>há risco de eco de campos sensíveis;</li>
+<li>o SAST aponta fluxo de credencial para resposta.</li>
+</ul>
+<h2 id="quando-mascarar">Quando mascarar?</h2>
+<p>Mascaramento é útil para:</p>
+<ul>
+<li>logs;</li>
+<li>mensagens operacionais;</li>
+<li>dashboards;</li>
+<li>telas administrativas;</li>
+<li>suporte.</li>
+</ul>
+<p>Mas não masque antes de enviar para o protocolo funcional se o parceiro precisa do valor real.</p>
+<h2 id="quando-classificar-como-not-exploitable">Quando classificar como Not Exploitable?</h2>
+<p>Considere quando:</p>
+<ul>
+<li>o fluxo sensível é funcional;</li>
+<li>o destino é correto;</li>
+<li>há HTTPS;</li>
+<li>não há log de segredo;</li>
+<li>resposta é filtrada;</li>
+<li>reflexão é bloqueada;</li>
+<li>DTO público não contém credencial;</li>
+<li>testes comprovam;</li>
+<li>risco residual está documentado.</li>
+</ul>
+<h2 id="quando-envolver-appsec">Quando envolver AppSec?</h2>
+<p>Envolva AppSec quando:</p>
+<ul>
+<li>o scanner não reconhece guarda customizada;</li>
+<li>o finding persiste após correção real;</li>
+<li>a classificação será <code>Not Exploitable</code>;</li>
+<li>há necessidade de ajustar query corporativa;</li>
+<li>o risco residual depende de política corporativa;</li>
+<li>a decisão envolve exceção de segurança.</li>
+</ul>
+<h2 id="onde-isso-aparece-em-sistemas-reais">Onde isso aparece em sistemas reais</h2>
+<p>Privacy Violation aparece em:</p>
+<ul>
+<li>integração OAuth;</li>
+<li>cache de token;</li>
+<li>logs de erro;</li>
+<li>logs de debug;</li>
+<li>decorators de cache;</li>
+<li>gateways;</li>
+<li>APIs que retornam DTOs internos;</li>
+<li>respostas de parceiros;</li>
+<li>sistemas legados;</li>
+<li>integrações com bureau;</li>
+<li>upload/download;</li>
+<li>sistemas de documento;</li>
+<li>autenticação server-to-server;</li>
+<li>mensageria;</li>
+<li>auditoria;</li>
+<li>tracing e APM.</li>
+</ul>
+<p>Em Java/Spring, pontos comuns são:</p>
+<ul>
+<li>controllers retornando objetos internos;</li>
+<li>services logando request/response;</li>
+<li>clients HTTP;</li>
+<li>interceptors;</li>
+<li>exception handlers;</li>
+<li>classes de cache;</li>
+<li>DTOs com <code>toString()</code>;</li>
+<li>serialização Jackson;</li>
+<li>integração com parceiros;</li>
+<li>filtros de correlation id.</li>
+</ul>
+<h2 id="checklist-pratico">Checklist prático</h2>
+<h3 id="dados-sensiveis">Dados sensíveis</h3>
+<ul>
+<li>Existe senha?</li>
+<li>Existe token?</li>
+<li>Existe <code>client_secret</code>?</li>
+<li>Existe API key?</li>
+<li>Existe header <code>Authorization</code>?</li>
+<li>Existe documento?</li>
+<li>Existe dado pessoal?</li>
+<li>Existe payload de autenticação?</li>
+</ul>
+<h3 id="logs">Logs</h3>
+<ul>
+<li>Algum objeto sensível é logado?</li>
+<li>Algum body completo é logado?</li>
+<li>Alguma exception pode carregar segredo?</li>
+<li><code>toString()</code> expõe campos sensíveis?</li>
+<li>DEBUG em produção está controlado?</li>
+<li>Logs possuem retenção e acesso restrito?</li>
+</ul>
+<h3 id="respostas">Respostas</h3>
+<ul>
+<li>A API retorna DTO público?</li>
+<li>Alguma resposta contém token?</li>
+<li>Alguma resposta contém campo secreto?</li>
+<li>Resposta de parceiro é repassada diretamente?</li>
+<li>Existe filtro ou mapper?</li>
+<li>Existe bloqueio de reflexão?</li>
+</ul>
+<h3 id="integracoes">Integrações</h3>
+<ul>
+<li>O destino é correto?</li>
+<li>O canal é HTTPS?</li>
+<li>O segredo é funcionalmente necessário?</li>
+<li>O segredo é enviado apenas ao parceiro correto?</li>
+<li>Erros do parceiro são sanitizados?</li>
+<li>Redirecionamentos são controlados?</li>
+</ul>
+<h3 id="cache">Cache</h3>
+<ul>
+<li>Segredo é usado como chave?</li>
+<li>Token é armazenado?</li>
+<li>TTL é adequado?</li>
+<li>Logs do cache expõem chave?</li>
+<li>Há isolamento entre credenciais?</li>
+<li>Há limpeza ou expiração?</li>
+</ul>
+<h3 id="testes">Testes</h3>
+<ul>
+<li>Marcadores sensíveis aparecem em logs?</li>
+<li>Resposta com segredo refletido é rejeitada?</li>
+<li>DTO público exclui campos sensíveis?</li>
+<li>Exception pública não contém segredo?</li>
+<li>Fluxo funcional continua funcionando?</li>
+<li>Novo scan foi executado?</li>
+</ul>
+<h2 id="resumo-final">Resumo final</h2>
+<p><code>Privacy Violation</code> é um finding que exige análise cuidadosa.</p>
+<p>Ele pode indicar uma vulnerabilidade real, como segredo em log, token em resposta pública ou senha em exception.</p>
+<p>Mas também pode aparecer em fluxos funcionais legítimos, como envio de <code>client_id</code> e <code>client_secret</code> para um token endpoint OAuth.</p>
+<p>A diferença está nos controles.</p>
+<p>Uma aplicação Java/Spring bem protegida deve:</p>
+<ul>
+<li>limitar onde dados sensíveis circulam;</li>
+<li>não registrar segredos;</li>
+<li>usar DTOs públicos explícitos;</li>
+<li>tratar respostas de parceiros como não confiáveis;</li>
+<li>bloquear reflexão de credenciais;</li>
+<li>proteger mensagens de erro;</li>
+<li>evitar segredo em chave de cache;</li>
+<li>usar correlation id opaco;</li>
+<li>criar testes com marcadores sensíveis;</li>
+<li>documentar triagens e riscos residuais.</li>
+</ul>
+<p>A principal lição é:</p>
+<blockquote>
+<p>Dado sensível pode ser necessário para a integração, mas nunca deve aparecer fora da finalidade, do destino e do contexto corretos.</p>
+</blockquote>
+<h2 id="perguntas-de-revisao">Perguntas de revisão</h2>
+<h3 id="1-o-que-e-privacy-violation">1. O que é Privacy Violation?</h3>
+<p>É um finding que indica possível exposição ou propagação indevida de dados sensíveis para logs, respostas, arquivos, sistemas externos, exceções ou outros destinos.</p>
+<h3 id="2-todo-fluxo-de-credencial-e-vulnerabilidade">2. Todo fluxo de credencial é vulnerabilidade?</h3>
+<p>Não. Alguns fluxos são funcionais e obrigatórios, como OAuth <code>client_credentials</code>. O importante é controlar destino, canal, logs, erros e resposta pública.</p>
+<h3 id="3-por-que-logs-sao-perigosos">3. Por que logs são perigosos?</h3>
+<p>Porque logs podem ser armazenados, replicados, pesquisados, exportados, retidos por muito tempo e acessados por várias pessoas ou ferramentas.</p>
+<h3 id="4-o-que-nao-deve-ir-para-logs">4. O que não deve ir para logs?</h3>
+<p>Senhas, tokens, <code>client_secret</code>, headers de autenticação, cookies, documentos, payloads completos de autenticação e respostas sensíveis.</p>
+<h3 id="5-https-resolve-privacy-violation">5. HTTPS resolve Privacy Violation?</h3>
+<p>Não completamente. HTTPS protege transmissão, mas não impede vazamento em logs, respostas, cache ou erros.</p>
+<h3 id="6-por-que-resposta-de-parceiro-deve-ser-tratada-como-nao-confiavel">6. Por que resposta de parceiro deve ser tratada como não confiável?</h3>
+<p>Porque o parceiro pode refletir dados enviados, mudar contrato, incluir campos inesperados ou retornar informações que não devem ser públicas.</p>
+<h3 id="7-o-que-e-reflexao-de-credencial">7. O que é reflexão de credencial?</h3>
+<p>É quando uma credencial enviada ao parceiro volta na resposta e pode ser propagada pela aplicação.</p>
+<h3 id="8-o-que-e-dto-publico-explicito">8. O que é DTO público explícito?</h3>
+<p>É um objeto de resposta desenhado apenas com campos que podem sair da aplicação, evitando serializar objetos internos ou respostas brutas.</p>
+<h3 id="9-e-correto-mascarar-segredo-antes-de-enviar-ao-parceiro">9. É correto mascarar segredo antes de enviar ao parceiro?</h3>
+<p>Não, se o parceiro precisa do valor real para autenticar. Mascaramento é para logs, telas e mensagens, não para o protocolo funcional.</p>
+<h3 id="10-por-que-tostring-pode-ser-perigoso">10. Por que <code>toString()</code> pode ser perigoso?</h3>
+<p>Porque pode incluir todos os campos do objeto, inclusive senhas e tokens, quando usado em logs.</p>
+<h3 id="11-o-que-e-correlation-id-seguro">11. O que é correlation id seguro?</h3>
+<p>É um identificador opaco, sem dados pessoais ou segredos, usado para rastrear requisições.</p>
+<h3 id="12-quando-usar-hmac-em-chave-de-cache">12. Quando usar HMAC em chave de cache?</h3>
+<p>Quando é necessário derivar uma chave a partir de material sensível sem usar o segredo puro como identificador visível.</p>
+<h3 id="13-quando-um-finding-pode-ser-falso-positivo">13. Quando um finding pode ser falso positivo?</h3>
+<p>Quando o scanner associa dado sensível a um sink, mas o fluxo real não expõe o dado, ou há controles que impedem a exposição.</p>
+<h3 id="14-o-que-deve-ter-em-uma-justificativa-de-not-exploitable">14. O que deve ter em uma justificativa de Not Exploitable?</h3>
+<p>Source, sink, fluxo apontado, fluxo real, controles, testes, evidências e risco residual.</p>
+<h3 id="15-qual-e-a-principal-regra">15. Qual é a principal regra?</h3>
+<p>Dado sensível deve circular apenas onde há finalidade clara, controle adequado e necessidade real.</p>
+<h2 id="referencias">Referências</h2>
+<ul>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html">OWASP Logging Cheat Sheet</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Logging_Vocabulary_Cheat_Sheet.html">OWASP Logging Vocabulary Cheat Sheet</a></li>
+<li><a href="https://api-security.owasp.org/editions/2023/en/0x11-t10/">OWASP API Security Top 10 2023</a></li>
+<li><a href="https://owasp.github.io/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/12-API_Testing/03-Excessive_Data_Exposure">OWASP WSTG — Excessive Data Exposure</a></li>
+<li><a href="https://api-security.owasp.org/editions/2023/en/0xaa-unsafe-consumption-of-apis/">OWASP API10:2023 — Unsafe Consumption of APIs</a></li>
+<li><a href="https://devguide.owasp.org/en/04-design/02-web-app-checklist/09-logging-monitoring/">OWASP Developer Guide — Logging and Monitoring</a></li>
+<li><a href="https://cwe.mitre.org/data/definitions/532.html">CWE-532 — Insertion of Sensitive Information into Log File</a></li>
+<li><a href="https://cwe.mitre.org/data/definitions/200.html">CWE-200 — Exposure of Sensitive Information to an Unauthorized Actor</a></li>
+<li><a href="https://docs.spring.io/spring-framework/reference/integration/rest-clients.html">Spring Framework Reference — REST Clients</a></li>
+<li><a href="https://docs.spring.io/spring-boot/reference/io/rest-client.html">Spring Boot Reference — Calling REST Services</a></li>
+<li><a href="https://docs.oracle.com/en/java/javase/25/">Oracle JDK 25 Documentation</a></li>
+<li><a href="https://www.oracle.com/java/technologies/downloads/">Oracle Java Downloads — JDK 25 LTS</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

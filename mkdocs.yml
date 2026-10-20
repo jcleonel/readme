@@ -25,6 +25,23 @@ nav:
         - Spring Initializr: backend/spring/spring-initializr.md
         - Maven e pom.xml: backend/spring/maven-pom.md
 
+  - Segurança:
+    - Segurança em aplicações web:
+      - Introdução à Segurança de Aplicações Web: seguranca/seguranca-aplicacoes-web/introducao-seguranca-aplicacoes-web.md
+      - HTTP, DNS, Sessões e HTTPS na Segurança Web: seguranca/seguranca-aplicacoes-web/http-dns-sessoes-https.md
+      - SQL Injection - Funcionamento, Impactos e Prevenção: seguranca/seguranca-aplicacoes-web/sql-injection.md
+      - Cross-Site Scripting (XSS): seguranca/seguranca-aplicacoes-web/xss.md
+      - DAST, Conformidade e Segurança no Ciclo de Desenvolvimento: seguranca/seguranca-aplicacoes-web/dast-conformidade-sdlc.md
+      - SAST na prática - Source, Sink, Taint Flow e falso positivo: seguranca/seguranca-aplicacoes-web/sast-source-sink-taint-flow-falso-positivo.md
+      - SSRF em aplicações Java/Spring: seguranca/seguranca-aplicacoes-web/ssrf-aplicacoes-java-spring.md
+      - Cleartext Submission em integrações server-to-server: seguranca/seguranca-aplicacoes-web/cleartext-submission-integracoes-server-to-server.md
+      - Privacy Violation - credenciais, logs e respostas de parceiros: seguranca/seguranca-aplicacoes-web/privacy-violation-credenciais-logs-respostas-parceiros.md
+      - Path Traversal e upload/download seguro de arquivos: seguranca/seguranca-aplicacoes-web/path-traversal-upload-download-seguro-arquivos.md
+      - Unchecked Input for Loop Condition e prevenção de DoS por processamento: seguranca/seguranca-aplicacoes-web/unchecked-input-loop-condition-dos-processamento.md
+      - Headers de segurança- HSTS, JSON explícito e nosniff: seguranca/seguranca-aplicacoes-web/headers-seguranca-hsts-json-nosniff.md
+      - SCA na prática - dependências vulneráveis, CVEs e gestão de bibliotecas: seguranca/seguranca-aplicacoes-web/sca-dependencias-vulneraveis-cves-gestao-bibliotecas.md
+      - Triagem de vulnerabilidades - corrigir, mitigar ou marcar como Not Exploitable: seguranca/seguranca-aplicacoes-web/triagem-vulnerabilidades-corrigir-mitigar-not-exploitable.md
+      - Ferramentas de AppSec - como SAST, SCA e DAST encontram vulnerabilidades: seguranca/seguranca-aplicacoes-web/ferramentas-appsec-sast-sca-dast.md
 theme:
   name: material
   include_page_toc: false

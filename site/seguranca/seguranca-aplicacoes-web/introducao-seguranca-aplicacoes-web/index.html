@@ -1,0 +1,3344 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../../backend/spring/maven-pom/">
+      
+      
+        <link rel="next" href="../http-dns-sessoes-https/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Introdução à Segurança de Aplicações Web - README</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/css/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introducao-a-seguranca-de-aplicacoes-web" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../../.." title="README" class="md-header__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            README
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Introdução à Segurança de Aplicações Web
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="README" class="md-nav__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    README
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Backend
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/fundamentos-da-linguagem-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/convencoes-de-codigo-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convenções de código em Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/variaveis-tipos-primitivos-operadores-conversoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variáveis, tipos primitivos, operadores e conversões
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/fundamentos-de-string/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de String
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-controle-operadores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de controle e operadores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-condicionais/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas condicionais
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-de-repeticao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de repetição
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Iniciando em Orientação a Objetos (POO)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Iniciando em Orientação a Objetos (POO)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/introducao-orientacao-a-objetos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução à POO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/classes-e-objetos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes e objetos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/classes-objetos-metodos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes, objetos e métodos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Spring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/api-rest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    O que é API REST?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/http/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Um pouco de HTTP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/por-que-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Por que escolher Spring?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/spring-boot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Boot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/spring-initializr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Initializr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/maven-pom/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maven e pom.xml
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Segurança
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Segurança
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Segurança em aplicações web
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Segurança em aplicações web
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução à Segurança de Aplicações Web
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução à Segurança de Aplicações Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-e-seguranca-de-aplicacoes-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que é segurança de aplicações web?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seguranca-de-aplicacao-web-nao-e-a-mesma-coisa-que-seguranca-de-rede" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Segurança de aplicação web não é a mesma coisa que segurança de rede
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-aplicacoes-web-sao-alvos-tao-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que aplicações web são alvos tão comuns?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#natureza-global" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Natureza global
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#grande-superficie-de-ataque" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Grande superfície de ataque
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multiplas-camadas-e-complexidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Múltiplas camadas e complexidade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seguranca-precisa-comecar-no-inicio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Segurança precisa começar no início
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#principios-fundamentais-ci4a" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Princípios fundamentais: CI4A
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#confidencialidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Confidencialidade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integridade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integridade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#disponibilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Disponibilidade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#autenticacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Autenticação
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#autorizacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Autorização
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#responsabilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Responsabilidade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vetores-de-entrada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vetores de entrada
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-em-java-e-spring-validacao-de-entrada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo em Java e Spring: validação de entrada
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-modelagem-defensiva-com-enum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de modelagem defensiva com enum
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-esse-exemplo-ensina" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que esse exemplo ensina?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#defesa-em-profundidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Defesa em profundidade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erro-comum-confiar-apenas-no-frontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erro comum: confiar apenas no frontend
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erro-comum-seguranca-apenas-como-ferramenta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erro comum: segurança apenas como ferramenta
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erro-comum-tratar-seguranca-como-responsabilidade-de-outro-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erro comum: tratar segurança como responsabilidade de outro time
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seguranca-e-requisitos-de-negocio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Segurança e requisitos de negócio
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seguranca-no-ciclo-de-desenvolvimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Segurança no ciclo de desenvolvimento
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relacao-com-owasp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relação com OWASP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas-iniciais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas iniciais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checklist-para-revisar-uma-aplicacao-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist para revisar uma aplicação web
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Checklist para revisar uma aplicação web">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#entrada-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entrada de dados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autenticacao-e-sessao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Autenticação e sessão
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autorizacao_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Autorização
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dados-sensiveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dados sensíveis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dependencias-e-configuracao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dependências e configuração
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operação
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Perguntas de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-o-que-e-seguranca-de-aplicacoes-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. O que é segurança de aplicações web?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-seguranca-de-aplicacao-web-e-igual-a-seguranca-de-rede" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Segurança de aplicação web é igual a segurança de rede?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-o-que-e-superficie-de-ataque" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. O que é superfície de ataque?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-por-que-parametros-de-url-e-formularios-sao-vetores-de-entrada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Por que parâmetros de URL e formulários são vetores de entrada?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-por-que-nao-devemos-confiar-apenas-na-validacao-do-frontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Por que não devemos confiar apenas na validação do frontend?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-o-que-significa-confidencialidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. O que significa confidencialidade?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-o-que-significa-integridade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. O que significa integridade?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-o-que-significa-disponibilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. O que significa disponibilidade?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-qual-e-a-diferenca-entre-autenticacao-e-autorizacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Qual é a diferença entre autenticação e autorização?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-o-que-e-responsabilidade-em-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. O que é responsabilidade em segurança?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-o-que-e-defesa-em-profundidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. O que é defesa em profundidade?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-seguranca-deve-ser-aplicada-apenas-no-final-do-projeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Segurança deve ser aplicada apenas no final do projeto?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../http-dns-sessoes-https/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTTP, DNS, Sessões e HTTPS na Segurança Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sql-injection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Injection - Funcionamento, Impactos e Prevenção
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xss/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cross-Site Scripting (XSS)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dast-conformidade-sdlc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DAST, Conformidade e Segurança no Ciclo de Desenvolvimento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sast-source-sink-taint-flow-falso-positivo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SAST na prática - Source, Sink, Taint Flow e falso positivo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssrf-aplicacoes-java-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSRF em aplicações Java/Spring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cleartext-submission-integracoes-server-to-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cleartext Submission em integrações server-to-server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../privacy-violation-credenciais-logs-respostas-parceiros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Privacy Violation - credenciais, logs e respostas de parceiros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../path-traversal-upload-download-seguro-arquivos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Path Traversal e upload/download seguro de arquivos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unchecked-input-loop-condition-dos-processamento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unchecked Input for Loop Condition e prevenção de DoS por processamento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../headers-seguranca-hsts-json-nosniff/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Headers de segurança- HSTS, JSON explícito e nosniff
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sca-dependencias-vulneraveis-cves-gestao-bibliotecas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SCA na prática - dependências vulneráveis, CVEs e gestão de bibliotecas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../triagem-vulnerabilidades-corrigir-mitigar-not-exploitable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Triagem de vulnerabilidades - corrigir, mitigar ou marcar como Not Exploitable
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ferramentas-appsec-sast-sca-dast/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ferramentas de AppSec - como SAST, SCA e DAST encontram vulnerabilidades
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-e-seguranca-de-aplicacoes-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que é segurança de aplicações web?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seguranca-de-aplicacao-web-nao-e-a-mesma-coisa-que-seguranca-de-rede" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Segurança de aplicação web não é a mesma coisa que segurança de rede
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-aplicacoes-web-sao-alvos-tao-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que aplicações web são alvos tão comuns?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#natureza-global" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Natureza global
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#grande-superficie-de-ataque" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Grande superfície de ataque
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multiplas-camadas-e-complexidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Múltiplas camadas e complexidade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seguranca-precisa-comecar-no-inicio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Segurança precisa começar no início
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#principios-fundamentais-ci4a" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Princípios fundamentais: CI4A
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#confidencialidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Confidencialidade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integridade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integridade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#disponibilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Disponibilidade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#autenticacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Autenticação
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#autorizacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Autorização
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#responsabilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Responsabilidade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vetores-de-entrada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vetores de entrada
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-em-java-e-spring-validacao-de-entrada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo em Java e Spring: validação de entrada
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-modelagem-defensiva-com-enum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de modelagem defensiva com enum
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-esse-exemplo-ensina" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que esse exemplo ensina?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#defesa-em-profundidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Defesa em profundidade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erro-comum-confiar-apenas-no-frontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erro comum: confiar apenas no frontend
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erro-comum-seguranca-apenas-como-ferramenta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erro comum: segurança apenas como ferramenta
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erro-comum-tratar-seguranca-como-responsabilidade-de-outro-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erro comum: tratar segurança como responsabilidade de outro time
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seguranca-e-requisitos-de-negocio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Segurança e requisitos de negócio
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seguranca-no-ciclo-de-desenvolvimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Segurança no ciclo de desenvolvimento
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relacao-com-owasp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relação com OWASP
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas-iniciais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas iniciais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checklist-para-revisar-uma-aplicacao-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist para revisar uma aplicação web
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Checklist para revisar uma aplicação web">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#entrada-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entrada de dados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autenticacao-e-sessao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Autenticação e sessão
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autorizacao_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Autorização
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dados-sensiveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dados sensíveis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dependencias-e-configuracao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dependências e configuração
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operação
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Perguntas de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-o-que-e-seguranca-de-aplicacoes-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. O que é segurança de aplicações web?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-seguranca-de-aplicacao-web-e-igual-a-seguranca-de-rede" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Segurança de aplicação web é igual a segurança de rede?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-o-que-e-superficie-de-ataque" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. O que é superfície de ataque?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-por-que-parametros-de-url-e-formularios-sao-vetores-de-entrada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Por que parâmetros de URL e formulários são vetores de entrada?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-por-que-nao-devemos-confiar-apenas-na-validacao-do-frontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Por que não devemos confiar apenas na validação do frontend?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-o-que-significa-confidencialidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. O que significa confidencialidade?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-o-que-significa-integridade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. O que significa integridade?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-o-que-significa-disponibilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. O que significa disponibilidade?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-qual-e-a-diferenca-entre-autenticacao-e-autorizacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Qual é a diferença entre autenticação e autorização?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-o-que-e-responsabilidade-em-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. O que é responsabilidade em segurança?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-o-que-e-defesa-em-profundidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. O que é defesa em profundidade?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-seguranca-deve-ser-aplicada-apenas-no-final-do-projeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Segurança deve ser aplicada apenas no final do projeto?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="introducao-a-seguranca-de-aplicacoes-web">Introdução à Segurança de Aplicações Web</h1>
+<p>Aplicações web estão presentes em praticamente todos os tipos de negócio: bancos, e-commerces, sistemas internos, plataformas de ensino, catálogos, portais públicos, redes sociais e APIs consumidas por aplicativos móveis.</p>
+<p>Quando uma aplicação fica disponível na web, ela deixa de ser apenas um software executando em um servidor. Ela passa a ser um ponto de entrada para usuários legítimos, integrações, bots, crawlers, ferramentas automatizadas e também invasores tentando encontrar falhas.</p>
+<p>Segurança de aplicações web é o conjunto de práticas, processos, controles, validações, decisões de arquitetura e mecanismos técnicos usados para proteger uma aplicação contra ameaças. Isso envolve pensar em segurança desde a concepção do sistema, durante o desenvolvimento, nos testes, na implantação e também na operação em produção.</p>
+<p>Em outras palavras, segurança não é uma etapa isolada no final do projeto. Segurança precisa fazer parte do ciclo de vida da aplicação.</p>
+<p>Imagine a aplicação fictícia <code>meucatalogomusical.com</code>, um sistema onde usuários podem cadastrar bandas de Metal e Hard Rock, montar listas de álbuns favoritos, escrever comentários e avaliar shows. Mesmo sendo uma aplicação aparentemente simples, ela já possui vários pontos sensíveis:</p>
+<ul>
+<li>cadastro de usuários;</li>
+<li>autenticação;</li>
+<li>formulários;</li>
+<li>comentários;</li>
+<li>busca por bandas;</li>
+<li>upload de imagens;</li>
+<li>armazenamento de dados;</li>
+<li>APIs;</li>
+<li>logs;</li>
+<li>cookies de sessão;</li>
+<li>integração com banco de dados;</li>
+<li>configuração de servidor;</li>
+<li>deploy em ambiente cloud.</li>
+</ul>
+<p>Cada um desses pontos pode se tornar uma via de ataque se não for tratado corretamente.</p>
+<h2 id="o-que-e-seguranca-de-aplicacoes-web">O que é segurança de aplicações web?</h2>
+<p>Segurança de aplicações web é uma área da segurança da informação focada em proteger aplicações acessadas pela web contra uso indevido, vazamento de dados, alteração indevida de informações, interrupção de serviço e acesso não autorizado.</p>
+<p>Ela envolve controles como:</p>
+<ul>
+<li>validação de entradas;</li>
+<li>autenticação;</li>
+<li>autorização;</li>
+<li>proteção de sessão;</li>
+<li>criptografia;</li>
+<li>tratamento seguro de erros;</li>
+<li>logs e auditoria;</li>
+<li>atualização de dependências;</li>
+<li>configuração segura;</li>
+<li>testes de segurança;</li>
+<li>monitoramento;</li>
+<li>resposta a incidentes.</li>
+</ul>
+<p>Uma aplicação web segura não é aquela que “nunca será atacada”. Isso seria uma promessa irreal. Uma aplicação web segura é aquela que reduz a superfície de ataque, dificulta explorações, limita danos quando algo falha e permite detectar e responder rapidamente a comportamentos suspeitos.</p>
+<h2 id="seguranca-de-aplicacao-web-nao-e-a-mesma-coisa-que-seguranca-de-rede">Segurança de aplicação web não é a mesma coisa que segurança de rede</h2>
+<p>É comum confundir segurança de rede com segurança de aplicação, mas elas não são a mesma coisa.</p>
+<p>A segurança de rede se preocupa com elementos como:</p>
+<ul>
+<li>firewall;</li>
+<li>segmentação de rede;</li>
+<li>VPN;</li>
+<li>controle de portas;</li>
+<li>tráfego entre servidores;</li>
+<li>regras de entrada e saída;</li>
+<li>proteção da infraestrutura.</li>
+</ul>
+<p>A segurança de aplicações web se preocupa com o comportamento da aplicação em si:</p>
+<ul>
+<li>o que acontece quando o usuário envia dados inválidos;</li>
+<li>como a aplicação valida permissões;</li>
+<li>como os dados são exibidos em páginas HTML;</li>
+<li>como consultas ao banco são montadas;</li>
+<li>como sessões são protegidas;</li>
+<li>como erros são tratados;</li>
+<li>como arquivos enviados são processados;</li>
+<li>como APIs validam entrada e autorização.</li>
+</ul>
+<p>Um firewall pode bloquear tráfego indevido, mas ele não entende completamente a regra de negócio de <code>meucatalogomusical.com</code>.</p>
+<p>Por exemplo, se um usuário comum tentar acessar uma funcionalidade administrativa para excluir a banda “Black Sabbath” do catálogo, isso é um problema de autorização da aplicação, não apenas de rede.</p>
+<h2 id="por-que-aplicacoes-web-sao-alvos-tao-comuns">Por que aplicações web são alvos tão comuns?</h2>
+<p>Aplicações web são muito visadas porque normalmente ficam acessíveis pela internet, recebem dados de usuários e estão conectadas a bancos de dados ou serviços internos.</p>
+<p>Três características tornam aplicações web especialmente sensíveis:</p>
+<ol>
+<li>natureza global;</li>
+<li>grande superfície de ataque;</li>
+<li>múltiplas camadas e complexidade.</li>
+</ol>
+<h2 id="natureza-global">Natureza global</h2>
+<p>Uma aplicação web pública pode ser acessada de qualquer lugar do mundo. Isso é uma grande vantagem para o negócio, mas também aumenta o risco.</p>
+<p>Se <code>meucatalogomusical.com</code> estiver disponível na internet, qualquer pessoa pode tentar acessar suas páginas, APIs, formulários, parâmetros de URL e endpoints públicos.</p>
+<p>Isso significa que a aplicação não será usada apenas por usuários bem-intencionados. Ela também poderá receber:</p>
+<ul>
+<li>requisições automatizadas;</li>
+<li>tentativas de enumeração;</li>
+<li>acessos indevidos;</li>
+<li>entradas malformadas;</li>
+<li>bots;</li>
+<li>scanners;</li>
+<li>tentativas de exploração.</li>
+</ul>
+<p>A natureza global da web aumenta a responsabilidade dos desenvolvedores. Não basta funcionar na máquina local. A aplicação precisa resistir a uso inesperado e malicioso.</p>
+<h2 id="grande-superficie-de-ataque">Grande superfície de ataque</h2>
+<p>Superfície de ataque é o conjunto de pontos pelos quais uma aplicação pode ser acessada, manipulada ou explorada.</p>
+<p>Em uma aplicação web, a superfície de ataque pode incluir:</p>
+<ul>
+<li>parâmetros de URL;</li>
+<li>formulários HTML;</li>
+<li>campos ocultos;</li>
+<li>cabeçalhos HTTP;</li>
+<li>cookies;</li>
+<li>corpo de requisições JSON;</li>
+<li>upload de arquivos;</li>
+<li>endpoints REST;</li>
+<li>páginas públicas;</li>
+<li>páginas administrativas;</li>
+<li>integrações com terceiros;</li>
+<li>mensagens em filas;</li>
+<li>logs;</li>
+<li>banco de dados;</li>
+<li>cache;</li>
+<li>configurações;</li>
+<li>dependências externas.</li>
+</ul>
+<p>No caso de <code>meucatalogomusical.com</code>, pense em uma tela de busca:</p>
+<div class="highlight"><pre><span></span><code>GET /bandas?nome=Metallica
+</code></pre></div>
+<p>Esse parâmetro <code>nome</code> é um vetor de entrada. Mesmo sendo apenas uma busca, a aplicação precisa tratar esse valor como dado não confiável.</p>
+<p>O mesmo vale para um formulário de cadastro:</p>
+<div class="highlight"><pre><span></span><code>POST /bandas
+</code></pre></div>
+<p>Com um corpo JSON como:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;nome&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Iron Maiden&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;genero&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Heavy Metal&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;anoFormacao&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1975</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Mesmo que os dados pareçam simples, eles vieram de fora da aplicação. Portanto, precisam ser validados antes de serem usados.</p>
+<h2 id="multiplas-camadas-e-complexidade">Múltiplas camadas e complexidade</h2>
+<p>Aplicações modernas raramente são compostas por uma única camada. Normalmente, temos várias partes trabalhando juntas:</p>
+<ul>
+<li>frontend;</li>
+<li>backend;</li>
+<li>banco de dados;</li>
+<li>cache;</li>
+<li>API Gateway;</li>
+<li>autenticação;</li>
+<li>autorização;</li>
+<li>mensageria;</li>
+<li>storage;</li>
+<li>CDN;</li>
+<li>logs;</li>
+<li>observabilidade;</li>
+<li>serviços externos;</li>
+<li>infraestrutura cloud.</li>
+</ul>
+<p>Cada camada adiciona responsabilidades e também possíveis falhas.</p>
+<p>Em uma aplicação Spring, por exemplo, uma requisição pode passar por:</p>
+<ol>
+<li>navegador;</li>
+<li>DNS;</li>
+<li>HTTPS/TLS;</li>
+<li>servidor ou balanceador;</li>
+<li>filtros de segurança;</li>
+<li>controller;</li>
+<li>service;</li>
+<li>repository;</li>
+<li>banco de dados;</li>
+<li>resposta HTTP;</li>
+<li>renderização no frontend.</li>
+</ol>
+<p>Se qualquer uma dessas etapas for mal configurada, a aplicação pode ficar vulnerável.</p>
+<p>Complexidade não é ruim por si só. O problema é quando a complexidade não é entendida, documentada, testada e protegida.</p>
+<h2 id="seguranca-precisa-comecar-no-inicio">Segurança precisa começar no início</h2>
+<p>Um erro comum é pensar em segurança apenas no final do desenvolvimento, quando a aplicação já está pronta para ir para produção.</p>
+<p>Esse modelo é perigoso porque muitas decisões inseguras já podem ter sido incorporadas ao projeto:</p>
+<ul>
+<li>dados sensíveis expostos em logs;</li>
+<li>permissões mal definidas;</li>
+<li>ausência de validação;</li>
+<li>consultas ao banco montadas de forma insegura;</li>
+<li>endpoints administrativos sem proteção adequada;</li>
+<li>configurações diferentes entre ambientes;</li>
+<li>dependências vulneráveis;</li>
+<li>tratamento genérico de erros;</li>
+<li>ausência de auditoria.</li>
+</ul>
+<p>Quanto mais tarde uma falha de segurança é encontrada, mais caro tende a ser corrigi-la.</p>
+<p>Por isso, segurança deve fazer parte do ciclo de desenvolvimento:</p>
+<ol>
+<li><strong>Requisitos</strong>: identificar dados sensíveis, perfis de acesso e riscos.</li>
+<li><strong>Design</strong>: definir autenticação, autorização, segregação de responsabilidades e fluxos seguros.</li>
+<li><strong>Implementação</strong>: validar entradas, usar bibliotecas confiáveis e evitar padrões inseguros.</li>
+<li><strong>Testes</strong>: incluir testes automatizados, revisão de código e testes de segurança.</li>
+<li><strong>Deploy</strong>: aplicar configurações seguras, HTTPS, secrets protegidos e menor privilégio.</li>
+<li><strong>Operação</strong>: monitorar logs, métricas, eventos de segurança e dependências vulneráveis.</li>
+</ol>
+<h2 id="principios-fundamentais-ci4a">Princípios fundamentais: CI4A</h2>
+<p>A segurança de aplicações web pode ser entendida a partir de alguns princípios fundamentais. Esses princípios aparecem como CI4A:</p>
+<ul>
+<li>Confidencialidade;</li>
+<li>Integridade;</li>
+<li>Disponibilidade;</li>
+<li>Autenticação;</li>
+<li>Autorização;</li>
+<li>Responsabilidade.</li>
+</ul>
+<p>Esses conceitos ajudam a organizar o pensamento de segurança.</p>
+<h2 id="confidencialidade">Confidencialidade</h2>
+<p>Confidencialidade significa garantir que dados sensíveis sejam acessados apenas por quem tem permissão.</p>
+<p>Em <code>meucatalogomusical.com</code>, exemplos de dados que exigem confidencialidade podem incluir:</p>
+<ul>
+<li>e-mail do usuário;</li>
+<li>dados de login;</li>
+<li>tokens;</li>
+<li>preferências privadas;</li>
+<li>dados administrativos;</li>
+<li>logs sensíveis;</li>
+<li>informações internas da aplicação.</li>
+</ul>
+<p>Uma falha de confidencialidade ocorre quando dados privados são expostos para usuários não autorizados.</p>
+<p>Exemplo: um usuário comum conseguir visualizar os dados de outro usuário por alterar um parâmetro na URL.</p>
+<h2 id="integridade">Integridade</h2>
+<p>Integridade significa garantir que os dados não sejam modificados indevidamente.</p>
+<p>Em <code>meucatalogomusical.com</code>, a integridade é importante para evitar que alguém altere dados sem autorização, como:</p>
+<ul>
+<li>trocar o nome de uma banda;</li>
+<li>excluir avaliações;</li>
+<li>modificar notas;</li>
+<li>alterar permissões;</li>
+<li>adulterar comentários;</li>
+<li>manipular listas de favoritos de outro usuário.</li>
+</ul>
+<p>A integridade protege a confiança nos dados.</p>
+<h2 id="disponibilidade">Disponibilidade</h2>
+<p>Disponibilidade significa garantir que a aplicação esteja acessível quando necessário.</p>
+<p>Uma aplicação indisponível pode gerar prejuízo, perda de confiança e impacto operacional.</p>
+<p>Disponibilidade envolve:</p>
+<ul>
+<li>monitoramento;</li>
+<li>tratamento de erros;</li>
+<li>resiliência;</li>
+<li>backup;</li>
+<li>rate limiting;</li>
+<li>proteção contra abuso;</li>
+<li>capacidade de recuperação.</li>
+</ul>
+<p>Se <code>meucatalogomusical.com</code> ficar fora do ar durante o lançamento de uma votação de “melhor álbum do ano”, o problema não é apenas técnico. Também é um problema de experiência e confiança.</p>
+<h2 id="autenticacao">Autenticação</h2>
+<p>Autenticação é o processo de verificar quem é o usuário.</p>
+<p>Normalmente, isso envolve:</p>
+<ul>
+<li>login e senha;</li>
+<li>tokens;</li>
+<li>autenticação multifator;</li>
+<li>provedores externos;</li>
+<li>certificados;</li>
+<li>chaves de API.</li>
+</ul>
+<p>A pergunta principal da autenticação é:</p>
+<blockquote>
+<p>Quem é você?</p>
+</blockquote>
+<p>Em uma aplicação web, autenticar corretamente é essencial para diferenciar usuários anônimos, usuários logados, moderadores e administradores.</p>
+<h2 id="autorizacao">Autorização</h2>
+<p>Autorização é o processo de verificar o que um usuário autenticado pode fazer.</p>
+<p>A pergunta principal da autorização é:</p>
+<blockquote>
+<p>O que você tem permissão para fazer?</p>
+</blockquote>
+<p>Um usuário pode estar autenticado e, ainda assim, não ter autorização para determinada ação.</p>
+<p>Por exemplo:</p>
+<ul>
+<li>um usuário comum pode avaliar álbuns;</li>
+<li>um moderador pode remover comentários ofensivos;</li>
+<li>um administrador pode cadastrar novas bandas;</li>
+<li>apenas um administrador pode alterar permissões de outros usuários.</li>
+</ul>
+<p>Autenticação e autorização são conceitos diferentes. Fazer login não significa ter acesso a tudo.</p>
+<h2 id="responsabilidade">Responsabilidade</h2>
+<p>Responsabilidade, ou accountability, significa conseguir rastrear ações até usuários, processos ou sistemas.</p>
+<p>Isso envolve:</p>
+<ul>
+<li>logs de auditoria;</li>
+<li>registro de eventos importantes;</li>
+<li>identificação de quem realizou determinada ação;</li>
+<li>horário da ação;</li>
+<li>origem da requisição;</li>
+<li>contexto suficiente para investigação.</li>
+</ul>
+<p>Em <code>meucatalogomusical.com</code>, ações sensíveis poderiam gerar logs de auditoria, como:</p>
+<ul>
+<li>criação de banda;</li>
+<li>exclusão de álbum;</li>
+<li>alteração de permissões;</li>
+<li>bloqueio de usuário;</li>
+<li>tentativa de acesso negado.</li>
+</ul>
+<p>Responsabilidade não significa registrar tudo indiscriminadamente. Logs também precisam ser seguros, úteis e não devem expor dados sensíveis desnecessariamente.</p>
+<h2 id="vetores-de-entrada">Vetores de entrada</h2>
+<p>Um vetor de entrada é qualquer caminho pelo qual dados externos entram na aplicação.</p>
+<p>Exemplos comuns:</p>
+<ul>
+<li>parâmetros de URL;</li>
+<li>formulários HTML;</li>
+<li>corpo JSON;</li>
+<li>cookies;</li>
+<li>headers;</li>
+<li>uploads;</li>
+<li>campos ocultos;</li>
+<li>parâmetros de rota;</li>
+<li>webhooks;</li>
+<li>mensagens de filas;</li>
+<li>dados vindos de APIs externas.</li>
+</ul>
+<p>Todo vetor de entrada deve ser tratado como não confiável.</p>
+<p>Isso não significa que todo usuário é malicioso. Significa apenas que a aplicação não deve depender da boa intenção do usuário para permanecer segura.</p>
+<h2 id="exemplo-em-java-e-spring-validacao-de-entrada">Exemplo em Java e Spring: validação de entrada</h2>
+<p>Em uma aplicação Spring Boot moderna, usando Java LTS, podemos representar a entrada de cadastro de banda com um <code>record</code> e Bean Validation.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.bandas.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.validation.constraints.Max</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.validation.constraints.Min</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.validation.constraints.NotBlank</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.validation.constraints.Size</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">CadastroBandaRequest</span><span class="p">(</span>
+
+<span class="w">        </span><span class="nd">@NotBlank</span>
+<span class="w">        </span><span class="nd">@Size</span><span class="p">(</span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">120</span><span class="p">)</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">,</span>
+
+<span class="w">        </span><span class="nd">@NotBlank</span>
+<span class="w">        </span><span class="nd">@Size</span><span class="p">(</span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">80</span><span class="p">)</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">genero</span><span class="p">,</span>
+
+<span class="w">        </span><span class="nd">@Min</span><span class="p">(</span><span class="mi">1950</span><span class="p">)</span>
+<span class="w">        </span><span class="nd">@Max</span><span class="p">(</span><span class="mi">2100</span><span class="p">)</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">anoFormacao</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse código não resolve todos os problemas de segurança, mas já estabelece um ponto importante: a aplicação não aceita qualquer entrada sem validação.</p>
+<p>Agora podemos usar esse objeto em um controller:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.bandas.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.validation.Valid</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.HttpStatus</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.*</span><span class="p">;</span>
+
+<span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/api/bandas&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BandaController</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">CadastroBandaService</span><span class="w"> </span><span class="n">cadastroBandaService</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">BandaController</span><span class="p">(</span><span class="n">CadastroBandaService</span><span class="w"> </span><span class="n">cadastroBandaService</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">cadastroBandaService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cadastroBandaService</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@PostMapping</span>
+<span class="w">    </span><span class="nd">@ResponseStatus</span><span class="p">(</span><span class="n">HttpStatus</span><span class="p">.</span><span class="na">CREATED</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">BandaResponse</span><span class="w"> </span><span class="nf">cadastrar</span><span class="p">(</span><span class="nd">@Valid</span><span class="w"> </span><span class="nd">@RequestBody</span><span class="w"> </span><span class="n">CadastroBandaRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">cadastroBandaService</span><span class="p">.</span><span class="na">cadastrar</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>A anotação <code>@Valid</code> faz com que as regras definidas no <code>CadastroBandaRequest</code> sejam avaliadas antes de a requisição seguir para a regra de negócio.</p>
+<p>Se alguém tentar cadastrar uma banda sem nome, com nome excessivamente grande ou com ano inválido, a entrada será recusada antes de chegar ao serviço.</p>
+<h2 id="exemplo-de-modelagem-defensiva-com-enum">Exemplo de modelagem defensiva com enum</h2>
+<p>Quando um campo possui valores controlados, é melhor evitar texto livre.</p>
+<p>Em vez de aceitar qualquer string para o gênero musical, poderíamos criar um enum:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.bandas.domain</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">GeneroMusical</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">HEAVY_METAL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">THRASH_METAL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">POWER_METAL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">PROGRESSIVE_METAL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">HARD_ROCK</span><span class="p">,</span>
+<span class="w">    </span><span class="n">CLASSIC_ROCK</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>E usar esse enum na entrada:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.bandas.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.meucatalogomusical.bandas.domain.GeneroMusical</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.validation.constraints.Max</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.validation.constraints.Min</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.validation.constraints.NotBlank</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.validation.constraints.NotNull</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.validation.constraints.Size</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">CadastroBandaRequest</span><span class="p">(</span>
+
+<span class="w">        </span><span class="nd">@NotBlank</span>
+<span class="w">        </span><span class="nd">@Size</span><span class="p">(</span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">120</span><span class="p">)</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">,</span>
+
+<span class="w">        </span><span class="nd">@NotNull</span>
+<span class="w">        </span><span class="n">GeneroMusical</span><span class="w"> </span><span class="n">genero</span><span class="p">,</span>
+
+<span class="w">        </span><span class="nd">@Min</span><span class="p">(</span><span class="mi">1950</span><span class="p">)</span>
+<span class="w">        </span><span class="nd">@Max</span><span class="p">(</span><span class="mi">2100</span><span class="p">)</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">anoFormacao</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Com isso, a aplicação deixa claro quais valores são esperados.</p>
+<p>Isso reduz ambiguidade, melhora a regra de negócio e diminui o risco de entradas inesperadas circularem pela aplicação.</p>
+<h2 id="o-que-esse-exemplo-ensina">O que esse exemplo ensina?</h2>
+<p>Esse exemplo mostra um princípio essencial:</p>
+<blockquote>
+<p>Segurança começa tratando entrada externa como dado não confiável.</p>
+</blockquote>
+<p>Validação de entrada não é apenas uma questão de “evitar erro de tela”. É uma prática importante para reduzir comportamentos inesperados e proteger as camadas internas da aplicação.</p>
+<p>Mas validação não deve ser vista como única proteção. Uma aplicação segura combina várias camadas de defesa.</p>
+<h2 id="defesa-em-profundidade">Defesa em profundidade</h2>
+<p>Defesa em profundidade é a ideia de usar múltiplas camadas de proteção.</p>
+<p>Em vez de confiar em um único mecanismo, a aplicação aplica controles em diferentes pontos.</p>
+<p>Por exemplo:</p>
+<ul>
+<li>o frontend pode orientar o usuário;</li>
+<li>o backend valida de verdade;</li>
+<li>o banco aplica constraints;</li>
+<li>a autenticação identifica o usuário;</li>
+<li>a autorização limita ações;</li>
+<li>os logs registram eventos relevantes;</li>
+<li>o monitoramento detecta comportamento anormal;</li>
+<li>as dependências são atualizadas;</li>
+<li>o deploy usa configuração segura;</li>
+<li>os secrets ficam protegidos;</li>
+<li>o tráfego usa HTTPS.</li>
+</ul>
+<p>Se uma camada falhar, outra pode reduzir o impacto.</p>
+<h2 id="erro-comum-confiar-apenas-no-frontend">Erro comum: confiar apenas no frontend</h2>
+<p>Validações no frontend são úteis para melhorar a experiência do usuário, mas não são suficientes para segurança.</p>
+<p>Qualquer pessoa pode enviar requisições diretamente para a API, sem usar a tela oficial da aplicação.</p>
+<p>Por isso, regras importantes precisam existir no backend.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@PostMapping</span>
+<span class="nd">@ResponseStatus</span><span class="p">(</span><span class="n">HttpStatus</span><span class="p">.</span><span class="na">CREATED</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">BandaResponse</span><span class="w"> </span><span class="nf">cadastrar</span><span class="p">(</span><span class="nd">@Valid</span><span class="w"> </span><span class="nd">@RequestBody</span><span class="w"> </span><span class="n">CadastroBandaRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">cadastroBandaService</span><span class="p">.</span><span class="na">cadastrar</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Mesmo que a tela valide o formulário, o backend continua validando a entrada.</p>
+<p>Essa duplicidade é intencional:</p>
+<ul>
+<li>frontend melhora usabilidade;</li>
+<li>backend protege a aplicação.</li>
+</ul>
+<h2 id="erro-comum-seguranca-apenas-como-ferramenta">Erro comum: segurança apenas como ferramenta</h2>
+<p>Ferramentas são importantes, mas não substituem boas decisões de engenharia.</p>
+<p>Ferramentas podem ajudar com:</p>
+<ul>
+<li>análise estática de código;</li>
+<li>análise de dependências;</li>
+<li>testes dinâmicos;</li>
+<li>verificação de configuração;</li>
+<li>monitoramento;</li>
+<li>detecção de vulnerabilidades conhecidas.</li>
+</ul>
+<p>Mas elas não entendem completamente a regra de negócio.</p>
+<p>Uma ferramenta pode apontar uma dependência vulnerável, mas talvez não saiba dizer se um usuário comum deveria ou não poder aprovar uma alteração administrativa em <code>meucatalogomusical.com</code>.</p>
+<p>Segurança depende de ferramenta, processo e conhecimento do domínio.</p>
+<h2 id="erro-comum-tratar-seguranca-como-responsabilidade-de-outro-time">Erro comum: tratar segurança como responsabilidade de outro time</h2>
+<p>Outro erro comum é pensar que segurança é responsabilidade exclusiva do time de segurança.</p>
+<p>Em aplicações modernas, segurança é responsabilidade compartilhada.</p>
+<p>O time de segurança pode definir padrões, revisar riscos, apoiar testes e orientar boas práticas. Mas os desenvolvedores tomam decisões todos os dias que impactam diretamente a segurança:</p>
+<ul>
+<li>como validar entrada;</li>
+<li>como montar consultas;</li>
+<li>como tratar erros;</li>
+<li>como organizar permissões;</li>
+<li>como registrar logs;</li>
+<li>como consumir APIs externas;</li>
+<li>como configurar endpoints;</li>
+<li>como lidar com dados sensíveis.</li>
+</ul>
+<p>Desenvolvedores não precisam se tornar especialistas ofensivos em segurança, mas precisam saber construir software de forma defensiva.</p>
+<h2 id="seguranca-e-requisitos-de-negocio">Segurança e requisitos de negócio</h2>
+<p>Segurança não deve ser vista apenas como uma obrigação técnica. Ela também protege o negócio.</p>
+<p>Uma falha de segurança pode causar:</p>
+<ul>
+<li>vazamento de dados;</li>
+<li>perda de confiança;</li>
+<li>indisponibilidade;</li>
+<li>impacto financeiro;</li>
+<li>multas regulatórias;</li>
+<li>dano à reputação;</li>
+<li>retrabalho técnico;</li>
+<li>perda de clientes;</li>
+<li>interrupção operacional.</li>
+</ul>
+<p>No caso de <code>meucatalogomusical.com</code>, um vazamento de dados poderia expor e-mails, senhas mal protegidas, listas privadas de usuários ou dados internos de administração.</p>
+<p>Mesmo que a aplicação seja fictícia e pareça simples, os princípios são os mesmos de aplicações corporativas reais.</p>
+<h2 id="seguranca-no-ciclo-de-desenvolvimento">Segurança no ciclo de desenvolvimento</h2>
+<p>Um fluxo saudável de desenvolvimento seguro pode incluir:</p>
+<ol>
+<li>mapear dados sensíveis;</li>
+<li>definir papéis e permissões;</li>
+<li>validar entradas no backend;</li>
+<li>usar consultas parametrizadas;</li>
+<li>proteger sessões;</li>
+<li>aplicar HTTPS;</li>
+<li>revisar logs para evitar exposição de dados;</li>
+<li>atualizar dependências;</li>
+<li>usar ferramentas de análise;</li>
+<li>revisar configurações;</li>
+<li>criar testes automatizados;</li>
+<li>monitorar produção;</li>
+<li>responder a incidentes.</li>
+</ol>
+<p>A segurança precisa acompanhar a velocidade do desenvolvimento.</p>
+<p>Com práticas de entrega contínua, código pode ser publicado semanalmente, diariamente ou até várias vezes ao dia. Portanto, os controles de segurança também precisam se adaptar a essa velocidade.</p>
+<h2 id="relacao-com-owasp">Relação com OWASP</h2>
+<p>OWASP é uma das principais referências abertas sobre segurança de aplicações web.</p>
+<p>Entre os materiais mais conhecidos estão:</p>
+<ul>
+<li>OWASP Top 10;</li>
+<li>OWASP ASVS;</li>
+<li>OWASP Web Security Testing Guide;</li>
+<li>OWASP Cheat Sheet Series.</li>
+</ul>
+<p>O OWASP Top 10 ajuda na conscientização sobre os riscos mais críticos. O ASVS ajuda a transformar segurança em requisitos verificáveis. O WSTG ajuda a estruturar testes de segurança.</p>
+<p>Esses materiais são úteis porque ajudam a transformar segurança em práticas concretas de desenvolvimento.</p>
+<h2 id="boas-praticas-iniciais">Boas práticas iniciais</h2>
+<p>Algumas boas práticas que todo desenvolvedor web deve internalizar:</p>
+<ul>
+<li>nunca confiar cegamente em entrada do usuário;</li>
+<li>validar dados no backend;</li>
+<li>aplicar autorização em ações sensíveis;</li>
+<li>usar HTTPS;</li>
+<li>proteger cookies e sessões;</li>
+<li>evitar expor detalhes internos em mensagens de erro;</li>
+<li>não registrar dados sensíveis em logs;</li>
+<li>manter dependências atualizadas;</li>
+<li>aplicar o princípio do menor privilégio;</li>
+<li>usar bibliotecas confiáveis;</li>
+<li>revisar configurações de produção;</li>
+<li>criar testes automatizados para regras de segurança;</li>
+<li>monitorar comportamento suspeito.</li>
+</ul>
+<p>Essas práticas não tornam a aplicação invulnerável, mas reduzem muito o risco.</p>
+<h2 id="checklist-para-revisar-uma-aplicacao-web">Checklist para revisar uma aplicação web</h2>
+<p>Use este checklist como ponto de partida:</p>
+<h3 id="entrada-de-dados">Entrada de dados</h3>
+<ul>
+<li>Os parâmetros de URL são validados?</li>
+<li>Os dados de formulários são validados no backend?</li>
+<li>O corpo JSON das requisições é validado?</li>
+<li>Campos opcionais possuem limites?</li>
+<li>Strings possuem tamanho máximo?</li>
+<li>Valores controlados usam enum ou lista permitida?</li>
+<li>Uploads são tratados com cuidado?</li>
+</ul>
+<h3 id="autenticacao-e-sessao">Autenticação e sessão</h3>
+<ul>
+<li>O login usa mecanismo confiável?</li>
+<li>As senhas são armazenadas corretamente?</li>
+<li>Existe proteção contra sessão roubada?</li>
+<li>Cookies sensíveis usam atributos seguros?</li>
+<li>Tokens possuem expiração?</li>
+<li>Logout invalida sessão ou token quando aplicável?</li>
+</ul>
+<h3 id="autorizacao_1">Autorização</h3>
+<ul>
+<li>Cada ação sensível valida permissão?</li>
+<li>Usuários comuns não acessam recursos administrativos?</li>
+<li>A autorização é validada no backend?</li>
+<li>Existe separação clara entre perfis?</li>
+</ul>
+<h3 id="dados-sensiveis">Dados sensíveis</h3>
+<ul>
+<li>Dados sensíveis são criptografados quando necessário?</li>
+<li>Logs evitam expor tokens, senhas e dados pessoais?</li>
+<li>Respostas de erro evitam detalhes internos?</li>
+<li>Backups são protegidos?</li>
+</ul>
+<h3 id="dependencias-e-configuracao">Dependências e configuração</h3>
+<ul>
+<li>Dependências são atualizadas?</li>
+<li>Secrets ficam fora do código-fonte?</li>
+<li>Ambientes possuem configurações adequadas?</li>
+<li>O modo debug está desativado em produção?</li>
+<li>Headers de segurança são configurados?</li>
+</ul>
+<h3 id="operacao">Operação</h3>
+<ul>
+<li>Existem logs úteis?</li>
+<li>Eventos sensíveis são auditados?</li>
+<li>Há monitoramento?</li>
+<li>Alertas importantes são tratados?</li>
+<li>Existe plano de resposta a incidentes?</li>
+</ul>
+<h2 id="resumo">Resumo</h2>
+<p>Segurança de aplicações web é uma disciplina essencial para qualquer desenvolvedor que constrói sistemas acessados pela internet.</p>
+<p>Aplicações web são expostas por natureza, possuem grande superfície de ataque e normalmente envolvem múltiplas camadas. Por isso, segurança precisa ser pensada desde o início do desenvolvimento, não apenas no final.</p>
+<p>Os principais conceitos deste artigo foram:</p>
+<ul>
+<li>segurança de aplicação web é diferente de segurança de rede;</li>
+<li>aplicações web possuem natureza global;</li>
+<li>toda entrada externa deve ser tratada como não confiável;</li>
+<li>superfície de ataque inclui URLs, formulários, cookies, headers, APIs e uploads;</li>
+<li>múltiplas camadas aumentam a complexidade;</li>
+<li>CI4A ajuda a organizar os objetivos de segurança;</li>
+<li>validação no backend é indispensável;</li>
+<li>defesa em profundidade reduz riscos;</li>
+<li>segurança é responsabilidade compartilhada;</li>
+<li>ferramentas ajudam, mas não substituem boas decisões de engenharia.</li>
+</ul>
+<p>A partir daqui, os próximos temas importantes são HTTP, DNS, sessões, HTTPS, SQL Injection, XSS, DAST e conformidade.</p>
+<h2 id="perguntas-de-revisao">Perguntas de revisão</h2>
+<h3 id="1-o-que-e-seguranca-de-aplicacoes-web">1. O que é segurança de aplicações web?</h3>
+<p>Segurança de aplicações web é o conjunto de práticas, processos, controles e mecanismos usados para proteger aplicações acessadas pela web contra ameaças, acessos indevidos, vazamento de dados, alteração não autorizada e indisponibilidade.</p>
+<h3 id="2-seguranca-de-aplicacao-web-e-igual-a-seguranca-de-rede">2. Segurança de aplicação web é igual a segurança de rede?</h3>
+<p>Não. Segurança de rede protege a infraestrutura de comunicação, como portas, firewall e segmentação. Segurança de aplicação protege o comportamento da aplicação, como validação de entrada, autenticação, autorização, sessão, regras de negócio e tratamento de dados.</p>
+<h3 id="3-o-que-e-superficie-de-ataque">3. O que é superfície de ataque?</h3>
+<p>Superfície de ataque é o conjunto de pontos pelos quais uma aplicação pode ser acessada, manipulada ou explorada. Em aplicações web, isso inclui parâmetros de URL, formulários, APIs, cookies, headers, uploads e integrações.</p>
+<h3 id="4-por-que-parametros-de-url-e-formularios-sao-vetores-de-entrada">4. Por que parâmetros de URL e formulários são vetores de entrada?</h3>
+<p>Porque são caminhos pelos quais dados externos entram na aplicação. Como esses dados podem ser manipulados pelo usuário, precisam ser tratados como não confiáveis.</p>
+<h3 id="5-por-que-nao-devemos-confiar-apenas-na-validacao-do-frontend">5. Por que não devemos confiar apenas na validação do frontend?</h3>
+<p>Porque o frontend pode ser ignorado. Um usuário pode enviar requisições diretamente para a API. Por isso, validações importantes precisam existir no backend.</p>
+<h3 id="6-o-que-significa-confidencialidade">6. O que significa confidencialidade?</h3>
+<p>Confidencialidade significa garantir que dados sensíveis sejam acessados apenas por pessoas, sistemas ou processos autorizados.</p>
+<h3 id="7-o-que-significa-integridade">7. O que significa integridade?</h3>
+<p>Integridade significa garantir que os dados não sejam modificados de forma indevida, acidental ou maliciosa.</p>
+<h3 id="8-o-que-significa-disponibilidade">8. O que significa disponibilidade?</h3>
+<p>Disponibilidade significa garantir que a aplicação e seus dados estejam acessíveis quando necessário.</p>
+<h3 id="9-qual-e-a-diferenca-entre-autenticacao-e-autorizacao">9. Qual é a diferença entre autenticação e autorização?</h3>
+<p>Autenticação verifica quem é o usuário. Autorização verifica o que esse usuário tem permissão para fazer.</p>
+<h3 id="10-o-que-e-responsabilidade-em-seguranca">10. O que é responsabilidade em segurança?</h3>
+<p>Responsabilidade significa conseguir rastrear ações até usuários, processos ou sistemas, normalmente por meio de logs e auditoria.</p>
+<h3 id="11-o-que-e-defesa-em-profundidade">11. O que é defesa em profundidade?</h3>
+<p>Defesa em profundidade é o uso de múltiplas camadas de proteção. A ideia é que, se uma camada falhar, outras ainda possam reduzir o impacto.</p>
+<h3 id="12-seguranca-deve-ser-aplicada-apenas-no-final-do-projeto">12. Segurança deve ser aplicada apenas no final do projeto?</h3>
+<p>Não. Segurança deve estar presente desde os requisitos, passando por design, implementação, testes, deploy e operação.</p>
+<h2 id="referencias">Referências</h2>
+<ul>
+<li>OWASP Top 10:2025.</li>
+<li>OWASP Application Security Verification Standard.</li>
+<li>OWASP Web Security Testing Guide.</li>
+<li>OWASP Cheat Sheet Series.</li>
+<li>Oracle Java SE 25 Documentation.</li>
+<li>Spring Boot 4 Documentation.</li>
+<li>Spring Framework 7 Documentation.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

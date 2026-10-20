@@ -1,0 +1,4935 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../dast-conformidade-sdlc/">
+      
+      
+        <link rel="next" href="../ssrf-aplicacoes-java-spring/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>SAST na prática - Source, Sink, Taint Flow e falso positivo - README</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/css/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sast-na-pratica-source-sink-taint-flow-e-falso-positivo" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../../.." title="README" class="md-header__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            README
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SAST na prática - Source, Sink, Taint Flow e falso positivo
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="README" class="md-nav__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    README
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Backend
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/fundamentos-da-linguagem-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/convencoes-de-codigo-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convenções de código em Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/variaveis-tipos-primitivos-operadores-conversoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variáveis, tipos primitivos, operadores e conversões
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/fundamentos-de-string/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de String
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-controle-operadores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de controle e operadores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-condicionais/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas condicionais
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-de-repeticao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de repetição
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Iniciando em Orientação a Objetos (POO)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Iniciando em Orientação a Objetos (POO)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/introducao-orientacao-a-objetos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução à POO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/classes-e-objetos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes e objetos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/classes-objetos-metodos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes, objetos e métodos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Spring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/api-rest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    O que é API REST?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/http/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Um pouco de HTTP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/por-que-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Por que escolher Spring?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/spring-boot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Boot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/spring-initializr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Initializr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/maven-pom/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maven e pom.xml
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Segurança
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Segurança
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Segurança em aplicações web
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Segurança em aplicações web
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introducao-seguranca-aplicacoes-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução à Segurança de Aplicações Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../http-dns-sessoes-https/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTTP, DNS, Sessões e HTTPS na Segurança Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sql-injection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Injection - Funcionamento, Impactos e Prevenção
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xss/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cross-Site Scripting (XSS)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dast-conformidade-sdlc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DAST, Conformidade e Segurança no Ciclo de Desenvolvimento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SAST na prática - Source, Sink, Taint Flow e falso positivo
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SAST na prática - Source, Sink, Taint Flow e falso positivo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-problema-real-que-sast-resolve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O problema real que SAST resolve
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-nos-detalhes-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar nos detalhes: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Source
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sink" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sink
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sink">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#consulta-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Consulta SQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#escrita-em-arquivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escrita em arquivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chamada-http-outbound" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chamada HTTP outbound
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#renderizacao-html-sem-escape" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Renderização HTML sem escape
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#log" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Loop
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resposta-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resposta HTTP
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#taint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Taint
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#taint-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Taint Flow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-inseguro-possivel-path-traversal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo inseguro: possível Path Traversal
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#corrigindo-com-identificador-interno-e-normalizacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Corrigindo com identificador interno e normalização
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sanitizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sanitizer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validator-nao-e-sempre-sanitizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validator não é sempre sanitizer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-possivel-ssrf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo: possível SSRF
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#correcao-com-allowlist-de-parceiros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Correção com allowlist de parceiros
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#falso-positivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Falso positivo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplos-de-falso-positivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplos de falso positivo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exemplos de falso positivo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-sink-html-inexistente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Sink HTML inexistente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-loop-com-limite-matematico-demonstravel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Loop com limite matemático demonstrável
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-credencial-enviada-em-fluxo-funcional-autorizado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Credencial enviada em fluxo funcional autorizado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-controle-customizado-nao-reconhecido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Controle customizado não reconhecido
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verdadeiro-positivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verdadeiro positivo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#risco-mitigado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Risco mitigado
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#not-exploitable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Not Exploitable
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nao-faca-correcoes-artificiais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Não faça correções artificiais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#processo-de-triagem-sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Processo de triagem SAST
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Processo de triagem SAST">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-identificar-a-query" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Identificar a query
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-ler-source-e-sink" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Ler source e sink
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-reconstruir-o-fluxo-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Reconstruir o fluxo real
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-identificar-a-fronteira-de-confianca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Identificar a fronteira de confiança
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-avaliar-o-contexto-do-sink" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Avaliar o contexto do sink
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-procurar-controles-existentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Procurar controles existentes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-avaliar-explorabilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Avaliar explorabilidade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-decidir-o-tratamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Decidir o tratamento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-criar-evidencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Criar evidências
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-justificativa-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de justificativa técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-teste-para-contrato-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de teste para contrato JSON
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sast-e-contexto-de-negocio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SAST e contexto de negócio
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sast-e-frameworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SAST e frameworks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas-ao-corrigir-findings-sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas ao corrigir findings SAST
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boas práticas ao corrigir findings SAST">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#preserve-o-contrato-funcional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Preserve o contrato funcional
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aplique-controle-proximo-ao-sink" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aplique controle próximo ao sink
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nao-confie-apenas-em-premissas-externas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Não confie apenas em premissas externas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#escreva-testes-de-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escreva testes de segurança
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documente-risco-residual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Documente risco residual
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-corrigir-pelo-nome-da-vulnerabilidade-nao-pelo-fluxo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Corrigir pelo nome da vulnerabilidade, não pelo fluxo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-classificar-falso-positivo-sem-evidencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Classificar falso positivo sem evidência
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-criar-codigo-artificial-para-quebrar-taint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Criar código artificial para quebrar taint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-ignorar-severidade-alta-automaticamente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Ignorar severidade alta automaticamente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-achar-que-autenticacao-elimina-vulnerabilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Achar que autenticação elimina vulnerabilidade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-nao-executar-novo-scan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Não executar novo scan
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-nao-criar-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Não criar testes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-nao-envolver-appsec-quando-a-query-precisa-ser-ajustada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Não envolver AppSec quando a query precisa ser ajustada
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-corrigir-no-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando corrigir no código?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-mitigar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando mitigar?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-classificar-como-falso-positivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando classificar como falso positivo?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-classificar-como-not-exploitable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando classificar como Not Exploitable?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-solicitar-ajuste-de-query" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando solicitar ajuste de query?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checklist-pratico-de-triagem-sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist prático de triagem SAST
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Checklist prático de triagem SAST">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#identificacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Identificação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#source_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Source
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sink_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sink
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fluxo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fluxo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#controle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Controle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisão
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evidencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evidência
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Perguntas de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-o-que-e-sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. O que é SAST?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-o-que-e-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. O que é source?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-o-que-e-sink" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. O que é sink?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-o-que-e-taint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. O que é taint?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-o-que-e-taint-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. O que é taint flow?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-o-que-e-falso-positivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. O que é falso positivo?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-o-que-e-true-positive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. O que é true positive?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-o-que-significa-not-exploitable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. O que significa Not Exploitable?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-qual-e-a-diferenca-entre-validator-e-sanitizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Qual é a diferença entre validator e sanitizer?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-por-que-nao-devemos-criar-codigo-artificial-para-calar-o-scanner" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Por que não devemos criar código artificial para calar o scanner?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-por-que-autenticacao-nao-elimina-vulnerabilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Por que autenticação não elimina vulnerabilidade?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-o-que-deve-conter-uma-boa-justificativa-de-falso-positivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. O que deve conter uma boa justificativa de falso positivo?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-quando-pedir-ajuste-da-query-corporativa-do-sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Quando pedir ajuste da query corporativa do SAST?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-por-que-o-controle-deve-ficar-proximo-ao-sink" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Por que o controle deve ficar próximo ao sink?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-qual-e-a-principal-licao-sobre-sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Qual é a principal lição sobre SAST?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssrf-aplicacoes-java-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSRF em aplicações Java/Spring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cleartext-submission-integracoes-server-to-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cleartext Submission em integrações server-to-server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../privacy-violation-credenciais-logs-respostas-parceiros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Privacy Violation - credenciais, logs e respostas de parceiros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../path-traversal-upload-download-seguro-arquivos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Path Traversal e upload/download seguro de arquivos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unchecked-input-loop-condition-dos-processamento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unchecked Input for Loop Condition e prevenção de DoS por processamento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../headers-seguranca-hsts-json-nosniff/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Headers de segurança- HSTS, JSON explícito e nosniff
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sca-dependencias-vulneraveis-cves-gestao-bibliotecas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SCA na prática - dependências vulneráveis, CVEs e gestão de bibliotecas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../triagem-vulnerabilidades-corrigir-mitigar-not-exploitable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Triagem de vulnerabilidades - corrigir, mitigar ou marcar como Not Exploitable
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ferramentas-appsec-sast-sca-dast/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ferramentas de AppSec - como SAST, SCA e DAST encontram vulnerabilidades
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-problema-real-que-sast-resolve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O problema real que SAST resolve
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-nos-detalhes-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar nos detalhes: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Source
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sink" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sink
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sink">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#consulta-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Consulta SQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#escrita-em-arquivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escrita em arquivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chamada-http-outbound" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chamada HTTP outbound
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#renderizacao-html-sem-escape" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Renderização HTML sem escape
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#log" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Loop
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resposta-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resposta HTTP
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#taint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Taint
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#taint-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Taint Flow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-inseguro-possivel-path-traversal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo inseguro: possível Path Traversal
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#corrigindo-com-identificador-interno-e-normalizacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Corrigindo com identificador interno e normalização
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sanitizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sanitizer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validator-nao-e-sempre-sanitizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validator não é sempre sanitizer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-possivel-ssrf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo: possível SSRF
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#correcao-com-allowlist-de-parceiros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Correção com allowlist de parceiros
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#falso-positivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Falso positivo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplos-de-falso-positivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplos de falso positivo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exemplos de falso positivo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-sink-html-inexistente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Sink HTML inexistente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-loop-com-limite-matematico-demonstravel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Loop com limite matemático demonstrável
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-credencial-enviada-em-fluxo-funcional-autorizado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Credencial enviada em fluxo funcional autorizado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-controle-customizado-nao-reconhecido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Controle customizado não reconhecido
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verdadeiro-positivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verdadeiro positivo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#risco-mitigado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Risco mitigado
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#not-exploitable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Not Exploitable
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nao-faca-correcoes-artificiais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Não faça correções artificiais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#processo-de-triagem-sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Processo de triagem SAST
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Processo de triagem SAST">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-identificar-a-query" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Identificar a query
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-ler-source-e-sink" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Ler source e sink
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-reconstruir-o-fluxo-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Reconstruir o fluxo real
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-identificar-a-fronteira-de-confianca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Identificar a fronteira de confiança
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-avaliar-o-contexto-do-sink" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Avaliar o contexto do sink
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-procurar-controles-existentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Procurar controles existentes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-avaliar-explorabilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Avaliar explorabilidade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-decidir-o-tratamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Decidir o tratamento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-criar-evidencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Criar evidências
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-justificativa-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de justificativa técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-teste-para-contrato-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de teste para contrato JSON
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sast-e-contexto-de-negocio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SAST e contexto de negócio
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sast-e-frameworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SAST e frameworks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas-ao-corrigir-findings-sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas ao corrigir findings SAST
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boas práticas ao corrigir findings SAST">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#preserve-o-contrato-funcional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Preserve o contrato funcional
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aplique-controle-proximo-ao-sink" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aplique controle próximo ao sink
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nao-confie-apenas-em-premissas-externas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Não confie apenas em premissas externas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#escreva-testes-de-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escreva testes de segurança
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documente-risco-residual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Documente risco residual
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-corrigir-pelo-nome-da-vulnerabilidade-nao-pelo-fluxo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Corrigir pelo nome da vulnerabilidade, não pelo fluxo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-classificar-falso-positivo-sem-evidencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Classificar falso positivo sem evidência
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-criar-codigo-artificial-para-quebrar-taint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Criar código artificial para quebrar taint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-ignorar-severidade-alta-automaticamente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Ignorar severidade alta automaticamente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-achar-que-autenticacao-elimina-vulnerabilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Achar que autenticação elimina vulnerabilidade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-nao-executar-novo-scan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Não executar novo scan
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-nao-criar-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Não criar testes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-nao-envolver-appsec-quando-a-query-precisa-ser-ajustada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Não envolver AppSec quando a query precisa ser ajustada
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-corrigir-no-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando corrigir no código?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-mitigar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando mitigar?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-classificar-como-falso-positivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando classificar como falso positivo?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-classificar-como-not-exploitable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando classificar como Not Exploitable?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-solicitar-ajuste-de-query" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando solicitar ajuste de query?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checklist-pratico-de-triagem-sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist prático de triagem SAST
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Checklist prático de triagem SAST">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#identificacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Identificação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#source_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Source
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sink_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sink
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fluxo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fluxo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#controle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Controle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisão
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evidencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evidência
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Perguntas de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-o-que-e-sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. O que é SAST?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-o-que-e-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. O que é source?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-o-que-e-sink" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. O que é sink?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-o-que-e-taint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. O que é taint?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-o-que-e-taint-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. O que é taint flow?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-o-que-e-falso-positivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. O que é falso positivo?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-o-que-e-true-positive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. O que é true positive?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-o-que-significa-not-exploitable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. O que significa Not Exploitable?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-qual-e-a-diferenca-entre-validator-e-sanitizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Qual é a diferença entre validator e sanitizer?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-por-que-nao-devemos-criar-codigo-artificial-para-calar-o-scanner" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Por que não devemos criar código artificial para calar o scanner?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-por-que-autenticacao-nao-elimina-vulnerabilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Por que autenticação não elimina vulnerabilidade?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-o-que-deve-conter-uma-boa-justificativa-de-falso-positivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. O que deve conter uma boa justificativa de falso positivo?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-quando-pedir-ajuste-da-query-corporativa-do-sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Quando pedir ajuste da query corporativa do SAST?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-por-que-o-controle-deve-ficar-proximo-ao-sink" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Por que o controle deve ficar próximo ao sink?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-qual-e-a-principal-licao-sobre-sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Qual é a principal lição sobre SAST?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="sast-na-pratica-source-sink-taint-flow-e-falso-positivo">SAST na prática: Source, Sink, Taint Flow e falso positivo</h1>
+<p>SAST significa Static Application Security Testing, ou Teste Estático de Segurança de Aplicações.</p>
+<p>Na prática, é uma forma de analisar o código-fonte, bytecode ou artefatos da aplicação sem precisar executar o sistema. A ferramenta examina o código procurando padrões que podem indicar vulnerabilidades.</p>
+<p>Ferramentas SAST costumam apontar problemas como:</p>
+<ul>
+<li>SQL Injection;</li>
+<li>Cross-Site Scripting;</li>
+<li>Server-Side Request Forgery;</li>
+<li>Path Traversal;</li>
+<li>exposição de dados sensíveis em logs;</li>
+<li>envio de dados sensíveis por canal inseguro;</li>
+<li>uso de entrada externa em loops;</li>
+<li>headers de segurança ausentes;</li>
+<li>uso inseguro de arquivos;</li>
+<li>fluxos suspeitos de credenciais.</li>
+</ul>
+<p>Mas usar SAST bem não significa apenas rodar o scanner e corrigir tudo mecanicamente.</p>
+<p>O ponto mais importante é aprender a interpretar o finding.</p>
+<p>Um finding normalmente mostra:</p>
+<ul>
+<li>de onde o dado veio;</li>
+<li>por onde ele passou;</li>
+<li>onde ele chegou;</li>
+<li>por que isso pode ser perigoso;</li>
+<li>qual vulnerabilidade a ferramenta acredita existir;</li>
+<li>qual severidade foi atribuída.</li>
+</ul>
+<p>Esses elementos geralmente aparecem com nomes como:</p>
+<ul>
+<li>source;</li>
+<li>sink;</li>
+<li>taint flow;</li>
+<li>query;</li>
+<li>result state;</li>
+<li>severity;</li>
+<li>remediation.</li>
+</ul>
+<p>Saber ler isso evita dois extremos perigosos:</p>
+<ol>
+<li>ignorar vulnerabilidades reais achando que “é coisa do scanner”;</li>
+<li>alterar código sem necessidade apenas para “calar” a ferramenta.</li>
+</ol>
+<p>O objetivo deste artigo é explicar como interpretar findings SAST de forma técnica, defensiva e profissional.</p>
+<h2 id="o-problema-real-que-sast-resolve">O problema real que SAST resolve</h2>
+<p>Desenvolvedores escrevem código todos os dias. Em uma aplicação web, esse código recebe dados externos, chama APIs, acessa banco de dados, grava arquivos, gera respostas HTTP, registra logs e integra com sistemas parceiros.</p>
+<p>Cada uma dessas ações pode criar uma falha de segurança se os dados forem usados de forma incorreta.</p>
+<p>O problema é que muitas vulnerabilidades não aparecem claramente em um teste funcional.</p>
+<p>Um teste funcional pode confirmar que o cadastro de uma resenha da banda <strong>Gojira</strong> funciona. Mas talvez ele não perceba que:</p>
+<ul>
+<li>o campo de texto pode ser exibido sem escape;</li>
+<li>o nome de arquivo pode controlar um path;</li>
+<li>uma URL externa pode ser manipulada;</li>
+<li>uma credencial pode aparecer no log;</li>
+<li>uma entrada pode controlar um loop grande demais;</li>
+<li>um endpoint retorna JSON sem media type explícito;</li>
+<li>um serviço chama HTTP em vez de HTTPS.</li>
+</ul>
+<p>O SAST ajuda justamente porque ele olha para fluxos de código que humanos podem deixar passar em uma revisão comum.</p>
+<p>Ele não substitui o desenvolvedor. Ele aumenta a visibilidade.</p>
+<h2 id="antes-de-entrar-nos-detalhes-uma-ideia-simples">Antes de entrar nos detalhes: uma ideia simples</h2>
+<p>Pense na aplicação fictícia <code>meucatalogomusical.com</code>.</p>
+<p>Ela permite que usuários criem resenhas de álbuns de Metal e Hard Rock.</p>
+<p>Um usuário envia uma resenha sobre a banda <strong>Mastodon</strong>:</p>
+<div class="highlight"><pre><span></span><code>Esse álbum tem uma produção pesada e progressiva.
+</code></pre></div>
+<p>Esse texto entra na aplicação por uma API.</p>
+<p>Depois pode ser:</p>
+<ul>
+<li>validado;</li>
+<li>salvo no banco;</li>
+<li>exibido em uma página;</li>
+<li>enviado para outro serviço;</li>
+<li>registrado em log;</li>
+<li>retornado em JSON;</li>
+<li>usado em uma notificação.</li>
+</ul>
+<p>Para o SAST, esse texto pode ser considerado um dado contaminado, ou seja, um dado vindo de uma fonte externa.</p>
+<p>A ferramenta tenta responder:</p>
+<blockquote>
+<p>Esse dado externo chega a algum ponto sensível sem controle adequado?</p>
+</blockquote>
+<p>Se chega a uma resposta HTML sem escape, pode ser XSS.</p>
+<p>Se chega a uma query SQL concatenada, pode ser SQL Injection.</p>
+<p>Se chega a uma chamada HTTP que controla o destino, pode ser SSRF.</p>
+<p>Se chega a um caminho de arquivo, pode ser Path Traversal.</p>
+<p>Se chega a um log contendo dado sensível, pode ser Privacy Violation.</p>
+<p>SAST é, em grande parte, uma tentativa automatizada de rastrear esse caminho.</p>
+<h2 id="definicao-tecnica">Definição técnica</h2>
+<p>SAST é uma técnica de teste de segurança que analisa a aplicação sem executá-la, procurando padrões vulneráveis no código.</p>
+<p>Em uma análise de fluxo de dados, a ferramenta procura principalmente:</p>
+<ul>
+<li><strong>source</strong>: ponto onde um dado entra ou nasce;</li>
+<li><strong>sink</strong>: ponto sensível onde esse dado é usado;</li>
+<li><strong>taint flow</strong>: caminho percorrido pelo dado entre source e sink;</li>
+<li><strong>sanitizer</strong>: controle que torna o dado seguro para determinado contexto;</li>
+<li><strong>validator</strong>: controle que verifica formato, faixa, tipo ou regra esperada;</li>
+<li><strong>finding</strong>: resultado reportado pelo scanner;</li>
+<li><strong>false positive</strong>: finding reportado como vulnerabilidade, mas que não representa uma vulnerabilidade real no contexto analisado;</li>
+<li><strong>true positive</strong>: finding que representa uma vulnerabilidade real;</li>
+<li><strong>not exploitable</strong>: finding cujo fluxo existe parcialmente, mas não é explorável nas condições reais do sistema.</li>
+</ul>
+<p>Esses conceitos são essenciais para interpretar relatórios SAST.</p>
+<h2 id="source">Source</h2>
+<p>Source é o ponto de origem do dado analisado.</p>
+<p>Normalmente, o source é uma entrada externa ou um dado não confiável.</p>
+<p>Exemplos comuns em Java/Spring:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">termo</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nd">@PathVariable</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nd">@RequestBody</span><span class="w"> </span><span class="n">NovaResenhaRequest</span><span class="w"> </span><span class="n">request</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">MultipartFile</span><span class="w"> </span><span class="n">arquivo</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">request</span><span class="p">.</span><span class="na">getHeader</span><span class="p">(</span><span class="s">&quot;X-Partner-Id&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">cookie</span><span class="p">.</span><span class="na">getValue</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">Files</span><span class="p">.</span><span class="na">newInputStream</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">s3Client</span><span class="p">.</span><span class="na">getObject</span><span class="p">(...)</span>
+</code></pre></div>
+<p>Nem todo source é necessariamente malicioso. Ele é apenas uma origem que não deve ser tratada como automaticamente confiável.</p>
+<p>Um erro comum é pensar:</p>
+<blockquote>
+<p>“Esse endpoint é interno, então a entrada é confiável.”</p>
+</blockquote>
+<p>Mesmo em APIs internas, os dados ainda atravessam fronteiras de confiança. Autenticação reduz superfície, mas não transforma entrada externa em dado seguro para qualquer uso.</p>
+<h2 id="sink">Sink</h2>
+<p>Sink é um ponto sensível do código.</p>
+<p>É uma operação que pode causar impacto de segurança se receber dado não confiável sem controle adequado.</p>
+<p>Exemplos de sinks:</p>
+<h3 id="consulta-sql">Consulta SQL</h3>
+<div class="highlight"><pre><span></span><code><span class="n">jdbcTemplate</span><span class="p">.</span><span class="na">query</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span><span class="w"> </span><span class="n">rowMapper</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="escrita-em-arquivo">Escrita em arquivo</h3>
+<div class="highlight"><pre><span></span><code><span class="n">Files</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="w"> </span><span class="n">conteudo</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="chamada-http-outbound">Chamada HTTP outbound</h3>
+<div class="highlight"><pre><span></span><code><span class="n">httpClient</span><span class="p">.</span><span class="na">send</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">BodyHandlers</span><span class="p">.</span><span class="na">ofString</span><span class="p">());</span>
+</code></pre></div>
+<h3 id="renderizacao-html-sem-escape">Renderização HTML sem escape</h3>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">th:utext</span><span class="o">=</span><span class="s">&quot;${comentario.conteudo}&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+<h3 id="log">Log</h3>
+<div class="highlight"><pre><span></span><code><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Dados recebidos: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="loop">Loop</h3>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">totalLinhas</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">processarLinha</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="resposta-http">Resposta HTTP</h3>
+<div class="highlight"><pre><span></span><code><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">ok</span><span class="p">(</span><span class="n">dados</span><span class="p">);</span>
+</code></pre></div>
+<p>Um sink não é ruim por si só. Consultar banco, gravar arquivo, chamar API, registrar log e retornar resposta são atividades normais de uma aplicação.</p>
+<p>O risco aparece quando um dado não confiável chega ao sink sem o controle correto para aquele contexto.</p>
+<h2 id="taint">Taint</h2>
+<p>Taint significa contaminação.</p>
+<p>Quando o SAST identifica que um valor veio de uma fonte externa, ele pode marcar esse valor como tainted.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/buscar&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">BandaResponse</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">buscar</span><span class="p">(</span><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">bandaService</span><span class="p">.</span><span class="na">buscar</span><span class="p">(</span><span class="n">nome</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>O valor <code>nome</code> veio da requisição HTTP. Portanto, a ferramenta pode considerá-lo tainted.</p>
+<p>Se esse valor for passado por vários métodos, a ferramenta tenta acompanhar o fluxo:</p>
+<div class="highlight"><pre><span></span><code>@RequestParam nome
+    -&gt; controller
+    -&gt; service
+    -&gt; repository
+    -&gt; query SQL
+</code></pre></div>
+<p>Se chegar a uma query SQL concatenada, o scanner pode apontar SQL Injection.</p>
+<h2 id="taint-flow">Taint Flow</h2>
+<p>Taint flow é o caminho entre o source e o sink.</p>
+<p>Exemplo conceitual:</p>
+<div class="highlight"><pre><span></span><code>source: @RequestParam nomeArquivo
+    -&gt; AnexoController.upload(...)
+    -&gt; AnexoService.salvar(...)
+    -&gt; FileUtil.write(...)
+sink: Files.write(...)
+</code></pre></div>
+<p>O SAST tenta reconstruir esse caminho analisando chamadas de método, variáveis, objetos, retornos e transformações.</p>
+<p>Em relatórios de ferramentas como Checkmarx, esse caminho costuma aparecer como uma cadeia de arquivos, métodos, linhas e colunas.</p>
+<p>Saber ler essa cadeia é mais importante do que olhar apenas o nome da vulnerabilidade.</p>
+<h2 id="exemplo-inseguro-possivel-path-traversal">Exemplo inseguro: possível Path Traversal</h2>
+<p>Imagine uma funcionalidade de upload de imagem de capa para álbuns da banda <strong>Epica</strong>.</p>
+<p>Exemplo inseguro:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.albuns.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.*</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.multipart.MultipartFile</span><span class="p">;</span>
+
+<span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/api/albuns&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CapaAlbumController</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">CapaAlbumService</span><span class="w"> </span><span class="n">capaAlbumService</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">CapaAlbumController</span><span class="p">(</span><span class="n">CapaAlbumService</span><span class="w"> </span><span class="n">capaAlbumService</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">capaAlbumService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">capaAlbumService</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@PostMapping</span><span class="p">(</span><span class="s">&quot;/{albumId}/capa&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">enviarCapa</span><span class="p">(</span>
+<span class="w">            </span><span class="nd">@PathVariable</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">albumId</span><span class="p">,</span>
+<span class="w">            </span><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nomeArquivo</span><span class="p">,</span>
+<span class="w">            </span><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">MultipartFile</span><span class="w"> </span><span class="n">arquivo</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">capaAlbumService</span><span class="p">.</span><span class="na">salvarCapa</span><span class="p">(</span><span class="n">albumId</span><span class="p">,</span><span class="w"> </span><span class="n">nomeArquivo</span><span class="p">,</span><span class="w"> </span><span class="n">arquivo</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Service:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.albuns.application</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.multipart.MultipartFile</span><span class="p">;</span>
+
+<span class="nd">@Service</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CapaAlbumService</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">FileStorage</span><span class="w"> </span><span class="n">fileStorage</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">CapaAlbumService</span><span class="p">(</span><span class="n">FileStorage</span><span class="w"> </span><span class="n">fileStorage</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">fileStorage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fileStorage</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">salvarCapa</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">albumId</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nomeArquivo</span><span class="p">,</span><span class="w"> </span><span class="n">MultipartFile</span><span class="w"> </span><span class="n">arquivo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">fileStorage</span><span class="p">.</span><span class="na">salvar</span><span class="p">(</span><span class="n">nomeArquivo</span><span class="p">,</span><span class="w"> </span><span class="n">arquivo</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Storage inseguro:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.albuns.infra</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Component</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.multipart.MultipartFile</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Files</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Path</span><span class="p">;</span>
+
+<span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">FileStorage</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Path</span><span class="w"> </span><span class="n">diretorioBase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;/var/app/uploads&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">salvar</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nomeArquivo</span><span class="p">,</span><span class="w"> </span><span class="n">MultipartFile</span><span class="w"> </span><span class="n">arquivo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Path</span><span class="w"> </span><span class="n">destino</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">diretorioBase</span><span class="p">.</span><span class="na">resolve</span><span class="p">(</span><span class="n">nomeArquivo</span><span class="p">);</span>
+<span class="w">            </span><span class="n">Files</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">destino</span><span class="p">,</span><span class="w"> </span><span class="n">arquivo</span><span class="p">.</span><span class="na">getBytes</span><span class="p">());</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;Não foi possível salvar o arquivo.&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ex</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>O SAST poderia montar este fluxo:</p>
+<div class="highlight"><pre><span></span><code>source: @RequestParam nomeArquivo
+    -&gt; CapaAlbumController.enviarCapa
+    -&gt; CapaAlbumService.salvarCapa
+    -&gt; FileStorage.salvar
+sink: Files.write
+</code></pre></div>
+<p>A preocupação é que <code>nomeArquivo</code> vem da requisição e participa da construção de um caminho de arquivo.</p>
+<p>Mesmo que a aplicação espere algo simples como:</p>
+<div class="highlight"><pre><span></span><code>capa-epica.jpg
+</code></pre></div>
+<p>o código não garante que esse valor seja apenas um nome de arquivo seguro.</p>
+<h2 id="corrigindo-com-identificador-interno-e-normalizacao">Corrigindo com identificador interno e normalização</h2>
+<p>Uma abordagem melhor é não confiar no nome enviado pelo usuário como caminho de escrita.</p>
+<p>Exemplo defensivo:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.albuns.infra</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Component</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.multipart.MultipartFile</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Files</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Path</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Set</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.UUID</span><span class="p">;</span>
+
+<span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">FileStorage</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">EXTENSOES_PERMITIDAS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Set</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;jpg&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;jpeg&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;png&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;webp&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Path</span><span class="w"> </span><span class="n">diretorioBase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;/var/app/uploads&quot;</span><span class="p">).</span><span class="na">toAbsolutePath</span><span class="p">().</span><span class="na">normalize</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">salvarImagem</span><span class="p">(</span><span class="n">MultipartFile</span><span class="w"> </span><span class="n">arquivo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">extensao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">obterExtensaoPermitida</span><span class="p">(</span><span class="n">arquivo</span><span class="p">.</span><span class="na">getOriginalFilename</span><span class="p">());</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">nomeInterno</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UUID</span><span class="p">.</span><span class="na">randomUUID</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;.&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">extensao</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">Path</span><span class="w"> </span><span class="n">destino</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">diretorioBase</span><span class="p">.</span><span class="na">resolve</span><span class="p">(</span><span class="n">nomeInterno</span><span class="p">).</span><span class="na">normalize</span><span class="p">();</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">destino</span><span class="p">.</span><span class="na">startsWith</span><span class="p">(</span><span class="n">diretorioBase</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Caminho de arquivo inválido.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Files</span><span class="p">.</span><span class="na">createDirectories</span><span class="p">(</span><span class="n">diretorioBase</span><span class="p">);</span>
+<span class="w">            </span><span class="n">Files</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">destino</span><span class="p">,</span><span class="w"> </span><span class="n">arquivo</span><span class="p">.</span><span class="na">getBytes</span><span class="p">());</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">nomeInterno</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;Não foi possível salvar o arquivo.&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ex</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">obterExtensaoPermitida</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nomeOriginal</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nomeOriginal</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">nomeOriginal</span><span class="p">.</span><span class="na">isBlank</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Nome do arquivo é obrigatório.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">ultimoPonto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nomeOriginal</span><span class="p">.</span><span class="na">lastIndexOf</span><span class="p">(</span><span class="s">&quot;.&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ultimoPonto</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">ultimoPonto</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">nomeOriginal</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Extensão do arquivo é obrigatória.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">extensao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nomeOriginal</span><span class="p">.</span><span class="na">substring</span><span class="p">(</span><span class="n">ultimoPonto</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="na">toLowerCase</span><span class="p">();</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">EXTENSOES_PERMITIDAS</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">extensao</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Extensão de arquivo não permitida.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">extensao</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Aqui existem várias decisões defensivas:</p>
+<ul>
+<li>o usuário não controla o nome final do arquivo;</li>
+<li>o nome interno é gerado pela aplicação;</li>
+<li>o diretório base é absoluto e normalizado;</li>
+<li>o destino final é normalizado;</li>
+<li>o destino precisa continuar dentro do diretório base;</li>
+<li>a extensão é validada por lista permitida;</li>
+<li>o código não usa o nome original como path final.</li>
+</ul>
+<p>Esse é um exemplo de correção real, não apenas uma tentativa de esconder o fluxo do scanner.</p>
+<h2 id="sanitizer">Sanitizer</h2>
+<p>Sanitizer é um controle que torna um dado seguro para determinado contexto.</p>
+<p>Exemplos:</p>
+<ul>
+<li>escape HTML antes de renderizar texto em página;</li>
+<li>parametrização antes de enviar valor para SQL;</li>
+<li>validação de URI antes de chamada outbound;</li>
+<li>normalização e verificação de path antes de escrita em arquivo;</li>
+<li>lista permitida para nomes de colunas;</li>
+<li>remoção de campos secretos antes de devolver resposta pública.</li>
+</ul>
+<p>Um ponto essencial:</p>
+<blockquote>
+<p>Um sanitizer só é sanitizer para um contexto específico.</p>
+</blockquote>
+<p>Escapar HTML não torna uma URL segura contra SSRF.</p>
+<p>Validar HTTPS não garante que o host é autorizado.</p>
+<p>Limitar tamanho de string não torna uma query SQL segura.</p>
+<p>Normalizar path não resolve XSS.</p>
+<p>Por isso, ao ler um finding SAST, não basta perguntar:</p>
+<blockquote>
+<p>“Existe alguma validação?”</p>
+</blockquote>
+<p>A pergunta correta é:</p>
+<blockquote>
+<p>“Existe um controle adequado para este sink e para este tipo de risco?”</p>
+</blockquote>
+<h2 id="validator-nao-e-sempre-sanitizer">Validator não é sempre sanitizer</h2>
+<p>Validador e sanitizer são conceitos próximos, mas não idênticos.</p>
+<p>Um validator verifica se o dado segue uma regra.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@NotBlank</span>
+<span class="nd">@Size</span><span class="p">(</span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">120</span><span class="p">)</span>
+<span class="n">String</span><span class="w"> </span><span class="n">titulo</span>
+</code></pre></div>
+<p>Isso valida obrigatoriedade e tamanho.</p>
+<p>Mas esse campo ainda precisa ser escapado se for exibido em HTML.</p>
+<p>Outro exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="n">URI</span><span class="w"> </span><span class="n">uri</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">URI</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="n">valor</span><span class="p">);</span>
+</code></pre></div>
+<p>Isso apenas cria uma URI. Não garante que ela seja HTTPS, absoluta, com host permitido e sem redirecionamento perigoso.</p>
+<p>Validação ajuda, mas precisa ser compatível com o sink.</p>
+<h2 id="exemplo-possivel-ssrf">Exemplo: possível SSRF</h2>
+<p>Imagine que <code>meucatalogomusical.com</code> tenha uma integração para importar informações de uma API parceira sobre a banda <strong>Sabaton</strong>.</p>
+<p>Exemplo perigoso:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.integracoes.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.*</span><span class="p">;</span>
+
+<span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/api/importacoes&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ImportacaoController</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ImportacaoService</span><span class="w"> </span><span class="n">importacaoService</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ImportacaoController</span><span class="p">(</span><span class="n">ImportacaoService</span><span class="w"> </span><span class="n">importacaoService</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">importacaoService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">importacaoService</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@PostMapping</span><span class="p">(</span><span class="s">&quot;/banda&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">importar</span><span class="p">(</span><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">urlParceiro</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">importacaoService</span><span class="p">.</span><span class="na">importar</span><span class="p">(</span><span class="n">urlParceiro</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Service:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.integracoes.application</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.client.RestTemplate</span><span class="p">;</span>
+
+<span class="nd">@Service</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ImportacaoService</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">RestTemplate</span><span class="w"> </span><span class="n">restTemplate</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ImportacaoService</span><span class="p">(</span><span class="n">RestTemplate</span><span class="w"> </span><span class="n">restTemplate</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">restTemplate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">restTemplate</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">importar</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">urlParceiro</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">restTemplate</span><span class="p">.</span><span class="na">getForObject</span><span class="p">(</span><span class="n">urlParceiro</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Possível finding:</p>
+<div class="highlight"><pre><span></span><code>Query: SSRF
+Source: @RequestParam urlParceiro
+Sink: RestTemplate.getForObject
+</code></pre></div>
+<p>A preocupação é que o usuário controla o destino da requisição server-side.</p>
+<p>Uma correção melhor seria não aceitar URL livre.</p>
+<h2 id="correcao-com-allowlist-de-parceiros">Correção com allowlist de parceiros</h2>
+<p>Exemplo defensivo:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.integracoes.domain</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="n">ParceiroMusical</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">CATALOGO_OFICIAL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">API_EVENTOS</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.integracoes.application</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.meucatalogomusical.integracoes.domain.ParceiroMusical</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Component</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.net.URI</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Map</span><span class="p">;</span>
+
+<span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ParceiroUriResolver</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">ParceiroMusical</span><span class="p">,</span><span class="w"> </span><span class="n">URI</span><span class="o">&gt;</span><span class="w"> </span><span class="n">endpoints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Map</span><span class="p">.</span><span class="na">of</span><span class="p">(</span>
+<span class="w">            </span><span class="n">ParceiroMusical</span><span class="p">.</span><span class="na">CATALOGO_OFICIAL</span><span class="p">,</span><span class="w"> </span><span class="n">URI</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="s">&quot;https://api-parceira.example/catalogo&quot;</span><span class="p">),</span>
+<span class="w">            </span><span class="n">ParceiroMusical</span><span class="p">.</span><span class="na">API_EVENTOS</span><span class="p">,</span><span class="w"> </span><span class="n">URI</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="s">&quot;https://api-eventos.example/shows&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">URI</span><span class="w"> </span><span class="nf">resolver</span><span class="p">(</span><span class="n">ParceiroMusical</span><span class="w"> </span><span class="n">parceiro</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">URI</span><span class="w"> </span><span class="n">uri</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endpoints</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">parceiro</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">uri</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Parceiro não autorizado.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="s">&quot;https&quot;</span><span class="p">.</span><span class="na">equalsIgnoreCase</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="na">getScheme</span><span class="p">())</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">uri</span><span class="p">.</span><span class="na">getHost</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;Endpoint do parceiro mal configurado.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">uri</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.integracoes.application</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.meucatalogomusical.integracoes.domain.ParceiroMusical</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.client.RestTemplate</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.net.URI</span><span class="p">;</span>
+
+<span class="nd">@Service</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ImportacaoService</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">RestTemplate</span><span class="w"> </span><span class="n">restTemplate</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ParceiroUriResolver</span><span class="w"> </span><span class="n">parceiroUriResolver</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ImportacaoService</span><span class="p">(</span>
+<span class="w">            </span><span class="n">RestTemplate</span><span class="w"> </span><span class="n">restTemplate</span><span class="p">,</span>
+<span class="w">            </span><span class="n">ParceiroUriResolver</span><span class="w"> </span><span class="n">parceiroUriResolver</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">restTemplate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">restTemplate</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">parceiroUriResolver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parceiroUriResolver</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">importar</span><span class="p">(</span><span class="n">ParceiroMusical</span><span class="w"> </span><span class="n">parceiro</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">URI</span><span class="w"> </span><span class="n">endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parceiroUriResolver</span><span class="p">.</span><span class="na">resolver</span><span class="p">(</span><span class="n">parceiro</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">restTemplate</span><span class="p">.</span><span class="na">getForObject</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Agora o cliente não envia a URL final.</p>
+<p>Ele escolhe um parceiro conhecido, e a aplicação resolve o endpoint a partir de configuração controlada.</p>
+<p>Essa é uma mudança de desenho mais segura.</p>
+<h2 id="falso-positivo">Falso positivo</h2>
+<p>Falso positivo é um finding que a ferramenta reporta como vulnerabilidade, mas que, após análise técnica, não representa vulnerabilidade real no contexto.</p>
+<p>Isso pode acontecer porque SAST trabalha por aproximação.</p>
+<p>A ferramenta nem sempre entende:</p>
+<ul>
+<li>regra de negócio;</li>
+<li>configuração real;</li>
+<li>autenticação corporativa;</li>
+<li>contratos legados;</li>
+<li>serializers;</li>
+<li>frameworks;</li>
+<li>headers HTTP;</li>
+<li>media type;</li>
+<li>consumidores reais;</li>
+<li>controles customizados;</li>
+<li>validadores internos;</li>
+<li>branches inalcançáveis;</li>
+<li>limites matemáticos do algoritmo.</li>
+</ul>
+<p>Mas cuidado: chamar algo de falso positivo exige evidência.</p>
+<p>Não basta dizer:</p>
+<blockquote>
+<p>“Isso nunca vai acontecer.”</p>
+</blockquote>
+<p>Uma boa triagem precisa demonstrar por que o fluxo não é explorável.</p>
+<h2 id="exemplos-de-falso-positivo">Exemplos de falso positivo</h2>
+<h3 id="1-sink-html-inexistente">1. Sink HTML inexistente</h3>
+<p>A ferramenta aponta XSS, mas o endpoint é uma API JSON server-to-server, com:</p>
+<ul>
+<li><code>Content-Type: application/json</code>;</li>
+<li><code>produces = application/json</code>;</li>
+<li><code>X-Content-Type-Options: nosniff</code>;</li>
+<li>rejeição de <code>Accept: text/html</code>;</li>
+<li>ausência de frontend que injete o campo em DOM.</li>
+</ul>
+<p>Nesse caso, pode existir dado não confiável retornando ao cliente, mas não existe contexto HTML ou JavaScript onde o XSS se concretize.</p>
+<p>Mesmo assim, o hardening é útil: tornar o contrato HTTP explícito reduz ambiguidade para humanos, clientes e scanners.</p>
+<h3 id="2-loop-com-limite-matematico-demonstravel">2. Loop com limite matemático demonstrável</h3>
+<p>A ferramenta aponta que entrada externa controla um loop.</p>
+<p>Após análise, o valor que chega ao loop é derivado de dois dígitos decimais e só pode produzir <code>1</code> ou <code>2</code>.</p>
+<p>Nesse caso, o risco de número arbitrário de iterações pode não existir.</p>
+<p>Ainda assim, pode fazer sentido deixar o limite explícito no código para facilitar manutenção e reduzir alertas futuros.</p>
+<h3 id="3-credencial-enviada-em-fluxo-funcional-autorizado">3. Credencial enviada em fluxo funcional autorizado</h3>
+<p>A ferramenta aponta Privacy Violation porque <code>client_id</code> e <code>client_secret</code> são enviados para fora da aplicação.</p>
+<p>Mas o fluxo real é autenticação OAuth <code>client_credentials</code>, com:</p>
+<ul>
+<li>endpoint vindo de configuração;</li>
+<li>HTTPS obrigatório;</li>
+<li>ausência de log de credenciais;</li>
+<li>resposta pública sem reflexão de segredo;</li>
+<li>falha fechada se o parceiro ecoar segredo;</li>
+<li>contrato funcional preservado.</li>
+</ul>
+<p>Nesse caso, a saída da credencial não é automaticamente uma vulnerabilidade. Ela é parte do protocolo. O risco precisa ser avaliado pelos controles existentes.</p>
+<h3 id="4-controle-customizado-nao-reconhecido">4. Controle customizado não reconhecido</h3>
+<p>A aplicação possui um método como:</p>
+<div class="highlight"><pre><span></span><code><span class="n">CredentialReflectionGuard</span><span class="p">.</span><span class="na">verifyAndReturn</span><span class="p">(</span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">credentials</span><span class="p">);</span>
+</code></pre></div>
+<p>Esse método remove ou rejeita campos secretos.</p>
+<p>Mas o scanner não sabe que ele é um sanitizer para aquela query.</p>
+<p>Nesse caso, pode ser necessário:</p>
+<ul>
+<li>documentar a evidência;</li>
+<li>criar testes;</li>
+<li>justificar triagem;</li>
+<li>pedir ao time de AppSec para reconhecer o método como sanitizador específico;</li>
+<li>evitar gambiarras artificiais só para quebrar o fluxo.</li>
+</ul>
+<h2 id="verdadeiro-positivo">Verdadeiro positivo</h2>
+<p>True positive é um finding que representa uma vulnerabilidade real ou uma fragilidade que precisa ser corrigida.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">sql</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SELECT * FROM bandas WHERE nome = &#39;&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nome</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;&#39;&quot;</span><span class="p">;</span>
+</code></pre></div>
+<p>Se <code>nome</code> vem da requisição, isso é um problema real.</p>
+<p>Outro exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="w"> </span><span class="n">destino</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">diretorioBase</span><span class="p">.</span><span class="na">resolve</span><span class="p">(</span><span class="n">nomeArquivo</span><span class="p">);</span>
+<span class="n">Files</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">destino</span><span class="p">,</span><span class="w"> </span><span class="n">bytes</span><span class="p">);</span>
+</code></pre></div>
+<p>Se <code>nomeArquivo</code> vem do usuário e não há normalização, geração de nome interno ou verificação do diretório final, o finding de Path Traversal pode ser real.</p>
+<p>Outro exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;Credenciais recebidas: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">credentials</span><span class="p">);</span>
+</code></pre></div>
+<p>Se <code>credentials</code> contém segredo, isso é uma exposição real em log.</p>
+<h2 id="risco-mitigado">Risco mitigado</h2>
+<p>Às vezes, o finding não desaparece, mas o risco foi mitigado por controles reais.</p>
+<p>Exemplo:</p>
+<ul>
+<li>a ferramenta continua apontando SSRF;</li>
+<li>o código agora só aceita URI absoluta HTTPS;</li>
+<li>o host vem de allowlist;</li>
+<li>redirects estão desabilitados;</li>
+<li>há teste cobrindo HTTP, URI relativa e host inválido;</li>
+<li>não há controle do destino pelo usuário.</li>
+</ul>
+<p>Nesse caso, pode ser necessário classificar como mitigado ou solicitar ajuste da regra corporativa do scanner.</p>
+<p>O ponto importante é: mitigação precisa ser comprovável.</p>
+<h2 id="not-exploitable">Not Exploitable</h2>
+<p><code>Not Exploitable</code> é uma classificação usada quando o finding existe do ponto de vista do scanner, mas não é explorável no contexto real.</p>
+<p>Exemplo:</p>
+<ul>
+<li>source existe;</li>
+<li>sink existe;</li>
+<li>a ferramenta liga os dois;</li>
+<li>mas existe uma guarda funcional que impede exploração;</li>
+<li>ou o caminho não é alcançável;</li>
+<li>ou o dado chega ao sink em um contexto que não executa;</li>
+<li>ou a operação é funcionalmente obrigatória e protegida por controles suficientes.</li>
+</ul>
+<p>Para classificar como <code>Not Exploitable</code>, a justificativa deve responder:</p>
+<ol>
+<li>Qual é o source?</li>
+<li>Qual é o sink?</li>
+<li>Qual fluxo o scanner acredita existir?</li>
+<li>Qual é o fluxo real?</li>
+<li>Qual controle impede a exploração?</li>
+<li>Quais evidências provam isso?</li>
+<li>Quais testes foram executados?</li>
+<li>Qual risco residual permanece?</li>
+</ol>
+<h2 id="nao-faca-correcoes-artificiais">Não faça correções artificiais</h2>
+<p>Um erro perigoso é alterar o código apenas para “enganar” o SAST.</p>
+<p>Exemplos ruins:</p>
+<ul>
+<li>criar wrapper vazio sem função real;</li>
+<li>serializar e desserializar sem necessidade;</li>
+<li>usar reflexão para esconder fluxo;</li>
+<li>colocar condição inalcançável;</li>
+<li>renomear variável para confundir scanner;</li>
+<li>quebrar contrato público;</li>
+<li>mascarar dado necessário para protocolo;</li>
+<li>remover log operacional útil sem avaliar;</li>
+<li>adicionar escape HTML em dado que nunca será HTML;</li>
+<li>engolir exceções;</li>
+<li>mover código para outro método sem controle real.</li>
+</ul>
+<p>Isso pode até fazer o finding desaparecer, mas não melhora a segurança.</p>
+<p>A correção correta é implementar controle de segurança real ou documentar tecnicamente por que o finding não é explorável.</p>
+<h2 id="processo-de-triagem-sast">Processo de triagem SAST</h2>
+<p>Um bom processo de triagem pode seguir estes passos.</p>
+<h3 id="1-identificar-a-query">1. Identificar a query</h3>
+<p>Primeiro, veja qual vulnerabilidade foi apontada.</p>
+<p>Exemplos:</p>
+<ul>
+<li>SSRF;</li>
+<li>Reflected XSS;</li>
+<li>Stored XSS;</li>
+<li>Privacy Violation;</li>
+<li>Absolute Path Traversal;</li>
+<li>Unchecked Input for Loop Condition;</li>
+<li>Cleartext Submission;</li>
+<li>Missing HSTS Header.</li>
+</ul>
+<p>A query define a hipótese da ferramenta.</p>
+<p>Mas a hipótese precisa ser validada.</p>
+<h3 id="2-ler-source-e-sink">2. Ler source e sink</h3>
+<p>Identifique:</p>
+<ul>
+<li>arquivo de origem;</li>
+<li>linha de origem;</li>
+<li>variável de origem;</li>
+<li>arquivo de destino;</li>
+<li>linha de destino;</li>
+<li>operação sensível.</li>
+</ul>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>Source: @RequestParam nomeArquivo
+Sink: Files.write
+</code></pre></div>
+<p>Isso já sugere o tipo de análise: entrada externa influenciando escrita em arquivo.</p>
+<h3 id="3-reconstruir-o-fluxo-real">3. Reconstruir o fluxo real</h3>
+<p>Não confie apenas no relatório.</p>
+<p>Abra o código e reconstrua:</p>
+<div class="highlight"><pre><span></span><code>controller
+    -&gt; service
+    -&gt; util
+    -&gt; sink
+</code></pre></div>
+<p>Verifique:</p>
+<ul>
+<li>o dado é realmente o mesmo?</li>
+<li>há transformação?</li>
+<li>há validação?</li>
+<li>há sanitização?</li>
+<li>há troca de contexto?</li>
+<li>há branch que impede o fluxo?</li>
+<li>o método é realmente chamado?</li>
+<li>a linha está atualizada?</li>
+<li>o scanner está olhando código antigo?</li>
+</ul>
+<h3 id="4-identificar-a-fronteira-de-confianca">4. Identificar a fronteira de confiança</h3>
+<p>Pergunte:</p>
+<ul>
+<li>o dado vem de usuário externo?</li>
+<li>vem de sistema interno?</li>
+<li>vem de configuração?</li>
+<li>vem de S3?</li>
+<li>vem de arquivo local?</li>
+<li>vem de banco?</li>
+<li>vem de parceiro?</li>
+<li>vem de header?</li>
+<li>vem de cookie?</li>
+</ul>
+<p>Dado interno também pode ser não confiável dependendo da fronteira.</p>
+<p>Um arquivo de configuração no S3, por exemplo, pode ser confiável para regra de negócio, mas ainda assim precisa ser tratado com cuidado se for retornado para consumidores.</p>
+<h3 id="5-avaliar-o-contexto-do-sink">5. Avaliar o contexto do sink</h3>
+<p>O mesmo dado pode ser perigoso ou seguro dependendo do contexto.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">ok</span><span class="p">(</span><span class="n">response</span><span class="p">);</span>
+</code></pre></div>
+<p>Pode ser seguro se:</p>
+<ul>
+<li>é JSON;</li>
+<li><code>Content-Type</code> é explícito;</li>
+<li>não há sniffing;</li>
+<li>nenhum consumidor injeta em HTML.</li>
+</ul>
+<p>Pode ser perigoso se:</p>
+<ul>
+<li>retorna HTML;</li>
+<li>o conteúdo é renderizado sem escape;</li>
+<li>o navegador interpreta como script;</li>
+<li>o consumidor insere em DOM.</li>
+</ul>
+<p>Contexto importa.</p>
+<h3 id="6-procurar-controles-existentes">6. Procurar controles existentes</h3>
+<p>Verifique se existem controles reais.</p>
+<p>Exemplos:</p>
+<ul>
+<li>parametrização SQL;</li>
+<li>escape HTML contextual;</li>
+<li>validação de URI;</li>
+<li>allowlist de host;</li>
+<li><code>Content-Type</code> explícito;</li>
+<li><code>nosniff</code>;</li>
+<li>limite de linhas;</li>
+<li>limite de arquivo;</li>
+<li>normalização de path;</li>
+<li>verificação <code>startsWith</code> no diretório base;</li>
+<li>remoção de campos secretos;</li>
+<li>ausência de log de credenciais;</li>
+<li>HTTPS obrigatório.</li>
+</ul>
+<h3 id="7-avaliar-explorabilidade">7. Avaliar explorabilidade</h3>
+<p>Pergunte:</p>
+<ul>
+<li>um atacante controla o source?</li>
+<li>consegue atingir o sink?</li>
+<li>consegue alterar o comportamento?</li>
+<li>consegue obter impacto?</li>
+<li>há autenticação?</li>
+<li>há autorização?</li>
+<li>o ambiente é interno?</li>
+<li>existe outro controle de infraestrutura?</li>
+<li>o controle está no código ou só em premissa?</li>
+<li>o scanner ignorou algum controle?</li>
+<li>o risco residual é aceitável?</li>
+</ul>
+<p>Não use autenticação como desculpa automática.</p>
+<p>Um endpoint autenticado ainda pode ter vulnerabilidade.</p>
+<h3 id="8-decidir-o-tratamento">8. Decidir o tratamento</h3>
+<p>Possíveis decisões:</p>
+<ul>
+<li>corrigir;</li>
+<li>mitigar;</li>
+<li>abrir débito técnico;</li>
+<li>aceitar risco temporário;</li>
+<li>classificar como falso positivo;</li>
+<li>classificar como Not Exploitable;</li>
+<li>solicitar ajuste de query ao time AppSec.</li>
+</ul>
+<h3 id="9-criar-evidencias">9. Criar evidências</h3>
+<p>Evidências podem incluir:</p>
+<ul>
+<li>testes unitários;</li>
+<li>testes de integração;</li>
+<li>teste manual;</li>
+<li>diff do código;</li>
+<li>logs sem dado sensível;</li>
+<li>resposta HTTP com headers corretos;</li>
+<li>prova de <code>Content-Type</code>;</li>
+<li>prova de rejeição de entrada inválida;</li>
+<li>prova de falha fechada;</li>
+<li>explicação source/sink;</li>
+<li>justificativa de risco residual.</li>
+</ul>
+<p>Sem evidência, a triagem vira opinião.</p>
+<h2 id="exemplo-de-justificativa-tecnica">Exemplo de justificativa técnica</h2>
+<p>Imagine um finding de Reflected XSS em um endpoint JSON.</p>
+<p>Justificativa ruim:</p>
+<div class="highlight"><pre><span></span><code>Não é XSS porque essa API é interna.
+</code></pre></div>
+<p>Justificativa melhor:</p>
+<div class="highlight"><pre><span></span><code>O source indicado é o parâmetro `termo` recebido no controller. O sink indicado é o retorno do método REST. O endpoint não produz HTML: o mapping declara `produces = application/json`, a resposta possui `Content-Type: application/json` e `X-Content-Type-Options: nosniff`. A aplicação não possui frontend que injete esse campo em DOM, e clientes que solicitam exclusivamente `text/html` recebem erro de negociação. Portanto, o dado permanece como valor JSON e não entra em contexto HTML, atributo, JavaScript ou DOM. Classificação proposta: Not Exploitable para XSS, com hardening HTTP aplicado.
+</code></pre></div>
+<p>A segunda justificativa é muito mais forte porque explica:</p>
+<ul>
+<li>source;</li>
+<li>sink;</li>
+<li>contexto;</li>
+<li>controle;</li>
+<li>por que a exploração não ocorre;</li>
+<li>classificação proposta.</li>
+</ul>
+<h2 id="exemplo-de-teste-para-contrato-json">Exemplo de teste para contrato JSON</h2>
+<p>Controller:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.busca.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.MediaType</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.*</span><span class="p">;</span>
+
+<span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/api/busca&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BuscaController</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="n">produces</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON_VALUE</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">BuscaResponse</span><span class="w"> </span><span class="nf">buscar</span><span class="p">(</span><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">termo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BuscaResponse</span><span class="p">(</span><span class="s">&quot;Resultados para: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">termo</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">BuscaResponse</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">mensagem</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Teste:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.busca.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.MediaType</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.web.servlet.MockMvc</span><span class="p">;</span>
+
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.hamcrest.Matchers.containsString</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.test.web.servlet.result.MockMvcResultMatchers.*</span><span class="p">;</span>
+
+<span class="nd">@WebMvcTest</span><span class="p">(</span><span class="n">BuscaController</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="kd">class</span> <span class="nc">BuscaControllerTest</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Autowired</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">MockMvc</span><span class="w"> </span><span class="n">mockMvc</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">deveResponderJsonExplicitamente</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">mockMvc</span><span class="p">.</span><span class="na">perform</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;/api/busca&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">param</span><span class="p">(</span><span class="s">&quot;termo&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Lacuna Coil&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">accept</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON</span><span class="p">))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">andExpect</span><span class="p">(</span><span class="n">status</span><span class="p">().</span><span class="na">isOk</span><span class="p">())</span>
+<span class="w">                </span><span class="p">.</span><span class="na">andExpect</span><span class="p">(</span><span class="n">header</span><span class="p">().</span><span class="na">string</span><span class="p">(</span><span class="s">&quot;Content-Type&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">containsString</span><span class="p">(</span><span class="s">&quot;application/json&quot;</span><span class="p">)))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">andExpect</span><span class="p">(</span><span class="n">jsonPath</span><span class="p">(</span><span class="s">&quot;$.mensagem&quot;</span><span class="p">).</span><span class="na">value</span><span class="p">(</span><span class="s">&quot;Resultados para: Lacuna Coil&quot;</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">deveRecusarHtmlQuandoEndpointProduzSomenteJson</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">mockMvc</span><span class="p">.</span><span class="na">perform</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;/api/busca&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">param</span><span class="p">(</span><span class="s">&quot;termo&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Lacuna Coil&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">accept</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">TEXT_HTML</span><span class="p">))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">andExpect</span><span class="p">(</span><span class="n">status</span><span class="p">().</span><span class="na">isNotAcceptable</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse teste não “resolve XSS” sozinho.</p>
+<p>Ele comprova uma parte importante da triagem: o endpoint foi desenhado para JSON e recusa negociação HTML.</p>
+<h2 id="sast-e-contexto-de-negocio">SAST e contexto de negócio</h2>
+<p>SAST não entende perfeitamente a regra de negócio.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@PreAuthorize</span><span class="p">(</span><span class="s">&quot;hasRole(&#39;ADMIN&#39;)&quot;</span><span class="p">)</span>
+<span class="nd">@DeleteMapping</span><span class="p">(</span><span class="s">&quot;/api/admin/resenhas/{id}&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">remover</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">resenhaService</span><span class="p">.</span><span class="na">remover</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>O scanner pode ver apenas que um <code>id</code> externo chega a uma operação sensível.</p>
+<p>Mas ele talvez não entenda:</p>
+<ul>
+<li>se o endpoint exige papel administrativo;</li>
+<li>se há auditoria;</li>
+<li>se o service valida ownership;</li>
+<li>se a operação é permitida pela regra de negócio;</li>
+<li>se há soft delete;</li>
+<li>se a ação é reversível.</li>
+</ul>
+<p>Por isso, revisão humana continua indispensável.</p>
+<h2 id="sast-e-frameworks">SAST e frameworks</h2>
+<p>Frameworks como Spring ajudam muito, mas também podem confundir scanners.</p>
+<p>Exemplos:</p>
+<ul>
+<li><code>@Valid</code> pode ser reconhecido ou não;</li>
+<li><code>@PreAuthorize</code> pode ser reconhecido ou não;</li>
+<li>serialização JSON pode ser entendida ou não;</li>
+<li>filtros de segurança podem estar fora do fluxo analisado;</li>
+<li>sanitizers customizados podem não ser reconhecidos;</li>
+<li>configurações em YAML podem não ser correlacionadas ao código;</li>
+<li>headers definidos em filtros podem não ser associados ao controller.</li>
+</ul>
+<p>Por isso, quanto mais explícito for o contrato de segurança no código e nos testes, mais fácil será defender a triagem.</p>
+<h2 id="boas-praticas-ao-corrigir-findings-sast">Boas práticas ao corrigir findings SAST</h2>
+<h3 id="preserve-o-contrato-funcional">Preserve o contrato funcional</h3>
+<p>Antes de alterar, entenda:</p>
+<ul>
+<li>endpoint;</li>
+<li>request;</li>
+<li>response;</li>
+<li>payload;</li>
+<li>status HTTP;</li>
+<li>headers;</li>
+<li>clientes consumidores;</li>
+<li>regra de negócio;</li>
+<li>compatibilidade retroativa.</li>
+</ul>
+<p>Correção de segurança não deve quebrar contrato sem decisão consciente.</p>
+<h3 id="aplique-controle-proximo-ao-sink">Aplique controle próximo ao sink</h3>
+<p>Sempre que possível, valide próximo da fronteira perigosa.</p>
+<p>Exemplo:</p>
+<ul>
+<li>validar URI imediatamente antes da chamada HTTP;</li>
+<li>verificar path final imediatamente antes da escrita;</li>
+<li>parametrizar no ponto da query;</li>
+<li>escapar no ponto de saída HTML;</li>
+<li>filtrar segredo antes do log;</li>
+<li>limitar loop antes do processamento.</li>
+</ul>
+<p>Isso facilita leitura humana e reduz ambiguidade para ferramentas.</p>
+<h3 id="nao-confie-apenas-em-premissas-externas">Não confie apenas em premissas externas</h3>
+<p>Premissas como “é interno”, “tem firewall” ou “só o legado chama” ajudam no risco, mas não substituem controle de código.</p>
+<p>Use essas informações como contexto, não como única defesa.</p>
+<h3 id="escreva-testes-de-seguranca">Escreva testes de segurança</h3>
+<p>Tests ajudam a provar que a correção é real.</p>
+<p>Exemplos:</p>
+<ul>
+<li>HTTP é rejeitado;</li>
+<li>URI relativa é rejeitada;</li>
+<li>host não autorizado é rejeitado;</li>
+<li>arquivo fora do diretório base é rejeitado;</li>
+<li>segredo refletido é bloqueado;</li>
+<li>resposta HTML é recusada;</li>
+<li>loop respeita limite máximo;</li>
+<li>log não contém marcador sensível.</li>
+</ul>
+<h3 id="documente-risco-residual">Documente risco residual</h3>
+<p>Toda correção pode deixar riscos residuais.</p>
+<p>Exemplo:</p>
+<ul>
+<li>API JSON explícita reduz XSS naquele endpoint, mas o consumidor ainda precisa evitar injetar JSON em HTML.</li>
+<li>HTTPS obrigatório protege canal, mas não substitui allowlist de host.</li>
+<li>HMAC no cache evita expor segredo como chave, mas o segredo ainda existe em memória durante o fluxo.</li>
+<li>Limite de linhas evita DoS por planilha enorme, mas ainda pode haver custo de parsing do arquivo.</li>
+</ul>
+<p>Risco residual bem documentado ajuda futuras decisões.</p>
+<h2 id="erros-comuns">Erros comuns</h2>
+<h3 id="1-corrigir-pelo-nome-da-vulnerabilidade-nao-pelo-fluxo">1. Corrigir pelo nome da vulnerabilidade, não pelo fluxo</h3>
+<p>Ver “XSS” e aplicar escape HTML em qualquer lugar pode ser errado.</p>
+<p>Primeiro entenda se existe contexto HTML.</p>
+<h3 id="2-classificar-falso-positivo-sem-evidencia">2. Classificar falso positivo sem evidência</h3>
+<p>Dizer “não explora” sem demonstrar source, sink, controle e contexto não é triagem técnica.</p>
+<h3 id="3-criar-codigo-artificial-para-quebrar-taint">3. Criar código artificial para quebrar taint</h3>
+<p>Isso reduz a qualidade do código e pode manter o risco real.</p>
+<h3 id="4-ignorar-severidade-alta-automaticamente">4. Ignorar severidade alta automaticamente</h3>
+<p>Severidade alta exige análise cuidadosa. Mesmo que depois seja falso positivo, precisa de evidência.</p>
+<h3 id="5-achar-que-autenticacao-elimina-vulnerabilidade">5. Achar que autenticação elimina vulnerabilidade</h3>
+<p>Usuários autenticados também podem explorar falhas.</p>
+<h3 id="6-nao-executar-novo-scan">6. Não executar novo scan</h3>
+<p>Depois da correção, rode novo scan no commit exato.</p>
+<h3 id="7-nao-criar-testes">7. Não criar testes</h3>
+<p>Sem teste, o problema pode voltar no próximo refactor.</p>
+<h3 id="8-nao-envolver-appsec-quando-a-query-precisa-ser-ajustada">8. Não envolver AppSec quando a query precisa ser ajustada</h3>
+<p>Se o controle customizado é real, mas o scanner não reconhece, pode ser necessário ajuste controlado da query corporativa.</p>
+<h2 id="decisoes-de-engenharia">Decisões de engenharia</h2>
+<h2 id="quando-corrigir-no-codigo">Quando corrigir no código?</h2>
+<p>Corrija quando:</p>
+<ul>
+<li>o fluxo é real;</li>
+<li>o usuário controla o source;</li>
+<li>o sink é sensível;</li>
+<li>não há controle adequado;</li>
+<li>o impacto é relevante;</li>
+<li>a correção não quebra contrato ou a quebra é aprovada.</li>
+</ul>
+<p>Exemplo: entrada externa controlando path de escrita.</p>
+<h2 id="quando-mitigar">Quando mitigar?</h2>
+<p>Mitigue quando:</p>
+<ul>
+<li>o risco existe, mas pode ser reduzido com controle específico;</li>
+<li>não é possível remover totalmente o fluxo por causa de contrato legado;</li>
+<li>há protocolo funcional obrigatório;</li>
+<li>há integração com parceiro;</li>
+<li>a correção completa exige mudança arquitetural maior.</li>
+</ul>
+<p>Exemplo: credenciais precisam sair para OAuth, mas somente via HTTPS, sem logs e com prevenção de reflexão.</p>
+<h2 id="quando-classificar-como-falso-positivo">Quando classificar como falso positivo?</h2>
+<p>Classifique como falso positivo quando:</p>
+<ul>
+<li>o fluxo apontado não existe;</li>
+<li>o sink não é realmente perigoso naquele contexto;</li>
+<li>o scanner confundiu retorno e argumento;</li>
+<li>o dado não chega ao ponto indicado;</li>
+<li>o caminho é inalcançável;</li>
+<li>existe prova técnica clara.</li>
+</ul>
+<h2 id="quando-classificar-como-not-exploitable">Quando classificar como Not Exploitable?</h2>
+<p>Use quando:</p>
+<ul>
+<li>o scanner encontrou um caminho plausível;</li>
+<li>mas controles reais impedem exploração;</li>
+<li>o fluxo funcional precisa existir;</li>
+<li>o risco está mitigado;</li>
+<li>há testes e justificativa.</li>
+</ul>
+<h2 id="quando-solicitar-ajuste-de-query">Quando solicitar ajuste de query?</h2>
+<p>Solicite ajuste quando:</p>
+<ul>
+<li>o mesmo falso positivo aparece em vários scans;</li>
+<li>há sanitizer customizado robusto;</li>
+<li>a query corporativa não reconhece um padrão legítimo;</li>
+<li>a equipe AppSec concorda com a evidência;</li>
+<li>o ajuste não enfraquece detecção em outros projetos.</li>
+</ul>
+<h2 id="onde-isso-aparece-em-sistemas-reais">Onde isso aparece em sistemas reais</h2>
+<p>SAST aparece em:</p>
+<ul>
+<li>pull requests;</li>
+<li>pipelines CI/CD;</li>
+<li>gates de qualidade;</li>
+<li>auditorias;</li>
+<li>esteiras corporativas;</li>
+<li>migração de ferramentas;</li>
+<li>correção de legado;</li>
+<li>preparação para produção;</li>
+<li>revisões de segurança;</li>
+<li>programas DevSecOps.</li>
+</ul>
+<p>Em Java/Spring, os findings costumam aparecer em:</p>
+<ul>
+<li>controllers;</li>
+<li>services;</li>
+<li>repositories;</li>
+<li>classes utilitárias;</li>
+<li>filtros HTTP;</li>
+<li>clients REST;</li>
+<li>parsers de arquivos;</li>
+<li>serializers;</li>
+<li>decorators de cache;</li>
+<li>classes de configuração;</li>
+<li>templates HTML;</li>
+<li>integrações com storage;</li>
+<li>integrações com parceiros.</li>
+</ul>
+<p>O ponto central é: SAST não analisa apenas “código ruim”. Ele analisa fluxos. Às vezes o problema está no desenho da fronteira de confiança, não em uma linha isolada.</p>
+<h2 id="checklist-pratico-de-triagem-sast">Checklist prático de triagem SAST</h2>
+<h3 id="identificacao">Identificação</h3>
+<ul>
+<li>Qual é a query?</li>
+<li>Qual é a severidade?</li>
+<li>É recorrente?</li>
+<li>O scan foi feito no commit correto?</li>
+<li>As linhas ainda correspondem ao código atual?</li>
+</ul>
+<h3 id="source_1">Source</h3>
+<ul>
+<li>De onde vem o dado?</li>
+<li>É entrada de usuário?</li>
+<li>É header?</li>
+<li>É arquivo?</li>
+<li>É configuração?</li>
+<li>É banco?</li>
+<li>É parceiro?</li>
+<li>É confiável ou cruza fronteira?</li>
+</ul>
+<h3 id="sink_1">Sink</h3>
+<ul>
+<li>Qual é a operação sensível?</li>
+<li>SQL?</li>
+<li>HTML?</li>
+<li>HTTP outbound?</li>
+<li>Arquivo?</li>
+<li>Log?</li>
+<li>Loop?</li>
+<li>Header?</li>
+<li>Resposta pública?</li>
+</ul>
+<h3 id="fluxo">Fluxo</h3>
+<ul>
+<li>O dado realmente chega ao sink?</li>
+<li>Passa por quais métodos?</li>
+<li>Há transformação?</li>
+<li>Há validação?</li>
+<li>Há sanitização?</li>
+<li>Há branch que bloqueia?</li>
+<li>O caminho é alcançável?</li>
+</ul>
+<h3 id="controle">Controle</h3>
+<ul>
+<li>O controle é adequado para o sink?</li>
+<li>Está próximo da fronteira perigosa?</li>
+<li>Falha fechado?</li>
+<li>Possui teste?</li>
+<li>Preserva contrato?</li>
+<li>Reduz risco real ou só engana scanner?</li>
+</ul>
+<h3 id="decisao">Decisão</h3>
+<ul>
+<li>Corrigir?</li>
+<li>Mitigar?</li>
+<li>Marcar falso positivo?</li>
+<li>Marcar Not Exploitable?</li>
+<li>Aceitar risco?</li>
+<li>Acionar AppSec?</li>
+<li>Criar tarefa de refatoração?</li>
+</ul>
+<h3 id="evidencia">Evidência</h3>
+<ul>
+<li>Há teste automatizado?</li>
+<li>Há teste manual?</li>
+<li>Há print ou log seguro?</li>
+<li>Há resposta HTTP comprovando headers?</li>
+<li>Há justificativa source/sink?</li>
+<li>Há risco residual documentado?</li>
+</ul>
+<h2 id="resumo-final">Resumo final</h2>
+<p>SAST é uma ferramenta poderosa para encontrar vulnerabilidades no código, mas seu valor depende da capacidade do time de interpretar os findings.</p>
+<p>Os conceitos principais são:</p>
+<ul>
+<li><strong>source</strong>: origem do dado;</li>
+<li><strong>sink</strong>: operação sensível;</li>
+<li><strong>taint</strong>: dado considerado não confiável;</li>
+<li><strong>taint flow</strong>: caminho entre source e sink;</li>
+<li><strong>sanitizer</strong>: controle que torna o dado seguro para um contexto;</li>
+<li><strong>validator</strong>: controle que verifica formato, tamanho ou regra;</li>
+<li><strong>false positive</strong>: finding não vulnerável no contexto real;</li>
+<li><strong>true positive</strong>: vulnerabilidade real;</li>
+<li><strong>not exploitable</strong>: finding plausível para o scanner, mas não explorável devido ao contexto e controles reais.</li>
+</ul>
+<p>O maior erro é tratar o SAST como oráculo.</p>
+<p>O segundo maior erro é ignorá-lo.</p>
+<p>A postura correta é técnica:</p>
+<ol>
+<li>ler o finding;</li>
+<li>reconstruir o fluxo;</li>
+<li>entender o contexto;</li>
+<li>aplicar controle real;</li>
+<li>preservar contrato funcional;</li>
+<li>criar testes;</li>
+<li>documentar evidências;</li>
+<li>executar novo scan;</li>
+<li>envolver AppSec quando necessário.</li>
+</ol>
+<p>SAST bem usado não é burocracia. É uma ferramenta para melhorar a engenharia do software.</p>
+<h2 id="perguntas-de-revisao">Perguntas de revisão</h2>
+<h3 id="1-o-que-e-sast">1. O que é SAST?</h3>
+<p>SAST é uma técnica de teste estático de segurança que analisa código-fonte, bytecode ou artefatos da aplicação sem executar o sistema, procurando padrões que podem indicar vulnerabilidades.</p>
+<h3 id="2-o-que-e-source">2. O que é source?</h3>
+<p>Source é o ponto de origem de um dado, geralmente uma entrada externa ou não confiável, como parâmetro HTTP, header, body JSON, cookie, arquivo ou dado vindo de integração.</p>
+<h3 id="3-o-que-e-sink">3. O que é sink?</h3>
+<p>Sink é uma operação sensível que pode causar impacto de segurança se receber dado não confiável sem controle adequado, como query SQL, escrita em arquivo, log, chamada HTTP ou renderização HTML.</p>
+<h3 id="4-o-que-e-taint">4. O que é taint?</h3>
+<p>Taint é a marcação de um dado como potencialmente não confiável. A ferramenta acompanha esse dado pelo código para verificar se ele chega a um sink perigoso.</p>
+<h3 id="5-o-que-e-taint-flow">5. O que é taint flow?</h3>
+<p>Taint flow é o caminho percorrido pelo dado entre o source e o sink.</p>
+<h3 id="6-o-que-e-falso-positivo">6. O que é falso positivo?</h3>
+<p>Falso positivo é um finding reportado como vulnerabilidade, mas que, após análise técnica, não representa uma vulnerabilidade real no contexto analisado.</p>
+<h3 id="7-o-que-e-true-positive">7. O que é true positive?</h3>
+<p>True positive é um finding que representa uma vulnerabilidade real ou uma fragilidade que precisa ser corrigida.</p>
+<h3 id="8-o-que-significa-not-exploitable">8. O que significa Not Exploitable?</h3>
+<p>Significa que o scanner encontrou um fluxo suspeito, mas a exploração não é possível no contexto real devido a controles, restrições ou características demonstráveis do sistema.</p>
+<h3 id="9-qual-e-a-diferenca-entre-validator-e-sanitizer">9. Qual é a diferença entre validator e sanitizer?</h3>
+<p>Validator verifica se o dado segue uma regra esperada. Sanitizer torna o dado seguro para um contexto específico. Um validador nem sempre é suficiente para proteger um sink.</p>
+<h3 id="10-por-que-nao-devemos-criar-codigo-artificial-para-calar-o-scanner">10. Por que não devemos criar código artificial para calar o scanner?</h3>
+<p>Porque isso pode esconder o fluxo sem corrigir o risco real, além de piorar legibilidade, manutenção e qualidade do código.</p>
+<h3 id="11-por-que-autenticacao-nao-elimina-vulnerabilidade">11. Por que autenticação não elimina vulnerabilidade?</h3>
+<p>Porque usuários autenticados também podem explorar falhas. Autenticação reduz superfície, mas não substitui validação, autorização e controles adequados.</p>
+<h3 id="12-o-que-deve-conter-uma-boa-justificativa-de-falso-positivo">12. O que deve conter uma boa justificativa de falso positivo?</h3>
+<p>Deve conter source, sink, fluxo apontado, fluxo real, controles existentes, evidências, testes e risco residual.</p>
+<h3 id="13-quando-pedir-ajuste-da-query-corporativa-do-sast">13. Quando pedir ajuste da query corporativa do SAST?</h3>
+<p>Quando um controle customizado real não é reconhecido pela ferramenta e o mesmo falso positivo continua aparecendo, desde que AppSec valide a evidência e o ajuste não enfraqueça outros projetos.</p>
+<h3 id="14-por-que-o-controle-deve-ficar-proximo-ao-sink">14. Por que o controle deve ficar próximo ao sink?</h3>
+<p>Porque isso facilita análise humana, reduz ambiguidade para ferramentas e garante que o dado seja protegido imediatamente antes da operação sensível.</p>
+<h3 id="15-qual-e-a-principal-licao-sobre-sast">15. Qual é a principal lição sobre SAST?</h3>
+<p>SAST não deve ser tratado como oráculo nem ignorado. Ele deve ser usado como ferramenta de engenharia, com análise técnica, correções reais, evidências e triagem responsável.</p>
+<h2 id="referencias">Referências</h2>
+<ul>
+<li>OWASP — Static Code Analysis.</li>
+<li>OWASP — Secure Code Review Cheat Sheet.</li>
+<li>OWASP — Code Review Guide.</li>
+<li>OWASP — DevSecOps Guideline: Static Application Security Testing.</li>
+<li>OWASP — Web Security Testing Guide.</li>
+<li>CWE — Common Weakness Enumeration.</li>
+<li>Oracle — Java SE 25 Documentation.</li>
+<li>Spring Boot Reference Documentation.</li>
+<li>Spring Security Reference Documentation.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

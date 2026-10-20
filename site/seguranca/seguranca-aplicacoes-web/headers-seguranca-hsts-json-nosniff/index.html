@@ -1,0 +1,4685 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../unchecked-input-loop-condition-dos-processamento/">
+      
+      
+        <link rel="next" href="../sca-dependencias-vulneraveis-cves-gestao-bibliotecas/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Headers de segurança- HSTS, JSON explícito e nosniff - README</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/css/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#headers-de-seguranca-hsts-json-explicito-e-nosniff" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../../.." title="README" class="md-header__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            README
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Headers de segurança- HSTS, JSON explícito e nosniff
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="README" class="md-nav__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    README
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Backend
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/fundamentos-da-linguagem-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/convencoes-de-codigo-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convenções de código em Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/variaveis-tipos-primitivos-operadores-conversoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variáveis, tipos primitivos, operadores e conversões
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/fundamentos-de-string/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de String
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-controle-operadores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de controle e operadores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-condicionais/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas condicionais
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-de-repeticao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de repetição
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Iniciando em Orientação a Objetos (POO)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Iniciando em Orientação a Objetos (POO)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/introducao-orientacao-a-objetos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução à POO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/classes-e-objetos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes e objetos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/classes-objetos-metodos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes, objetos e métodos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Spring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/api-rest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    O que é API REST?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/http/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Um pouco de HTTP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/por-que-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Por que escolher Spring?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/spring-boot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Boot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/spring-initializr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Initializr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/maven-pom/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maven e pom.xml
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Segurança
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Segurança
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Segurança em aplicações web
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Segurança em aplicações web
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introducao-seguranca-aplicacoes-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução à Segurança de Aplicações Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../http-dns-sessoes-https/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTTP, DNS, Sessões e HTTPS na Segurança Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sql-injection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Injection - Funcionamento, Impactos e Prevenção
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xss/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cross-Site Scripting (XSS)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dast-conformidade-sdlc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DAST, Conformidade e Segurança no Ciclo de Desenvolvimento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sast-source-sink-taint-flow-falso-positivo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SAST na prática - Source, Sink, Taint Flow e falso positivo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssrf-aplicacoes-java-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSRF em aplicações Java/Spring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cleartext-submission-integracoes-server-to-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cleartext Submission em integrações server-to-server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../privacy-violation-credenciais-logs-respostas-parceiros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Privacy Violation - credenciais, logs e respostas de parceiros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../path-traversal-upload-download-seguro-arquivos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Path Traversal e upload/download seguro de arquivos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unchecked-input-loop-condition-dos-processamento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unchecked Input for Loop Condition e prevenção de DoS por processamento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Headers de segurança- HSTS, JSON explícito e nosniff
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Headers de segurança- HSTS, JSON explícito e nosniff
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-problema-real-que-esses-headers-resolvem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O problema real que esses headers resolvem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-nos-detalhes-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar nos detalhes: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-isso-importa-para-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que isso importa para segurança?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hsts-strict-transport-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HSTS: Strict-Transport-Security
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-o-hsts-funciona-na-pratica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como o HSTS funciona na prática
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hsts-nao-resolve-tudo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HSTS não resolve tudo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuidado-com-includesubdomains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cuidado com includeSubDomains
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#max-age" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        max-age
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hsts-em-spring-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HSTS em Spring Security
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hsts-atras-de-proxy-ou-load-balancer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HSTS atrás de proxy ou load balancer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#missing-hsts-header-em-sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Missing HSTS Header em SAST
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#json-explicito" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JSON explícito
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-produces-importa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que produces importa?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#json-nao-e-html" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JSON não é HTML
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#x-content-type-options-nosniff" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        X-Content-Type-Options: nosniff
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-nosniff" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de nosniff
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configurando-nosniff-no-spring-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configurando nosniff no Spring Security
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configurando-headers-manualmente-com-filtro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configurando headers manualmente com filtro
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hsts-deve-ser-enviado-apenas-sobre-https" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HSTS deve ser enviado apenas sobre HTTPS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testando-headers-com-curl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testando headers com curl
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testes-com-mockmvc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testes com MockMvc
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testando-nosniff" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testando nosniff
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testando-hsts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testando HSTS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#endpoint-json-seguro-em-spring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Endpoint JSON seguro em Spring
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#endpoint-que-recebe-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Endpoint que recebe JSON
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-tambem-devem-ser-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros também devem ser JSON
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#headers-nao-substituem-encoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Headers não substituem encoding
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#headers-em-download-de-arquivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Headers em download de arquivos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-usar-textplain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar text/plain?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-usar-texthtml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar text/html?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relacao-com-xss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relação com XSS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relacao-com-dast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relação com DAST
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boas práticas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-habilite-hsts-em-producao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Habilite HSTS em produção
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-faca-rollout-cuidadoso-de-hsts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Faça rollout cuidadoso de HSTS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-declare-json-explicitamente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Declare JSON explicitamente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-declare-consumes-quando-recebe-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Declare consumes quando recebe JSON
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-use-nosniff" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Use nosniff
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-teste-headers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Teste headers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-padronize-erros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Padronize erros
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-nao-misture-api-json-e-html-no-mesmo-endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Não misture API JSON e HTML no mesmo endpoint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-cuidado-com-downloads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Cuidado com downloads
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-documente-decisoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Documente decisões
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-achar-que-https-sozinho-ativa-hsts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Achar que HTTPS sozinho ativa HSTS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-ativar-includesubdomains-sem-mapear-subdominios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Ativar includeSubDomains sem mapear subdomínios
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-retornar-json-sem-content-type-claro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Retornar JSON sem Content-Type claro
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-confiar-que-o-framework-sempre-fara-tudo-certo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Confiar que o framework sempre fará tudo certo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-nao-testar-respostas-de-erro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Não testar respostas de erro
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-usar-texthtml-para-resposta-que-e-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Usar text/html para resposta que é API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-usar-innerhtml-no-consumidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Usar innerHTML no consumidor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-achar-que-nosniff-substitui-validacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Achar que nosniff substitui validação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-corrigir-xss-com-header-errado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Corrigir XSS com header errado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-nao-considerar-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Não considerar gateway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-configurar-headers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde configurar headers?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hsts-na-aplicacao-ou-no-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HSTS na aplicação ou no gateway?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#json-explicito-em-todos-os-controllers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JSON explícito em todos os controllers?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-nao-usar-nosniff" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando não usar nosniff?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-um-finding-pode-ser-falso-positivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando um finding pode ser falso positivo?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checklist-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist prático
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Checklist prático">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hsts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HSTS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#json-explicito_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JSON explícito
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nosniff" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        nosniff
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xss-e-contexto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XSS e contexto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operação
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Perguntas de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-o-que-e-hsts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. O que é HSTS?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-hsts-substitui-https" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. HSTS substitui HTTPS?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-qual-e-uma-limitacao-do-hsts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Qual é uma limitação do HSTS?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-o-que-faz-includesubdomains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. O que faz includeSubDomains?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-qual-e-o-risco-de-includesubdomains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Qual é o risco de includeSubDomains?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-o-que-e-content-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. O que é Content-Type?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-por-que-declarar-applicationjson-explicitamente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Por que declarar application/json explicitamente?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-o-que-faz-x-content-type-options-nosniff" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. O que faz X-Content-Type-Options: nosniff?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-nosniff-corrige-xss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. nosniff corrige XSS?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-json-pode-causar-xss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. JSON pode causar XSS?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-o-que-testar-em-apis-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. O que testar em APIs JSON?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-por-que-respostas-de-erro-importam" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Por que respostas de erro importam?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-onde-configurar-headers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Onde configurar headers?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-quando-um-finding-de-missing-hsts-pode-ser-falso-positivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Quando um finding de Missing HSTS pode ser falso positivo?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-qual-e-a-principal-regra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Qual é a principal regra?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sca-dependencias-vulneraveis-cves-gestao-bibliotecas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SCA na prática - dependências vulneráveis, CVEs e gestão de bibliotecas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../triagem-vulnerabilidades-corrigir-mitigar-not-exploitable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Triagem de vulnerabilidades - corrigir, mitigar ou marcar como Not Exploitable
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ferramentas-appsec-sast-sca-dast/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ferramentas de AppSec - como SAST, SCA e DAST encontram vulnerabilidades
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-problema-real-que-esses-headers-resolvem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O problema real que esses headers resolvem
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-nos-detalhes-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar nos detalhes: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-isso-importa-para-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que isso importa para segurança?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hsts-strict-transport-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HSTS: Strict-Transport-Security
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-o-hsts-funciona-na-pratica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como o HSTS funciona na prática
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hsts-nao-resolve-tudo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HSTS não resolve tudo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuidado-com-includesubdomains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cuidado com includeSubDomains
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#max-age" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        max-age
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hsts-em-spring-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HSTS em Spring Security
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hsts-atras-de-proxy-ou-load-balancer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HSTS atrás de proxy ou load balancer
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#missing-hsts-header-em-sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Missing HSTS Header em SAST
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#json-explicito" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JSON explícito
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#por-que-produces-importa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que produces importa?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#json-nao-e-html" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JSON não é HTML
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#x-content-type-options-nosniff" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        X-Content-Type-Options: nosniff
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-nosniff" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de nosniff
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configurando-nosniff-no-spring-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configurando nosniff no Spring Security
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configurando-headers-manualmente-com-filtro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configurando headers manualmente com filtro
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hsts-deve-ser-enviado-apenas-sobre-https" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HSTS deve ser enviado apenas sobre HTTPS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testando-headers-com-curl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testando headers com curl
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testes-com-mockmvc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testes com MockMvc
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testando-nosniff" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testando nosniff
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testando-hsts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testando HSTS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#endpoint-json-seguro-em-spring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Endpoint JSON seguro em Spring
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#endpoint-que-recebe-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Endpoint que recebe JSON
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-tambem-devem-ser-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros também devem ser JSON
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#headers-nao-substituem-encoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Headers não substituem encoding
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#headers-em-download-de-arquivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Headers em download de arquivos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-usar-textplain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar text/plain?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-usar-texthtml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar text/html?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relacao-com-xss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relação com XSS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relacao-com-dast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relação com DAST
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boas práticas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-habilite-hsts-em-producao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Habilite HSTS em produção
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-faca-rollout-cuidadoso-de-hsts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Faça rollout cuidadoso de HSTS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-declare-json-explicitamente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Declare JSON explicitamente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-declare-consumes-quando-recebe-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Declare consumes quando recebe JSON
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-use-nosniff" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Use nosniff
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-teste-headers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Teste headers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-padronize-erros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Padronize erros
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-nao-misture-api-json-e-html-no-mesmo-endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Não misture API JSON e HTML no mesmo endpoint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-cuidado-com-downloads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Cuidado com downloads
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-documente-decisoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Documente decisões
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-achar-que-https-sozinho-ativa-hsts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Achar que HTTPS sozinho ativa HSTS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-ativar-includesubdomains-sem-mapear-subdominios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Ativar includeSubDomains sem mapear subdomínios
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-retornar-json-sem-content-type-claro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Retornar JSON sem Content-Type claro
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-confiar-que-o-framework-sempre-fara-tudo-certo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Confiar que o framework sempre fará tudo certo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-nao-testar-respostas-de-erro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Não testar respostas de erro
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-usar-texthtml-para-resposta-que-e-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Usar text/html para resposta que é API
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-usar-innerhtml-no-consumidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Usar innerHTML no consumidor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-achar-que-nosniff-substitui-validacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Achar que nosniff substitui validação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-corrigir-xss-com-header-errado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Corrigir XSS com header errado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-nao-considerar-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Não considerar gateway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-configurar-headers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde configurar headers?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hsts-na-aplicacao-ou-no-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HSTS na aplicação ou no gateway?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#json-explicito-em-todos-os-controllers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JSON explícito em todos os controllers?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-nao-usar-nosniff" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando não usar nosniff?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-um-finding-pode-ser-falso-positivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando um finding pode ser falso positivo?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checklist-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist prático
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Checklist prático">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hsts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HSTS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#json-explicito_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JSON explícito
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nosniff" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        nosniff
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xss-e-contexto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XSS e contexto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operação
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Perguntas de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-o-que-e-hsts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. O que é HSTS?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-hsts-substitui-https" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. HSTS substitui HTTPS?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-qual-e-uma-limitacao-do-hsts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Qual é uma limitação do HSTS?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-o-que-faz-includesubdomains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. O que faz includeSubDomains?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-qual-e-o-risco-de-includesubdomains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Qual é o risco de includeSubDomains?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-o-que-e-content-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. O que é Content-Type?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-por-que-declarar-applicationjson-explicitamente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Por que declarar application/json explicitamente?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-o-que-faz-x-content-type-options-nosniff" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. O que faz X-Content-Type-Options: nosniff?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-nosniff-corrige-xss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. nosniff corrige XSS?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-json-pode-causar-xss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. JSON pode causar XSS?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-o-que-testar-em-apis-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. O que testar em APIs JSON?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-por-que-respostas-de-erro-importam" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Por que respostas de erro importam?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-onde-configurar-headers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Onde configurar headers?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-quando-um-finding-de-missing-hsts-pode-ser-falso-positivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Quando um finding de Missing HSTS pode ser falso positivo?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-qual-e-a-principal-regra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Qual é a principal regra?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="headers-de-seguranca-hsts-json-explicito-e-nosniff">Headers de segurança: HSTS, JSON explícito e nosniff</h1>
+<p>Headers de segurança são cabeçalhos HTTP enviados pela aplicação para orientar o comportamento do navegador, clientes HTTP, proxies e ferramentas intermediárias.</p>
+<p>Eles não substituem validação de entrada, autorização, autenticação, criptografia, logs seguros ou código defensivo. Mas ajudam a reduzir ambiguidade e a reforçar o contrato de segurança da aplicação.</p>
+<p>Neste artigo, vamos focar em três temas:</p>
+<ul>
+<li><code>Strict-Transport-Security</code>, também conhecido como <strong>HSTS</strong>;</li>
+<li><code>Content-Type</code> explícito, especialmente <code>application/json</code>;</li>
+<li><code>X-Content-Type-Options: nosniff</code>.</li>
+</ul>
+<p>Esses três pontos aparecem com frequência em aplicações Java/Spring e em findings SAST, principalmente quando a ferramenta detecta:</p>
+<ul>
+<li>ausência de HSTS;</li>
+<li>resposta sem tipo claro;</li>
+<li>risco de MIME sniffing;</li>
+<li>possível XSS em endpoint que deveria ser apenas JSON;</li>
+<li>API REST que retorna dados sem contrato HTTP explícito;</li>
+<li>resposta interpretável como HTML por algum cliente.</li>
+</ul>
+<p>A ideia central é:</p>
+<blockquote>
+<p>A aplicação deve deixar claro para o cliente como aquela resposta deve ser tratada.</p>
+</blockquote>
+<p>Se a resposta é JSON, ela deve ser entregue como JSON.</p>
+<p>Se a aplicação só deve funcionar por HTTPS, isso deve ser reforçado.</p>
+<p>Se o servidor informou um <code>Content-Type</code>, o navegador não deve tentar “adivinhar” outro tipo.</p>
+<p>No contexto da aplicação fictícia <code>meucatalogomusical.com</code>, imagine uma API que retorna dados de bandas como <strong>Amon Amarth</strong>, <strong>Kreator</strong> e <strong>Testament</strong>. Essa API não entrega HTML; ela entrega JSON. Então o contrato HTTP precisa deixar isso explícito.</p>
+<h2 id="o-problema-real-que-esses-headers-resolvem">O problema real que esses headers resolvem</h2>
+<p>Muitos problemas de segurança não surgem apenas porque o código está errado.</p>
+<p>Às vezes, o problema é ambiguidade.</p>
+<p>Exemplos:</p>
+<div class="highlight"><pre><span></span><code>A aplicação retorna JSON, mas não declara claramente Content-Type.
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>O endpoint deveria ser consumido apenas por API, mas aceita negociação para text/html.
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>O navegador tenta interpretar uma resposta de forma diferente da pretendida.
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>A aplicação usa HTTPS, mas não orienta o navegador a evitar HTTP em acessos futuros.
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>O scanner aponta XSS porque vê dado não confiável indo para a resposta, mas o endpoint é uma API JSON server-to-server.
+</code></pre></div>
+<p>Headers de segurança ajudam a deixar o contrato explícito.</p>
+<p>Eles dizem:</p>
+<div class="highlight"><pre><span></span><code>Esta resposta é JSON.
+Não tente adivinhar outro MIME type.
+Este domínio deve ser acessado por HTTPS.
+</code></pre></div>
+<p>Esse tipo de clareza ajuda:</p>
+<ul>
+<li>navegadores;</li>
+<li>clientes HTTP;</li>
+<li>ferramentas SAST/DAST;</li>
+<li>times de AppSec;</li>
+<li>revisores de código;</li>
+<li>consumidores de API;</li>
+<li>operadores de produção.</li>
+</ul>
+<h2 id="antes-de-entrar-nos-detalhes-uma-ideia-simples">Antes de entrar nos detalhes: uma ideia simples</h2>
+<p>Pense em um pacote enviado pelo correio.</p>
+<p>Se o pacote não tem identificação clara, a pessoa que recebe pode tentar adivinhar o conteúdo.</p>
+<p>Agora pense em uma resposta HTTP.</p>
+<p>Se a aplicação devolve um corpo como este:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;banda&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Amon Amarth&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;genero&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Melodic Death Metal&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>mas não informa corretamente:</p>
+<div class="highlight"><pre><span></span><code><span class="err">Content-Type: application/json</span>
+</code></pre></div>
+<p>o cliente pode tratar a resposta de forma incorreta.</p>
+<p>E se o navegador tentar “adivinhar” o tipo do conteúdo, isso pode abrir espaço para comportamentos inseguros.</p>
+<p>Por isso, uma API deve ser explícita:</p>
+<div class="highlight"><pre><span></span><code><span class="err">Content-Type: application/json</span>
+<span class="err">X-Content-Type-Options: nosniff</span>
+</code></pre></div>
+<p>E uma aplicação web que exige HTTPS deve reforçar:</p>
+<div class="highlight"><pre><span></span><code><span class="err">Strict-Transport-Security: max-age=31536000; includeSubDomains</span>
+</code></pre></div>
+<p>Cada header reduz um tipo de ambiguidade.</p>
+<h2 id="definicao-tecnica">Definição técnica</h2>
+<p>Headers de segurança são campos de cabeçalho HTTP usados para instruir clientes e navegadores sobre políticas de segurança da resposta.</p>
+<p>Neste artigo, vamos tratar três:</p>
+<div class="highlight"><pre><span></span><code><span class="err">Strict-Transport-Security: max-age=31536000; includeSubDomains</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">Content-Type: application/json</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">X-Content-Type-Options: nosniff</span>
+</code></pre></div>
+<p>O <code>Strict-Transport-Security</code> informa ao navegador que o host deve ser acessado apenas via HTTPS em acessos futuros. A MDN descreve esse header como uma forma de o site informar ao navegador que deve ser acessado somente por HTTPS, não por HTTP.</p>
+<p>O <code>Content-Type</code> informa ao cliente o media type do conteúdo retornado, como <code>application/json</code>, <code>text/html</code>, <code>text/plain</code> ou <code>application/pdf</code>. A MDN descreve que, em respostas, o <code>Content-Type</code> informa ao cliente qual é o tipo de mídia do recurso devolvido.</p>
+<p>O <code>X-Content-Type-Options: nosniff</code> instrui o navegador a respeitar o MIME type informado em <code>Content-Type</code>, evitando MIME sniffing. A MDN descreve esse header como um marcador usado pelo servidor para indicar que os MIME types anunciados em <code>Content-Type</code> não devem ser alterados ou “adivinhados”.</p>
+<h2 id="por-que-isso-importa-para-seguranca">Por que isso importa para segurança?</h2>
+<p>Esses headers ajudam a reduzir riscos como:</p>
+<ul>
+<li>downgrade para HTTP;</li>
+<li>interpretação ambígua de resposta;</li>
+<li>MIME sniffing;</li>
+<li>endpoints JSON tratados como HTML;</li>
+<li>findings de XSS em APIs que não produzem HTML;</li>
+<li>comportamento inconsistente entre navegadores;</li>
+<li>respostas de erro interpretadas fora do contexto esperado;</li>
+<li>exposição acidental por configuração HTTP incompleta.</li>
+</ul>
+<p>Eles não tornam uma aplicação invulnerável.</p>
+<p>Mas são camadas importantes de defesa.</p>
+<p>Em segurança, uma prática recorrente é:</p>
+<blockquote>
+<p>Reduza ambiguidade. Explicite contratos. Falhe fechado.</p>
+</blockquote>
+<p>Headers de segurança fazem exatamente isso no nível HTTP.</p>
+<h2 id="hsts-strict-transport-security">HSTS: Strict-Transport-Security</h2>
+<p>HSTS significa HTTP Strict Transport Security.</p>
+<p>Ele é configurado por meio do header:</p>
+<div class="highlight"><pre><span></span><code><span class="err">Strict-Transport-Security: max-age=31536000; includeSubDomains</span>
+</code></pre></div>
+<p>Esse header informa ao navegador que, por determinado período, aquele host deve ser acessado apenas por HTTPS.</p>
+<p>A MDN explica que o HSTS faz com que tentativas futuras de acesso via HTTP sejam automaticamente atualizadas para HTTPS pelo navegador, depois que o navegador já recebeu o header em uma conexão HTTPS válida.</p>
+<p>Isso ajuda a reduzir riscos como:</p>
+<ul>
+<li>usuário digitando <code>http://</code>;</li>
+<li>links antigos usando HTTP;</li>
+<li>downgrade acidental;</li>
+<li>tentativa de interceptação em primeiro acesso posterior;</li>
+<li>cookies trafegando por canal inseguro;</li>
+<li>inconsistência entre endpoints HTTP e HTTPS.</li>
+</ul>
+<h2 id="como-o-hsts-funciona-na-pratica">Como o HSTS funciona na prática</h2>
+<p>Imagine que o usuário acessou:</p>
+<div class="highlight"><pre><span></span><code>https://meucatalogomusical.com
+</code></pre></div>
+<p>A resposta inclui:</p>
+<div class="highlight"><pre><span></span><code><span class="err">Strict-Transport-Security: max-age=31536000</span>
+</code></pre></div>
+<p>O navegador armazena essa política.</p>
+<p>Depois, se o usuário tentar acessar:</p>
+<div class="highlight"><pre><span></span><code>http://meucatalogomusical.com/bandas/kreator
+</code></pre></div>
+<p>o navegador deve trocar automaticamente para:</p>
+<div class="highlight"><pre><span></span><code>https://meucatalogomusical.com/bandas/kreator
+</code></pre></div>
+<p>antes de fazer a requisição.</p>
+<p>Isso reforça o uso de HTTPS no navegador.</p>
+<h2 id="hsts-nao-resolve-tudo">HSTS não resolve tudo</h2>
+<p>HSTS é importante, mas possui limitações.</p>
+<p>A própria MDN destaca uma fraqueza: o HSTS não tem efeito até que o navegador faça pelo menos uma conexão segura com o host e receba o header <code>Strict-Transport-Security</code>.</p>
+<p>Além disso, HSTS não corrige:</p>
+<ul>
+<li>SQL Injection;</li>
+<li>XSS;</li>
+<li>SSRF;</li>
+<li>Path Traversal;</li>
+<li>autorização incorreta;</li>
+<li>cookies mal configurados;</li>
+<li>logs com dados sensíveis;</li>
+<li>dependências vulneráveis;</li>
+<li>APIs retornando dados demais;</li>
+<li>ausência de validação.</li>
+</ul>
+<p>HSTS protege o uso de HTTPS pelo navegador. Ele não substitui segurança da aplicação.</p>
+<h2 id="cuidado-com-includesubdomains">Cuidado com includeSubDomains</h2>
+<p>O header pode incluir:</p>
+<div class="highlight"><pre><span></span><code><span class="err">Strict-Transport-Security: max-age=31536000; includeSubDomains</span>
+</code></pre></div>
+<p><code>includeSubDomains</code> aplica a política também aos subdomínios.</p>
+<p>Isso pode ser ótimo quando todos os subdomínios suportam HTTPS corretamente.</p>
+<p>Mas pode quebrar ambientes se algum subdomínio legítimo ainda depende de HTTP.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>meucatalogomusical.com
+api.meucatalogomusical.com
+admin.meucatalogomusical.com
+legacy.meucatalogomusical.com
+</code></pre></div>
+<p>Se <code>legacy.meucatalogomusical.com</code> não suporta HTTPS e você habilita <code>includeSubDomains</code>, usuários podem perder acesso.</p>
+<p>Por isso, HSTS precisa ser decisão técnica e operacional, não apenas um header colocado às pressas.</p>
+<h2 id="max-age">max-age</h2>
+<p><code>max-age</code> define por quantos segundos o navegador deve lembrar da política HSTS.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="err">Strict-Transport-Security: max-age=31536000</span>
+</code></pre></div>
+<p><code>31536000</code> segundos equivalem a aproximadamente um ano.</p>
+<p>Em ambientes reais, é comum começar com valores menores em homologação ou rollout controlado, validar todos os subdomínios e depois aumentar.</p>
+<p>Exemplo de rollout gradual:</p>
+<div class="highlight"><pre><span></span><code><span class="err">Strict-Transport-Security: max-age=300</span>
+</code></pre></div>
+<p>Depois:</p>
+<div class="highlight"><pre><span></span><code><span class="err">Strict-Transport-Security: max-age=86400</span>
+</code></pre></div>
+<p>Depois:</p>
+<div class="highlight"><pre><span></span><code><span class="err">Strict-Transport-Security: max-age=31536000; includeSubDomains</span>
+</code></pre></div>
+<p>A estratégia depende da empresa, dos domínios e da maturidade operacional.</p>
+<h2 id="hsts-em-spring-security">HSTS em Spring Security</h2>
+<p>O Spring Security fornece headers de segurança por padrão e documenta suporte para HSTS e <code>X-Content-Type-Options: nosniff</code>. A documentação informa que o Spring Security adiciona um conjunto padrão de headers relacionados a segurança e mostra <code>X-Content-Type-Options: nosniff</code> e comportamento padrão para HSTS.</p>
+<p>Exemplo de configuração em Spring Security:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.config</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.context.annotation.Bean</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.context.annotation.Configuration</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.security.config.Customizer</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.security.config.annotation.web.builders.HttpSecurity</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.security.web.SecurityFilterChain</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.time.Duration</span><span class="p">;</span>
+
+<span class="nd">@Configuration</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SecurityHeadersConfig</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Bean</span>
+<span class="w">    </span><span class="n">SecurityFilterChain</span><span class="w"> </span><span class="nf">securityFilterChain</span><span class="p">(</span><span class="n">HttpSecurity</span><span class="w"> </span><span class="n">http</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">http</span>
+<span class="w">                </span><span class="p">.</span><span class="na">headers</span><span class="p">(</span><span class="n">headers</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">headers</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">httpStrictTransportSecurity</span><span class="p">(</span><span class="n">hsts</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">hsts</span>
+<span class="w">                                </span><span class="p">.</span><span class="na">maxAgeInSeconds</span><span class="p">(</span><span class="n">Duration</span><span class="p">.</span><span class="na">ofDays</span><span class="p">(</span><span class="mi">365</span><span class="p">).</span><span class="na">toSeconds</span><span class="p">())</span>
+<span class="w">                                </span><span class="p">.</span><span class="na">includeSubDomains</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+<span class="w">                        </span><span class="p">)</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">contentTypeOptions</span><span class="p">(</span><span class="n">Customizer</span><span class="p">.</span><span class="na">withDefaults</span><span class="p">())</span>
+<span class="w">                </span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">authorizeHttpRequests</span><span class="p">(</span><span class="n">authorize</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">authorize</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">requestMatchers</span><span class="p">(</span><span class="s">&quot;/api/public/**&quot;</span><span class="p">).</span><span class="na">permitAll</span><span class="p">()</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">anyRequest</span><span class="p">().</span><span class="na">authenticated</span><span class="p">()</span>
+<span class="w">                </span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse exemplo configura:</p>
+<ul>
+<li>HSTS por 365 dias;</li>
+<li>inclusão de subdomínios;</li>
+<li><code>X-Content-Type-Options</code>.</li>
+</ul>
+<p>Em produção, essa configuração precisa estar alinhada com a infraestrutura, proxy, balanceador, TLS termination e política de domínio.</p>
+<h2 id="hsts-atras-de-proxy-ou-load-balancer">HSTS atrás de proxy ou load balancer</h2>
+<p>Em muitas empresas, a aplicação Spring não recebe HTTPS diretamente.</p>
+<p>Fluxo comum:</p>
+<div class="highlight"><pre><span></span><code>Navegador
+    -&gt; HTTPS
+Load Balancer / API Gateway
+    -&gt; HTTP interno
+Aplicação Spring
+</code></pre></div>
+<p>Nesse cenário, o TLS termina no load balancer ou gateway.</p>
+<p>A aplicação pode enxergar a requisição como HTTP, mesmo que o cliente tenha acessado por HTTPS.</p>
+<p>Isso pode afetar geração de URLs, redirects, cookies <code>Secure</code> e políticas de segurança.</p>
+<p>Por isso, é importante configurar corretamente headers encaminhados, como:</p>
+<div class="highlight"><pre><span></span><code>X-Forwarded-Proto
+Forwarded
+</code></pre></div>
+<p>e a configuração correspondente no Spring Boot e na infraestrutura.</p>
+<p>O ponto de segurança é:</p>
+<blockquote>
+<p>O header HSTS deve refletir a política real vista pelo navegador.</p>
+</blockquote>
+<p>Se o navegador acessa por HTTPS, o HSTS precisa aparecer na resposta HTTPS final.</p>
+<h2 id="missing-hsts-header-em-sast">Missing HSTS Header em SAST</h2>
+<p>Um finding <code>Missing HSTS Header</code> normalmente indica que a ferramenta não encontrou o header <code>Strict-Transport-Security</code> em alguma resposta.</p>
+<p>Isso pode acontecer por vários motivos:</p>
+<ul>
+<li>aplicação não configura HSTS;</li>
+<li>Spring Security não está habilitado;</li>
+<li>endpoint passa fora da cadeia de filtros;</li>
+<li>HSTS é configurado no gateway, mas o SAST analisou só código;</li>
+<li>ambiente de teste usa HTTP;</li>
+<li>scanner não entende configuração externa;</li>
+<li>response customizada não passa pelos headers padrão;</li>
+<li>arquivo/download é tratado por componente separado.</li>
+</ul>
+<p>No CustomerData, o scan apontou <code>Missing_HSTS_Header</code> associado a <code>FileUtil.write</code>, o que mostra como ferramentas podem associar headers ausentes até a fluxos que não parecem, à primeira vista, relacionados a uma resposta HTTP.</p>
+<p>A triagem deve responder:</p>
+<div class="highlight"><pre><span></span><code>O HSTS é configurado na aplicação?
+É configurado no gateway?
+O endpoint passa por essa camada?
+O header aparece na resposta real?
+Há teste ou evidência HTTP?
+</code></pre></div>
+<h2 id="json-explicito">JSON explícito</h2>
+<p>Agora vamos ao segundo tema: JSON explícito.</p>
+<p>Uma API REST deve declarar claramente que produz JSON.</p>
+<p>Em Spring MVC, isso pode ser feito com <code>produces</code>.</p>
+<p>A documentação do Spring Framework mostra o uso de <code>@GetMapping(..., produces = "application/json")</code> para declarar o media type produzido pelo endpoint.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.bandas.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.MediaType</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.*</span><span class="p">;</span>
+
+<span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/api/bandas&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BandaController</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span>
+<span class="w">            </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/{id}&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="n">produces</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON_VALUE</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">BandaResponse</span><span class="w"> </span><span class="nf">buscar</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BandaResponse</span><span class="p">(</span>
+<span class="w">                </span><span class="n">id</span><span class="p">,</span>
+<span class="w">                </span><span class="s">&quot;Testament&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s">&quot;Thrash Metal&quot;</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>DTO:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.bandas.api</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">BandaResponse</span><span class="p">(</span>
+<span class="w">        </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">,</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">,</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">genero</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse endpoint deixa claro:</p>
+<div class="highlight"><pre><span></span><code>Produzo application/json.
+</code></pre></div>
+<p>A resposta esperada:</p>
+<div class="highlight"><pre><span></span><code><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+<span class="na">X-Content-Type-Options</span><span class="o">:</span> <span class="l">nosniff</span>
+</code></pre></div>
+<p>Corpo:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;nome&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Testament&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;genero&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Thrash Metal&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="por-que-produces-importa">Por que <code>produces</code> importa?</h2>
+<p>Em muitos casos, o Spring já consegue retornar JSON automaticamente por causa do Jackson e da negociação de conteúdo.</p>
+<p>Mas declarar <code>produces = MediaType.APPLICATION_JSON_VALUE</code> ajuda a deixar o contrato explícito.</p>
+<p>Isso é útil porque:</p>
+<ul>
+<li>reduz ambiguidade;</li>
+<li>documenta intenção;</li>
+<li>ajuda testes;</li>
+<li>ajuda triagem SAST;</li>
+<li>evita negociação inesperada;</li>
+<li>diferencia API JSON de página HTML;</li>
+<li>ajuda a responder a findings de XSS em endpoints REST;</li>
+<li>reforça que o endpoint não deveria produzir <code>text/html</code>.</li>
+</ul>
+<p>No caso do Databridge, a mitigação de findings de XSS passou por deixar claro que o dado permanecia como JSON, com <code>produces = application/json</code>, <code>Content-Type</code> JSON e <code>X-Content-Type-Options: nosniff</code>, sem entrar em contexto HTML, atributo, JavaScript ou DOM.</p>
+<p>Esse é um aprendizado importante:</p>
+<blockquote>
+<p>Nem toda resposta com dado não confiável é XSS. O contexto de saída importa.</p>
+</blockquote>
+<p>Se a resposta é JSON e não HTML, a mitigação correta pode ser reforçar o contrato JSON, não aplicar escape HTML aleatório.</p>
+<h2 id="json-nao-e-html">JSON não é HTML</h2>
+<p>Uma resposta JSON é dado.</p>
+<p>Uma resposta HTML é documento interpretável pelo navegador.</p>
+<p>Exemplo JSON:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;comentario&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Esse álbum do Kreator é excelente.&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Exemplo HTML:</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Esse álbum do Kreator é excelente.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>Se um dado não confiável entra em HTML sem escape, pode haver XSS.</p>
+<p>Se o mesmo dado é retornado corretamente como JSON, com <code>Content-Type: application/json</code> e <code>nosniff</code>, ele não está automaticamente em um contexto de execução HTML.</p>
+<p>Mas cuidado: o frontend que consumir esse JSON ainda precisa renderizar o valor com segurança.</p>
+<p>Exemplo seguro no frontend:</p>
+<div class="highlight"><pre><span></span><code><span class="nx">element</span><span class="p">.</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">resposta</span><span class="p">.</span><span class="nx">comentario</span><span class="p">;</span>
+</code></pre></div>
+<p>Exemplo perigoso:</p>
+<div class="highlight"><pre><span></span><code><span class="nx">element</span><span class="p">.</span><span class="nx">innerHTML</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">resposta</span><span class="p">.</span><span class="nx">comentario</span><span class="p">;</span>
+</code></pre></div>
+<p>Ou seja:</p>
+<ul>
+<li>API deve produzir JSON corretamente;</li>
+<li>frontend deve renderizar corretamente;</li>
+<li>uma camada não anula a responsabilidade da outra.</li>
+</ul>
+<h2 id="x-content-type-options-nosniff">X-Content-Type-Options: nosniff</h2>
+<p>O header <code>X-Content-Type-Options</code> com valor <code>nosniff</code> instrui o navegador a respeitar o <code>Content-Type</code> informado.</p>
+<div class="highlight"><pre><span></span><code><span class="err">X-Content-Type-Options: nosniff</span>
+</code></pre></div>
+<p>A MDN explica que esse header indica que os MIME types anunciados em <code>Content-Type</code> devem ser respeitados e não alterados.</p>
+<p>Isso evita MIME sniffing.</p>
+<p>MIME sniffing é quando o navegador tenta adivinhar o tipo do conteúdo, em vez de confiar apenas no <code>Content-Type</code>.</p>
+<p>Isso pode ser perigoso quando uma resposta deveria ser tratada como texto ou JSON, mas o navegador tenta interpretá-la como HTML ou script.</p>
+<p>A MDN recomenda configurar <code>X-Content-Type-Options: nosniff</code> e media types apropriados para arquivos servidos.</p>
+<h2 id="exemplo-de-nosniff">Exemplo de nosniff</h2>
+<p>Resposta segura:</p>
+<div class="highlight"><pre><span></span><code><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+<span class="na">X-Content-Type-Options</span><span class="o">:</span> <span class="l">nosniff</span>
+</code></pre></div>
+<p>Corpo:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;banda&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Overkill&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;genero&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Thrash Metal&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Aqui o servidor diz:</p>
+<div class="highlight"><pre><span></span><code>Isto é JSON.
+Não tente adivinhar outro tipo.
+</code></pre></div>
+<p>Isso ajuda a impedir que o navegador interprete conteúdo em contexto diferente do esperado.</p>
+<h2 id="configurando-nosniff-no-spring-security">Configurando nosniff no Spring Security</h2>
+<p>Com Spring Security, <code>X-Content-Type-Options: nosniff</code> faz parte dos headers de segurança padrão. A documentação do Spring Security mostra esse header dentro do conjunto de headers de segurança aplicados por padrão.</p>
+<p>Configuração explícita:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.config</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.context.annotation.Bean</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.context.annotation.Configuration</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.security.config.Customizer</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.security.config.annotation.web.builders.HttpSecurity</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.security.web.SecurityFilterChain</span><span class="p">;</span>
+
+<span class="nd">@Configuration</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SecurityHeadersConfig</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Bean</span>
+<span class="w">    </span><span class="n">SecurityFilterChain</span><span class="w"> </span><span class="nf">securityFilterChain</span><span class="p">(</span><span class="n">HttpSecurity</span><span class="w"> </span><span class="n">http</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">http</span>
+<span class="w">                </span><span class="p">.</span><span class="na">headers</span><span class="p">(</span><span class="n">headers</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">headers</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">contentTypeOptions</span><span class="p">(</span><span class="n">Customizer</span><span class="p">.</span><span class="na">withDefaults</span><span class="p">())</span>
+<span class="w">                </span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">authorizeHttpRequests</span><span class="p">(</span><span class="n">authorize</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">authorize</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">requestMatchers</span><span class="p">(</span><span class="s">&quot;/api/public/**&quot;</span><span class="p">).</span><span class="na">permitAll</span><span class="p">()</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">anyRequest</span><span class="p">().</span><span class="na">authenticated</span><span class="p">()</span>
+<span class="w">                </span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Em muitas aplicações, você não precisa configurar isso manualmente se o Spring Security já estiver adicionando os headers padrão. Mas explicitar pode ajudar quando a equipe quer deixar a política visível.</p>
+<h2 id="configurando-headers-manualmente-com-filtro">Configurando headers manualmente com filtro</h2>
+<p>Quando não há Spring Security, ou quando existe um fluxo específico fora da cadeia padrão, você pode adicionar headers com filtro.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.config</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.FilterChain</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.ServletException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.http.HttpServletRequest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.servlet.http.HttpServletResponse</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.filter.OncePerRequestFilter</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SecurityHeadersFilter</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">OncePerRequestFilter</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">doFilterInternal</span><span class="p">(</span>
+<span class="w">            </span><span class="n">HttpServletRequest</span><span class="w"> </span><span class="n">request</span><span class="p">,</span>
+<span class="w">            </span><span class="n">HttpServletResponse</span><span class="w"> </span><span class="n">response</span><span class="p">,</span>
+<span class="w">            </span><span class="n">FilterChain</span><span class="w"> </span><span class="n">filterChain</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">ServletException</span><span class="p">,</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="n">response</span><span class="p">.</span><span class="na">setHeader</span><span class="p">(</span><span class="s">&quot;X-Content-Type-Options&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;nosniff&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="na">isSecure</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">response</span><span class="p">.</span><span class="na">setHeader</span><span class="p">(</span>
+<span class="w">                    </span><span class="s">&quot;Strict-Transport-Security&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="s">&quot;max-age=31536000; includeSubDomains&quot;</span>
+<span class="w">            </span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">filterChain</span><span class="p">.</span><span class="na">doFilter</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse exemplo é útil para fins didáticos.</p>
+<p>Em uma aplicação real, prefira configurar headers de segurança de forma centralizada com Spring Security, gateway ou infraestrutura padronizada da empresa.</p>
+<h2 id="hsts-deve-ser-enviado-apenas-sobre-https">HSTS deve ser enviado apenas sobre HTTPS</h2>
+<p>HSTS só faz sentido em resposta HTTPS.</p>
+<p>Se você adiciona HSTS em uma resposta HTTP, navegadores não devem confiar naquela política, porque o canal não é seguro.</p>
+<p>Por isso, o exemplo anterior usa:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="na">isSecure</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">response</span><span class="p">.</span><span class="na">setHeader</span><span class="p">(</span>
+<span class="w">            </span><span class="s">&quot;Strict-Transport-Security&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;max-age=31536000; includeSubDomains&quot;</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Mas, atrás de proxy ou gateway, <code>request.isSecure()</code> pode depender da configuração correta de forwarded headers.</p>
+<p>Em produção, valide a resposta real no navegador ou com <code>curl</code>.</p>
+<h2 id="testando-headers-com-curl">Testando headers com curl</h2>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-I<span class="w"> </span>https://meucatalogomusical.com/api/bandas/1
+</code></pre></div>
+<p>Resposta esperada:</p>
+<div class="highlight"><pre><span></span><code><span class="kr">HTTP</span><span class="o">/</span><span class="m">2</span> <span class="m">200</span>
+<span class="na">content-type</span><span class="o">:</span> <span class="l">application/json</span>
+<span class="na">x-content-type-options</span><span class="o">:</span> <span class="l">nosniff</span>
+<span class="na">strict-transport-security</span><span class="o">:</span> <span class="l">max-age=31536000; includeSubDomains</span>
+</code></pre></div>
+<p>Para um endpoint JSON, você quer ver:</p>
+<div class="highlight"><pre><span></span><code><span class="err">Content-Type: application/json</span>
+</code></pre></div>
+<p>Para <code>nosniff</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="err">X-Content-Type-Options: nosniff</span>
+</code></pre></div>
+<p>Para HSTS em HTTPS:</p>
+<div class="highlight"><pre><span></span><code><span class="err">Strict-Transport-Security: max-age=...</span>
+</code></pre></div>
+<p>Esse tipo de evidência é útil para fechar findings SAST/DAST.</p>
+<h2 id="testes-com-mockmvc">Testes com MockMvc</h2>
+<p>Teste do endpoint JSON:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.bandas.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.MediaType</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.web.servlet.MockMvc</span><span class="p">;</span>
+
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.hamcrest.Matchers.containsString</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.test.web.servlet.result.MockMvcResultMatchers.*</span><span class="p">;</span>
+
+<span class="nd">@WebMvcTest</span><span class="p">(</span><span class="n">BandaController</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="kd">class</span> <span class="nc">BandaControllerTest</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Autowired</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">MockMvc</span><span class="w"> </span><span class="n">mockMvc</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">deveRetornarJsonExplicitamente</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">mockMvc</span><span class="p">.</span><span class="na">perform</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;/api/bandas/1&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">accept</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON</span><span class="p">))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">andExpect</span><span class="p">(</span><span class="n">status</span><span class="p">().</span><span class="na">isOk</span><span class="p">())</span>
+<span class="w">                </span><span class="p">.</span><span class="na">andExpect</span><span class="p">(</span><span class="n">header</span><span class="p">().</span><span class="na">string</span><span class="p">(</span><span class="s">&quot;Content-Type&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">containsString</span><span class="p">(</span><span class="s">&quot;application/json&quot;</span><span class="p">)))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">andExpect</span><span class="p">(</span><span class="n">jsonPath</span><span class="p">(</span><span class="s">&quot;$.nome&quot;</span><span class="p">).</span><span class="na">value</span><span class="p">(</span><span class="s">&quot;Testament&quot;</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">deveRecusarHtmlQuandoEndpointProduzSomenteJson</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">mockMvc</span><span class="p">.</span><span class="na">perform</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;/api/bandas/1&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">accept</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">TEXT_HTML</span><span class="p">))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">andExpect</span><span class="p">(</span><span class="n">status</span><span class="p">().</span><span class="na">isNotAcceptable</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse teste valida duas coisas:</p>
+<ul>
+<li>o endpoint retorna JSON;</li>
+<li>o endpoint não negocia HTML.</li>
+</ul>
+<p>Isso é muito útil quando você quer provar que o dado não entra em contexto HTML.</p>
+<h2 id="testando-nosniff">Testando nosniff</h2>
+<p>Se você estiver com Spring Security carregado no teste, pode validar o header:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.bandas.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.context.annotation.Import</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.MediaType</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.web.servlet.MockMvc</span><span class="p">;</span>
+
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.test.web.servlet.result.MockMvcResultMatchers.*</span><span class="p">;</span>
+
+<span class="nd">@WebMvcTest</span><span class="p">(</span><span class="n">BandaController</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="nd">@Import</span><span class="p">(</span><span class="n">SecurityHeadersConfig</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="kd">class</span> <span class="nc">BandaSecurityHeadersTest</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Autowired</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">MockMvc</span><span class="w"> </span><span class="n">mockMvc</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">deveEnviarNosniff</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">mockMvc</span><span class="p">.</span><span class="na">perform</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;/api/bandas/1&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">accept</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON</span><span class="p">))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">andExpect</span><span class="p">(</span><span class="n">status</span><span class="p">().</span><span class="na">isOk</span><span class="p">())</span>
+<span class="w">                </span><span class="p">.</span><span class="na">andExpect</span><span class="p">(</span><span class="n">header</span><span class="p">().</span><span class="na">string</span><span class="p">(</span><span class="s">&quot;X-Content-Type-Options&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;nosniff&quot;</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Dependendo da configuração de segurança do projeto, talvez você precise ajustar autenticação, filtros e contexto de teste.</p>
+<p>O importante é ter evidência automatizada de que o header aparece.</p>
+<h2 id="testando-hsts">Testando HSTS</h2>
+<p>HSTS depende de requisição segura.</p>
+<p>Em <code>MockMvc</code>, você pode simular uma requisição segura:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.bandas.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.context.annotation.Import</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.MediaType</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.web.servlet.MockMvc</span><span class="p">;</span>
+
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.hamcrest.Matchers.containsString</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.test.web.servlet.result.MockMvcResultMatchers.*</span><span class="p">;</span>
+
+<span class="nd">@WebMvcTest</span><span class="p">(</span><span class="n">BandaController</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="nd">@Import</span><span class="p">(</span><span class="n">SecurityHeadersConfig</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="kd">class</span> <span class="nc">BandaHstsTest</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@Autowired</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">MockMvc</span><span class="w"> </span><span class="n">mockMvc</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">deveEnviarHstsEmRequisicaoSegura</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">mockMvc</span><span class="p">.</span><span class="na">perform</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;/api/bandas/1&quot;</span><span class="p">)</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">secure</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+<span class="w">                        </span><span class="p">.</span><span class="na">accept</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON</span><span class="p">))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">andExpect</span><span class="p">(</span><span class="n">status</span><span class="p">().</span><span class="na">isOk</span><span class="p">())</span>
+<span class="w">                </span><span class="p">.</span><span class="na">andExpect</span><span class="p">(</span><span class="n">header</span><span class="p">().</span><span class="na">string</span><span class="p">(</span>
+<span class="w">                        </span><span class="s">&quot;Strict-Transport-Security&quot;</span><span class="p">,</span>
+<span class="w">                        </span><span class="n">containsString</span><span class="p">(</span><span class="s">&quot;max-age=&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse teste comprova que a aplicação envia HSTS quando a requisição é considerada segura.</p>
+<p>Em produção, ainda é necessário validar no tráfego real, especialmente se houver proxy, gateway ou load balancer.</p>
+<h2 id="endpoint-json-seguro-em-spring">Endpoint JSON seguro em Spring</h2>
+<p>Exemplo completo:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.bandas.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.MediaType</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.*</span><span class="p">;</span>
+
+<span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span>
+<span class="w">        </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/api/bandas&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">produces</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON_VALUE</span>
+<span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BandaController</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/{id}&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">BandaResponse</span><span class="w"> </span><span class="nf">buscar</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BandaResponse</span><span class="p">(</span>
+<span class="w">                </span><span class="n">id</span><span class="p">,</span>
+<span class="w">                </span><span class="s">&quot;Amon Amarth&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s">&quot;Melodic Death Metal&quot;</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@GetMapping</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ListaBandasResponse</span><span class="w"> </span><span class="nf">listar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ListaBandasResponse</span><span class="p">(</span>
+<span class="w">                </span><span class="n">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span>
+<span class="w">                        </span><span class="k">new</span><span class="w"> </span><span class="n">BandaResponse</span><span class="p">(</span><span class="mi">1L</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Amon Amarth&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Melodic Death Metal&quot;</span><span class="p">),</span>
+<span class="w">                        </span><span class="k">new</span><span class="w"> </span><span class="n">BandaResponse</span><span class="p">(</span><span class="mi">2L</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Kreator&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Thrash Metal&quot;</span><span class="p">),</span>
+<span class="w">                        </span><span class="k">new</span><span class="w"> </span><span class="n">BandaResponse</span><span class="p">(</span><span class="mi">3L</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Testament&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Thrash Metal&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">)</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>DTOs:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.bandas.api</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">BandaResponse</span><span class="p">(</span>
+<span class="w">        </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">,</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">,</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">genero</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.bandas.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">ListaBandasResponse</span><span class="p">(</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">BandaResponse</span><span class="o">&gt;</span><span class="w"> </span><span class="n">bandas</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Colocar <code>produces = MediaType.APPLICATION_JSON_VALUE</code> no <code>@RequestMapping</code> da classe ajuda a declarar que todos os endpoints daquele controller produzem JSON.</p>
+<h2 id="endpoint-que-recebe-json">Endpoint que recebe JSON</h2>
+<p>Para requests com corpo JSON, também deixe claro o <code>consumes</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.bandas.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.validation.Valid</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.MediaType</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.*</span><span class="p">;</span>
+
+<span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span>
+<span class="w">        </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/api/bandas&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">produces</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON_VALUE</span>
+<span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CadastroBandaController</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@PostMapping</span><span class="p">(</span><span class="n">consumes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON_VALUE</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">BandaResponse</span><span class="w"> </span><span class="nf">cadastrar</span><span class="p">(</span><span class="nd">@Valid</span><span class="w"> </span><span class="nd">@RequestBody</span><span class="w"> </span><span class="n">CadastroBandaRequest</span><span class="w"> </span><span class="n">request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BandaResponse</span><span class="p">(</span>
+<span class="w">                </span><span class="mi">10L</span><span class="p">,</span>
+<span class="w">                </span><span class="n">request</span><span class="p">.</span><span class="na">nome</span><span class="p">(),</span>
+<span class="w">                </span><span class="n">request</span><span class="p">.</span><span class="na">genero</span><span class="p">()</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>DTO:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.bandas.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.validation.constraints.NotBlank</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.validation.constraints.Size</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">CadastroBandaRequest</span><span class="p">(</span>
+
+<span class="w">        </span><span class="nd">@NotBlank</span>
+<span class="w">        </span><span class="nd">@Size</span><span class="p">(</span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">120</span><span class="p">)</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">nome</span><span class="p">,</span>
+
+<span class="w">        </span><span class="nd">@NotBlank</span>
+<span class="w">        </span><span class="nd">@Size</span><span class="p">(</span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">80</span><span class="p">)</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">genero</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Agora o contrato é claro:</p>
+<div class="highlight"><pre><span></span><code>Recebo application/json.
+Produzo application/json.
+</code></pre></div>
+<p>Isso reduz ambiguidade e melhora segurança.</p>
+<h2 id="erros-tambem-devem-ser-json">Erros também devem ser JSON</h2>
+<p>Não adianta o endpoint de sucesso retornar JSON se os erros retornam HTML padrão.</p>
+<p>Exemplo de <code>ControllerAdvice</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.shared.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.HttpStatus</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.MediaType</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.*</span><span class="p">;</span>
+
+<span class="nd">@RestControllerAdvice</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">produces</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON_VALUE</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ApiExceptionHandler</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@ExceptionHandler</span><span class="p">(</span><span class="n">IllegalArgumentException</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="w">    </span><span class="nd">@ResponseStatus</span><span class="p">(</span><span class="n">HttpStatus</span><span class="p">.</span><span class="na">BAD_REQUEST</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ErroResponse</span><span class="w"> </span><span class="nf">tratarEntradaInvalida</span><span class="p">(</span><span class="n">IllegalArgumentException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ErroResponse</span><span class="p">(</span><span class="s">&quot;Requisição inválida.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@ExceptionHandler</span><span class="p">(</span><span class="n">Exception</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="w">    </span><span class="nd">@ResponseStatus</span><span class="p">(</span><span class="n">HttpStatus</span><span class="p">.</span><span class="na">INTERNAL_SERVER_ERROR</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ErroResponse</span><span class="w"> </span><span class="nf">tratarErroInesperado</span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ErroResponse</span><span class="p">(</span><span class="s">&quot;Não foi possível processar a solicitação.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">ErroResponse</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">mensagem</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>O objetivo é evitar:</p>
+<ul>
+<li>HTML de erro inesperado;</li>
+<li>stack trace exposto;</li>
+<li><code>Content-Type</code> ambíguo;</li>
+<li>detalhes internos;</li>
+<li>resposta fora do contrato da API.</li>
+</ul>
+<h2 id="headers-nao-substituem-encoding">Headers não substituem encoding</h2>
+<p><code>Content-Type: application/json</code> e <code>nosniff</code> ajudam a garantir que a resposta será tratada como JSON.</p>
+<p>Mas não substituem codificação correta em HTML.</p>
+<p>Se outro sistema pegar o JSON e injetar em uma página com <code>innerHTML</code>, ainda pode haver XSS no consumidor.</p>
+<p>Exemplo perigoso no frontend:</p>
+<div class="highlight"><pre><span></span><code><span class="nx">resultado</span><span class="p">.</span><span class="nx">innerHTML</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">resposta</span><span class="p">.</span><span class="nx">comentario</span><span class="p">;</span>
+</code></pre></div>
+<p>Exemplo seguro:</p>
+<div class="highlight"><pre><span></span><code><span class="nx">resultado</span><span class="p">.</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">resposta</span><span class="p">.</span><span class="nx">comentario</span><span class="p">;</span>
+</code></pre></div>
+<p>Portanto:</p>
+<div class="highlight"><pre><span></span><code>API JSON segura ≠ frontend automaticamente seguro
+</code></pre></div>
+<p>Cada camada precisa respeitar o contexto de saída.</p>
+<h2 id="headers-em-download-de-arquivos">Headers em download de arquivos</h2>
+<p>Para downloads, também é importante declarar <code>Content-Type</code> correto.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.arquivos.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.core.io.Resource</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.*</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.*</span><span class="p">;</span>
+
+<span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/api/arquivos&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ArquivoDownloadController</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ArquivoService</span><span class="w"> </span><span class="n">arquivoService</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ArquivoDownloadController</span><span class="p">(</span><span class="n">ArquivoService</span><span class="w"> </span><span class="n">arquivoService</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">arquivoService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arquivoService</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/{id}/download&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">Resource</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">download</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">ArquivoDownload</span><span class="w"> </span><span class="n">arquivo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arquivoService</span><span class="p">.</span><span class="na">carregar</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">ok</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="na">contentType</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_OCTET_STREAM</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">header</span><span class="p">(</span>
+<span class="w">                        </span><span class="n">HttpHeaders</span><span class="p">.</span><span class="na">CONTENT_DISPOSITION</span><span class="p">,</span>
+<span class="w">                        </span><span class="s">&quot;attachment; filename=\&quot;&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">arquivo</span><span class="p">.</span><span class="na">nomeSeguro</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;\&quot;&quot;</span>
+<span class="w">                </span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">body</span><span class="p">(</span><span class="n">arquivo</span><span class="p">.</span><span class="na">resource</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Para conteúdo não confiável, <code>attachment</code> costuma ser uma escolha mais conservadora do que <code>inline</code>.</p>
+<p>Além disso, <code>nosniff</code> ajuda a evitar que o navegador tente interpretar o conteúdo de forma diferente.</p>
+<h2 id="quando-usar-textplain">Quando usar text/plain?</h2>
+<p>Às vezes, uma resposta é texto puro.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@GetMapping</span><span class="p">(</span>
+<span class="w">        </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/health-text&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">produces</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MediaType</span><span class="p">.</span><span class="na">TEXT_PLAIN_VALUE</span>
+<span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">healthText</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;OK&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Nesse caso, o <code>Content-Type</code> correto é:</p>
+<div class="highlight"><pre><span></span><code><span class="err">Content-Type: text/plain</span>
+</code></pre></div>
+<p>Com:</p>
+<div class="highlight"><pre><span></span><code><span class="err">X-Content-Type-Options: nosniff</span>
+</code></pre></div>
+<p>Se o corpo contiver caracteres que parecem HTML, o navegador não deve reinterpretar como HTML.</p>
+<h2 id="quando-usar-texthtml">Quando usar text/html?</h2>
+<p>Use <code>text/html</code> apenas quando a resposta realmente é HTML.</p>
+<p>Exemplo com template server-side:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@Controller</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">HomeController</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">home</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;home&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Aqui o contexto muda.</p>
+<p>Se a resposta é HTML, dados não confiáveis precisam de escape HTML contextual.</p>
+<p>Esse é o ponto:</p>
+<div class="highlight"><pre><span></span><code>JSON exige contrato JSON.
+HTML exige escape HTML.
+Arquivo exige Content-Type e Content-Disposition adequados.
+</code></pre></div>
+<p>Não existe um único tratamento que serve para tudo.</p>
+<h2 id="relacao-com-xss">Relação com XSS</h2>
+<p>Findings de XSS podem aparecer quando a ferramenta vê:</p>
+<div class="highlight"><pre><span></span><code>dado não confiável -&gt; resposta HTTP
+</code></pre></div>
+<p>Mas, para confirmar XSS, é preciso entender o contexto.</p>
+<p>Perguntas:</p>
+<div class="highlight"><pre><span></span><code>A resposta é HTML?
+O dado entra em atributo HTML?
+O dado entra em JavaScript?
+O dado entra no DOM?
+Ou permanece JSON?
+</code></pre></div>
+<p>Se o dado permanece em JSON com:</p>
+<div class="highlight"><pre><span></span><code><span class="err">Content-Type: application/json</span>
+<span class="err">X-Content-Type-Options: nosniff</span>
+</code></pre></div>
+<p>e nenhum cliente intermediário injeta em HTML, o risco de XSS naquele endpoint pode ser falso positivo ou risco mitigado.</p>
+<p>Foi exatamente esse tipo de raciocínio que apareceu no Databridge: a análise registrou que o dado permanecia em JSON e não entrava em HTML, atributo, JavaScript ou DOM.</p>
+<h2 id="relacao-com-dast">Relação com DAST</h2>
+<p>Ferramentas DAST podem apontar ausência de headers.</p>
+<p>Exemplos:</p>
+<div class="highlight"><pre><span></span><code>Missing Strict-Transport-Security Header
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Missing X-Content-Type-Options Header
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Content-Type not specified
+</code></pre></div>
+<p>Esses findings normalmente são verificados na resposta HTTP real.</p>
+<p>Por isso, para corrigir, é importante validar:</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-I<span class="w"> </span>https://meucatalogomusical.com/api/bandas/1
+</code></pre></div>
+<p>e não apenas olhar o código.</p>
+<p>Às vezes o header é adicionado no gateway, não no Spring.</p>
+<p>Às vezes é adicionado no Spring, mas removido no proxy.</p>
+<p>Às vezes aparece em endpoints normais, mas não em erro ou download.</p>
+<p>Teste a resposta real.</p>
+<h2 id="boas-praticas">Boas práticas</h2>
+<h3 id="1-habilite-hsts-em-producao">1. Habilite HSTS em produção</h3>
+<p>Use <code>Strict-Transport-Security</code> em respostas HTTPS, alinhado à política de domínio.</p>
+<h3 id="2-faca-rollout-cuidadoso-de-hsts">2. Faça rollout cuidadoso de HSTS</h3>
+<p>Cuidado com <code>includeSubDomains</code> e <code>preload</code>. Valide subdomínios antes.</p>
+<h3 id="3-declare-json-explicitamente">3. Declare JSON explicitamente</h3>
+<p>Use <code>produces = MediaType.APPLICATION_JSON_VALUE</code> em APIs REST.</p>
+<h3 id="4-declare-consumes-quando-recebe-json">4. Declare consumes quando recebe JSON</h3>
+<p>Use <code>consumes = MediaType.APPLICATION_JSON_VALUE</code> em endpoints com <code>@RequestBody</code>.</p>
+<h3 id="5-use-nosniff">5. Use nosniff</h3>
+<p>Configure <code>X-Content-Type-Options: nosniff</code>.</p>
+<h3 id="6-teste-headers">6. Teste headers</h3>
+<p>Use <code>MockMvc</code>, <code>curl</code>, DAST e validação em ambiente real.</p>
+<h3 id="7-padronize-erros">7. Padronize erros</h3>
+<p>Erros também devem respeitar o contrato da API.</p>
+<h3 id="8-nao-misture-api-json-e-html-no-mesmo-endpoint">8. Não misture API JSON e HTML no mesmo endpoint</h3>
+<p>Separe controllers e contratos.</p>
+<h3 id="9-cuidado-com-downloads">9. Cuidado com downloads</h3>
+<p>Use <code>Content-Type</code>, <code>Content-Disposition</code> e <code>nosniff</code>.</p>
+<h3 id="10-documente-decisoes">10. Documente decisões</h3>
+<p>Se um finding for falso positivo, documente contexto, headers e evidências.</p>
+<h2 id="erros-comuns">Erros comuns</h2>
+<h3 id="1-achar-que-https-sozinho-ativa-hsts">1. Achar que HTTPS sozinho ativa HSTS</h3>
+<p>HTTPS e HSTS são coisas diferentes. HSTS precisa de header.</p>
+<h3 id="2-ativar-includesubdomains-sem-mapear-subdominios">2. Ativar includeSubDomains sem mapear subdomínios</h3>
+<p>Isso pode quebrar subdomínios legados.</p>
+<h3 id="3-retornar-json-sem-content-type-claro">3. Retornar JSON sem Content-Type claro</h3>
+<p>Isso deixa espaço para interpretação ambígua.</p>
+<h3 id="4-confiar-que-o-framework-sempre-fara-tudo-certo">4. Confiar que o framework sempre fará tudo certo</h3>
+<p>Framework ajuda, mas contrato explícito facilita auditoria e testes.</p>
+<h3 id="5-nao-testar-respostas-de-erro">5. Não testar respostas de erro</h3>
+<p>Muitos headers somem justamente em erros, downloads ou fluxos customizados.</p>
+<h3 id="6-usar-texthtml-para-resposta-que-e-api">6. Usar <code>text/html</code> para resposta que é API</h3>
+<p>Isso aumenta risco de interpretação indevida.</p>
+<h3 id="7-usar-innerhtml-no-consumidor">7. Usar <code>innerHTML</code> no consumidor</h3>
+<p>Mesmo que a API seja JSON, o consumidor pode criar XSS se renderizar errado.</p>
+<h3 id="8-achar-que-nosniff-substitui-validacao">8. Achar que nosniff substitui validação</h3>
+<p><code>nosniff</code> ajuda no cliente, mas não substitui validação e encoding.</p>
+<h3 id="9-corrigir-xss-com-header-errado">9. Corrigir XSS com header errado</h3>
+<p>Headers ajudam, mas não corrigem saída HTML sem escape.</p>
+<h3 id="10-nao-considerar-gateway">10. Não considerar gateway</h3>
+<p>Em produção, headers podem ser adicionados, alterados ou removidos pela infraestrutura.</p>
+<h2 id="decisoes-de-engenharia">Decisões de engenharia</h2>
+<h2 id="onde-configurar-headers">Onde configurar headers?</h2>
+<p>Você pode configurar em:</p>
+<ul>
+<li>aplicação Spring;</li>
+<li>Spring Security;</li>
+<li>API Gateway;</li>
+<li>load balancer;</li>
+<li>reverse proxy;</li>
+<li>service mesh;</li>
+<li>CDN.</li>
+</ul>
+<p>O ideal depende da arquitetura.</p>
+<p>Em muitos ambientes corporativos, a política global fica no gateway, mas a aplicação também pode ter defaults defensivos.</p>
+<p>O importante é evitar lacunas.</p>
+<h2 id="hsts-na-aplicacao-ou-no-gateway">HSTS na aplicação ou no gateway?</h2>
+<p>Se o TLS termina no gateway, muitas vezes faz sentido configurar HSTS no gateway.</p>
+<p>Mas a aplicação também pode configurar se recebe corretamente a informação de que a requisição original era HTTPS.</p>
+<p>A decisão deve considerar:</p>
+<ul>
+<li>onde TLS termina;</li>
+<li>quem controla domínios;</li>
+<li>quem controla subdomínios;</li>
+<li>consistência entre serviços;</li>
+<li>ambientes internos;</li>
+<li>testes;</li>
+<li>responsabilidade operacional.</li>
+</ul>
+<h2 id="json-explicito-em-todos-os-controllers">JSON explícito em todos os controllers?</h2>
+<p>Para APIs REST, sim, costuma ser boa prática.</p>
+<p>Você pode declarar no controller:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@RequestMapping</span><span class="p">(</span>
+<span class="w">        </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/api/bandas&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">produces</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON_VALUE</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>E declarar <code>consumes</code> nos métodos que recebem corpo.</p>
+<p>Isso ajuda a padronizar.</p>
+<h2 id="quando-nao-usar-nosniff">Quando não usar nosniff?</h2>
+<p>Em aplicações web modernas, <code>nosniff</code> deve ser padrão.</p>
+<p>A MDN recomenda configurar <code>X-Content-Type-Options: nosniff</code> e media types adequados para os arquivos servidos.</p>
+<p>Se algo quebra por causa de <code>nosniff</code>, normalmente é sinal de que o <code>Content-Type</code> está errado.</p>
+<h2 id="quando-um-finding-pode-ser-falso-positivo">Quando um finding pode ser falso positivo?</h2>
+<p>Pode ser falso positivo quando:</p>
+<ul>
+<li>HSTS é aplicado no gateway e não aparece no código;</li>
+<li>endpoint apontado como XSS produz apenas JSON;</li>
+<li>resposta tem <code>Content-Type: application/json</code>;</li>
+<li>resposta tem <code>X-Content-Type-Options: nosniff</code>;</li>
+<li>consumidor não injeta o JSON em HTML;</li>
+<li>evidência real mostra os headers;</li>
+<li>o scanner não entende a configuração da infraestrutura.</li>
+</ul>
+<p>Mesmo assim, registre evidências.</p>
+<h2 id="onde-isso-aparece-em-sistemas-reais">Onde isso aparece em sistemas reais</h2>
+<p>Esses headers aparecem em:</p>
+<ul>
+<li>APIs REST;</li>
+<li>gateways;</li>
+<li>downloads;</li>
+<li>sistemas internos;</li>
+<li>backoffices;</li>
+<li>respostas de erro;</li>
+<li>endpoints públicos;</li>
+<li>health checks;</li>
+<li>arquivos estáticos;</li>
+<li>integrações server-to-server;</li>
+<li>aplicações com frontend separado;</li>
+<li>serviços atrás de load balancer.</li>
+</ul>
+<p>Em Java/Spring, os pontos comuns são:</p>
+<ul>
+<li><code>SecurityFilterChain</code>;</li>
+<li>controllers REST;</li>
+<li>exception handlers;</li>
+<li>filtros servlet;</li>
+<li>endpoints de download;</li>
+<li>configurações do gateway;</li>
+<li>testes MockMvc;</li>
+<li>configurações de proxy;</li>
+<li>DAST em homologação;</li>
+<li>scans Checkmarx/SAST com heurísticas de XSS e headers.</li>
+</ul>
+<h2 id="checklist-pratico">Checklist prático</h2>
+<h3 id="hsts">HSTS</h3>
+<ul>
+<li>A aplicação usa HTTPS em produção?</li>
+<li>O header <code>Strict-Transport-Security</code> aparece na resposta real?</li>
+<li><code>max-age</code> foi definido?</li>
+<li><code>includeSubDomains</code> foi avaliado?</li>
+<li>Todos os subdomínios suportam HTTPS?</li>
+<li>HSTS é aplicado no gateway ou na aplicação?</li>
+<li>O teste considera proxy/load balancer?</li>
+<li>Há evidência com <code>curl -I</code>?</li>
+</ul>
+<h3 id="json-explicito_1">JSON explícito</h3>
+<ul>
+<li>Controllers REST declaram <code>produces = application/json</code>?</li>
+<li>Endpoints com body declaram <code>consumes = application/json</code>?</li>
+<li>Erros também retornam JSON?</li>
+<li><code>Accept: text/html</code> é recusado quando o endpoint é apenas JSON?</li>
+<li><code>Content-Type</code> aparece corretamente na resposta?</li>
+<li>DTOs públicos são usados?</li>
+</ul>
+<h3 id="nosniff">nosniff</h3>
+<ul>
+<li><code>X-Content-Type-Options: nosniff</code> aparece?</li>
+<li>Downloads também recebem headers adequados?</li>
+<li>Arquivos têm <code>Content-Type</code> correto?</li>
+<li>Respostas de erro mantêm o header?</li>
+<li>O gateway preserva o header?</li>
+<li>Testes automatizados verificam?</li>
+</ul>
+<h3 id="xss-e-contexto">XSS e contexto</h3>
+<ul>
+<li>O endpoint realmente produz HTML?</li>
+<li>O dado entra em HTML, atributo, JavaScript ou DOM?</li>
+<li>Ou permanece JSON?</li>
+<li>O consumidor renderiza com segurança?</li>
+<li>Existe prova de <code>Content-Type</code> e <code>nosniff</code>?</li>
+<li>O finding SAST foi triado pelo contexto real?</li>
+</ul>
+<h3 id="operacao">Operação</h3>
+<ul>
+<li>Headers são consistentes entre ambientes?</li>
+<li>Homologação se parece com produção?</li>
+<li>Proxy remove algum header?</li>
+<li>CDN altera algum header?</li>
+<li>Load balancer adiciona HSTS?</li>
+<li>Existe monitoramento de regressão?</li>
+</ul>
+<h2 id="resumo-final">Resumo final</h2>
+<p>Headers de segurança ajudam a reduzir ambiguidade no comportamento HTTP da aplicação.</p>
+<p>Neste artigo, estudamos três pontos principais:</p>
+<ul>
+<li><code>Strict-Transport-Security</code>;</li>
+<li><code>Content-Type: application/json</code>;</li>
+<li><code>X-Content-Type-Options: nosniff</code>.</li>
+</ul>
+<p>O HSTS orienta o navegador a acessar o host apenas por HTTPS em acessos futuros.</p>
+<p>O <code>Content-Type</code> explícito informa ao cliente qual é o tipo da resposta.</p>
+<p>O <code>nosniff</code> instrui o navegador a respeitar o tipo informado, evitando MIME sniffing.</p>
+<p>Em aplicações Java/Spring, esses headers são especialmente importantes para:</p>
+<ul>
+<li>fechar findings de Missing HSTS;</li>
+<li>reforçar APIs JSON;</li>
+<li>mitigar falsos positivos de XSS em endpoints que não produzem HTML;</li>
+<li>reduzir comportamento ambíguo;</li>
+<li>padronizar respostas;</li>
+<li>melhorar evidências para AppSec.</li>
+</ul>
+<p>A principal lição é:</p>
+<blockquote>
+<p>Segurança também depende de contrato HTTP claro. Se a resposta é JSON, diga que é JSON. Se o domínio deve usar HTTPS, declare isso. Se o navegador não deve adivinhar o tipo, use nosniff.</p>
+</blockquote>
+<h2 id="perguntas-de-revisao">Perguntas de revisão</h2>
+<h3 id="1-o-que-e-hsts">1. O que é HSTS?</h3>
+<p>HSTS é uma política HTTP enviada pelo header <code>Strict-Transport-Security</code> para informar ao navegador que o host deve ser acessado apenas por HTTPS.</p>
+<h3 id="2-hsts-substitui-https">2. HSTS substitui HTTPS?</h3>
+<p>Não. HSTS depende de HTTPS. Ele reforça acessos futuros por HTTPS.</p>
+<h3 id="3-qual-e-uma-limitacao-do-hsts">3. Qual é uma limitação do HSTS?</h3>
+<p>Ele só passa a valer depois que o navegador acessa o host por HTTPS e recebe o header.</p>
+<h3 id="4-o-que-faz-includesubdomains">4. O que faz <code>includeSubDomains</code>?</h3>
+<p>Aplica a política HSTS também aos subdomínios.</p>
+<h3 id="5-qual-e-o-risco-de-includesubdomains">5. Qual é o risco de <code>includeSubDomains</code>?</h3>
+<p>Pode quebrar subdomínios que ainda não suportam HTTPS corretamente.</p>
+<h3 id="6-o-que-e-content-type">6. O que é <code>Content-Type</code>?</h3>
+<p>É o header que informa o media type da resposta, como <code>application/json</code> ou <code>text/html</code>.</p>
+<h3 id="7-por-que-declarar-applicationjson-explicitamente">7. Por que declarar <code>application/json</code> explicitamente?</h3>
+<p>Para deixar claro que o endpoint produz JSON e reduzir ambiguidade de interpretação.</p>
+<h3 id="8-o-que-faz-x-content-type-options-nosniff">8. O que faz <code>X-Content-Type-Options: nosniff</code>?</h3>
+<p>Instrui o navegador a respeitar o <code>Content-Type</code> informado e não tentar adivinhar outro tipo.</p>
+<h3 id="9-nosniff-corrige-xss">9. <code>nosniff</code> corrige XSS?</h3>
+<p>Não. Ele ajuda a reduzir MIME sniffing, mas não substitui escape HTML, validação e renderização segura.</p>
+<h3 id="10-json-pode-causar-xss">10. JSON pode causar XSS?</h3>
+<p>JSON corretamente servido como <code>application/json</code> não é contexto HTML. Mas o consumidor pode criar XSS se inserir dados do JSON em HTML de forma insegura.</p>
+<h3 id="11-o-que-testar-em-apis-json">11. O que testar em APIs JSON?</h3>
+<p>Teste <code>Content-Type</code>, <code>Accept</code>, erros, <code>nosniff</code> e ausência de negociação HTML quando o endpoint é apenas JSON.</p>
+<h3 id="12-por-que-respostas-de-erro-importam">12. Por que respostas de erro importam?</h3>
+<p>Porque muitas aplicações retornam HTML ou stack trace em erro, quebrando o contrato JSON.</p>
+<h3 id="13-onde-configurar-headers">13. Onde configurar headers?</h3>
+<p>Na aplicação, Spring Security, gateway, load balancer, reverse proxy ou CDN, dependendo da arquitetura.</p>
+<h3 id="14-quando-um-finding-de-missing-hsts-pode-ser-falso-positivo">14. Quando um finding de Missing HSTS pode ser falso positivo?</h3>
+<p>Quando o HSTS é aplicado fora do código, por exemplo no gateway, e há evidência da resposta real com o header.</p>
+<h3 id="15-qual-e-a-principal-regra">15. Qual é a principal regra?</h3>
+<p>Declare explicitamente como a resposta deve ser tratada e garanta que o cliente não precise adivinhar.</p>
+<h2 id="referencias">Referências</h2>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security">MDN — Strict-Transport-Security</a></li>
+<li><a href="https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security">MDN — Strict-Transport-Security em português</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Type">MDN — Content-Type</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Content-Type-Options">MDN — X-Content-Type-Options</a></li>
+<li><a href="https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Reference/Headers/X-Content-Type-Options">MDN — X-Content-Type-Options em português</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/Security/Practical_implementation_guides/MIME_types">MDN — MIME type verification</a></li>
+<li><a href="https://docs.spring.io/spring-security/reference/features/exploits/headers.html">Spring Security — Security HTTP Response Headers</a></li>
+<li><a href="https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-requestmapping.html">Spring Framework — Mapping Requests</a></li>
+<li><a href="https://docs.oracle.com/en/java/javase/25/">Oracle JDK 25 Documentation</a></li>
+<li><a href="https://www.oracle.com/java/technologies/downloads/">Oracle Java Downloads — JDK 25 LTS</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

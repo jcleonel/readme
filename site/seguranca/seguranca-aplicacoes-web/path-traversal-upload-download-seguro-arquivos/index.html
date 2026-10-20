@@ -1,0 +1,4749 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../privacy-violation-credenciais-logs-respostas-parceiros/">
+      
+      
+        <link rel="next" href="../unchecked-input-loop-condition-dos-processamento/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Path Traversal e upload/download seguro de arquivos - README</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/css/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#path-traversal-e-uploaddownload-seguro-de-arquivos" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../../.." title="README" class="md-header__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            README
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Path Traversal e upload/download seguro de arquivos
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="README" class="md-nav__button md-logo" aria-label="README" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    README
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backend
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Backend
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/fundamentos-da-linguagem-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/convencoes-de-codigo-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convenções de código em Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/variaveis-tipos-primitivos-operadores-conversoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variáveis, tipos primitivos, operadores e conversões
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/fundamentos-de-string/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de String
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-controle-operadores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de controle e operadores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-condicionais/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas condicionais
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/estruturas-de-repeticao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estruturas de repetição
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Iniciando em Orientação a Objetos (POO)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Iniciando em Orientação a Objetos (POO)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/introducao-orientacao-a-objetos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução à POO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/classes-e-objetos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes e objetos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/java/classes-objetos-metodos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes, objetos e métodos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Spring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/api-rest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    O que é API REST?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/http/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Um pouco de HTTP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/por-que-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Por que escolher Spring?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/spring-boot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Boot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/spring-initializr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Initializr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backend/spring/maven-pom/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maven e pom.xml
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Segurança
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Segurança
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Segurança em aplicações web
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Segurança em aplicações web
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introducao-seguranca-aplicacoes-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introdução à Segurança de Aplicações Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../http-dns-sessoes-https/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTTP, DNS, Sessões e HTTPS na Segurança Web
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sql-injection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Injection - Funcionamento, Impactos e Prevenção
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xss/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cross-Site Scripting (XSS)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dast-conformidade-sdlc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DAST, Conformidade e Segurança no Ciclo de Desenvolvimento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sast-source-sink-taint-flow-falso-positivo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SAST na prática - Source, Sink, Taint Flow e falso positivo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssrf-aplicacoes-java-spring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSRF em aplicações Java/Spring
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cleartext-submission-integracoes-server-to-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cleartext Submission em integrações server-to-server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../privacy-violation-credenciais-logs-respostas-parceiros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Privacy Violation - credenciais, logs e respostas de parceiros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Path Traversal e upload/download seguro de arquivos
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Path Traversal e upload/download seguro de arquivos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-problema-real-que-path-traversal-resolve-no-estudo-de-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O problema real que Path Traversal resolve no estudo de segurança
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-nos-detalhes-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar nos detalhes: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#path-traversal-em-uploads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Path Traversal em uploads
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getoriginalfilename-tambem-nao-e-confiavel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        getOriginalFilename() também não é confiável
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#correcao-gerar-nome-interno-no-servidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Correção: gerar nome interno no servidor
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-esse-codigo-resolve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que esse código resolve?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#normalize-nao-basta-sozinho" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        normalize() não basta sozinho
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuidado-com-paths-absolutos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cuidado com paths absolutos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upload-seguro-com-metadados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Upload seguro com metadados
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-controller-de-upload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de controller de upload
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#download-inseguro-por-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Download inseguro por path
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#download-seguro-por-id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Download seguro por id
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#carregando-arquivo-como-resource-com-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Carregando arquivo como Resource com segurança
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuidado-com-content-disposition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cuidado com Content-Disposition
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validacao-de-extensao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validação de extensão
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validacao-de-content-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validação de content type
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limite-de-tamanho" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limite de tamanho
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#armazenar-fora-do-webroot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Armazenar fora do webroot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#permissoes-do-diretorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Permissões do diretório
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upload-temporario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Upload temporário
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#path-traversal-e-banco-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Path Traversal e banco de dados
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#path-traversal-e-storage-externo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Path Traversal e storage externo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#path-traversal-e-importacao-de-planilhas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Path Traversal e importação de planilhas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tratamento-seguro-de-erros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tratamento seguro de erros
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-exception-handler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de exception handler
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testes-de-upload-seguro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testes de upload seguro
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#teste-de-path-seguro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Teste de path seguro
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sast-e-path-traversal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SAST e Path Traversal
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-e-falso-positivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando é falso positivo?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-e-risco-mitigado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando é risco mitigado?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boas práticas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-nao-use-nome-do-cliente-como-nome-fisico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Não use nome do cliente como nome físico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-gere-nome-interno" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Gere nome interno
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-salve-fora-do-webroot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Salve fora do webroot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-use-diretorio-base-fixo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Use diretório base fixo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-normalize-e-verifique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Normalize e verifique
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-valide-extensao-por-allowlist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Valide extensão por allowlist
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-limite-tamanho" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Limite tamanho
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-nao-exponha-path-fisico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Não exponha path físico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-valide-autorizacao-no-download" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Valide autorização no download
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-nao-execute-uploads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Não execute uploads
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-usar-getoriginalfilename-diretamente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Usar getOriginalFilename() diretamente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-fazer-apenas-replace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Fazer apenas replace("../", "")
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-confiar-so-na-extensao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Confiar só na extensão
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-salvar-dentro-do-webroot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Salvar dentro do webroot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-fazer-download-por-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Fazer download por path
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-expor-path-em-erro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Expor path em erro
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-nao-limitar-tamanho" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Não limitar tamanho
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-nao-limpar-temporarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Não limpar temporários
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-nao-validar-autorizacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Não validar autorização
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-criar-wrapper-artificial-para-sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Criar wrapper artificial para SAST
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-armazenar-em-filesystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando armazenar em filesystem?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-usar-object-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar object storage?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-armazenar-no-banco" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando armazenar no banco?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-preservar-nome-original" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando preservar nome original?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-permitir-download-inline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando permitir download inline?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checklist-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist prático
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Checklist prático">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#upload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Upload
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Path
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#download" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Download
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SAST
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Perguntas de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-o-que-e-path-traversal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. O que é Path Traversal?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-por-que-getoriginalfilename-e-perigoso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Por que getOriginalFilename() é perigoso?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-o-que-e-nome-interno" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. O que é nome interno?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-o-nome-original-deve-ser-descartado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. O nome original deve ser descartado?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-normalize-resolve-tudo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. normalize() resolve tudo?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-para-que-serve-startswithbasedirectory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Para que serve startsWith(baseDirectory)?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-por-que-salvar-fora-do-webroot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Por que salvar fora do webroot?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-download-deve-receber-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Download deve receber path?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-validar-extensao-e-suficiente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Validar extensão é suficiente?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-por-que-limitar-tamanho-de-upload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Por que limitar tamanho de upload?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-o-que-e-path-fisico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. O que é path físico?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-o-path-fisico-deve-aparecer-para-o-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. O path físico deve aparecer para o usuário?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-quando-um-finding-path-traversal-pode-ser-falso-positivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Quando um finding Path Traversal pode ser falso positivo?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-qual-e-o-risco-de-usar-fileutil-generico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Qual é o risco de usar FileUtil genérico?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-qual-e-a-principal-regra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Qual é a principal regra?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unchecked-input-loop-condition-dos-processamento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unchecked Input for Loop Condition e prevenção de DoS por processamento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../headers-seguranca-hsts-json-nosniff/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Headers de segurança- HSTS, JSON explícito e nosniff
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sca-dependencias-vulneraveis-cves-gestao-bibliotecas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SCA na prática - dependências vulneráveis, CVEs e gestão de bibliotecas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../triagem-vulnerabilidades-corrigir-mitigar-not-exploitable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Triagem de vulnerabilidades - corrigir, mitigar ou marcar como Not Exploitable
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ferramentas-appsec-sast-sca-dast/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ferramentas de AppSec - como SAST, SCA e DAST encontram vulnerabilidades
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#o-problema-real-que-path-traversal-resolve-no-estudo-de-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O problema real que Path Traversal resolve no estudo de segurança
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-entrar-nos-detalhes-uma-ideia-simples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de entrar nos detalhes: uma ideia simples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definicao-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição técnica
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#path-traversal-em-uploads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Path Traversal em uploads
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getoriginalfilename-tambem-nao-e-confiavel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        getOriginalFilename() também não é confiável
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#correcao-gerar-nome-interno-no-servidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Correção: gerar nome interno no servidor
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#o-que-esse-codigo-resolve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que esse código resolve?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#normalize-nao-basta-sozinho" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        normalize() não basta sozinho
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuidado-com-paths-absolutos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cuidado com paths absolutos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upload-seguro-com-metadados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Upload seguro com metadados
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-controller-de-upload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de controller de upload
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#download-inseguro-por-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Download inseguro por path
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#download-seguro-por-id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Download seguro por id
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#carregando-arquivo-como-resource-com-seguranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Carregando arquivo como Resource com segurança
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuidado-com-content-disposition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cuidado com Content-Disposition
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validacao-de-extensao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validação de extensão
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validacao-de-content-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validação de content type
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limite-de-tamanho" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limite de tamanho
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#armazenar-fora-do-webroot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Armazenar fora do webroot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#permissoes-do-diretorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Permissões do diretório
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upload-temporario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Upload temporário
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#path-traversal-e-banco-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Path Traversal e banco de dados
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#path-traversal-e-storage-externo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Path Traversal e storage externo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#path-traversal-e-importacao-de-planilhas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Path Traversal e importação de planilhas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tratamento-seguro-de-erros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tratamento seguro de erros
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-exception-handler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemplo de exception handler
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testes-de-upload-seguro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testes de upload seguro
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#teste-de-path-seguro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Teste de path seguro
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sast-e-path-traversal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SAST e Path Traversal
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-e-falso-positivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando é falso positivo?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-e-risco-mitigado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando é risco mitigado?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#boas-praticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boas práticas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boas práticas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-nao-use-nome-do-cliente-como-nome-fisico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Não use nome do cliente como nome físico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-gere-nome-interno" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Gere nome interno
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-salve-fora-do-webroot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Salve fora do webroot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-use-diretorio-base-fixo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Use diretório base fixo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-normalize-e-verifique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Normalize e verifique
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-valide-extensao-por-allowlist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Valide extensão por allowlist
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-limite-tamanho" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Limite tamanho
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-nao-exponha-path-fisico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Não exponha path físico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-valide-autorizacao-no-download" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Valide autorização no download
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-nao-execute-uploads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Não execute uploads
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#erros-comuns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erros comuns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Erros comuns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-usar-getoriginalfilename-diretamente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Usar getOriginalFilename() diretamente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-fazer-apenas-replace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Fazer apenas replace("../", "")
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-confiar-so-na-extensao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Confiar só na extensão
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-salvar-dentro-do-webroot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Salvar dentro do webroot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-fazer-download-por-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Fazer download por path
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-expor-path-em-erro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Expor path em erro
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-nao-limitar-tamanho" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Não limitar tamanho
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-nao-limpar-temporarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Não limpar temporários
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-nao-validar-autorizacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Não validar autorização
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-criar-wrapper-artificial-para-sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Criar wrapper artificial para SAST
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisoes-de-engenharia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisões de engenharia
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-armazenar-em-filesystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando armazenar em filesystem?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-usar-object-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando usar object storage?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-armazenar-no-banco" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando armazenar no banco?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-preservar-nome-original" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando preservar nome original?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quando-permitir-download-inline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quando permitir download inline?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#onde-isso-aparece-em-sistemas-reais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Onde isso aparece em sistemas reais
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checklist-pratico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist prático
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Checklist prático">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#upload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Upload
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Path
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#download" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Download
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Operação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sast" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SAST
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perguntas-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perguntas de revisão
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Perguntas de revisão">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-o-que-e-path-traversal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. O que é Path Traversal?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-por-que-getoriginalfilename-e-perigoso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Por que getOriginalFilename() é perigoso?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-o-que-e-nome-interno" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. O que é nome interno?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-o-nome-original-deve-ser-descartado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. O nome original deve ser descartado?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-normalize-resolve-tudo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. normalize() resolve tudo?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-para-que-serve-startswithbasedirectory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Para que serve startsWith(baseDirectory)?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-por-que-salvar-fora-do-webroot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Por que salvar fora do webroot?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-download-deve-receber-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Download deve receber path?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-validar-extensao-e-suficiente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Validar extensão é suficiente?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-por-que-limitar-tamanho-de-upload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Por que limitar tamanho de upload?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-o-que-e-path-fisico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. O que é path físico?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-o-path-fisico-deve-aparecer-para-o-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. O path físico deve aparecer para o usuário?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-quando-um-finding-path-traversal-pode-ser-falso-positivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Quando um finding Path Traversal pode ser falso positivo?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-qual-e-o-risco-de-usar-fileutil-generico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Qual é o risco de usar FileUtil genérico?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-qual-e-a-principal-regra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Qual é a principal regra?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="path-traversal-e-uploaddownload-seguro-de-arquivos">Path Traversal e upload/download seguro de arquivos</h1>
+<p>Path Traversal é uma vulnerabilidade que acontece quando uma aplicação usa entrada externa para montar caminhos de arquivo sem limitar corretamente onde esse arquivo pode ser lido, escrito, movido ou baixado.</p>
+<p>Em termos simples, o problema aparece quando o usuário consegue influenciar o caminho final usado pela aplicação no filesystem.</p>
+<p>Em aplicações Java/Spring, esse risco costuma aparecer em funcionalidades como:</p>
+<ul>
+<li>upload de anexos;</li>
+<li>download de arquivos;</li>
+<li>renomeação de arquivos;</li>
+<li>geração de relatórios;</li>
+<li>importação de planilhas;</li>
+<li>leitura de templates;</li>
+<li>escrita temporária em disco;</li>
+<li>movimentação de arquivos;</li>
+<li>uso de <code>MultipartFile</code>;</li>
+<li>uso de <code>transferTo</code>;</li>
+<li>uso de <code>Files.write</code>;</li>
+<li>uso de <code>Path.resolve</code>;</li>
+<li>uso de <code>File</code>;</li>
+<li>armazenamento de imagens;</li>
+<li>download por nome de arquivo;</li>
+<li>anexos associados a propostas, usuários ou documentos.</li>
+</ul>
+<p>O problema real não é a aplicação manipular arquivos. Isso é normal.</p>
+<p>O problema é permitir que dados vindos de fora decidam diretamente o caminho físico do arquivo.</p>
+<p>Na aplicação fictícia <code>meucatalogomusical.com</code>, imagine uma funcionalidade onde administradores podem enviar capas de álbuns de bandas como <strong>Tesla</strong>, <strong>Accept</strong> e <strong>Yngwie Malmsteen</strong>. Se o nome do arquivo enviado pelo usuário for usado diretamente para salvar no disco, a aplicação pode acabar escrevendo fora do diretório esperado.</p>
+<p>A regra principal é:</p>
+<blockquote>
+<p>O usuário pode enviar um arquivo. Ele não deve escolher livremente onde esse arquivo será salvo no servidor.</p>
+</blockquote>
+<h2 id="o-problema-real-que-path-traversal-resolve-no-estudo-de-seguranca">O problema real que Path Traversal resolve no estudo de segurança</h2>
+<p>Funcionalidades de arquivo parecem simples:</p>
+<div class="highlight"><pre><span></span><code>Receber arquivo -&gt; salvar arquivo -&gt; permitir download depois
+</code></pre></div>
+<p>Mas, por baixo disso, existem várias decisões de segurança:</p>
+<ul>
+<li>onde o arquivo será salvo;</li>
+<li>qual nome será usado;</li>
+<li>quem pode baixar;</li>
+<li>como o arquivo será identificado;</li>
+<li>se o arquivo fica dentro ou fora do webroot;</li>
+<li>se o arquivo pode ser executado;</li>
+<li>se o nome original será preservado;</li>
+<li>se o tipo será validado;</li>
+<li>se o tamanho será limitado;</li>
+<li>se o download usa path físico ou identificador lógico;</li>
+<li>se logs expõem caminhos internos;</li>
+<li>se erros revelam estrutura do servidor.</li>
+</ul>
+<p>Path Traversal aparece quando uma dessas decisões deixa o usuário controlar caminho demais.</p>
+<p>Exemplo perigoso:</p>
+<div class="highlight"><pre><span></span><code>POST /api/albuns/10/capa?nomeArquivo=cover.jpg
+</code></pre></div>
+<p>Se <code>nomeArquivo</code> for usado diretamente em:</p>
+<div class="highlight"><pre><span></span><code>/var/app/uploads/{nomeArquivo}
+</code></pre></div>
+<p>a aplicação parece segura para o caso comum.</p>
+<p>Mas o caso comum não é suficiente. A aplicação precisa resistir a entradas inesperadas.</p>
+<p>O caminho físico deve ser uma decisão da aplicação, não do cliente.</p>
+<h2 id="antes-de-entrar-nos-detalhes-uma-ideia-simples">Antes de entrar nos detalhes: uma ideia simples</h2>
+<p>Pense em um hotel.</p>
+<p>O hóspede pode pedir para guardar uma mala.</p>
+<p>Mas ele não pode dizer:</p>
+<div class="highlight"><pre><span></span><code>Guarde minha mala dentro do cofre da gerência.
+</code></pre></div>
+<p>ou:</p>
+<div class="highlight"><pre><span></span><code>Coloque minha mala no quarto de outro hóspede.
+</code></pre></div>
+<p>O hotel recebe o item, identifica o hóspede, gera um comprovante e guarda a mala em um local controlado.</p>
+<p>Com arquivos é parecido.</p>
+<p>O usuário pode enviar:</p>
+<div class="highlight"><pre><span></span><code>capa-tesla.jpg
+</code></pre></div>
+<p>Mas a aplicação deveria salvar internamente como algo controlado:</p>
+<div class="highlight"><pre><span></span><code>/var/app/uploads/9f6c0d77-76fa-4d9d-b58c-90c6791d82e0.jpg
+</code></pre></div>
+<p>E guardar no banco:</p>
+<div class="highlight"><pre><span></span><code>id do arquivo -&gt; nome interno -&gt; nome original -&gt; dono -&gt; tipo -&gt; tamanho
+</code></pre></div>
+<p>Depois, para download, o usuário pede pelo identificador lógico:</p>
+<div class="highlight"><pre><span></span><code>GET /api/arquivos/123/download
+</code></pre></div>
+<p>e não por um caminho físico como:</p>
+<div class="highlight"><pre><span></span><code>GET /download?path=/var/app/uploads/arquivo.jpg
+</code></pre></div>
+<p>Essa diferença é fundamental.</p>
+<h2 id="definicao-tecnica">Definição técnica</h2>
+<p>Path Traversal é uma vulnerabilidade em que uma aplicação permite que entrada externa controle ou influencie um caminho de arquivo, possibilitando acesso a arquivos ou diretórios fora do local pretendido.</p>
+<p>Em SAST, o padrão costuma aparecer como:</p>
+<div class="highlight"><pre><span></span><code>source: entrada externa
+    -&gt; controller
+    -&gt; service
+    -&gt; utilitário de arquivo
+sink: operação de arquivo
+</code></pre></div>
+<p>Exemplos de source:</p>
+<ul>
+<li><code>@RequestParam String nomeArquivo</code>;</li>
+<li><code>@RequestParam String path</code>;</li>
+<li><code>@PathVariable String fileName</code>;</li>
+<li><code>MultipartFile.getOriginalFilename()</code>;</li>
+<li>valor vindo de header;</li>
+<li>nome de arquivo vindo de planilha;</li>
+<li>chave de storage vinda do request;</li>
+<li>identificador usado para montar path;</li>
+<li>parâmetro usado para download;</li>
+<li>objeto vindo de banco sem validação de ownership.</li>
+</ul>
+<p>Exemplos de sink:</p>
+<ul>
+<li><code>Files.write</code>;</li>
+<li><code>Files.readAllBytes</code>;</li>
+<li><code>Files.copy</code>;</li>
+<li><code>Files.move</code>;</li>
+<li><code>Files.delete</code>;</li>
+<li><code>MultipartFile.transferTo</code>;</li>
+<li><code>new File(...)</code>;</li>
+<li><code>Path.resolve(...)</code> seguido de escrita/leitura;</li>
+<li>abertura de <code>InputStream</code>;</li>
+<li>criação de <code>Resource</code>;</li>
+<li>retorno de arquivo em download.</li>
+</ul>
+<p>O risco aumenta quando o source é usado para montar o caminho final sem normalização, validação, geração de nome interno e verificação do diretório base.</p>
+<h2 id="path-traversal-em-uploads">Path Traversal em uploads</h2>
+<p>Upload é um dos pontos mais comuns.</p>
+<p>Exemplo inseguro:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.albuns.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.*</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.multipart.MultipartFile</span><span class="p">;</span>
+
+<span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/api/albuns&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CapaAlbumController</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">CapaAlbumService</span><span class="w"> </span><span class="n">capaAlbumService</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">CapaAlbumController</span><span class="p">(</span><span class="n">CapaAlbumService</span><span class="w"> </span><span class="n">capaAlbumService</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">capaAlbumService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">capaAlbumService</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@PostMapping</span><span class="p">(</span><span class="s">&quot;/{albumId}/capa&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">enviarCapa</span><span class="p">(</span>
+<span class="w">            </span><span class="nd">@PathVariable</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">albumId</span><span class="p">,</span>
+<span class="w">            </span><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nomeArquivo</span><span class="p">,</span>
+<span class="w">            </span><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">MultipartFile</span><span class="w"> </span><span class="n">arquivo</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">capaAlbumService</span><span class="p">.</span><span class="na">salvarCapa</span><span class="p">(</span><span class="n">albumId</span><span class="p">,</span><span class="w"> </span><span class="n">nomeArquivo</span><span class="p">,</span><span class="w"> </span><span class="n">arquivo</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Service inseguro:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.albuns.application</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.multipart.MultipartFile</span><span class="p">;</span>
+
+<span class="nd">@Service</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CapaAlbumService</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">FileStorage</span><span class="w"> </span><span class="n">fileStorage</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">CapaAlbumService</span><span class="p">(</span><span class="n">FileStorage</span><span class="w"> </span><span class="n">fileStorage</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">fileStorage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fileStorage</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">salvarCapa</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">albumId</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">nomeArquivo</span><span class="p">,</span><span class="w"> </span><span class="n">MultipartFile</span><span class="w"> </span><span class="n">arquivo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">fileStorage</span><span class="p">.</span><span class="na">salvar</span><span class="p">(</span><span class="n">nomeArquivo</span><span class="p">,</span><span class="w"> </span><span class="n">arquivo</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Storage inseguro:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.albuns.infra</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Component</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.multipart.MultipartFile</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Files</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Path</span><span class="p">;</span>
+
+<span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">FileStorage</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Path</span><span class="w"> </span><span class="n">diretorioBase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;/var/app/uploads&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">salvar</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nomeArquivo</span><span class="p">,</span><span class="w"> </span><span class="n">MultipartFile</span><span class="w"> </span><span class="n">arquivo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Path</span><span class="w"> </span><span class="n">destino</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">diretorioBase</span><span class="p">.</span><span class="na">resolve</span><span class="p">(</span><span class="n">nomeArquivo</span><span class="p">);</span>
+<span class="w">            </span><span class="n">Files</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">destino</span><span class="p">,</span><span class="w"> </span><span class="n">arquivo</span><span class="p">.</span><span class="na">getBytes</span><span class="p">());</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;Não foi possível salvar o arquivo.&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ex</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>O problema está aqui:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="w"> </span><span class="n">destino</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">diretorioBase</span><span class="p">.</span><span class="na">resolve</span><span class="p">(</span><span class="n">nomeArquivo</span><span class="p">);</span>
+</code></pre></div>
+<p>O usuário controla <code>nomeArquivo</code>.</p>
+<p>Se esse valor tiver separadores de diretório, caminho absoluto, <code>..</code> ou variações específicas do sistema operacional, a aplicação pode tentar escrever fora do diretório esperado.</p>
+<h2 id="getoriginalfilename-tambem-nao-e-confiavel"><code>getOriginalFilename()</code> também não é confiável</h2>
+<p>Um erro comum é trocar <code>@RequestParam String nomeArquivo</code> por:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">nomeArquivo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arquivo</span><span class="p">.</span><span class="na">getOriginalFilename</span><span class="p">();</span>
+</code></pre></div>
+<p>Isso não resolve o problema.</p>
+<p>A documentação do Spring informa que <code>getOriginalFilename()</code> retorna o nome original do arquivo no filesystem do cliente; esse nome é fornecido pelo cliente, pode conter path information, pode conter <code>..</code> e não deve ser usado diretamente. A recomendação da própria documentação é gerar um nome único e armazenar o nome original apenas como referência quando necessário.</p>
+<p>Exemplo perigoso:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">nomeOriginal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arquivo</span><span class="p">.</span><span class="na">getOriginalFilename</span><span class="p">();</span>
+<span class="n">Path</span><span class="w"> </span><span class="n">destino</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">diretorioBase</span><span class="p">.</span><span class="na">resolve</span><span class="p">(</span><span class="n">nomeOriginal</span><span class="p">);</span>
+<span class="n">arquivo</span><span class="p">.</span><span class="na">transferTo</span><span class="p">(</span><span class="n">destino</span><span class="p">);</span>
+</code></pre></div>
+<p>Mesmo que pareça natural, esse desenho permite que o cliente influencie o nome final salvo no servidor.</p>
+<p>O nome original deve ser tratado como metadado, não como caminho final.</p>
+<h2 id="correcao-gerar-nome-interno-no-servidor">Correção: gerar nome interno no servidor</h2>
+<p>Uma abordagem segura é gerar o nome interno no servidor.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.arquivos.domain</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.UUID</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">ArquivoId</span><span class="p">(</span><span class="n">UUID</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ArquivoId</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;ArquivoId é obrigatório.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">ArquivoId</span><span class="w"> </span><span class="nf">novo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArquivoId</span><span class="p">(</span><span class="n">UUID</span><span class="p">.</span><span class="na">randomUUID</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">toString</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">value</span><span class="p">.</span><span class="na">toString</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Agora o storage pode usar esse identificador para criar o nome físico.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.arquivos.infra</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.meucatalogomusical.arquivos.domain.ArquivoId</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Component</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.multipart.MultipartFile</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Files</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Path</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Set</span><span class="p">;</span>
+
+<span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">FileStorage</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">EXTENSOES_PERMITIDAS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Set</span><span class="p">.</span><span class="na">of</span><span class="p">(</span>
+<span class="w">            </span><span class="s">&quot;jpg&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;jpeg&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;png&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;webp&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;pdf&quot;</span>
+<span class="w">    </span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Path</span><span class="w"> </span><span class="n">diretorioBase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;/var/app/uploads&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="na">toAbsolutePath</span><span class="p">()</span>
+<span class="w">            </span><span class="p">.</span><span class="na">normalize</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">salvar</span><span class="p">(</span><span class="n">MultipartFile</span><span class="w"> </span><span class="n">arquivo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">extensao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">obterExtensaoPermitida</span><span class="p">(</span><span class="n">arquivo</span><span class="p">);</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">nomeInterno</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ArquivoId</span><span class="p">.</span><span class="na">novo</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;.&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">extensao</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">Path</span><span class="w"> </span><span class="n">destino</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">resolverDestinoSeguro</span><span class="p">(</span><span class="n">nomeInterno</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Files</span><span class="p">.</span><span class="na">createDirectories</span><span class="p">(</span><span class="n">diretorioBase</span><span class="p">);</span>
+<span class="w">            </span><span class="n">Files</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">destino</span><span class="p">,</span><span class="w"> </span><span class="n">arquivo</span><span class="p">.</span><span class="na">getBytes</span><span class="p">());</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">nomeInterno</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;Não foi possível salvar o arquivo.&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ex</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Path</span><span class="w"> </span><span class="nf">resolverDestinoSeguro</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nomeInterno</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Path</span><span class="w"> </span><span class="n">destino</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">diretorioBase</span><span class="p">.</span><span class="na">resolve</span><span class="p">(</span><span class="n">nomeInterno</span><span class="p">).</span><span class="na">normalize</span><span class="p">();</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">destino</span><span class="p">.</span><span class="na">startsWith</span><span class="p">(</span><span class="n">diretorioBase</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Caminho de arquivo inválido.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">destino</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">obterExtensaoPermitida</span><span class="p">(</span><span class="n">MultipartFile</span><span class="w"> </span><span class="n">arquivo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">nomeOriginal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arquivo</span><span class="p">.</span><span class="na">getOriginalFilename</span><span class="p">();</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nomeOriginal</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">nomeOriginal</span><span class="p">.</span><span class="na">isBlank</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Nome original do arquivo é obrigatório.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">ultimoPonto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nomeOriginal</span><span class="p">.</span><span class="na">lastIndexOf</span><span class="p">(</span><span class="s">&quot;.&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ultimoPonto</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">ultimoPonto</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">nomeOriginal</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Extensão do arquivo é obrigatória.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">extensao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nomeOriginal</span><span class="p">.</span><span class="na">substring</span><span class="p">(</span><span class="n">ultimoPonto</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="na">toLowerCase</span><span class="p">();</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">EXTENSOES_PERMITIDAS</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">extensao</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Extensão de arquivo não permitida.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">extensao</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Aqui o usuário não controla o caminho final.</p>
+<p>O nome original é usado apenas para extrair a extensão, e mesmo assim a extensão passa por lista permitida.</p>
+<p>O nome físico é gerado pela aplicação.</p>
+<h2 id="o-que-esse-codigo-resolve">O que esse código resolve?</h2>
+<p>Esse desenho aplica algumas defesas importantes:</p>
+<ul>
+<li>o cliente não escolhe o caminho;</li>
+<li>o cliente não escolhe o nome físico final;</li>
+<li>o diretório base é absoluto;</li>
+<li>o diretório base é normalizado;</li>
+<li>o destino final é normalizado;</li>
+<li>o destino final precisa começar com o diretório base;</li>
+<li>a extensão passa por allowlist;</li>
+<li>o arquivo recebe nome interno aleatório;</li>
+<li>o nome original não é usado diretamente como path.</li>
+</ul>
+<p>A documentação do Java <code>Path</code> mostra que <code>normalize()</code> remove elementos redundantes como <code>.</code> e <code>..</code>, mas também deixa claro que isso não acessa o filesystem e que links simbólicos podem afetar o caminho real; por isso, <code>normalize()</code> é parte da solução, não a solução inteira.</p>
+<h2 id="normalize-nao-basta-sozinho"><code>normalize()</code> não basta sozinho</h2>
+<p>Este é um ponto importante.</p>
+<p>Código incompleto:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="w"> </span><span class="n">destino</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">diretorioBase</span><span class="p">.</span><span class="na">resolve</span><span class="p">(</span><span class="n">nomeArquivo</span><span class="p">).</span><span class="na">normalize</span><span class="p">();</span>
+<span class="n">Files</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">destino</span><span class="p">,</span><span class="w"> </span><span class="n">arquivo</span><span class="p">.</span><span class="na">getBytes</span><span class="p">());</span>
+</code></pre></div>
+<p>Falta a verificação:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">destino</span><span class="p">.</span><span class="na">startsWith</span><span class="p">(</span><span class="n">diretorioBase</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Caminho de arquivo inválido.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>A normalização resolve a forma do path.</p>
+<p>A verificação <code>startsWith</code> garante que o destino final ainda está dentro do diretório base.</p>
+<p>A documentação do Java descreve <code>Path.startsWith</code> como teste se um path começa com outro path, comparando elementos do caminho e root component conforme o filesystem.</p>
+<p>A sequência defensiva comum é:</p>
+<div class="highlight"><pre><span></span><code>base absoluto e normalizado
+    -&gt; resolve(nome controlado pela aplicação)
+    -&gt; normalize()
+    -&gt; startsWith(base)
+    -&gt; operação de arquivo
+</code></pre></div>
+<h2 id="cuidado-com-paths-absolutos">Cuidado com paths absolutos</h2>
+<p><code>Path.resolve</code> tem um detalhe importante: quando o outro path é absoluto, o comportamento pode substituir a base, dependendo do filesystem. A documentação do Java informa que, se o path a ser resolvido tiver root component, a resolução é dependente da implementação.</p>
+<p>Por isso, não use entrada do usuário diretamente em <code>resolve</code>.</p>
+<p>Exemplo perigoso:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="w"> </span><span class="n">destino</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">diretorioBase</span><span class="p">.</span><span class="na">resolve</span><span class="p">(</span><span class="n">nomeRecebidoDoUsuario</span><span class="p">).</span><span class="na">normalize</span><span class="p">();</span>
+</code></pre></div>
+<p>Se <code>nomeRecebidoDoUsuario</code> puder representar caminho absoluto, você corre risco.</p>
+<p>A melhor abordagem é não permitir que o usuário forneça path. Gere o nome interno no servidor.</p>
+<h2 id="upload-seguro-com-metadados">Upload seguro com metadados</h2>
+<p>Normalmente, não basta salvar o arquivo. Você também precisa registrar metadados.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.arquivos.domain</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.time.OffsetDateTime</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">ArquivoCatalogo</span><span class="p">(</span>
+<span class="w">        </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">,</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">nomeOriginal</span><span class="p">,</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">nomeInterno</span><span class="p">,</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">contentType</span><span class="p">,</span>
+<span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">tamanhoBytes</span><span class="p">,</span>
+<span class="w">        </span><span class="n">Long</span><span class="w"> </span><span class="n">usuarioId</span><span class="p">,</span>
+<span class="w">        </span><span class="n">OffsetDateTime</span><span class="w"> </span><span class="n">criadoEm</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>A aplicação pode salvar:</p>
+<ul>
+<li>nome original;</li>
+<li>nome interno;</li>
+<li>content type declarado;</li>
+<li>tamanho;</li>
+<li>dono;</li>
+<li>data;</li>
+<li>contexto;</li>
+<li>tipo de arquivo;</li>
+<li>status de validação.</li>
+</ul>
+<p>O download depois deve usar o <code>id</code>, não o path.</p>
+<h2 id="exemplo-de-controller-de-upload">Exemplo de controller de upload</h2>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.albuns.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.HttpStatus</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.*</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.multipart.MultipartFile</span><span class="p">;</span>
+
+<span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/api/albuns&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CapaAlbumController</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">CapaAlbumService</span><span class="w"> </span><span class="n">capaAlbumService</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">CapaAlbumController</span><span class="p">(</span><span class="n">CapaAlbumService</span><span class="w"> </span><span class="n">capaAlbumService</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">capaAlbumService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">capaAlbumService</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@PostMapping</span><span class="p">(</span><span class="s">&quot;/{albumId}/capa&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nd">@ResponseStatus</span><span class="p">(</span><span class="n">HttpStatus</span><span class="p">.</span><span class="na">CREATED</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">CapaAlbumResponse</span><span class="w"> </span><span class="nf">enviarCapa</span><span class="p">(</span>
+<span class="w">            </span><span class="nd">@PathVariable</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">albumId</span><span class="p">,</span>
+<span class="w">            </span><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">MultipartFile</span><span class="w"> </span><span class="n">arquivo</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">capaAlbumService</span><span class="p">.</span><span class="na">salvarCapa</span><span class="p">(</span><span class="n">albumId</span><span class="p">,</span><span class="w"> </span><span class="n">arquivo</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Response:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.albuns.api</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">CapaAlbumResponse</span><span class="p">(</span>
+<span class="w">        </span><span class="n">Long</span><span class="w"> </span><span class="n">arquivoId</span><span class="p">,</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">nomeOriginal</span><span class="p">,</span>
+<span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">tamanhoBytes</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Service:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.albuns.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.meucatalogomusical.arquivos.application.ArquivoService</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.meucatalogomusical.arquivos.domain.ArquivoCatalogo</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.multipart.MultipartFile</span><span class="p">;</span>
+
+<span class="nd">@Service</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CapaAlbumService</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ArquivoService</span><span class="w"> </span><span class="n">arquivoService</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">CapaAlbumService</span><span class="p">(</span><span class="n">ArquivoService</span><span class="w"> </span><span class="n">arquivoService</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">arquivoService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arquivoService</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">CapaAlbumResponse</span><span class="w"> </span><span class="nf">salvarCapa</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">albumId</span><span class="p">,</span><span class="w"> </span><span class="n">MultipartFile</span><span class="w"> </span><span class="n">arquivo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">ArquivoCatalogo</span><span class="w"> </span><span class="n">arquivoCatalogo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arquivoService</span><span class="p">.</span><span class="na">salvarArquivoDoAlbum</span><span class="p">(</span><span class="n">albumId</span><span class="p">,</span><span class="w"> </span><span class="n">arquivo</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CapaAlbumResponse</span><span class="p">(</span>
+<span class="w">                </span><span class="n">arquivoCatalogo</span><span class="p">.</span><span class="na">id</span><span class="p">(),</span>
+<span class="w">                </span><span class="n">arquivoCatalogo</span><span class="p">.</span><span class="na">nomeOriginal</span><span class="p">(),</span>
+<span class="w">                </span><span class="n">arquivoCatalogo</span><span class="p">.</span><span class="na">tamanhoBytes</span><span class="p">()</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>O controller não recebe <code>nomeArquivo</code>.</p>
+<p>Isso reduz bastante o risco.</p>
+<h2 id="download-inseguro-por-path">Download inseguro por path</h2>
+<p>Agora imagine download.</p>
+<p>Exemplo perigoso:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/download&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="nf">download</span><span class="p">(</span><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">path</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Files</span><span class="p">.</span><span class="na">readAllBytes</span><span class="p">(</span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">path</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse é o tipo de desenho que deve ser evitado.</p>
+<p>O usuário não deve informar:</p>
+<div class="highlight"><pre><span></span><code>/var/app/uploads/capa.jpg
+</code></pre></div>
+<p>nem:</p>
+<div class="highlight"><pre><span></span><code>../../algum-arquivo
+</code></pre></div>
+<p>nem qualquer path físico.</p>
+<p>A API deve receber um identificador lógico.</p>
+<h2 id="download-seguro-por-id">Download seguro por id</h2>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.arquivos.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.core.io.Resource</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.ResponseEntity</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.*</span><span class="p">;</span>
+
+<span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/api/arquivos&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ArquivoDownloadController</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ArquivoDownloadService</span><span class="w"> </span><span class="n">arquivoDownloadService</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ArquivoDownloadController</span><span class="p">(</span><span class="n">ArquivoDownloadService</span><span class="w"> </span><span class="n">arquivoDownloadService</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">arquivoDownloadService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arquivoDownloadService</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/{arquivoId}/download&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">Resource</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">download</span><span class="p">(</span><span class="nd">@PathVariable</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">arquivoId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">arquivoDownloadService</span><span class="p">.</span><span class="na">download</span><span class="p">(</span><span class="n">arquivoId</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Service:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.arquivos.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.core.io.Resource</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.ResponseEntity</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
+
+<span class="nd">@Service</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ArquivoDownloadService</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ArquivoRepository</span><span class="w"> </span><span class="n">arquivoRepository</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">FileStorage</span><span class="w"> </span><span class="n">fileStorage</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">ArquivoDownloadService</span><span class="p">(</span>
+<span class="w">            </span><span class="n">ArquivoRepository</span><span class="w"> </span><span class="n">arquivoRepository</span><span class="p">,</span>
+<span class="w">            </span><span class="n">FileStorage</span><span class="w"> </span><span class="n">fileStorage</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">arquivoRepository</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arquivoRepository</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">fileStorage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fileStorage</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="o">&lt;</span><span class="n">Resource</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">download</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="n">arquivoId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">ArquivoCatalogo</span><span class="w"> </span><span class="n">arquivo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arquivoRepository</span><span class="p">.</span><span class="na">buscarPorId</span><span class="p">(</span><span class="n">arquivoId</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">validarPermissaoDeDownload</span><span class="p">(</span><span class="n">arquivo</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">Resource</span><span class="w"> </span><span class="n">resource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fileStorage</span><span class="p">.</span><span class="na">carregarComoResource</span><span class="p">(</span><span class="n">arquivo</span><span class="p">.</span><span class="na">nomeInterno</span><span class="p">());</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ResponseEntity</span><span class="p">.</span><span class="na">ok</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="na">header</span><span class="p">(</span><span class="s">&quot;Content-Disposition&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;attachment; filename=\&quot;&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">arquivo</span><span class="p">.</span><span class="na">nomeOriginalSeguro</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;\&quot;&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">body</span><span class="p">(</span><span class="n">resource</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">validarPermissaoDeDownload</span><span class="p">(</span><span class="n">ArquivoCatalogo</span><span class="w"> </span><span class="n">arquivo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Validar autenticação, autorização e ownership conforme a regra do sistema.</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Nesse desenho:</p>
+<ul>
+<li>o cliente informa <code>arquivoId</code>;</li>
+<li>o banco resolve o nome interno;</li>
+<li>a aplicação valida permissão;</li>
+<li>o storage resolve o path dentro do diretório base;</li>
+<li>o download usa nome original seguro apenas no header;</li>
+<li>o path físico não é exposto.</li>
+</ul>
+<h2 id="carregando-arquivo-como-resource-com-seguranca">Carregando arquivo como Resource com segurança</h2>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.arquivos.infra</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.core.io.Resource</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.core.io.UrlResource</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Component</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.net.MalformedURLException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Files</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Path</span><span class="p">;</span>
+
+<span class="nd">@Component</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">FileStorage</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Path</span><span class="w"> </span><span class="n">diretorioBase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;/var/app/uploads&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="na">toAbsolutePath</span><span class="p">()</span>
+<span class="w">            </span><span class="p">.</span><span class="na">normalize</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Resource</span><span class="w"> </span><span class="nf">carregarComoResource</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nomeInterno</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Path</span><span class="w"> </span><span class="n">arquivo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">resolverDestinoSeguro</span><span class="p">(</span><span class="n">nomeInterno</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">Files</span><span class="p">.</span><span class="na">exists</span><span class="p">(</span><span class="n">arquivo</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">Files</span><span class="p">.</span><span class="na">isRegularFile</span><span class="p">(</span><span class="n">arquivo</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Arquivo não encontrado.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Resource</span><span class="w"> </span><span class="n">resource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UrlResource</span><span class="p">(</span><span class="n">arquivo</span><span class="p">.</span><span class="na">toUri</span><span class="p">());</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">resource</span><span class="p">.</span><span class="na">exists</span><span class="p">()</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">resource</span><span class="p">.</span><span class="na">isReadable</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Arquivo não está disponível para leitura.&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">resource</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">MalformedURLException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;Não foi possível carregar o arquivo.&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ex</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Path</span><span class="w"> </span><span class="nf">resolverDestinoSeguro</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nomeInterno</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Path</span><span class="w"> </span><span class="n">destino</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">diretorioBase</span><span class="p">.</span><span class="na">resolve</span><span class="p">(</span><span class="n">nomeInterno</span><span class="p">).</span><span class="na">normalize</span><span class="p">();</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">destino</span><span class="p">.</span><span class="na">startsWith</span><span class="p">(</span><span class="n">diretorioBase</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Caminho de arquivo inválido.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">destino</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Mesmo no download, o path é reconstruído de forma controlada.</p>
+<p>O usuário não escolhe o path.</p>
+<h2 id="cuidado-com-content-disposition">Cuidado com <code>Content-Disposition</code></h2>
+<p>O header <code>Content-Disposition</code> pode usar o nome original para sugerir o nome de download.</p>
+<p>Mas o nome original também vem do usuário.</p>
+<p>Portanto, precisa ser tratado.</p>
+<p>Exemplo simples:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.arquivos.domain</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">ArquivoCatalogo</span><span class="p">(</span>
+<span class="w">        </span><span class="n">Long</span><span class="w"> </span><span class="n">id</span><span class="p">,</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">nomeOriginal</span><span class="p">,</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">nomeInterno</span><span class="p">,</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">contentType</span><span class="p">,</span>
+<span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">tamanhoBytes</span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">nomeOriginalSeguro</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nomeOriginal</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">nomeOriginal</span><span class="p">.</span><span class="na">isBlank</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;arquivo&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">nomeOriginal</span>
+<span class="w">                </span><span class="p">.</span><span class="na">replace</span><span class="p">(</span><span class="s">&quot;\\&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;_&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">replace</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;_&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">replace</span><span class="p">(</span><span class="s">&quot;\&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;_&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">replace</span><span class="p">(</span><span class="s">&quot;\r&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;_&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">replace</span><span class="p">(</span><span class="s">&quot;\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;_&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Isso evita alguns problemas básicos em header.</p>
+<p>Em aplicações reais, você pode usar utilitários próprios do framework ou bibliotecas para construir headers corretamente, especialmente quando houver caracteres internacionais.</p>
+<h2 id="validacao-de-extensao">Validação de extensão</h2>
+<p>Validar extensão não é suficiente, mas ajuda.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">EXTENSOES_PERMITIDAS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Set</span><span class="p">.</span><span class="na">of</span><span class="p">(</span>
+<span class="w">        </span><span class="s">&quot;jpg&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;jpeg&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;png&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;webp&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;pdf&quot;</span>
+<span class="p">);</span>
+</code></pre></div>
+<p>A OWASP recomenda validar extensão, tamanho, nome, localização de armazenamento, permissões e outros controles; também recomenda gerar o nome armazenado no servidor para evitar que o atacante controle qual arquivo será atingido.</p>
+<p>A extensão deve ser tratada como um sinal, não como prova absoluta de conteúdo.</p>
+<p>Um arquivo chamado:</p>
+<div class="highlight"><pre><span></span><code>capa.jpg
+</code></pre></div>
+<p>não necessariamente contém uma imagem JPEG válida.</p>
+<h2 id="validacao-de-content-type">Validação de content type</h2>
+<p>O <code>Content-Type</code> informado no upload também vem do cliente.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="n">String</span><span class="w"> </span><span class="n">contentType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arquivo</span><span class="p">.</span><span class="na">getContentType</span><span class="p">();</span>
+</code></pre></div>
+<p>Isso pode ser útil para rejeições básicas, mas não deve ser sua única defesa.</p>
+<p>Melhor combinar:</p>
+<ul>
+<li>extensão permitida;</li>
+<li>content type permitido;</li>
+<li>validação do conteúdo quando necessário;</li>
+<li>limites de tamanho;</li>
+<li>armazenamento seguro;</li>
+<li>ausência de execução;</li>
+<li>autorização no download.</li>
+</ul>
+<p>Para imagens, por exemplo, você pode tentar decodificar a imagem com biblioteca confiável antes de aceitar.</p>
+<p>Para PDFs, pode haver outras validações e políticas.</p>
+<h2 id="limite-de-tamanho">Limite de tamanho</h2>
+<p>Upload sem limite pode causar problemas de disponibilidade.</p>
+<p>Exemplo de configuração:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">spring</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">servlet</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">multipart</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">max-file-size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5MB</span>
+<span class="w">      </span><span class="nt">max-request-size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6MB</span>
+</code></pre></div>
+<p>Essa configuração ajuda a evitar arquivos enormes.</p>
+<p>Também é comum validar em código:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">TAMANHO_MAXIMO_BYTES</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1024</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1024</span><span class="p">;</span>
+
+<span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">validarTamanho</span><span class="p">(</span><span class="n">MultipartFile</span><span class="w"> </span><span class="n">arquivo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">arquivo</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Arquivo é obrigatório.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">arquivo</span><span class="p">.</span><span class="na">getSize</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">TAMANHO_MAXIMO_BYTES</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Arquivo excede o tamanho máximo permitido.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>A OWASP File Upload Cheat Sheet recomenda limites de tamanho para proteger armazenamento e evitar abuso.</p>
+<h2 id="armazenar-fora-do-webroot">Armazenar fora do webroot</h2>
+<p>Guardar uploads dentro do webroot pode permitir acesso direto.</p>
+<p>Exemplo perigoso:</p>
+<div class="highlight"><pre><span></span><code>/var/www/html/uploads/capa.jpg
+</code></pre></div>
+<p>Se o servidor web servir esse diretório diretamente, controles de autorização da aplicação podem ser contornados.</p>
+<p>A OWASP recomenda escolher a localização de armazenamento conforme requisitos de segurança; entre as opções, cita armazenar em host diferente, fora do webroot ou, se dentro do webroot, aplicar controles apropriados.</p>
+<p>Para muitos sistemas corporativos, uma boa decisão é:</p>
+<div class="highlight"><pre><span></span><code>/var/app/uploads
+</code></pre></div>
+<p>fora do diretório público do servidor web.</p>
+<p>O download deve passar pela aplicação, que valida autorização.</p>
+<h2 id="permissoes-do-diretorio">Permissões do diretório</h2>
+<p>O diretório de upload não deve ter permissão de execução.</p>
+<p>Boas práticas:</p>
+<ul>
+<li>diretório fora do webroot;</li>
+<li>permissão de escrita apenas para o usuário da aplicação;</li>
+<li>sem execução de scripts;</li>
+<li>separação por ambiente;</li>
+<li>backup controlado;</li>
+<li>monitoramento de espaço;</li>
+<li>política de retenção;</li>
+<li>limpeza de temporários;</li>
+<li>antivírus ou varredura quando aplicável;</li>
+<li>auditoria de acesso em arquivos sensíveis.</li>
+</ul>
+<p>Upload seguro não é apenas código. É também filesystem, infraestrutura e operação.</p>
+<h2 id="upload-temporario">Upload temporário</h2>
+<p>Às vezes, a aplicação precisa salvar temporariamente antes de validar.</p>
+<p>Nesse caso:</p>
+<ul>
+<li>use diretório temporário controlado;</li>
+<li>não use nome original como nome físico;</li>
+<li>aplique limite de tamanho;</li>
+<li>limpe arquivos temporários;</li>
+<li>não execute conteúdo;</li>
+<li>não sirva temporários publicamente;</li>
+<li>aplique permissões restritas.</li>
+</ul>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Path</span><span class="w"> </span><span class="n">temporario</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Files</span><span class="p">.</span><span class="na">createTempFile</span><span class="p">(</span><span class="s">&quot;upload-&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;.tmp&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>Mesmo assim, o arquivo temporário precisa ser tratado como dado não confiável.</p>
+<h2 id="path-traversal-e-banco-de-dados">Path Traversal e banco de dados</h2>
+<p>Salvar o <code>nomeInterno</code> no banco ajuda, mas também exige cuidado.</p>
+<p>Não salve path absoluto se não for necessário.</p>
+<p>Evite:</p>
+<div class="highlight"><pre><span></span><code>/var/app/uploads/9f6c0d77.jpg
+</code></pre></div>
+<p>Prefira:</p>
+<div class="highlight"><pre><span></span><code>9f6c0d77.jpg
+</code></pre></div>
+<p>A aplicação conhece o diretório base.</p>
+<p>O banco guarda apenas identificador ou nome interno.</p>
+<p>Isso reduz vazamento de estrutura do servidor e facilita migração de storage.</p>
+<h2 id="path-traversal-e-storage-externo">Path Traversal e storage externo</h2>
+<p>Se os arquivos forem para S3, MinIO, Google Cloud Storage ou outro object storage, ainda há riscos semelhantes.</p>
+<p>A chave do objeto não deve ser controlada livremente pelo usuário.</p>
+<p>Exemplo perigoso:</p>
+<div class="highlight"><pre><span></span><code>bucket/{nomeArquivoRecebido}
+</code></pre></div>
+<p>Melhor:</p>
+<div class="highlight"><pre><span></span><code>bucket/albuns/{albumId}/{uuid}.{extensao}
+</code></pre></div>
+<p>Mesmo em object storage:</p>
+<ul>
+<li>gere chave interna;</li>
+<li>valide extensão;</li>
+<li>limite tamanho;</li>
+<li>controle content type;</li>
+<li>não exponha bucket público sem necessidade;</li>
+<li>use URLs assinadas com expiração quando apropriado;</li>
+<li>valide autorização antes de gerar download;</li>
+<li>não use path vindo do usuário como chave bruta.</li>
+</ul>
+<p>Path Traversal é mais associado a filesystem, mas o princípio de controle de namespace vale também para storage de objetos.</p>
+<h2 id="path-traversal-e-importacao-de-planilhas">Path Traversal e importação de planilhas</h2>
+<p>Outro cenário comum é importação.</p>
+<p>Por exemplo, <code>meucatalogomusical.com</code> permite importar uma planilha com discografia de <strong>King Diamond</strong>.</p>
+<p>Riscos:</p>
+<ul>
+<li>planilha enorme;</li>
+<li>muitas linhas;</li>
+<li>muitas colunas;</li>
+<li>arquivo com extensão falsa;</li>
+<li>parser consumindo memória;</li>
+<li>nome de arquivo controlando destino;</li>
+<li>planilha salva em temporário inseguro;</li>
+<li>erros revelando caminho interno;</li>
+<li>arquivo importado ficando acessível sem autorização.</li>
+</ul>
+<p>Mesmo que o foco seja parser, o upload ainda precisa ser seguro.</p>
+<h2 id="tratamento-seguro-de-erros">Tratamento seguro de erros</h2>
+<p>Não exponha caminho físico em erro.</p>
+<p>Exemplo ruim:</p>
+<div class="highlight"><pre><span></span><code><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;Erro ao salvar em /var/app/uploads/&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nomeArquivo</span><span class="p">,</span><span class="w"> </span><span class="n">ex</span><span class="p">);</span>
+</code></pre></div>
+<p>Exemplo melhor:</p>
+<div class="highlight"><pre><span></span><code><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalStateException</span><span class="p">(</span><span class="s">&quot;Não foi possível salvar o arquivo.&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ex</span><span class="p">);</span>
+</code></pre></div>
+<p>No log interno, evite expor path completo quando não for necessário. Se precisar, use correlation id e contexto suficiente, sem revelar estrutura sensível para o cliente.</p>
+<h2 id="exemplo-de-exception-handler">Exemplo de exception handler</h2>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.shared.api</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.HttpStatus</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.*</span><span class="p">;</span>
+
+<span class="nd">@RestControllerAdvice</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ApiExceptionHandler</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="nd">@ExceptionHandler</span><span class="p">(</span><span class="n">IllegalArgumentException</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="w">    </span><span class="nd">@ResponseStatus</span><span class="p">(</span><span class="n">HttpStatus</span><span class="p">.</span><span class="na">BAD_REQUEST</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ErroResponse</span><span class="w"> </span><span class="nf">tratarEntradaInvalida</span><span class="p">(</span><span class="n">IllegalArgumentException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ErroResponse</span><span class="p">(</span><span class="n">ex</span><span class="p">.</span><span class="na">getMessage</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@ExceptionHandler</span><span class="p">(</span><span class="n">IllegalStateException</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="w">    </span><span class="nd">@ResponseStatus</span><span class="p">(</span><span class="n">HttpStatus</span><span class="p">.</span><span class="na">INTERNAL_SERVER_ERROR</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">ErroResponse</span><span class="w"> </span><span class="nf">tratarErroInterno</span><span class="p">(</span><span class="n">IllegalStateException</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ErroResponse</span><span class="p">(</span><span class="s">&quot;Não foi possível processar o arquivo.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">record</span> <span class="nc">ErroResponse</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">mensagem</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse exemplo evita devolver stack trace ou path físico ao consumidor.</p>
+<h2 id="testes-de-upload-seguro">Testes de upload seguro</h2>
+<p>Teste o comportamento do storage.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.arquivos.infra</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.mock.web.MockMultipartFile</span><span class="p">;</span>
+
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.*</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">FileStorageTest</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">FileStorage</span><span class="w"> </span><span class="n">fileStorage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileStorage</span><span class="p">();</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">deveRejeitarArquivoSemExtensao</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">MockMultipartFile</span><span class="w"> </span><span class="n">arquivo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MockMultipartFile</span><span class="p">(</span>
+<span class="w">                </span><span class="s">&quot;arquivo&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s">&quot;capa&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s">&quot;image/jpeg&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s">&quot;conteudo&quot;</span><span class="p">.</span><span class="na">getBytes</span><span class="p">()</span>
+<span class="w">        </span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">assertThrows</span><span class="p">(</span><span class="n">IllegalArgumentException</span><span class="p">.</span><span class="na">class</span><span class="p">,</span>
+<span class="w">                </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">fileStorage</span><span class="p">.</span><span class="na">salvar</span><span class="p">(</span><span class="n">arquivo</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">deveRejeitarExtensaoNaoPermitida</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">MockMultipartFile</span><span class="w"> </span><span class="n">arquivo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MockMultipartFile</span><span class="p">(</span>
+<span class="w">                </span><span class="s">&quot;arquivo&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s">&quot;script.sh&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s">&quot;text/plain&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s">&quot;conteudo&quot;</span><span class="p">.</span><span class="na">getBytes</span><span class="p">()</span>
+<span class="w">        </span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">assertThrows</span><span class="p">(</span><span class="n">IllegalArgumentException</span><span class="p">.</span><span class="na">class</span><span class="p">,</span>
+<span class="w">                </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">fileStorage</span><span class="p">.</span><span class="na">salvar</span><span class="p">(</span><span class="n">arquivo</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">deveSalvarComNomeInternoGeradoPelaAplicacao</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">MockMultipartFile</span><span class="w"> </span><span class="n">arquivo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MockMultipartFile</span><span class="p">(</span>
+<span class="w">                </span><span class="s">&quot;arquivo&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s">&quot;capa-accept.jpg&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s">&quot;image/jpeg&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s">&quot;conteudo&quot;</span><span class="p">.</span><span class="na">getBytes</span><span class="p">()</span>
+<span class="w">        </span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">nomeInterno</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fileStorage</span><span class="p">.</span><span class="na">salvar</span><span class="p">(</span><span class="n">arquivo</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">assertNotNull</span><span class="p">(</span><span class="n">nomeInterno</span><span class="p">);</span>
+<span class="w">        </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">nomeInterno</span><span class="p">.</span><span class="na">endsWith</span><span class="p">(</span><span class="s">&quot;.jpg&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="n">assertFalse</span><span class="p">(</span><span class="n">nomeInterno</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="s">&quot;capa-accept&quot;</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Esse teste valida uma regra essencial:</p>
+<blockquote>
+<p>O nome original não vira nome físico final.</p>
+</blockquote>
+<h2 id="teste-de-path-seguro">Teste de path seguro</h2>
+<p>Se o método <code>resolverDestinoSeguro</code> for extraído para uma classe testável, dá para testar tentativa de fuga.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.arquivos.infra</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Test</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Path</span><span class="p">;</span>
+
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Assertions.*</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">SafePathResolverTest</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">SafePathResolver</span><span class="w"> </span><span class="n">resolver</span><span class="w"> </span><span class="o">=</span>
+<span class="w">            </span><span class="k">new</span><span class="w"> </span><span class="n">SafePathResolver</span><span class="p">(</span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;/var/app/uploads&quot;</span><span class="p">));</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">deveResolverNomeInternoDentroDoDiretorioBase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Path</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">resolver</span><span class="p">.</span><span class="na">resolve</span><span class="p">(</span><span class="s">&quot;arquivo.jpg&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">assertTrue</span><span class="p">(</span><span class="n">path</span><span class="p">.</span><span class="na">startsWith</span><span class="p">(</span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;/var/app/uploads&quot;</span><span class="p">).</span><span class="na">toAbsolutePath</span><span class="p">().</span><span class="na">normalize</span><span class="p">()));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">deveRejeitarTentativaDeSairDoDiretorioBase</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">assertThrows</span><span class="p">(</span><span class="n">IllegalArgumentException</span><span class="p">.</span><span class="na">class</span><span class="p">,</span>
+<span class="w">                </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">resolver</span><span class="p">.</span><span class="na">resolve</span><span class="p">(</span><span class="s">&quot;../arquivo.jpg&quot;</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">deveRejeitarCaminhoAbsoluto</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">assertThrows</span><span class="p">(</span><span class="n">IllegalArgumentException</span><span class="p">.</span><span class="na">class</span><span class="p">,</span>
+<span class="w">                </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">resolver</span><span class="p">.</span><span class="na">resolve</span><span class="p">(</span><span class="s">&quot;/etc/passwd&quot;</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Classe:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nn">com.meucatalogomusical.arquivos.infra</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Path</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SafePathResolver</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Path</span><span class="w"> </span><span class="n">baseDirectory</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">SafePathResolver</span><span class="p">(</span><span class="n">Path</span><span class="w"> </span><span class="n">baseDirectory</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">baseDirectory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">baseDirectory</span><span class="p">.</span><span class="na">toAbsolutePath</span><span class="p">().</span><span class="na">normalize</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Path</span><span class="w"> </span><span class="nf">resolve</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">fileName</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Path</span><span class="w"> </span><span class="n">candidate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">baseDirectory</span><span class="p">.</span><span class="na">resolve</span><span class="p">(</span><span class="n">fileName</span><span class="p">).</span><span class="na">normalize</span><span class="p">();</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">candidate</span><span class="p">.</span><span class="na">startsWith</span><span class="p">(</span><span class="n">baseDirectory</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Caminho de arquivo inválido.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">candidate</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Observação: em um sistema real, se você permitir apenas nomes internos gerados pela aplicação, esse resolver recebe uma entrada bem mais restrita. Isso é melhor do que aceitar qualquer nome vindo do usuário.</p>
+<h2 id="sast-e-path-traversal">SAST e Path Traversal</h2>
+<p>Ferramentas SAST costumam apontar Path Traversal quando veem este fluxo:</p>
+<div class="highlight"><pre><span></span><code>source: MultipartFile ou request parameter
+    -&gt; controller
+    -&gt; service
+    -&gt; FileUtil
+sink: write, transferTo, read, move, delete
+</code></pre></div>
+<p>Esse finding merece atenção.</p>
+<p>Para triagem, pergunte:</p>
+<ul>
+<li>o usuário controla o path?</li>
+<li>o usuário controla o nome físico?</li>
+<li>o nome original é usado diretamente?</li>
+<li>existe diretório base fixo?</li>
+<li>o path é absoluto e normalizado?</li>
+<li>existe <code>startsWith(baseDirectory)</code>?</li>
+<li>o arquivo é salvo fora do webroot?</li>
+<li>existe autorização no download?</li>
+<li>o erro expõe caminho interno?</li>
+<li>existem testes?</li>
+</ul>
+<p>Se o usuário controla o path e não existe verificação forte, provavelmente é vulnerabilidade real.</p>
+<h2 id="quando-e-falso-positivo">Quando é falso positivo?</h2>
+<p>Pode ser falso positivo quando:</p>
+<ul>
+<li>o usuário não controla o path final;</li>
+<li>o nome físico é gerado pela aplicação;</li>
+<li>o input é apenas arquivo, não destino;</li>
+<li>há diretório base fixo;</li>
+<li>há normalização e verificação <code>startsWith</code>;</li>
+<li>o download usa id lógico;</li>
+<li>há validação de autorização;</li>
+<li>o método apontado pelo scanner recebe nome interno já controlado;</li>
+<li>existem testes comprovando tentativa de fuga rejeitada.</li>
+</ul>
+<p>Mesmo assim, vale documentar claramente o fluxo.</p>
+<h2 id="quando-e-risco-mitigado">Quando é risco mitigado?</h2>
+<p>Pode ser risco mitigado quando:</p>
+<ul>
+<li>há algum uso de nome vindo de fora, mas ele é reduzido a nome simples;</li>
+<li>há allowlist de extensão;</li>
+<li>há diretório controlado;</li>
+<li>há normalização;</li>
+<li>há verificação de base;</li>
+<li>há permissão restrita no filesystem;</li>
+<li>há autorização no download;</li>
+<li>há testes.</li>
+</ul>
+<p>Mas, sempre que possível, prefira eliminar o controle do usuário sobre o nome físico.</p>
+<h2 id="boas-praticas">Boas práticas</h2>
+<h3 id="1-nao-use-nome-do-cliente-como-nome-fisico">1. Não use nome do cliente como nome físico</h3>
+<p><code>getOriginalFilename()</code> é metadado, não destino.</p>
+<h3 id="2-gere-nome-interno">2. Gere nome interno</h3>
+<p>Use UUID, ULID ou outro identificador gerado pela aplicação.</p>
+<h3 id="3-salve-fora-do-webroot">3. Salve fora do webroot</h3>
+<p>Evite acesso direto sem autorização.</p>
+<h3 id="4-use-diretorio-base-fixo">4. Use diretório base fixo</h3>
+<p>O diretório de armazenamento deve ser definido pela aplicação.</p>
+<h3 id="5-normalize-e-verifique">5. Normalize e verifique</h3>
+<p>Use <code>toAbsolutePath().normalize()</code> no base directory e <code>resolve(...).normalize()</code> no destino, com <code>startsWith(base)</code>.</p>
+<h3 id="6-valide-extensao-por-allowlist">6. Valide extensão por allowlist</h3>
+<p>Não aceite extensões arbitrárias.</p>
+<h3 id="7-limite-tamanho">7. Limite tamanho</h3>
+<p>Configure limites no Spring e valide quando necessário.</p>
+<h3 id="8-nao-exponha-path-fisico">8. Não exponha path físico</h3>
+<p>APIs devem usar ids lógicos.</p>
+<h3 id="9-valide-autorizacao-no-download">9. Valide autorização no download</h3>
+<p>Ter o id do arquivo não significa ter permissão para baixá-lo.</p>
+<h3 id="10-nao-execute-uploads">10. Não execute uploads</h3>
+<p>Diretório de upload não deve permitir execução de scripts.</p>
+<h2 id="erros-comuns">Erros comuns</h2>
+<h3 id="1-usar-getoriginalfilename-diretamente">1. Usar <code>getOriginalFilename()</code> diretamente</h3>
+<p>O nome vem do cliente e pode ser malicioso.</p>
+<h3 id="2-fazer-apenas-replace">2. Fazer apenas <code>replace("../", "")</code></h3>
+<p>Denylist é frágil. Existem variações de encoding, separadores e sistemas operacionais.</p>
+<h3 id="3-confiar-so-na-extensao">3. Confiar só na extensão</h3>
+<p>Extensão não prova conteúdo.</p>
+<h3 id="4-salvar-dentro-do-webroot">4. Salvar dentro do webroot</h3>
+<p>Pode permitir acesso direto sem autorização.</p>
+<h3 id="5-fazer-download-por-path">5. Fazer download por path</h3>
+<p>Use id lógico, não caminho físico.</p>
+<h3 id="6-expor-path-em-erro">6. Expor path em erro</h3>
+<p>Mensagens de erro não devem revelar estrutura interna.</p>
+<h3 id="7-nao-limitar-tamanho">7. Não limitar tamanho</h3>
+<p>Uploads grandes podem causar DoS por armazenamento.</p>
+<h3 id="8-nao-limpar-temporarios">8. Não limpar temporários</h3>
+<p>Arquivos temporários acumulados viram risco operacional.</p>
+<h3 id="9-nao-validar-autorizacao">9. Não validar autorização</h3>
+<p>Download precisa validar ownership ou permissão.</p>
+<h3 id="10-criar-wrapper-artificial-para-sast">10. Criar wrapper artificial para SAST</h3>
+<p>A correção precisa reduzir risco real, não apenas esconder o fluxo.</p>
+<h2 id="decisoes-de-engenharia">Decisões de engenharia</h2>
+<h2 id="quando-armazenar-em-filesystem">Quando armazenar em filesystem?</h2>
+<p>Armazenar em filesystem pode fazer sentido quando:</p>
+<ul>
+<li>volume é moderado;</li>
+<li>infraestrutura é simples;</li>
+<li>há backup;</li>
+<li>há controle de permissão;</li>
+<li>há diretório fora do webroot;</li>
+<li>há limpeza e monitoramento;</li>
+<li>a aplicação controla download.</li>
+</ul>
+<h2 id="quando-usar-object-storage">Quando usar object storage?</h2>
+<p>Object storage pode ser melhor quando:</p>
+<ul>
+<li>há muitos arquivos;</li>
+<li>há necessidade de escala;</li>
+<li>há integração cloud;</li>
+<li>há lifecycle policy;</li>
+<li>há URL assinada;</li>
+<li>há separação entre app e storage;</li>
+<li>há versionamento;</li>
+<li>há auditoria.</li>
+</ul>
+<p>Mesmo assim, use chave interna controlada.</p>
+<h2 id="quando-armazenar-no-banco">Quando armazenar no banco?</h2>
+<p>Armazenar arquivos no banco pode fazer sentido para arquivos pequenos, consistência transacional ou requisitos específicos.</p>
+<p>Mas pode gerar:</p>
+<ul>
+<li>crescimento do banco;</li>
+<li>impacto em backup;</li>
+<li>impacto em performance;</li>
+<li>aumento de custo;</li>
+<li>complexidade operacional.</li>
+</ul>
+<p>A decisão deve considerar DBA, operação e requisitos de retenção.</p>
+<h2 id="quando-preservar-nome-original">Quando preservar nome original?</h2>
+<p>Preserve nome original como metadado quando for útil para o usuário.</p>
+<p>Mas não use como nome físico.</p>
+<p>Exemplo:</p>
+<div class="highlight"><pre><span></span><code>nomeOriginal = capa-tesla.jpg
+nomeInterno = 9f6c0d77-76fa-4d9d-b58c-90c6791d82e0.jpg
+</code></pre></div>
+<h2 id="quando-permitir-download-inline">Quando permitir download inline?</h2>
+<p><code>inline</code> pode fazer sentido para imagens ou PDFs visualizados no navegador.</p>
+<p>Mas <code>attachment</code> é mais seguro por padrão quando você não quer que o navegador interprete o conteúdo.</p>
+<p>Avalie:</p>
+<ul>
+<li>tipo do arquivo;</li>
+<li>origem do conteúdo;</li>
+<li>risco de execução;</li>
+<li>Content-Type;</li>
+<li><code>X-Content-Type-Options: nosniff</code>;</li>
+<li>necessidade de visualização;</li>
+<li>política de segurança.</li>
+</ul>
+<h2 id="onde-isso-aparece-em-sistemas-reais">Onde isso aparece em sistemas reais</h2>
+<p>Path Traversal e upload seguro aparecem em:</p>
+<ul>
+<li>anexos de propostas;</li>
+<li>upload de documentos;</li>
+<li>importação de planilhas;</li>
+<li>fotos de perfil;</li>
+<li>capas de álbum;</li>
+<li>comprovantes;</li>
+<li>relatórios gerados;</li>
+<li>arquivos temporários;</li>
+<li>download de contratos;</li>
+<li>exportação CSV;</li>
+<li>storage local;</li>
+<li>integração com S3;</li>
+<li>gateways de arquivo;</li>
+<li>sistemas legados;</li>
+<li>painéis administrativos.</li>
+</ul>
+<p>Em aplicações Java/Spring, os pontos mais sensíveis são:</p>
+<ul>
+<li>controllers multipart;</li>
+<li>services de anexo;</li>
+<li>classes <code>FileUtil</code>;</li>
+<li><code>MultipartFile.transferTo</code>;</li>
+<li><code>Files.write</code>;</li>
+<li><code>Files.readAllBytes</code>;</li>
+<li><code>Path.resolve</code>;</li>
+<li>downloads por query param;</li>
+<li>nomes de arquivo vindos do request;</li>
+<li>importadores de XLSX/CSV;</li>
+<li>diretórios temporários.</li>
+</ul>
+<h2 id="checklist-pratico">Checklist prático</h2>
+<h3 id="upload">Upload</h3>
+<ul>
+<li>O usuário controla o nome físico?</li>
+<li><code>getOriginalFilename()</code> é usado diretamente?</li>
+<li>O nome interno é gerado pela aplicação?</li>
+<li>Existe allowlist de extensão?</li>
+<li>Existe limite de tamanho?</li>
+<li>O content type é validado?</li>
+<li>O arquivo fica fora do webroot?</li>
+<li>O diretório não permite execução?</li>
+<li>Erros não expõem path?</li>
+</ul>
+<h3 id="path">Path</h3>
+<ul>
+<li>O diretório base é fixo?</li>
+<li>O diretório base é absoluto?</li>
+<li>O diretório base é normalizado?</li>
+<li>O destino é normalizado?</li>
+<li>Há verificação <code>startsWith(base)</code>?</li>
+<li>Caminhos absolutos vindos do usuário são rejeitados?</li>
+<li><code>..</code> é neutralizado pela combinação de normalize e verificação de base?</li>
+<li>Links simbólicos foram considerados quando aplicável?</li>
+</ul>
+<h3 id="download">Download</h3>
+<ul>
+<li>Download usa id lógico?</li>
+<li>Há validação de autorização?</li>
+<li>O path físico não aparece na URL?</li>
+<li>O path físico não aparece na resposta?</li>
+<li><code>Content-Disposition</code> é seguro?</li>
+<li>O arquivo existe e é regular?</li>
+<li>O usuário tem permissão para baixar?</li>
+<li>O content type é controlado?</li>
+</ul>
+<h3 id="operacao">Operação</h3>
+<ul>
+<li>Diretório tem permissão mínima?</li>
+<li>Uploads são monitorados?</li>
+<li>Há limpeza de temporários?</li>
+<li>Há backup adequado?</li>
+<li>Há política de retenção?</li>
+<li>Há limite de armazenamento?</li>
+<li>Há alerta de disco?</li>
+<li>Há varredura de malware quando necessário?</li>
+</ul>
+<h3 id="sast">SAST</h3>
+<ul>
+<li>Source e sink foram entendidos?</li>
+<li>O scanner aponta <code>write</code>, <code>read</code>, <code>transferTo</code> ou <code>move</code>?</li>
+<li>O path final é controlado?</li>
+<li>Há testes de tentativa de fuga?</li>
+<li>O novo scan foi executado?</li>
+<li>A justificativa documenta o fluxo real?</li>
+</ul>
+<h2 id="resumo-final">Resumo final</h2>
+<p>Path Traversal acontece quando entrada externa consegue influenciar caminhos de arquivo de forma insegura.</p>
+<p>Em aplicações Java/Spring, isso aparece principalmente em upload, download, anexos, importação de arquivos e classes utilitárias de filesystem.</p>
+<p>As principais defesas são:</p>
+<ul>
+<li>não usar nome enviado pelo cliente como caminho físico;</li>
+<li>gerar nome interno no servidor;</li>
+<li>armazenar fora do webroot;</li>
+<li>usar diretório base fixo;</li>
+<li>normalizar caminhos;</li>
+<li>verificar que o destino permanece dentro da base;</li>
+<li>limitar extensão e tamanho;</li>
+<li>validar autorização no download;</li>
+<li>não expor path físico;</li>
+<li>tratar erros sem revelar estrutura interna;</li>
+<li>criar testes de tentativa de fuga.</li>
+</ul>
+<p>A lição principal é:</p>
+<blockquote>
+<p>O usuário pode enviar e baixar arquivos conforme a regra de negócio, mas nunca deve controlar diretamente o caminho físico usado pela aplicação.</p>
+</blockquote>
+<h2 id="perguntas-de-revisao">Perguntas de revisão</h2>
+<h3 id="1-o-que-e-path-traversal">1. O que é Path Traversal?</h3>
+<p>É uma vulnerabilidade em que entrada externa influencia um caminho de arquivo e permite acessar, escrever ou manipular arquivos fora do diretório esperado.</p>
+<h3 id="2-por-que-getoriginalfilename-e-perigoso">2. Por que <code>getOriginalFilename()</code> é perigoso?</h3>
+<p>Porque o nome original vem do cliente, pode conter path information, caracteres maliciosos e não deve ser usado diretamente como nome de destino.</p>
+<h3 id="3-o-que-e-nome-interno">3. O que é nome interno?</h3>
+<p>É o nome físico gerado pela aplicação para armazenar o arquivo, geralmente usando UUID ou outro identificador seguro.</p>
+<h3 id="4-o-nome-original-deve-ser-descartado">4. O nome original deve ser descartado?</h3>
+<p>Não necessariamente. Ele pode ser salvo como metadado, mas não deve ser usado como caminho físico.</p>
+<h3 id="5-normalize-resolve-tudo">5. <code>normalize()</code> resolve tudo?</h3>
+<p>Não. Ele remove elementos redundantes, mas precisa ser combinado com verificação de diretório base e cuidado com links simbólicos.</p>
+<h3 id="6-para-que-serve-startswithbasedirectory">6. Para que serve <code>startsWith(baseDirectory)</code>?</h3>
+<p>Para verificar se o path final continua dentro do diretório permitido.</p>
+<h3 id="7-por-que-salvar-fora-do-webroot">7. Por que salvar fora do webroot?</h3>
+<p>Para evitar que arquivos sejam acessados diretamente sem passar por autorização da aplicação.</p>
+<h3 id="8-download-deve-receber-path">8. Download deve receber path?</h3>
+<p>Não. O ideal é receber um identificador lógico e resolver o arquivo internamente.</p>
+<h3 id="9-validar-extensao-e-suficiente">9. Validar extensão é suficiente?</h3>
+<p>Não. Extensão ajuda, mas deve ser combinada com tamanho, content type, validação de conteúdo, storage seguro e autorização.</p>
+<h3 id="10-por-que-limitar-tamanho-de-upload">10. Por que limitar tamanho de upload?</h3>
+<p>Para evitar abuso de armazenamento, consumo excessivo de memória e indisponibilidade.</p>
+<h3 id="11-o-que-e-path-fisico">11. O que é path físico?</h3>
+<p>É o caminho real ou interno usado pelo servidor, como <code>/var/app/uploads/arquivo.jpg</code>.</p>
+<h3 id="12-o-path-fisico-deve-aparecer-para-o-usuario">12. O path físico deve aparecer para o usuário?</h3>
+<p>Não. A API deve expor identificadores lógicos.</p>
+<h3 id="13-quando-um-finding-path-traversal-pode-ser-falso-positivo">13. Quando um finding Path Traversal pode ser falso positivo?</h3>
+<p>Quando o usuário não controla o path final, o nome interno é gerado pela aplicação, há diretório base fixo, normalização, verificação de base e testes.</p>
+<h3 id="14-qual-e-o-risco-de-usar-fileutil-generico">14. Qual é o risco de usar <code>FileUtil</code> genérico?</h3>
+<p>Classes utilitárias genéricas podem concentrar sinks perigosos, como <code>write</code>, <code>read</code> e <code>transferTo</code>. Elas precisam de contratos claros e validações fortes.</p>
+<h3 id="15-qual-e-a-principal-regra">15. Qual é a principal regra?</h3>
+<p>Entrada externa não deve controlar caminho físico de arquivo.</p>
+<h2 id="referencias">Referências</h2>
+<ul>
+<li><a href="https://community.owasp.org/attacks/Path_Traversal">OWASP Path Traversal</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html">OWASP File Upload Cheat Sheet</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html">OWASP Input Validation Cheat Sheet</a></li>
+<li><a href="https://community.owasp.org/vulnerabilities/Unrestricted_File_Upload">OWASP Unrestricted File Upload</a></li>
+<li><a href="https://cwe.mitre.org/data/definitions/22.html">CWE-22 — Improper Limitation of a Pathname to a Restricted Directory</a></li>
+<li><a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/multipart/MultipartFile.html">Spring Framework — MultipartFile API</a></li>
+<li><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html">Java SE 25 — Path API</a></li>
+<li><a href="https://docs.oracle.com/en/java/javase/25/">Oracle JDK 25 Documentation</a></li>
+<li><a href="https://www.oracle.com/java/technologies/downloads/">Oracle Java Downloads — JDK 25 LTS</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
